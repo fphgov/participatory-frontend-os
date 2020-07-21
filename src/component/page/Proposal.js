@@ -1,55 +1,40 @@
-import React from "react";
+import axios from "axios"
+import React from "react"
+import StoreContext from '../../StoreContext'
+import NumberFormat from 'react-number-format'
 
 export default class Proposal extends React.Component {
-  constructor(props) {
-    super(props)
+  static contextType = StoreContext
+
+  constructor(props, context) {
+    super(props, context)
 
     this.state = {
-      error: '',
-      redirect: false,
-      title: '',
-      description: '',
-      cost: '',
-    }
-  }
-
-  componentDidMount() {
-    document.body.classList.add('page-proposal')
-  }
-
-  componentWillUnmount() {
-    document.body.classList.remove('page-proposal')
-  }
-  
-  handleChangeInput(e) {
-    this.setState({ [e.target.name]: e.target.value })
-  }
-  
-  handleOnlyNumberChangeInput(e) {
-    const numberRegex = /[^0-9]+/g;
-
-    let value = e.target.value
-
-    if (numberRegex.test(value)) {
-      value = value.replace(numberRegex, '');
+      proposal: null
     }
 
-    this.setState({ error: '', [ e.target.name ]: e.target.value.replace(numberRegex, '') || "" })
+    this.context.set('loading', true, () => {
+      this.getProposalsData()
+    })
   }
 
-  submitLogin() {
-    const data = {
-      title: this.state.title,
-      description: this.state.description,
-      cost: this.state.cost,
+  getProposalsData() {
+    const config = {
+      headers: {
+        'Accept': 'application/json',
+      }
     }
 
-    axios.post(process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_NEW_PROPOSAL, qs.stringify(data))
+    const link = process.env.REACT_APP_API_REQ_PROPOSAL.toString().replace(':hashId', this.props.match.params.hashId)
+
+    axios.get(process.env.REACT_APP_API_SERVER + link, config)
       .then(response => {
         if (response.data) {
           this.setState({
-            redirect: true
+            proposal: response.data
           })
+
+          this.context.set('loading', false)
         }
       })
       .catch(error => {
@@ -61,53 +46,56 @@ export default class Proposal extends React.Component {
       })
   }
 
-  Error(props) {
+  ProposalWrapper(props) {
     return (
-      <div className="error-message">
-        {props.message}
+      <div className="row">
+        <div className="col-md-8">
+          <div className="proposal-single-wrapper">
+            <div className="proposal-single-inner">
+              <div className="widget-title">Általános</div>
+              <div className="propsal-single-content">
+                <div className="propsal-location"><i className="fa fa-map-marker-alt" aria-hidden="true"></i> {props.proposal.location}</div>
+
+                <div className="propsal-single-title">{props.proposal.title}</div>
+                <div className="propsal-single-description" dangerouslySetInnerHTML={{ __html: props.proposal.description }} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-md-4">
+          <div className="proposal-single-wrapper">
+            <div className="widget-title">Javaslatról</div>
+            <div className="propsal-single-content">
+              {props.proposal.campaign ? (
+                <div className="propsal-single-campaign">Kampány: <b>{props.proposal.campaign.title}</b></div>
+              ) : null}
+              <div className="propsal-single-published">{props.proposal.published}</div>
+              <div className="propsal-single-cost">Becsült költség: <b><NumberFormat value={props.proposal.cost} displayType={'text'} thousandSeparator={" "} decimalSeparator={","} suffix={' Ft'} /></b></div>
+            </div>
+          </div>
+          
+          { props.proposal.submitter ? (
+            <div className="proposal-single-wrapper">
+              <div className="widget-title">Beküldésről</div>
+              <div className="propsal-single-content">
+                <div className="propsal-single-submitter">{props.proposal.submitter.lastname} {props.proposal.submitter.firstname}</div>
+                <div className="propsal-single-submited">{ new Date(props.proposal.createdAt.date).toLocaleString() }</div>
+              </div>
+            </div>
+          ) : null }
+        </div>
       </div>
     )
   }
 
   render() {
-    const { redirect } = this.state
-
-    if (redirect) {
-      return <Redirect to='/' />
-    }
-
     return (
       <div className="proposal">
         <div className="container">
-          <h1>Javaslat</h1>
+          <h1>Beküldött javaslat</h1>
 
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam soluta, aut eum qui necessitatibus molestiae ratione cum eos impedit incidunt voluptas rem delectus, laboriosam doloremque explicabo debitis voluptatibus ullam odit.</p>
-          
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam soluta, aut eum qui necessitatibus molestiae ratione cum eos impedit incidunt voluptas rem delectus, laboriosam doloremque explicabo debitis voluptatibus ullam odit.</p>
-
-          {this.state.error ? <this.Error message={this.state.error} /> : null}
-
-          <div className="form-wrapper">
-            <div className="input-wrapper">
-              <label htmlFor="title">Rövid megnevezés</label>
-              <div className="input-tipp">Adjon meg egy címet a javaslatának.</div>
-              <input type="text" placeholder="Rövid megnevezés" name="title" id="title" value={this.state.title} onChange={this.handleChangeInput.bind(this)} />
-            </div>
-
-            <div className="input-wrapper">
-              <label htmlFor="description">Leírás</label>
-              <div className="input-tipp">Fejtse ki, hogy miről szól a projekt.</div>
-              <textarea placeholder="Leírás" name="description" id="description" value={this.state.description} onChange={this.handleChangeInput.bind(this)} />
-            </div>
-            
-            <div className="input-wrapper">
-              <label htmlFor="cost">Költség</label>
-              <div className="input-tipp">Adja meg a javaslat becsült költségét. A költség értéke forintban értendő, ezres kerekítés nélkül.</div>
-              <input type="text" placeholder="1000000" name="cost" id="cost" value={this.state.cost} onChange={this.handleOnlyNumberChangeInput.bind(this)} />
-            </div>
-
-            <input type="submit" value="Beküldés" className="btn btn-primary" onClick={this.submitLogin.bind(this)} />
-          </div>
+          {this.state.proposal ? <this.ProposalWrapper proposal={this.state.proposal} /> : null}
         </div>
       </div>
     )

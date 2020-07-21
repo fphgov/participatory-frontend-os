@@ -33,6 +33,7 @@ export default class Header extends React.Component {
       openMenu: false,
       menu: [
         { title: "Kezdőlap", href: "/" },
+        { title: "Javaslat beküldése", href: "/javaslat/bekuldes", onHideLoggedIn: false },
         { title: "Beküldött javaslatok", href: "/javaslatok" },
         { title: "Bejelentkezés", href: "/bejelentkezes", onHideLoggedIn: true },
         { title: "Kijelentkezés", href: "/kijelentkezes", onHideLoggedIn: false },
@@ -52,7 +53,7 @@ export default class Header extends React.Component {
         <nav className="main-navigation">
           <div className="container">
             <div className="row flex-center">
-              <div className="col-xs-6 col-sm-6 col-md-6">
+              <div className="col-xs-6 col-sm-6 col-md-4">
                 <div className="logo-wrapper">
                   <Link to="/">
                     <Logo />
@@ -60,7 +61,7 @@ export default class Header extends React.Component {
                 </div>
               </div>
 
-              <div className="col-xs-6 col-sm-6 col-md-6">
+              <div className="col-xs-6 col-sm-6 col-md-8">
                 <ul className="desktop-menu">
                   {this.state.menu.map((menuItem, i) => {
                     if (

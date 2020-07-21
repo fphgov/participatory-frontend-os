@@ -1,16 +1,19 @@
 import React from "react";
 import {
   BrowserRouter as Router,
+  Route,
   Switch,
   HashRouter,
 } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import Page from "./Page";
+import NotFound from "./page/NotFound";
 import Home from "./page/Home";
 import Impressum from "./page/Impressum";
 import Contacts from "./page/Contacts";
 import Login from "./page/Login";
+import ProposalNew from "./page/ProposalNew";
 import Proposal from "./page/Proposal";
 import Proposals from "./page/Proposals";
 import Logout from "./page/Logout";
@@ -28,30 +31,17 @@ export default class App extends React.Component {
 
           <Page>
             <Switch>
-              <HashRouter path="/bejelentkezes">
-                <Login />
-              </HashRouter>
-              <HashRouter path="/kijelentkezes">
-                <Logout />
-              </HashRouter>
-              <HashRouter path="/impresszum">
-                <Impressum />
-              </HashRouter>
-              <HashRouter path="/elerhetosegek">
-                <Contacts />
-              </HashRouter>
-              <HashRouter path="/profil">
-                <Profile />
-              </HashRouter>
-              <HashRouter path="/javaslat">
-                <Proposal />
-              </HashRouter>
-              <HashRouter path="/javaslatok">
-                <Proposals / >
-              </HashRouter>
-              <HashRouter path="/">
-                <Home />
-              </HashRouter>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/bejelentkezes" component={Login} />
+              <Route exact path="/kijelentkezes" component={Logout} />
+              <Route exact path="/impresszum" component={Impressum} />
+              <Route exact path="/elerhetosegek" component={Contacts} />
+              <Route exact path="/profil" component={Profile} />
+              <Route exact path="/javaslat/bekuldes" component={ProposalNew} />
+              <Route exact path="/javaslat/:hashId" component={Proposal} />
+              <Route exact path="/javaslatok" component={Proposals} />
+              
+              <Route exact path="*" component={NotFound} />
             </Switch>
           </Page>
 

@@ -1,5 +1,8 @@
-import axios from "axios";
-import React from "react";
+import axios from "axios"
+import React from "react"
+import {
+  Redirect,
+} from "react-router-dom"
 import StoreContext from '../../StoreContext'
 
 export default class Profile extends React.Component {
@@ -9,7 +12,8 @@ export default class Profile extends React.Component {
     super(props, context)
 
     this.state = {
-      profile: null
+      profile: null,
+      redirectLogin: false
     }
  
     this.context.set('loading', true, () => {
@@ -20,7 +24,8 @@ export default class Profile extends React.Component {
   getProfileData() {
     const config = {
       headers: {
-        'Authorization': `Bearer ${this.context.get('token')}`
+        'Authorization': `Bearer ${this.context.get('token')}`,
+        'Accept': 'application/json',
       }
     }
 
@@ -35,12 +40,24 @@ export default class Profile extends React.Component {
         }
       })
       .catch(error => {
+        if (error.response.status === 401) {
+          this.setState({
+            redirectLogin: true
+          })
+
+          this.context.set('loading', false)
+
+          return
+        }
+
         if (error.response && error.response.data && error.response.data.message) {
           this.setState({
             error: error.response.data.message
-          });
+          })
         }
-      });
+
+        this.context.set('loading', false)
+      })
   }
 
   Error(props) {
@@ -61,6 +78,12 @@ export default class Profile extends React.Component {
   }
 
   render() {
+    const { redirectLogin } = this.state
+
+    if (redirectLogin) {
+      return <Redirect to='/bejelentkezes' />
+    }
+
     return (
       <div className="page-profile-section">
         <div className="container">
