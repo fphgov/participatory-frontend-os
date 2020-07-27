@@ -1,5 +1,4 @@
 import React from "react";
-import Logo from '../img/logo-bp.svg';
 import {
   Link,
 } from "react-router-dom";
@@ -25,7 +24,7 @@ const MobileMenu = (props) => {
 
 export default class Header extends React.Component {
   static contextType = StoreContext
-  
+
   constructor(props, context) {
     super(props, context)
 
@@ -56,7 +55,7 @@ export default class Header extends React.Component {
               <div className="col-xs-6 col-sm-6 col-md-4">
                 <div className="logo-wrapper">
                   <Link to="/">
-                    <Logo />
+                    <img src={require('../img/logo-bp-participatory.png')} alt="Budapest Részvételiségi Költségvetés Logo"/>
                   </Link>
                 </div>
               </div>
@@ -68,7 +67,7 @@ export default class Header extends React.Component {
                       menuItem.onHideLoggedIn === true && this.context.get('loggedIn') ||
                       ! this.context.get('loggedIn') && menuItem.onHideLoggedIn === false
                     ) return;
-                    
+
                     return (
                       <li key={i.toString()}>
                         <Link to={menuItem.href}>{menuItem.title}</Link>

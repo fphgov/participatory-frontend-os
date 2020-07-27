@@ -43,7 +43,7 @@ export default class Home extends React.Component {
                           <div className="article-title">{ article.title }</div>
                           <div className="article-content">
                             <div className="article-desctiption">{article.description}</div>
-                            
+
                             <div className="article-button-wrapper btn-wrapper">
                               <a href="#" className="btn btn-secondary">Projekt bemutatása</a>
                             </div>
@@ -59,7 +59,7 @@ export default class Home extends React.Component {
                 <div className="btn-wrapper">
                   <a href="#" className="btn btn-secondary">Összes projekt bemutatása</a>
                 </div>
-                
+
               </div>
             </div>
           </div>
@@ -79,7 +79,7 @@ export default class Home extends React.Component {
                           <div className="article-title">{article.title}</div>
                           <div className="article-content">
                             <div className="article-button-wrapper btn-wrapper">
-                              <a href={article.btnLink} className="btn btn-primary" target="_blank">{article.btn}</a>
+                              <a href={article.btnLink} className="btn btn-tertiary" target="_blank">{article.btn}</a>
                             </div>
                           </div>
                         </article>

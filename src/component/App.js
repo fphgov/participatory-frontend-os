@@ -19,6 +19,7 @@ import Proposals from "./page/Proposals";
 import Logout from "./page/Logout";
 import Profile from "./page/Profile";
 import SEO from "./common/SEO";
+import ScrollToTop from "./common/ScrollToTop";
 
 export default class App extends React.Component {
   render() {
@@ -27,25 +28,27 @@ export default class App extends React.Component {
         <SEO />
 
         <HashRouter>
-          <Header />
+          <ScrollToTop>
+            <Header />
 
-          <Page>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/bejelentkezes" component={Login} />
-              <Route exact path="/kijelentkezes" component={Logout} />
-              <Route exact path="/impresszum" component={Impressum} />
-              <Route exact path="/elerhetosegek" component={Contacts} />
-              <Route exact path="/profil" component={Profile} />
-              <Route exact path="/javaslat/bekuldes" component={ProposalNew} />
-              <Route exact path="/javaslat/:hashId" component={Proposal} />
-              <Route exact path="/javaslatok" component={Proposals} />
-              
-              <Route exact path="*" component={NotFound} />
-            </Switch>
-          </Page>
+            <Page>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/bejelentkezes" component={Login} />
+                <Route exact path="/kijelentkezes" component={Logout} />
+                <Route exact path="/impresszum" component={Impressum} />
+                <Route exact path="/elerhetosegek" component={Contacts} />
+                <Route exact path="/profil" component={Profile} />
+                <Route exact path="/javaslat/bekuldes" component={ProposalNew} />
+                <Route exact path="/javaslat/:hashId" component={Proposal} />
+                <Route exact path="/javaslatok" component={Proposals} />
 
-          <Footer />
+                <Route exact path="*" component={NotFound} />
+              </Switch>
+            </Page>
+
+            <Footer />
+          </ScrollToTop>
         </HashRouter>
       </div>
     );

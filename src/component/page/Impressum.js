@@ -13,7 +13,7 @@ export default class Impressum extends React.Component {
 
           <p>
             A Budapest Portál tulajdonosa: Budapest Főváros Önkormányzata<br />
-            Felelős kiadó: Főpolgármesteri Hivatal Kommunikációs Igazgatósága
+            Felelős kiadó: Szervezési és Informatikai Főosztály
           </p>
         </div>
       </div>

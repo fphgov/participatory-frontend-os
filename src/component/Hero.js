@@ -18,7 +18,7 @@ export default class Hero extends React.Component {
             <h3>Október 26-ig várjuk a javaslatokat,<br /> hogy együtt jobbá tegyük Budapestet!</h3>
 
             <div className="hero-btn-wrapper">
-              <Link to="/javaslat" className="btn btn-primary">Javaslat beküldése</Link>
+              <Link to="/javaslat/bekuldes" className="btn btn-primary">Javaslat beküldése</Link>
             </div>
 
             <div className="hero-links-wrapper">

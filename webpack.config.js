@@ -7,9 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: {
-    app: './src/index.js'
-  },
+  entry: [ 'babel-polyfill', './src/index.js' ],
   resolve: {
     extensions: ['.js', '.css', '.scss'],
     alias: {
