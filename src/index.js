@@ -7,10 +7,6 @@ import "normalize";
 import "grid";
 import StoreContext from './StoreContext'
 import Loading from './component/common/Loading'
-import '@fortawesome/fontawesome-free/js/fontawesome'
-import '@fortawesome/fontawesome-free/js/solid'
-import '@fortawesome/fontawesome-free/js/regular'
-import '@fortawesome/fontawesome-free/js/brands'
 
 class AppWithContext extends React.Component {
   constructor(props) {
@@ -20,11 +16,11 @@ class AppWithContext extends React.Component {
       loading: false,
       loggedIn: false,
       get: (key) => {
-        return typeof store.get('state') !== 'undefined' && typeof store.get('state')[key] !== 'undefined' ? store.get('state')[key] : this.state[key]
+        return typeof store.get('state') !== 'undefined' && typeof store.get('state')[ key ] !== 'undefined' ? store.get('state')[ key ] : this.state[ key ]
       },
       set: (key, value, cb) => {
         const state = this.state
-        state[key] = value
+        state[ key ] = value
 
         if (typeof cb === 'function') {
           this.setState(state, cb)
@@ -34,7 +30,7 @@ class AppWithContext extends React.Component {
       },
       remove: (key, cb) => {
         const state = this.state
-        delete state[key]
+        delete state[ key ]
 
         if (typeof cb === 'function') {
           this.setState(state, cb)
@@ -57,7 +53,7 @@ class AppWithContext extends React.Component {
     return (
       <StoreContext.Provider value={this.state}>
         {loading ? <Loading /> : null}
-        
+
         <App />
       </StoreContext.Provider>
     )

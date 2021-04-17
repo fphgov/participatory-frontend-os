@@ -64,7 +64,7 @@ export default class Home extends React.Component {
             </div>
           </div>
 
-          <div className="news-wrapper dark-section">
+          {/* <div className="news-wrapper dark-section">
             <div className="container">
               <h2 className="section-title">Hírek!</h2>
 
@@ -90,13 +90,7 @@ export default class Home extends React.Component {
 
               </div>
             </div>
-          </div>
-        </div>
-
-        <div className="subfooter">
-          <div className="container">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur cum nesciunt, corrupti exercitationem adipisci eos eius nemo, inventore obcaecati beatae minima totam molestias odio nulla natus id eveniet facilis recusandae?
-          </div>
+          </div> */}
         </div>
       </div>
     )

@@ -5,8 +5,8 @@ export default function SEO() {
   return (
     <Helmet>
       <meta charSet="utf-8" />
-      
-      <title>Részvételiségi Költségvetés</title>
+
+      <title>Részvételi költségvetés</title>
 
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -27,7 +27,7 @@ export default function SEO() {
       <link rel="icon" type="image/png" sizes="16x16" href="/manifest/favicon-16x16.png" />
 
       <link rel="manifest" href="/manifest.json" />
-      
+
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
       <meta name="theme-color" content="#ffffff" />

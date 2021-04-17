@@ -30,11 +30,11 @@ export default class ProposalNew extends React.Component {
   componentWillUnmount() {
     document.body.classList.remove('page-new-proposal')
   }
-  
+
   handleChangeInput(e) {
     this.setState({ [ e.target.name ]: e.target.value })
   }
-  
+
   handleOnlyNumberChangeInput(e) {
     const numberRegex = /[^0-9]+/g
 
@@ -50,7 +50,7 @@ export default class ProposalNew extends React.Component {
   submitProposal() {
     const config = {
       headers: {
-        'Authorization': `Bearer ${this.context.get('token')}`,
+        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
         'Accept': 'application/json',
       }
     }
@@ -124,7 +124,7 @@ export default class ProposalNew extends React.Component {
           <h1>Javaslat</h1>
 
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam soluta, aut eum qui necessitatibus molestiae ratione cum eos impedit incidunt voluptas rem delectus, laboriosam doloremque explicabo debitis voluptatibus ullam odit.</p>
-          
+
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam soluta, aut eum qui necessitatibus molestiae ratione cum eos impedit incidunt voluptas rem delectus, laboriosam doloremque explicabo debitis voluptatibus ullam odit.</p>
 
           {this.state.error ? <this.Error message={this.state.error} /> : null}
@@ -134,7 +134,7 @@ export default class ProposalNew extends React.Component {
               <label htmlFor="title">Rövid megnevezés</label>
               <div className="input-tipp">Adjon meg egy címet a javaslatának.</div>
               <input type="text" placeholder="Rövid megnevezés" name="title" id="title" value={this.state.title} onChange={this.handleChangeInput.bind(this)} />
-              
+
               { this.state.error && this.state.error.title ? Object.values(this.state.error.title).map((err, i) => {
                 return (<div key={i} className="error-message-inline">{err}</div>)
               }) : null }
@@ -149,7 +149,7 @@ export default class ProposalNew extends React.Component {
                 return (<div key={i} className="error-message-inline">{err}</div>)
               }) : null}
             </div>
-            
+
             <div className="input-wrapper">
               <label htmlFor="cost">Költség</label>
               <div className="input-tipp">Adja meg a javaslat becsült költségét. A költség értéke forintban értendő, ezres kerekítés nélkül.</div>
@@ -159,7 +159,7 @@ export default class ProposalNew extends React.Component {
                 return (<div key={i} className="error-message-inline">{err}</div>)
               }) : null}
             </div>
-            
+
             <div className="input-wrapper">
               <label htmlFor="location">Helyszín</label>
               <div className="input-tipp">Adja meg a kerületet vagy ha egész Budapestre vonatkozik, akkor Budapestet.</div>

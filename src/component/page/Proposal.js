@@ -25,7 +25,7 @@ export default class Proposal extends React.Component {
       }
     }
 
-    const link = process.env.REACT_APP_API_REQ_PROPOSAL.toString().replace(':hashId', this.props.match.params.hashId)
+    const link = process.env.REACT_APP_API_REQ_PROJECT.toString().replace(':hashId', this.props.match.params.hashId)
 
     axios.get(process.env.REACT_APP_API_SERVER + link, config)
       .then(response => {
@@ -74,7 +74,7 @@ export default class Proposal extends React.Component {
               <div className="propsal-single-cost">Becsült költség: <b><NumberFormat value={props.proposal.cost} displayType={'text'} thousandSeparator={" "} decimalSeparator={","} suffix={' Ft'} /></b></div>
             </div>
           </div>
-          
+
           { props.proposal.submitter ? (
             <div className="proposal-single-wrapper">
               <div className="widget-title">Beküldésről</div>

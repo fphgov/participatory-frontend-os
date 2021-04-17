@@ -1,8 +1,8 @@
-import axios from "axios"
 import React from "react"
 import {
   Redirect,
 } from "react-router-dom"
+import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
 
 export default class Profile extends React.Component {
@@ -15,16 +15,16 @@ export default class Profile extends React.Component {
       profile: null,
       redirectLogin: false
     }
- 
+
     this.context.set('loading', true, () => {
       this.getProfileData()
     })
   }
-  
+
   getProfileData() {
     const config = {
       headers: {
-        'Authorization': `Bearer ${this.context.get('token')}`,
+        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
         'Accept': 'application/json',
       }
     }
@@ -40,7 +40,7 @@ export default class Profile extends React.Component {
         }
       })
       .catch(error => {
-        if (error.response.status === 401) {
+        if (error.response && error.response.status === 401) {
           this.setState({
             redirectLogin: true
           })

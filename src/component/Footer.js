@@ -1,7 +1,5 @@
 import React from "react";
-import {
-  Link,
-} from "react-router-dom";
+import OpenBP from '../img/nyitott_budapest_white.svg'
 
 export default class Footer extends React.Component {
     constructor() {
@@ -16,12 +14,22 @@ export default class Footer extends React.Component {
               <div className="dark-section">
                 <div className="container">
                   <div className="logo-wrapper">
-                    <img className="logo" src={require('../img/logo-bp-white.png')} alt="logo" />
+                    <img className="logo" src={OpenBP} alt="logo" />
                   </div>
 
-                  <div className="footer-content">© Budapest Főváros Önkormányzata,<br />2020. Minden jog fenntartva.</div>
+                  <div className="copyright-wrapper">
+                    <div className="copyright">© 2021 Budapest Főváros Önkormányzata | Minden jog fenntartva</div>
 
-                  <Link to="/impresszum" className="light">Impresszum</Link>
+                    <ul>
+                      <li className="nav"><a href="https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=htmlpage&amp;htmlpage_id=5">Adatvédelmi tájékoztató</a></li>
+
+                      <li className="nav"><a href="https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=htmlpage&amp;htmlpage_id=9">Dokumentumok</a></li>
+
+                      <li className="nav"><a href="https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=htmlpage&amp;htmlpage_id=3">Kapcsolat</a></li>
+                    </ul>
+                  </div>
+
+                  <div className="links-wrapper app-version">OpenPB v1.0.0</div>
                 </div>
               </div>
             </footer>

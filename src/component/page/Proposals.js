@@ -27,7 +27,7 @@ export default class Proposals extends React.Component {
       }
     }
 
-    axios.get(process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_PROPOSALS, config)
+    axios.get(process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_PROJECTS, config)
       .then(response => {
         if (response.data) {
           this.setState({
@@ -61,7 +61,7 @@ export default class Proposals extends React.Component {
 
             <div className="propsal-more">
               <div className="article-button-wrapper btn-wrapper">
-                <Link to={`/javaslat/${props.proposal.hashId}`} className="btn btn-secondary">Javaslat bemutatása</Link>
+                <Link to={`/javaslat/${props.proposal.hashId}`} className="btn btn-secondary">Megtekintés</Link>
               </div>
             </div>
           </div>

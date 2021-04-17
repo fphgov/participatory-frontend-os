@@ -3,6 +3,9 @@ import {
   Link,
 } from "react-router-dom";
 import StoreContext from '../StoreContext'
+import tokenParser from './assets/tokenParser'
+import Logo from '../img/logo-bp-participatory.svg';
+
 
 const MobileMenu = (props) => {
   return (
@@ -10,6 +13,10 @@ const MobileMenu = (props) => {
       <div className="container">
         <ul>
           {props.menu.map((menuItem, i) => {
+            if (menuItem.onHideLoggedIn === true && localStorage.getItem('auth_token')) return;
+
+            if (Array.isArray(menuItem.roles) && !menuItem.roles.includes(tokenParser('user.role'))) return;
+
             return (
               <li key={i.toString()}>
                 <Link to={menuItem.href}>{menuItem.title}</Link>
@@ -29,13 +36,15 @@ export default class Header extends React.Component {
     super(props, context)
 
     this.state = {
+      pathname: '/',
       openMenu: false,
       menu: [
-        { title: "Kezdőlap", href: "/" },
-        { title: "Javaslat beküldése", href: "/javaslat/bekuldes", onHideLoggedIn: false },
-        { title: "Beküldött javaslatok", href: "/javaslatok" },
-        { title: "Bejelentkezés", href: "/bejelentkezes", onHideLoggedIn: true },
-        { title: "Kijelentkezés", href: "/kijelentkezes", onHideLoggedIn: false },
+        { title: "Mi ez?", href: "https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=htmlpage&htmlpage_id=2", outside: true },
+        { title: "Beküldött ötletek", href: "https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=solrProjectSearch&sort_name=date&sort_order=desc&conf=proposals_list&fq=campaign_text:A", outside: true },
+        { title: "Hírek", href: "https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page_id=4", outside: true },
+        { title: "Szavazom", href: "/bejelentkezes", highlight: true },
+        // { title: "Bejelentkezés", href: "/bejelentkezes", highlight: true, onHideLoggedIn: true },
+        // { title: "Kijelentkezés", href: "/kijelentkezes", highlight: true, onHideLoggedIn: false },
       ]
     }
   }
@@ -44,6 +53,20 @@ export default class Header extends React.Component {
     this.setState({
       openMenu: ! this.state.openMenu,
     })
+  }
+
+  componentDidMount() {
+    this.setState({
+      pathname: window.location.pathname,
+    })
+  }
+
+  componentDidUpdate() {
+    if (window.location.pathname !== this.state.pathname) {
+      this.setState({
+        pathname: window.location.pathname,
+      })
+    }
   }
 
   render() {
@@ -55,7 +78,7 @@ export default class Header extends React.Component {
               <div className="col-xs-6 col-sm-6 col-md-4">
                 <div className="logo-wrapper">
                   <Link to="/">
-                    <img src={require('../img/logo-bp-participatory.png')} alt="Budapest Részvételiségi Költségvetés Logo"/>
+                    <img src={Logo} alt="Budapest Részvételiségi Költségvetés"/>
                   </Link>
                 </div>
               </div>
@@ -64,13 +87,23 @@ export default class Header extends React.Component {
                 <ul className="desktop-menu">
                   {this.state.menu.map((menuItem, i) => {
                     if (
-                      menuItem.onHideLoggedIn === true && this.context.get('loggedIn') ||
-                      ! this.context.get('loggedIn') && menuItem.onHideLoggedIn === false
+                      menuItem.onHideLoggedIn === true && localStorage.getItem('auth_token') !== null ||
+                      menuItem.onHideLoggedOut === true && localStorage.getItem('auth_token') === null
                     ) return;
 
+                    if (Array.isArray(menuItem.roles) && !menuItem.roles.includes(tokenParser('user.role'))) return;
+
+                    if (menuItem.outside) {
+                      return (
+                        <li key={i.toString()} className={menuItem.highlight ? 'highlight' : ''}>
+                          <a href={menuItem.href} className={menuItem.href === this.state.pathname ? 'active' : ''}>{menuItem.title}</a>
+                        </li>
+                      )
+                    }
+
                     return (
-                      <li key={i.toString()}>
-                        <Link to={menuItem.href}>{menuItem.title}</Link>
+                      <li key={i.toString()} className={menuItem.highlight ? 'highlight' : ''}>
+                        <Link to={menuItem.href} className={menuItem.href === this.state.pathname ? 'active' : ''}>{menuItem.title}</Link>
                       </li>
                     )
                   })}
@@ -88,7 +121,7 @@ export default class Header extends React.Component {
           </div>
         </nav>
 
-        {this.state.openMenu ? <MobileMenu menu={this.state.menu} /> : null}
+        {this.state.openMenu ? <MobileMenu menu={this.state.menu} onClick={() => { this.toggleMenu() }} /> : null}
 
         { this.props.children }
       </header>
