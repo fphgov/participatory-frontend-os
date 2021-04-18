@@ -15,6 +15,7 @@ import Login from "./page/Login";
 import ProposalNew from "./page/ProposalNew";
 import Proposal from "./page/Proposal";
 import Proposals from "./page/Proposals";
+import Project from "./page/Project";
 import Projects from "./page/Projects";
 import Logout from "./page/Logout";
 import Profile from "./page/Profile";
@@ -40,6 +41,7 @@ export default class App extends React.Component {
                 <Route exact path="/impresszum" component={Impressum} />
                 <Route exact path="/elerhetosegek" component={Contacts} />
                 <Route exact path="/projects" component={Projects} />
+                <Route exact path="/projects/:id" component={Project} />
                 <Route exact path="/profil" component={Profile} />
                 {/* <Route exact path="/javaslat/bekuldes" component={ProposalNew} /> */}
                 {/* <Route exact path="/javaslat/:hashId" component={Proposal} />
