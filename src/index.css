@@ -890,7 +890,7 @@ hr {
   align-items: center;
   border: 0px;
   border-radius: 0px;
-  font-size: 1.6rem;
+  font-size: 22px;
 	min-width: 34px;
 }
 
@@ -929,6 +929,62 @@ hr {
   font-family: 'Roboto', sans-serif;
   text-align: right;
   margin-bottom: 15px;
+}
+
+.filter-wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.filter-clear {
+	background-color: #19506e;
+	/* color: #555; */
+	color: #fff;
+  height: 100%;
+  align-items: center;
+  align-content: center;
+  display: flex;
+  padding: 0px 15px;
+  font-family: 'Roboto', sans-serif;
+  text-transform: none;
+  cursor: pointer;
+}
+
+.filter-clear:hover {
+	color: #fff;
+	background-color: #19506e;
+	text-decoration: underline;
+}
+
+.pagination {
+	text-align: center;
+	padding: 30px 0px 40px 0px;
+}
+
+.pagination > div {
+  display: inline-block;
+  padding: 5px 10px 5px 10px;
+	font-size: 22px;
+	font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+	cursor: pointer;
+}
+
+.pagination > div.active {
+	color: #ff442a;
+	text-decoration: none !important;
+	cursor: default;
+}
+
+.pagination > div:hover {
+	text-decoration: underline;
+}
+
+.search-area button.btn-search {
+  background-color: #19506e;
+	color: #fff;
 }
 
 @media screen and (min-width: 1200px) {

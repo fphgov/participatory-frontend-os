@@ -110,7 +110,7 @@ export default class Login extends React.Component {
     const { redirect } = this.state
 
     if (redirect) {
-      return <Redirect to='/profil' />
+      return <Redirect to='/projects' />
     }
 
     return (
