@@ -46,8 +46,22 @@ export default class Project extends React.Component {
           this.setState({
             error: error.response.data.message
           })
+        } else if (error.response && error.response.data && error.response.data.errors) {
+          this.setState({
+            error: error.response.data.errors
+          })
         }
+
+        this.context.set('loading', false)
       })
+  }
+
+  Error(props) {
+    return (
+      <div className="error-message">
+        {props.message}
+      </div>
+    )
   }
 
   ProposalWrapper(props) {
@@ -169,6 +183,7 @@ export default class Project extends React.Component {
     return (
       <div className="prop">
         <div className="container">
+          {this.state.error ? <this.Error message={this.state.error} /> : null}
           {this.state.project ? <this.ProposalWrapper project={this.state.project} /> : null}
         </div>
       </div>
