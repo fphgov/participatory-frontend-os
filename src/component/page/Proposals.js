@@ -72,7 +72,7 @@ export default class Proposals extends React.Component {
 
   render() {
     return (
-      <div className="proposals">
+      <div className="prop">
         <div className="container">
           <h1>Beküldött javaslatok</h1>
 

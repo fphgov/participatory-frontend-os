@@ -1,7 +1,6 @@
 import axios from "axios"
 import React from "react"
 import StoreContext from '../../StoreContext'
-import NumberFormat from 'react-number-format'
 
 export default class Proposal extends React.Component {
   static contextType = StoreContext
@@ -71,7 +70,7 @@ export default class Proposal extends React.Component {
                 <div className="propsal-single-campaign">Kampány: <b>{props.proposal.campaign.title}</b></div>
               ) : null}
               <div className="propsal-single-published">{props.proposal.published}</div>
-              <div className="propsal-single-cost">Becsült költség: <b><NumberFormat value={props.proposal.cost} displayType={'text'} thousandSeparator={" "} decimalSeparator={","} suffix={' Ft'} /></b></div>
+              <div className="propsal-single-cost">Becsült költség: <b>{nFormatter(props.project.cost)}</b></div>
             </div>
           </div>
 

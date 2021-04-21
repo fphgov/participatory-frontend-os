@@ -51,9 +51,9 @@
     "react-draft-wysiwyg": "^1.14.5",
     "react-flatpickr": "^3.10.6",
     "react-helmet": "^6.1.0",
+    "react-image-gallery": "^1.0.9",
     "react-images-upload": "^1.2.8",
     "react-input-mask": "^3.0.0-alpha.2",
-    "react-number-format": "^4.4.1",
     "react-recaptcha-v3": "^2.0.1",
     "react-router-dom": "^5.2.0",
     "store": "^2.0.12"

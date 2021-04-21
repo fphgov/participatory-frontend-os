@@ -110,6 +110,7 @@ export default class Projects extends React.Component {
 
     const search = new URLSearchParams(document.location.search)
 
+    search.delete("page")
     search.set("query", this.state.query)
     search.set("theme", this.state.theme)
 
@@ -141,26 +142,26 @@ export default class Projects extends React.Component {
 
     return (
       <div className="col-sm-12 col-md-6 col-lg-4">
-        <div className="proposal-wrapper">
-          <div className="proposal-inner">
-            <div className="propsal-picture"><img src={OpenBP} /></div>
-            <div className="propsal-category" style={{ backgroundColor: themeColor }}>{themeName}</div>
-            <div className="propsal-content-wrapper" style={{ borderColor: themeColor }}>
-              <div className="propsal-content">
-                <div className="propsal-tags-wrapper">
-                  <div className="propsal-tags">{props.project.tags.map((tag, i) => {
+        <div className="prop-wrapper">
+          <div className="prop-inner">
+            <div className="prop-picture"><img src={OpenBP} /></div>
+            <div className="prop-category" style={{ backgroundColor: themeColor }}>{themeName}</div>
+            <div className="prop-content-wrapper" style={{ borderColor: themeColor }}>
+              <div className="prop-content">
+                <div className="prop-tags-wrapper">
+                  <div className="prop-tags">{props.project.tags.map((tag, i) => {
                     return (
                       <div key={i} className="filter-tag bg-transition" style={{ backgroundColor: themeColor }} onClick={() => props.tagClick(tag)}>#{tag.name}</div>
                     )
                   })}</div>
                 </div>
 
-                <div className="propsal-title">{props.project.title}</div>
-                <div className="propsal-line" style={{ backgroundColor: themeColor }}></div>
-                <div className="propsal-description">{shortDescription}</div>
+                <div className="prop-title">{props.project.title}</div>
+                <div className="prop-line" style={{ backgroundColor: themeColor }}></div>
+                <div className="prop-description">{shortDescription}</div>
               </div>
 
-              <div className="propsal-more" onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+              <div className="prop-more" onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
                 <div className="article-button-wrapper btn-wrapper">
                   <Link to={`/projects/${props.project.id}`} className="btn btn-secondary" style={{ borderColor: themeColor, color: isHover ? '#fff' : themeColor, backgroundColor: isHover ? themeColor: 'transparent' }}>Megtekintés</Link>
                 </div>
