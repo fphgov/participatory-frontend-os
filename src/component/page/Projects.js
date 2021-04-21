@@ -127,7 +127,9 @@ export default class Projects extends React.Component {
   }
 
   hasQueryFilter() {
-    return !!window.location.search
+    const onlyPageParam = /^\?page=\d+$/.test(document.location.search)
+
+    return !!window.location.search && !onlyPageParam
   }
 
   ProposalsWrapper(props) {

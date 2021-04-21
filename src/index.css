@@ -987,6 +987,10 @@ hr {
 	color: #fff;
 }
 
+.search-area .form-group:first-of-type {
+  margin-top: 45px;
+}
+
 @media screen and (min-width: 1200px) {
 	.container, .container-sm, .container-md, .container-lg, .container-xl {
 		max-width: 1170px;
