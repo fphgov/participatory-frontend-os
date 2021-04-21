@@ -126,7 +126,7 @@ export default class Login extends React.Component {
 
                   <div className="form-wrapper">
                     <div className="input-wrapper">
-                      <label htmlFor="email">E-mail cím</label>
+                      <label htmlFor="email">E-mail cím vagy felhasználónév</label>
                       <input type="text" placeholder="E-mail cím" name="email" id="email" value={this.state.email} onChange={this.handleChangeInput.bind(this)} />
                     </div>
 

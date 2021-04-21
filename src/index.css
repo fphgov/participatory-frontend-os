@@ -415,6 +415,21 @@ footer .logo-wrapper {
 	width: 140px;
 }
 
+footer .fa-stack {
+  color: #ffffff;
+}
+
+footer .fa-inverse {
+  color: #071f32;
+}
+
+.line-one {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
 .news-wrapper {
 	margin-bottom: 0;
 }
