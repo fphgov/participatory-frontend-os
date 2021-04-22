@@ -564,7 +564,7 @@ input[type="submit"] {
 }
 
 .prop-single-sidebar {
-  padding: 50px 35px;
+  padding: 50px 5px;
   background-color: #f9f9f9;
   height: 100%;
 }
@@ -1110,6 +1110,15 @@ hr {
 	background: #19506e;
 }
 
+p.tipp {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.prop-single-sidebar .tipp {
+  margin-top: 60px;
+}
+
 @media screen and (min-width: 1200px) {
 	.container, .container-sm, .container-md, .container-lg, .container-xl {
 		max-width: 1170px;
@@ -1165,5 +1174,13 @@ hr {
 		color: #ffffff;
 		padding: 6px 0;
 		display: block;
+	}
+
+	.line-one {
+		flex-direction: column;
+	}
+
+	.line-one > div {
+		margin: 8px 0;
 	}
 }

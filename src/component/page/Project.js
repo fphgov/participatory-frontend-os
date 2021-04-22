@@ -79,7 +79,7 @@ export default class Project extends React.Component {
         </div>
         <div className="prop-inner-content" style={{ borderColor: theme.rgb }}>
           <div className="row">
-            <div className="col-md-8">
+            <div className="col-lg-8">
               <div className="prop-single-wrapper prop-single-body">
                 <div className="prop-single-inner">
                   <div className="prop-single-content">
@@ -117,10 +117,10 @@ export default class Project extends React.Component {
               </div>
             </div>
 
-            <div className="col-md-4">
+            <div className="col-lg-4">
               <div className="prop-single-wrapper prop-single-sidebar">
                 <div className="prop-single-content">
-                  <button className="btn btn-primary btn-vote" style={{ backgroundColor: theme.rgb }}>Szavazom</button>
+                  <button className="btn btn-primary btn-vote" style={{ backgroundColor: theme.rgb }}>Szavazom *</button>
 
                   <h2>Projekt</h2>
 
@@ -160,18 +160,19 @@ export default class Project extends React.Component {
                     </div>
                   </div>
 
+                  { props.project.submitter ? (
+                    <div className="prop-single-wrapper">
+                      <div className="widget-title">Beküldésről</div>
+                      <div className="prop-single-content">
+                        <div className="prop-single-submitter">{props.project.submitter.lastname} {props.project.submitter.firstname}</div>
+                        <div className="prop-single-submited">{new Date(props.project.createdAt.date).toLocaleString() }</div>
+                      </div>
+                    </div>
+                  ) : null }
+
+                  <p className="tipp">* A szavazat akkor érvényes, ha a <Link to={`/profil`} style={{ textDecoration: 'underline' }}>Szavazom</Link> menüpontban érvényesítve van.</p>
                 </div>
               </div>
-
-              { props.project.submitter ? (
-                <div className="prop-single-wrapper">
-                  <div className="widget-title">Beküldésről</div>
-                  <div className="prop-single-content">
-                    <div className="prop-single-submitter">{props.project.submitter.lastname} {props.project.submitter.firstname}</div>
-                    <div className="prop-single-submited">{new Date(props.project.createdAt.date).toLocaleString() }</div>
-                  </div>
-                </div>
-              ) : null }
             </div>
           </div>
         </div>
