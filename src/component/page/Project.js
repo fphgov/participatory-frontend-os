@@ -18,11 +18,11 @@ export default class Project extends React.Component {
     }
 
     this.context.set('loading', true, () => {
-      this.getProposalsData()
+      this.getProjectData()
     })
   }
 
-  getProposalsData() {
+  getProjectData() {
     const config = {
       headers: {
         'Accept': 'application/json',
@@ -64,7 +64,7 @@ export default class Project extends React.Component {
     )
   }
 
-  ProposalWrapper(props) {
+  ProjectWrapper(props) {
     const theme = props.project.campaign_theme;
 
     const images = props.project.medias.map((item) => {
@@ -154,7 +154,7 @@ export default class Project extends React.Component {
                     <div className="prop-info-content">
                       {props.project.tags.map((tag, i) => {
                         return (<div className="tag" key={i}>
-                          <Link to={`/projects?tag=${tag.id}`} style={{ backgroundColor: theme.rgb }}>#{tag.name}</Link>
+                          <Link to={`/projektek?tag=${tag.id}`} style={{ backgroundColor: theme.rgb }}>#{tag.name}</Link>
                         </div>)
                       })}
                     </div>
@@ -185,7 +185,7 @@ export default class Project extends React.Component {
       <div className="prop">
         <div className="container">
           {this.state.error ? <this.Error message={this.state.error} /> : null}
-          {this.state.project ? <this.ProposalWrapper project={this.state.project} /> : null}
+          {this.state.project ? <this.ProjectWrapper project={this.state.project} /> : null}
         </div>
       </div>
     )

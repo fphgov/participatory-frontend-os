@@ -133,7 +133,7 @@ export default class Projects extends React.Component {
     return !!window.location.search && !onlyPageParam
   }
 
-  ProposalsWrapper(props) {
+  ProjectsWrapper(props) {
     const [isHover, setIsHover] = React.useState(false)
 
     const themeColor = props.project.campaign_theme.rgb
@@ -163,7 +163,7 @@ export default class Projects extends React.Component {
 
               <div className="prop-more" onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
                 <div className="article-button-wrapper btn-wrapper">
-                  <Link to={`/projects/${props.project.id}`} className="btn btn-secondary" style={{ borderColor: themeColor, color: isHover ? '#fff' : themeColor, backgroundColor: isHover ? themeColor: 'transparent' }}>Megtekintés</Link>
+                  <Link to={`/projektek/${props.project.id}`} className="btn btn-secondary" style={{ borderColor: themeColor, color: isHover ? '#fff' : themeColor, backgroundColor: isHover ? themeColor: 'transparent' }}>Megtekintés</Link>
                 </div>
               </div>
             </div>
@@ -240,7 +240,7 @@ export default class Projects extends React.Component {
 
         <div className="container">
           <div className="row">
-            {this.state.projects.map((project, i) => <this.ProposalsWrapper key={i} project={project} tagClick={this.filterByTag} />)}
+            {this.state.projects.map((project, i) => <this.ProjectsWrapper key={i} project={project} tagClick={this.filterByTag} />)}
           </div>
         </div>
 

@@ -12,11 +12,9 @@ import Home from "./page/Home";
 import Impressum from "./page/Impressum";
 import Contacts from "./page/Contacts";
 import Login from "./page/Login";
-import ProposalNew from "./page/ProposalNew";
-import Proposal from "./page/Proposal";
-import Proposals from "./page/Proposals";
 import Project from "./page/Project";
 import Projects from "./page/Projects";
+import ProfileActivate from "./page/ProfileActivate";
 import Logout from "./page/Logout";
 import Profile from "./page/Profile";
 import SEO from "./common/SEO";
@@ -40,12 +38,10 @@ export default class App extends React.Component {
                 <Route exact path="/kijelentkezes" component={Logout} />
                 <Route exact path="/impresszum" component={Impressum} />
                 <Route exact path="/elerhetosegek" component={Contacts} />
-                <Route exact path="/projects" component={Projects} />
-                <Route exact path="/projects/:id" component={Project} />
+                <Route exact path="/projektek" component={Projects} />
+                <Route exact path="/projektek/:id" component={Project} />
                 <Route exact path="/profil" component={Profile} />
-                {/* <Route exact path="/javaslat/bekuldes" component={ProposalNew} /> */}
-                {/* <Route exact path="/javaslat/:hashId" component={Proposal} />
-                <Route exact path="/javaslatok" component={Proposals} /> */}
+                <Route exact path="/profil/aktivalas/:hash" component={ProfileActivate} />
 
                 <Route exact path="*" component={NotFound} />
               </Switch>
