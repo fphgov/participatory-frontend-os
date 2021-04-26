@@ -15,6 +15,10 @@ import Login from "./page/Login";
 import Project from "./page/Project";
 import Projects from "./page/Projects";
 import ProfileActivate from "./page/ProfileActivate";
+import Registration from "./page/Registration";
+import ResetPassword from "./page/ResetPassword";
+import ForgotPassword from "./page/ForgotPassword";
+import ForgotAccount from "./page/ForgotAccount";
 import Logout from "./page/Logout";
 import Profile from "./page/Profile";
 import SEO from "./common/SEO";
@@ -42,6 +46,10 @@ export default class App extends React.Component {
                 <Route exact path="/projektek/:id" component={Project} />
                 <Route exact path="/profil" component={Profile} />
                 <Route exact path="/profil/aktivalas/:hash" component={ProfileActivate} />
+                <Route exact path="/profil/jelszo/:hash" component={ResetPassword} />
+                <Route exact path="/regisztracio" component={Registration} />
+                <Route exact path="/elfelejtett-felhasznalonev" component={ForgotAccount} />
+                <Route exact path="/elfelejtett-jelszo" component={ForgotPassword} />
 
                 <Route exact path="*" component={NotFound} />
               </Switch>

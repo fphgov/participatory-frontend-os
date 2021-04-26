@@ -120,7 +120,7 @@ export default class Project extends React.Component {
             <div className="col-lg-4">
               <div className="prop-single-wrapper prop-single-sidebar">
                 <div className="prop-single-content">
-                  <button className="btn btn-primary btn-vote" style={{ backgroundColor: theme.rgb }}>Szavazom *</button>
+                  <button className="btn btn-primary btn-vote" style={{ backgroundColor: theme.rgb }}>Erre a projektre szavazok *</button>
 
                   <h2>Projekt</h2>
 
@@ -170,7 +170,7 @@ export default class Project extends React.Component {
                     </div>
                   ) : null }
 
-                  <p className="tipp">* A szavazat akkor érvényes, ha a <Link to={`/profil`} style={{ textDecoration: 'underline' }}>Szavazom</Link> menüpontban érvényesítve van.</p>
+                  <p className="tipp">* A szavazat akkor érvényes, ha a <Link to={`/profil`} style={{ textDecoration: 'underline' }}>Szavazás</Link> menüpontban érvényesítve van.</p>
                 </div>
               </div>
             </div>

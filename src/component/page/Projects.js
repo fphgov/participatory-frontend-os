@@ -4,7 +4,6 @@ import {
   Link
 } from "react-router-dom"
 import StoreContext from '../../StoreContext'
-import OpenBP from '../../img/nyitott_budapest_white.svg'
 
 export default class Projects extends React.Component {
   static contextType = StoreContext
@@ -53,6 +52,8 @@ export default class Projects extends React.Component {
         'Accept': 'application/json',
       }
     }
+
+    this.context.set('loading', true)
 
     axios.get(process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_PROJECTS + window.location.search, config)
       .then(response => {
@@ -144,7 +145,7 @@ export default class Projects extends React.Component {
       <div className="col-sm-12 col-md-6 col-lg-4">
         <div className="prop-wrapper">
           <div className="prop-inner">
-            <div className="prop-picture"><img src={OpenBP} /></div>
+            <div className="prop-picture"></div>
             <div className="prop-category" style={{ backgroundColor: themeColor }}>{themeName}</div>
             <div className="prop-content-wrapper" style={{ borderColor: themeColor }}>
               <div className="prop-content">

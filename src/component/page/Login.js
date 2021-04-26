@@ -4,6 +4,7 @@ import qs from 'querystring'
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import {
   Redirect,
+  Link,
 } from "react-router-dom"
 import StoreContext from '../../StoreContext'
 
@@ -152,8 +153,8 @@ export default class Login extends React.Component {
 
                   <div className="form-group">
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12" style={{ display: "flex", justifyContent: "space-between", padding: 0 }}>
-                      <a className="btn btn-sm" title="Elfelejtettem a felhasználónevem" href="#">Felhasználónév emlékeztető</a>
-                      <a className="btn btn-sm" title="Elfelejtettem a jelszavam" href="#">Jelszó emlékeztető</a>
+                      <Link to={`/elfelejtett-felhasznalonev`} className="btn btn-sm" title="Elfelejtettem a felhasználónevem">Elfelejtettem a felhasználónevem</Link>
+                      <Link to={`/elfelejtett-jelszo`} className="btn btn-sm" title="Elfelejtettem a jelszavam">Elfelejtettem a jelszavam</Link>
                     </div>
                   </div>
                 </fieldset>

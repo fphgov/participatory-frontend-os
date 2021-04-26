@@ -42,7 +42,7 @@ export default class Header extends React.Component {
         { title: "Mi ez?", href: "https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=htmlpage&htmlpage_id=2", outside: true },
         { title: "Beküldött ötletek", href: "https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=solrProjectSearch&sort_name=date&sort_order=desc&conf=proposals_list&fq=campaign_text:A", outside: true },
         { title: "Hírek", href: "https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page_id=4", outside: true },
-        { title: "Szavazom", href: "/bejelentkezes", highlight: true },
+        { title: "Szavazás", href: "/bejelentkezes", highlight: true },
         // { title: "Bejelentkezés", href: "/bejelentkezes", highlight: true, onHideLoggedIn: true },
         // { title: "Kijelentkezés", href: "/kijelentkezes", highlight: true, onHideLoggedIn: false },
       ]
