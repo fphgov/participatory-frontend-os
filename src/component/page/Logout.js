@@ -29,12 +29,14 @@ export default class Logout extends React.Component {
   }
 
   submitLogout() {
-    this.context.set('token', null)
-    this.context.set('loggedIn', false)
     this.context.set('loading', false)
+    this.context.set('token', null, () => {
+      localStorage.removeItem('auth_token')
+      localStorage.removeItem('rk_voted')
 
-    this.setState({
-      redirect: true,
+      this.setState({
+        redirect: true,
+      })
     })
   }
 

@@ -33,6 +33,16 @@ export default class Login extends React.Component {
   }
 
   componentDidMount() {
+    if (localStorage.getItem('auth_token')) {
+      this.context.set('token', localStorage.getItem('auth_token') || '')
+
+      this.setState({
+        redirect: true,
+      })
+
+      return
+    }
+
     this.context.set('loading', false)
 
     document.body.classList.add('page-login')
@@ -79,6 +89,7 @@ export default class Login extends React.Component {
               error: response.data.message
             })
 
+            this.context.set('token', null)
             localStorage.removeItem('auth_token')
           }
 
@@ -92,6 +103,7 @@ export default class Login extends React.Component {
           })
         }
 
+        this.context.set('token', null)
         localStorage.removeItem('auth_token')
 
         this.context.set('loading', false)

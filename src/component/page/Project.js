@@ -20,6 +20,8 @@ export default class Project extends React.Component {
     this.context.set('loading', true, () => {
       this.getProjectData()
     })
+
+    this.vote = this.vote.bind(this)
   }
 
   getProjectData() {
@@ -54,6 +56,22 @@ export default class Project extends React.Component {
 
         this.context.set('loading', false)
       })
+  }
+
+  vote() {
+    if (! this.state.project) {
+      return
+    }
+
+    let data = {
+      id: this.state.project.id,
+      title: this.state.project.title,
+      description: this.state.project.short_description
+    };
+
+    const name = `rk_vote_${this.state.project.campaign_theme.code}`
+    localStorage.setItem(name, JSON.stringify(data))
+    this.context.set(name, data)
   }
 
   Error(props) {
@@ -120,7 +138,9 @@ export default class Project extends React.Component {
             <div className="col-lg-4">
               <div className="prop-single-wrapper prop-single-sidebar">
                 <div className="prop-single-content">
-                  <button className="btn btn-primary btn-vote" style={{ backgroundColor: theme.rgb }}>Erre a projektre szavazok *</button>
+                  {props.showVoteButton ? <>
+                    <button className={`btn btn-primary btn-vote ${props.disableVoteButton ? 'btn-disable': ''}`} style={{ backgroundColor: theme.rgb }} onClick={props.voteAction}>Erre a projektre szavazok *</button>
+                  </> : null }
 
                   <h2>Projekt</h2>
 
@@ -181,11 +201,13 @@ export default class Project extends React.Component {
   }
 
   render() {
+    const voteBtn = this.state.project && this.context.get(`rk_vote_${this.state.project.campaign_theme.code}`) && this.context.get(`rk_vote_${this.state.project.campaign_theme.code}`).id === this.state.project.id
+
     return (
       <div className="prop">
         <div className="container">
           {this.state.error ? <this.Error message={this.state.error} /> : null}
-          {this.state.project ? <this.ProjectWrapper project={this.state.project} /> : null}
+          {this.state.project ? <this.ProjectWrapper project={this.state.project} voteAction={this.vote} disableVoteButton={voteBtn} showVoteButton={! this.context.get('successVote')} /> : null}
         </div>
       </div>
     )

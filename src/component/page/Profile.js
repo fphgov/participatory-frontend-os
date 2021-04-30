@@ -24,7 +24,7 @@ export default class Profile extends React.Component {
   getProfileData() {
     const config = {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+        'Authorization': `Bearer ${this.context.get('token')}`,
         'Accept': 'application/json',
       }
     }

@@ -34,6 +34,16 @@ export default class Login extends React.Component {
   }
 
   componentDidMount() {
+    if (localStorage.getItem('auth_token')) {
+      this.context.set('token', localStorage.getItem('auth_token') || '')
+
+      this.setState({
+        redirect: true,
+      })
+
+      return
+    }
+
     document.body.classList.add('page-login')
 
     loadReCaptcha(process.env.SITE_KEY, this.verifyCallback)
@@ -80,6 +90,7 @@ export default class Login extends React.Component {
             error: response.data.message
           })
 
+          this.context.set('token', null)
           localStorage.removeItem('auth_token')
         }
 
@@ -93,6 +104,7 @@ export default class Login extends React.Component {
         })
       }
 
+      this.context.set('token', null)
       localStorage.removeItem('auth_token')
 
       this.context.set('loading', false)
@@ -118,7 +130,7 @@ export default class Login extends React.Component {
       <div className="page-login-section">
         <div className="container">
           <div className="row">
-            <div className="col-xs-12 col-sm-6 offset-sm-3 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
+            <div className="col-xs-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
               <form className="form-horizontal" onSubmit={this.submitLogin.bind(this)}>
                 <fieldset>
                   {this.state.error ? <this.Error message={this.state.error} /> : null}

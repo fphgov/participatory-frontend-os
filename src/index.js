@@ -17,8 +17,12 @@ class AppWithContext extends React.Component {
     super(props)
 
     this.state = {
+      rk_vote_GREEN: null,
+      rk_vote_CARE: null,
+      rk_vote_WHOLE: null,
+      successVote: false,
       loading: false,
-      loggedIn: false,
+      token: false,
       get: (key) => {
         return typeof store.get('state') !== 'undefined' && typeof store.get('state')[ key ] !== 'undefined' ? store.get('state')[ key ] : this.state[ key ]
       },

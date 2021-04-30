@@ -8,9 +8,9 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Page from "./Page";
 import NotFound from "./page/NotFound";
-import Home from "./page/Home";
-import Impressum from "./page/Impressum";
-import Contacts from "./page/Contacts";
+// import Home from "./page/Home";
+// import Impressum from "./page/Impressum";
+// import Contacts from "./page/Contacts";
 import Login from "./page/Login";
 import Project from "./page/Project";
 import Projects from "./page/Projects";
@@ -23,8 +23,28 @@ import Logout from "./page/Logout";
 import Profile from "./page/Profile";
 import SEO from "./common/SEO";
 import ScrollToTop from "./common/ScrollToTop";
+import StoreContext from '../StoreContext'
+import tokenParser from './assets/tokenParser'
 
 export default class App extends React.Component {
+  static contextType = StoreContext
+
+  componentDidMount() {
+    if (localStorage.getItem('auth_token')) {
+      this.context.set('token', localStorage.getItem('auth_token') || '')
+
+      const voted = tokenParser('user.voted')
+
+      const successVote = voted || !!localStorage.getItem('rk_voted')
+
+      setTimeout(() => {
+        this.context.set('successVote', successVote)
+      }, 100)
+    } else {
+      this.context.set('token', null)
+    }
+  }
+
   render() {
     return (
       <div className="app">
@@ -37,11 +57,11 @@ export default class App extends React.Component {
 
             <Page>
               <Switch>
-                <Route exact path="/" component={Home} />
+                <Route exact path="/" component={Projects} />
                 <Route exact path="/bejelentkezes" component={Login} />
                 <Route exact path="/kijelentkezes" component={Logout} />
-                <Route exact path="/impresszum" component={Impressum} />
-                <Route exact path="/elerhetosegek" component={Contacts} />
+                {/* <Route exact path="/impresszum" component={Impressum} /> */}
+                {/* <Route exact path="/elerhetosegek" component={Contacts} /> */}
                 <Route exact path="/projektek" component={Projects} />
                 <Route exact path="/projektek/:id" component={Project} />
                 <Route exact path="/profil" component={Profile} />

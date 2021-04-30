@@ -4,8 +4,8 @@ import {
 } from "react-router-dom";
 import StoreContext from '../StoreContext'
 import tokenParser from './assets/tokenParser'
-import Logo from '../img/logo-bp-participatory.svg';
-
+import Logo from '../img/logo-bp-participatory.svg'
+import VoteModal from "./common/VoteModal"
 
 const MobileMenu = (props) => {
   return (
@@ -42,7 +42,7 @@ export default class Header extends React.Component {
         { title: "Mi ez?", href: "https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=htmlpage&htmlpage_id=2", outside: true },
         { title: "Beküldött ötletek", href: "https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=solrProjectSearch&sort_name=date&sort_order=desc&conf=proposals_list&fq=campaign_text:A", outside: true },
         { title: "Hírek", href: "https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page_id=4", outside: true },
-        { title: "Szavazás", href: "/bejelentkezes", highlight: true },
+        { title: "Szavazás", href: "/projektek", highlight: true },
         // { title: "Bejelentkezés", href: "/bejelentkezes", highlight: true, onHideLoggedIn: true },
         // { title: "Kijelentkezés", href: "/kijelentkezes", highlight: true, onHideLoggedIn: false },
       ]
@@ -120,6 +120,8 @@ export default class Header extends React.Component {
             </div>
           </div>
         </nav>
+
+        <VoteModal />
 
         {this.state.openMenu ? <MobileMenu menu={this.state.menu} onClick={() => { this.toggleMenu() }} /> : null}
 
