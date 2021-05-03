@@ -144,6 +144,14 @@ export default class Project extends React.Component {
 
                   <h2>Projekt</h2>
 
+                  {props.project.voted !== null ? (
+                    <div className="prop-single-voted">
+                      <div className="prop-info-title">Beérkezett szavazatok:</div>
+                      <div className="prop-info-content">
+                       <b>{props.project.voted} db</b></div>
+                      </div>
+                  ) : null}
+
                   {props.project.campaign ? (
                     <div className="prop-single-campaign">Kampány: <b>{props.project.campaign.title}</b></div>
                   ) : null}

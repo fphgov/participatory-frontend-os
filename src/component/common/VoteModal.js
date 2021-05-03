@@ -159,6 +159,8 @@ export default function VoteModal() {
         </> : <div className="vote-login">
             <p><Link to={`/bejelentkezes`}>Jelentkezzen be</Link> a szavazáshoz!</p>
         </div>}
+
+        <Link className="btn btn-primary btn-vote-more" to={`/statisztika`}>Leadott szavazatok</Link>
       </div>
     </div>
   )

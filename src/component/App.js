@@ -12,6 +12,7 @@ import NotFound from "./page/NotFound";
 // import Impressum from "./page/Impressum";
 // import Contacts from "./page/Contacts";
 import Login from "./page/Login";
+import Statistics from "./page/Statistics";
 import Project from "./page/Project";
 import Projects from "./page/Projects";
 import ProfileActivate from "./page/ProfileActivate";
@@ -62,6 +63,7 @@ export default class App extends React.Component {
                 <Route exact path="/kijelentkezes" component={Logout} />
                 {/* <Route exact path="/impresszum" component={Impressum} /> */}
                 {/* <Route exact path="/elerhetosegek" component={Contacts} /> */}
+                <Route exact path="/statisztika" component={Statistics} />
                 <Route exact path="/projektek" component={Projects} />
                 <Route exact path="/projektek/:id" component={Project} />
                 <Route exact path="/profil" component={Profile} />

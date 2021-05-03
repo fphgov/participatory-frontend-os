@@ -1213,11 +1213,16 @@ fieldset h4 {
 	cursor: not-allowed;
 }
 
+.btn.btn-vote-more {
+  border: 4px solid #FFF;
+}
+
 .btn.btn-primary.btn-vote-active {
   cursor: pointer;
 }
 
-.btn.btn-vote-final:hover {
+.btn.btn-vote-final:hover,
+.btn.btn-vote-more {
 	opacity: 1;
 	background-color: transparent;
 }
@@ -1321,6 +1326,41 @@ fieldset h4 {
 
 .vote-modal + .mobile-menu {
   border-top: 2px solid #00af96;
+}
+
+.statistics .prop-content {
+  padding: 0;
+  width: 100%;
+	height: 100%;
+}
+
+.statistics .prop-content > a {
+	flex: 1;
+}
+
+.statistics .prop-title {
+  min-height: 0;
+  text-align: left;
+	color: #071f32;
+}
+
+.statistics .prop-content-wrapper {
+	align-items: flex-start;
+	padding: 0 10px;
+}
+
+.statistics .prop-count {
+	font-size: 18px;
+	margin: 0 0 15px 0;
+}
+
+.statistics .prop-count span {
+	font-weight: bold;
+}
+
+.statistics .prop-content {
+  padding: 0;
+  width: 100%;
 }
 
 @media screen and (min-width: 1200px) {
