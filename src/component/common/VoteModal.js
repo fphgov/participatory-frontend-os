@@ -118,7 +118,7 @@ export default function VoteModal() {
                     </div> : null
                   }
                 </div>
-              </div> : <a href={`/projektek?query=&theme=1`} className="placeholder-text">Válasszon <strong>Zöld Budapest</strong> kategóriából egy projektet</a>}
+              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=1`} className="placeholder-text">Válasszon <strong>Zöld Budapest</strong> kategóriából egy projektet</a>}
             </div>
             <div className={`vote-option vote-option-2 ${!context.get('rk_vote_CARE') ? 'vote-option-placeholder' : ''}`}>
               {context.get('rk_vote_CARE') ? <div className="vote-option-item">
@@ -133,7 +133,7 @@ export default function VoteModal() {
                     </div> : null
                   }
                 </div>
-              </div> : <a href={`/projektek?query=&theme=2`} className="placeholder-text">Válasszon <strong>Gondoskodó Budapest</strong> kategóriából egy projektet</a>}
+              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=2`} className="placeholder-text">Válasszon <strong>Gondoskodó Budapest</strong> kategóriából egy projektet</a>}
             </div>
             <div className={`vote-option vote-option-3 ${!context.get('rk_vote_WHOLE') ? 'vote-option-placeholder' : ''}`}>
               {context.get('rk_vote_WHOLE') ? <div className="vote-option-item">
@@ -148,7 +148,7 @@ export default function VoteModal() {
                     </div> : null
                   }
                 </div>
-              </div> : <a href={`/projektek?query=&theme=3`} className="placeholder-text">Válasszon <strong>Egész Budapest</strong> kategóriából egy projektet</a>}
+              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=3`} className="placeholder-text">Válasszon <strong>Egész Budapest</strong> kategóriából egy projektet</a>}
             </div>
           </div>
 
