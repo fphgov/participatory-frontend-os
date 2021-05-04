@@ -177,10 +177,10 @@ export default class Login extends React.Component {
 
                 <p>Nincs még fiókja? Regisztráljon itt!</p>
 
-                <a className="btn btn-primary btn-sm" title="Regisztráció" href="jsp/site/Portal.jsp?page=mylutecedatabase&amp;action=createAccount">
+                <Link to={`/regisztracio`} className="btn btn-primary btn-sm" title="Regisztráció">
                   <span className="glyphicon glyphicon-plus"></span>&nbsp;
                   Regisztráció
-                </a>
+                </Link>
               </div>
             </div>
           </div>
