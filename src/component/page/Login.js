@@ -7,6 +7,7 @@ import {
   Link,
 } from "react-router-dom"
 import StoreContext from '../../StoreContext'
+import tokenParser from '../assets/tokenParser'
 
 export default class Login extends React.Component {
   static contextType = StoreContext
@@ -72,6 +73,13 @@ export default class Login extends React.Component {
     .then(response => {
       if (response.data && response.data.token) {
         localStorage.setItem('auth_token', response.data.token)
+
+        if (tokenParser('user.votes')) {
+          Object.entries(tokenParser('user.votes')).forEach(vote => {
+            localStorage.setItem(vote[0], JSON.stringify(vote[1]))
+            this.context.set(vote[ 0 ], JSON.stringify(vote[1]))
+          })
+        }
 
         this.context.set('token', localStorage.getItem('auth_token') || '')
 

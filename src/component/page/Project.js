@@ -2,10 +2,13 @@ import axios from "axios"
 import React from "react"
 import {
   Link,
+  Redirect
 } from "react-router-dom";
 import ImageGallery from 'react-image-gallery';
 import StoreContext from '../../StoreContext'
 import nFormatter from '../assets/nFormatter'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons"
 
 export default class Project extends React.Component {
   static contextType = StoreContext
@@ -14,7 +17,8 @@ export default class Project extends React.Component {
     super(props, context)
 
     this.state = {
-      project: null
+      project: null,
+      redirectLogin: false,
     }
 
     this.context.set('loading', true, () => {
@@ -63,6 +67,12 @@ export default class Project extends React.Component {
       return
     }
 
+    if (!this.context.get('token')) {
+      this.setState({
+        redirectLogin: true
+      })
+    }
+
     let data = {
       id: this.state.project.id,
       title: this.state.project.title,
@@ -101,7 +111,9 @@ export default class Project extends React.Component {
               <div className="prop-single-wrapper prop-single-body">
                 <div className="prop-single-inner">
                   <div className="prop-single-content">
-                    <div className="prop-location"><i className="fa fa-map-marker-alt" aria-hidden="true"></i> {props.project.location}</div>
+                    <div className="prop-location">
+                      <FontAwesomeIcon icon={faMapMarkerAlt} /> {props.project.location}
+                    </div>
 
                     <h1 className="prop-single-title" style={{ color: theme.rgb }}>{props.project.title}</h1>
                     <div className="prop-single-description" dangerouslySetInnerHTML={{ __html: props.project.description }} />
@@ -210,6 +222,10 @@ export default class Project extends React.Component {
 
   render() {
     const voteBtn = this.state.project && this.context.get(`rk_vote_${this.state.project.campaign_theme.code}`) && this.context.get(`rk_vote_${this.state.project.campaign_theme.code}`).id === this.state.project.id
+
+    if (this.state.redirectLogin) {
+      return <Redirect to='/bejelentkezes' />
+    }
 
     return (
       <div className="prop">

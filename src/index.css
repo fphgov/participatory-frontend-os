@@ -1363,6 +1363,10 @@ fieldset h4 {
   width: 100%;
 }
 
+.hide {
+	display: none;
+}
+
 @media screen and (min-width: 1200px) {
 	.container, .container-sm, .container-md, .container-lg, .container-xl {
 		max-width: 1170px;

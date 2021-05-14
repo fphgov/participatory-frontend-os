@@ -4,6 +4,8 @@ import {
   Link
 } from "react-router-dom"
 import StoreContext from '../../StoreContext'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faSearch, faAngleDoubleLeft, faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons"
 
 export default class Projects extends React.Component {
   static contextType = StoreContext
@@ -198,7 +200,7 @@ export default class Projects extends React.Component {
                     <input className="form-control" type="text" name="query" value={this.state.query} placeholder="Keresés" id="search" onKeyUp={this.onKeyUp} onChange={this.handleChange} />
                     <span className="input-group-btn">
                       <button id="btn-search" className="btn btn-search form-control" type="submit" title="Keresés" onClick={this.search}>
-                        <i className="fa fa-search"></i>
+                        <FontAwesomeIcon icon={faSearch} />
                       </button>
                     </span>
                   </div>
@@ -251,7 +253,7 @@ export default class Projects extends React.Component {
               {paginationShow && (
                 <div className="pagination">
                   {(firstPageNum && prevPageNum) && (firstPageNum !== prevPageNum) && (
-                    <div onClick={() => { this.pagination(firstPageNum) }}><i className="fa fa-angle-double-left"></i></div>
+                    <div onClick={() => { this.pagination(firstPageNum) }}><FontAwesomeIcon icon={faAngleDoubleLeft} /></div>
                   )}
                   {prevPageNum && (
                     <div onClick={() => { this.pagination(prevPageNum) }}>{prevPageNum}</div>
@@ -263,7 +265,7 @@ export default class Projects extends React.Component {
                     <div onClick={() => { this.pagination(nextPageNum) }}>{nextPageNum}</div>
                   )}
                   {(lastPageNum && nextPageNum) && (lastPageNum !== nextPageNum) && (
-                    <div onClick={() => { this.pagination(lastPageNum) }}><i className="fa fa-angle-double-right"></i></div>
+                    <div onClick={() => { this.pagination(lastPageNum) }}><FontAwesomeIcon icon={faAngleDoubleRight} /></div>
                   )}
                 </div>
               )}

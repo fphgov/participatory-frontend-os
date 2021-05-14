@@ -5,7 +5,7 @@
   "description": "Participatory Budget Frontend",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --mode development",
+    "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production"
   },
   "keywords": [],
@@ -16,7 +16,6 @@
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/preset-env": "^7.12.7",
     "@babel/preset-react": "^7.12.7",
-    "@fortawesome/fontawesome-free": "^5.15.1",
     "@svgr/webpack": "^5.5.0",
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^3.0.0",
@@ -33,6 +32,11 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-brands-svg-icons": "^5.15.3",
+    "@fortawesome/free-regular-svg-icons": "^5.15.3",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
     "@types/react": "^16.14.2",
     "@types/react-dom": "^16.9.10",
     "axios": "^0.21.1",

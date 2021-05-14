@@ -33,11 +33,17 @@ export default class Logout extends React.Component {
     this.context.set('token', null, () => {
       localStorage.removeItem('auth_token')
       localStorage.removeItem('rk_voted')
+      localStorage.removeItem('rk_vote_CARE')
+      localStorage.removeItem('rk_vote_WHOLE')
+      localStorage.removeItem('rk_vote_GREEN')
 
       this.setState({
         redirect: true,
       })
     })
+    this.context.set('rk_vote_CARE', null)
+    this.context.set('rk_vote_WHOLE', null)
+    this.context.set('rk_vote_GREEN', null)
   }
 
   render() {

@@ -3,6 +3,8 @@ import { useLocation, Link } from 'react-router-dom'
 import qs from 'querystring'
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faArrowAltCircleUp, faArrowAltCircleDown, faTrash } from "@fortawesome/free-solid-svg-icons"
 
 export default function VoteModal() {
   const context = useContext(StoreContext)
@@ -12,7 +14,7 @@ export default function VoteModal() {
   const [error, setError] = useState(false)
   const [loggedIn, setLoggedIn] = useState(false)
 
-  const height = voteModal && voteModal.current && voteModal.current.scrollHeight && open ? voteModal.current.scrollHeight : 54
+  const height = voteModal && voteModal.current && voteModal.current.scrollHeight && open === true ? voteModal.current.scrollHeight : 54
 
   const enumOptions = [
     'rk_vote_GREEN',
@@ -46,7 +48,7 @@ export default function VoteModal() {
   }
 
   useEffect(() => {
-    setOpen(false)
+    setOpen(true)
     checkLoggedIn()
     checkOptions()
   }, [location])
@@ -83,6 +85,7 @@ export default function VoteModal() {
     ).then(response => {
       if (response.data) {
         localStorage.setItem('rk_voted', "true")
+
         context.set('successVote', true)
         context.set('loading', false)
       }
@@ -101,7 +104,9 @@ export default function VoteModal() {
   return (
     <div className="vote-modal" style={{ height: height }} ref={voteModal}>
       <div className="container">
-        <h3 style={{ textTransform: 'uppercase' }} onClick={() => { setOpen(!open) }}>Szavazás</h3>
+        <h3 style={{ textTransform: 'uppercase' }} onClick={() => { setOpen(!open) }}>
+          Szavazás {open ? <FontAwesomeIcon icon={faArrowAltCircleUp} /> : <FontAwesomeIcon icon={faArrowAltCircleDown} />}
+        </h3>
 
         {loggedIn ? <>
           <div className="vote-option-wrapper">
@@ -114,11 +119,11 @@ export default function VoteModal() {
                 <div className="vote-option-actions">
                   {! context.get('successVote') ?
                     <div className="vote-action-remove" onClick={() => { localStorage.removeItem('rk_vote_GREEN'); checkOptions()}} title="Törlés">
-                      <i className="fa fa-trash"></i>
+                      <FontAwesomeIcon icon={faTrash} />
                     </div> : null
                   }
                 </div>
-              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=1`} className="placeholder-text">Válasszon <strong>Zöld Budapest</strong> kategóriából egy projektet</a>}
+              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=1`.replaceAll('//', '/')} className="placeholder-text">Válasszon <strong>Zöld Budapest</strong> kategóriából egy projektet</a>}
             </div>
             <div className={`vote-option vote-option-2 ${!context.get('rk_vote_CARE') ? 'vote-option-placeholder' : ''}`}>
               {context.get('rk_vote_CARE') ? <div className="vote-option-item">
@@ -129,11 +134,11 @@ export default function VoteModal() {
                 <div className="vote-option-actions">
                   {! context.get('successVote') ?
                     <div className="vote-action-remove" onClick={() => { localStorage.removeItem('rk_vote_CARE'); checkOptions() }} title="Törlés">
-                      <i className="fa fa-trash"></i>
+                      <FontAwesomeIcon icon={faTrash} />
                     </div> : null
                   }
                 </div>
-              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=2`} className="placeholder-text">Válasszon <strong>Gondoskodó Budapest</strong> kategóriából egy projektet</a>}
+              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=2`.replaceAll('//', '/')} className="placeholder-text">Válasszon <strong>Gondoskodó Budapest</strong> kategóriából egy projektet</a>}
             </div>
             <div className={`vote-option vote-option-3 ${!context.get('rk_vote_WHOLE') ? 'vote-option-placeholder' : ''}`}>
               {context.get('rk_vote_WHOLE') ? <div className="vote-option-item">
@@ -144,13 +149,15 @@ export default function VoteModal() {
                 <div className="vote-option-actions">
                   {! context.get('successVote') ?
                     <div className="vote-action-remove" onClick={() => { localStorage.removeItem('rk_vote_WHOLE'); checkOptions() }} title="Törlés">
-                      <i className="fa fa-trash"></i>
+                      <FontAwesomeIcon icon={faTrash} />
                     </div> : null
                   }
                 </div>
-              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=3`} className="placeholder-text">Válasszon <strong>Egész Budapest</strong> kategóriából egy projektet</a>}
+              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=3`.replaceAll('//', '/')} className="placeholder-text">Válasszon <strong>Egész Budapest</strong> kategóriából egy projektet</a>}
             </div>
           </div>
+
+          {error ? <p>{error.message}</p> : null}
 
           {!context.get('successVote') ? <>
             <div className={`btn btn-primary btn-vote-final ${enableSendVote() ? 'btn-vote-active' : ''}`} onClick={() => sendVote()}>Beküldöm a szavazatom <sup>*</sup></div>
@@ -160,7 +167,9 @@ export default function VoteModal() {
             <p><Link to={`/bejelentkezes`}>Jelentkezzen be</Link> a szavazáshoz!</p>
         </div>}
 
-        <Link className="btn btn-primary btn-vote-more" to={`/statisztika`}>Leadott szavazatok</Link>
+        {loggedIn && localStorage.getItem('rk_voted', "true") ? <Link className="btn btn-primary btn-vote-more" to={`/statisztika`}>Leadott szavazatok</Link> : null}
+
+        {loggedIn ? <Link to={`/kijelentkezes`} style={{ color: '#fff' }}><u>Kijelentkezés</u></Link> : null}
       </div>
     </div>
   )
