@@ -74,9 +74,9 @@ export default class Login extends React.Component {
       if (response.data && response.data.token) {
         localStorage.setItem('auth_token', response.data.token)
 
-        if (tokenParser('user.voted')) {
-          localStorage.setItem('rk_voted', tokenParser('user.voted'))
-          this.context.set('rk_voted', tokenParser('user.voted'))
+        if (tokenParser('user.voted') && tokenParser('user.voted') === true) {
+          localStorage.setItem('rk_voted', true)
+          this.context.set('successVote', true)
         }
 
         if (tokenParser('user.votes')) {
