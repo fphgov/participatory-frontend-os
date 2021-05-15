@@ -13,14 +13,18 @@ export default class Statistics extends React.Component {
 
     this.state = {
       count: 0,
+      currentTabIndex: 0,
       pageCount: 0,
       projects: [],
+      filteredProjects: [],
       error: [],
     }
 
     this.context.set('loading', true, () => {
       this.getProjectData()
     })
+
+    this.handleClickTab = this.handleClickTab.bind(this)
   }
 
   getProjectData() {
@@ -37,6 +41,7 @@ export default class Statistics extends React.Component {
         if (response.data) {
           this.setState({
             projects: response.data._embedded.projects,
+            filteredProjects: response.data._embedded.projects
           })
 
           this.context.set('loading', false)
@@ -46,6 +51,7 @@ export default class Statistics extends React.Component {
         if (error.response && error.response.data && error.response.data.message) {
           this.setState({
             projects: [],
+            filteredProjects: [],
             error: error.response.data.message
           })
         }
@@ -54,24 +60,30 @@ export default class Statistics extends React.Component {
       })
   }
 
+  handleClickTab(e) {
+    const tabIndex = e.currentTarget.tabIndex
+    const filteredProjects = tabIndex !== 0 ? this.state.projects.filter((t) => t.campaign_theme.id === tabIndex) : this.state.projects
+
+    this.setState({
+      filteredProjects: filteredProjects
+    }, () => {
+      this.setState({
+        currentTabIndex: tabIndex
+      })
+    })
+  }
+
   ProjectsWrapper(props) {
-    const themeColor = props.project.campaign_theme.rgb
-    const themeName = props.project.campaign_theme.name
-
     return (
-      <div className="col-sm-12 col-md-6 col-lg-4">
-        <div className="prop-wrapper">
-          <div className="prop-inner">
-            <div className="prop-picture"></div>
-            <div className="prop-category" style={{ backgroundColor: themeColor }}>{themeName}</div>
-            <div className="prop-content-wrapper" style={{ borderColor: themeColor }}>
-              <div className="prop-content">
-                <Link to={`/projektek/${props.project.id}`}>
-                  <div className="prop-title">{props.project.title}</div>
-                </Link>
-
-                <div className="prop-count">Leadott szavazatok:<br /><span>{props.project.voted} db</span></div>
-              </div>
+      <div className="col-sm-12 col-md-12 col-lg-12">
+        <div className="stat-wrapper">
+          <div className="stat-inner">
+            <div className="stat-content">
+              <Link to={`/projektek/${props.project.id}`}>
+                <div className="stat-id">{props.place + 1}.</div>
+                <div className="stat-title">{props.project.title}</div>
+                <div className="stat-count"><span>{props.project.voted} db</span></div>
+              </Link>
             </div>
           </div>
         </div>
@@ -84,7 +96,20 @@ export default class Statistics extends React.Component {
       <div className="statistics">
         <div className="container">
           <div className="row">
-            {this.state.projects.map((project, i) => <this.ProjectsWrapper key={i} project={project} />)}
+            <div className="col-md-12">
+              <h1>Projektre leadott szavazatok</h1>
+
+              <div className="tab-wrapper">
+                <ul className="tab">
+                  <li tabIndex={0} className={`${this.state.currentTabIndex === 0 ? 'active' : ''}`} onClick={this.handleClickTab}><a>Összesített lista</a></li>
+                  <li tabIndex={1} className={`${this.state.currentTabIndex === 1 ? 'active' : ''}`} onClick={this.handleClickTab}><a>Zöld Budapest</a></li>
+                  <li tabIndex={2} className={`${this.state.currentTabIndex === 2 ? 'active' : ''}`} onClick={this.handleClickTab}><a>Gondoskodó Budapest</a></li>
+                  <li tabIndex={3} className={`${this.state.currentTabIndex === 3 ? 'active' : ''}`} onClick={this.handleClickTab}><a>Egész Budapest</a></li>
+                </ul>
+              </div>
+            </div>
+
+            {this.state.filteredProjects.map((project, i) => <this.ProjectsWrapper key={i} project={project} place={i} />)}
           </div>
         </div>
       </div>

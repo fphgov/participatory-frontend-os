@@ -1332,39 +1332,63 @@ fieldset h4 {
   border-top: 2px solid #00af96;
 }
 
-.statistics .prop-content {
-  padding: 0;
-  width: 100%;
-	height: 100%;
+.statistics {
+  padding-bottom: 30px;
 }
 
-.statistics .prop-content > a {
+.stat-wrapper {
+  border-top: 1px solid #ddd;
+}
+
+.stat-content a {
+	padding: 8px 4px;
+  display: flex;
+}
+
+.stat-content a:hover {
+  background-color: #00af96;
+  color: #fff;
+}
+
+.stat-content a .stat-title {
 	flex: 1;
 }
 
-.statistics .prop-title {
-  min-height: 0;
-  text-align: left;
-	color: #071f32;
+.stat-count {
+  margin-left: 5px;
 }
 
-.statistics .prop-content-wrapper {
-	align-items: flex-start;
-	padding: 0 10px;
+.stat-id {
+	margin-right: 5px;
 }
 
-.statistics .prop-count {
-	font-size: 18px;
-	margin: 0 0 15px 0;
+.tab-wrapper {
+  margin: 12px 0 44px 0;
+  text-align: center;
 }
 
-.statistics .prop-count span {
-	font-weight: bold;
+.statistics h1 {
+  text-align: center;
 }
 
-.statistics .prop-content {
+ul.tab {
+  list-style: none;
   padding: 0;
-  width: 100%;
+  margin: 0;
+}
+
+ul.tab li {
+  display: inline-block;
+}
+
+ul.tab li a {
+  display: block;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+ul.tab li.active a {
+	border-bottom: 4px solid #19506e;
 }
 
 .hide {
