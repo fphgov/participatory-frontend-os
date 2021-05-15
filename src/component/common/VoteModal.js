@@ -4,7 +4,7 @@ import qs from 'querystring'
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faArrowAltCircleUp, faArrowAltCircleDown, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faArrowAltCircleUp, faArrowAltCircleDown, faTrash, faSignOutAlt } from "@fortawesome/free-solid-svg-icons"
 
 export default function VoteModal() {
   const context = useContext(StoreContext)
@@ -48,9 +48,15 @@ export default function VoteModal() {
   }
 
   useEffect(() => {
-    setOpen(true)
+    setOpen(false)
     checkLoggedIn()
     checkOptions()
+
+    if (!localStorage.getItem('vote_modal_first')) {
+      setOpen(true)
+
+      localStorage.setItem('vote_modal_first', true)
+    }
   }, [location])
 
   useEffect(() => {
@@ -169,7 +175,7 @@ export default function VoteModal() {
 
         {loggedIn && localStorage.getItem('rk_voted', "true") ? <Link className="btn btn-primary btn-vote-more" to={`/statisztika`}>Leadott szavazatok</Link> : null}
 
-        {loggedIn ? <Link to={`/kijelentkezes`} style={{ color: '#fff' }}><u>Kijelentkezés</u></Link> : null}
+        {loggedIn ? <Link to={`/kijelentkezes`} className="logout"><FontAwesomeIcon icon={faSignOutAlt} />Kijelentkezés</Link> : null}
       </div>
     </div>
   )

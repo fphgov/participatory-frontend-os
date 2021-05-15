@@ -44,6 +44,7 @@ export default class Logout extends React.Component {
     this.context.set('rk_vote_CARE', null)
     this.context.set('rk_vote_WHOLE', null)
     this.context.set('rk_vote_GREEN', null)
+    this.context.set('successVote', null)
   }
 
   render() {

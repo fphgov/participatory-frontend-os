@@ -8,9 +8,6 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Page from "./Page";
 import NotFound from "./page/NotFound";
-// import Home from "./page/Home";
-// import Impressum from "./page/Impressum";
-// import Contacts from "./page/Contacts";
 import Login from "./page/Login";
 import Statistics from "./page/Statistics";
 import Project from "./page/Project";
@@ -61,8 +58,6 @@ export default class App extends React.Component {
                 <Route exact path="/" component={Projects} />
                 <Route exact path="/bejelentkezes" component={Login} />
                 <Route exact path="/kijelentkezes" component={Logout} />
-                {/* <Route exact path="/impresszum" component={Impressum} /> */}
-                {/* <Route exact path="/elerhetosegek" component={Contacts} /> */}
                 <Route exact path="/statisztika" component={Statistics} />
                 <Route exact path="/projektek" component={Projects} />
                 <Route exact path="/projektek/:id" component={Project} />

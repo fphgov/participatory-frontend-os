@@ -544,6 +544,10 @@ input[type="submit"] {
 	margin: 0 auto;
 }
 
+.loading-overlayer .loader .loader-spinner {
+	margin-top: 20px;
+}
+
 .prop .form-wrapper {
 	width: 100%;
 }
@@ -1365,6 +1369,18 @@ fieldset h4 {
 
 .hide {
 	display: none;
+}
+
+a.logout {
+	color: #fff;
+	margin-top: 20px;
+	display: block;
+	margin-top: 20px;
+	text-decoration: underline;
+}
+
+a.logout:hover {
+	color: #00af96;
 }
 
 @media screen and (min-width: 1200px) {
