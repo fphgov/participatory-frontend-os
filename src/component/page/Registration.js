@@ -285,7 +285,7 @@ export default class Registration extends React.Component {
                     <div className="form-group">
                       <label htmlFor="live_in_city" className="form-group-label">
                         <input className="form-control" type="checkbox" id="live_in_city" name="live_in_city" onChange={this.handleChangeInput} />
-                        Kijelentem, hogy budapesti lakos vagyok, vagy Budapesten dolgozom, vagy Budapesten tanulok. *
+                        Kijelentem, hogy elmúltam 18 éves és budapesti lakos vagyok, vagy Budapesten dolgozom, vagy Budapesten tanulok. *
                       </label>
 
                       {this.state.error && this.state.error.live_in_city ? Object.values(this.state.error.live_in_city).map((err, i) => {
@@ -296,7 +296,7 @@ export default class Registration extends React.Component {
                     <div className="form-group">
                       <label htmlFor="privacy" className="form-group-label">
                         <input className="form-control" type="checkbox" id="privacy" name="privacy" onChange={this.handleChangeInput} />
-                        Elfogadom az <a href="https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=htmlpage&amp;htmlpage_id=5" target="_blank">adatvédelmi tájékoztatót</a>
+                        Elfogadom az <a href="https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=htmlpage&amp;htmlpage_id=5" target="_blank" rel="noopener noreferrer">adatvédelmi tájékoztatót</a>
                       </label>
 
                       {this.state.error && this.state.error.privacy ? Object.values(this.state.error.privacy).map((err, i) => {

@@ -192,7 +192,7 @@ export default class Projects extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <h1>Mely projekteket látni szívesen megvalósulni?</h1>
+                <h1>Mely projekteket látná szívesen megvalósulni?</h1>
 
                 <div className="form-group">
                   <label className="sr-only" htmlFor="search">Keresés</label>

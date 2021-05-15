@@ -183,7 +183,7 @@ export default class Project extends React.Component {
                       {props.project.ideas.length === 0 ? <b>Nincs kapcsolodó ötlet</b> : null}
                       {props.project.ideas.map((idea, i) => {
                         return (<div className="idea" key={i}>
-                          <a style={{ backgroundColor: theme.rgb }} href={`https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=proposal&campaign=A&proposal=${idea}`}>{idea}</a>
+                          <a style={{ backgroundColor: theme.rgb }} href={`https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=proposal&campaign=A&proposal=${idea}`} rel="noopener noreferrer">{idea}</a>
                         </div>)
                       })}
                     </div>
