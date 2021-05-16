@@ -79,6 +79,8 @@ export default class Project extends React.Component {
       description: this.state.project.short_description
     };
 
+    this.context.set('rk_modal_open', true)
+
     const name = `rk_vote_${this.state.project.campaign_theme.code}`
     localStorage.setItem(name, JSON.stringify(data))
     this.context.set(name, data)
@@ -210,7 +212,9 @@ export default class Project extends React.Component {
                     </div>
                   ) : null }
 
-                  <p className="tipp">* A szavazat akkor érvényes, ha a <Link to={`/profil`} style={{ textDecoration: 'underline' }}>Szavazás</Link> menüpontban érvényesítve van.</p>
+                  {props.showVoteButton ? <>
+                    <p className="tipp">* A szavazat akkor érvényes, ha a <Link to={`/`} style={{ textDecoration: 'underline' }}>Szavazás</Link> menüpontban érvényesítve van.</p>
+                  </>: null}
                 </div>
               </div>
             </div>

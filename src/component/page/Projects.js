@@ -23,6 +23,8 @@ export default class Projects extends React.Component {
       location: '',
     }
 
+    this.queryRef = React.createRef()
+
     this.context.set('loading', true, () => {
       this.getProjectData()
     })
@@ -126,7 +128,11 @@ export default class Projects extends React.Component {
   }
 
   handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value })
+    this.setState({
+      [e.target.name]: e.target.value
+    }, () => {
+      this.queryRef.current.focus()
+    })
   }
 
   onKeyUp(e) {
@@ -138,7 +144,7 @@ export default class Projects extends React.Component {
   hasQueryFilter() {
     const onlyPageParam = /^\?page=\d+$/.test(document.location.search)
 
-    return !!window.location.search && !onlyPageParam
+    return !!window.location.search && !onlyPageParam || this.state.query !== '' || this.state.theme !== '' || this.state.location !== ''
   }
 
   ProjectsWrapper(props) {
@@ -202,7 +208,7 @@ export default class Projects extends React.Component {
                 <div className="form-group">
                   <label className="sr-only" htmlFor="search">Keresés</label>
                   <div className="input-group">
-                    <input className="form-control" type="text" name="query" value={this.state.query} placeholder="Keresés" id="search" onKeyUp={this.onKeyUp} onChange={this.handleChange} />
+                    <input className="form-control" type="text" name="query" value={this.state.query} placeholder="Keresés" id="search" ref={this.queryRef} onKeyUp={this.onKeyUp} onChange={this.handleChange} />
                     <span className="input-group-btn">
                       <button id="btn-search" className="btn btn-search form-control" type="submit" title="Keresés" onClick={this.search}>
                         <FontAwesomeIcon icon={faSearch} />

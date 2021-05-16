@@ -121,7 +121,7 @@ export default class Header extends React.Component {
           </div>
         </nav>
 
-        <VoteModal />
+        <VoteModal open={this.context.get('rk_modal_open')} />
 
         {this.state.openMenu ? <MobileMenu menu={this.state.menu} onClick={() => { this.toggleMenu() }} /> : null}
 

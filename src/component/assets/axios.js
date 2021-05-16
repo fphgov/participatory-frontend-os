@@ -6,7 +6,7 @@ axios.interceptors.response.use(response => {
   if (error.response.status === 401) {
     localStorage.removeItem('auth_token')
 
-    window.location.hash = '#/login'
+    window.location.pathname = (process.env.REACT_APP_BASENAME + '/bejelentkezes').replaceAll('//', '/')
   }
 
   return Promise.reject(error)

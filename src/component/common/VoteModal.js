@@ -6,15 +6,14 @@ import StoreContext from '../../StoreContext'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowAltCircleUp, faArrowAltCircleDown, faTrash, faSignOutAlt } from "@fortawesome/free-solid-svg-icons"
 
-export default function VoteModal() {
+export default function VoteModal(props) {
   const context = useContext(StoreContext)
   const location = useLocation()
   const voteModal = useRef(null)
-  const [open, setOpen] = useState(false)
   const [error, setError] = useState(false)
   const [loggedIn, setLoggedIn] = useState(false)
 
-  const height = voteModal && voteModal.current && voteModal.current.scrollHeight && open === true ? voteModal.current.scrollHeight : 54
+  const height = voteModal && voteModal.current && voteModal.current.scrollHeight && props.open === true ? voteModal.current.scrollHeight : 54
 
   const enumOptions = [
     'rk_vote_GREEN',
@@ -48,12 +47,12 @@ export default function VoteModal() {
   }
 
   useEffect(() => {
-    setOpen(false)
+    context.set('rk_modal_open', false)
     checkLoggedIn()
     checkOptions()
 
     if (!localStorage.getItem('vote_modal_first')) {
-      setOpen(true)
+      context.set('rk_modal_open', true)
 
       localStorage.setItem('vote_modal_first', true)
     }
@@ -110,8 +109,8 @@ export default function VoteModal() {
   return (
     <div className="vote-modal" style={{ height: height }} ref={voteModal}>
       <div className="container">
-        <h3 style={{ textTransform: 'uppercase' }} onClick={() => { setOpen(!open) }}>
-          Szavazás {open ? <FontAwesomeIcon icon={faArrowAltCircleUp} /> : <FontAwesomeIcon icon={faArrowAltCircleDown} />}
+        <h3 style={{ textTransform: 'uppercase' }} onClick={() => { context.set('rk_modal_open', ! props.open) }}>
+          Szavazás {props.open ? <FontAwesomeIcon icon={faArrowAltCircleUp} /> : <FontAwesomeIcon icon={faArrowAltCircleDown} />}
         </h3>
 
         {loggedIn ? <>
