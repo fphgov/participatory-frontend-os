@@ -77,7 +77,7 @@ export default class Header extends React.Component {
             <div className="row flex-center">
               <div className="col-xs-6 col-sm-6 col-md-4">
                 <div className="logo-wrapper">
-                  <a href={process.env.REACT_APP_BASENAME}>
+                  <a href="/">
                     <img src={Logo} alt="Budapest Részvételiségi Költségvetés"/>
                   </a>
                 </div>
