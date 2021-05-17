@@ -170,7 +170,9 @@ export default class Projects extends React.Component {
                   })}</div>
                 </div>
 
-                <div className="prop-title">{props.project.title}</div>
+                <div className="prop-title">
+                  <Link to={`/projektek/${props.project.id}`}>{props.project.title}</Link>
+                </div>
                 <div className="prop-line" style={{ backgroundColor: themeColor }}></div>
                 <div className="prop-description">{shortDescription}</div>
               </div>
@@ -234,7 +236,7 @@ export default class Projects extends React.Component {
                 <select name="location" onChange={this.handleChange} value={this.state.location}>
                   <option value="">Keresés kerület alapján</option>
                   <option disabled="disabled">----</option>
-                  <option value="1">Egész Budapest (32)</option>
+                  <option value="1">Nem köthető konkrét helyszínhez (32)</option>
                   <option value="2">I. kerület (0)</option>
                   <option value="3">II. kerület (0)</option>
                   <option value="4">III. kerület (5)</option>

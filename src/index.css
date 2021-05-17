@@ -626,6 +626,14 @@ input[type="submit"] {
 	min-height: 66px;
 }
 
+.prop-title a {
+  color: #071f32;
+}
+
+.prop-title a:hover {
+  color: #19506e;
+}
+
 .prop-description {
   margin-bottom: 30px;
   font-size: 16px;
