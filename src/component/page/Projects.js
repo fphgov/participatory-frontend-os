@@ -234,30 +234,30 @@ export default class Projects extends React.Component {
                 <select name="location" onChange={this.handleChange} value={this.state.location}>
                   <option value="">Keresés kerület alapján</option>
                   <option disabled="disabled">----</option>
-                  <option value="1">Egész Budapest</option>
-                  <option value="2">I. kerület</option>
-                  <option value="3">II. kerület</option>
-                  <option value="4">III. kerület</option>
-                  <option value="5">IV. kerület</option>
-                  <option value="6">V. kerület</option>
-                  <option value="7">VI. kerület</option>
-                  <option value="8">VII. kerület</option>
-                  <option value="9">VIII. kerület</option>
-                  <option value="10">IX. kerület</option>
-                  <option value="11">X. kerület</option>
-                  <option value="12">XI. kerület</option>
-                  <option value="13">XII. kerület</option>
-                  <option value="14">XIII. kerület</option>
-                  <option value="15">XIV. kerület</option>
-                  <option value="16">XV. kerület</option>
-                  <option value="17">XVI. kerület</option>
-                  <option value="18">XVII. kerület</option>
-                  <option value="19">XVIII. kerület</option>
-                  <option value="20">XIX. kerület</option>
-                  <option value="21">XX. kerület</option>
-                  <option value="22">XXI. kerület</option>
-                  <option value="23">XXII. kerület</option>
-                  <option value="24">Margit sziget</option>
+                  <option value="1">Egész Budapest (32)</option>
+                  <option value="2">I. kerület (0)</option>
+                  <option value="3">II. kerület (0)</option>
+                  <option value="4">III. kerület (5)</option>
+                  <option value="5">IV. kerület (0)</option>
+                  <option value="6">V. kerület (0)</option>
+                  <option value="7">VI. kerület (1)</option>
+                  <option value="8">VII. kerület (3)</option>
+                  <option value="9">VIII. kerület (4)</option>
+                  <option value="10">IX. kerület (2)</option>
+                  <option value="11">X. kerület (2)</option>
+                  <option value="12">XI. kerület (2)</option>
+                  <option value="13">XII. kerület (0)</option>
+                  <option value="14">XIII. kerület (1)</option>
+                  <option value="15">XIV. kerület (4)</option>
+                  <option value="16">XV. kerület (0)</option>
+                  <option value="17">XVI. kerület (0)</option>
+                  <option value="18">XVII. kerület (0)</option>
+                  <option value="19">XVIII. kerület (0)</option>
+                  <option value="20">XIX. kerület (0)</option>
+                  <option value="21">XX. kerület (0)</option>
+                  <option value="22">XXI. kerület (1)</option>
+                  <option value="23">XXII. kerület (0)</option>
+                  <option value="24">Margit sziget (1)</option>
                 </select>
               </div>
 
