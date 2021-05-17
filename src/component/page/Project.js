@@ -153,10 +153,10 @@ export default class Project extends React.Component {
               <div className="prop-single-wrapper prop-single-sidebar">
                 <div className="prop-single-content">
                   {props.showVoteButton ? <>
-                    <button className={`btn btn-primary btn-vote ${props.disableVoteButton ? 'btn-disable': ''}`} style={{ backgroundColor: theme.rgb }} onClick={props.voteAction}>Erre a projektre szavazok *</button>
+                    <button className={`btn btn-primary btn-vote ${props.disableVoteButton ? 'btn-disable' : ''}`} style={{ backgroundColor: theme.rgb }} onClick={props.voteAction}>Erre az ötletetre szavazok *</button>
                   </> : null }
 
-                  <h2>Projekt</h2>
+                  <h2>Ötlet</h2>
 
                   {props.project.voted !== null ? (
                     <div className="prop-single-voted">

@@ -97,7 +97,7 @@ export default class Statistics extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h1>Projektre leadott szavazatok</h1>
+              <h1>Ötletekre leadott szavazatok</h1>
 
               <div className="tab-wrapper">
                 <ul className="tab">

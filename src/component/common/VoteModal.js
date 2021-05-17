@@ -128,7 +128,7 @@ export default function VoteModal(props) {
                     </div> : null
                   }
                 </div>
-              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=1`.replaceAll('//', '/')} className="placeholder-text">Válasszon <strong>Zöld Budapest</strong> kategóriából egy projektet</a>}
+              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=1`.replaceAll('//', '/')} className="placeholder-text">Válasszon <strong>Zöld Budapest</strong> kategóriából egy ötletet</a>}
             </div>
             <div className={`vote-option vote-option-2 ${!context.get('rk_vote_CARE') ? 'vote-option-placeholder' : ''}`}>
               {context.get('rk_vote_CARE') ? <div className="vote-option-item">
@@ -143,7 +143,7 @@ export default function VoteModal(props) {
                     </div> : null
                   }
                 </div>
-              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=2`.replaceAll('//', '/')} className="placeholder-text">Válasszon <strong>Gondoskodó Budapest</strong> kategóriából egy projektet</a>}
+              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=2`.replaceAll('//', '/')} className="placeholder-text">Válasszon <strong>Gondoskodó Budapest</strong> kategóriából egy ötletet</a>}
             </div>
             <div className={`vote-option vote-option-3 ${!context.get('rk_vote_WHOLE') ? 'vote-option-placeholder' : ''}`}>
               {context.get('rk_vote_WHOLE') ? <div className="vote-option-item">
@@ -158,7 +158,7 @@ export default function VoteModal(props) {
                     </div> : null
                   }
                 </div>
-              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=3`.replaceAll('//', '/')} className="placeholder-text">Válasszon <strong>Egész Budapest</strong> kategóriából egy projektet</a>}
+              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=3`.replaceAll('//', '/')} className="placeholder-text">Válasszon <strong>Egész Budapest</strong> kategóriából egy ötletet</a>}
             </div>
           </div>
 
@@ -166,7 +166,7 @@ export default function VoteModal(props) {
 
           {!context.get('successVote') ? <>
             <div className={`btn btn-primary btn-vote-final ${enableSendVote() ? 'btn-vote-active' : ''}`} onClick={() => sendVote()}>Beküldöm a szavazatom <sup>*</sup></div>
-            <p><sup>*</sup> A gomb megnyomása után a kiválasztott projektekre leadott szavazatok véglegesednek, módosításra nincs lehetőség.</p>
+            <p><sup>*</sup> A gomb megnyomása után a kiválasztott ötletetekre leadott szavazatok véglegesednek, módosításra nincs lehetőség.</p>
           </> : <p>Az Ön szavazatai véglegesedtek, módosításra nincs lehetőség.</p>}
         </> : <div className="vote-login">
             <p><Link to={`/bejelentkezes`}>Jelentkezzen be</Link> a szavazáshoz!</p>
