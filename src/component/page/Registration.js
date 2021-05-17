@@ -15,6 +15,7 @@ export default class Registration extends React.Component {
     super(props, context)
 
     this.state = {
+      success: false,
       username: '',
       email: '',
       password: '',
@@ -111,7 +112,7 @@ export default class Registration extends React.Component {
     ).then(response => {
       if (response.data) {
         this.setState({
-          redirectLogin: true
+          success: true
         })
 
         this.context.set('loading', false)
@@ -168,7 +169,8 @@ export default class Registration extends React.Component {
 
                   <legend>Regisztráció</legend>
 
-                  <div className="form-wrapper">
+                  {! this.state.success ? <>
+                    <div className="form-wrapper">
                     <div className="input-wrapper">
                       <label htmlFor="username">Felhasználónév <sup>*</sup></label>
                       <p className="tipp">Az itt megadott névvel fog tudni belépni a rendszerbe. Speciális karakterek és nagybetűk nem elfogadottak.</p>
@@ -318,8 +320,27 @@ export default class Registration extends React.Component {
                       </button>
                     </div>
                   </div>
+                  </> : null}
                 </fieldset>
               </form>
+
+              {this.state.success ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
+                <p>Kérjük, regisztrációja befejezéséhez aktiválja fiókját az e-mail címére küldött levélben található linkre kattintva.</p>
+
+                <div className="row">
+                  <div className="col-lg-4">
+                    <div className="form-actions">
+                      <input className="btn btn-primary btn-small" id="button-send" type="submit" name="btnSend" value="Tovább a bejelentkezésre" onClick={(e) => {
+                        e.preventDefault()
+
+                        this.setState({
+                          redirectLogin: true
+                        })
+                      }} />
+                    </div>
+                  </div>
+                </div>
+              </div> : null}
             </div>
           </div>
         </div>

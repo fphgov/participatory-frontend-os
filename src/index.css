@@ -1208,6 +1208,10 @@ fieldset h4 {
 	cursor: pointer;
 }
 
+.vote-modal h3:hover {
+	color: #00af96;
+}
+
 .vote-option-wrapper {
 	margin: 28px 0;
 }
