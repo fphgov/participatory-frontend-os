@@ -213,7 +213,7 @@ export default class Project extends React.Component {
                   ) : null }
 
                   {props.showVoteButton ? <>
-                    <p className="tipp">* A szavazat akkor érvényes, ha a <Link to={`/`} style={{ textDecoration: 'underline' }}>Szavazás</Link> menüpontban érvényesítve van.</p>
+                    <p className="tipp">* A szavazat akkor érvényes, ha a felső, kék sávban található <div onClick={() => { this.context.set('rk_modal_open', true) }} style={{ textDecoration: 'underline' }}>Szavazás</div> menüpontban mindhárom kategóriából választott egy-egy ötletet, és azokat a beküldés gombbal beküldte.</p>
                   </>: null}
                 </div>
               </div>

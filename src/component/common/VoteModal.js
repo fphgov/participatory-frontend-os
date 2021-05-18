@@ -128,7 +128,7 @@ export default function VoteModal(props) {
                     </div> : null
                   }
                 </div>
-              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=1`.replaceAll('//', '/')} className="placeholder-text">Válasszon <strong>Zöld Budapest</strong> kategóriából egy ötletet</a>}
+              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=1`.replaceAll('//', '/')} className="placeholder-text">Kattinson ide, és válasszon a <strong>Zöld Budapest</strong> kategóriából egy ötletet (kötelező)</a>}
             </div>
             <div className={`vote-option vote-option-2 ${!context.get('rk_vote_CARE') ? 'vote-option-placeholder' : ''}`}>
               {context.get('rk_vote_CARE') ? <div className="vote-option-item">
@@ -143,7 +143,7 @@ export default function VoteModal(props) {
                     </div> : null
                   }
                 </div>
-              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=2`.replaceAll('//', '/')} className="placeholder-text">Válasszon <strong>Gondoskodó Budapest</strong> kategóriából egy ötletet</a>}
+              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=2`.replaceAll('//', '/')} className="placeholder-text">Kattinson ide, és válasszon a <strong>Gondoskodó Budapest</strong> kategóriából egy ötletet (kötelező)</a>}
             </div>
             <div className={`vote-option vote-option-3 ${!context.get('rk_vote_WHOLE') ? 'vote-option-placeholder' : ''}`}>
               {context.get('rk_vote_WHOLE') ? <div className="vote-option-item">
@@ -158,7 +158,7 @@ export default function VoteModal(props) {
                     </div> : null
                   }
                 </div>
-              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=3`.replaceAll('//', '/')} className="placeholder-text">Válasszon <strong>Egész Budapest</strong> kategóriából egy ötletet</a>}
+              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=3`.replaceAll('//', '/')} className="placeholder-text">Kattinson ide, és válasszon a <strong>Egész Budapest</strong> kategóriából egy ötletet (kötelező)</a>}
             </div>
           </div>
 

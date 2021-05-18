@@ -34,7 +34,7 @@ export default class ForgotAccount extends React.Component {
     };
 
     axios.post(
-      process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_PROFILE_FORGOT_PASSWORD,
+      process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_PROFILE_FORGOT_ACCOUNT,
       qs.stringify(data),
       config
     ).then(response => {
