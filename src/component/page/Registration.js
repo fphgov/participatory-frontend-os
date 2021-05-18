@@ -15,6 +15,7 @@ export default class Registration extends React.Component {
     super(props, context)
 
     this.state = {
+      error: null,
       success: false,
       username: '',
       email: '',
@@ -119,7 +120,11 @@ export default class Registration extends React.Component {
       }
     })
     .catch(error => {
-      if (error.response && error.response.data && error.response.data.errors) {
+      if (error.response.status === 403) {
+        this.setState({
+          error: 'Google reCapcha ellenőrzés sikertelen'
+        })
+      } else if (error.response && error.response.data && error.response.data.errors) {
         this.setState({
           error: error.response.data.errors
         })
@@ -129,6 +134,7 @@ export default class Registration extends React.Component {
         })
       }
 
+      this.updateToken()
       this.context.set('loading', false)
     })
   }
@@ -165,7 +171,7 @@ export default class Registration extends React.Component {
             <div className="col-xs-12 col-sm-6 offset-sm-3 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
               <form className="form-horizontal" onSubmit={this.submitRegistration.bind(this)}>
                 <fieldset>
-                  {this.state.error && this.state.error.message ? <this.Error message={this.state.error} /> : null}
+                  {(typeof this.state.error === 'string') ? <this.Error message={this.state.error} /> : null}
 
                   <legend>Regisztráció</legend>
 
