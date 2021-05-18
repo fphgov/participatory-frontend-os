@@ -17,6 +17,14 @@ const MobileMenu = (props) => {
 
             if (Array.isArray(menuItem.roles) && !menuItem.roles.includes(tokenParser('user.role'))) return;
 
+            if (menuItem.outside) {
+              return (
+                <li key={i.toString()}>
+                  <a href={menuItem.href}>{menuItem.title}</a>
+                </li>
+              )
+            }
+
             return (
               <li key={i.toString()}>
                 <Link to={menuItem.href}>{menuItem.title}</Link>
