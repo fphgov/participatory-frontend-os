@@ -168,7 +168,7 @@ export default class Registration extends React.Component {
       <div className="page-registration-section">
         <div className="container">
           <div className="row">
-            <div className="col-xs-12 col-sm-6 offset-sm-3 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
+            <div className="col-xs-12 col-sm-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
               <form className="form-horizontal" onSubmit={this.submitRegistration.bind(this)}>
                 <fieldset>
                   {(typeof this.state.error === 'string') ? <this.Error message={this.state.error} /> : null}
@@ -265,29 +265,19 @@ export default class Registration extends React.Component {
                       return <this.ErrorMini key={i} error={err} increment={`hear_about-${i}`} />
                     }) : null}
                     <div className="form-group form-group-hear-about">
-                      <label htmlFor="hear-about-friend" className="radio-inline">
-                        <input type="radio" name="hear_about" id="hear-about-friend" value="friend" onChange={this.handleChangeInput} />Barátoktól, ismerőstől, családtól
-                      </label>
-
-                      <label htmlFor="hear-about-street" className="radio-inline">
-                        <input type="radio" name="hear_about" id="hear-about-street" value="street" onChange={this.handleChangeInput} />Utcai plakátról
-                      </label>
-
-                      <label htmlFor="hear-about-districtevent" className="radio-inline">
-                        <input type="radio" name="hear_about" id="hear-about-districtevent" value="districtevent" onChange={this.handleChangeInput} />Kerületi tájékoztató eseményről
-                      </label>
-
-                      <label htmlFor="hear-about-facebook" className="radio-inline">
-                        <input type="radio" name="hear_about" id="hear-about-facebook" value="facebook" onChange={this.handleChangeInput} />Facebook bejegyzésből vagy hirdetésből
-                      </label>
-
-                      <label htmlFor="hear-about-civil" className="radio-inline">
-                        <input type="radio" name="hear_about" id="hear-about-civil" value="civil" onChange={this.handleChangeInput} />Civil szervezet hírleveléből, vagy civil szervezeti találkozón
-                      </label>
-
-                      <label htmlFor="hear-about-library" className="radio-inline">
-                        <input type="radio" name="hear_about" id="hear-about-library" value="library" onChange={this.handleChangeInput} />A Fővárosi Szabó Ervin Könyvtárban található brosúrából
-                      </label>
+                      <select name="hear_about" onChange={this.handleChangeInput}>
+                          <option value="">Válasszon a lehetőségek közül</option>
+                          <option disabled>---</option>
+                          <option value="friend">Barátoktól, ismerőstől, családtól</option>
+                          <option value="street">Utcai plakátról</option>
+                          <option value="news">Híroldalról, rádióból, TV-ből</option>
+                          <option value="transport">Tömegközlekedési jármű hirdetésből</option>
+                          <option value="districtevent">Kerületi tájékoztató eseményről</option>
+                          <option value="facebook">Facebook bejegyzésből vagy hirdetésből</option>
+                          <option value="civil">Civil szervezet hírleveléből, vagy civil szervezeti találkozón</option>
+                          <option value="library">A Fővárosi Szabó Ervin Könyvtárban található brosúrából</option>
+                          <option value="other">Egyéb</option>
+                      </select>
                     </div>
 
                     <div className="form-group">

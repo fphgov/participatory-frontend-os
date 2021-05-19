@@ -441,6 +441,15 @@ footer .fa-inverse {
 	min-width: 280px;
 }
 
+.form-wrapper select {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: 'Roboto', sans-serif;
+  color: #555;
+  background-color: #fff;
+}
+
 .input-wrapper {
 	margin-bottom: 20px;
 }
@@ -1133,7 +1142,8 @@ hr {
 	background: #19506e;
 }
 
-p.tipp {
+p.tipp,
+div.tipp {
   font-size: 14px;
   line-height: 18px;
 	font-style: italic;
@@ -1515,5 +1525,10 @@ a.logout:hover {
 
 	.line-one > div {
 		margin: 8px 0;
+	}
+
+	.form-wrapper {
+		min-width: initial;
+		width: 100%;
 	}
 }

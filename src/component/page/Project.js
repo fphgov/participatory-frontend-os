@@ -7,6 +7,7 @@ import {
 import ImageGallery from 'react-image-gallery';
 import StoreContext from '../../StoreContext'
 import nFormatter from '../assets/nFormatter'
+import ScrollTo from "../common/ScrollTo"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons"
 
@@ -17,6 +18,7 @@ export default class Project extends React.Component {
     super(props, context)
 
     this.state = {
+      scroll: false,
       project: null,
       redirectLogin: false,
     }
@@ -26,6 +28,7 @@ export default class Project extends React.Component {
     })
 
     this.vote = this.vote.bind(this)
+    this.ProjectWrapper = this.ProjectWrapper.bind(this)
   }
 
   getProjectData() {
@@ -213,7 +216,7 @@ export default class Project extends React.Component {
                   ) : null }
 
                   {props.showVoteButton ? <>
-                    <p className="tipp">* A szavazat akkor érvényes, ha a felső, kék sávban található <div onClick={() => { this.context.set('rk_modal_open', true) }} style={{ textDecoration: 'underline' }}>Szavazás</div> menüpontban mindhárom kategóriából választott egy-egy ötletet, és azokat a beküldés gombbal beküldte.</p>
+                    <div className="tipp">* A szavazat akkor érvényes, ha a felső, kék sávban található <div onClick={() => { this.context.set('rk_modal_open', true); this.setState({ scroll: true }) }} style={{ textDecoration: 'underline', display: 'inline', cursor: 'pointer' }}>Szavazás</div> menüpontban mindhárom kategóriából választott egy-egy ötletet, és azokat a beküldés gombbal beküldte.</div>
                   </>: null}
                 </div>
               </div>
@@ -234,6 +237,7 @@ export default class Project extends React.Component {
     return (
       <div className="prop">
         <div className="container">
+          {this.state.scroll ? <ScrollTo element={document.querySelector('.vote-modal').offsetTop} /> : null}
           {this.state.error ? <this.Error message={this.state.error} /> : null}
           {this.state.project ? <this.ProjectWrapper project={this.state.project} voteAction={this.vote} disableVoteButton={voteBtn} showVoteButton={! this.context.get('successVote')} /> : null}
         </div>
