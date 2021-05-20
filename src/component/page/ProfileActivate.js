@@ -4,6 +4,7 @@ import {
 } from "react-router-dom"
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
+import SEO from '../common/SEO'
 
 export default class ProfileActivate extends React.Component {
   static contextType = StoreContext
@@ -71,6 +72,8 @@ export default class ProfileActivate extends React.Component {
 
     return (
       <div className="page-profile-section">
+        <SEO title="Szavazzon most!" />
+
         <div className="container">
           <h1>Felhasználói fiók aktíválása</h1>
 
