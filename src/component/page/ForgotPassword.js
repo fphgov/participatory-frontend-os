@@ -5,6 +5,7 @@ import {
 import qs from 'querystring'
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
+import SEO from '../common/SEO'
 
 export default class ForgotPassword extends React.Component {
   static contextType = StoreContext
@@ -88,6 +89,8 @@ export default class ForgotPassword extends React.Component {
 
     return (
       <div className="page-forgot-password-section">
+        <SEO title="Szavazzon most!" />
+
         <div className="container">
           <h1>Elfelejtett jelszó</h1>
 

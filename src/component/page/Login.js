@@ -8,6 +8,7 @@ import {
 } from "react-router-dom"
 import StoreContext from '../../StoreContext'
 import tokenParser from '../assets/tokenParser'
+import SEO from '../common/SEO'
 
 export default class Login extends React.Component {
   static contextType = StoreContext
@@ -141,6 +142,8 @@ export default class Login extends React.Component {
 
     return (
       <div className="page-login-section">
+        <SEO title="Szavazzon most!" />
+
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3">

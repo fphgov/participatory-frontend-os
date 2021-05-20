@@ -7,6 +7,7 @@ import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import { rmAllCharForEmail, rmAllCharForName } from '../lib/removeSpecialCharacters'
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
+import SEO from '../common/SEO'
 
 export default class Registration extends React.Component {
   static contextType = StoreContext
@@ -166,6 +167,8 @@ export default class Registration extends React.Component {
 
     return (
       <div className="page-registration-section">
+        <SEO title="Szavazzon most!" />
+
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
@@ -266,17 +269,17 @@ export default class Registration extends React.Component {
                     }) : null}
                     <div className="form-group form-group-hear-about">
                       <select name="hear_about" onChange={this.handleChangeInput}>
-                          <option value="">Válasszon a lehetőségek közül</option>
-                          <option disabled>---</option>
-                          <option value="friend">Barátoktól, ismerőstől, családtól</option>
-                          <option value="street">Utcai plakátról</option>
-                          <option value="news">Híroldalról, rádióból, TV-ből</option>
-                          <option value="transport">Tömegközlekedési jármű hirdetésből</option>
-                          <option value="districtevent">Kerületi tájékoztató eseményről</option>
-                          <option value="facebook">Facebook bejegyzésből vagy hirdetésből</option>
-                          <option value="civil">Civil szervezet hírleveléből, vagy civil szervezeti találkozón</option>
-                          <option value="library">A Fővárosi Szabó Ervin Könyvtárban található brosúrából</option>
-                          <option value="other">Egyéb</option>
+                        <option value="">Válasszon a lehetőségek közül</option>
+                        <option disabled>---</option>
+                        <option value="friend">Barátoktól, ismerőstől, családtól</option>
+                        <option value="street">Utcai plakátról</option>
+                        <option value="news">Híroldalról, rádióból, TV-ből</option>
+                        <option value="transport">Tömegközlekedési jármű hirdetésből</option>
+                        <option value="districtevent">Kerületi tájékoztató eseményről</option>
+                        <option value="facebook">Facebook bejegyzésből vagy hirdetésből</option>
+                        <option value="civil">Civil szervezet hírleveléből, vagy civil szervezeti találkozón</option>
+                        <option value="library">A Fővárosi Szabó Ervin Könyvtárban található brosúrából</option>
+                        <option value="other">Egyéb</option>
                       </select>
                     </div>
 

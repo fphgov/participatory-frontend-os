@@ -46,7 +46,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <SEO />
+        <SEO title="Szavazzon most!" />
 
         <Router basename={process.env.REACT_APP_BASENAME}>
           {(process.env.GA_ID || process.env.GTM_ID) ? <CookieNotice /> : ''}

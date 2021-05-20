@@ -25,6 +25,11 @@ module.exports = {
     historyApiFallback: true,
     port: 8080,
   },
+  target: `web`,
+  mode: `production`,
+  node: {
+    ___filename: true
+  },
   devtool: 'source-map',
   module: {
     rules: [

@@ -5,6 +5,7 @@ import {
 import qs from 'querystring'
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
+import SEO from '../common/SEO'
 
 export default class ResetPassword extends React.Component {
   static contextType = StoreContext
@@ -90,6 +91,8 @@ export default class ResetPassword extends React.Component {
 
     return (
       <div className="page-reset-password-section">
+        <SEO title="Szavazzon most!" />
+
         <div className="container">
           <h1>Új jelszó beállítása</h1>
 

@@ -10,6 +10,7 @@ import nFormatter from '../assets/nFormatter'
 import ScrollTo from "../common/ScrollTo"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons"
+import SEO from '../common/SEO'
 
 export default class Project extends React.Component {
   static contextType = StoreContext
@@ -236,6 +237,8 @@ export default class Project extends React.Component {
 
     return (
       <div className="prop">
+        <SEO title={this.state.project ? this.state.project.title : ''} description={this.state.project ? this.state.project.short_description : ''} />
+
         <div className="container">
           {this.state.scroll ? <ScrollTo element={document.querySelector('.vote-modal').offsetTop} /> : null}
           {this.state.error ? <this.Error message={this.state.error} /> : null}
