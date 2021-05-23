@@ -4,7 +4,6 @@ import {
   Link
 } from "react-router-dom"
 import StoreContext from '../../StoreContext'
-import SEO from '../common/SEO'
 
 export default class Statistics extends React.Component {
   static contextType = StoreContext
@@ -95,8 +94,6 @@ export default class Statistics extends React.Component {
   render() {
     return (
       <div className="statistics">
-        <SEO title="Szavazzon most!" />
-
         <div className="container">
           <div className="row">
             <div className="col-md-12">

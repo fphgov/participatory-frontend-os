@@ -7,7 +7,6 @@ import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import { rmAllCharForEmail, rmAllCharForName } from '../lib/removeSpecialCharacters'
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
-import SEO from '../common/SEO'
 
 export default class Registration extends React.Component {
   static contextType = StoreContext
@@ -167,8 +166,6 @@ export default class Registration extends React.Component {
 
     return (
       <div className="page-registration-section">
-        <SEO title="Szavazzon most!" />
-
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3">

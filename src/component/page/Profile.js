@@ -4,7 +4,6 @@ import {
 } from "react-router-dom"
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
-import SEO from '../common/SEO'
 
 export default class Profile extends React.Component {
   static contextType = StoreContext
@@ -87,8 +86,6 @@ export default class Profile extends React.Component {
 
     return (
       <div className="page-profile-section">
-        <SEO title="Szavazzon most!" />
-
         <div className="container">
           <div className="row">
             <div className="col-md-12">

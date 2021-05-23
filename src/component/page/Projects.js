@@ -3,7 +3,6 @@ import React from "react"
 import {
   Link
 } from "react-router-dom"
-import SEO from '../common/SEO'
 import StoreContext from '../../StoreContext'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch, faAngleDoubleLeft, faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons"
@@ -202,8 +201,6 @@ export default class Projects extends React.Component {
 
     return (
       <div className="projects">
-        <SEO title="Szavazzon most!" />
-
         <div className="search-area">
           <div className="container">
             <div className="row">
