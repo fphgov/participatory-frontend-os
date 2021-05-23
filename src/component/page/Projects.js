@@ -179,7 +179,7 @@ export default class Projects extends React.Component {
               </div>
 
               <div className="prop-more" onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
-                <div className="article-button-wrapper btn-wrapper">
+                <div className="btn-wrapper">
                   <Link to={`/projektek/${props.project.id}`} className="btn btn-secondary" style={{ borderColor: themeColor, color: isHover ? '#fff' : themeColor, backgroundColor: isHover ? themeColor: 'transparent' }}>Megtekintés</Link>
                 </div>
               </div>
