@@ -125,18 +125,18 @@ module.exports = {
       filename: "./admin.html"
     }),
     new WebpackPwaManifest({
-      name: 'Budapest Részvételi költségvetés',
-      short_name: 'Részvételi költségvetés',
-      start_url: "/szavazas/",
+      name: process.env.REACT_APP_PWA_NAME,
+      short_name: process.env.REACT_APP_PWA_SHORT_NAME,
+      start_url: process.env.REACT_APP_PWA_START_URL,
       orientation: 'portrait',
       display: 'standalone',
-      description: 'Szavazzon most!',
-      background_color: '#ffffff',
+      description: process.env.REACT_APP_PWA_DESCRIPTION,
+      background_color: process.env.REACT_APP_PWA_COLOR,
       crossorigin: 'use-credentials',
       fingerprints: false,
       ios: {
-        'apple-mobile-web-app-title': 'Részvételi költségvetés',
-        'apple-mobile-web-app-status-bar-style': 'white'
+        'apple-mobile-web-app-title': process.env.REACT_APP_PWA_SHORT_NAME,
+        'apple-mobile-web-app-status-bar-style': process.env.REACT_APP_PWA_BAR_STYLE
       },
       icons: [
         {
