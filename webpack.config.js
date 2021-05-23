@@ -1,7 +1,7 @@
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const Dotenv = require('dotenv-webpack');
@@ -124,21 +124,31 @@ module.exports = {
       template: "./admin/index.html",
       filename: "./admin.html"
     }),
-    new CopyPlugin({
-      patterns: [
+    new WebpackPwaManifest({
+      name: 'Budapest Részvételi költségvetés',
+      short_name: 'Részvételi költségvetés',
+      start_url: "/szavazas/",
+      orientation: 'portrait',
+      display: 'standalone',
+      description: 'Szavazzon most!',
+      background_color: '#ffffff',
+      crossorigin: 'use-credentials',
+      fingerprints: false,
+      ios: {
+        'apple-mobile-web-app-title': 'Részvételi költségvetés',
+        'apple-mobile-web-app-status-bar-style': 'white'
+      },
+      icons: [
         {
-          from: './src/favicon.ico'
+          src: path.resolve('src/img/favicon.png'),
+          sizes: [ 96, 128, 192, 256, 384, 512 ],
+          purpose: 'any'
         },
         {
-          from: './src/manifest.json'
-        },
-        {
-          from: './src/browserconfig.xml'
-        },
-        {
-          from: './src/manifest',
-          to: path.resolve(__dirname, 'public', 'manifest')
-        },
+          src: path.resolve('src/img/favicon.png'),
+          size: '1024x1024',
+          purpose: 'any'
+        }
       ]
     })
   ],

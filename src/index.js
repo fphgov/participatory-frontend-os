@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./component/App";
+import Layout from "./component/Layout";
 import store from 'store'
 import "./index.css";
 import "normalize";
@@ -57,9 +58,11 @@ class AppWithContext extends React.Component {
 
     return (
       <StoreContext.Provider value={this.state}>
-        {loading ? <Loading /> : null}
+        <Layout>
+          {loading ? <Loading /> : null}
 
-        <App />
+          <App />
+        </Layout>
       </StoreContext.Provider>
     )
   }

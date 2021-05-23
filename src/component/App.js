@@ -19,7 +19,6 @@ import ForgotPassword from "./page/ForgotPassword";
 import ForgotAccount from "./page/ForgotAccount";
 import Logout from "./page/Logout";
 import Profile from "./page/Profile";
-import SEO from "./common/SEO";
 import ScrollToTop from "./common/ScrollToTop";
 import StoreContext from '../StoreContext'
 import tokenParser from './assets/tokenParser'
@@ -46,8 +45,6 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <SEO title="Szavazzon most!" />
-
         <Router basename={process.env.REACT_APP_BASENAME}>
           {(process.env.GA_ID || process.env.GTM_ID) ? <CookieNotice /> : ''}
           <ScrollToTop>

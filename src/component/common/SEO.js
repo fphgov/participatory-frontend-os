@@ -21,81 +21,9 @@ function SEO({ description, lang, meta, title }) {
       titleTemplate={`%s | ${siteMetaData.title}`}
       link={[
         {
-          rel: `apple-touch-icon`,
-          sizes: `57x57`,
-          href: `${(process.env.REACT_APP_BASENAME + '/manifest/apple-icon-57x57.png').replace('//', '/')}`
-        },
-        {
-          rel: `apple-touch-icon`,
-          sizes: `60x60`,
-          href: `${(process.env.REACT_APP_BASENAME + '/manifest/apple-icon-60x60.png').replace('//', '/')}`
-        },
-        {
-          rel: `apple-touch-icon`,
-          sizes: `72x72`,
-          href: `${(process.env.REACT_APP_BASENAME + '/manifest/apple-icon-72x72.png').replace('//', '/')}`
-        },
-        {
-          rel: `apple-touch-icon`,
-          sizes: `76x76`,
-          href: `${(process.env.REACT_APP_BASENAME + '/manifest/apple-icon-76x76.png').replace('//', '/')}`
-        },
-        {
-          rel: `apple-touch-icon`,
-          sizes: `114x114`,
-          href: `${(process.env.REACT_APP_BASENAME + '/manifest/apple-icon-114x114.png').replace('//', '/')}`
-        },
-        {
-          rel: `apple-touch-icon`,
-          sizes: `120x120`,
-          href: `${(process.env.REACT_APP_BASENAME + '/manifest/apple-icon-120x120.png').replace('//', '/')}`
-        },
-        {
-          rel: `apple-touch-icon`,
-          sizes: `144x144`,
-          href: `${(process.env.REACT_APP_BASENAME + '/manifest/apple-icon-144x144.png').replace('//', '/')}`
-        },
-        {
-          rel: `apple-touch-icon`,
-          sizes: `152x152`,
-          href: `${(process.env.REACT_APP_BASENAME + '/manifest/apple-icon-152x152.png').replace('//', '/')}`
-        },
-        {
-          rel: `apple-touch-icon`,
-          sizes: `180x180`,
-          href: `${(process.env.REACT_APP_BASENAME + '/manifest/apple-icon-180x180.png').replace('//', '/')}`
-        },
-        {
           rel: `icon`,
-          href: `${(process.env.REACT_APP_BASENAME + '/favicon.ico').replace('//', '/')}`
-        },
-        {
-          rel: `icon`,
-          sizes: `192x192`,
-          type: `image/png`,
-          href: `${(process.env.REACT_APP_BASENAME + '/manifest/android-icon-192x192.png').replace('//', '/')}`
-        },
-        {
-          rel: `icon`,
-          sizes: `96x96`,
-          type: `image/png`,
-          href: `${(process.env.REACT_APP_BASENAME + '/manifest/favicon-96x96.png').replace('//', '/')}`
-        },
-        {
-          rel: `icon`,
-          sizes: `32x32`,
-          type: `image/png`,
-          href: `${(process.env.REACT_APP_BASENAME + '/manifest/favicon-32x32.png').replace('//', '/')}`
-        },
-        {
-          rel: `icon`,
-          sizes: `16x16`,
-          type: `image/png`,
-          href: `${(process.env.REACT_APP_BASENAME + '/manifest/favicon-16x16.png').replace('//', '/')}`
-        },
-        {
-          rel: `manifest`,
-          href: `${(process.env.REACT_APP_BASENAME + '/manifest.json').replace('//', '/')}`
+          href: `${(process.env.REACT_APP_BASENAME + '/icon_96x96.png').replace('//', '/')}`,
+          type: `image/png`
         },
       ]}
       meta={[
@@ -105,18 +33,6 @@ function SEO({ description, lang, meta, title }) {
         {
           name: `viewport`,
           content: `width=device-width, initial-scale=1`,
-        },
-        {
-          name: `msapplication-TileColor`,
-          content: `#ffffff`,
-        },
-        {
-          name: `msapplication-TileImage`,
-          content: `${(process.env.REACT_APP_BASENAME + '/manifest/ms-icon-144x144.png').replace('//', '/')}`,
-        },
-        {
-          name: `theme-color`,
-          content: `#ffffff`,
         },
         {
           name: `description`,
