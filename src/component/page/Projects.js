@@ -259,7 +259,7 @@ export default class Projects extends React.Component {
                   <option value="21">XX. kerület (0)</option>
                   <option value="22">XXI. kerület (1)</option>
                   <option value="23">XXII. kerület (0)</option>
-                  <option value="24">Margit sziget (1)</option>
+                  <option value="24">Margitsziget (1)</option>
                 </select>
               </div>
 
