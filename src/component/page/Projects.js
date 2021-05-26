@@ -6,6 +6,7 @@ import {
 import StoreContext from '../../StoreContext'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch, faAngleDoubleLeft, faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons"
+import Map from './Map'
 
 export default class Projects extends React.Component {
   static contextType = StoreContext
@@ -179,7 +180,7 @@ export default class Projects extends React.Component {
 
               <div className="prop-more" onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
                 <div className="btn-wrapper">
-                  <Link to={`/projektek/${props.project.id}`} className="btn btn-secondary" style={{ borderColor: themeColor, color: isHover ? '#fff' : themeColor, backgroundColor: isHover ? themeColor: 'transparent' }}>Megtekintés</Link>
+                  <Link to={`/projektek/${props.project.id}`} className="btn btn-secondary" style={{ borderColor: themeColor, color: isHover ? '#fff' : themeColor, backgroundColor: isHover ? themeColor : 'transparent' }}>Megtekintés</Link>
                 </div>
               </div>
             </div>
@@ -221,7 +222,7 @@ export default class Projects extends React.Component {
               </div>
             </div>
 
-            <div className="row">
+            <div className="row mb-3">
               <div className="col-md-3 col-xs-12">
                 <select name="theme" onChange={this.handleChange} value={this.state.theme}>
                   <option value="">Keresés kategória alapján</option>
@@ -273,6 +274,7 @@ export default class Projects extends React.Component {
                 </div>
               </div>
             </div>
+            <Map />
           </div>
         </div>
 
