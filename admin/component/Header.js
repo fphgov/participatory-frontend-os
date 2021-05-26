@@ -58,10 +58,10 @@ export default class Header extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-xs-6 col-sm-6 col-md-4">
-                <a href="https://sample.hu" rel="noopener noreferrer">Vissza a [ sample.hu ] főoldalára</a>
+                <a href="https://otlet.budapest.hu" rel="noopener noreferrer">Vissza az otlet.budapest.hu főoldalára</a>
               </div>
               <div className="col-xs-6 col-sm-6 col-md-8 col-right">
-                <a href="https://sample.hu" target="_blank" rel="noopener noreferrer">sample.hu</a>
+                <a href="https://otlet.budapest.hu" target="_blank" rel="noopener noreferrer">budapest.hu</a>
               </div>
             </div>
           </div>
