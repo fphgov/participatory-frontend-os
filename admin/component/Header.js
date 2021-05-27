@@ -37,8 +37,6 @@ export default class Header extends React.Component {
       openMenu: false,
       menu: [
         { title: "Jelentkezettek", href: "/applicants", onHideLoggedOut: true, roles: [ 'developer', 'admin', 'cs' ] },
-        { title: "Időpont ellenőrzés", href: "/checks", onHideLoggedOut: true, roles: [ 'developer', 'admin', 'voluntary' ] },
-        { title: "Napi jelenlét", href: "/informations", onHideLoggedOut: true, roles: [ 'developer', 'admin', 'voluntary' ] },
         { title: "Bejelentkezés", href: "/login", onHideLoggedIn: true },
         { title: "Kijelentkezés", href: "/logout", onHideLoggedOut: true },
       ]
@@ -72,9 +70,9 @@ export default class Header extends React.Component {
             <div className="row flex-center">
               <div className="col-xs-6 col-sm-6 col-md-2">
                 <div className="logo-wrapper">
-                  <a href="/bp-admin">
+                  <Link to={"/"}>
                     <img src={require('../img/logo-bp-monocrom.png')} />
-                  </a>
+                  </Link>
                 </div>
               </div>
 
