@@ -36,7 +36,8 @@ export default class Header extends React.Component {
     this.state = {
       openMenu: false,
       menu: [
-        { title: "Jelentkezettek", href: "/applicants", onHideLoggedOut: true, roles: [ 'developer', 'admin', 'cs' ] },
+        { title: "Jelentkezettek", href: "/applicants", onHideLoggedOut: true, roles: [ 'developer', 'admin', 'editor' ] },
+        { title: "Szavazat hozzáadása", href: "/vote", onHideLoggedOut: true, roles: [ 'developer', 'admin', 'editor' ] },
         { title: "Bejelentkezés", href: "/login", onHideLoggedIn: true },
         { title: "Kijelentkezés", href: "/logout", onHideLoggedOut: true },
       ]
@@ -68,7 +69,7 @@ export default class Header extends React.Component {
         <nav className="main-navigation">
           <div className="container">
             <div className="row flex-center">
-              <div className="col-xs-6 col-sm-6 col-md-2">
+              <div className="col-xs-6 col-sm-4 col-md-2">
                 <div className="logo-wrapper">
                   <Link to={"/"}>
                     <img src={require('../img/logo-bp-monocrom.png')} />
@@ -76,7 +77,7 @@ export default class Header extends React.Component {
                 </div>
               </div>
 
-              <div className="col-xs-6 col-sm-6 col-md-10">
+              <div className="col-xs-6 col-sm-8 col-md-10">
                 <ul className="desktop-menu">
                   {this.state.menu.map((menuItem, i) => {
                     if (

@@ -777,6 +777,10 @@ input[name="search"] {
   margin-left: 20px;
 }
 
+.vote-selection select {
+	width: 100%;
+}
+
 @media screen and (max-width: 991px) {
   .desktop-menu {
     display: none;

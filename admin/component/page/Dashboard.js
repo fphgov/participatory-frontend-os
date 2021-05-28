@@ -18,6 +18,7 @@ export default class Dashboard extends React.Component {
       close: false,
       countVotes: 'N/A',
       countUsers: 'N/A',
+      error: [],
     }
 
     this.context.set('loading', true, () => {
