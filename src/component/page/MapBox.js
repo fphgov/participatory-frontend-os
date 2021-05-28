@@ -3,21 +3,22 @@ import ReactMapGL, { Marker, Layer, Source } from 'react-map-gl'
 import districtData from '../geodata/districts.json'
 import useLayers from '../geodata/layerStyles'
 
-const districtIndexOnSelect = [1, 3, 4]
+const districtIndexOnSelect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
 
 export default function MapBox(props) {
 
   const [layerStyles, layerOptions, handleLayerOptions] = useLayers();
   const [viewport, setViewport] = useState({
-    latitude: 47.485,
-    longitude: 19.089,
+    latitude: 47.484,
+    longitude: window.innerWidth < 767 ? 19.135 : 19.053,
     width: 'inherit',
     height: '400px',
-    zoom: 9.34
+    zoom: window.innerWidth < 767 ? 9 : 9.38,
+    minZoom: 8.5
   });
 
-  function getCursor({ isHovering }) {
-    return isHovering ? 'pointer' : 'default';
+  function getCursor({ isHovering, isDragging }) {
+    return isDragging ? 'grabbing' : isHovering ? 'pointer' : 'default';
   }
 
   const districtFilter = useCallback((selectedDistricts, source) => {
@@ -48,13 +49,17 @@ export default function MapBox(props) {
     })
   }
 
+  // console.log(viewport.longitude)
+  // console.log(viewport.latitude)
+  // console.log(viewport.zoom)
+
   return (
-    <div>
+    <div className="map-container">
       <ReactMapGL
         {...viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
         // mapStyle="mapbox://styles/mapbox/streets-v11"
-        // onViewportChange={(viewport) => { setViewport(viewport) }}
+        onViewportChange={(viewport) => { setViewport(viewport) }}
         getCursor={getCursor}
         interactiveLayerIds={convertIndexToId(districtIndexOnSelect)}
         onClick={e => {
@@ -65,7 +70,7 @@ export default function MapBox(props) {
       >
 
         {filteredSourceData && filteredSourceData.features.map((district, index) => (
-          <Source key={district.properties.osm_id} type="geojson" data={filteredSourceData.features[index]}>
+          <Source key={district.properties.ksh} type="geojson" data={filteredSourceData.features[index]}>
             <Layer {...layerStyles[index]} />
           </Source>
 

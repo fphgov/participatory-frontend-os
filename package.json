@@ -43,7 +43,6 @@
     "babel-polyfill": "^6.26.0",
     "bootstrap-4-grid": "^3.4.0",
     "jwt-decode": "^3.1.2",
-    "mapbox-gl": "^2.2.0",
     "normalize.css": "^8.0.1",
     "querystring": "^0.2.1",
     "react": "^17.0.2",
