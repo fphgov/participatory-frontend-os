@@ -6,7 +6,7 @@ import {
 import StoreContext from '../../StoreContext'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch, faAngleDoubleLeft, faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons"
-import Map from './Map'
+import MapBox from './MapBox'
 
 export default class Projects extends React.Component {
   static contextType = StoreContext
@@ -133,6 +133,12 @@ export default class Projects extends React.Component {
       [e.target.name]: e.target.value
     }, () => {
       this.queryRef.current.focus()
+    })
+  }
+
+  crossLocationChange(locationId) {
+    this.setState({
+      location: locationId
     })
   }
 
@@ -274,7 +280,7 @@ export default class Projects extends React.Component {
                 </div>
               </div>
             </div>
-            <Map />
+            <MapBox location={this.state.location} onChange={val => this.crossLocationChange(val)} />
           </div>
         </div>
 
