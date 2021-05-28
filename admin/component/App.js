@@ -11,8 +11,6 @@ import NotFound from "./page/NotFound";
 import Dashboard from "./page/Dashboard";
 import Login from "./page/Login";
 import Logout from "./page/Logout";
-import Applicants from "./page/Applicants";
-import Applicant from "./page/Applicant";
 import Vote from "./page/Vote";
 import ScrollToTop from "./common/ScrollToTop";
 import 'react-toastify/dist/ReactToastify.css';
@@ -31,8 +29,6 @@ export default class App extends React.Component {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/logout" component={Logout} />
                 <Route exact path="/vote" component={Vote} />
-                <Route exact path="/applicants" component={Applicants} />
-                <Route exact path="/applicants/:id" component={Applicant} />
 
                 <Route exact path="*" component={NotFound} />
               </Switch>
