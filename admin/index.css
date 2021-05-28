@@ -685,6 +685,10 @@ input[name="search"] {
   margin-left: 20px;
 }
 
+.box.box-button:hover {
+  background-color: #ffe125;
+}
+
 .box span {
   font-weight: bold;
 }
