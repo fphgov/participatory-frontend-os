@@ -165,7 +165,7 @@ export default class Project extends React.Component {
                     <div className="prop-single-voted">
                       <div className="prop-info-title">Beérkezett szavazatok:</div>
                       <div className="prop-info-content">
-                       <b>{props.project.voted} db</b></div>
+                       <b>{props.project.voted} szavazat</b></div>
                       </div>
                   ) : null}
 

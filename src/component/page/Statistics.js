@@ -82,7 +82,7 @@ export default class Statistics extends React.Component {
               <Link to={`/projektek/${props.project.id}`}>
                 <div className="stat-id">{props.place + 1}.</div>
                 <div className="stat-title">{props.project.title}</div>
-                <div className="stat-count"><span>{props.project.voted} db</span></div>
+                <div className="stat-count"><span>{props.project.voted} szavazat</span></div>
               </Link>
             </div>
           </div>
