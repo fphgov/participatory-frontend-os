@@ -27,6 +27,7 @@ export default class Vote extends React.Component {
     this.state = {
       redirectLogin: false,
       projects: null,
+      stats: null,
       rk_vote_CARE: '',
       rk_vote_GREEN: '',
       rk_vote_WHOLE: '',
@@ -75,6 +76,7 @@ export default class Vote extends React.Component {
         if (response.data) {
           this.setState({
             projects: response.data && response.data.projects ? response.data.projects : null,
+            stats: response.data && response.data.stats ? response.data.stats : null,
           })
 
           this.context.set('loading', false)
@@ -119,13 +121,12 @@ export default class Vote extends React.Component {
       config
     ).then(response => {
       if (response.data && response.data.success) {
-        console.log(response.data.success)
-
         this.setState({
           rk_vote_CARE: '',
           rk_vote_GREEN: '',
           rk_vote_WHOLE: '',
           error: [],
+          stats: response.data && response.data.stats ? response.data.stats : null,
         })
       }
 
@@ -168,7 +169,7 @@ export default class Vote extends React.Component {
     }
 
     return (
-      <div className="votes">
+      <div className="vote">
         <div className="container">
           <h1>Szavazat hozzáadása</h1>
 
@@ -197,6 +198,28 @@ export default class Vote extends React.Component {
 
           <div style={{ marginTop: 25, marginBottom: 45 }}>
             <button className="btn btn-primary" onClick={this.addVoteData.bind(this)}>Szavazat hozzáadása</button>
+          </div>
+
+          <h1>Offline szavazatok</h1>
+
+          <div className="vote-stat-wrapper">
+            {this.state.stats !== null && Object.values(this.state.stats).map((stat, i) => {
+              return (
+                <div className="vote-stat-box" key={i}>
+                  <h2 className="vote-stat-title">{stat.title}</h2>
+                  <div className="vote-stat-content">
+                    {stat.times !== null && Object.values(stat.times).map((stat, y) => {
+                      return (
+                        <div className="vote-stat-elem" key={y}>
+                          <div className="vote-stat-date">{stat.date}</div>
+                          <div className="vote-stat-count">{stat.count} szavazat</div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </div>
 

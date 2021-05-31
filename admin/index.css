@@ -95,6 +95,7 @@ textarea {
 
 .app>.page>div:not(.home) {
   margin: 15px 0;
+	padding: 0 0 45px 0;
 }
 
 .page a {
@@ -783,6 +784,21 @@ input[name="search"] {
 
 .vote-selection select {
 	width: 100%;
+}
+
+.vote-stat-box {
+
+}
+
+.vote-stat-title {
+	font-weight: bold;
+}
+
+.vote-stat-elem {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #fce65d;
+  padding: 8px 0;
 }
 
 @media screen and (max-width: 991px) {
