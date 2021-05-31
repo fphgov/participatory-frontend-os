@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 
-const colors = ['#e6194B', '#3cb44b', '#469990', '#4363d8', '#f58231', '#911eb4', '#42d4f4', '#f032e6', '#bfef45', '#fabed4', '#ffe119', '#dcbeff', '#f81511', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#a9a9a9', '#770CAB', '#D2D5D0', '#81f119', '#D6B51A', '#769AA7']
+const colors = ['#e6194B', '#3cb44b', '#469990', '#4363d8', '#f58231', '#911eb4', '#42d4f4', '#f032e6', '#bfef45', '#fabed4', '#ffe119', '#dcbeff', '#f81511', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#a9a9a9', '#770CAB', '#D2D5D0', '#81f119', '#D6B51A', '#769AA7', '#ffffff']
 
 const opacity = 0.4;
 
@@ -45,7 +45,7 @@ function useLayers() {
       type: 'fill',
       paint: {
         'fill-color': colors[2],
-        'fill-outline-color': colors[2],
+        'fill-outline-color': colors[25],
         'fill-opacity': layerOptions == 4 ? 1 : opacity
       }
     },
@@ -72,7 +72,7 @@ function useLayers() {
       type: 'fill',
       paint: {
         'fill-color': colors[5],
-        'fill-outline-color': colors[5],
+        'fill-outline-color': colors[25],
         'fill-opacity': layerOptions == 7 ? 1 : opacity
       }
     },
@@ -81,7 +81,7 @@ function useLayers() {
       type: 'fill',
       paint: {
         'fill-color': colors[6],
-        'fill-outline-color': colors[6],
+        'fill-outline-color': colors[25],
         'fill-opacity': layerOptions == 8 ? 1 : opacity
       }
     },
@@ -90,7 +90,7 @@ function useLayers() {
       type: 'fill',
       paint: {
         'fill-color': colors[7],
-        'fill-outline-color': colors[7],
+        'fill-outline-color': colors[25],
         'fill-opacity': layerOptions == 9 ? 1 : opacity
       }
     },
@@ -99,7 +99,7 @@ function useLayers() {
       type: 'fill',
       paint: {
         'fill-color': colors[8],
-        'fill-outline-color': colors[8],
+        'fill-outline-color': colors[25],
         'fill-opacity': layerOptions == 10 ? 1 : opacity
       }
     },
@@ -108,7 +108,7 @@ function useLayers() {
       type: 'fill',
       paint: {
         'fill-color': colors[9],
-        'fill-outline-color': colors[9],
+        'fill-outline-color': colors[25],
         'fill-opacity': layerOptions == 11 ? 1 : opacity
       }
     },
@@ -117,7 +117,7 @@ function useLayers() {
       type: 'fill',
       paint: {
         'fill-color': colors[10],
-        'fill-outline-color': colors[10],
+        'fill-outline-color': colors[25],
         'fill-opacity': layerOptions == 12 ? 1 : opacity
       }
     },
@@ -135,7 +135,7 @@ function useLayers() {
       type: 'fill',
       paint: {
         'fill-color': colors[12],
-        'fill-outline-color': colors[12],
+        'fill-outline-color': colors[25],
         'fill-opacity': layerOptions == 14 ? 1 : opacity
       }
     },
@@ -144,7 +144,7 @@ function useLayers() {
       type: 'fill',
       paint: {
         'fill-color': colors[13],
-        'fill-outline-color': colors[13],
+        'fill-outline-color': colors[25],
         'fill-opacity': layerOptions == 15 ? 1 : opacity
       }
     },
@@ -207,7 +207,7 @@ function useLayers() {
       type: 'fill',
       paint: {
         'fill-color': colors[20],
-        'fill-outline-color': colors[20],
+        'fill-outline-color': colors[25],
         'fill-opacity': layerOptions == 22 ? 1 : opacity
       }
     },
@@ -225,7 +225,7 @@ function useLayers() {
       type: 'fill',
       paint: {
         'fill-color': colors[22],
-        'fill-outline-color': colors[22],
+        'fill-outline-color': colors[25],
         'fill-opacity': layerOptions == 14 ? 0 : layerOptions == 24 ? 1 : opacity
       }
     },

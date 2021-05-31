@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ReactMapGL, { Layer, Source } from 'react-map-gl'
+import ReactMapGL, { Layer, Source, NavigationControl } from 'react-map-gl'
 import districtData from '../geodata/districts.json'
 import useLayers from '../geodata/layerStyles'
 
@@ -14,6 +14,11 @@ export default function MapBox(props) {
     zoom: window.innerWidth < 767 ? 9 : 9.38,
     minZoom: 8.5
   });
+
+  const navControlStyle = {
+    right: 10,
+    top: 10
+  };
 
   function getCursor({ isHovering, isDragging }) {
     return isDragging ? 'grabbing' : isHovering ? 'pointer' : 'default';
@@ -40,6 +45,7 @@ export default function MapBox(props) {
           }
         }}
       >
+        <NavigationControl style={navControlStyle} />
 
         {districtData && districtData.features.map((district, index) => (
           <Source key={district.properties.ksh} type="geojson" data={districtData.features[index]}>

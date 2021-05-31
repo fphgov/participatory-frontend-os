@@ -116,7 +116,9 @@ export default class Projects extends React.Component {
   }
 
   search(e) {
-    e.preventDefault()
+    if (e) {
+      e.preventDefault()
+    }
 
     const search = new URLSearchParams(document.location.search)
 
@@ -140,6 +142,7 @@ export default class Projects extends React.Component {
     this.setState({
       location: locationId
     })
+    this.search()
   }
 
   onKeyUp(e) {
@@ -280,12 +283,12 @@ export default class Projects extends React.Component {
                 </div>
               </div>
             </div>
-            <MapBox location={this.state.location} onChange={val => this.crossLocationChange(val)} />
           </div>
         </div>
 
         <div className="container">
-          <div className="search-result">
+          <MapBox location={this.state.location} onChange={val => this.crossLocationChange(val)} />
+          <div className="search-result mt-3">
             {this.state.count} találat
           </div>
         </div>

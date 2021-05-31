@@ -1427,4 +1427,14 @@ a.logout:hover {
 		min-width: initial;
 		width: 100%;
 	}
+
+	.projects select[name="theme"] {
+		margin-bottom: 1em;
+	}
+	.projects .filter-clear {
+		height: 48px;
+		width: 100%;
+		padding: 0px 10px;
+		margin-top: 1em;
+	}
 }
