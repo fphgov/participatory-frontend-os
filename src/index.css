@@ -996,7 +996,7 @@ hr {
   align-items: center;
   align-content: center;
   display: flex;
-  padding: 0px 15px;
+  padding: 14px 15px;
   font-family: 'Roboto', sans-serif;
   text-transform: none;
   cursor: pointer;
@@ -1428,3 +1428,49 @@ a.logout:hover {
 		width: 100%;
 	}
 }
+
+@media screen and (max-width: 769px) {
+	.search-area h1 {
+		font-size: 28px;
+	}
+
+	.search-area select {
+		margin-bottom: 15px;
+	}
+
+	.prop-inner-wrapper {
+		margin-top: 60px;
+		margin-bottom: 20px;
+	}
+
+	.prop-single-sidebar {
+		padding: 0 5px;
+	}
+
+	.prop-single-sidebar .prop-single-content {
+		display: flex;
+  	flex-direction: column;
+	}
+
+	.prop-single-sidebar .prop-single-content .btn.btn-vote {
+		order: 2;
+		margin-top: 30px;
+	}
+
+	.prop-single-content {
+		padding: 40px 35px;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.vote-modal h3 {
+		font-size: 16px;
+	}
+}
+
+@media screen and (max-width: 442px) {
+	.vote-modal {
+		padding: 8px;
+	}
+}
+

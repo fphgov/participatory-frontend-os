@@ -237,7 +237,7 @@ export default class Projects extends React.Component {
             </div>
 
             <div className="row">
-              <div className="col-md-3 col-xs-12">
+              <div className="col-md-4 col-lg-3 col-xs-12">
                 <select name="theme" onChange={this.handleChange} value={this.state.theme}>
                   <option value="">Keresés kategória alapján</option>
                   <option disabled="disabled">----</option>
@@ -247,7 +247,7 @@ export default class Projects extends React.Component {
                 </select>
               </div>
 
-              <div className="col-md-3 col-xs-12">
+              <div className="col-md-4 col-lg-3 col-xs-12">
                 <select name="location" onChange={this.handleChange} value={this.state.location}>
                   <option value="">Keresés kerület alapján</option>
                   <option disabled="disabled">----</option>

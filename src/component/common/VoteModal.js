@@ -110,7 +110,7 @@ export default function VoteModal(props) {
     <div className="vote-modal" style={{ height: height }} ref={voteModal}>
       <div className="container">
         <h3 style={{ textTransform: 'uppercase' }} onClick={() => { context.set('rk_modal_open', ! props.open) }}>
-          Szavazás {props.open ? <FontAwesomeIcon icon={faArrowAltCircleUp} /> : <FontAwesomeIcon icon={faArrowAltCircleDown} />}
+          Kattintson ide a szavazás megkezdéséhez {props.open ? <FontAwesomeIcon icon={faArrowAltCircleUp} /> : <FontAwesomeIcon icon={faArrowAltCircleDown} />}
         </h3>
 
         {loggedIn ? <>
