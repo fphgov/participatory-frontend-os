@@ -38,6 +38,7 @@ export default class Header extends React.Component {
       menu: [
         { title: "Szavazat hozzáadása", href: "/vote", onHideLoggedOut: true, roles: [ 'developer', 'admin', 'editor' ] },
         { title: "Bejelentkezés", href: "/login", onHideLoggedIn: true },
+        { title: "Profil", href: "/profile", onHideLoggedOut: true },
         { title: "Kijelentkezés", href: "/logout", onHideLoggedOut: true },
       ]
     }

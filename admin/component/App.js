@@ -13,6 +13,7 @@ import Login from "./page/Login";
 import Logout from "./page/Logout";
 import Vote from "./page/Vote";
 import ScrollToTop from "./common/ScrollToTop";
+import Profile from "./page/Profile";
 import 'react-toastify/dist/ReactToastify.css';
 
 export default class App extends React.Component {
@@ -29,6 +30,7 @@ export default class App extends React.Component {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/logout" component={Logout} />
                 <Route exact path="/vote" component={Vote} />
+                <Route exact path="/profile" component={Profile} />
 
                 <Route exact path="*" component={NotFound} />
               </Switch>

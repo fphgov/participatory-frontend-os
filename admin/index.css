@@ -269,6 +269,12 @@ nav.main-navigation ul {
   margin-top: 30px;
 }
 
+.btn-disabled {
+  background: whitesmoke;
+  color: #666666;
+  cursor: default;
+}
+
 .content {
   padding: 0;
 }
@@ -786,10 +792,6 @@ input[name="search"] {
 	width: 100%;
 }
 
-.vote-stat-box {
-
-}
-
 .vote-stat-title {
 	font-weight: bold;
 }
@@ -799,6 +801,18 @@ input[name="search"] {
   justify-content: space-between;
   border-bottom: 2px solid #fce65d;
   padding: 8px 0;
+}
+
+.desktop-menu a {
+  font-size: 14px;
+}
+
+.profile h2 {
+  cursor: pointer;
+}
+
+.profile .alert {
+  max-width: 400px;
 }
 
 @media screen and (max-width: 991px) {
