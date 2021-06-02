@@ -19,7 +19,7 @@ module.exports = (env, argv) => {
         grid: path.join(__dirname, '/node_modules/bootstrap-4-grid/css/grid.min.css'),
       }
     },
-    target: `web`,
+    target: process.env.NODE_ENV === "development" ? "web" : "browserslist",
     devServer: {
       contentBase: path.resolve(__dirname, 'public'),
       inline: true,
