@@ -11,7 +11,7 @@ const MobileMenu = (props) => {
       <div className="container">
         <ul>
           {props.menu.map((menuItem, i) => {
-            if (menuItem.onHideLoggedIn === true && localStorage.getItem('auth_token')) return;
+            if (menuItem.onHideLoggedIn === true && localStorage.getItem('auth_admin_token')) return;
 
             if (Array.isArray(menuItem.roles) && !menuItem.roles.includes(tokenParser('user.role'))) return;
 
@@ -81,8 +81,8 @@ export default class Header extends React.Component {
                 <ul className="desktop-menu">
                   {this.state.menu.map((menuItem, i) => {
                     if (
-                      menuItem.onHideLoggedIn === true && localStorage.getItem('auth_token') !== null ||
-                      menuItem.onHideLoggedOut === true && localStorage.getItem('auth_token') === null
+                      menuItem.onHideLoggedIn === true && localStorage.getItem('auth_admin_token') !== null ||
+                      menuItem.onHideLoggedOut === true && localStorage.getItem('auth_admin_token') === null
                     ) return;
 
                     if (Array.isArray(menuItem.roles) && !menuItem.roles.includes(tokenParser('user.role'))) return;

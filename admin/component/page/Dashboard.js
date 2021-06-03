@@ -35,7 +35,7 @@ export default class Dashboard extends React.Component {
 
     const config = {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+        'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
         'Accept': 'application/json',
       }
     }
@@ -66,12 +66,12 @@ export default class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem('auth_token') === null) {
+    if (localStorage.getItem('auth_admin_token') === null) {
       this.setState({
         redirectLogin: true
       })
     } else {
-      this.context.set('token', localStorage.getItem('auth_token'))
+      this.context.set('token', localStorage.getItem('auth_admin_token'))
       this.context.set('loggedIn', true)
 
       this.setState({
@@ -97,7 +97,7 @@ export default class Dashboard extends React.Component {
   submitForm() {
     const config = {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+        'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
         'Accept': 'application/json',
       }
     }
@@ -142,7 +142,7 @@ export default class Dashboard extends React.Component {
   handleCacheClear() {
     const config = {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+        'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
       },
     }
 

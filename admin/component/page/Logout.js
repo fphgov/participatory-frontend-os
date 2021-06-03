@@ -34,7 +34,7 @@ export default class Logout extends React.Component {
     this.context.set('token', null)
     this.context.set('loading', false)
 
-    localStorage.removeItem('auth_token')
+    localStorage.removeItem('auth_admin_token')
 
     this.setState({
       redirect: true,

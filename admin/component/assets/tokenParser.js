@@ -1,7 +1,7 @@
 import jwtDecode from "jwt-decode"
 
 const tokenParser = function(key) {
-  const token = localStorage.getItem('auth_token')
+  const token = localStorage.getItem('auth_admin_token')
 
   if (token) {
     const decodedJwt = jwtDecode(token)

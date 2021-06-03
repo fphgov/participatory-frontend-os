@@ -51,7 +51,7 @@ export default function Profile() {
 
     const config = {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+        'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
         'Accept': 'application/json',
       }
     }
