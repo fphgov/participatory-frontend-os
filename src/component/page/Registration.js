@@ -1,12 +1,10 @@
 import React from "react"
-import {
-  Redirect,
-} from "react-router-dom"
 import qs from 'querystring'
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import { rmAllCharForEmail, rmAllCharForName } from '../lib/removeSpecialCharacters'
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
+import ScrollTo from "../common/ScrollTo"
 
 export default class Registration extends React.Component {
   static contextType = StoreContext
@@ -30,7 +28,6 @@ export default class Registration extends React.Component {
       live_in_city: '',
       privacy: '',
       recaptcha: null,
-      redirectLogin: false,
     }
 
     this.handleChangeInput = this.handleChangeInput.bind(this)
@@ -158,12 +155,6 @@ export default class Registration extends React.Component {
   }
 
   render() {
-    const { redirectLogin } = this.state
-
-    if (redirectLogin) {
-      return <Redirect to='/bejelentkezes' />
-    }
-
     return (
       <div className="page-registration-section">
         <div className="container">
