@@ -93,6 +93,7 @@ export default class Login extends React.Component {
             localStorage.removeItem('auth_admin_token')
           }
 
+          this.updateToken()
           this.context.set('loading', false)
         }
       })
