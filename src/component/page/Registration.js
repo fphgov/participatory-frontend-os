@@ -13,6 +13,7 @@ export default class Registration extends React.Component {
     super(props, context)
 
     this.state = {
+      scroll: false,
       error: null,
       success: false,
       username: '',
@@ -78,6 +79,8 @@ export default class Registration extends React.Component {
   submitRegistration(e) {
     e.preventDefault();
 
+    this.setState({ scroll: false })
+
     const config = {
       headers: {
         'Accept': 'application/json',
@@ -133,6 +136,7 @@ export default class Registration extends React.Component {
 
       this.updateToken()
       this.context.set('loading', false)
+      this.setState({ scroll: true })
     })
   }
 
@@ -157,6 +161,8 @@ export default class Registration extends React.Component {
   render() {
     return (
       <div className="page-registration-section">
+        {this.state.scroll ? <ScrollTo element={document.querySelector('.error-message-inline').offsetTop} /> : null}
+
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3">

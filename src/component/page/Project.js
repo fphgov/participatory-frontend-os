@@ -70,23 +70,29 @@ export default class Project extends React.Component {
       return
     }
 
-    if (!this.context.get('token')) {
+    if (! this.context.get('token')) {
       this.setState({
         redirectLogin: true
       })
     }
 
-    let data = {
-      id: this.state.project.id,
-      title: this.state.project.title,
-      description: this.state.project.short_description
-    };
+    this.setState({
+      scroll: false
+    }, () => {
+      let data = {
+        id: this.state.project.id,
+        title: this.state.project.title,
+        description: this.state.project.short_description
+      };
 
-    this.context.set('rk_modal_open', true)
+      this.context.set('rk_modal_open', true)
 
-    const name = `rk_vote_${this.state.project.campaign_theme.code}`
-    localStorage.setItem(name, JSON.stringify(data))
-    this.context.set(name, data)
+      const name = `rk_vote_${this.state.project.campaign_theme.code}`
+      localStorage.setItem(name, JSON.stringify(data))
+      this.context.set(name, data)
+
+      this.setState({ scroll: true })
+    })
   }
 
   Error(props) {
