@@ -322,20 +322,6 @@ export default class Registration extends React.Component {
 
               {this.state.success ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
                 <p>Kérjük, regisztrációja befejezéséhez aktiválja fiókját az e-mail címére küldött levélben található linkre kattintva.</p>
-
-                <div className="row">
-                  <div className="col-lg-4">
-                    <div className="form-actions">
-                      <input className="btn btn-primary btn-small" id="button-send" type="submit" name="btnSend" value="Tovább a bejelentkezésre" onClick={(e) => {
-                        e.preventDefault()
-
-                        this.setState({
-                          redirectLogin: true
-                        })
-                      }} />
-                    </div>
-                  </div>
-                </div>
               </div> : null}
             </div>
           </div>
