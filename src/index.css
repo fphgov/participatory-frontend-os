@@ -69,7 +69,7 @@ textarea {
 }
 
 .app > .page {
-	flex: 1 0 100%;
+	flex: 1 0 auto;
 }
 
 .app > .page > div:not(.home) {
@@ -499,9 +499,8 @@ input[type="submit"] {
 
 .prop-content-wrapper {
   border: 4px solid #19506e;
-  flex: 1;
+  flex: 1 0 auto;
   justify-content: space-between;
-  align-items: center;
   display: flex;
   flex-direction: column;
 }
@@ -597,7 +596,7 @@ input[type="submit"] {
 
 .prop-single-content {
 	padding: 25px 15px;
-	flex: 1;
+	flex: 1 0 auto;
 }
 
 .prop-single-submitter {
@@ -696,7 +695,7 @@ input[type="submit"] {
 }
 
 .copyright-wrapper ul {
-  flex: 1;
+  flex: 1 0 auto;
   justify-content: flex-end;
   margin: 0;
   padding: 0;
@@ -1210,6 +1209,7 @@ fieldset h4 {
 	padding: 16px;
 	color: #fff;
 	align-items: center;
+	overflow: hidden;
 }
 
 .vote-option.vote-option-placeholder,
@@ -1218,7 +1218,7 @@ fieldset h4 {
 }
 
 .vote-option-content {
-	flex: 1;
+	flex: 1 0 auto;
 }
 
 .vote-option-actions .vote-action-remove {
@@ -1281,7 +1281,7 @@ fieldset h4 {
 }
 
 .stat-content a .stat-title {
-	flex: 1;
+	flex: 1 0 auto;
 }
 
 .stat-count {
