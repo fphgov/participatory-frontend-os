@@ -1218,7 +1218,7 @@ fieldset h4 {
 }
 
 .vote-option-content {
-	flex: 1 0 auto;
+	flex: 1 1 auto;
 }
 
 .vote-option-actions .vote-action-remove {
