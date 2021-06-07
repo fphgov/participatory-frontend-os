@@ -162,7 +162,7 @@ export default function VoteModal(props) {
             </div>
           </div>
 
-          {error ? <p className="error">{error}</p> : null}
+          {error && typeof error === "string" ? <p className="error">{error}</p> : null}
 
           {!context.get('successVote') ? <>
             <div className={`btn btn-primary btn-vote-final ${enableSendVote() ? 'btn-vote-active' : ''}`} onClick={() => sendVote()}>Beküldöm a szavazatom <sup>*</sup></div>

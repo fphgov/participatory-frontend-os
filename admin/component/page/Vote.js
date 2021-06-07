@@ -28,9 +28,8 @@ export default class Vote extends React.Component {
       redirectLogin: false,
       projects: null,
       stats: null,
-      rk_vote_CARE: '',
-      rk_vote_GREEN: '',
-      rk_vote_WHOLE: '',
+      project: '',
+      voteCount: '',
       error: [],
     }
 
@@ -110,9 +109,8 @@ export default class Vote extends React.Component {
     this.context.set('loading', true)
 
     const data = {
-      rk_vote_CARE: this.state.rk_vote_CARE,
-      rk_vote_GREEN: this.state.rk_vote_GREEN,
-      rk_vote_WHOLE: this.state.rk_vote_WHOLE,
+      project: this.state.project,
+      voteCount: this.state.voteCount,
     }
 
     axios.post(
@@ -122,9 +120,8 @@ export default class Vote extends React.Component {
     ).then(response => {
       if (response.data && response.data.success) {
         this.setState({
-          rk_vote_CARE: '',
-          rk_vote_GREEN: '',
-          rk_vote_WHOLE: '',
+          project: '',
+          voteCount: '',
           error: [],
           stats: response.data && response.data.stats ? response.data.stats : null,
         })
@@ -173,28 +170,35 @@ export default class Vote extends React.Component {
         <div className="container">
           <h1>Szavazat hozzáadása</h1>
 
-          {this.state.projects !== null && Object.values(this.state.projects).map((project, i) => {
-            return (
-              <div key={i} className="vote-selection">
-                <h2>{project.name}</h2>
+          <div className="vote-selection">
+            <div className="input-wrapper">
+              <label htmlFor="project">Ötlet választás</label>
 
-                <select name={`rk_vote_${project.code}`} onChange={this.handleChange} value={this.state[`rk_vote_${project.code}`]}>
-                  <option value="">Válasszon a lehetőségek közül</option>
-                  <option disabled>---</option>
+              <select id="project" name="project" onChange={this.handleChange} value={this.state.project}>
+                <option value="">Válasszon a lehetőségek közül</option>
+                <option disabled>---</option>
 
-                  {project.elems.map((elem, k) => {
-                    return (
-                      <option key={k} value={elem.id}>#{elem.id} {elem.name}</option>
-                    )
-                  })}
-                </select>
+                {this.state.projects !== null && Object.values(this.state.projects).flatMap(x => x.elems).map((elem, k) => {
+                  return (
+                    <option key={k} value={elem.id}>#{elem.id} {elem.name}</option>
+                  )
+                })}
+              </select>
 
-                {this.state.error && this.state.error[`rk_vote_${project.code}`] ? Object.values(this.state.error[`rk_vote_${project.code}`]).map((err, i) => {
-                  return <this.ErrorMini key={i} error={err} increment={i} />
-                }) : null}
-              </div>
-            )
-          })}
+              {this.state.error && this.state.error.project ? Object.values(this.state.error.project).map((err, i) => {
+                return <this.ErrorMini key={i} error={err} increment={i} />
+              }) : null}
+            </div>
+
+            <div className="input-wrapper">
+              <label htmlFor="voteCount">Ötletre adott szavazatok száma</label>
+              <input id="voteCount" name="voteCount" type="number" onChange={this.handleChange} value={this.state.voteCount} />
+
+              {this.state.error && this.state.error.voteCount ? Object.values(this.state.error.voteCount).map((err, i) => {
+                return <this.ErrorMini key={i} error={err} increment={i} />
+              }) : null}
+            </div>
+          </div>
 
           <div style={{ marginTop: 25, marginBottom: 45 }}>
             <button className="btn btn-primary" onClick={this.addVoteData.bind(this)}>Szavazat hozzáadása</button>
@@ -212,6 +216,7 @@ export default class Vote extends React.Component {
                       return (
                         <div className="vote-stat-elem" key={y}>
                           <div className="vote-stat-date">{stat.date}</div>
+                          <div className="vote-stat-name">{stat.projectName}</div>
                           <div className="vote-stat-count">{stat.count} szavazat</div>
                         </div>
                       )
