@@ -215,8 +215,8 @@ export default class Vote extends React.Component {
                     {stat.times !== null && Object.values(stat.times).map((stat, y) => {
                       return (
                         <div className="vote-stat-elem" key={y}>
+                          <div className="vote-stat-name"><span className="vote-stat-id">#{stat.projectId}</span> {stat.projectName}</div>
                           <div className="vote-stat-date">{stat.date}</div>
-                          <div className="vote-stat-name">{stat.projectName}</div>
                           <div className="vote-stat-count">{stat.count} szavazat</div>
                         </div>
                       )

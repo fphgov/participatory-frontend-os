@@ -815,6 +815,27 @@ input[name="search"] {
   max-width: 400px;
 }
 
+.vote-stat-name {
+  flex: 1;
+}
+
+.vote-stat-date {
+  text-align: right;
+  margin: 0 12px;
+}
+
+.vote-stat-count {
+  min-width: 120px;
+  text-align: right;
+}
+
+span.vote-stat-id {
+  min-width: 30px;
+  display: inline-block;
+  text-align: right;
+  font-weight: bold;
+}
+
 @media screen and (max-width: 991px) {
   .desktop-menu {
     display: none;
