@@ -11,7 +11,7 @@ const MobileMenu = (props) => {
       <div className="container">
         <ul>
           {props.menu.map((menuItem, i) => {
-            if (menuItem.onHideLoggedIn === true && localStorage.getItem('auth_token')) return;
+            if (menuItem.onHideLoggedIn === true && localStorage.getItem('auth_admin_token')) return;
 
             if (Array.isArray(menuItem.roles) && !menuItem.roles.includes(tokenParser('user.role'))) return;
 
@@ -36,10 +36,9 @@ export default class Header extends React.Component {
     this.state = {
       openMenu: false,
       menu: [
-        { title: "Jelentkezettek", href: "/applicants", onHideLoggedOut: true, roles: [ 'developer', 'admin', 'cs' ] },
-        { title: "Időpont ellenőrzés", href: "/checks", onHideLoggedOut: true, roles: [ 'developer', 'admin', 'voluntary' ] },
-        { title: "Napi jelenlét", href: "/informations", onHideLoggedOut: true, roles: [ 'developer', 'admin', 'voluntary' ] },
+        { title: "Szavazat hozzáadása", href: "/vote", onHideLoggedOut: true, roles: [ 'developer', 'admin', 'editor' ] },
         { title: "Bejelentkezés", href: "/login", onHideLoggedIn: true },
+        { title: "Profil", href: "/profile", onHideLoggedOut: true },
         { title: "Kijelentkezés", href: "/logout", onHideLoggedOut: true },
       ]
     }
@@ -58,10 +57,10 @@ export default class Header extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-xs-6 col-sm-6 col-md-4">
-                <a href="https://sample.hu" rel="noopener noreferrer">Vissza a [ sample.hu ] főoldalára</a>
+                <a href="https://otlet.budapest.hu" rel="noopener noreferrer">Vissza az otlet.budapest.hu főoldalára</a>
               </div>
               <div className="col-xs-6 col-sm-6 col-md-8 col-right">
-                <a href="https://sample.hu" target="_blank" rel="noopener noreferrer">sample.hu</a>
+                <a href="https://otlet.budapest.hu" target="_blank" rel="noopener noreferrer">budapest.hu</a>
               </div>
             </div>
           </div>
@@ -70,20 +69,20 @@ export default class Header extends React.Component {
         <nav className="main-navigation">
           <div className="container">
             <div className="row flex-center">
-              <div className="col-xs-6 col-sm-6 col-md-2">
+              <div className="col-xs-6 col-sm-4 col-md-2">
                 <div className="logo-wrapper">
-                  <a href="/bp-admin">
+                  <Link to={"/"}>
                     <img src={require('../img/logo-bp-monocrom.png')} />
-                  </a>
+                  </Link>
                 </div>
               </div>
 
-              <div className="col-xs-6 col-sm-6 col-md-10">
+              <div className="col-xs-6 col-sm-8 col-md-10">
                 <ul className="desktop-menu">
                   {this.state.menu.map((menuItem, i) => {
                     if (
-                      menuItem.onHideLoggedIn === true && localStorage.getItem('auth_token') !== null ||
-                      menuItem.onHideLoggedOut === true && localStorage.getItem('auth_token') === null
+                      menuItem.onHideLoggedIn === true && localStorage.getItem('auth_admin_token') !== null ||
+                      menuItem.onHideLoggedOut === true && localStorage.getItem('auth_admin_token') === null
                     ) return;
 
                     if (Array.isArray(menuItem.roles) && !menuItem.roles.includes(tokenParser('user.role'))) return;

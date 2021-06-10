@@ -69,7 +69,7 @@ textarea {
 }
 
 .app > .page {
-	flex: 1 0 100%;
+	flex: 1 0 auto;
 }
 
 .app > .page > div:not(.home) {
@@ -499,9 +499,8 @@ input[type="submit"] {
 
 .prop-content-wrapper {
   border: 4px solid #19506e;
-  flex: 1;
+  flex: 1 0 auto;
   justify-content: space-between;
-  align-items: center;
   display: flex;
   flex-direction: column;
 }
@@ -597,7 +596,7 @@ input[type="submit"] {
 
 .prop-single-content {
 	padding: 25px 15px;
-	flex: 1;
+	flex: 1 0 auto;
 }
 
 .prop-single-submitter {
@@ -696,7 +695,7 @@ input[type="submit"] {
 }
 
 .copyright-wrapper ul {
-  flex: 1;
+  flex: 1 0 auto;
   justify-content: flex-end;
   margin: 0;
   padding: 0;
@@ -1016,7 +1015,7 @@ button.map-toggle:hover {
   align-items: center;
   align-content: center;
   display: flex;
-  padding: 0px 15px;
+  padding: 14px 15px;
   font-family: 'Roboto', sans-serif;
   text-transform: none;
   cursor: pointer;
@@ -1230,6 +1229,7 @@ fieldset h4 {
 	padding: 16px;
 	color: #fff;
 	align-items: center;
+	overflow: hidden;
 }
 
 .vote-option.vote-option-placeholder,
@@ -1238,7 +1238,7 @@ fieldset h4 {
 }
 
 .vote-option-content {
-	flex: 1;
+	flex: 1 1 auto;
 }
 
 .vote-option-actions .vote-action-remove {
@@ -1301,7 +1301,7 @@ fieldset h4 {
 }
 
 .stat-content a .stat-title {
-	flex: 1;
+	flex: 1 0 auto;
 }
 
 .stat-count {
@@ -1355,6 +1355,11 @@ a.logout {
 
 a.logout:hover {
 	color: #00af96;
+}
+
+p.error {
+  color: #ef5556;
+  font-style: italic;
 }
 
 @media screen and (min-width: 1200px) {
@@ -1458,3 +1463,49 @@ a.logout:hover {
 		margin-top: 1em;
 	}
 }
+
+@media screen and (max-width: 769px) {
+	.search-area h1 {
+		font-size: 28px;
+	}
+
+	.search-area select {
+		margin-bottom: 15px;
+	}
+
+	.prop-inner-wrapper {
+		margin-top: 60px;
+		margin-bottom: 20px;
+	}
+
+	.prop-single-sidebar {
+		padding: 0 5px;
+	}
+
+	.prop-single-sidebar .prop-single-content {
+		display: flex;
+  	flex-direction: column;
+	}
+
+	.prop-single-sidebar .prop-single-content .btn.btn-vote {
+		order: 2;
+		margin-top: 30px;
+	}
+
+	.prop-single-content {
+		padding: 40px 35px;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.vote-modal h3 {
+		font-size: 16px;
+	}
+}
+
+@media screen and (max-width: 442px) {
+	.vote-modal {
+		padding: 8px;
+	}
+}
+

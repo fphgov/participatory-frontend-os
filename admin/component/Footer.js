@@ -15,13 +15,21 @@ export default class Footer extends React.Component {
           <div className="container">
             <div className="footer-content">
               <div className="row">
-                <div className="col-md-12">
-                  <div className="footer-text">Ez az oldal a Fővárosi Önkormányzat <a href="https://github.com/fphgov" className="light inline">nyílt forráskódú szoftverének</a> felhasználásával készítettük.</div>
+                <div className="col-md-12 justify-content-md-center justify-content-lg-start">
+                  <div className="footer-media-center">
+                    <img className="footer-logo" src={Logo} alt="Nyitott Budapest Logo" />
+                  </div>
+                </div>
 
-                  <div className="footer-logo">
-                    <a href="https://budapest.hu" target="_blank" rel="noopener noreferrer">
-                      <img src={Logo} />
-                    </a>
+                <div className="col-md-12 col-lg-8 pt-2 justify-content-md-center justify-content-lg-start">
+                  <div className="footer-text">
+                    © 2021 Budapest Főváros Önkormányzata | Minden jog fenntartva
+                  </div>
+                </div>
+
+                <div className="col-md-12 col-lg-4 pt-2 justify-content-md-center justify-content-lg-end text-lg-right">
+                  <div className="footer-media-down">
+                    <a href="mailto:nyitott@budapest.hu" className="light">nyitott@budapest.hu</a>
                   </div>
                 </div>
               </div>

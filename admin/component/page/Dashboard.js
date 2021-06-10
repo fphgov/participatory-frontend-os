@@ -16,10 +16,9 @@ export default class Dashboard extends React.Component {
     this.state = {
       redirectLogin: false,
       close: false,
-      reserved: 'N/A',
-      available: 'N/A',
-      banned: 'N/A',
-      appointments: [],
+      countVotes: 'N/A',
+      countUsers: 'N/A',
+      error: [],
     }
 
     this.context.set('loading', true, () => {
@@ -36,7 +35,7 @@ export default class Dashboard extends React.Component {
 
     const config = {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+        'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
         'Accept': 'application/json',
       }
     }
@@ -48,10 +47,8 @@ export default class Dashboard extends React.Component {
         if (response.data) {
           this.setState({
             close: response.data.settings && response.data.settings.close ? response.data.settings.close : false,
-            reserved: response.data.infos && response.data.infos.reserved ? response.data.infos.reserved : 'N/A',
-            available: response.data.infos && response.data.infos.available ? response.data.infos.available : 'N/A',
-            banned: response.data.infos && response.data.infos.banned ? response.data.infos.banned : 'N/A',
-            appointments: response.data.infos && response.data.infos.appointments ? response.data.infos.appointments : [],
+            countVotes: response.data.infos && response.data.infos.countVotes ? response.data.infos.countVotes : 'N/A',
+            countUsers: response.data.infos && response.data.infos.countUsers ? response.data.infos.countUsers : 'N/A',
           })
 
           this.context.set('loading', false)
@@ -69,12 +66,12 @@ export default class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem('auth_token') === null) {
+    if (localStorage.getItem('auth_admin_token') === null) {
       this.setState({
         redirectLogin: true
       })
     } else {
-      this.context.set('token', localStorage.getItem('auth_token'))
+      this.context.set('token', localStorage.getItem('auth_admin_token'))
       this.context.set('loggedIn', true)
 
       this.setState({
@@ -100,7 +97,7 @@ export default class Dashboard extends React.Component {
   submitForm() {
     const config = {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+        'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
         'Accept': 'application/json',
       }
     }
@@ -142,59 +139,10 @@ export default class Dashboard extends React.Component {
       })
   }
 
-  handleExport() {
-    const config = {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
-        'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      },
-      responseType: 'blob'
-    }
-
-    this.context.set('loading', true)
-
-    axios.get(
-      process.env.REACT_APP_API_ADMIN_SERVER + process.env.REACT_APP_API_ADMIN_REQ_EXPORT,
-      config
-    )
-      .then(response => {
-        const url = window.URL.createObjectURL(new Blob([ response.data ]));
-        const link = document.createElement('a');
-
-        link.href = url;
-        link.setAttribute('download', `export-${(new Date()) - 0}.xlsx`);
-
-        document.body.appendChild(link);
-
-        link.click();
-
-        this.context.set('loading', false)
-      })
-      .catch(error => {
-        if (error.response && error.response.status === 401) {
-          this.setState({
-            redirectLogin: true
-          })
-
-          this.context.set('loading', false)
-
-          return
-        }
-
-        if (error.response && error.response.data && error.response.data.errors) {
-          this.setState({
-            error: error.response.data.errors
-          })
-        }
-
-        this.context.set('loading', false)
-      })
-  }
-
   handleCacheClear() {
     const config = {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+        'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
       },
     }
 
@@ -261,35 +209,15 @@ export default class Dashboard extends React.Component {
             <>
               <div className="box-wrapper">
                 <div className="box-left">
-                  <div className="box">Elérhető helyek száma<br /><span>{this.state.available}</span></div>
-                  <div className="box">Jelentkezettek száma<br /><span>{this.state.reserved}</span></div>
-                  <div className="box">Letiltott helyek száma<br /><span>{this.state.banned}</span></div>
+                  <div className="box">Felhasználók száma<br /><span>{this.state.countUsers}</span></div>
+                  <div className="box">Szavazatok száma<br /><span>{this.state.countVotes}</span></div>
                 </div>
 
                 <div className="box-right">
                   <div className="input-wrapper">
                     <div className="box box-button" onClick={this.handleCacheClear.bind(this)}>Gyorsítótár ürítés</div>
                   </div>
-
-                  <div className="input-wrapper">
-                    <div className="box box-button" onClick={this.handleExport.bind(this)}>Jelentkezők exportálása</div>
-                  </div>
                 </div>
-              </div>
-
-              <div className="section"></div>
-
-              <div className="stat-wrappers">
-                {Object.entries(this.groupBy(this.state.appointments, 'date')).map((app, i) => {
-                  return <div className="stat-wrapper" key={i}>
-                    <div className="stat-day">{app[ 0 ]}</div>
-                    <div className="stats">
-                      {app[ 1 ].map((stat, x) => {
-                        return <div className="stat-row" key={x}><div className="stat-elem stat-hour">{stat.hour}</div><div className="stat-elem stat-attended">{stat.allApplicant}</div><div className={`stat-elem stat-sum stat-eq-${stat.allApplicant - stat.attended}`}>{stat.attended}</div></div>
-                      })}
-                    </div>
-                  </div>;
-                })}
               </div>
 
               <div className="section"></div>
@@ -300,7 +228,7 @@ export default class Dashboard extends React.Component {
                     <label htmlFor="close">
                       <input type="checkbox" name="close" id="close" checked={this.state.close} onChange={this.handleChangeInput.bind(this)} />
 
-                      A jelentkezés lezárása
+                      A szavazás lezárása
                   </label>
 
                     {this.state.error && this.state.error.close ? Object.values(this.state.error.close).map((err, i) => {

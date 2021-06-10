@@ -95,6 +95,7 @@ textarea {
 
 .app>.page>div:not(.home) {
   margin: 15px 0;
+	padding: 0 0 45px 0;
 }
 
 .page a {
@@ -266,6 +267,12 @@ nav.main-navigation ul {
   appearance: auto;
   line-height: normal;
   margin-top: 30px;
+}
+
+.btn-disabled {
+  background: whitesmoke;
+  color: #666666;
+  cursor: default;
 }
 
 .content {
@@ -685,6 +692,10 @@ input[name="search"] {
   margin-left: 20px;
 }
 
+.box.box-button:hover {
+  background-color: #ffe125;
+}
+
 .box span {
   font-weight: bold;
 }
@@ -775,6 +786,54 @@ input[name="search"] {
 
 .search-wrapper input + .btn {
   margin-left: 20px;
+}
+
+.vote-selection select {
+	width: 100%;
+}
+
+.vote-stat-title {
+	font-weight: bold;
+}
+
+.vote-stat-elem {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #fce65d;
+  padding: 8px 0;
+}
+
+.desktop-menu a {
+  font-size: 14px;
+}
+
+.profile h2 {
+  cursor: pointer;
+}
+
+.profile .alert {
+  max-width: 400px;
+}
+
+.vote-stat-name {
+  flex: 1;
+}
+
+.vote-stat-date {
+  text-align: right;
+  margin: 0 12px;
+}
+
+.vote-stat-count {
+  min-width: 120px;
+  text-align: right;
+}
+
+span.vote-stat-id {
+  min-width: 30px;
+  display: inline-block;
+  text-align: right;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 991px) {

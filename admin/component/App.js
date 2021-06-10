@@ -11,12 +11,10 @@ import NotFound from "./page/NotFound";
 import Dashboard from "./page/Dashboard";
 import Login from "./page/Login";
 import Logout from "./page/Logout";
-import Applicants from "./page/Applicants";
-import Informations from "./page/Informations";
-import Check from "./page/Check";
-import Checks from "./page/Checks";
-import Applicant from "./page/Applicant";
+import Vote from "./page/Vote";
 import ScrollToTop from "./common/ScrollToTop";
+import Profile from "./page/Profile";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default class App extends React.Component {
   render() {
@@ -31,11 +29,8 @@ export default class App extends React.Component {
                 <Route exact path="/" component={Dashboard} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/logout" component={Logout} />
-                <Route exact path="/applicants" component={Applicants} />
-                <Route exact path="/applicants/:id" component={Applicant} />
-                <Route exact path="/checks" component={Checks} />
-                <Route exact path="/checks/:id" component={Check} />
-                <Route exact path="/informations" component={Informations} />
+                <Route exact path="/vote" component={Vote} />
+                <Route exact path="/profile" component={Profile} />
 
                 <Route exact path="*" component={NotFound} />
               </Switch>

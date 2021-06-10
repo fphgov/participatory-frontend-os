@@ -7,6 +7,7 @@ import "normalize";
 import "grid";
 import StoreContext from './StoreContext'
 import Loading from './component/common/Loading'
+import 'url-polyfill'
 
 class AppWithContext extends React.Component {
   constructor(props) {

@@ -33,8 +33,8 @@ export default class Login extends React.Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem('auth_token')) {
-      this.context.set('token', localStorage.getItem('auth_token') || '')
+    if (localStorage.getItem('auth_admin_token')) {
+      this.context.set('token', localStorage.getItem('auth_admin_token') || '')
 
       this.setState({
         redirect: true,
@@ -70,9 +70,9 @@ export default class Login extends React.Component {
     axios.post(process.env.REACT_APP_API_ADMIN_SERVER + process.env.REACT_APP_API_ADMIN_REQ_LOGIN, qs.stringify(data))
       .then(response => {
         if (response.data && response.data.token) {
-          localStorage.setItem('auth_token', response.data.token)
+          localStorage.setItem('auth_admin_token', response.data.token)
 
-          this.context.set('token', localStorage.getItem('auth_token') || '')
+          this.context.set('token', localStorage.getItem('auth_admin_token') || '')
 
           this.forceUpdate()
 
@@ -90,9 +90,10 @@ export default class Login extends React.Component {
             })
 
             this.context.set('token', null)
-            localStorage.removeItem('auth_token')
+            localStorage.removeItem('auth_admin_token')
           }
 
+          this.updateToken()
           this.context.set('loading', false)
         }
       })
@@ -104,8 +105,9 @@ export default class Login extends React.Component {
         }
 
         this.context.set('token', null)
-        localStorage.removeItem('auth_token')
+        localStorage.removeItem('auth_admin_token')
 
+        this.updateToken()
         this.context.set('loading', false)
       })
   }
@@ -128,7 +130,9 @@ export default class Login extends React.Component {
     return (
       <div className="page-login-section">
         <div className="container">
-          {this.state.error ? <this.Error message={this.state.error} /> : null}
+          <div className="col-md-6 offset-md-3">
+            {this.state.error ? <this.Error message={this.state.error} /> : null}
+          </div>
 
           <div className="form-wrapper">
             <div className="input-wrapper">

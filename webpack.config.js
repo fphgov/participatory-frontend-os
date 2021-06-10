@@ -9,8 +9,8 @@ const Dotenv = require('dotenv-webpack');
 module.exports = (env, argv) => {
   const config = {
     entry: {
-      app: ['babel-polyfill', './src/index.js'],
-      admin: ['babel-polyfill', './admin/index.js']
+      index: [ 'babel-polyfill', './src/index.js' ],
+      admin: [ 'babel-polyfill', './admin/index.js' ]
     },
     resolve: {
       extensions: ['.js', '.css', '.scss'],
@@ -19,7 +19,6 @@ module.exports = (env, argv) => {
         grid: path.join(__dirname, '/node_modules/bootstrap-4-grid/css/grid.min.css'),
       }
     },
-    target: `web`,
     devServer: {
       contentBase: path.resolve(__dirname, 'public'),
       inline: true,
@@ -116,7 +115,7 @@ module.exports = (env, argv) => {
       }),
       new HtmlWebPackPlugin({
         title: 'Frontend',
-        chunks: ['app'],
+        chunks: [ 'index' ],
         template: "./src/index.html",
         filename: "./index.html"
       }),

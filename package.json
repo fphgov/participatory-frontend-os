@@ -12,9 +12,16 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "browserslist": [
+    "ie >= 11",
+    "chrome >= 30",
+    "iOS >= 8",
+    "Android >= 4"
+  ],
   "devDependencies": {
     "@babel/core": "^7.14.3",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-transform-runtime": "^7.14.3",
     "@babel/preset-env": "^7.14.2",
     "@babel/preset-react": "^7.13.13",
     "@svgr/webpack": "^5.5.0",
@@ -32,6 +39,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "@babel/runtime": "^7.14.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "@fortawesome/free-regular-svg-icons": "^5.15.3",
@@ -42,6 +50,7 @@
     "axios": "^0.21.1",
     "babel-polyfill": "^6.26.0",
     "bootstrap-4-grid": "^3.4.0",
+    "core-js": "^3.13.1",
     "jwt-decode": "^3.1.2",
     "normalize.css": "^8.0.1",
     "querystring": "^0.2.1",
@@ -51,7 +60,9 @@
     "react-map-gl": "^6.1.15",
     "react-recaptcha-v3": "^2.0.1",
     "react-router-dom": "^5.2.0",
+    "react-toastify": "^7.0.4",
     "store": "^2.0.12",
+    "url-polyfill": "^1.1.12",
     "webpack-pwa-manifest": "^4.3.0"
   }
 }

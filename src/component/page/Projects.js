@@ -75,6 +75,8 @@ export default class Projects extends React.Component {
           })
 
           this.context.set('loading', false)
+
+          this.handleScrollPosition()
         }
       })
       .catch(error => {
@@ -169,6 +171,19 @@ export default class Projects extends React.Component {
     return !!window.location.search && !onlyPageParam || this.state.query !== '' || this.state.theme !== '' || this.state.location !== ''
   }
 
+  handleScrollPosition() {
+    const scrollPosition = sessionStorage.getItem("scrollPosition")
+
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition))
+      sessionStorage.removeItem("scrollPosition")
+    }
+  }
+
+  handleClick(e) {
+    sessionStorage.setItem("scrollPosition", window.pageYOffset)
+  }
+
   ProjectsWrapper(props) {
     const [isHover, setIsHover] = React.useState(false)
 
@@ -201,7 +216,7 @@ export default class Projects extends React.Component {
 
               <div className="prop-more" onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
                 <div className="btn-wrapper">
-                  <Link to={`/projektek/${props.project.id}`} className="btn btn-secondary" style={{ borderColor: themeColor, color: isHover ? '#fff' : themeColor, backgroundColor: isHover ? themeColor : 'transparent' }}>Megtekintés</Link>
+                  <Link to={`/projektek/${props.project.id}`} className="btn btn-secondary" onClick={props.handleClick} style={{ borderColor: themeColor, color: isHover ? '#fff' : themeColor, backgroundColor: isHover ? themeColor: 'transparent' }}>Megtekintés</Link>
                 </div>
               </div>
             </div>
@@ -243,8 +258,8 @@ export default class Projects extends React.Component {
               </div>
             </div>
 
-            <div className="row mb-3">
-              <div className="col-md-3 col-xs-12">
+            <div className="row">
+              <div className="col-md-4 col-lg-3 col-xs-12">
                 <select name="theme" onChange={this.handleChange} value={this.state.theme}>
                   <option value="">Keresés kategória alapján</option>
                   <option disabled="disabled">----</option>
@@ -254,7 +269,7 @@ export default class Projects extends React.Component {
                 </select>
               </div>
 
-              <div className="col-md-3 col-xs-12">
+              <div className="col-md-4 col-lg-3 col-xs-12">
                 <select name="location" onChange={this.handleChange} value={this.state.location}>
                   <option value="">Keresés kerület alapján</option>
                   <option disabled="disabled">----</option>
@@ -312,7 +327,7 @@ export default class Projects extends React.Component {
 
         <div className="container">
           <div className="row">
-            {this.state.projects.map((project, i) => <this.ProjectsWrapper key={i} project={project} tagClick={this.filterByTag} />)}
+            {this.state.projects.map((project, i) => <this.ProjectsWrapper handleClick={this.handleClick} key={i} project={project} tagClick={this.filterByTag} />)}
           </div>
         </div>
 
