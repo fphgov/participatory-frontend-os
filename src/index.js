@@ -20,6 +20,7 @@ class AppWithContext extends React.Component {
       successVote: false,
       loading: false,
       token: false,
+      map: false,
       get: (key) => {
         return typeof store.get('state') !== 'undefined' && typeof store.get('state')[ key ] !== 'undefined' ? store.get('state')[ key ] : this.state[ key ]
       },

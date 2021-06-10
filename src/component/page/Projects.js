@@ -5,7 +5,7 @@ import {
 } from "react-router-dom"
 import StoreContext from '../../StoreContext'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSearch, faAngleDoubleLeft, faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons"
+import { faSearch, faAngleDoubleLeft, faAngleDoubleRight, faMapMarked } from "@fortawesome/free-solid-svg-icons"
 import MapBox from './MapBox'
 
 export default class Projects extends React.Component {
@@ -34,6 +34,7 @@ export default class Projects extends React.Component {
     this.search = this.search.bind(this)
     this.onKeyUp = this.onKeyUp.bind(this)
     this.clearQuery = this.clearQuery.bind(this)
+    this.toggleMap = this.toggleMap.bind(this)
   }
 
   componentDidMount() {
@@ -135,14 +136,25 @@ export default class Projects extends React.Component {
       [e.target.name]: e.target.value
     }, () => {
       this.queryRef.current.focus()
+      if (e.target.name !== 'query') {
+        this.search()
+      }
     })
+  }
+
+  toggleMap(e) {
+    e.preventDefault();
+    const map = !this.context.get('map')
+    localStorage.setItem('map', map)
+    this.context.set('map', map);
   }
 
   crossLocationChange(locationId) {
     this.setState({
       location: locationId
+    }, () => {
+      this.search()
     })
-    this.search()
   }
 
   onKeyUp(e) {
@@ -287,7 +299,12 @@ export default class Projects extends React.Component {
         </div>
 
         <div className="container">
-          <MapBox location={this.state.location} onChange={val => this.crossLocationChange(val)} />
+          <div className="d-flex flex-row-reverse mb-3">
+            <button id="btn-map-toggle" className="map-toggle" type="submit" title={this.context.get('map') ? 'Térkép kikapcsolása' : 'Térkép bekapcsolása'} onClick={this.toggleMap}>
+              <FontAwesomeIcon icon={faMapMarked} />
+            </button>
+          </div>
+          {this.context.get('map') && <MapBox location={this.state.location} onChange={val => this.crossLocationChange(val)} />}
           <div className="search-result mt-3">
             {this.state.count} találat
           </div>
