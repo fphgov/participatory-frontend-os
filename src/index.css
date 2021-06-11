@@ -963,6 +963,10 @@ button.map-toggle:hover {
   transition: all 0.2s ease-in-out;
 }
 
+.map-container > div {
+  width: 100% !important;
+}
+
 .input-group .form-control {
   position: relative;
   z-index: 2;
