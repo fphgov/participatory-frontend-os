@@ -973,6 +973,18 @@ button.map-toggle:hover,
   width: 100% !important;
 }
 
+.tooltip {
+  position: absolute;
+  margin: 8px;
+  padding: 4px;
+  background: #19506E;
+  color: #fff;
+  max-width: 300px;
+  font-size: 10px;
+  z-index: 9;
+  pointer-events: none;
+}
+
 .input-group .form-control {
   position: relative;
   z-index: 2;
