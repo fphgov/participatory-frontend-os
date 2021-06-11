@@ -316,7 +316,7 @@ export default class Projects extends React.Component {
         </div>
 
         <div className="container">
-          <div className="d-flex flex-row-reverse mb-3">
+          <div className="d-flex justify-content-end mb-3">
             <button id="btn-map-toggle" className={`map-toggle ${this.context.get('map') ? 'map-toggle-active' : ''}`} type="submit" title={this.context.get('map') ? 'Térkép kikapcsolása' : 'Térkép bekapcsolása'} onClick={this.toggleMap}>
               <div className="map-icon">
                 <FontAwesomeIcon icon={faMapMarked} />
