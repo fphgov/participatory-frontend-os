@@ -13,7 +13,7 @@ module.exports = (env, argv) => {
       admin: [ 'babel-polyfill', './admin/index.js' ]
     },
     resolve: {
-      extensions: [ '.js', '.css', '.scss' ],
+      extensions: ['.js', '.css', '.scss'],
       alias: {
         normalize: path.join(__dirname, '/node_modules/normalize.css'),
         grid: path.join(__dirname, '/node_modules/bootstrap-4-grid/css/grid.min.css'),
@@ -70,7 +70,7 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.svg$/,
-          use: [ '@svgr/webpack', 'url-loader' ],
+          use: ['@svgr/webpack', 'url-loader'],
         },
         {
           test: /\.(js|jsx)$/,
@@ -99,6 +99,12 @@ module.exports = (env, argv) => {
             }
           ],
         },
+        {
+          test: /\.m?js/,
+          resolve: {
+            fullySpecified: false
+          }
+        }
       ]
     },
     plugins: [
@@ -115,7 +121,7 @@ module.exports = (env, argv) => {
       }),
       new HtmlWebPackPlugin({
         title: 'Admin',
-        chunks: [ 'admin' ],
+        chunks: ['admin'],
         template: "./admin/index.html",
         filename: "./admin.html"
       }),
@@ -132,7 +138,7 @@ module.exports = (env, argv) => {
         icons: [
           {
             src: path.resolve('src/img/favicon.png'),
-            sizes: [ 96, 128, 192, 256, 384, 512 ],
+            sizes: [96, 128, 192, 256, 384, 512],
             purpose: 'any'
           },
           {
