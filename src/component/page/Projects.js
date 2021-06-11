@@ -146,7 +146,9 @@ export default class Projects extends React.Component {
 
   toggleMap(e) {
     e.preventDefault();
+
     const map = !this.context.get('map')
+
     localStorage.setItem('map', map)
     this.context.set('map', map);
   }

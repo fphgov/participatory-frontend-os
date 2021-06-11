@@ -40,9 +40,9 @@ export default class App extends React.Component {
     } else {
       this.context.set('token', null)
     }
-    const mapBool = (localStorage.getItem('map') === 'true') ? true : false
+
     if (localStorage.getItem('map')) {
-      this.context.set('map', mapBool)
+      this.context.set('map', (localStorage.getItem('map') === 'true') ? true : false)
     }
   }
 

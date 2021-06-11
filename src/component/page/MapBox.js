@@ -26,7 +26,6 @@ export default function MapBox(props) {
 
   useEffect(() => {
     handleLayerOptions(props.location)
-
   }, [props.location])
 
   return (
