@@ -317,7 +317,7 @@ export default class Projects extends React.Component {
 
         <div className="container">
           <div className="d-flex justify-content-end mb-3">
-            <button id="btn-map-toggle" className={`map-toggle ${this.context.get('map') ? 'map-toggle-active' : ''}`} type="submit" title={this.context.get('map') ? 'Térkép kikapcsolása' : 'Térkép bekapcsolása'} onClick={this.toggleMap}>
+            <button id="btn-map-toggle" className={`map-toggle ${this.context.get('map') ? 'map-toggle-active' : ''}`} type="submit" title={this.context.get('map') ? 'Térkép kikapcsolása' : 'Térkép bekapcsolása'} onClick={this.toggleMap} role="button" aria-pressed={this.context.get('map')}>
               <div className="map-icon">
                 <FontAwesomeIcon icon={faMapMarked} />
               </div>
