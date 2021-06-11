@@ -22,7 +22,7 @@ export default function MapBox(props) {
   };
 
   const onHover = useCallback(e => {
-    if (e.features[0] && e.features[0].properties.name && e.features[0].properties.name != 'Budapest') {
+    if (e.features[0] && e.features[0].properties.name) {
 
       const { srcEvent: { offsetX, offsetY } } = e
 
@@ -69,7 +69,7 @@ export default function MapBox(props) {
           </Source>
         ))}
         {hoverInfo && (
-          <div className="tooltip" style={{left:hoverInfo.x, top:hoverInfo.y}}>
+          <div className="tooltip" style={{ left: hoverInfo.x, top: hoverInfo.y }}>
             <div>{hoverInfo.name}</div>
           </div>
         )}

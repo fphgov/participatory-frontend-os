@@ -983,6 +983,7 @@ button.map-toggle:hover,
   font-size: 10px;
   z-index: 9;
   pointer-events: none;
+	border: 1px solid #aaaaaa;
 }
 
 .input-group .form-control {
