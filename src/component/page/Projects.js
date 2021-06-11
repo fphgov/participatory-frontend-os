@@ -317,8 +317,11 @@ export default class Projects extends React.Component {
 
         <div className="container">
           <div className="d-flex flex-row-reverse mb-3">
-            <button id="btn-map-toggle" className="map-toggle" type="submit" title={this.context.get('map') ? 'Térkép kikapcsolása' : 'Térkép bekapcsolása'} onClick={this.toggleMap}>
-              <FontAwesomeIcon icon={faMapMarked} />
+            <button id="btn-map-toggle" className={`map-toggle ${this.context.get('map') ? 'map-toggle-active' : ''}`} type="submit" title={this.context.get('map') ? 'Térkép kikapcsolása' : 'Térkép bekapcsolása'} onClick={this.toggleMap}>
+              <div className="map-icon">
+                <FontAwesomeIcon icon={faMapMarked} />
+              </div>
+              <div className="map-text">Térkép</div>
             </button>
           </div>
           {this.context.get('map') && <MapBox location={this.state.location} onChange={val => this.crossLocationChange(val)} />}
