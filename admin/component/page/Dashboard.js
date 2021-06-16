@@ -17,6 +17,7 @@ export default class Dashboard extends React.Component {
       redirectLogin: false,
       close: false,
       countVotes: 'N/A',
+      countOfflineVotes: 'N/A',
       countUsers: 'N/A',
       error: [],
     }
@@ -48,6 +49,7 @@ export default class Dashboard extends React.Component {
           this.setState({
             close: response.data.settings && response.data.settings.close ? response.data.settings.close : false,
             countVotes: response.data.infos && response.data.infos.countVotes ? response.data.infos.countVotes : 'N/A',
+            countOfflineVotes: response.data.infos && response.data.infos.countOfflineVotes ? response.data.infos.countOfflineVotes : 'N/A',
             countUsers: response.data.infos && response.data.infos.countUsers ? response.data.infos.countUsers : 'N/A',
           })
 
@@ -210,7 +212,13 @@ export default class Dashboard extends React.Component {
               <div className="box-wrapper">
                 <div className="box-left">
                   <div className="box">Felhasználók száma<br /><span>{this.state.countUsers}</span></div>
-                  <div className="box">Szavazatok száma<br /><span>{this.state.countVotes}</span></div>
+                  <div className="box">Online szavazatok száma<br /><span>{this.state.countVotes}</span></div>
+                  <div className="box">Offline szavazatok száma<br /><span>{this.state.countOfflineVotes}</span></div>
+                  <div className="box">Szavazatok száma összesen<br />
+                    <span>{
+                      this.state.countVotes != 'N/A' && this.state.countOfflineVotes !== 'N/A' ? this.state.countVotes + this.state.countOfflineVotes : 'N/A'
+                    }</span>
+                  </div>
                 </div>
 
                 <div className="box-right">
@@ -229,7 +237,7 @@ export default class Dashboard extends React.Component {
                       <input type="checkbox" name="close" id="close" checked={this.state.close} onChange={this.handleChangeInput.bind(this)} />
 
                       A szavazás lezárása
-                  </label>
+                    </label>
 
                     {this.state.error && this.state.error.close ? Object.values(this.state.error.close).map((err, i) => {
                       return <this.ErrorMini error={err} increment={i} />
