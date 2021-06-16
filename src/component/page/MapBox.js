@@ -52,13 +52,7 @@ export default function MapBox(props) {
         onViewportChange={(viewport) => { setViewport(viewport) }}
         getCursor={getCursor}
         interactiveLayerIds={['1', '4', '7', '8', '9', '10', '11', '12', '14', '15', '22', '24']}
-        onClick={e => {
-          if (e.features[0] && e.features[0].layer.id) {
-            props.onChange(e.features[0].layer.id)
-          } else {
-            props.onChange('')
-          }
-        }}
+        onClick={props.onClick}
         onHover={onHover}
       >
         <NavigationControl style={navControlStyle} />

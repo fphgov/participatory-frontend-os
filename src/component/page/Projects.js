@@ -153,12 +153,17 @@ export default class Projects extends React.Component {
     this.context.set('map', map);
   }
 
-  crossLocationChange(locationId) {
-    this.setState({
-      location: locationId
-    }, () => {
-      this.search()
-    })
+  crossLocationChange(e) {
+    const location   = this.state.location
+    const locationId = e.features[0] && e.features[0].layer.id ? e.features[0].layer.id : '';
+
+    if (location !== locationId) {
+      this.setState({
+        location: locationId
+      }, () => {
+        this.search()
+      })
+    }
   }
 
   onKeyUp(e) {
@@ -324,7 +329,7 @@ export default class Projects extends React.Component {
               <div className="map-text">Térkép</div>
             </button>
           </div>
-          {this.context.get('map') && <MapBox location={this.state.location} onChange={val => this.crossLocationChange(val)} />}
+          {this.context.get('map') && <MapBox location={this.state.location} onClick={e => this.crossLocationChange(e)} />}
           <div className="search-result mt-3">
             {this.state.count} találat
           </div>
