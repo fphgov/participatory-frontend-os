@@ -243,7 +243,7 @@ export default class Project extends React.Component {
     return (
       <div className="prop">
         <div className="container">
-          {this.state.scroll ? <ScrollTo element={document.querySelector('.vote-modal').offsetTop} /> : null}
+          {this.state.scroll && document.querySelector('.vote-modal') ? <ScrollTo element={document.querySelector('.vote-modal').offsetTop} /> : null}
           {this.state.error ? <this.Error message={this.state.error} /> : null}
           {this.state.project ? <this.ProjectWrapper project={this.state.project} voteAction={this.vote} disableVoteButton={voteBtn} showVoteButton={! this.context.get('successVote')} /> : null}
         </div>

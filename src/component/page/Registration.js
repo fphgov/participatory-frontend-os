@@ -123,20 +123,25 @@ export default class Registration extends React.Component {
       if (error.response.status === 403) {
         this.setState({
           error: 'Google reCapcha ellenőrzés sikertelen'
+        }, () => {
+          this.setState({ scroll: true })
         })
       } else if (error.response && error.response.data && error.response.data.errors) {
         this.setState({
           error: error.response.data.errors
+        }, () => {
+          this.setState({ scroll: true })
         })
       } else {
         this.setState({
           error: 'Váratlan hiba történt, kérjük próbálja később'
+        }, () => {
+          this.setState({ scroll: true })
         })
       }
 
       this.updateToken()
       this.context.set('loading', false)
-      this.setState({ scroll: true })
     })
   }
 
@@ -161,7 +166,7 @@ export default class Registration extends React.Component {
   render() {
     return (
       <div className="page-registration-section">
-        {this.state.scroll ? <ScrollTo element={document.querySelector('.error-message-inline').offsetTop} /> : null}
+        {this.state.scroll && document.querySelector('.error-message-inline') ? <ScrollTo element={document.querySelector('.error-message-inline').offsetTop} /> : null}
 
         <div className="container">
           <div className="row">
