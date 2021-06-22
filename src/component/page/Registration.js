@@ -31,6 +31,7 @@ export default class Registration extends React.Component {
       recaptcha: null,
     }
 
+    this.handleChangeRaw = this.handleChangeRaw.bind(this)
     this.handleChangeInput = this.handleChangeInput.bind(this)
     this.handleChangeEmailInput = this.handleChangeEmailInput.bind(this)
     this.onKeyUp = this.onKeyUp.bind(this)
@@ -60,13 +61,19 @@ export default class Registration extends React.Component {
     const value = e.target.type === 'checkbox' ? e.target.checked : rmAllCharForName(e.target.value)
 
     this.setState({
-      [ e.target.name ]: value
+      [e.target.name]: value
     })
   }
 
   handleChangeEmailInput(e) {
     this.setState({
-      [ e.target.name ]: rmAllCharForEmail(e.target.value)
+      [e.target.name]: rmAllCharForEmail(e.target.value)
+    })
+  }
+
+  handleChangeRaw(e) {
+    this.setState({
+      [e.target.name]: e.target.value
     })
   }
 
@@ -200,7 +207,7 @@ export default class Registration extends React.Component {
 
                     <div className="input-wrapper">
                       <label htmlFor="password">Jelszó <sup>*</sup></label>
-                      <input type="password" placeholder="Jelszó" name="password" id="password" value={this.state.password} onChange={this.handleChangeInput} />
+                      <input type="password" placeholder="Jelszó" name="password" id="password" value={this.state.password} onChange={this.handleChangeRaw} />
 
                       {this.state.error && this.state.error.password ? Object.values(this.state.error.password).map((err, i) => {
                         return <this.ErrorMini key={i} error={err} increment={`password-${i}`} />
@@ -209,7 +216,7 @@ export default class Registration extends React.Component {
 
                     <div className="input-wrapper">
                       <label htmlFor="password_confirm">Jelszó megerősítése <sup>*</sup></label>
-                      <input type="password" placeholder="Jelszó megerősítése" name="password_confirm" id="password_confirm" value={this.state.password_confirm} onChange={this.handleChangeInput} />
+                      <input type="password" placeholder="Jelszó megerősítése" name="password_confirm" id="password_confirm" value={this.state.password_confirm} onChange={this.handleChangeRaw} />
 
                       {this.state.error && this.state.error.password_confirm ? Object.values(this.state.error.password_confirm).map((err, i) => {
                         return <this.ErrorMini key={i} error={err} increment={`password_confirm-${i}`} />
