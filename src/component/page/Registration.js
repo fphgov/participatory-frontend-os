@@ -28,6 +28,7 @@ export default class Registration extends React.Component {
       hear_about: '',
       live_in_city: '',
       privacy: '',
+      prize: '',
       recaptcha: null,
     }
 
@@ -108,6 +109,7 @@ export default class Registration extends React.Component {
       hear_about: this.state.hear_about,
       live_in_city: this.state.live_in_city,
       privacy: this.state.privacy,
+      prize: this.state.prize,
       'g-recaptcha-response': this.state.recaptcha,
     }
 
@@ -127,7 +129,7 @@ export default class Registration extends React.Component {
       }
     })
     .catch(error => {
-      if (error.response.status === 403) {
+      if (error.response && error.response.status === 403) {
         this.setState({
           error: 'Google reCapcha ellenőrzés sikertelen'
         }, () => {
@@ -303,11 +305,22 @@ export default class Registration extends React.Component {
                     <div className="form-group">
                       <label htmlFor="privacy" className="form-group-label">
                         <input className="form-control" type="checkbox" id="privacy" name="privacy" onChange={this.handleChangeInput} />
-                        Elfogadom az <a href="https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=htmlpage&amp;htmlpage_id=5" target="_blank" rel="noopener noreferrer">adatvédelmi tájékoztatót</a>
+                          Elfogadom az <a href="https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=htmlpage&amp;htmlpage_id=5" target="_blank" rel="noopener noreferrer">adatvédelmi tájékoztatót</a>  *
                       </label>
 
                       {this.state.error && this.state.error.privacy ? Object.values(this.state.error.privacy).map((err, i) => {
                         return <this.ErrorMini key={i} error={err} increment={`privacy-${i}`} />
+                      }) : null}
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="prize" className="form-group-label">
+                        <input className="form-control" type="checkbox" id="prize" name="prize" onChange={this.handleChangeInput} />
+                        Részt veszek a Budapest Főpolgármesteri Hivatal nyereményjátékában.
+                      </label>
+
+                      {this.state.error && this.state.error.prize ? Object.values(this.state.error.prize).map((err, i) => {
+                        return <this.ErrorMini key={i} error={err} increment={`prize-${i}`} />
                       }) : null}
                     </div>
 
