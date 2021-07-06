@@ -58,7 +58,9 @@ export default class Login extends React.Component {
     this.setState({ error: '', [ e.target.name ]: e.target.value })
   }
 
-  submitLogin() {
+  submitLogin(e) {
+    e.preventDefault()
+
     const data = {
       email: this.state.email,
       password: this.state.password,
@@ -134,26 +136,28 @@ export default class Login extends React.Component {
             {this.state.error ? <this.Error message={this.state.error} /> : null}
           </div>
 
-          <div className="form-wrapper">
-            <div className="input-wrapper">
-              <label htmlFor="email">E-mail cím</label>
-              <input type="text" placeholder="E-mail cím" name="email" id="email" value={this.state.email} onChange={this.handleChangeInput.bind(this)} />
+          <form onSubmit={this.submitLogin.bind(this)}>
+            <div className="form-wrapper">
+              <div className="input-wrapper">
+                <label htmlFor="email">E-mail cím</label>
+                <input type="text" placeholder="E-mail cím" name="email" id="email" value={this.state.email} onChange={this.handleChangeInput.bind(this)} />
+              </div>
+
+              <div className="input-wrapper">
+                <label htmlFor="password">Jelszó</label>
+                <input type="password" placeholder="Jelszó" name="password" id="password" value={this.state.password} onChange={this.handleChangeInput.bind(this)} />
+              </div>
+
+              <ReCaptcha
+                ref={ref => this.recaptcha = ref}
+                sitekey={process.env.SITE_KEY}
+                action='submit'
+                verifyCallback={this.verifyCallback}
+              />
+
+              <input type="submit" value="Bejelentkezés" className="btn btn-primary" />
             </div>
-
-            <div className="input-wrapper">
-              <label htmlFor="password">Jelszó</label>
-              <input type="password" placeholder="Jelszó" name="password" id="password" value={this.state.password} onChange={this.handleChangeInput.bind(this)} />
-            </div>
-
-            <ReCaptcha
-              ref={ref => this.recaptcha = ref}
-              sitekey={process.env.SITE_KEY}
-              action='submit'
-              verifyCallback={this.verifyCallback}
-            />
-
-            <input type="submit" value="Bejelentkezés" className="btn btn-primary" onClick={this.submitLogin.bind(this)} />
-          </div>
+          </form>
         </div>
       </div>
     )
