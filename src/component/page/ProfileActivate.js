@@ -82,10 +82,19 @@ export default class ProfileActivate extends React.Component {
     return (
       <div className="page-profile-section">
         <div className="container">
-          <h1>Felhasználói fiók aktíválása</h1>
+          <div className="row">
+            <div className="col-md-12">
+              <h1>Felhasználói fiók aktíválása</h1>
 
-          {this.state.error ? <this.Error message={this.state.error} /> : <this.Success message="A felhasználói fiókjának aktiválását elindítottuk."/>}
-          <button className="back-button" onClick={this.toRedirect.bind(this)}> Vissza </button>
+              {! this.context.get('loading') ? (<>
+                {this.state.error ? <this.Error message={this.state.error} /> : <this.Success message="A felhasználói fiókjának aktiválását elindítottuk." />}
+
+                <div class="small">
+                  <button className="btn btn-primary" onClick={this.toRedirect.bind(this)}>Vissza</button>
+                </div>
+              </>) : null}
+            </div>
+          </div>
         </div>
       </div>
     )
