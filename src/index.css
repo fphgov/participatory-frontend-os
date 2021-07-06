@@ -438,6 +438,15 @@ input[type="submit"] {
   font-weight: bold;
 }
 
+.success-message {
+  margin: 0 0 25px 0;
+  background-color: darkgreen;
+  color: #fff;
+  padding: 8px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
 .error-message-inline {
   color: darkred;
   font-style: italic;
@@ -784,6 +793,7 @@ fieldset input[type="password"] {
 }
 
 fieldset button,
+.small .btn,
 .registration-info .btn {
   max-width: 100%;
   border-radius: 0px;
@@ -956,10 +966,10 @@ button.map-toggle {
 
 button.map-toggle:hover,
 .app .map-toggle-active {
-  cursor: pointer;
-  background-color: #19506e;
-  color: #fff;
-  transition: all 0.2s ease-in-out;
+	cursor: pointer;
+	background-color: #19506e;
+	color: #fff;
+	transition: all 0.2s ease-in-out;
 }
 
 .map-text {

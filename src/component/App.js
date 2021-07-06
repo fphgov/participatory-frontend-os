@@ -13,6 +13,7 @@ import Statistics from "./page/Statistics";
 import Project from "./page/Project";
 import Projects from "./page/Projects";
 import ProfileActivate from "./page/ProfileActivate";
+import PrizeActivate from "./page/PrizeActivate";
 import Registration from "./page/Registration";
 import ResetPassword from "./page/ResetPassword";
 import ForgotPassword from "./page/ForgotPassword";
@@ -64,6 +65,7 @@ export default class App extends React.Component {
                 <Route exact path="/projektek/:id" component={Project} />
                 <Route exact path="/profil" component={Profile} />
                 <Route exact path="/profil/aktivalas/:hash" component={ProfileActivate} />
+                <Route exact path="/profil/nyeremeny-aktivalas/:hash" component={PrizeActivate} />
                 <Route exact path="/profil/jelszo/:hash" component={ResetPassword} />
                 <Route exact path="/regisztracio" component={Registration} />
                 <Route exact path="/elfelejtett-felhasznalonev" component={ForgotAccount} />

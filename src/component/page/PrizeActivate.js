@@ -33,7 +33,7 @@ export default class ProfileActivate extends React.Component {
       }
     }
 
-    const link = process.env.REACT_APP_API_REQ_PROFILE_ACTIVATE.toString().replace(':hash', this.props.match.params.hash)
+    const link = process.env.REACT_APP_API_REQ_PROFILE_PRIZE.toString().replace(':hash', this.props.match.params.hash)
 
     axios.get(process.env.REACT_APP_API_SERVER + link, config)
       .then(response => {
@@ -84,10 +84,10 @@ export default class ProfileActivate extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h1>Felhasználói fiók aktíválása</h1>
+              <h1>Jelentkezés nyereményjátékra</h1>
 
               {! this.context.get('loading') ? (<>
-                {this.state.error ? <this.Error message={this.state.error} /> : <this.Success message="A felhasználói fiókjának aktiválását elindítottuk." />}
+                {this.state.error ? <this.Error message={this.state.error} /> : <this.Success message="Sikeresen jelentkezett a nyereményjátékra!" />}
 
                 <div class="small">
                   <button className="btn btn-primary" onClick={this.toRedirect.bind(this)}>Vissza</button>
