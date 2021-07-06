@@ -22,6 +22,7 @@ export default class Projects extends React.Component {
       query: '',
       theme: '',
       location: '',
+      rand: 0,
     }
 
     this.queryRef = React.createRef()
@@ -40,10 +41,19 @@ export default class Projects extends React.Component {
   componentDidMount() {
     const search = new URLSearchParams(document.location.search)
 
+    const rand = Math.floor(Math.random() * 100000)
+
+    if (! search.get('rand')) {
+      search.set('rand', rand)
+
+      window.location.search = search.toString()
+    }
+
     this.setState({
       query: search.get('query') ? search.get('query') : '',
       theme: search.get('theme') ? search.get('theme') : '',
       location: search.get('location') ? search.get('location') : '',
+      rand: search.get('rand') ? search.get('rand') : rand,
     })
   }
 
@@ -52,6 +62,7 @@ export default class Projects extends React.Component {
       query: '',
       theme: '',
       location: '',
+      rand: 0,
     })
   }
 
@@ -101,6 +112,7 @@ export default class Projects extends React.Component {
     search.delete("location")
     search.delete("query")
     search.delete("page")
+    search.delete("rand")
     search.set("tag", tag.id)
 
     window.location.search = search.toString()
@@ -129,6 +141,7 @@ export default class Projects extends React.Component {
     search.set("query", this.state.query)
     search.set("theme", this.state.theme)
     search.set("location", this.state.location)
+    search.set("rand", this.state.rand)
 
     window.location.search = search.toString()
   }
