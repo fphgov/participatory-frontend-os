@@ -1,47 +1,49 @@
 import React from "react"
-import {
-  Link,
-} from "react-router-dom"
-import loadGA from './loadGA.js'
-import loadGTM from './loadGTM.js'
+import loadG from './loadG.js'
 import docCookies from '../lib/docCookies.js'
 
 export default function CookieNotice() {
   const cookieName = 'cookie-notice'
-  const [ accepted, setAccepted ] = React.useState(true)
+  const [ accepted, setAccepted ] = React.useState(false)
   const [ open, setOpen ] = React.useState(true)
 
   React.useEffect(() => {
     const cookieValue = docCookies.getItem(cookieName)
 
     if (cookieValue) {
-      setAccepted(!! cookieValue)
+      setOpen(false)
+      setAccepted(cookieValue == "true")
 
       if (accepted) {
-        setOpen(false)
+        loadTags()
       }
     }
-  })
+  }, [])
+
+  function loadTags() {
+    if (!window.dataLayer) {
+      loadG(() => {
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() { dataLayer.push(arguments); }
+
+        gtag('js', new Date());
+        gtag('config', process.env.GA_ID);
+
+        setOpen(false)
+      })
+    }
+  }
 
   function handlerAccept(e) {
     e.preventDefault()
 
     setAccepted(true)
     docCookies.setItem(cookieName, true)
-    loadGA(() => {
-      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
-      ga('create', process.env.GA_ID, 'auto');
-      ga('send', 'pageview');
 
-      setOpen(false)
-    })
-
-    loadGTM(() => {
-      window.dataLayer = window.dataLayer || []
-      window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
-
-      setOpen(false)
-    })
+    if (accepted) {
+      loadTags()
+    }
   }
 
   function handlerRefuse(e) {
@@ -59,7 +61,7 @@ export default function CookieNotice() {
           <a className="cookie-notice-accept" onClick={handlerAccept}>Elfogadom</a>
           <a className="cookie-notice-refuse" onClick={handlerRefuse}>Elutasítom</a>
 
-          <Link to="/adatvedelmi-iranyelvek" className="cookie-notice-info">Adatvédelmi</Link>
+          <a href="https://budapest.hu/Lapok/2018/adatkezelesi-tajekoztato.aspx" target="_blank" rel="noopener" className="cookie-notice-info">Adatvédelmi</a>
         </div>
       </div>
     </div>

@@ -21,6 +21,7 @@ import ForgotAccount from "./page/ForgotAccount";
 import Logout from "./page/Logout";
 import Profile from "./page/Profile";
 import ScrollToTop from "./common/ScrollToTop";
+import CookieNotice from "./common/CookieNotice";
 import StoreContext from '../StoreContext'
 import tokenParser from './assets/tokenParser'
 

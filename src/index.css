@@ -412,6 +412,66 @@ input[type="submit"] {
   margin-top: 30px;
 }
 
+.cookie-notice {
+  background-color: #00AF96;
+  color: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 11;
+  font-family: -apple-system, Arial, sans-serif;
+}
+
+.cookie-notice-text {
+  color: #fff;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.cookie-notice-container {
+  padding: 8px 30px;
+  text-align: center;
+  width: 100%;
+  z-index: 2;
+}
+
+.cookie-notice-container > div {
+  display: inline-block;
+}
+
+.cookie-notice-visible {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+.cookie-notice-invisible {
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+
+.cookie-notice-buttons {
+  margin: 10px;
+}
+
+.cookie-notice-buttons > a {
+  display: inline-block;
+  padding: 4px 8px;
+  background-color: #19506e;
+  color: #fff;
+  text-transform: uppercase;
+  margin-left: 10px;
+}
+
+.cookie-notice-buttons > a:first-of-type {
+  margin-left: 0;
+}
+
+.cookie-notice-buttons > a:hover {
+  background-color: #11415b;
+}
+
 .page-login .page {
   display: block;
   background-color: transparent;
