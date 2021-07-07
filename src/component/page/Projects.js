@@ -186,9 +186,10 @@ export default class Projects extends React.Component {
   }
 
   hasQueryFilter() {
-    const onlyPageParam = /^\?page=\d+$/.test(document.location.search)
+    const hasPageParam = /^\?page=\d+$/.test(document.location.search)
+    const hasRandParam = /^\?rand=\d+$/.test(document.location.search)
 
-    return !!window.location.search && !onlyPageParam || this.state.query !== '' || this.state.theme !== '' || this.state.location !== ''
+    return !!window.location.search && !hasPageParam && !hasRandParam || this.state.query !== '' || this.state.theme !== '' || this.state.location !== ''
   }
 
   handleScrollPosition() {
