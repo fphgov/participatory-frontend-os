@@ -92,10 +92,10 @@ export default class ForgotPassword extends React.Component {
           <h1>Elfelejtett jelszó</h1>
 
           {this.state.error ? <this.Error message={this.state.error} />: <div>
-            {!this.state.success ? <p>Kérjük, adja meg e-mail címét. Az aktíváló linket e-mailben kapja meg.</p> : null}
+            {!this.state.success ? <p>Kérjük, adja meg e-mail címét. Az aktiváló linket e-mailben kapja meg.</p> : null}
 
             {this.state.success ? <>
-              <p>Amennyiben szerepel az e-mail cím a rendszerben, úgy az aktíváló linket kiküldtük.</p>
+              <p>Amennyiben szerepel az e-mail cím a rendszerben, úgy az aktiváló linket kiküldtük.</p>
 
               <div className="row">
                 <div className="col-lg-4">
