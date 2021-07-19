@@ -80,6 +80,10 @@ export default class Header extends React.Component {
   render() {
     return (
       <header>
+        <div id="service-information" style={{ backgroundColor: 'red', color: '#fff', textAlign: 'center', fontWeight: 'bold', padding: '12px 30px' }}>
+          <p style={{ margin: 0, padding: 0 }}>Karbantartás! Július 23-25. között a szervereink karbantartása miatt az oldal használatában fennakadások várhatóak. Köszönjük a türelmet, igyekszünk gyorsak lenni!</p>
+        </div>
+
         <nav className="main-navigation">
           <div className="container">
             <div className="row flex-center">
