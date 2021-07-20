@@ -316,7 +316,7 @@ export default class Registration extends React.Component {
                     <div className="form-group">
                       <label htmlFor="prize" className="form-group-label">
                         <input className="form-control" type="checkbox" id="prize" name="prize" onChange={this.handleChangeInput} />
-                        Részt veszek a Budapest Főpolgármesteri Hivatal nyereményjátékában.
+                          Részt veszek a <a href="https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?document_id=34&portlet_id=159" target="_blank" rel="noopener noreferrer">Budapest Főpolgármesteri Hivatal nyereményjátékában</a>.
                       </label>
 
                       {this.state.error && this.state.error.prize ? Object.values(this.state.error.prize).map((err, i) => {
