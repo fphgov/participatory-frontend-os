@@ -79,7 +79,7 @@ export default class Header extends React.Component {
 
   render() {
     const config = this.context.get('config')
-    const showVoteModal = config && !(config && config.options.close)
+    const showVoteModal = config && !(config && config.options && config.options.close)
 
     return (
       <header>

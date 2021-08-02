@@ -241,7 +241,7 @@ export default class Project extends React.Component {
     }
 
     const config = this.context.get('config')
-    const showVoteButton = !this.context.get('successVote') && !(config && config.options.close)
+    const showVoteButton = !this.context.get('successVote') && !(config && config.options && config.options.close)
 
     return (
       <div className="prop">
