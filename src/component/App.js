@@ -1,3 +1,4 @@
+import axios from "axios"
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -46,6 +47,31 @@ export default class App extends React.Component {
     if (localStorage.getItem('map')) {
       this.context.set('map', (localStorage.getItem('map') === 'true') ? true : false)
     }
+
+    this.getConfig()
+  }
+
+  getConfig() {
+    this.context.set('loading', true)
+
+    const config = {
+      headers: {
+        'Accept': 'application/json',
+      }
+    }
+
+    axios.get(process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_CONFIG, config)
+      .then(response => {
+        this.context.set('loading', false)
+
+        if (response.data) {
+          this.context.set('config', response.data)
+        }
+      })
+      .catch(() => {
+        this.context.set('loading', false)
+        this.context.set('config', null)
+      })
   }
 
   render() {

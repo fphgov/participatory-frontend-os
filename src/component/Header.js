@@ -78,6 +78,9 @@ export default class Header extends React.Component {
   }
 
   render() {
+    const config = this.context.get('config')
+    const showVoteModal = config && !(config && config.options.close)
+
     return (
       <header>
         <nav className="main-navigation">
@@ -129,7 +132,7 @@ export default class Header extends React.Component {
           </div>
         </nav>
 
-        <VoteModal open={this.context.get('rk_modal_open')} />
+        {showVoteModal ? <VoteModal open={this.context.get('rk_modal_open')} /> : null}
 
         {this.state.openMenu ? <MobileMenu menu={this.state.menu} onClick={() => { this.toggleMenu() }} /> : null}
 

@@ -240,12 +240,15 @@ export default class Project extends React.Component {
       return <Redirect to='/bejelentkezes' />
     }
 
+    const config = this.context.get('config')
+    const showVoteButton = !this.context.get('successVote') && !(config && config.options.close)
+
     return (
       <div className="prop">
         <div className="container">
           {this.state.scroll && document.querySelector('.vote-modal') ? <ScrollTo element={document.querySelector('.vote-modal').offsetTop} /> : null}
           {this.state.error ? <this.Error message={this.state.error} /> : null}
-          {this.state.project ? <this.ProjectWrapper project={this.state.project} voteAction={this.vote} disableVoteButton={voteBtn} showVoteButton={! this.context.get('successVote')} /> : null}
+          {this.state.project ? <this.ProjectWrapper project={this.state.project} voteAction={this.vote} disableVoteButton={voteBtn} showVoteButton={showVoteButton} /> : null}
         </div>
       </div>
     )
