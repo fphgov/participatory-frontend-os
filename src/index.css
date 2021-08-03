@@ -1582,6 +1582,7 @@ p.error {
 		flex-direction: column;
 	}
 
+	.stat-win,
   .stat-count {
     margin-left: 0;
 		margin-top: 12px;
