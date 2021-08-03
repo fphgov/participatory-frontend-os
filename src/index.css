@@ -1387,6 +1387,18 @@ fieldset h4 {
   display: flex;
 }
 
+.stat-content-win {
+  background-color: #19506e;
+}
+
+.stat-content.stat-content-win a {
+  color: #fff;
+}
+
+.stat-win {
+  margin-left: 6px;
+}
+
 .stat-content a {
   padding: 8px 4px;
   display: flex;

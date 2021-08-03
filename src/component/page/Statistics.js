@@ -78,7 +78,7 @@ export default class Statistics extends React.Component {
       <div className="col-sm-12 col-md-12 col-lg-12">
         <div className="stat-wrapper">
           <div className="stat-inner">
-            <div className="stat-content">
+            <div className={`stat-content${props.project.win ? ' stat-content-win' : ''}`}>
               <Link to={`/projektek/${props.project.id}`}>
                 <div className="stat-content-inner">
                   <div className="stat-id">{props.place + 1}.</div>
@@ -88,6 +88,7 @@ export default class Statistics extends React.Component {
                 <div className="stat-content-inner">
                   <div className="stat-id" style={{ visibility: 'hidden' }}>{props.place + 1}.</div>
                   <div className="stat-count"><span>{props.project.voted} szavazat</span></div>
+                  {props.project.win ? <div className="stat-win">(nyert)</div> : null}
                 </div>
               </Link>
             </div>
