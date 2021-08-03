@@ -80,9 +80,15 @@ export default class Statistics extends React.Component {
           <div className="stat-inner">
             <div className="stat-content">
               <Link to={`/projektek/${props.project.id}`}>
-                <div className="stat-id">{props.place + 1}.</div>
-                <div className="stat-title">{props.project.title}</div>
-                <div className="stat-count"><span>{props.project.voted} szavazat</span></div>
+                <div className="stat-content-inner">
+                  <div className="stat-id">{props.place + 1}.</div>
+                  <div className="stat-title">{props.project.title}</div>
+                </div>
+
+                <div className="stat-content-inner">
+                  <div className="stat-id" style={{ visibility: 'hidden' }}>{props.place + 1}.</div>
+                  <div className="stat-count"><span>{props.project.voted} szavazat</span></div>
+                </div>
               </Link>
             </div>
           </div>

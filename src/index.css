@@ -1383,9 +1383,14 @@ fieldset h4 {
   border-top: 1px solid #ddd;
 }
 
+.stat-content-inner {
+  display: flex;
+}
+
 .stat-content a {
   padding: 8px 4px;
   display: flex;
+	justify-content: space-between;
 }
 
 .stat-content a:hover {
@@ -1549,12 +1554,30 @@ p.error {
   .projects select[name="theme"] {
     margin-bottom: 1em;
   }
+
   .projects .filter-clear {
     height: 48px;
     width: 100%;
     padding: 0px 10px;
     margin-top: 1em;
   }
+
+	.stat-content a .stat-title {
+		flex: auto;
+	}
+
+	.stat-content a {
+		flex-direction: column;
+	}
+
+  .stat-count {
+    margin-left: 0;
+		margin-top: 12px;
+  }
+
+	ul.tab li {
+		display: block;
+	}
 }
 
 @media screen and (max-width: 769px) {
