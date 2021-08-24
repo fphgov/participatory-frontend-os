@@ -106,8 +106,6 @@ export default class Statistics extends React.Component {
             <div className="col-md-12">
               <h1>Ötletekre leadott szavazatok</h1>
 
-              <p style={{ textAlign: 'center' }}>A szavazást július 31-én éjfélkor lezártuk.<br />A végeredményt a kerületi könyvtárakban papíron leadott szavazatok beérkezése és feldolgozása után a főpolgármester állapítja meg. A döntést előre láthatóan augusztus második felében tesszük közzé; a szavazásban szereplő ötletek benyújtóit ezzel egyidejűleg tájékoztatjuk az eredményről.</p>
-
               <div className="tab-wrapper">
                 <ul className="tab">
                   <li tabIndex={0} className={`${this.state.currentTabIndex === 0 ? 'active' : ''}`} onClick={this.handleClickTab}><a>Összesített lista</a></li>
