@@ -18,7 +18,6 @@ import PrizeActivate from "./page/PrizeActivate";
 import Registration from "./page/Registration";
 import ResetPassword from "./page/ResetPassword";
 import ForgotPassword from "./page/ForgotPassword";
-import ForgotAccount from "./page/ForgotAccount";
 import Logout from "./page/Logout";
 import Profile from "./page/Profile";
 import ScrollToTop from "./common/ScrollToTop";
@@ -95,7 +94,6 @@ export default class App extends React.Component {
                 <Route exact path="/profil/nyeremeny-aktivalas/:hash" component={PrizeActivate} />
                 <Route exact path="/profil/jelszo/:hash" component={ResetPassword} />
                 <Route exact path="/regisztracio" component={Registration} />
-                <Route exact path="/elfelejtett-felhasznalonev" component={ForgotAccount} />
                 <Route exact path="/elfelejtett-jelszo" component={ForgotPassword} />
 
                 <Route exact path="*" component={NotFound} />

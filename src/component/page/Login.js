@@ -178,7 +178,6 @@ export default class Login extends React.Component {
 
                   <div className="form-group">
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12" style={{ display: "flex", justifyContent: "space-between", padding: 0 }}>
-                      <Link to={`/elfelejtett-felhasznalonev`} className="btn btn-sm" title="Elfelejtettem a felhasználónevem">Elfelejtettem a felhasználónevem</Link>
                       <Link to={`/elfelejtett-jelszo`} className="btn btn-sm" title="Elfelejtettem a jelszavam">Elfelejtettem a jelszavam</Link>
                     </div>
                   </div>

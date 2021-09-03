@@ -16,13 +16,11 @@ export default class Registration extends React.Component {
       scroll: false,
       error: null,
       success: false,
-      username: '',
       email: '',
       password: '',
       password_confirm: '',
       lastname: '',
       firstname: '',
-      nickname: '',
       postal_code: '',
       birthyear: '',
       hear_about: '',
@@ -97,13 +95,11 @@ export default class Registration extends React.Component {
 
     const data = {
       hash: this.props.match.params.hash,
-      username: this.state.username,
       email: this.state.email,
       password: this.state.password,
       password_confirm: this.state.password_confirm,
       lastname: this.state.lastname,
       firstname: this.state.firstname,
-      nickname: this.state.nickname,
       postal_code: this.state.postal_code,
       birthyear: this.state.birthyear,
       hear_about: this.state.hear_about,
@@ -189,16 +185,6 @@ export default class Registration extends React.Component {
                   {! this.state.success ? <>
                     <div className="form-wrapper">
                     <div className="input-wrapper">
-                      <label htmlFor="username">Felhasználónév <sup>*</sup></label>
-                      <p className="tipp">Az itt megadott névvel fog tudni belépni a rendszerbe. Speciális karakterek és nagybetűk nem elfogadottak.</p>
-                      <input type="text" placeholder="Felhasználónév" name="username" id="username" value={this.state.username} onChange={this.handleChangeInput} />
-
-                      {this.state.error && this.state.error.username ? Object.values(this.state.error.username).map((err, i) => {
-                        return <this.ErrorMini key={i} error={err} increment={`username-${i}`} />
-                      }) : null}
-                    </div>
-
-                    <div className="input-wrapper">
                       <label htmlFor="email">E-mail <sup>*</sup></label>
                       <input type="text" placeholder="E-mail" name="email" id="email" value={this.state.email} onChange={this.handleChangeEmailInput} />
 
@@ -222,16 +208,6 @@ export default class Registration extends React.Component {
 
                       {this.state.error && this.state.error.password_confirm ? Object.values(this.state.error.password_confirm).map((err, i) => {
                         return <this.ErrorMini key={i} error={err} increment={`password_confirm-${i}`} />
-                      }) : null}
-                    </div>
-
-                    <div className="input-wrapper">
-                      <label htmlFor="nickname">Nyilvános név <sup>*</sup></label>
-                      <p className="tipp">Ez a név fog megjelenni az oldalon.</p>
-                      <input type="text" placeholder="Nyilvános név" name="nickname" id="nickname" value={this.state.nickname} onChange={this.handleChangeInput} />
-
-                      {this.state.error && this.state.error.nickname ? Object.values(this.state.error.nickname).map((err, i) => {
-                        return <this.ErrorMini key={i} error={err} increment={`nickname-${i}`} />
                       }) : null}
                     </div>
 
