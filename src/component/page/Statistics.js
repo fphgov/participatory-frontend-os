@@ -108,7 +108,6 @@ export default class Statistics extends React.Component {
 
               <div className="tab-wrapper">
                 <ul className="tab">
-                  <li tabIndex={0} className={`${this.state.currentTabIndex === 0 ? 'active' : ''}`} onClick={this.handleClickTab}><a>Összesített lista</a></li>
                   <li tabIndex={1} className={`${this.state.currentTabIndex === 1 ? 'active' : ''}`} onClick={this.handleClickTab}><a>Zöld Budapest</a></li>
                   <li tabIndex={2} className={`${this.state.currentTabIndex === 2 ? 'active' : ''}`} onClick={this.handleClickTab}><a>Gondoskodó Budapest</a></li>
                   <li tabIndex={3} className={`${this.state.currentTabIndex === 3 ? 'active' : ''}`} onClick={this.handleClickTab}><a>Egész Budapest</a></li>
