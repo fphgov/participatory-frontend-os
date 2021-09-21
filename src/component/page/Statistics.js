@@ -6,14 +6,16 @@ import {
 import StoreContext from '../../StoreContext'
 
 export default class Statistics extends React.Component {
-  static contextType = StoreContext
+  static contextType = StoreContext;
 
   constructor(props, context) {
     super(props, context)
 
+    const id = parseInt(this.props.match.params.id)
+
     this.state = {
       count: 0,
-      currentTabIndex: 0,
+      currentTabIndex: id ? id : 1,
       pageCount: 0,
       projects: [],
       filteredProjects: [],
@@ -58,18 +60,27 @@ export default class Statistics extends React.Component {
 
         this.context.set('loading', false)
       })
+      .finally(() => {
+        this.updateProjects()
+      })
   }
 
   handleClickTab(e) {
-    const tabIndex = e.currentTarget.tabIndex
-    const filteredProjects = tabIndex !== 0 ? this.state.projects.filter((t) => t.campaign_theme.id === tabIndex) : this.state.projects
+    this.props.history.push(`/statisztika/${e.currentTarget.tabIndex}`)
+
+    this.setState({
+      currentTabIndex: e.currentTarget.tabIndex
+    }, () => {
+      this.updateProjects()
+    })
+
+  }
+
+  updateProjects() {
+    const filteredProjects = this.state.currentTabIndex !== 0 ? this.state.projects.filter((t) => t.campaign_theme.id === this.state.currentTabIndex) : this.state.projects
 
     this.setState({
       filteredProjects: filteredProjects
-    }, () => {
-      this.setState({
-        currentTabIndex: tabIndex
-      })
     })
   }
 

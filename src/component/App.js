@@ -88,6 +88,7 @@ export default class App extends React.Component {
                 <Route exact path="/bejelentkezes" component={Login} />
                 <Route exact path="/kijelentkezes" component={Logout} />
                 <Route exact path="/statisztika" component={Statistics} />
+                <Route exact path="/statisztika/:id" component={Statistics} />
                 <Route exact path="/projektek" component={Projects} />
                 <Route exact path="/projektek/:id" component={Project} />
                 <Route exact path="/profil" component={Profile} />
