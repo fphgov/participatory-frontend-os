@@ -1,6 +1,5 @@
 import axios from "../assets/axios"
 import React from "react"
-import qs from 'querystring'
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import {
   Redirect,
@@ -69,7 +68,7 @@ export default class Login extends React.Component {
 
     this.context.set('loading', true)
 
-    axios.post(process.env.REACT_APP_API_ADMIN_SERVER + process.env.REACT_APP_API_ADMIN_REQ_LOGIN, qs.stringify(data))
+    axios.post(process.env.REACT_APP_API_ADMIN_SERVER + process.env.REACT_APP_API_ADMIN_REQ_LOGIN, new URLSearchParams(data).toString())
       .then(response => {
         if (response.data && response.data.token) {
           localStorage.setItem('auth_admin_token', response.data.token)

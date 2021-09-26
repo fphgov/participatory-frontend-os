@@ -5,7 +5,6 @@ import {
 } from "react-router-dom"
 import StoreContext from '../../StoreContext'
 import tokenParser from '../assets/tokenParser'
-import qs from 'querystring'
 import { ToastContainer, toast } from 'react-toastify';
 
 const notify = (message) => toast.dark(message, {
@@ -64,7 +63,6 @@ export default class Vote extends React.Component {
     const config = {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
-        'Accept': 'application/json',
       }
     }
 
@@ -102,7 +100,6 @@ export default class Vote extends React.Component {
     const config = {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
-        'Accept': 'application/json',
       }
     }
 
@@ -115,7 +112,7 @@ export default class Vote extends React.Component {
 
     axios.post(
       process.env.REACT_APP_API_ADMIN_SERVER + process.env.REACT_APP_API_ADMIN_REQ_VOTE,
-      qs.stringify(data),
+      new URLSearchParams(data).toString(),
       config
     ).then(response => {
       if (response.data && response.data.success) {

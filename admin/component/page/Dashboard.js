@@ -1,5 +1,4 @@
 import axios from "../assets/axios"
-import qs from 'querystring'
 import React from "react"
 import {
   Redirect,
@@ -37,7 +36,6 @@ export default class Dashboard extends React.Component {
     const config = {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
-        'Accept': 'application/json',
       }
     }
 
@@ -100,7 +98,6 @@ export default class Dashboard extends React.Component {
     const config = {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
-        'Accept': 'application/json',
       }
     }
 
@@ -110,7 +107,7 @@ export default class Dashboard extends React.Component {
 
     axios.post(
       process.env.REACT_APP_API_ADMIN_SERVER + process.env.REACT_APP_API_ADMIN_REQ_OPTIONS,
-      qs.stringify(data),
+      new URLSearchParams(data).toString(),
       config
     )
       .then(response => {

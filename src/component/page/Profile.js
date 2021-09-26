@@ -1,66 +1,60 @@
-import React from "react"
+import React, { useContext, useEffect, useState } from "react"
 import {
   Redirect,
 } from "react-router-dom"
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
 
-export default class Profile extends React.Component {
-  static contextType = StoreContext
+export default function Profile() {
+  const context = useContext(StoreContext)
 
-  constructor(props, context) {
-    super(props, context)
+  const [profile, setProfile] = useState(null)
+  const [error, setError] = useState('')
+  const [redirectLogin, setRedirectLogin] = useState(false)
 
-    this.state = {
-      profile: null,
-      redirectLogin: false
-    }
-
-    this.context.set('loading', true, () => {
-      this.getProfileData()
-    })
-  }
-
-  getProfileData() {
+  const getProfileData = () => {
     const config = {
       headers: {
-        'Authorization': `Bearer ${this.context.get('token')}`,
-        'Accept': 'application/json',
+        'Authorization': `Bearer ${context.get('token')}`,
       }
     }
 
-    axios.get(process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_PROFILE, config)
-      .then(response => {
-        if (response.data) {
-          this.setState({
-            profile: response.data
-          })
+    axios
+    .get(process.env.REACT_APP_API_REQ_PROFILE, config)
+    .then(response => {
+      if (response.data) {
+        setProfile(response.data)
+      }
+    })
+    .catch(error => {
+      if (error.response && error.response.status === 401) {
+        setRedirectLogin(true)
 
-          this.context.set('loading', false)
-        }
-      })
-      .catch(error => {
-        if (error.response && error.response.status === 401) {
-          this.setState({
-            redirectLogin: true
-          })
+        return
+      }
 
-          this.context.set('loading', false)
-
-          return
-        }
-
-        if (error.response && error.response.data && error.response.data.message) {
-          this.setState({
-            error: error.response.data.message
-          })
-        }
-
-        this.context.set('loading', false)
-      })
+      if (error.response && error.response.data && error.response.data.message) {
+        setError(error.response.data.message)
+      }
+    })
+    .finally(() => {
+      context.set('loading', false)
+    })
   }
 
-  Error(props) {
+  useEffect(() => {
+    document.body.classList.add('page-profile')
+
+    context.set('loading', true, () => {
+      getProfileData()
+    })
+
+    return () => {
+      document.body.classList.remove('page-profile')
+    }
+  }, [])
+
+  const Error = (props) => {
     return (
       <div className="error-message">
         {props.message}
@@ -68,7 +62,7 @@ export default class Profile extends React.Component {
     )
   }
 
-  ProfileBox(props) {
+  const ProfileBox = (props) => {
     return (
       <div className="box-profile">
         <p><b>Név:</b> {props.profile.lastname + ' ' + props.profile.firstname}</p>
@@ -77,27 +71,21 @@ export default class Profile extends React.Component {
     )
   }
 
-  render() {
-    const { redirectLogin } = this.state
+  return (
+    <div className="page-profile-section">
+      {redirectLogin ? <Redirect to='/bejelentkezes' /> : null}
 
-    if (redirectLogin) {
-      return <Redirect to='/bejelentkezes' />
-    }
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <h1>Profil</h1>
 
-    return (
-      <div className="page-profile-section">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <h1>Profil</h1>
+            {error ? <Error message={error} /> : null}
 
-              {this.state.error ? <this.Error message={this.state.error} /> : null}
-
-              {this.state.profile ? <this.ProfileBox profile={this.state.profile} /> : null }
-            </div>
+            {profile ? <ProfileBox profile={profile} /> : null}
           </div>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }

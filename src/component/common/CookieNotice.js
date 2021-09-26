@@ -1,13 +1,13 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import loadG from './loadG.js'
 import docCookies from '../lib/docCookies.js'
 
 export default function CookieNotice() {
   const cookieName = 'cookie-notice'
-  const [ accepted, setAccepted ] = React.useState(false)
-  const [ open, setOpen ] = React.useState(true)
+  const [accepted, setAccepted] = useState(false)
+  const [open, setOpen] = useState(true)
 
-  React.useEffect(() => {
+  useEffect(() => {
     const cookieValue = docCookies.getItem(cookieName)
 
     if (cookieValue) {

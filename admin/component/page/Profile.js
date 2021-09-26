@@ -1,7 +1,6 @@
 import axios from "../assets/axios"
 import React, { useState, useContext } from "react"
 import { ToastContainer, toast } from 'react-toastify';
-import qs from 'querystring'
 import StoreContext from '../../StoreContext'
 
 export default function Profile() {
@@ -52,7 +51,6 @@ export default function Profile() {
     const config = {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
-        'Accept': 'application/json',
       }
     }
 
@@ -62,7 +60,7 @@ export default function Profile() {
 
     axios.post(
       process.env.REACT_APP_API_ADMIN_SERVER + process.env.REACT_APP_API_ADMIN_REQ_PASSWORD,
-      qs.stringify(data),
+      new URLSearchParams(data).toString(),
       config
     ).then(response => {
       context.set('loading', false)

@@ -1,19 +1,15 @@
-import React from "react"
+import React, { useEffect } from "react"
 
-class ScrollTo extends React.Component {
-  componentDidMount() {
+export default function ScrollTo(props) {
+  useEffect(() => {
     window.scrollTo({
-      top: this.props.element,
+      top: props.element,
       left: 0,
       behavior: 'smooth'
-    });
-  }
+    })
+  }, [])
 
-  render() {
-    return (
-      this.props.children ? this.props.children : null
-    )
-  }
+  return (
+    props.children ? props.children : null
+  )
 }
-
-export default ScrollTo

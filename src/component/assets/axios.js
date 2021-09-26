@@ -1,5 +1,8 @@
 import axios from "axios"
 
+axios.defaults.baseURL = process.env.REACT_APP_API_SERVER
+axios.defaults.headers.common['Accept'] = 'application/json';
+
 axios.interceptors.response.use(response => {
    return response
 }, error => {

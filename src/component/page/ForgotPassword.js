@@ -1,77 +1,42 @@
-import React from "react"
+import React, { useContext, useState } from "react"
 import {
   Redirect,
 } from "react-router-dom"
-import qs from 'querystring'
-import axios from "../assets/axios"
+import API from '../assets/axios'
 import StoreContext from '../../StoreContext'
 
-export default class ForgotPassword extends React.Component {
-  static contextType = StoreContext
+export default function ForgotPassword() {
+  const context = useContext(StoreContext)
 
-  constructor(props, context) {
-    super(props, context)
+  const [email, setEmail] = useState('')
+  const [success, setSuccess] = useState(false)
+  const [error, setError] = useState('')
+  const [redirectLogin, setRedirectLogin] = useState(false)
 
-    this.state = {
-      email: '',
-      success: false,
-      redirectLogin: false
-    }
-
-    this.handleChange = this.handleChange.bind(this)
-    this.onKeyUp = this.onKeyUp.bind(this)
-  }
-
-  postForgotPassword() {
-    const config = {
-      headers: {
-        'Accept': 'application/json',
-      }
-    }
-
+  const postForgotPassword = () => {
     const data = {
-      email: this.state.email,
-    };
+      email,
+    }
 
-    axios.post(
-      process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_PROFILE_FORGOT_PASSWORD,
-      qs.stringify(data),
-      config
+    API.post(
+      process.env.REACT_APP_API_REQ_PROFILE_FORGOT_PASSWORD,
+      new URLSearchParams(data).toString()
     ).then(response => {
       if (response.data) {
-        this.setState({
-          success: true
-        })
-
-        this.context.set('loading', false)
+        setSuccess(true)
       }
-    })
-    .catch(error => {
+    }).catch(error => {
       if (error.response && error.response.data && error.response.data.message) {
-        this.setState({
-          error: error.response.data.message
-        })
+        setError(error.response.data.message)
       } else {
-        this.setState({
-          error: 'Váratlan hiba történt, kérjük próbálja később'
-        })
+        setError('Váratlan hiba történt, kérjük próbálja később')
       }
-
-      this.context.set('loading', false)
+    }).finally(() => {
+      context.set('loading', false)
     })
   }
 
-  handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value })
-  }
-
-  onKeyUp(e) {
-    if (e.key === 'Enter') {
-      this.postForgotPassword()
-    }
-  }
-
-  Error(props) {
+  const Error = (props) => {
     return (
       <div className="error-message">
         {props.message}
@@ -79,56 +44,53 @@ export default class ForgotPassword extends React.Component {
     )
   }
 
-  render() {
-    const { redirectLogin } = this.state
+  return (
+    <div className="page-forgot-password-section">
+      {redirectLogin ? <Redirect to='/bejelentkezes' /> : null}
 
-    if (redirectLogin) {
-      return <Redirect to='/bejelentkezes' />
-    }
+      <div className="container">
+        <h1>Elfelejtett jelszó</h1>
 
-    return (
-      <div className="page-forgot-password-section">
-        <div className="container">
-          <h1>Elfelejtett jelszó</h1>
+        {error ? <Error message={error} /> : <div>
+          {!success ? <p>Kérjük, adja meg e-mail címét. Az aktiváló linket e-mailben kapja meg.</p> : null}
 
-          {this.state.error ? <this.Error message={this.state.error} />: <div>
-            {!this.state.success ? <p>Kérjük, adja meg e-mail címét. Az aktiváló linket e-mailben kapja meg.</p> : null}
+          {success ? <>
+            <p>Amennyiben szerepel az e-mail cím a rendszerben, úgy az aktiváló linket kiküldtük.</p>
 
-            {this.state.success ? <>
-              <p>Amennyiben szerepel az e-mail cím a rendszerben, úgy az aktiváló linket kiküldtük.</p>
-
-              <div className="row">
-                <div className="col-lg-4">
-                  <div className="form-actions">
-                    <input className="btn btn-primary btn-small" id="button-send" type="submit" name="btnSend" value="Tovább a bejelentkezésre" onClick={(e) => {
-                      e.preventDefault()
-
-                      this.setState({
-                        redirectLogin: true
-                      })
-                    }} />
-                  </div>
-                </div>
-              </div>
-            </> : null}
-
-            {! this.state.success ? <div className="row">
+            <div className="row">
               <div className="col-lg-4">
-                <div className="control-group">
-                  <label className="control-label" htmlFor="email">E-mail * : </label>
-                  <input className="form-control" type="text" name="email" value={this.state.email} placeholder="E-mail" id="email" onKeyUp={this.onKeyUp} onChange={this.handleChange} />
-                </div>
                 <div className="form-actions">
-                  <input className="btn btn-primary btn-small" id="button-send" type="submit" name="btnSend" value="Küldés" onClick={(e) => {
+                  <input className="btn btn-primary btn-small" id="button-send" type="submit" name="btnSend" value="Tovább a bejelentkezésre" onClick={(e) => {
                     e.preventDefault()
-                    this.postForgotPassword()
+
+                    setRedirectLogin(true)
                   }} />
                 </div>
               </div>
-            </div> : null}
-          </div>}
-        </div>
+            </div>
+          </> : null}
+
+          {!success ? <div className="row">
+            <div className="col-lg-4">
+              <div className="control-group">
+                <label className="control-label" htmlFor="email">E-mail * : </label>
+                <input className="form-control" type="text" name="email" value={email} placeholder="E-mail" id="email" onChange={(e) => {
+                  setEmail(e.target.value)
+                }} />
+              </div>
+              <div className="form-actions">
+                <input className="btn btn-primary btn-small" id="button-send" type="submit" name="btnSend" value="Küldés" onClick={(e) => {
+                  e.preventDefault()
+
+                  context.set('loading', true, () => {
+                    postForgotPassword()
+                  })
+                }} />
+              </div>
+            </div>
+          </div> : null}
+        </div>}
       </div>
-    )
-  }
+    </div>
+  )
 }

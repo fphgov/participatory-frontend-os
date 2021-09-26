@@ -10,13 +10,15 @@ module.exports = (env, argv) => {
   const config = {
     entry: {
       index: [ 'babel-polyfill', './src/index.js' ],
-      admin: [ 'babel-polyfill', './admin/index.js' ]
+      admin: [ 'babel-polyfill', './admin/index.js' ],
+      mapbox: [ 'babel-polyfill', './src/component/assets/MapBox.js' ]
     },
     resolve: {
       extensions: ['.js', '.css', '.scss'],
       alias: {
         normalize: path.join(__dirname, '/node_modules/normalize.css'),
         grid: path.join(__dirname, '/node_modules/bootstrap-4-grid/css/grid.min.css'),
+        modernizr$: path.resolve(__dirname, ".modernizrrc.js")
       }
     },
     devServer: {
@@ -26,19 +28,23 @@ module.exports = (env, argv) => {
       historyApiFallback: true,
       port: 8080,
     },
-    optimization: {
-      splitChunks: {
-        cacheGroups: {
-          defaultVendors: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all',
-          },
-        },
-      },
-    },
+    // optimization: {
+    //   splitChunks: {
+    //     cacheGroups: {
+    //       defaultVendors: {
+    //         test: /[\\/]node_modules[\\/]/,
+    //         name: 'vendors',
+    //         chunks: 'all',
+    //       },
+    //     },
+    //   },
+    // },
     module: {
       rules: [
+        {
+          loader: "webpack-modernizr-loader",
+          test: /\.modernizrrc\.js$/
+        },
         {
           test: /\.css$/i,
           use: [
@@ -152,13 +158,19 @@ module.exports = (env, argv) => {
     output: {
       filename: '[name].[fullhash:6].js',
       path: path.resolve(__dirname, 'public'),
-      publicPath: '/'
-    }
+      publicPath: '/',
+      environment: {
+        arrowFunction: false,
+        bigIntLiteral: false,
+        const: false,
+        destructuring: false,
+        dynamicImport: false,
+        forOf: false,
+        module: false,
+      }
+    },
+    devtool: argv.mode === 'development' ? 'source-map' : ''
   };
-
-  if (argv.mode === 'development') {
-    config.devtool = 'source-map';
-  }
 
   return config;
 }

@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useContext, useState } from "react"
 import { useLocation, Link } from 'react-router-dom'
-import qs from 'querystring'
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -71,7 +70,6 @@ export default function VoteModal(props) {
     const config = {
       headers: {
         'Authorization': `Bearer ${context.get('token')}`,
-        'Accept': 'application/json',
       }
     }
 
@@ -84,8 +82,8 @@ export default function VoteModal(props) {
     context.set('loading', true)
 
     axios.post(
-      process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_PROFILE_VOTE,
-      qs.stringify(data),
+      process.env.REACT_APP_API_REQ_PROFILE_VOTE,
+      new URLSearchParams(data).toString(),
       config
     ).then(response => {
       if (response.data) {
