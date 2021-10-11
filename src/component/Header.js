@@ -1,7 +1,7 @@
-import React from "react";
+import React from "react"
 import {
   Link,
-} from "react-router-dom";
+} from "react-router-dom"
 import StoreContext from '../StoreContext'
 import tokenParser from './assets/tokenParser'
 import Logo from '../img/logo-bp-participatory.svg'
@@ -13,7 +13,10 @@ const MobileMenu = (props) => {
       <div className="container">
         <ul>
           {props.menu.map((menuItem, i) => {
-            if (menuItem.onHideLoggedIn === true && localStorage.getItem('auth_token')) return;
+            if (
+              menuItem.onHideLoggedIn === true && localStorage.getItem('auth_token') !== null ||
+              menuItem.onHideLoggedOut === true && localStorage.getItem('auth_token') === null
+            ) return;
 
             if (Array.isArray(menuItem.roles) && !menuItem.roles.includes(tokenParser('user.role'))) return;
 
@@ -47,12 +50,13 @@ export default class Header extends React.Component {
       pathname: '/',
       openMenu: false,
       menu: [
-        { title: "Mi ez?", href: "https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=htmlpage&htmlpage_id=2", outside: true },
+        { title: "Mi ez?", href: "/oldal/bovebben-a-reszveteli-koltsegvetesrol", outside: false },
+        { title: "Ötlet beküldés", href: "/bekuldes", outside: false },
         // { title: "Beküldött ötletek", href: "https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=solrProjectSearch&sort_name=date&sort_order=desc&conf=proposals_list&fq=campaign_text:A", outside: true },
-        { title: "Hírek", href: "https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page_id=4", outside: true },
+        { title: "Hírek", href: "/hirek", outside: false },
         { title: "Statisztika", href: "/statisztika", highlight: true },
-        // { title: "Bejelentkezés", href: "/bejelentkezes", highlight: true, onHideLoggedIn: true },
-        // { title: "Kijelentkezés", href: "/kijelentkezes", highlight: true, onHideLoggedIn: false },
+        { title: "Bejelentkezés", href: "/bejelentkezes", highlight: false, onHideLoggedIn: true, onHideLoggedOut: false },
+        { title: "Kijelentkezés", href: "/kijelentkezes", highlight: false, onHideLoggedIn: false, onHideLoggedOut: true },
       ]
     }
   }
@@ -84,7 +88,7 @@ export default class Header extends React.Component {
     return (
       <header>
         <nav className="main-navigation">
-          <div className="container">
+          <div className="container-fluid">
             <div className="row flex-center">
               <div className="col-xs-6 col-sm-6 col-md-4">
                 <div className="logo-wrapper">
@@ -126,13 +130,14 @@ export default class Header extends React.Component {
                     <div className="hamburger-menu-elem"></div>
                     <div className="hamburger-menu-elem"></div>
                   </div>
+                  <div className="hamburger-menu-subtitle">MENÜ</div>
                 </div>
               </div>
             </div>
           </div>
         </nav>
 
-        {showVoteModal ? <VoteModal open={this.context.get('rk_modal_open')} /> : null}
+        {showVoteModal && 0 ? <VoteModal open={this.context.get('rk_modal_open')} /> : null}
 
         {this.state.openMenu ? <MobileMenu menu={this.state.menu} onClick={() => { this.toggleMenu() }} /> : null}
 

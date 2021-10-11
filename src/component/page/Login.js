@@ -110,7 +110,7 @@ export default function Login() {
 
   return (
     <div className="page-login-section">
-      {redirect ? <Redirect to='/projektek' /> : null}
+      {redirect ? <Redirect to="/bekuldes" /> : null}
 
       <div className="container">
         <div className="row">
@@ -141,17 +141,17 @@ export default function Login() {
                     }}
                   />
 
+                  <div className="form-group">
+                    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12" style={{ display: "flex", justifyContent: "space-between", padding: 0 }}>
+                      <Link to={`/elfelejtett-jelszo`} className="btn btn-sm" title="Elfelejtettem a jelszavam">Elfelejtettem a jelszavam</Link>
+                    </div>
+                  </div>
+
                   <div style={{ display: "inline-block" }}>
                     <button className="btn btn-primary">
                       <span className="glyphicon glyphicon-lock"></span>
                       Belépés
                     </button>
-                  </div>
-                </div>
-
-                <div className="form-group">
-                  <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12" style={{ display: "flex", justifyContent: "space-between", padding: 0 }}>
-                    <Link to={`/elfelejtett-jelszo`} className="btn btn-sm" title="Elfelejtettem a jelszavam">Elfelejtettem a jelszavam</Link>
                   </div>
                 </div>
               </fieldset>

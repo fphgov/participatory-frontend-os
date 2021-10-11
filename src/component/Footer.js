@@ -3,6 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons"
 import { faCircle } from "@fortawesome/free-solid-svg-icons"
 import OpenBP from '../img/nyitott_budapest_white.svg'
+import {
+  Link,
+} from "react-router-dom"
 
 export default function Footer() {
   return (
@@ -30,11 +33,9 @@ export default function Footer() {
             <ul>
               <li className="nav"><a href="https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=solrProjectSearch&sort_name=date&sort_order=desc&conf=proposals_list&fq=campaign_text:A">Beküldött ötletek 2020/2021</a></li>
 
-              <li className="nav"><a href="https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=htmlpage&amp;htmlpage_id=5">Adatvédelmi tájékoztató</a></li>
-
-              <li className="nav"><a href="https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=htmlpage&amp;htmlpage_id=9">Dokumentumok</a></li>
-
-              <li className="nav"><a href="https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=htmlpage&amp;htmlpage_id=3">Kapcsolat</a></li>
+              <li className="nav"><a href="/files/adatkezelesi_tajekozato.pdf">Adatvédelmi tájékoztató</a></li>
+              <li className="nav"><Link to="/oldal/dokumentumok">Dokumentumok</Link></li>
+              <li className="nav"><Link to="/oldal/kapcsolat">Kapcsolat</Link></li>
             </ul>
           </div>
 

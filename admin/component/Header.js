@@ -9,19 +9,21 @@ const MobileMenu = (props) => {
   return (
     <div className="mobile-menu">
       <div className="container">
-        <ul>
-          {props.menu.map((menuItem, i) => {
-            if (menuItem.onHideLoggedIn === true && localStorage.getItem('auth_admin_token')) return;
+        <div className="row">
+          <ul>
+            {props.menu.map((menuItem, i) => {
+              if (menuItem.onHideLoggedIn === true && localStorage.getItem('auth_admin_token')) return;
 
-            if (Array.isArray(menuItem.roles) && !menuItem.roles.includes(tokenParser('user.role'))) return;
+              if (Array.isArray(menuItem.roles) && !menuItem.roles.includes(tokenParser('user.role'))) return;
 
-            return (
-              <li key={i.toString()}>
-                <Link to={menuItem.href}>{menuItem.title}</Link>
-              </li>
-            )
-          })}
-        </ul>
+              return (
+                <li key={i.toString()}>
+                  <Link to={menuItem.href}>{menuItem.title}</Link>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
       </div>
     </div>
   )

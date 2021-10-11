@@ -11,6 +11,10 @@ import Page from "./Page"
 import NotFound from "./page/NotFound"
 import Login from "./page/Login"
 import Statistics from "./page/Statistics"
+import Home from "./page/Home"
+import SimplePage from "./page/SimplePage"
+import Posts from "./page/Posts"
+import Post from "./page/Post"
 import Project from "./page/Project"
 import Projects from "./page/Projects"
 import ProfileActivate from "./page/ProfileActivate"
@@ -24,6 +28,7 @@ import ScrollToTop from "./common/ScrollToTop"
 import CookieNotice from "./common/CookieNotice"
 import StoreContext from '../StoreContext'
 import tokenParser from './assets/tokenParser'
+import IdeaSubmission from "./page/IdeaSubmission"
 
 export default function App() {
   const context = useContext(StoreContext)
@@ -34,15 +39,15 @@ export default function App() {
     axios
     .get(process.env.REACT_APP_API_REQ_CONFIG)
     .then(response => {
-      context.set('loading', false)
-
       if (response.data) {
         context.set('config', response.data)
       }
     })
     .catch(() => {
-      context.set('loading', false)
       context.set('config', null)
+    })
+    .finally(() => {
+      context.set('loading', false)
     })
   }
 
@@ -77,9 +82,13 @@ export default function App() {
 
           <Page>
             <Switch>
-              <Route exact path="/" component={Projects} />
+              <Route exact path="/" component={Home} />
               <Route exact path="/bejelentkezes" component={Login} />
               <Route exact path="/kijelentkezes" component={Logout} />
+              <Route exact path="/bekuldes" component={IdeaSubmission} />
+              <Route exact path="/oldal/:slug" component={SimplePage} />
+              <Route exact path="/hirek" component={Posts} />
+              <Route exact path="/hirek/:slug" component={Post} />
               <Route exact path="/statisztika" component={Statistics} />
               <Route exact path="/statisztika/:id" component={Statistics} />
               <Route exact path="/projektek" component={Projects} />
@@ -90,6 +99,7 @@ export default function App() {
               <Route exact path="/profil/jelszo/:hash" component={ResetPassword} />
               <Route exact path="/regisztracio" component={Registration} />
               <Route exact path="/elfelejtett-jelszo" component={ForgotPassword} />
+              <Route exact path="/404" component={NotFound} />
 
               <Route exact path="*" component={NotFound} />
             </Switch>

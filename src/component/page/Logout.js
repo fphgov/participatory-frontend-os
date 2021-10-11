@@ -10,7 +10,6 @@ export default function Logout() {
   const [redirect, setRedirect] = useState(false)
 
   const submitLogout = () => {
-    context.set('loading', false)
     context.set('token', null, () => {
       localStorage.removeItem('auth_token')
       localStorage.removeItem('rk_voted')
@@ -18,6 +17,7 @@ export default function Logout() {
       localStorage.removeItem('rk_vote_WHOLE')
       localStorage.removeItem('rk_vote_GREEN')
 
+      context.set('loading', false)
       setRedirect(true)
     })
     context.set('rk_vote_CARE', null)
@@ -39,6 +39,6 @@ export default function Logout() {
   }, [])
 
   return (
-    redirect ? <Redirect to='/' /> : null
+    redirect ? <Redirect to='/' /> : ''
   )
 }

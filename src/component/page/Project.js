@@ -13,6 +13,7 @@ export default function Statistics() {
 
   let { id } = useParams()
 
+  const [ showVoteButton, setShowVoteButton ] = useState(false)
   const [ scroll, setScroll ] = useState(false)
   const [ project, setProject ] = useState(null)
   const [ error, setError ] = useState('')
@@ -78,6 +79,16 @@ export default function Statistics() {
     }
   }, [])
 
+  useEffect(() => {
+    const config = context.get('config')
+
+    setShowVoteButton(!context.get('successVote') && !(config && config.options && config.options.close) && 0)
+
+    return () => {
+
+    }
+  }, [context.get('config')])
+
   const Error = (props) => {
     return (
       <div className="error-message">
@@ -87,9 +98,6 @@ export default function Statistics() {
   }
 
   const voteBtn = project && context.get(`rk_vote_${project.campaign_theme.code}`) && context.get(`rk_vote_${project.campaign_theme.code}`).id === project.id
-
-  const config = context.get('config')
-  const showVoteButton = !context.get('successVote') && !(config && config.options && config.options.close)
 
   return (
     <div className="prop">
