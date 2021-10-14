@@ -90,7 +90,12 @@ export default function ProjectWrapper(props) {
                 ) : null}
 
                 {props.project.campaign ? (
-                  <div className="prop-single-campaign">Kampány: <b>{props.project.campaign.title}</b></div>
+                  <div className="prop-single-campaign">
+                    <div className="prop-info-title">Kampány</div>
+                    <div className="prop-info-content">
+                      <b>{props.project.campaign.title}</b>
+                    </div>
+                  </div>
                 ) : null}
 
                 <div className="prop-single-published">{props.project.published}</div>
@@ -105,7 +110,7 @@ export default function ProjectWrapper(props) {
                 <div className="prop-single-ideas">
                   <div className="prop-info-title">Kapcsolódó ötletek</div>
                   <div className="prop-info-content">
-                    {props.project.ideas.length === 0 ? <b>Nincs kapcsolodó ötlet</b> : null}
+                    {props.project.ideas.length === 0 ? <b>Nincs kapcsolódó ötlet</b> : null}
                     {props.project.ideas.map((idea, i) => {
                       return (<div className="idea" key={i}>
                         <a style={{ backgroundColor: theme.rgb }} href={`https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=proposal&campaign=A&proposal=${idea}`} rel="noopener noreferrer">{idea}</a>
@@ -127,7 +132,7 @@ export default function ProjectWrapper(props) {
 
                 {props.project.submitter ? (
                   <div className="prop-single-wrapper">
-                    <div className="widget-title">Beküldésről</div>
+                    <div className="prop-info-title">Beküldte</div>
                     <div className="prop-single-content">
                       <div className="prop-single-submitter">{props.project.submitter.lastname} {props.project.submitter.firstname}</div>
                       <div className="prop-single-submited">{new Date(props.project.createdAt.date).toLocaleString()}</div>

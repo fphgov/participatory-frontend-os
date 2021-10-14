@@ -17,6 +17,8 @@ import Posts from "./page/Posts"
 import Post from "./page/Post"
 import Project from "./page/Project"
 import Projects from "./page/Projects"
+import Idea from "./page/Idea"
+import Ideas from "./page/Ideas"
 import ProfileActivate from "./page/ProfileActivate"
 import PrizeActivate from "./page/PrizeActivate"
 import Registration from "./page/Registration"
@@ -91,6 +93,8 @@ export default function App() {
               <Route exact path="/hirek/:slug" component={Post} />
               <Route exact path="/statisztika" component={Statistics} />
               <Route exact path="/statisztika/:id" component={Statistics} />
+              <Route exact path="/otletek" component={Ideas} />
+              <Route exact path="/otletek/:id" component={Idea} />
               <Route exact path="/projektek" component={Projects} />
               <Route exact path="/projektek/:id" component={Project} />
               <Route exact path="/profil" component={Profile} />

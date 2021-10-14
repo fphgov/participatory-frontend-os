@@ -4,6 +4,7 @@ import {
   Link
 } from "react-router-dom"
 import API from '../assets/axios'
+import { getDateFormat, getHungarianDateFormat } from '../assets/dateFormats'
 import StoreContext from '../../StoreContext'
 
 export default function Posts() {
@@ -65,11 +66,29 @@ export default function Posts() {
 
             <div className="posts">
               {rawContent && rawContent.map((post, i) => (
-                <div key={i} className="post-item">
-                  <div className="post-image">{post.featuredImage ? <img src={`/files/${post.featuredImage.filename}`} /> : null}</div>
-                  <div className="post-title">{post.title}</div>
-                  <div className="post-more"><Link to={`/hirek/${post.slug}`}>Tovább</Link></div>
-                </div>
+                <article key={i} className="post-card">
+                  <Link className="post-card-image-link" to={`/hirek/${post.slug}`}>
+                    <div className="post-image">{post.featuredImage ? <img src={`http://localhost/files/${post.featuredImage.filename}`} /> : null}</div>
+                  </Link>
+
+                  <div className="post-card-content">
+                    <Link to={`/hirek/${post.slug}`}>
+                      <header className="post-full-header">
+                        <section className="post-full-meta">
+                          {post.createdAt ? <time className="post-full-meta-date" dateTime={getDateFormat(post.createdAt)}>{getHungarianDateFormat(post.createdAt)}</time> : null}
+                        </section>
+
+                        <h1 className="post-full-title">{post.title}</h1>
+                      </header>
+
+                      <footer className="post-card-meta">
+                        <div className="post-more-wrapper">
+                          <div className="post-more">Tovább</div>
+                        </div>
+                      </footer>
+                    </Link>
+                  </div>
+                </article>
               ))}
             </div>
           </div>

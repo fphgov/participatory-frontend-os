@@ -51,8 +51,10 @@ export default class Header extends React.Component {
       openMenu: false,
       menu: [
         { title: "Mi ez?", href: "/oldal/bovebben-a-reszveteli-koltsegvetesrol", outside: false },
+        { title: "Beküldött ötletek", href: "/otletek", outside: true },
+        // { title: "Megvalósuló ötletek", href: "/megvalosulo", outside: false },
+        { title: "Szavazás", href: "/projektek", outside: false },
         { title: "Ötlet beküldés", href: "/bekuldes", outside: false },
-        // { title: "Beküldött ötletek", href: "https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=solrProjectSearch&sort_name=date&sort_order=desc&conf=proposals_list&fq=campaign_text:A", outside: true },
         { title: "Hírek", href: "/hirek", outside: false },
         { title: "Statisztika", href: "/statisztika", highlight: true },
         { title: "Bejelentkezés", href: "/bejelentkezes", highlight: false, onHideLoggedIn: true, onHideLoggedOut: false },

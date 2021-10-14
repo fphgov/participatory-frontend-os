@@ -31,9 +31,8 @@ export default function Footer() {
             <div className="copyright">© 2021 Budapest Főváros Önkormányzata | Minden jog fenntartva</div>
 
             <ul>
-              <li className="nav"><a href="https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=solrProjectSearch&sort_name=date&sort_order=desc&conf=proposals_list&fq=campaign_text:A">Beküldött ötletek 2020/2021</a></li>
-
-              <li className="nav"><a href="/files/adatkezelesi_tajekozato.pdf">Adatvédelmi tájékoztató</a></li>
+              <li className="nav"><Link to="/otletek">Beküldött ötletek 2020/2021</Link></li>
+              <li className="nav"><a href="/files/adatkezelesi_tajekozato.pdf" target="_blank" rel="noopener noreferrer">Adatvédelmi tájékoztató</a></li>
               <li className="nav"><Link to="/oldal/dokumentumok">Dokumentumok</Link></li>
               <li className="nav"><Link to="/oldal/kapcsolat">Kapcsolat</Link></li>
             </ul>

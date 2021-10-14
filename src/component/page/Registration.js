@@ -239,7 +239,7 @@ export default function Registration() {
                     <div className="form-group">
                       <label htmlFor="privacy" className="form-group-label">
                         <input className="form-control" type="checkbox" id="privacy" name="privacy" value={filterData.privacy} onChange={handleChangeInput} />
-                        Elfogadom az <a href="https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=htmlpage&amp;htmlpage_id=5" target="_blank" rel="noopener noreferrer">adatvédelmi tájékoztatót</a> *
+                        Elfogadom az <a href="/files/adatkezelesi_tajekozato.pdf" target="_blank" rel="noopener noreferrer">adatvédelmi tájékoztatót</a> *
                       </label>
 
                       {error && error.privacy ? Object.values(error.privacy).map((err, i) => {

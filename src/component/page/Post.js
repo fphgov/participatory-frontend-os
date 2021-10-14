@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react'
 import {
   Redirect,
-  Link,
   useParams,
 } from "react-router-dom"
 import API from '../assets/axios'
+import { getHungarianDateFormat } from '../assets/dateFormats'
 import StoreContext from '../../StoreContext'
 
 export default function Post() {
@@ -69,6 +69,7 @@ export default function Post() {
             {rawContent ? <>
               <h1>{rawContent.title}</h1>
 
+              {rawContent.createdAt ? <div className="time">{getHungarianDateFormat(rawContent.createdAt)}</div> : null}
               {rawContent.featuredImage ? <div className="featured-image"><img src={`/files/${rawContent.featuredImage.filename}`} /></div> : null}
               {rawContent.description ? <div dangerouslySetInnerHTML={{ __html: rawContent.description }} /> : null}
               {rawContent.content ? <div dangerouslySetInnerHTML={{ __html: rawContent.content }} /> : null}

@@ -22,11 +22,14 @@ module.exports = (env, argv) => {
       }
     },
     devServer: {
-      contentBase: path.resolve(__dirname, 'public'),
-      inline: true,
+      static: {
+        directory: path.join(__dirname, 'public'),
+      },
+      compress: true,
       host: '0.0.0.0',
       historyApiFallback: true,
       port: 8080,
+      liveReload: false,
     },
     // optimization: {
     //   splitChunks: {
@@ -169,7 +172,6 @@ module.exports = (env, argv) => {
         module: false,
       }
     },
-    devtool: argv.mode === 'development' ? 'source-map' : ''
   };
 
   return config;
