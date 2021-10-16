@@ -1914,6 +1914,10 @@ span.profile-name {
   font-weight: bold;
 }
 
+a.profile-menu:hover span {
+  text-decoration: underline;
+}
+
 .posts {
   display: flex;
   flex-direction: row;
