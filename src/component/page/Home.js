@@ -15,8 +15,12 @@ export default function Home() {
     setPosts(null)
     context.set('loading', true)
 
+    const data = {
+      limit: 3
+    }
+
     API.get(
-      process.env.REACT_APP_API_REQ_POSTS_LIMIT.toString().replace(':limit', 3)
+      process.env.REACT_APP_API_REQ_POSTS + '?' + new URLSearchParams(data).toString()
     ).then(response => {
       if (response.data && response.data.data) {
         setPosts(response.data.data)
