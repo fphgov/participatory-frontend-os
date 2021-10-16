@@ -68,7 +68,7 @@ export default function Posts() {
               {rawContent && rawContent.map((post, i) => (
                 <article key={i} className="post-card">
                   <Link className="post-card-image-link" to={`/hirek/${post.slug}`}>
-                    <div className="post-image">{post.featuredImage ? <img src={`http://localhost/files/${post.featuredImage.filename}`} /> : null}</div>
+                    <div className="post-image">{post.featuredImage ? <img src={`${process.env.REACT_APP_SERVER_FILE}/${post.featuredImage.filename}`} /> : null}</div>
                   </Link>
 
                   <div className="post-card-content">

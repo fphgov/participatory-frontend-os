@@ -13,6 +13,8 @@ import StoreContext from '../../../StoreContext'
 import clonedeep from 'lodash.clonedeep'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlusCircle, faMinusCircle, faFileUpload, faFile } from "@fortawesome/free-solid-svg-icons"
+import getGravatarURL from "../../lib/gravatar"
+import tokenParser from '../../assets/tokenParser'
 
 export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRemoveElem, handleChange, values, profile }) {
   const context = useContext(StoreContext)
@@ -81,7 +83,10 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
 
             {profile ? <>
               <div className="profile">
-                Ötlet beküldés <span className="profile-name">{`${profile.lastname} ${profile.firstname}`}</span> névvel. Nem Ön az? <Link to="/kijelentkezes">Kijelentkezés</Link>
+                <div className="avatar"><img src={getGravatarURL(tokenParser('user.email'))} alt="Avatar kép" aria-hidden="true" /></div>
+                <div className="profil-information">
+                  Ötlet beküldés <span className="profile-name">{`${profile.lastname} ${profile.firstname}`}</span> névvel. Nem Ön az? <Link to="/kijelentkezes">Kijelentkezés</Link>
+                </div>
               </div>
             </> : null}
 

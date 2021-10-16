@@ -1,14 +1,41 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import StoreContext from '../../StoreContext'
+import { getDateFormat, getHungarianDateFormat } from '../assets/dateFormats'
 import {
   Link,
 } from "react-router-dom"
+import API from '../assets/axios'
 
 export default function Home() {
   const context = useContext(StoreContext)
 
+  const [posts, setPosts] = useState([])
+
+  const getPageContent = () => {
+    setPosts(null)
+    context.set('loading', true)
+
+    API.get(
+      process.env.REACT_APP_API_REQ_POSTS_LIMIT.toString().replace(':limit', 3)
+    ).then(response => {
+      if (response.data && response.data.data) {
+        setPosts(response.data.data)
+      }
+    }).catch(error => {
+      if (error.response && error.response.data && error.response.data.message) {
+        setError(error.response.data.message)
+      } else {
+        setError('Váratlan hiba történt, kérjük próbálja később')
+      }
+    }).finally(() => {
+      context.set('loading', false)
+    })
+  }
+
   useEffect(() => {
     document.body.classList.add('page-home')
+
+    getPageContent()
 
     return () => {
       document.body.classList.remove('page-home')
@@ -48,78 +75,34 @@ export default function Home() {
           </div>
 
           <div className="posts">
-            <article className="post-card">
-              <Link className="post-card-image-link" to="/hirek/indul-budapest-reszveteli-koltsegvetese">
-                <div className="post-image"><img src="http://localhost/files/n_1_1254965691.png" alt="" /></div>
-              </Link>
+            {posts && posts.map((post, i) => {
+              return (
+                <article key={i} className="post-card">
+                  <Link className="post-card-image-link" to={`/hirek/${post.slug}`}>
+                    <div className="post-image">{post.featuredImage ? <img src={`${process.env.REACT_APP_SERVER_FILE}/${post.featuredImage.filename}`} /> : null}</div>
+                  </Link>
 
-              <div className="post-card-content">
-                <Link to="/hirek/indul-budapest-reszveteli-koltsegvetese">
-                  <header className="post-full-header">
-                    <section className="post-full-meta">
-                      <time className="post-full-meta-date" dateTime="2020-09-14">2020. szeptember 14.</time>
-                    </section>
+                  <div className="post-card-content">
+                    <Link to={`/hirek/${post.slug}`}>
+                      <header className="post-full-header">
+                        <section className="post-full-meta">
+                          {post.createdAt ? <time className="post-full-meta-date" dateTime={getDateFormat(post.createdAt)}>{getHungarianDateFormat(post.createdAt)}</time> : null}
+                        </section>
 
-                    <h1 className="post-full-title">Budapestiek ötleteit valósítja meg egymilliárd forintból a fővárosi önkormányzat</h1>
-                  </header>
+                        <h1 className="post-full-title">{post.title}</h1>
+                      </header>
 
-                  <footer className="post-card-meta">
-                    <div className="post-more-wrapper">
-                      <div className="post-more">Tovább</div>
-                    </div>
+                      <footer className="post-card-meta">
+                        <div className="post-more-wrapper">
+                          <div className="post-more">Tovább</div>
+                        </div>
 
-                  </footer>
-                </Link>
-              </div>
-            </article>
-
-            <article className="post-card">
-              <Link className="post-card-image-link" to="/hirek/indul-budapest-reszveteli-koltsegvetese">
-                <div className="post-image"><img src="http://localhost/files/n_1_1254965691.png" alt="" /></div>
-              </Link>
-
-              <div className="post-card-content">
-                <Link to="/hirek/indul-budapest-reszveteli-koltsegvetese">
-                  <header className="post-full-header">
-                    <section className="post-full-meta">
-                      <time className="post-full-meta-date" dateTime="2020-09-14">2020. szeptember 14.</time>
-                    </section>
-
-                    <h1 className="post-full-title">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</h1>
-                  </header>
-
-                  <footer className="post-card-meta">
-                    <div className="post-more-wrapper">
-                      <div className="post-more">Tovább</div>
-                    </div>
-                  </footer>
-                </Link>
-              </div>
-            </article>
-
-            <article className="post-card">
-              <Link className="post-card-image-link" to="/hirek/indul-budapest-reszveteli-koltsegvetese">
-                <div className="post-image"><img src="http://localhost/files/n_1_1254965691.png" alt="" /></div>
-              </Link>
-
-              <div className="post-card-content">
-                <Link to="/hirek/indul-budapest-reszveteli-koltsegvetese">
-                  <header className="post-full-header">
-                    <section className="post-full-meta">
-                      <time className="post-full-meta-date" dateTime="2020-09-14">2020. szeptember 14.</time>
-                    </section>
-
-                    <h1 className="post-full-title">Budapestiek ötleteit valósítja meg egymilliárd forintból a fővárosi önkormányzat</h1>
-                  </header>
-
-                  <footer className="post-card-meta">
-                    <div className="post-more-wrapper">
-                      <div className="post-more">Tovább</div>
-                    </div>
-                  </footer>
-                </Link>
-              </div>
-            </article>
+                      </footer>
+                    </Link>
+                  </div>
+                </article>
+              )
+            })}
           </div>
 
         </div>
@@ -173,7 +156,7 @@ export default function Home() {
             <div className="row">
               <div className="col-md-4">
                 <div className="category-item">
-                  <div className="category-image"><img src="http://localhost/files/n_1_1254965691.png" alt="" /></div>
+                  <div className="category-image"><img src={`${process.env.REACT_APP_SERVER_FILE}/n_1_1254965691.png`} alt="" /></div>
                   <h3 className="category-title">Zöldebb városért</h3>
                   <div className="category-descrption">Lorem Ipsum is simply dummy text of the printing and typesetting industry</div>
                 </div>
@@ -181,7 +164,7 @@ export default function Home() {
 
               <div className="col-md-4">
                 <div className="category-item">
-                  <div className="category-image"><img src="http://localhost/files/n_1_1254965691.png" alt="" /></div>
+                  <div className="category-image"><img src={`${process.env.REACT_APP_SERVER_FILE}/n_1_1254965691.png`} alt="" /></div>
                   <h3 className="category-title">Esélyteremtő városért</h3>
                   <div className="category-descrption">Lorem Ipsum is simply dummy text of the printing and typesetting industry</div>
                 </div>
@@ -189,7 +172,7 @@ export default function Home() {
 
               <div className="col-md-4">
                 <div className="category-item">
-                  <div className="category-image"><img src="http://localhost/files/n_1_1254965691.png" alt="" /></div>
+                  <div className="category-image"><img src={`${process.env.REACT_APP_SERVER_FILE}/n_1_1254965691.png`} alt="" /></div>
                   <h3 className="category-title">Mert Budapest mindenkié</h3>
                   <div className="category-descrption">Lorem Ipsum is simply dummy text of the printing and typesetting industry</div>
                 </div>

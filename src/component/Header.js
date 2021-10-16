@@ -6,6 +6,7 @@ import StoreContext from '../StoreContext'
 import tokenParser from './assets/tokenParser'
 import Logo from '../img/logo-bp-participatory.svg'
 import VoteModal from "./common/VoteModal"
+import getGravatarURL from "./lib/gravatar"
 
 const MobileMenu = (props) => {
   return (
@@ -24,6 +25,16 @@ const MobileMenu = (props) => {
               return (
                 <li key={i.toString()}>
                   <a href={menuItem.href}>{menuItem.title}</a>
+                </li>
+              )
+            }
+
+            if (menuItem.profile) {
+              return (
+                <li key={i.toString()} className={menuItem.highlight ? 'highlight' : ''}>
+                  <Link to={menuItem.href} className={`profile-menu`}>
+                    <div className="avatar"><img src={getGravatarURL(tokenParser('user.email'))} alt="Avatar kép" aria-hidden="true" /><span className="profil-name">{tokenParser('user.firstname')}</span></div>
+                  </Link>
                 </li>
               )
             }
@@ -58,7 +69,8 @@ export default class Header extends React.Component {
         { title: "Hírek", href: "/hirek", outside: false },
         { title: "Statisztika", href: "/statisztika", highlight: true },
         { title: "Bejelentkezés", href: "/bejelentkezes", highlight: false, onHideLoggedIn: true, onHideLoggedOut: false },
-        { title: "Kijelentkezés", href: "/kijelentkezes", highlight: false, onHideLoggedIn: false, onHideLoggedOut: true },
+        { title: "Fiók", href: "/profil", highlight: false, onHideLoggedIn: false, onHideLoggedOut: true, profile: true },
+        // { title: "Kijelentkezés", href: "/kijelentkezes", highlight: false, onHideLoggedIn: false, onHideLoggedOut: true },
       ]
     }
   }
@@ -114,6 +126,16 @@ export default class Header extends React.Component {
                       return (
                         <li key={i.toString()} className={menuItem.highlight ? 'highlight' : ''}>
                           <a href={menuItem.href} className={menuItem.href === this.state.pathname ? 'active' : ''}>{menuItem.title}</a>
+                        </li>
+                      )
+                    }
+
+                    if (menuItem.profile) {
+                      return (
+                        <li key={i.toString()} className={menuItem.highlight ? 'highlight' : ''}>
+                          <Link to={menuItem.href} className={`profile-menu`}>
+                            <div className="avatar"><img src={getGravatarURL(tokenParser('user.email'))} alt="Avatar kép" aria-hidden="true" /><span className="profil-name">{tokenParser('user.firstname')}</span></div>
+                          </Link>
                         </li>
                       )
                     }

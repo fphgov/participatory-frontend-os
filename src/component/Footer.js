@@ -17,11 +17,11 @@ export default function Footer() {
               <img className="logo" src={OpenBP} alt="logo" />
             </div>
 
-            <div className="sharing" style={{ marginRight: 20 }}>
+            <div className="sharing">
               <a href="https://www.facebook.com/budapestmindenkie" title="Kövessen minket Facebookon">
                 <span className="fa-layers fa-lg">
                   <FontAwesomeIcon icon={faCircle} size='2x' color="white" />
-                  <FontAwesomeIcon icon={faFacebookF} mask={[ 'fab' ]} size='lg' inverse style={{ marginLeft: 10 }} />
+                  <FontAwesomeIcon icon={faFacebookF} mask={[ 'fab' ]} size='lg' style={{ marginLeft: 10 }} />
                 </span>
               </a>
             </div>
@@ -31,14 +31,11 @@ export default function Footer() {
             <div className="copyright">© 2021 Budapest Főváros Önkormányzata | Minden jog fenntartva</div>
 
             <ul>
-              <li className="nav"><Link to="/otletek">Beküldött ötletek 2020/2021</Link></li>
               <li className="nav"><a href="/files/adatkezelesi_tajekozato.pdf" target="_blank" rel="noopener noreferrer">Adatvédelmi tájékoztató</a></li>
               <li className="nav"><Link to="/oldal/dokumentumok">Dokumentumok</Link></li>
               <li className="nav"><Link to="/oldal/kapcsolat">Kapcsolat</Link></li>
             </ul>
           </div>
-
-          <div className="links-wrapper app-version">&nbsp;</div>
         </div>
       </div>
     </footer>

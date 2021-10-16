@@ -15,8 +15,8 @@ export default function IdeaWrapper(props) {
 
   const theme = props.idea.campaign_theme
 
-  const images = props.idea.medias.map((item) => {
-    const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item)
+  const images = props.idea.medias.filter(media => media.type !== 'application/pdf').map((item) => {
+    const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
 
     return { original: link }
   })
@@ -33,11 +33,25 @@ export default function IdeaWrapper(props) {
               <div className="prop-single-inner">
                 <div className="prop-single-content">
                   <div className="prop-location">
-                    <FontAwesomeIcon icon={faMapMarkerAlt} /> {props.idea.campaign_location.name}
+                    <FontAwesomeIcon icon={faMapMarkerAlt} /> {props.idea.campaign_location && props.idea.campaign_location.name}
                   </div>
 
                   <h1 className="prop-single-title" style={{ color: theme.rgb }}>{props.idea.title}</h1>
                   <div className="prop-single-description" dangerouslySetInnerHTML={{ __html: props.idea.description }} />
+
+                  {props.idea.links && props.idea.links.length > 0 ? (
+                    <>
+                      <h3 style={{ color: theme.rgb }}>Kapcsolodó hivatkozások</h3>
+
+                      <ul className="links">
+                        {props.idea.links.map((link, i) => {
+                          return (
+                            <li key={`link-${i}`}><a href={link}>{link}</a></li>
+                          )
+                        })}
+                      </ul>
+                    </>
+                  ) : null}
 
                   {props.idea.solution ? <>
                     <h3 style={{ color: theme.rgb }}>Mire megoldás?</h3>
@@ -62,7 +76,7 @@ export default function IdeaWrapper(props) {
                   {props.idea.medias && props.idea.medias.length > 0 ? (
                     <>
                       <div className="media-sep">
-                        {context.get('map') && modernizr.arrow && modernizr.webgl ?
+                        {modernizr.arrow && modernizr.webgl ?
                           <Suspense fallback={<div>Betöltés...</div>}>
                             <ImageGallery items={images} showFullscreenButton={false} showNav={false} showPlayButton={false} showBullets={true} showThumbnails={false} />
                           </Suspense> : null
@@ -91,10 +105,17 @@ export default function IdeaWrapper(props) {
 
                 <div className="prop-single-published">{props.idea.published}</div>
 
+                <div className="prop-single-status">
+                  <div className="prop-info-title">Állapot</div>
+                  <div className="prop-info-content">
+                    <b>{props.idea.workflow_state.title}</b>
+                  </div>
+                </div>
+
                 <div className="prop-single-cost">
                   <div className="prop-info-title">Becsült ráfordítás</div>
                   <div className="prop-info-content">
-                    {!props.idea.cost ? <b>Nincs becsült ráfordítás</b> : <b>{nFormatter(props.idea.cost)}</b>}
+                    {!props.idea.cost ? <b>A költségeket nem becsülték meg</b> : <b>{nFormatter(props.idea.cost)}</b>}
                   </div>
                 </div>
 

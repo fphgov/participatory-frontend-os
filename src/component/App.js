@@ -42,6 +42,7 @@ export default function App() {
     .get(process.env.REACT_APP_API_REQ_CONFIG)
     .then(response => {
       if (response.data) {
+        sessionStorage.setItem('config', JSON.stringify(response.data))
         context.set('config', response.data)
       }
     })
@@ -72,7 +73,13 @@ export default function App() {
       context.set('map', (localStorage.getItem('map') === 'true') ? true : false)
     }
 
-    getConfig()
+    if (! sessionStorage.getItem('config')) {
+      getConfig()
+    } else {
+      try {
+        context.set('config', JSON.parse(sessionStorage.getItem('config')))
+      } catch (e) {}
+    }
   }, [])
 
   return (

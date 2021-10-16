@@ -30,6 +30,7 @@ module.exports = (env, argv) => {
       historyApiFallback: true,
       port: 8080,
       liveReload: false,
+      hot: true,
     },
     // optimization: {
     //   splitChunks: {

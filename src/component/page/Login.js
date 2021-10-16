@@ -7,6 +7,8 @@ import {
 } from "react-router-dom"
 import StoreContext from '../../StoreContext'
 import tokenParser from '../assets/tokenParser'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faUser, faSignInAlt } from "@fortawesome/free-solid-svg-icons"
 
 export default function Login() {
   const context = useContext(StoreContext)
@@ -149,7 +151,7 @@ export default function Login() {
 
                   <div style={{ display: "inline-block" }}>
                     <button className="btn btn-primary">
-                      <span className="glyphicon glyphicon-lock"></span>
+                      <FontAwesomeIcon icon={faSignInAlt} />&nbsp;
                       Belépés
                     </button>
                   </div>
@@ -163,7 +165,7 @@ export default function Login() {
               <p>Nincs még fiókja? Regisztráljon itt!</p>
 
               <Link to={`/regisztracio`} className="btn btn-primary btn-sm" title="Regisztráció">
-                <span className="glyphicon glyphicon-plus"></span>&nbsp;
+                <FontAwesomeIcon icon={faUser} />&nbsp;
                 Regisztráció
               </Link>
             </div>

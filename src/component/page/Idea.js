@@ -48,14 +48,6 @@ export default function Idea() {
     }
   }, [])
 
-  useEffect(() => {
-    const config = context.get('config')
-
-    return () => {
-
-    }
-  }, [context.get('config')])
-
   const Error = (props) => {
     return (
       <div className="error-message">

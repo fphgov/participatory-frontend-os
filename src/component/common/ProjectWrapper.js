@@ -15,8 +15,8 @@ export default function ProjectWrapper(props) {
 
   const theme = props.project.campaign_theme
 
-  const images = props.project.medias.map((item) => {
-    const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item)
+  const images = props.project.medias.filter(media => media.type !== 'application/pdf').map((item) => {
+    const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
 
     return { original: link }
   })
@@ -113,7 +113,7 @@ export default function ProjectWrapper(props) {
                     {props.project.ideas.length === 0 ? <b>Nincs kapcsolódó ötlet</b> : null}
                     {props.project.ideas.map((idea, i) => {
                       return (<div className="idea" key={i}>
-                        <a style={{ backgroundColor: theme.rgb }} href={`https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=proposal&campaign=A&proposal=${idea}`} rel="noopener noreferrer">{idea}</a>
+                        <Link to={`/otletek/${idea}`} style={{ backgroundColor: theme.rgb }}>{idea}</Link>
                       </div>)
                     })}
                   </div>
