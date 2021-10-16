@@ -213,7 +213,7 @@ export default function IdeaSubmission() {
                 {!success ? <>
                   <p>Üdvözöljük Budapest részvételi költségvetésének ötletbenyújtó felületén!</p>
 
-                  <p>Javasoljuk, hogy ötlete benyújtása előtt mindenképp olvassa el <a href="jsp/site/Portal.jsp?document_id=2&portlet_id=201" target="_blank">a kategóriák leírásait és a beküldésről szóló cikket</a>.</p>
+                  <p>Javasoljuk, hogy ötlete benyújtása előtt mindenképp olvassa el <Link to="/hirek/tudnivalok-az-otletek-benyujtasarol" target="_blank">a kategóriák leírásait és a beküldésről szóló cikket</Link>.</p>
 
                   <p>Hasznos, ha akkor kezd neki ötlete beküldésének, ha azt már átgondolta és leírta részleteiben, mert az űrlap kitöltése nem szakítható félbe. A beérkezett ötletek ellenőrzés után nyilvánosan megtekinthetők lesznek a Beküldött ötletek menüpontban.</p>
 

@@ -148,8 +148,8 @@ export default function IdeaBasic({ nextStep, prevStep, handleChange, values }) 
 
               <div className="radio-inline-block">
                 <div className={`radio-inline ${values.theme === "4" ? "active" : ""}`} onClick={() => { if (category4 && category4.current) category4.current.click() }}>
-                  <div className="radio-inline-symbol"></div>
-                  <div className="radio-inline-content">
+                  <div className="radio-inline-symbol">
+                    <div className="radio-inline-hide"></div>
                     <input
                       type="radio"
                       id="theme_CARE"
@@ -158,6 +158,8 @@ export default function IdeaBasic({ nextStep, prevStep, handleChange, values }) 
                       checked={values.theme === "4"}
                       ref={category4}
                       onChange={handleChange} />
+                  </div>
+                  <div className="radio-inline-content">
                     <label htmlFor="theme_CARE">Zöld Budapest</label>
 
                     <p className="tipp">Témakörben olyan ötleteket várunk, melyek javaslatot tesznek például a város akadálymentesítését szolgáló-, a hajléktalan emberek életét megkönnyítő fejlesztésekre, vagy olyan találkozási pontokra, játszó-, fitnesz parkokra, amelyeket minél több korosztály szívesen használ. Budapest közösségeinek fejlődését célzó ötleteket várunk a <Link to="/oldal/eselyteremto-budapest" target="_blank">felsorolt alapelvek</Link> szerint.</p>
@@ -165,8 +167,8 @@ export default function IdeaBasic({ nextStep, prevStep, handleChange, values }) 
                 </div>
 
                 <div className={`radio-inline ${values.theme === "5" ? "active" : ""}`} onClick={() => { if (category5 && category5.current) category5.current.click() }}>
-                  <div className="radio-inline-symbol"></div>
-                  <div className="radio-inline-content">
+                  <div className="radio-inline-symbol">
+                    <div className="radio-inline-hide"></div>
                     <input
                       type="radio"
                       id="theme_ENVIRONMENT"
@@ -175,6 +177,8 @@ export default function IdeaBasic({ nextStep, prevStep, handleChange, values }) 
                       checked={values.theme === "5"}
                       ref={category5}
                       onChange={handleChange} />
+                  </div>
+                  <div className="radio-inline-content">
                     <label htmlFor="theme_ENVIRONMENT">Esélyteremtő Budapest</label>
 
                     <p className="tipp">„Zöld” ötleteket várunk a legtágabb értelemben. Közterületi zöldítések kihasználatlan, területeken, a várost zöldebb irányba befolyásoló ötletek, melyek elősegítik a sikeres alkalmazkodást az éghajlatváltozáshoz. (pl. újrahasznosítás, gyalogos-, kerékpáros közlekedés). Az ötleteknek a <Link to="/oldal/eselyteremto-budapest" target="_blank">felsorolt alapelveknek</Link> kell megfelelniük.</p>
@@ -182,8 +186,8 @@ export default function IdeaBasic({ nextStep, prevStep, handleChange, values }) 
                 </div>
 
                 <div className={`radio-inline ${values.theme === "6" ? "active" : ""}`} onClick={() => { if (category6 && category6.current) category6.current.click() }}>
-                  <div className="radio-inline-symbol"></div>
-                  <div className="radio-inline-content">
+                  <div className="radio-inline-symbol">
+                    <div className="radio-inline-hide"></div>
                     <input
                       type="radio"
                       id="theme_WHOLE"
@@ -192,6 +196,8 @@ export default function IdeaBasic({ nextStep, prevStep, handleChange, values }) 
                       checked={values.theme === "6"}
                       ref={category6}
                       onChange={handleChange} />
+                  </div>
+                  <div className="radio-inline-content">
                     <label htmlFor="theme_WHOLE">Egész Budapest</label>
 
                     <p className="tipp">Olyan projektötleteket várunk, melyek akár egész Budapest léptékűek, és valami újat, minőségi változást hoznak a budapestiek életébe. Az ötleteknek a <Link to="/oldal/egesz-budapest" target="_blank">felsorolt alapelveknek</Link> kell megfelelniük, lehet ez a téma „Zöld” vagy „Gondoskodó” is, épp csak nagyobb területet, vagy több városlakót érintsen.</p>

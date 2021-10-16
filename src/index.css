@@ -847,6 +847,7 @@ input[type="submit"] {
   display: inline-block;
   font-size: 14px;
   text-decoration: none;
+  border-radius: 4px;
 }
 
 .idea a:hover,
@@ -980,6 +981,12 @@ fieldset button,
   border-radius: 4px;
 }
 
+fieldset button:hover,
+.small .btn:hover,
+.registration-info .btn:hover {
+  background-color: #0d94b7;
+}
+
 fieldset .form-group a {
   padding: 15px 0;
   max-width: 100%;
@@ -1038,6 +1045,7 @@ hr {
   font-size: 12px;
   cursor: pointer;
   margin: 1px;
+  border-radius: 4px;
 }
 
 .filter-tag:hover {
@@ -1619,7 +1627,26 @@ p.error {
 }
 
 .radio-inline-block .radio-inline input[type="radio"] {
-  display: none;
+  padding: 22px;
+  display: block;
+  opacity: 0.5;
+  z-index: -1;
+  margin: 4px;
+}
+
+.radio-inline-hide {
+  background-color: white;
+  width: 20px;
+  height: 20px;
+  z-index: 1;
+  position: absolute;
+  border-radius: 50%;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: ' ';
 }
 
 .radio-inline-symbol {
@@ -1648,6 +1675,7 @@ p.error {
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 3;
 }
 
 .radio-inline-content {
