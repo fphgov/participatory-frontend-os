@@ -141,7 +141,7 @@ export default function VoteModal(props) {
                     </div> : null
                   }
                 </div>
-              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=care`.replace(/\/\//g, '/')} className="placeholder-text">Kattinson ide, és válasszon a <strong>Gondoskodó Budapest</strong> kategóriából egy ötletet (kötelező)</a>}
+              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=care`.replace(/\/\//g, '/')} className="placeholder-text">Kattinson ide, és válasszon a <strong>Esélyteremtő Budapest</strong> kategóriából egy ötletet (kötelező)</a>}
             </div>
             <div className={`vote-option vote-option-3 ${!context.get('rk_vote_WHOLE') ? 'vote-option-placeholder' : ''}`}>
               {context.get('rk_vote_WHOLE') ? <div className="vote-option-item">
@@ -156,7 +156,7 @@ export default function VoteModal(props) {
                     </div> : null
                   }
                 </div>
-              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=whole`.replace(/\/\//g, '/')} className="placeholder-text">Kattinson ide, és válasszon a <strong>Egész Budapest</strong> kategóriából egy ötletet (kötelező)</a>}
+              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=whole`.replace(/\/\//g, '/')} className="placeholder-text">Kattinson ide, és válasszon a <strong>Nyitott Budapest</strong> kategóriából egy ötletet (kötelező)</a>}
             </div>
           </div>
 

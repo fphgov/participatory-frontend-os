@@ -9,11 +9,13 @@ export default function ProjectsWrapper(props) {
   const themeColor = props.project.campaign_theme.rgb
   const themeName = props.project.campaign_theme.name
   const shortDescription = props.project.description
+  const status = props.project.status.title
+  const statusCode = props.project.status.code.toLowerCase()
 
   return (
     <div className="col-sm-12 col-md-6 col-lg-4">
       <div className="prop-wrapper">
-        <div className="prop-inner">
+        <div className={`prop-inner prop-status-${statusCode}`}>
           <div className="prop-picture"></div>
           <div className="prop-category" style={{ backgroundColor: themeColor }}>{themeName}</div>
           <div className="prop-content-wrapper" style={{ borderColor: themeColor }}>
@@ -38,6 +40,8 @@ export default function ProjectsWrapper(props) {
                 <Link to={`/projektek/${props.project.id}`} className="btn btn-secondary" onClick={props.handleClick} style={{ borderColor: themeColor, color: isHover ? '#fff' : themeColor, backgroundColor: isHover ? themeColor : 'transparent' }}>Megtekintés</Link>
               </div>
             </div>
+
+            <div className="prop-footer" style={{ backgroundColor: themeColor }}>{status}</div>
           </div>
         </div>
       </div>

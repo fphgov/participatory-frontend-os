@@ -98,7 +98,12 @@ export default function ProjectWrapper(props) {
                   </div>
                 ) : null}
 
-                <div className="prop-single-published">{props.project.published}</div>
+                <div className="prop-single-status">
+                  <div className="prop-info-title">Állapot</div>
+                  <div className="prop-info-content">
+                    <b>{props.project.workflow_state.title}</b>
+                  </div>
+                </div>
 
                 <div className="prop-single-cost">
                   <div className="prop-info-title">Becsült ráfordítás</div>

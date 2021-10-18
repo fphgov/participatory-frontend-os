@@ -648,6 +648,7 @@ input[type="submit"] {
   height: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .prop-single-sidebar {
@@ -706,13 +707,18 @@ input[type="submit"] {
   font-weight: bold;
   font-size: 18px;
   margin: 15px 0;
+  padding: 4px 0;
   text-align: center;
-  min-height: 66px;
+  min-height: 70px;
+  overflow: hidden;
 }
 
 .prop-title a {
   color: #19506E;
   text-decoration: none;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
 }
 
 .prop-title a:hover {
@@ -730,6 +736,7 @@ input[type="submit"] {
   text-overflow: ellipsis;
   font-weight: normal;
   line-height: 20px;
+  width: 100%;
 }
 
 .prop-more {
@@ -2186,6 +2193,20 @@ select:focus {
 
 .section {
   margin: 0 0 60px 0;
+}
+
+/* .prop-inner.prop-status-status_rejected,
+.prop-inner.prop-status-council_rejected,
+.prop-inner.prop-status-not_voted {
+  opacity: 0.6;
+} */
+
+.prop-footer {
+  background-color: #ef5556;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  padding: 2px 0;
 }
 
 @media screen and (min-width: 1200px) {

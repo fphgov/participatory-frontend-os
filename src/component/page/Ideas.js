@@ -29,6 +29,7 @@ export default function Ideas() {
     'theme': '',
     'location': '',
     'campaign': '',
+    'status': '',
     'query': '',
     'page': '',
     'rand': '',
@@ -63,6 +64,7 @@ export default function Ideas() {
       query: '',
       location: '',
       campaign: '',
+      status: '',
       page: '',
       rand: filterData.rand,
       tag: '',
@@ -133,6 +135,7 @@ export default function Ideas() {
     search.set("query", filterData.query)
     search.set("theme", filterData.theme)
     search.set("location", filterData.location)
+    search.set("status", filterData.status)
     search.set("campaign", filterData.campaign)
     search.set("rand", filterData.rand)
 
@@ -189,6 +192,7 @@ export default function Ideas() {
       theme: search.get('theme') ? search.get('theme') : '',
       location: search.get('location') ? search.get('location') : '',
       campaign: search.get('campaign') ? search.get('campaign') : '',
+      status: search.get('status') ? search.get('status') : '',
       rand: search.get('rand') && search.get('rand') != '' ? search.get('rand') : rand,
     })
 
@@ -216,7 +220,15 @@ export default function Ideas() {
 
   return (
     <div className="ideas">
-      <SearchArea title="Beküldött ötletek" queryRef={queryRef} values={filterData} inputChange={handleChange} triggerFindAction={getProjects} clearQuery={clearQuery} error={error} />
+      <SearchArea
+        title="Beküldött ötletek"
+        type="idea"
+        queryRef={queryRef}
+        values={filterData}
+        inputChange={handleChange}
+        triggerFindAction={getProjects}
+        clearQuery={clearQuery}
+        error={error} />
 
       <div className="container">
         <FindMap isEnableMap={isEnableMap} location={filterData.location} crossLocationChange={crossLocationChange} toggleMap={toggleMap} />

@@ -198,9 +198,9 @@ export default function IdeaBasic({ nextStep, prevStep, handleChange, values }) 
                       onChange={handleChange} />
                   </div>
                   <div className="radio-inline-content">
-                    <label htmlFor="theme_WHOLE">Egész Budapest</label>
+                    <label htmlFor="theme_WHOLE">Nyitott Budapest</label>
 
-                    <p className="tipp">Olyan projektötleteket várunk, melyek akár egész Budapest léptékűek, és valami újat, minőségi változást hoznak a budapestiek életébe. Az ötleteknek a <Link to="/oldal/egesz-budapest" target="_blank">felsorolt alapelveknek</Link> kell megfelelniük, lehet ez a téma „Zöld” vagy „Gondoskodó” is, épp csak nagyobb területet, vagy több városlakót érintsen.</p>
+                    <p className="tipp">Olyan projektötleteket várunk, melyek akár egész Budapest léptékűek, és valami újat, minőségi változást hoznak a budapestiek életébe. Az ötleteknek a <Link to="/oldal/egesz-budapest" target="_blank">felsorolt alapelveknek</Link> kell megfelelniük, lehet ez a téma „Zöld” vagy „Esélyteremtő” is, épp csak nagyobb területet, vagy több városlakót érintsen.</p>
                   </div>
                 </div>
               </div>

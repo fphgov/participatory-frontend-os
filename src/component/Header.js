@@ -64,7 +64,7 @@ export default class Header extends React.Component {
         { title: "Mi ez?", href: "/oldal/bovebben-a-reszveteli-koltsegvetesrol", outside: false },
         { title: "Beküldött ötletek", href: "/otletek", outside: true },
         // { title: "Megvalósuló ötletek", href: "/megvalosulo", outside: false },
-        { title: "Szavazás", href: "/projektek", outside: false },
+        { title: "Megvalósuló ötletek", href: "/projektek?status=under_construction", outside: false },
         { title: "Ötlet beküldés", href: "/bekuldes", outside: false },
         { title: "Hírek", href: "/hirek", outside: false },
         { title: "Statisztika", href: "/statisztika", highlight: true },

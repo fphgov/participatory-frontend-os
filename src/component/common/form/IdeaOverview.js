@@ -9,7 +9,7 @@ export default function IdeaOverview({ firstStep, values, submitIdea, error }) {
   const categories = {
     4: "Zöld Budapest",
     5: "Esélyteremtő Budapest",
-    6: "Egész Budapest"
+    6: "Nyitott Budapest"
   }
 
   const ErrorMini = (props) => {

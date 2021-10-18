@@ -2,7 +2,7 @@ import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 
-export default function SearchArea({ title, values, queryRef, inputChange, triggerFindAction, clearQuery, error }) {
+export default function SearchArea({ title, values, queryRef, inputChange, triggerFindAction, clearQuery, error, type }) {
   const onKeyUp = (e) => {
     if (e.key === 'Enter') {
       triggerFindAction()
@@ -52,7 +52,7 @@ export default function SearchArea({ title, values, queryRef, inputChange, trigg
                 <option disabled="disabled">----</option>
                 <option value="GREEN">Zöld Budapest</option>
                 <option value="CARE">Esélyteremtő Budapest</option>
-                <option value="WHOLE">Egész Budapest</option>
+                <option value="WHOLE">Nyitott Budapest</option>
               </select>
             </div>
 
@@ -60,30 +60,30 @@ export default function SearchArea({ title, values, queryRef, inputChange, trigg
               <select name="location" onChange={inputChange} value={values.location}>
                 <option value="">Keresés kerület alapján</option>
                 <option disabled="disabled">----</option>
-                <option value="1">Nem köthető konkrét helyszínhez (32)</option>
-                <option value="2">I. kerület (0)</option>
-                <option value="3">II. kerület (0)</option>
-                <option value="4">III. kerület (5)</option>
-                <option value="5">IV. kerület (0)</option>
-                <option value="6">V. kerület (0)</option>
-                <option value="7">VI. kerület (1)</option>
-                <option value="8">VII. kerület (3)</option>
-                <option value="9">VIII. kerület (4)</option>
-                <option value="10">IX. kerület (2)</option>
-                <option value="11">X. kerület (2)</option>
-                <option value="12">XI. kerület (2)</option>
-                <option value="13">XII. kerület (0)</option>
-                <option value="14">XIII. kerület (1)</option>
-                <option value="15">XIV. kerület (4)</option>
-                <option value="16">XV. kerület (0)</option>
-                <option value="17">XVI. kerület (0)</option>
-                <option value="18">XVII. kerület (0)</option>
-                <option value="19">XVIII. kerület (0)</option>
-                <option value="20">XIX. kerület (0)</option>
-                <option value="21">XX. kerület (0)</option>
-                <option value="22">XXI. kerület (1)</option>
-                <option value="23">XXII. kerület (0)</option>
-                <option value="24">Margitsziget (1)</option>
+                <option value="1">Nem köthető konkrét helyszínhez</option>
+                <option value="2">I. kerület</option>
+                <option value="3">II. kerület</option>
+                <option value="4">III. kerület</option>
+                <option value="5">IV. kerület</option>
+                <option value="6">V. kerület</option>
+                <option value="7">VI. kerület</option>
+                <option value="8">VII. kerület</option>
+                <option value="9">VIII. kerület</option>
+                <option value="10">IX. kerület</option>
+                <option value="11">X. kerület</option>
+                <option value="12">XI. kerület</option>
+                <option value="13">XII. kerület</option>
+                <option value="14">XIII. kerület</option>
+                <option value="15">XIV. kerület</option>
+                <option value="16">XV. kerület</option>
+                <option value="17">XVI. kerület</option>
+                <option value="18">XVII. kerület</option>
+                <option value="19">XVIII. kerület</option>
+                <option value="20">XIX. kerület</option>
+                <option value="21">XX. kerület</option>
+                <option value="22">XXI. kerület</option>
+                <option value="23">XXII. kerület</option>
+                <option value="24">Margitsziget</option>
               </select>
             </div>
 
@@ -93,6 +93,29 @@ export default function SearchArea({ title, values, queryRef, inputChange, trigg
                 <option disabled="disabled">----</option>
                 <option value="1">2020/2021</option>
                 <option value="2">2021/2022</option>
+              </select>
+            </div>
+
+            <div className="col-lg-3 col-md-4 col-xs-12">
+              <select name="status" onChange={inputChange} value={values.status}>
+                <option value="">Keresés állapot alapján</option>
+                <option disabled="disabled">----</option>
+
+                {type === 'project' && <>
+                  <option value="under_construction">Megvalósítás alatt</option>
+                  <option value="ready">Megvalósult</option>
+                  <option value="not_voted">Szavazáson nem nyert</option>
+                </>}
+
+                {type === 'idea' && <>
+                  {/* <option value="received">Beküldött</option> */}
+                  {/* <option value="status_rejected">Elutasított</option> */}
+                  <option value="published">Közzétéve</option>
+                  {/* <option value="FORMALLY_APPROPRIATE">Formailag nem megfelelő</option> */}
+                  <option value="voting_list">Szavazólistán</option>
+                  {/* <option value="formally_not_appropriate">Formailag megfelelő</option> */}
+                  <option value="council_rejected">Tanács elutasította</option>
+                </>}
               </select>
             </div>
 
