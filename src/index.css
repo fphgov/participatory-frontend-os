@@ -99,9 +99,10 @@ nav.main-navigation {
   background-color: #fff;
   display: block;
   width: 100%;
-  padding: 0;
+  padding: 4px 0;
   line-height: normal;
   border-bottom: 2px solid #0EA6CE;
+  height: 64px;
 }
 
 nav.main-navigation ul {
@@ -127,6 +128,10 @@ nav.main-navigation ul {
   font-weight: 700;
   font-size: 14px;
   text-decoration: none;
+}
+
+a.profile-menu {
+  padding: 9px 13px 7px 13px;
 }
 
 .main-navigation a.active {
@@ -157,7 +162,7 @@ nav.main-navigation ul {
 }
 
 header .logo-wrapper img {
-  height: 62px;
+  height: 52px;
   vertical-align: middle;
   text-align: left;
   width: auto;

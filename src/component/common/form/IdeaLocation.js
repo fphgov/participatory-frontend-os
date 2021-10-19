@@ -162,7 +162,7 @@ export default function IdeaBasic({ nextStep, prevStep, handleChange, values }) 
                   <div className="radio-inline-content">
                     <label htmlFor="theme_CARE">Zöld Budapest</label>
 
-                    <p className="tipp">Témakörben olyan ötleteket várunk, melyek javaslatot tesznek például a város akadálymentesítését szolgáló-, a hajléktalan emberek életét megkönnyítő fejlesztésekre, vagy olyan találkozási pontokra, játszó-, fitnesz parkokra, amelyeket minél több korosztály szívesen használ. Budapest közösségeinek fejlődését célzó ötleteket várunk a <Link to="/oldal/eselyteremto-budapest" target="_blank">felsorolt alapelvek</Link> szerint.</p>
+                    <p className="tipp">Témakörben olyan ötleteket várunk, melyek javaslatot tesznek például a város akadálymentesítését szolgáló-, a hajléktalan emberek életét megkönnyítő fejlesztésekre, vagy olyan találkozási pontokra, játszó-, fitnesz parkokra, amelyeket minél több korosztály szívesen használ. Budapest közösségeinek fejlődését célzó ötleteket várunk a <Link to="/oldal/kiiras#zold-budapest" target="_blank">felsorolt alapelvek</Link> szerint.</p>
                   </div>
                 </div>
 
@@ -181,7 +181,7 @@ export default function IdeaBasic({ nextStep, prevStep, handleChange, values }) 
                   <div className="radio-inline-content">
                     <label htmlFor="theme_ENVIRONMENT">Esélyteremtő Budapest</label>
 
-                    <p className="tipp">„Zöld” ötleteket várunk a legtágabb értelemben. Közterületi zöldítések kihasználatlan, területeken, a várost zöldebb irányba befolyásoló ötletek, melyek elősegítik a sikeres alkalmazkodást az éghajlatváltozáshoz. (pl. újrahasznosítás, gyalogos-, kerékpáros közlekedés). Az ötleteknek a <Link to="/oldal/eselyteremto-budapest" target="_blank">felsorolt alapelveknek</Link> kell megfelelniük.</p>
+                    <p className="tipp">„Zöld” ötleteket várunk a legtágabb értelemben. Közterületi zöldítések kihasználatlan, területeken, a várost zöldebb irányba befolyásoló ötletek, melyek elősegítik a sikeres alkalmazkodást az éghajlatváltozáshoz. (pl. újrahasznosítás, gyalogos-, kerékpáros közlekedés). Az ötleteknek a <Link to="/oldal/kiiras#eselyteremto-budapest" target="_blank">felsorolt alapelveknek</Link> kell megfelelniük.</p>
                   </div>
                 </div>
 
@@ -200,7 +200,7 @@ export default function IdeaBasic({ nextStep, prevStep, handleChange, values }) 
                   <div className="radio-inline-content">
                     <label htmlFor="theme_WHOLE">Nyitott Budapest</label>
 
-                    <p className="tipp">Olyan projektötleteket várunk, melyek akár egész Budapest léptékűek, és valami újat, minőségi változást hoznak a budapestiek életébe. Az ötleteknek a <Link to="/oldal/egesz-budapest" target="_blank">felsorolt alapelveknek</Link> kell megfelelniük, lehet ez a téma „Zöld” vagy „Esélyteremtő” is, épp csak nagyobb területet, vagy több városlakót érintsen.</p>
+                    <p className="tipp">Olyan projektötleteket várunk, melyek akár egész Budapest léptékűek, és valami újat, minőségi változást hoznak a budapestiek életébe. Az ötleteknek a <Link to="/oldal/kiiras#nyitott-budapest" target="_blank">felsorolt alapelveknek</Link> kell megfelelniük, lehet ez a téma „Zöld” vagy „Esélyteremtő” is, épp csak nagyobb területet, vagy több városlakót érintsen.</p>
                   </div>
                 </div>
               </div>
