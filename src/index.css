@@ -1724,6 +1724,10 @@ div:not(.radio-inline-block) > .radio-inline + .radio-inline {
 
 .overview-value {
   white-space: pre-line;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 
 .link-elem {
