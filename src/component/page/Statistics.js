@@ -141,7 +141,7 @@ export default function Statistics() {
             </div>
           </div>
 
-          {filteredProjects.map((project, i) => <ProjectsWrapper key={i} project={project} place={i} />)}
+          {filteredProjects.map((project, i) => <ProjectsWrapper key={i} project={project} place={i} tagClick={() => {}} />)}
         </div>
       </div>
     </div>

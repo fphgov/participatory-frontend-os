@@ -744,6 +744,14 @@ input[type="submit"] {
   width: 100%;
 }
 
+.prop-single-paper {
+  margin: 42px 0 0 0 !important;
+}
+
+.prop-single-paper > .tipp {
+  margin-top: 0 !important;
+}
+
 .prop-more {
   margin-bottom: 35px;
 }

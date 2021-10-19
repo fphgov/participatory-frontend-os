@@ -8,6 +8,7 @@ export default function IdeasWrapper({ idea, handleClick }) {
 
   const themeColor = idea.campaign_theme.rgb
   const themeName = idea.campaign_theme.name
+  const themeTitle = idea.campaign_theme.title
   const shortDescription = idea.description
   const statusCode = idea.status.code.toLowerCase()
   const status = idea.status.title
@@ -17,7 +18,7 @@ export default function IdeasWrapper({ idea, handleClick }) {
       <div className="prop-wrapper">
         <div className={`prop-inner prop-status-${statusCode}`}>
           <div className="prop-picture"></div>
-          <div className="prop-category" style={{ backgroundColor: themeColor }}>{themeName}</div>
+          <div className="prop-category" style={{ backgroundColor: themeColor }}>{themeName} <span>({themeTitle})</span></div>
           <div className="prop-content-wrapper" style={{ borderColor: themeColor }}>
             <div className="prop-content">
               <div className="prop-title">

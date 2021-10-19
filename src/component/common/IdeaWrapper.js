@@ -2,7 +2,6 @@ import React, { useContext, Suspense, lazy } from "react"
 import {
   Link,
 } from "react-router-dom"
-import StoreContext from '../../StoreContext'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons"
 import nFormatter from '../assets/nFormatter'
@@ -11,8 +10,6 @@ import modernizr from 'modernizr'
 const ImageGallery = lazy(() => import('react-image-gallery'));
 
 export default function IdeaWrapper(props) {
-  const context = useContext(StoreContext)
-
   const theme = props.idea.campaign_theme
 
   const images = props.idea.medias.filter(media => media.type !== 'application/pdf').map((item) => {
@@ -127,6 +124,16 @@ export default function IdeaWrapper(props) {
                       <div className="prop-single-submited">{new Date(props.idea.created_at.date).toLocaleString()}</div>
                     </div>
                   </div>
+                ) : null}
+
+                {props.idea.project ? (
+                  <>
+                    <div className="prop-single-elem prop-single-paper">
+                      <Link to={`/projektek/${props.idea.project.id}`} className="btn btn-primary btn-vote" style={{ backgroundColor: theme.rgb }} onClick={props.onClickVote}>Tovább a módosított ötletre *</Link>
+
+                      <p className="tipp">* Ez az ötlet módosult, összevonásra került. A fenti gombra kattinva megtekinthető az új ötlet.</p>
+                    </div>
+                  </>
                 ) : null}
               </div>
             </div>

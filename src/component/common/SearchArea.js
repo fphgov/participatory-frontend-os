@@ -12,7 +12,7 @@ export default function SearchArea({ title, values, queryRef, inputChange, trigg
   const hasQueryFilter = () => {
     const hasPageParam = /^\?page=\d+$/.test(document.location.search)
 
-    return !!window.location.search && !hasPageParam && values.query !== '' || values.theme !== '' || values.location !== '' || values.campaign !== ''
+    return !!window.location.search && !hasPageParam && values.query !== '' || values.theme !== '' || values.location !== '' || values.campaign !== '' || values.status !== ''
   }
 
   const Error = (props) => {
@@ -118,7 +118,10 @@ export default function SearchArea({ title, values, queryRef, inputChange, trigg
                 </>}
               </select>
             </div>
+          </div>
 
+          <div className="row">
+            <div className="col-lg-9 col-md-8 col-xs-12"></div>
             <div className="col-lg-3 col-md-4 col-xs-12">
               <div className="filter-wrapper">
                 {hasQueryFilter() && (
