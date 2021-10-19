@@ -117,7 +117,7 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
               name="description"
               tipp="Lorem ipsum dolor sit amet consectetur adipisicing elit."
               value={values.description}
-              options={{ min: 4, max: 1000 }}
+              options={{ min: 200, max: 1000 }}
               info={''}
               onChange={handleChange}
             />

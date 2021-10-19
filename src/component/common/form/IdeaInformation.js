@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import FormPaginator from './elements/FormPaginator'
+import InputLengthValidator from './elements/InputLengthValidator'
 
 export default function IdeaInformation({ nextStep, prevStep, handleChange, values }) {
   const [ participateChoose, setParticipateChoose ] = useState('no')
@@ -49,8 +50,15 @@ export default function IdeaInformation({ nextStep, prevStep, handleChange, valu
               </div>
 
               {participateChoose === 'yes' ? <>
-                <label htmlFor="participate">Milyen módon tudna részt venni a megvalósításban?</label>
-                <input type="text" autoCorrect="off" autoCapitalize="none" name="participate" id="participate" value={values.participate} onChange={handleChange} />
+                <InputLengthValidator
+                  title="Milyen módon tudna részt venni a megvalósításban?"
+                  name="participate"
+                  tipp=""
+                  value={values.participate}
+                  options={{ min: 0, max: 100 }}
+                  info={''}
+                  onChange={handleChange}
+                />
               </> : null}
             </div>
           </div>
