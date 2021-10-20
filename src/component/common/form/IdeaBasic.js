@@ -66,6 +66,16 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
     // setTempMedia(files)
   }
 
+  const validationAndNext = () => {
+    if (tempLink.length > 0) {
+      alert('A kapcsolodó link mező nem üres. Ha valós nyomja meg a Hozzáadás gombot, vagy törölje a mező értékét.')
+
+      return
+    }
+
+    nextStep()
+  }
+
   useEffect(() => {
     changeRaw('medias', tempMedia)
   }, [tempMedia])
@@ -203,14 +213,14 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
                     <label htmlFor="file" className="input-file-content">
                       <FontAwesomeIcon icon={faFileUpload} size="3x" />
 
-                      <p>Tallózzad be, vagy húzza a kijelőlt bezőbe a kapcsolódó anyagokat!</p>
+                      <p>Tallózza be, vagy húzza a kijelőlt bezőbe a kapcsolódó anyagokat!</p>
 
                     </label>
                   </> : null}
                 </div>
               </DragAndDrop>
 
-              <FormPaginator nextStep={nextStep} />
+              <FormPaginator nextStep={validationAndNext} />
 
             </div>
           </div>

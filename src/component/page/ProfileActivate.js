@@ -74,10 +74,10 @@ export default function ProfileActivate() {
             <h1>Felhasználói fiók aktíválása</h1>
 
             {! context.get('loading') ? (<>
-              {error ? <Error message={error} /> : <Success message="A felhasználói fiókjának aktiválását elindítottuk." />}
+              {error ? <Error message={error} /> : <Success message="Felhasználói fiókját aktiváltuk" />}
 
               <div className="small">
-                <button className="btn btn-primary" onClick={() => { setRedirectLogin(true) }}>Vissza</button>
+                <button className="btn btn-primary" onClick={() => { setRedirectLogin(true) }}>Tovább</button>
               </div>
             </>) : null}
           </div>

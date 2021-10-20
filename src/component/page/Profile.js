@@ -146,6 +146,11 @@ export default function Profile() {
               <h2><FontAwesomeIcon icon={faIdCardAlt} /> Fiók információk</h2>
 
               {profile ? <ProfileBox profile={profile} /> : null}
+
+              <div className="btn-wrapper btn-wrapper-flex">
+                <Link className="btn btn-primary" to="/kijelentkezes"><FontAwesomeIcon icon={faSignOutAlt} /> Kijelentkezés</Link>
+                {/* <Link className="btn btn-danger btn-danger-2" to="/"><FontAwesomeIcon icon={faTrash} /> Fiók törlése</Link> */}
+              </div>
             </div>
 
             <div className="section">
@@ -172,11 +177,6 @@ export default function Profile() {
                   <p>Nincs beküldött ötlet</p>
                 </div>}
               </div>
-            </div>
-
-            <div className="btn-wrapper btn-wrapper-flex">
-              <Link className="btn btn-primary" to="/kijelentkezes"><FontAwesomeIcon icon={faSignOutAlt} /> Kijelentkezés</Link>
-              <Link className="btn btn-danger" to="/"><FontAwesomeIcon icon={faTrash} /> Fiók törlése</Link>
             </div>
           </div>
         </div>

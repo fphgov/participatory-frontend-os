@@ -3,7 +3,7 @@ import {
   useParams,
 } from "react-router-dom"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
-import { rmAllCharForEmail, rmAllCharForName } from '../lib/removeSpecialCharacters'
+import { rmAllChar, rmAllCharForEmail, rmAllCharForName } from '../lib/removeSpecialCharacters'
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
 import ScrollTo from "../common/ScrollTo"
@@ -40,6 +40,10 @@ export default function Registration() {
 
   const handleChangeEmailInput = (e) => {
     setFilterData({ ...filterData, [e.target.name]: rmAllCharForEmail(e.target.value) })
+  }
+
+  const handleChangeNumberInput = (e) => {
+    setFilterData({ ...filterData, [ e.target.name ]: rmAllChar(e.target.value) })
   }
 
   const handleChangeRaw = (e) => {
@@ -189,7 +193,7 @@ export default function Registration() {
 
                     <div className="input-wrapper">
                       <label htmlFor="birthyear">Születési év <sup>*</sup></label>
-                      <input type="text" placeholder="Születési év" name="birthyear" id="birthyear" value={filterData.birthyear} onChange={handleChangeInput} />
+                      <input type="text" placeholder="Születési év" name="birthyear" id="birthyear" maxlength="4" value={filterData.birthyear} onChange={handleChangeNumberInput} />
 
                       {error && error.birthyear ? Object.values(error.birthyear).map((err, i) => {
                         return <ErrorMini key={i} error={err} increment={`birthyear-${i}`} />
@@ -198,7 +202,7 @@ export default function Registration() {
 
                     <div className="input-wrapper">
                       <label htmlFor="postal_code">Irányítószám</label>
-                      <input type="text" placeholder="Irányítószám" name="postal_code" id="postal_code" value={filterData.postal_code} onChange={handleChangeInput} />
+                      <input type="text" placeholder="Irányítószám" name="postal_code" id="postal_code" maxlength="4" value={filterData.postal_code} onChange={handleChangeNumberInput} />
 
                       {error && error.postal_code ? Object.values(error.postal_code).map((err, i) => {
                         return <ErrorMini key={i} error={err} increment={`postal_code-${i}`} />

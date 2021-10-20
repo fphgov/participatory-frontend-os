@@ -112,7 +112,7 @@ export default function Login() {
 
   return (
     <div className="page-login-section">
-      {redirect ? <Redirect to="/bekuldes" /> : null}
+      {redirect ? <Redirect to="/" /> : null}
 
       <div className="container">
         <div className="row">

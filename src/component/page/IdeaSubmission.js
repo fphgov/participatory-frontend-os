@@ -3,7 +3,7 @@ import {
   Link,
 } from "react-router-dom"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
-import { rmAllCharForName, rmAllCharForTitle } from '../lib/removeSpecialCharacters'
+import { rmAllCharForName, rmAllCharForTitle, rmAllCharForAddress } from '../lib/removeSpecialCharacters'
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
 import ScrollTo from "../common/ScrollTo"
@@ -62,6 +62,12 @@ export default function IdeaSubmission() {
     const value = e.target.type === 'checkbox' ? e.target.checked : rmAllCharForTitle(e.target.value)
 
     setFormData({ ...formData, [e.target.name]: value })
+  }
+
+  const handleChangeInputAddress = (e) => {
+    const value = e.target.type === 'checkbox' ? e.target.checked : rmAllCharForAddress(e.target.value)
+
+    setFormData({ ...formData, [ e.target.name ]: value })
   }
 
   const handleChangeRaw = (e) => {
@@ -251,6 +257,7 @@ export default function IdeaSubmission() {
                                 prevStep={prevStep}
                                 handleChange={handleChangeInput}
                                 changeRaw={changeRaw}
+                                changeInputAddress={handleChangeInputAddress}
                                 profile={profile}
                                 error={error}
                                 values={formData} />
@@ -261,6 +268,7 @@ export default function IdeaSubmission() {
                                 nextStep={nextStep}
                                 prevStep={prevStep}
                                 handleChange={handleChangeInput}
+                                handleChangeTitle={handleChangeInputTitle}
                                 profile={profile}
                                 error={error}
                                 values={formData} />

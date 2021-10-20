@@ -9,7 +9,7 @@ import {
   Link,
 } from "react-router-dom"
 
-export default function IdeaBasic({ nextStep, prevStep, handleChange, values }) {
+export default function IdeaLocation({ nextStep, prevStep, handleChange, changeInputAddress, values }) {
   const category4 = useRef(null)
   const category5 = useRef(null)
   const category6 = useRef(null)
@@ -139,7 +139,7 @@ export default function IdeaBasic({ nextStep, prevStep, handleChange, values }) 
                 <div>{values.error && values.error.location && iterateErrors(values.error.location, 'suggestion-error')}</div>
               </div> */}
 
-              <input type="text" autoCorrect="off" autoCapitalize="none" name="location" id="location" value={values.location} onChange={handleChange} />
+              <input type="text" autoCorrect="off" autoCapitalize="none" name="location" id="location" value={values.location} onChange={changeInputAddress} />
             </div>
 
             <div className="input-wrapper">
@@ -152,7 +152,7 @@ export default function IdeaBasic({ nextStep, prevStep, handleChange, values }) 
                     <div className="radio-inline-hide"></div>
                     <input
                       type="radio"
-                      id="theme_CARE"
+                      id="theme_GREEN"
                       name="theme"
                       value="4"
                       checked={values.theme === "4"}
@@ -160,9 +160,10 @@ export default function IdeaBasic({ nextStep, prevStep, handleChange, values }) 
                       onChange={handleChange} />
                   </div>
                   <div className="radio-inline-content">
-                    <label htmlFor="theme_CARE">Zöld Budapest</label>
+                    <label htmlFor="theme_GREEN">Zöld Budapest</label>
 
-                    <p className="tipp">Témakörben olyan ötleteket várunk, melyek javaslatot tesznek például a város akadálymentesítését szolgáló-, a hajléktalan emberek életét megkönnyítő fejlesztésekre, vagy olyan találkozási pontokra, játszó-, fitnesz parkokra, amelyeket minél több korosztály szívesen használ. Budapest közösségeinek fejlődését célzó ötleteket várunk a <Link to="/oldal/kiiras#zold-budapest" target="_blank">felsorolt alapelvek</Link> szerint.</p>
+                    <p className="tipp">„Zöld” ötleteket várunk a legtágabb értelemben. Közterületi zöldítések kihasználatlan, területeken, a várost zöldebb irányba befolyásoló ötletek, melyek elősegítik a sikeres alkalmazkodást az éghajlatváltozáshoz. (pl. újrahasznosítás, gyalogos-, kerékpáros közlekedés). Az ötleteknek a <Link to="/oldal/kiiras#eselyteremto-budapest" target="_blank">felsorolt alapelveknek</Link> kell megfelelniük.</p>
+
                   </div>
                 </div>
 
@@ -171,7 +172,7 @@ export default function IdeaBasic({ nextStep, prevStep, handleChange, values }) 
                     <div className="radio-inline-hide"></div>
                     <input
                       type="radio"
-                      id="theme_ENVIRONMENT"
+                      id="theme_CARE"
                       name="theme"
                       value="5"
                       checked={values.theme === "5"}
@@ -179,9 +180,9 @@ export default function IdeaBasic({ nextStep, prevStep, handleChange, values }) 
                       onChange={handleChange} />
                   </div>
                   <div className="radio-inline-content">
-                    <label htmlFor="theme_ENVIRONMENT">Esélyteremtő Budapest</label>
+                    <label htmlFor="theme_CARE">Esélyteremtő Budapest</label>
 
-                    <p className="tipp">„Zöld” ötleteket várunk a legtágabb értelemben. Közterületi zöldítések kihasználatlan, területeken, a várost zöldebb irányba befolyásoló ötletek, melyek elősegítik a sikeres alkalmazkodást az éghajlatváltozáshoz. (pl. újrahasznosítás, gyalogos-, kerékpáros közlekedés). Az ötleteknek a <Link to="/oldal/kiiras#eselyteremto-budapest" target="_blank">felsorolt alapelveknek</Link> kell megfelelniük.</p>
+                    <p className="tipp">Témakörben olyan ötleteket várunk, melyek javaslatot tesznek például a város akadálymentesítését szolgáló-, a hajléktalan emberek életét megkönnyítő fejlesztésekre, vagy olyan találkozási pontokra, játszó-, fitnesz parkokra, amelyeket minél több korosztály szívesen használ. Budapest közösségeinek fejlődését célzó ötleteket várunk a <Link to="/oldal/kiiras#zold-budapest" target="_blank">felsorolt alapelvek</Link> szerint.</p>
                   </div>
                 </div>
 

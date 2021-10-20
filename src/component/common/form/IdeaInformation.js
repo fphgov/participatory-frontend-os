@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import FormPaginator from './elements/FormPaginator'
 import InputLengthValidator from './elements/InputLengthValidator'
 
-export default function IdeaInformation({ nextStep, prevStep, handleChange, values }) {
+export default function IdeaInformation({ nextStep, prevStep, handleChange, handleChangeTitle, values }) {
   const [ participateChoose, setParticipateChoose ] = useState('no')
 
   return (
@@ -57,7 +57,7 @@ export default function IdeaInformation({ nextStep, prevStep, handleChange, valu
                   value={values.participate}
                   options={{ min: 0, max: 100 }}
                   info={''}
-                  onChange={handleChange}
+                  onChange={handleChangeTitle}
                 />
               </> : null}
             </div>
