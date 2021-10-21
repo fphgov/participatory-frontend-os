@@ -105,7 +105,7 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
             <InputLengthValidator
               title="Ötlet megnevezése*"
               name="title"
-              tipp="Lorem ipsum dolor sit amet consectetur adipisicing elit!"
+              tipp="Adj az ötletednek olyan tömör, lényegretörő címet, megnevezést, amiből kiderül, hogy mit javasolsz!"
               value={values.title}
               options={{ min: 4, max: 100 }}
               info={''}
@@ -115,9 +115,9 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
             <InputLengthValidator
               title="Mit oldana meg / mire megoldás?*"
               name="solution"
-              tipp="Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus pariatur voluptas tempore repellat, dolore praesentium, corporis voluptates blanditiis similique temporibus, molestias quam fugit eos? At beatae ad illum aliquid soluta!"
+              tipp="Írd le röviden, hogy miért van szükség erre a fejlesztésre, kiknek milyen helyzetre, problémára ad választ, megoldást!"
               value={values.solution}
-              options={{ min: 4, max: 100 }}
+              options={{ min: 4, max: 500 }}
               info={''}
               onChange={handleChange}
             />
@@ -125,7 +125,7 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
             <TextareaLengthValidator
               title="Leírás*"
               name="description"
-              tipp="Lorem ipsum dolor sit amet consectetur adipisicing elit."
+              tipp="Írd le röviden az ötleted, vagyis azt, hogy javaslatod szerint a Főváros mit hozzon létre a közösségi költségvetés keretében!"
               value={values.description}
               options={{ min: 200, max: 1000 }}
               info={''}
@@ -134,7 +134,7 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
 
             <div className="input-wrapper">
               <label htmlFor="links">Kapcsolódó hivatkozások</label>
-              <div className="tipp">Lorem ipsum dolor sit amet consectetur adipisicing elit!</div>
+              <div className="tipp">Ha szeretnél megosztani példákat, egyéb háttérinformációkat, itt az ötleted leírását kiegészítheted linkekkel.</div>
 
               {values.links.map((link, i) => {
                 return (
@@ -181,7 +181,7 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
 
             <div className="input-wrapper">
               <label htmlFor="medias">Kapcsolódó anyagok</label>
-              <div className="tipp">Lorem ipsum dolor sit amet consectetur adipisicing elit!</div>
+              <div className="tipp">Ha szeretnél fotókat, további leírásokat megosztani, itt tudod azokat is csatolni.</div>
 
               <DragAndDrop
                 onHandleDrop={handleDrop}

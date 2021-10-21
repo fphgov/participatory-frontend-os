@@ -2052,9 +2052,8 @@ time.post-full-meta-date {
 }
 
 .hero {
-  background: url(./img/hero.png);
-  background-color: #000;
-  color: #fff;
+  background-color: #fce550;
+  color: #19506E;
   min-height: 522px;
   background-repeat: no-repeat;
   background-position: center;
@@ -2068,6 +2067,10 @@ time.post-full-meta-date {
 .hero h2 {
   font-size: 38px;
   font-weight: bold;
+}
+
+.hero-content .btn {
+  margin: 30px 0 0 0;
 }
 
 .categories {
@@ -2090,6 +2093,8 @@ time.post-full-meta-date {
 
 .category-item {
   text-align: center;
+  text-decoration: none;
+  color: #fff;
 }
 
 .newsletter {
@@ -2249,6 +2254,10 @@ select:focus {
   font-weight: bold;
   text-align: center;
   padding: 2px 0;
+}
+
+.fix-section {
+  padding-bottom: 39px;
 }
 
 @media screen and (min-width: 1200px) {

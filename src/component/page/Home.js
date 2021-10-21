@@ -53,11 +53,13 @@ export default function Home() {
           <div className="container">
             <div className="row">
               <div className="offset-md-2 col-md-8">
-                <h2>Ötlet adott fázisának megfelelő nagy és max kétsoros cím</h2>
+                <h2>Üdvözlünk a budapesti közösségi költségvetés honlapján!</h2>
 
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                <p>Regisztrálj és add be ötletedet 2022. január 31-ig!</p>
 
-                <Link className="btn btn-primary" to="/bekuldes">Beküldök ötletet</Link>
+                <p>Nincs rossz ötlet!</p>
+
+                <Link className="btn btn-primary" to="/bekuldes">Ötletet adok be</Link>
               </div>
             </div>
           </div>
@@ -112,7 +114,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="light-section">
+      <div className="light-section fix-section">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -122,22 +124,22 @@ export default function Home() {
 
               <div className="row flex-center">
                 <div className="col-md-6">
-                  <div className="iframe-video" dangerouslySetInnerHTML={{ __html: '<iframe width="100%" height="315" src="https://www.youtube.com/embed/fzK79PgKITI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' }} />
+                  <div className="iframe-video" dangerouslySetInnerHTML={{ __html: '<iframe width="100%" height="315" src="https://www.youtube.com/embed/gk08qFY9Q7o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' }} />
                 </div>
                 <div className="col-md-6">
                   <div className="timeline-item">
                     <h3>Ötletelés</h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
+                    <p>Nézz körül, járj nyitott szemmel. Gondolkodj új dolgokban, ötleteddel hozz létre valamit. Ismerd meg a kategóriákat és a kereteket, hogy ötleted minden kritériumnak megfeleljen és sikeresen eljusson a megvalósításig.</p>
                   </div>
 
                   <div className="timeline-item">
-                    <h3>Ötletek beküldése - október</h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
+                    <h3>Beküldés</h3>
+                    <p>Regisztrálj az otlet.budapest.hu oldalon és nyújtsd be ötleted a megfelelő kategóriába 2022 január 31-ig</p>
                   </div>
 
                   <div className="timeline-item">
-                    <h3>Ötletek feldolgozása - november</h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
+                    <h3>Beküldés után</h3>
+                    <p>Nézd meg, mi történik az ötleteddel beküldés után</p>
                   </div>
                 </div>
               </div>
@@ -159,27 +161,27 @@ export default function Home() {
           <div className="categories">
             <div className="row">
               <div className="col-md-4">
-                <div className="category-item">
+                <Link to="/oldal/kiiras#zold-budapest" className="category-item">
                   <div className="category-image"><img src={`${process.env.REACT_APP_SERVER_FILE}/n_1_1254965691.png`} alt="" /></div>
                   <h3 className="category-title">Zöldebb városért</h3>
                   <div className="category-descrption">Lorem Ipsum is simply dummy text of the printing and typesetting industry</div>
-                </div>
+                </Link>
               </div>
 
               <div className="col-md-4">
-                <div className="category-item">
+                <Link to="/oldal/kiiras#eselyteremto-budapest" className="category-item">
                   <div className="category-image"><img src={`${process.env.REACT_APP_SERVER_FILE}/n_1_1254965691.png`} alt="" /></div>
                   <h3 className="category-title">Esélyteremtő városért</h3>
                   <div className="category-descrption">Lorem Ipsum is simply dummy text of the printing and typesetting industry</div>
-                </div>
+                </Link>
               </div>
 
               <div className="col-md-4">
-                <div className="category-item">
+                <Link to="/oldal/kiiras#nyitott-budapest" className="category-item">
                   <div className="category-image"><img src={`${process.env.REACT_APP_SERVER_FILE}/n_1_1254965691.png`} alt="" /></div>
                   <h3 className="category-title">Mert Budapest mindenkié</h3>
                   <div className="category-descrption">Lorem Ipsum is simply dummy text of the printing and typesetting industry</div>
-                </div>
+                </Link>
               </div>
             </div>
           </div>

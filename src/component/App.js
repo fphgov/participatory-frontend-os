@@ -56,6 +56,14 @@ export default function App() {
 
   useEffect(() => {
     if (localStorage.getItem('auth_token')) {
+      const exp = tokenParser('exp')
+
+      if (new Date(exp * 1000) < new Date()) {
+        localStorage.removeItem('auth_token')
+      }
+    }
+
+    if (localStorage.getItem('auth_token')) {
       context.set('token', localStorage.getItem('auth_token') || '')
 
       const voted = tokenParser('user.voted')

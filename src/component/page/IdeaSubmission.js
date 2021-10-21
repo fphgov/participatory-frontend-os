@@ -31,7 +31,7 @@ export default function IdeaSubmission() {
     'medias': [],
     'theme': '',
     'participateChoose': '',
-    'participate': ' ',
+    'participate': '',
     'suggestion': null,
     'privacy': false,
   })

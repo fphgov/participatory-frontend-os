@@ -102,13 +102,13 @@ export default function IdeaLocation({ nextStep, prevStep, handleChange, changeI
       <h3>Ötlet helye és kategóriája</h3>
 
       <div className="form-group location">
-        <p>Válassza ki az ötlet <b>témáját</b> *</p>
+        <p>Válaszd ki az ötlet <b>témáját</b> *</p>
 
         <div className="row">
           <div className="col-xs-12 col-sm-12">
             <div className="input-wrapper">
               <label htmlFor="location">Helyszín</label>
-              <div className="tipp">Lorem ipsum dolor sit amet consectetur adipisicing elit!</div>
+              <div className="tipp">Ha az ötleted egy konkrét helyszínre szól, vagy szeretnéd, hogy egy adott városrészben valósuljon meg, írd le a helyszínt minél pontosabban! Kérjük, vedd figyelembe, hogy különböző okok miatt nem biztos, hogy ötletedet a Főváros pontosan az általad javasolt helyszínen meg tudja valósítani.</div>
 
               {/* <div>
                 <div className="mb-2 mt-2">
@@ -144,7 +144,7 @@ export default function IdeaLocation({ nextStep, prevStep, handleChange, changeI
 
             <div className="input-wrapper">
               <h4>Kategória *</h4>
-              <div className="tipp">Válasszon egyet az alábbi kategóriák közül</div>
+              <div className="tipp">A közösségi költségvetés, az Otthon Budapesten programmal összhangban három kategóriában kínál lehetőséget az ötletek beadására. Kérjük, válassz, hogy a te ötleted melyik kategóriába tartozik az alábbiak közül!</div>
 
               <div className="radio-inline-block">
                 <div className={`radio-inline ${values.theme === "4" ? "active" : ""}`} onClick={() => { if (category4 && category4.current) category4.current.click() }}>
