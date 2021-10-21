@@ -24,7 +24,7 @@ const MobileMenu = (props) => {
             if (menuItem.outside) {
               return (
                 <li key={i.toString()}>
-                  <a href={menuItem.href}>{menuItem.title}</a>
+                  <a href={menuItem.href} onClick={props.onClick}>{menuItem.title}</a>
                 </li>
               )
             }
@@ -32,7 +32,7 @@ const MobileMenu = (props) => {
             if (menuItem.profile) {
               return (
                 <li key={i.toString()} className={menuItem.highlight ? 'highlight' : ''}>
-                  <Link to={menuItem.href} className={`profile-menu`}>
+                  <Link to={menuItem.href} className={`profile-menu`} onClick={props.onClick}>
                     <div className="avatar"><img src={getGravatarURL(tokenParser('user.email'))} alt="Avatar kép" aria-hidden="true" /><span className="profil-name">{tokenParser('user.firstname')}</span></div>
                   </Link>
                 </li>
@@ -41,7 +41,7 @@ const MobileMenu = (props) => {
 
             return (
               <li key={i.toString()}>
-                <Link to={menuItem.href}>{menuItem.title}</Link>
+                <Link to={menuItem.href} onClick={props.onClick}>{menuItem.title}</Link>
               </li>
             )
           })}
@@ -67,6 +67,7 @@ export default class Header extends React.Component {
         { title: "Megvalósuló ötletek", href: "/projektek?status=under_construction", outside: false },
         { title: "Ötlet beküldés", href: "/bekuldes", outside: false },
         { title: "Hírek", href: "/hirek", outside: false },
+        { title: "Események", href: "/esemenyek", outside: false },
         { title: "Bejelentkezés", href: "/bejelentkezes", highlight: false, onHideLoggedIn: true, onHideLoggedOut: false },
         { title: "Fiók", href: "/profil", highlight: false, onHideLoggedIn: false, onHideLoggedOut: true, profile: true },
       ]
@@ -105,7 +106,7 @@ export default class Header extends React.Component {
               <div className="col-xs-6 col-sm-6 col-md-4">
                 <div className="logo-wrapper">
                   <a href="/">
-                    <img src={Logo} alt="Budapest Részvételiségi Költségvetés"/>
+                    <img src={Logo} alt="Budapest Részvételiségi Költségvetés" />
                   </a>
                 </div>
               </div>

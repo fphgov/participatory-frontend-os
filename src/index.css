@@ -393,7 +393,7 @@ article.post-card:hover .post-more {
 
 .hamburger-menu-wrapper {
   text-align: right;
-  margin-top: 8px;
+  padding-top: 2px;
 }
 
 .mobile-menu {
@@ -2012,6 +2012,11 @@ h1.post-full-title {
   border: 2px solid #fff;
 }
 
+.page-post-section span,
+.post-full-meta span {
+  margin-left: 4px;
+}
+
 time.post-full-meta-date {
   font-style: italic;
 }
@@ -2064,6 +2069,7 @@ time.post-full-meta-date {
   text-align: center;
   align-items: center;
   justify-content: center;
+  padding-bottom: 32px;
 }
 
 .hero h2 {
@@ -2097,6 +2103,7 @@ time.post-full-meta-date {
   text-align: center;
   text-decoration: none;
   color: #fff;
+  display: block;
 }
 
 .newsletter {
@@ -2309,6 +2316,11 @@ select:focus {
   .page-login-section .form-wrapper {
     min-width: auto;
   }
+
+  .category-item {
+    margin: 24px 0 !important;
+    display: block;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -2392,6 +2404,10 @@ select:focus {
 
   .posts .post-image {
     height: 120px;
+  }
+
+  .newsletter {
+    padding: 60px 0;
   }
 }
 

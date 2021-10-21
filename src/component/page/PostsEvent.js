@@ -19,7 +19,7 @@ export default function Posts() {
     context.set('loading', true)
 
     const data = {
-      category: 1,
+      category: 2,
     }
 
     API.get(
