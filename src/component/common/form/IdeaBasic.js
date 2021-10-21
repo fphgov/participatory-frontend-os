@@ -112,7 +112,7 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
               onChange={handleChange}
             />
 
-            <InputLengthValidator
+            <TextareaLengthValidator
               title="Mit oldana meg / mire megoldás?*"
               name="solution"
               tipp="Írd le röviden, hogy miért van szükség erre a fejlesztésre, kiknek milyen helyzetre, problémára ad választ, megoldást!"
