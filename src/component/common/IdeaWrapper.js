@@ -1,9 +1,9 @@
-import React, { useContext, Suspense, lazy } from "react"
+import React, { Suspense, lazy } from "react"
 import {
   Link,
 } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons"
+import { faMapMarkerAlt, faFilePdf } from "@fortawesome/free-solid-svg-icons"
 import nFormatter from '../assets/nFormatter'
 import modernizr from 'modernizr'
 
@@ -12,8 +12,20 @@ const ImageGallery = lazy(() => import('react-image-gallery'));
 export default function IdeaWrapper(props) {
   const theme = props.idea.campaign_theme
 
-  const images = props.idea.medias.filter(media => media.type !== 'application/pdf').map((item) => {
+  const documentMimes = [
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/pdf',
+  ]
+
+  const images = props.idea.medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
     const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
+
+    return { original: link }
+  })
+
+  const documents = props.idea.medias.filter(media => documentMimes.indexOf(media.type) > -1).map((item) => {
+    const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA_DOWNLOAD.toString().replace(':id', item.id)
 
     return { original: link }
   })
@@ -43,7 +55,7 @@ export default function IdeaWrapper(props) {
                       <ul className="links">
                         {props.idea.links.map((link, i) => {
                           return (
-                            <li key={`link-${i}`}><a href={link}>{link}</a></li>
+                            <li key={`link-${i}`}><a href={link} rel="noopener noreferrer">{link}</a></li>
                           )
                         })}
                       </ul>
@@ -78,6 +90,22 @@ export default function IdeaWrapper(props) {
                             <ImageGallery items={images} showFullscreenButton={false} showNav={false} showPlayButton={false} showBullets={true} showThumbnails={false} />
                           </Suspense> : null
                         }
+                      </div>
+                    </>
+                  ) : null}
+
+                  {props.idea.medias && props.idea.medias.length > 0 ? (
+                    <>
+                      <div className="media-sep">
+                        <div className="documents">
+                          {documents.length > 0 && documents.map((document, i) => (
+                            <a key={i} href={document.original} target="_blank" rel="noopener noreferrer">
+                              <div key={i} className="document">
+                                <FontAwesomeIcon icon={faFilePdf} />
+                              </div>
+                            </a>
+                          ))}
+                        </div>
                       </div>
                     </>
                   ) : null}

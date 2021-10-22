@@ -199,7 +199,7 @@ export default function Home() {
 
               <p>Új, átláthatóbb és letisztultabb formátumban jelentkezünk minden héten a főváros legfontosabb ügyeivel a megújult hírlevelünkben.</p>
 
-              <a className="btn btn-primary" href="https://hirlevel.budapest.hu/subscribe.php?cid=8ILl2QAD-" target="_blank">Kattintson ide a feliratkozáshoz</a>
+              <a className="btn btn-primary" href="https://hirlevel.budapest.hu/subscribe.php?cid=8ILl2QAD-" target="_blank" rel="noopener noreferrer">Kattintson ide a feliratkozáshoz</a>
             </div>
           </div>
         </div>

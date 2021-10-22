@@ -141,7 +141,7 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
                   <div key={i} className="link-elem">
                     <button className="danger" onClick={() => {
                       handleRemoveElem('links', link)
-                    }}><FontAwesomeIcon icon={faMinusCircle} /> Eltávolítás</button>
+                    }}><FontAwesomeIcon icon={faMinusCircle} rel="noopener noreferrer" /> Eltávolítás</button>
 
                     <a href={link} target="_blank">{link}</a>
                   </div>

@@ -29,7 +29,7 @@ export default class Footer extends React.Component {
 
                 <div className="col-md-12 col-lg-4 pt-2 justify-content-md-center justify-content-lg-end text-lg-right">
                   <div className="footer-media-down">
-                    <a href="mailto:nyitott@budapest.hu" className="light">nyitott@budapest.hu</a>
+                    <a href="mailto:nyitott@budapest.hu" className="light" rel="noopener noreferrer">nyitott@budapest.hu</a>
                   </div>
                 </div>
               </div>

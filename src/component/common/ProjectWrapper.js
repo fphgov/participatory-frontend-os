@@ -15,8 +15,20 @@ export default function ProjectWrapper(props) {
 
   const theme = props.project.campaign_theme
 
-  const images = props.project.medias.filter(media => media.type !== 'application/pdf').map((item) => {
+  const documentMimes = [
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/pdf',
+  ]
+
+  const images = props.project.medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
     const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
+
+    return { original: link }
+  })
+
+  const documents = props.project.medias.filter(media => documentMimes.indexOf(media.type) > -1).map((item) => {
+    const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA_DOWNLOAD.toString().replace(':id', item.id)
 
     return { original: link }
   })
@@ -64,6 +76,22 @@ export default function ProjectWrapper(props) {
                             <ImageGallery items={images} showFullscreenButton={false} showNav={false} showPlayButton={false} showBullets={true} showThumbnails={false} />
                           </Suspense> : null
                         }
+                      </div>
+                    </>
+                  ) : null}
+
+                  {props.idea.medias && props.idea.medias.length > 0 ? (
+                    <>
+                      <div className="media-sep">
+                        <div className="documents">
+                          {documents.length > 0 && documents.map((document, i) => (
+                            <a key={i} href={document.original} target="_blank" rel="noopener noreferrer">
+                              <div key={i} className="document">
+                                <FontAwesomeIcon icon={faFilePdf} />
+                              </div>
+                            </a>
+                          ))}
+                        </div>
                       </div>
                     </>
                   ) : null}

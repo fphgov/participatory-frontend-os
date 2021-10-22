@@ -66,7 +66,7 @@ export default function IdeaOverview({ firstStep, values, submitIdea, error }) {
               values.links.length > 0 ?
                 values.links.map((link, i) => (
                   <div key={i} className="link-elem">
-                    <a href={link} target="_blank">{link}</a>
+                    <a href={link} target="_blank" rel="noopener noreferrer">{link}</a>
                   </div>
                 )) : <>Nincs</>
             }</div>

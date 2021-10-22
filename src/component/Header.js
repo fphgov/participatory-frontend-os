@@ -24,7 +24,7 @@ const MobileMenu = (props) => {
             if (menuItem.outside) {
               return (
                 <li key={i.toString()}>
-                  <a href={menuItem.href} onClick={props.onClick}>{menuItem.title}</a>
+                  <a href={menuItem.href} onClick={props.onClick} rel="noopener noreferrer">{menuItem.title}</a>
                 </li>
               )
             }
@@ -105,7 +105,7 @@ export default class Header extends React.Component {
             <div className="row flex-center">
               <div className="col-xs-6 col-sm-6 col-md-4">
                 <div className="logo-wrapper">
-                  <a href="/">
+                  <a href="/" rel="noopener noreferrer">
                     <img src={Logo} alt="Budapest Közösségi Költségvetés" />
                   </a>
                 </div>
@@ -124,7 +124,7 @@ export default class Header extends React.Component {
                     if (menuItem.outside) {
                       return (
                         <li key={i.toString()} className={menuItem.highlight ? 'highlight' : ''}>
-                          <a href={menuItem.href} className={menuItem.href === this.state.pathname ? 'active' : ''}>{menuItem.title}</a>
+                          <a href={menuItem.href} className={menuItem.href === this.state.pathname ? 'active' : ''} rel="noopener noreferrer">{menuItem.title}</a>
                         </li>
                       )
                     }
