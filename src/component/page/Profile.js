@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash, faKey, faSave, faSignOutAlt, faIdCardAlt, faLightbulb } from "@fortawesome/free-solid-svg-icons"
 import IdeasWrapper from "../common/IdeasWrapper"
 import CardPlaceholder from "../common/CardPlaceholder"
+import tokenParser from '../assets/tokenParser'
 
 export default function Profile() {
   const context = useContext(StoreContext)
@@ -34,18 +35,19 @@ export default function Profile() {
     progress: undefined,
   })
 
-  const getPageContent = async () => {
-    await getProfileData()
+  const getPageContent = () => {
+    getProfileData()
+    getIdeas()
   }
 
-  const getProfileData = async () => {
+  const getProfileData = () => {
     const config = {
       headers: {
         'Authorization': `Bearer ${context.get('token')}`,
       }
     }
 
-    return axios
+    axios
       .get(process.env.REACT_APP_API_REQ_PROFILE, config)
       .then(response => {
         if (response.data) {
@@ -69,8 +71,16 @@ export default function Profile() {
   }
 
   const getIdeas = () => {
+    const username = tokenParser('user.username')
+
+    if (! username) {
+      setLoadIdeas(false)
+
+      return
+    }
+
     const data = {
-      ids: profile.ideas
+      username,
     }
 
     axios
@@ -173,12 +183,6 @@ export default function Profile() {
       getPageContent()
     }
   }, [context.get('token')])
-
-  useEffect(() => {
-    if (profile && profile.ideas) {
-      getIdeas()
-    }
-  }, [profile])
 
   const Error = (props) => {
     return (
