@@ -1,10 +1,12 @@
 import axios from "../assets/axios"
 import React, { useState, useContext } from "react"
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify'
 import StoreContext from '../../StoreContext'
 
 export default function Profile() {
   const context = useContext(StoreContext)
+
+  const [ error, setError ] = useState('')
 
   const notify = (message) => toast.dark(message, {
     position: "bottom-right",
@@ -14,39 +16,28 @@ export default function Profile() {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-  });
+  })
 
   const [ display, setDisplay ] = useState({
     pwChange: true
   })
 
-  const [ state, setState ] = useState({
-    password1: '',
-    password2: ''
-  })
-
-  const [ errors, setErrors ] = useState({
-    password1: '',
-    password2: '',
-    password: ''
+  const [ credential, setCredential ] = useState({
+    password: '',
+    password_again: ''
   })
 
   const handleChangeInput = (e) => {
     e.persist()
 
-    setState(state => ({ ...state, [ e.target.name ]: e.target.value }))
-    setErrors(state => ({ ...state, [ e.target.name ]: '', password: '' }))
+    setCredential({ ...credential, [ e.target.name ]: e.target.value })
+    setError('')
   }
 
   const submitPassword = (e) => {
     e.preventDefault()
 
     context.set('loading', true)
-
-    if (passwordCheck()) {
-      context.set('loading', false)
-      return
-    }
 
     const config = {
       headers: {
@@ -55,7 +46,8 @@ export default function Profile() {
     }
 
     const data = {
-      password: state.password1
+      password: credential.password,
+      password_again: credential.password_again
     }
 
     axios.post(
@@ -70,63 +62,63 @@ export default function Profile() {
       } else {
         notify('⛔️ Sikertelen jelszó módosítás')
       }
-    }).catch(error => {
+    }).catch(() => {
       context.set('loading', false)
 
       notify('⛔️ Sikertelen jelszó módosítás')
     })
-
   }
 
-  function passwordCheck() {
-    if (state.password1 === '') {
-      setErrors(state => ({ ...state, password1: 'A mező nem lehet üres' }))
-      return true;
+  const ErrorMini = (props) => {
+    if (typeof props.error === 'object') {
+      return Object.values(props.error).map((e, i) => {
+        return (<div key={i} className="error-message-inline">{e}</div>)
+      })
+    } else {
+      return (<div key={props.increment} className="error-message-inline">{props.error}</div>)
     }
-
-    if (state.password2 === '') {
-      setErrors(state => ({ ...state, password2: 'A mező nem lehet üres' }))
-      return true;
-    }
-
-    if (state.password1 !== state.password2) {
-      setErrors(state => ({ ...state, password: 'A két jelszó nem egyezik' }))
-      return true;
-    }
-    return false;
   }
 
   return (
-    <div>
-      <div className="container profile">
-        <div className="col-lg-3">
-          <h1>Profil</h1>
-          <h2 onClick={e => {
-            setDisplay(state => ({ ...state, pwChange: !display.pwChange }))
-          }}>Jelszóváltoztatás</h2>
-        </div>
+    <>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <div className="profile">
+              <h1>Profil</h1>
+              <h2>Jelszóváltoztatás</h2>
+            </div>
 
-        {display.pwChange && <div className="pw-change">
-          <div className="input-wrapper col-lg-4">
-            <label htmlFor="password1">Új jelszó</label>
-            <input type="password" name="password1" id="password1" onChange={handleChangeInput} />
-            {errors.password1 && <div className="alert alert-danger">{errors.password1}</div>}
+            <div className="row">
+              <div className="col-lg-4">
+                <div className="input-wrapper">
+                  <label htmlFor="password">Új jelszó</label>
+                  <input type="password" name="password" id="password" onChange={handleChangeInput} />
+
+                  {error && error.password_again ? Object.values(error.password_again).map((err, i) => {
+                    return <ErrorMini key={i} error={err} increment={`password_again-${i}`} />
+                  }) : null}
+                </div>
+
+                <div className="input-wrapper">
+                  <label htmlFor="password_again">Új jelszó ismét</label>
+                  <input type="password" name="password_again" id="password_again" onChange={handleChangeInput} />
+
+                  {error && error.password_again ? Object.values(error.password_again).map((err, i) => {
+                    return <ErrorMini key={i} error={err} increment={`password_again-${i}`} />
+                  }) : null}
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4 mb-4">
+              <button className="btn btn-primary" onClick={submitPassword}>Mentés</button>
+            </div>
           </div>
-
-          <div className="input-wrapper col-lg-4">
-            <label htmlFor="password2">Új jelszó ismét</label>
-            <input type="password" name="password2" id="password2" onChange={handleChangeInput} />
-            {errors.password2 && <div className="alert alert-danger">{errors.password2}</div>}
-            {errors.password && <div className="alert alert-danger">{errors.password}</div>}
-          </div>
-        </div>}
-
-        <div className="mt-4 mb-4 col-lg-4">
-          {(!errors.password1 && !errors.password2) && <button className="btn btn-primary" onClick={submitPassword}>Mentés</button>}
-          {(errors.password1 || errors.password2) && <button className="btn btn-disabled" disabled onClick={submitPassword}>Mentés</button>}
         </div>
       </div>
+
       <ToastContainer />
-    </div>
+    </>
   )
 }

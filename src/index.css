@@ -1071,6 +1071,10 @@ hr {
   box-sizing: content-box;
 }
 
+.section fieldset {
+  padding: 0;
+}
+
 .registration-info {
   text-align: center;
 }

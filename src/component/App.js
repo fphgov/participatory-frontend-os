@@ -32,6 +32,7 @@ import CookieNotice from "./common/CookieNotice"
 import StoreContext from '../StoreContext'
 import tokenParser from './assets/tokenParser'
 import IdeaSubmission from "./page/IdeaSubmission"
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function App() {
   const context = useContext(StoreContext)

@@ -93,11 +93,6 @@ textarea {
   flex: 1 0 auto;
 }
 
-.app>.page>div:not(.home) {
-  margin: 15px 0;
-	padding: 0 0 45px 0;
-}
-
 .page a {
   text-decoration: underline;
 }
@@ -889,7 +884,7 @@ span.vote-stat-id {
 }
 
 @media screen and (max-width: 480px) {
-		.vote-stat-elem {	
+		.vote-stat-elem {
 			flex-wrap: wrap;
 	}
 

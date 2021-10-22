@@ -3,10 +3,11 @@ import {
   Redirect,
   Link,
 } from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify'
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTrash, faSignOutAlt, faIdCardAlt, faLightbulb } from "@fortawesome/free-solid-svg-icons"
+import { faTrash, faKey, faSave, faSignOutAlt, faIdCardAlt, faLightbulb } from "@fortawesome/free-solid-svg-icons"
 import IdeasWrapper from "../common/IdeasWrapper"
 import CardPlaceholder from "../common/CardPlaceholder"
 
@@ -18,6 +19,20 @@ export default function Profile() {
   const [loadIdeas, setLoadIdeas] = useState(false)
   const [error, setError] = useState('')
   const [redirectLogin, setRedirectLogin] = useState(false)
+  const [credential, setCredential] = useState({
+    password: '',
+    password_again: '',
+  })
+
+  const notify = (message) => toast.dark(message, {
+    position: "bottom-right",
+    autoClose: 5000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  })
 
   const getPageContent = async () => {
     await getProfileData()
@@ -81,11 +96,72 @@ export default function Profile() {
       })
   }
 
+  const submitPassword = (e) => {
+    e.preventDefault()
+
+    context.set('loading', true)
+
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+      }
+    }
+
+    const data = {
+      password: credential.password,
+      password_again: credential.password_again
+    }
+
+    axios.post(
+      process.env.REACT_APP_API_REQ_PASSWORD,
+      new URLSearchParams(data).toString(),
+      config
+    ).then(response => {
+      context.set('loading', false)
+
+      if (response.status === 200) {
+        setCredential({
+          password: '',
+          password_again: '',
+        })
+
+        if (response.status === 200) {
+          notify('🎉 Sikeres jelszó módosítás')
+        } else {
+          notify('⛔️ Sikertelen jelszó módosítás')
+        }
+      }
+
+      if (response.status !== 200 && response.data && response.data.message) {
+        setError(response.data.message)
+      }
+    }).catch(error => {
+      context.set('loading', false)
+
+      if (error.response && error.response.data && error.response.data.errors) {
+        console.log(error.response.data.errors);
+        setError(error.response.data.errors)
+      }
+
+      notify('⛔️ Sikertelen jelszó módosítás')
+    })
+  }
+
+  const handleChangeInput = (e) => {
+    e.persist()
+
+    setCredential({ ...credential, [ e.target.name ]: e.target.value })
+  }
+
   useEffect(() => {
     document.body.classList.add('page-profile')
 
     setLoadIdeas(true)
     context.set('loading', true)
+
+    if (! localStorage.getItem('auth_token')) {
+      setRedirectLogin(true)
+    }
 
     return () => {
       document.body.classList.remove('page-profile')
@@ -110,6 +186,16 @@ export default function Profile() {
         {props.message}
       </div>
     )
+  }
+
+  const ErrorMini = (props) => {
+    if (typeof props.error === 'object') {
+      return Object.values(props.error).map((e, i) => {
+        return (<div key={i} className="error-message-inline">{e}</div>)
+      })
+    } else {
+      return (<div key={props.increment} className="error-message-inline">{props.error}</div>)
+    }
   }
 
   const ProfileBox = ({ profile }) => {
@@ -140,7 +226,7 @@ export default function Profile() {
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            {error ? <Error message={error} /> : null}
+            {(typeof error === 'string' && error !== '') ? <Error message={error} /> : null}
 
             <div className="section">
               <h2><FontAwesomeIcon icon={faIdCardAlt} /> Fiók információk</h2>
@@ -151,6 +237,38 @@ export default function Profile() {
                 <Link className="btn btn-primary" to="/kijelentkezes"><FontAwesomeIcon icon={faSignOutAlt} /> Kijelentkezés</Link>
                 {/* <Link className="btn btn-danger btn-danger-2" to="/"><FontAwesomeIcon icon={faTrash} /> Fiók törlése</Link> */}
               </div>
+            </div>
+
+            <div className="section">
+              <h2><FontAwesomeIcon icon={faKey} /> Jelszó változtatás</h2>
+
+              <form onSubmit={submitPassword}>
+                <fieldset>
+                  <div className="form-wrapper">
+                    <div className="input-wrapper">
+                      <label htmlFor="password">Új jelszó</label>
+                      <input type="password" name="password" id="password" value={credential.password} onChange={handleChangeInput} />
+
+                      {error && error.password ? Object.values(error.password).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`password-${i}`} />
+                      }) : null}
+                    </div>
+
+                    <div className="input-wrapper">
+                      <label htmlFor="password_again">Új jelszó ismét</label>
+                      <input type="password" name="password_again" id="password_again" value={credential.password_again} onChange={handleChangeInput} />
+
+                      {error && error.password_again ? Object.values(error.password_again).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`password_again-${i}`} />
+                      }) : null}
+                    </div>
+
+                    <div className="btn-wrapper btn-wrapper-flex">
+                      <button type="submit" className="btn btn-primary"><FontAwesomeIcon icon={faSave} /> Mentés</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
             </div>
 
             <div className="section">
@@ -181,6 +299,8 @@ export default function Profile() {
           </div>
         </div>
       </div>
+
+      <ToastContainer />
     </div>
   )
 }
