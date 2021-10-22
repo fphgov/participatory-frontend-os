@@ -19,6 +19,7 @@ export default function Profile() {
   const [ideas, setIdeas] = useState([])
   const [loadIdeas, setLoadIdeas] = useState(false)
   const [error, setError] = useState('')
+  const [redirectLogout, setRedirectLogout] = useState(false)
   const [redirectLogin, setRedirectLogin] = useState(false)
   const [credential, setCredential] = useState({
     password: '',
@@ -135,11 +136,9 @@ export default function Profile() {
           password_again: '',
         })
 
-        if (response.status === 200) {
-          notify('🎉 Sikeres jelszó módosítás')
-        } else {
-          notify('⛔️ Sikertelen jelszó módosítás')
-        }
+        notify('🎉 Sikeres jelszó módosítás')
+      } else {
+        notify('⛔️ Sikertelen jelszó módosítás')
       }
 
       if (response.status !== 200 && response.data && response.data.message) {
@@ -220,12 +219,53 @@ export default function Profile() {
     )
   }
 
-  const handleClick = () => {
+  const deleteAccount = () => {
+    if (! confirm("Biztos törölni szeretnéd a fiókod?")) {
+      return
+    }
+
+    context.set('loading', true)
+
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+      }
+    }
+
+    axios.delete(
+      process.env.REACT_APP_API_REQ_PROFILE_DELETE,
+      config
+    ).then(response => {
+      context.set('loading', false)
+
+      if (response.status === 200) {
+        notify(response.data.message)
+
+        setTimeout(() => {
+          setRedirectLogout(true)
+        }, 10000)
+      } else {
+        notify('⛔️ Sikertelen fiók törlés')
+      }
+
+      if (response.status !== 200 && response.data && response.data.message) {
+        setError(response.data.message)
+      }
+    }).catch(error => {
+      context.set('loading', false)
+
+      if (error.response && error.response.data && error.response.data.errors) {
+        setError(error.response.data.errors)
+      }
+
+      notify('⛔️ Sikertelen fiók törlés')
+    })
   }
 
   return (
     <div className="page-profile-section">
       {redirectLogin ? <Redirect to='/bejelentkezes' /> : null}
+      {redirectLogout ? <Redirect to='/kijelentkezes' /> : null}
 
       <div className="container">
         <div className="row">
@@ -239,7 +279,8 @@ export default function Profile() {
 
               <div className="btn-wrapper btn-wrapper-flex">
                 <Link className="btn btn-primary" to="/kijelentkezes"><FontAwesomeIcon icon={faSignOutAlt} /> Kijelentkezés</Link>
-                {/* <Link className="btn btn-danger btn-danger-2" to="/"><FontAwesomeIcon icon={faTrash} /> Fiók törlése</Link> */}
+
+                <button className="btn btn-danger btn-danger-2" onClick={deleteAccount}><FontAwesomeIcon icon={faTrash} /> Fiók törlése</button>
               </div>
             </div>
 
@@ -279,7 +320,7 @@ export default function Profile() {
               <h2><FontAwesomeIcon icon={faLightbulb} /> Beküldött ötletek ({ideas.length})</h2>
 
               <div className="row">
-                {ideas.length > 0 && !loadIdeas && ideas.map((idea, i) => <IdeasWrapper handleClick={handleClick} key={i} idea={idea} />)}
+                {ideas.length > 0 && !loadIdeas && ideas.map((idea, i) => <IdeasWrapper handleClick={() => {}} key={i} idea={idea} />)}
 
                 {ideas.length == 0 && loadIdeas && <>
                   <div className="col-sm-12 col-md-6 col-lg-4">
