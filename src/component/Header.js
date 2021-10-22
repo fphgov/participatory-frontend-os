@@ -67,7 +67,7 @@ export default class Header extends React.Component {
         { title: "Megvalósuló ötletek", href: "/projektek?status=under_construction", outside: false },
         { title: "Ötlet beküldés", href: "/bekuldes", outside: false },
         { title: "Hírek", href: "/hirek", outside: false },
-        { title: "Események", href: "/esemenyek", outside: false },
+        { title: "Rendezvények", href: "/rendezvenyek", outside: false },
         { title: "Bejelentkezés", href: "/bejelentkezes", highlight: false, onHideLoggedIn: true, onHideLoggedOut: false },
         { title: "Fiók", href: "/profil", highlight: false, onHideLoggedIn: false, onHideLoggedOut: true, profile: true },
       ]
@@ -106,7 +106,7 @@ export default class Header extends React.Component {
               <div className="col-xs-6 col-sm-6 col-md-4">
                 <div className="logo-wrapper">
                   <a href="/">
-                    <img src={Logo} alt="Budapest Részvételiségi Költségvetés" />
+                    <img src={Logo} alt="Budapest Közösségi Költségvetés" />
                   </a>
                 </div>
               </div>

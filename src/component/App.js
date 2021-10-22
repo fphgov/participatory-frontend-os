@@ -105,7 +105,7 @@ export default function App() {
               <Route exact path="/kijelentkezes" component={Logout} />
               <Route exact path="/bekuldes" component={IdeaSubmission} />
               <Route exact path="/oldal/:slug" component={SimplePage} />
-              <Route exact path="/esemenyek" component={PostsEvent} />
+              <Route exact path="/rendezvenyek" component={PostsEvent} />
               <Route exact path="/hirek" component={Posts} />
               <Route exact path="/hirek/:slug" component={Post} />
               <Route exact path="/statisztika" component={Statistics} />

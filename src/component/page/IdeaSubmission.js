@@ -217,7 +217,7 @@ export default function IdeaSubmission() {
                 <legend>Ötlet beküldése</legend>
 
                 {!success ? <>
-                  <p>Üdvözöljük Budapest részvételi költségvetésének ötletbenyújtó felületén!</p>
+                  <p>Üdvözöljük Budapest közösségi költségvetésének ötletbenyújtó felületén!</p>
 
                   <p>Javasoljuk, hogy ötlete benyújtása előtt mindenképp olvassa el <Link to="/hirek/tudnivalok-az-otletek-benyujtasarol" target="_blank">a kategóriák leírásait és a beküldésről szóló cikket</Link>.</p>
 

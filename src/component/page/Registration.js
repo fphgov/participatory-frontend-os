@@ -209,7 +209,7 @@ export default function Registration() {
                       }) : null}
                     </div>
 
-                    <h4>Honnan értesült a részvételi költségvetésről?</h4>
+                    <h4>Honnan értesült a közösségi költségvetésről?</h4>
                     {error && error.hear_about ? Object.values(error.hear_about).map((err, i) => {
                       return <ErrorMini key={i} error={err} increment={`hear_about-${i}`} />
                     }) : null}

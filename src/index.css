@@ -528,8 +528,8 @@ input[type="submit"] {
 }
 
 .cookie-notice {
-  background-color: #00AF96;
-  color: #fff;
+  background-color: #FCE550;
+  color: #0ea6ce;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -540,7 +540,7 @@ input[type="submit"] {
 }
 
 .cookie-notice-text {
-  color: #fff;
+  color: #19506E;
   font-weight: 300;
   font-size: 14px;
 }
