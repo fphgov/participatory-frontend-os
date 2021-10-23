@@ -51,8 +51,8 @@ export default function Profile() {
     axios
       .get(process.env.REACT_APP_API_REQ_PROFILE, config)
       .then(response => {
-        if (response.data) {
-          setProfile(response.data)
+        if (response.data && response.data.data) {
+          setProfile(response.data.data)
         }
       })
       .catch(error => {

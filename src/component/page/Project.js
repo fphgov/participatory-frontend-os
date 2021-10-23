@@ -60,7 +60,7 @@ export default function Statistics() {
 
     context.set('rk_modal_open', true)
 
-    const name = `rk_vote_${project.campaign_theme.code}`
+    const name = `rk_vote_${project.campaignTheme.code}`
     localStorage.setItem(name, JSON.stringify(data))
     context.set(name, data)
 
@@ -97,7 +97,7 @@ export default function Statistics() {
     )
   }
 
-  const voteBtn = project && context.get(`rk_vote_${project.campaign_theme.code}`) && context.get(`rk_vote_${project.campaign_theme.code}`).id === project.id
+  const voteBtn = project && context.get(`rk_vote_${project.campaignTheme.code}`) && context.get(`rk_vote_${project.campaignTheme.code}`).id === project.id
 
   return (
     <div className="prop">

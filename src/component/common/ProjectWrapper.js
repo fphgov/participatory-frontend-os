@@ -13,7 +13,7 @@ const ImageGallery = lazy(() => import('react-image-gallery'));
 export default function ProjectWrapper(props) {
   const context = useContext(StoreContext)
 
-  const theme = props.project.campaign_theme
+  const theme = props.project.campaignTheme
 
   const documentMimes = [
     'application/msword',
@@ -80,7 +80,7 @@ export default function ProjectWrapper(props) {
                     </>
                   ) : null}
 
-                  {props.idea.medias && props.idea.medias.length > 0 ? (
+                  {props.project.medias && props.project.medias.length > 0 ? (
                     <>
                       <div className="media-sep">
                         <div className="documents">
@@ -129,7 +129,7 @@ export default function ProjectWrapper(props) {
                 <div className="prop-single-status">
                   <div className="prop-info-title">Állapot</div>
                   <div className="prop-info-content">
-                    <b>{props.project.workflow_state.title}</b>
+                    <b>{props.project.workflowState.title}</b>
                   </div>
                 </div>
 
@@ -168,7 +168,7 @@ export default function ProjectWrapper(props) {
                     <div className="prop-info-title">Beküldte</div>
                     <div className="prop-single-content">
                       <div className="prop-single-submitter">{props.project.submitter.lastname} {props.project.submitter.firstname}</div>
-                      <div className="prop-single-submited">{new Date(props.project.createdAt.date).toLocaleString()}</div>
+                      <div className="prop-single-submited">{new Date(props.project.createdAt).toLocaleString()}</div>
                     </div>
                   </div>
                 ) : null}

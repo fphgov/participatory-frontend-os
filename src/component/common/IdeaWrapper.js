@@ -10,7 +10,7 @@ import modernizr from 'modernizr'
 const ImageGallery = lazy(() => import('react-image-gallery'));
 
 export default function IdeaWrapper(props) {
-  const theme = props.idea.campaign_theme
+  const theme = props.idea.campaignTheme
 
   const documentMimes = [
     'application/msword',
@@ -42,7 +42,7 @@ export default function IdeaWrapper(props) {
               <div className="prop-single-inner">
                 <div className="prop-single-content">
                   <div className="prop-location">
-                    <FontAwesomeIcon icon={faMapMarkerAlt} /> {props.idea.campaign_location && props.idea.campaign_location.name}
+                    <FontAwesomeIcon icon={faMapMarkerAlt} /> {props.idea.campaignLocation && props.idea.campaignLocation.name}
                   </div>
 
                   <h1 className="prop-single-title" style={{ color: theme.rgb }}>{props.idea.title}</h1>
@@ -128,12 +128,10 @@ export default function IdeaWrapper(props) {
                   </div>
                 ) : null}
 
-                <div className="prop-single-published">{props.idea.published}</div>
-
                 <div className="prop-single-status">
                   <div className="prop-info-title">Állapot</div>
                   <div className="prop-info-content">
-                    <b>{props.idea.workflow_state.title}</b>
+                    <b>{props.idea.workflowState.title}</b>
                   </div>
                 </div>
 
@@ -149,7 +147,7 @@ export default function IdeaWrapper(props) {
                     <div className="prop-info-title">Beküldés</div>
                     <div className="prop-single-body">
                       <div className="prop-single-submitter">{props.idea.submitter.lastname} {props.idea.submitter.firstname}</div>
-                      <div className="prop-single-submited">{new Date(props.idea.created_at.date).toLocaleString()}</div>
+                      <div className="prop-single-submited">{new Date(props.idea.createdAt).toLocaleString()}</div>
                     </div>
                   </div>
                 ) : null}
