@@ -3,7 +3,7 @@ import {
   useParams,
 } from "react-router-dom"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
-import { rmAllChar, rmAllCharForEmail, rmAllCharForName } from '../lib/removeSpecialCharacters'
+import { rmForNumber, rmAllCharForEmail, rmAllCharForName } from '../lib/removeSpecialCharacters'
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
 import ScrollTo from "../common/ScrollTo"
@@ -43,7 +43,7 @@ export default function Registration() {
   }
 
   const handleChangeNumberInput = (e) => {
-    setFilterData({ ...filterData, [ e.target.name ]: rmAllChar(e.target.value) })
+    setFilterData({ ...filterData, [ e.target.name ]: rmForNumber(e.target.value) })
   }
 
   const handleChangeRaw = (e) => {

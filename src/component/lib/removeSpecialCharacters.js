@@ -4,6 +4,10 @@ export const rmEmojis = (text) => {
         .replace(/(\u00A9|\u00AE|[\u2000-\u3300]|\uD83C[\uD000-\uDFFF]|\uD83D[\uD000-\uDFFF]|\uD83E[\uD000-\uDFFF])/g, '')
 }
 
+export const rmForNumber = (text) => {
+  return rmEmojis(text.replace(/[\D]/gi, ''))
+}
+
 export const rmAllChar = (text) => {
   return rmEmojis(text.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, ''))
 }
