@@ -51,6 +51,7 @@ export default function IdeaLocation({ nextStep, prevStep, handleChange, changeR
     .then((response) => {
       if (response && response.status === 200 && response.data.data.features) {
         const suggestions = response.data.data.features.map((f) => {
+          const myf = f.attributes.myf ? f.attributes.myf : ''
           const nfn = f.attributes.nfn ? f.attributes.nfn : ''
           const php = f.attributes.php ? f.attributes.php : ''
           const mea = f.attributes.mea ? f.attributes.mea : ''
@@ -62,6 +63,7 @@ export default function IdeaLocation({ nextStep, prevStep, handleChange, changeR
             return {
               objectid: f.attributes.objectid,
               title: typeof name !== 'undefined' ? name.trim() : null,
+              myf,
               nfn,
               php,
               mea,
