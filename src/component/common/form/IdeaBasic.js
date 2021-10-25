@@ -9,7 +9,6 @@ import DragAndDrop from '../../common/form/elements/DragAndDrop'
 import InputLengthValidator from './elements/InputLengthValidator'
 import TextareaLengthValidator from './elements/TextareaLengthValidator'
 import FormPaginator from './elements/FormPaginator'
-import StoreContext from '../../../StoreContext'
 import clonedeep from 'lodash.clonedeep'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlusCircle, faMinusCircle, faFileUpload, faFile } from "@fortawesome/free-solid-svg-icons"
@@ -17,8 +16,6 @@ import getGravatarURL from "../../lib/gravatar"
 import tokenParser from '../../assets/tokenParser'
 
 export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRemoveElem, handleChange, values, profile }) {
-  const context = useContext(StoreContext)
-
   const [ dragged, setDragged ] = useState(false)
   const [ errorLink, setErrorLink ] = useState('')
   const [ tempLink, setTempLink ] = useState('')
@@ -213,7 +210,7 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
                     <label htmlFor="file" className="input-file-content">
                       <FontAwesomeIcon icon={faFileUpload} size="3x" />
 
-                      <p>Tallózza be, vagy húzza a kijelőlt bezőbe a kapcsolódó anyagokat!</p>
+                      <p>Tallózd be, vagy húzd a kijelőlt mezőbe a kapcsolódó anyagokat!</p>
 
                     </label>
                   </> : null}

@@ -18,8 +18,10 @@ export default function Posts() {
     setRawContent(null)
     context.set('loading', true)
 
+    const categoryIds = [1, 3]
+
     const data = {
-      category: 1,
+      category: categoryIds,
     }
 
     API.get(

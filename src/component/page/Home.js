@@ -57,7 +57,7 @@ export default function Home() {
 
                 <p>Regisztrálj és add be ötletedet 2022. január 31-ig!</p>
 
-                <p>Nincs rossz ötlet!</p>
+                <p>Adj egy jó ötlet!</p>
 
                 <Link className="btn btn-primary" to="/bekuldes">Ötletet adok be</Link>
               </div>
