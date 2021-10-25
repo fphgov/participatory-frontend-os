@@ -32,7 +32,7 @@ export default function IdeaSubmission() {
     'theme': '',
     'participateChoose': '',
     'participate': '',
-    'suggestion': null,
+    'location': '',
     'privacy': false,
   })
 
@@ -152,6 +152,10 @@ export default function IdeaSubmission() {
     delete data['links']
     delete data['medias']
     delete data['participateChoose']
+
+    if (typeof data['location'] === 'object') {
+      data['location'] = new URLSearchParams(data['location'])
+    }
 
     const search = new URLSearchParams(data)
 

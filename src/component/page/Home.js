@@ -195,11 +195,11 @@ export default function Home() {
               <img src="https://budapest.hu/Kpek2021/hirlevel.png" alt="Értesüljön egy helyen a fővárosi ügyekről promóciós kép" />
             </div>
             <div className="col-md-8">
-              <h3>Érdekli, hogy mi történik Budapesten? Iratkozzon fel a Fővárosi Önkormányzat hírlevelére!</h3>
+              <h3>Érdekel, hogy mi történik Budapesten? Iratkozz fel a Fővárosi Önkormányzat hírlevelére!</h3>
 
               <p>Új, átláthatóbb és letisztultabb formátumban jelentkezünk minden héten a főváros legfontosabb ügyeivel a megújult hírlevelünkben.</p>
 
-              <a className="btn btn-primary" href="https://hirlevel.budapest.hu/subscribe.php?cid=8ILl2QAD-" target="_blank" rel="noopener noreferrer">Kattintson ide a feliratkozáshoz</a>
+              <a className="btn btn-primary" href="https://hirlevel.budapest.hu/subscribe.php?cid=8ILl2QAD-" target="_blank" rel="noopener noreferrer">Kattints ide a feliratkozáshoz</a>
             </div>
           </div>
         </div>

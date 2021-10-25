@@ -12,6 +12,8 @@ export default function IdeaOverview({ firstStep, values, submitIdea, error }) {
     6: "Nyitott Budapest"
   }
 
+  const location = typeof values.location === 'object' ? `${values.location.nfn} kerület, ${values.location.php}` : '-'
+
   const ErrorMini = (props) => {
     if (typeof props.error === 'object') {
       return Object.values(props.error).map((e, i) => {
@@ -91,7 +93,7 @@ export default function IdeaOverview({ firstStep, values, submitIdea, error }) {
 
           <div className="overview">
             <div className="overview-name">Helyszín</div>
-            <div className="overview-value">{values.location ? values.location : "-"}</div>
+            <div className="overview-value">{values.location ? location : "-"}</div>
 
             <ErrorRender error={error} name="location" />
           </div>

@@ -92,7 +92,7 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
               <div className="profile">
                 <div className="avatar"><img src={getGravatarURL(tokenParser('user.email'))} alt="Avatar kép" aria-hidden="true" /></div>
                 <div className="profil-information">
-                  Ötlet beküldés <span className="profile-name">{`${profile.lastname} ${profile.firstname}`}</span> névvel. Nem Ön az? <Link to="/kijelentkezes">Kijelentkezés</Link>
+                  Ötlet beküldés <span className="profile-name">{`${profile.lastname} ${profile.firstname}`}</span> névvel. Nem Te vagy az? <Link to="/kijelentkezes">Kijelentkezés</Link>
                 </div>
               </div>
             </> : null}

@@ -108,7 +108,7 @@ export default function VoteModal(props) {
     <div className="vote-modal" style={{ height: height }} ref={voteModal}>
       <div className="container">
         <h3 style={{ textTransform: 'uppercase' }} onClick={() => { context.set('rk_modal_open', ! props.open) }}>
-          Kattintson ide a szavazás megkezdéséhez {props.open ? <FontAwesomeIcon icon={faArrowAltCircleUp} /> : <FontAwesomeIcon icon={faArrowAltCircleDown} />}
+          Kattints ide a szavazás megkezdéséhez {props.open ? <FontAwesomeIcon icon={faArrowAltCircleUp} /> : <FontAwesomeIcon icon={faArrowAltCircleDown} />}
         </h3>
 
         {loggedIn ? <>
@@ -126,7 +126,7 @@ export default function VoteModal(props) {
                     </div> : null
                   }
                 </div>
-              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=green`.replace(/\/\//g, '/')} className="placeholder-text" rel="noopener noreferrer">Kattinson ide, és válasszon a <strong>Zöld Budapest</strong> kategóriából egy ötletet (kötelező)</a>}
+              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=green`.replace(/\/\//g, '/')} className="placeholder-text" rel="noopener noreferrer">Kattints ide, és válasszon a <strong>Zöld Budapest</strong> kategóriából egy ötletet (kötelező)</a>}
             </div>
             <div className={`vote-option vote-option-2 ${!context.get('rk_vote_CARE') ? 'vote-option-placeholder' : ''}`}>
               {context.get('rk_vote_CARE') ? <div className="vote-option-item">
@@ -141,7 +141,7 @@ export default function VoteModal(props) {
                     </div> : null
                   }
                 </div>
-              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=care`.replace(/\/\//g, '/')} className="placeholder-text" rel="noopener noreferrer">Kattinson ide, és válasszon a <strong>Esélyteremtő Budapest</strong> kategóriából egy ötletet (kötelező)</a>}
+              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=care`.replace(/\/\//g, '/')} className="placeholder-text" rel="noopener noreferrer">Kattints ide, és válasszon a <strong>Esélyteremtő Budapest</strong> kategóriából egy ötletet (kötelező)</a>}
             </div>
             <div className={`vote-option vote-option-3 ${!context.get('rk_vote_WHOLE') ? 'vote-option-placeholder' : ''}`}>
               {context.get('rk_vote_WHOLE') ? <div className="vote-option-item">
@@ -156,7 +156,7 @@ export default function VoteModal(props) {
                     </div> : null
                   }
                 </div>
-              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=whole`.replace(/\/\//g, '/')} className="placeholder-text" rel="noopener noreferrer">Kattinson ide, és válasszon a <strong>Nyitott Budapest</strong> kategóriából egy ötletet (kötelező)</a>}
+              </div> : <a href={`${process.env.REACT_APP_BASENAME}/projektek?query=&theme=whole`.replace(/\/\//g, '/')} className="placeholder-text" rel="noopener noreferrer">Kattints ide, és válasszon a <strong>Nyitott Budapest</strong> kategóriából egy ötletet (kötelező)</a>}
             </div>
           </div>
 
@@ -165,7 +165,7 @@ export default function VoteModal(props) {
           {!context.get('successVote') ? <>
             <div className={`btn btn-primary btn-vote-final ${enableSendVote() ? 'btn-vote-active' : ''}`} onClick={() => sendVote()}>Beküldöm a szavazatom <sup>*</sup></div>
             <p><sup>*</sup> A gomb megnyomása után a kiválasztott ötletetekre leadott szavazatok véglegesednek, módosításra nincs lehetőség.</p>
-          </> : <p>Az Ön szavazatai véglegesedtek, módosításra nincs lehetőség.</p>}
+          </> : <p>A szavazataid véglegesedtek, módosításra nincs lehetőség.</p>}
         </> : <div className="vote-login">
             <p><Link to={`/bejelentkezes`}>Jelentkezzen be</Link> a szavazáshoz!</p>
         </div>}
