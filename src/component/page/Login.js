@@ -162,7 +162,7 @@ export default function Login() {
             <div className="registration-info">
               <hr />
 
-              <p>Nincs még fiókja? Regisztráljon itt!</p>
+              <p>Nincs még fiókod? Regisztrálj itt!</p>
 
               <Link to={`/regisztracio`} className="btn btn-primary btn-sm" title="Regisztráció">
                 <FontAwesomeIcon icon={faUser} />&nbsp;

@@ -69,7 +69,7 @@ export default function Statistics() {
       <div className="container">
         <h1>Új jelszó beállítása</h1>
 
-        {error ? <Error message={error} /> : <p>Adja meg az új jelszót.</p>}
+        {error ? <Error message={error} /> : <p>Add meg az új jelszót.</p>}
 
         {!success ? <div className="row">
           <div className="col-lg-4">
