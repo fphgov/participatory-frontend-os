@@ -110,7 +110,7 @@ export default function Registration() {
         setError(error.response.data.errors)
         setScroll(true)
       } else {
-        setError('Váratlan hiba történt, kérjük próbálja később')
+        setError('Váratlan hiba történt, kérjük próbáld később')
         setScroll(true)
       }
 
@@ -209,13 +209,13 @@ export default function Registration() {
                       }) : null}
                     </div>
 
-                    <h4>Honnan értesült a közösségi költségvetésről?</h4>
+                    <h4>Honnan értesültél a közösségi költségvetésről?</h4>
                     {error && error.hear_about ? Object.values(error.hear_about).map((err, i) => {
                       return <ErrorMini key={i} error={err} increment={`hear_about-${i}`} />
                     }) : null}
                     <div className="form-group form-group-hear-about">
                       <select name="hear_about" onChange={handleChangeInput}>
-                        <option value="">Válasszon a lehetőségek közül</option>
+                        <option value="">Válassz a lehetőségek közül</option>
                         <option disabled>---</option>
                         <option value="friend">Barátoktól, ismerőstől, családtól</option>
                         <option value="street">Utcai plakátról</option>
@@ -272,7 +272,7 @@ export default function Registration() {
             </form>
 
             {success ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
-              <p>Kérjük, regisztrációja befejezéséhez aktiválja fiókját az e-mail címére küldött levélben található linkre kattintva.</p>
+              <p>Kérünk, a regisztrációd befejezéséhez aktiváld a fiókod az e-mail címedre küldött levélben található linkre kattintva.</p>
             </div> : null}
           </div>
         </div>

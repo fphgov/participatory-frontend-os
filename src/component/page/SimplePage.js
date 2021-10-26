@@ -29,7 +29,7 @@ export default function SimplePage() {
       if (error.response && error.response.data && error.response.data.message) {
         setError(error.response.data.message)
       } else {
-        setError('Váratlan hiba történt, kérjük próbálja később')
+        setError('Váratlan hiba történt, kérünk próbáld később')
       }
 
       setRedirect(true)
