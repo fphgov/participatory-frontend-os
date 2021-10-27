@@ -221,13 +221,13 @@ export default function IdeaSubmission() {
                 <legend>Ötletbeküldése</legend>
 
                 {!success ? <>
-                  <p>Üdvözöljük Budapest közösségi költségvetésének ötletbenyújtó felületén!</p>
+                  <p>Üdvözlünk Budapest közösségi költségvetésének ötletbenyújtó felületén!</p>
 
-                  <p>Javasoljuk, hogy ötlete benyújtása előtt mindenképp olvassa el <Link to="/hirek/tudnivalok-az-otletek-benyujtasarol" target="_blank">a kategóriák leírásait és a beküldésről szóló cikket</Link>.</p>
+                  <p>Javasoljuk, hogy az ötleted benyújtása előtt mindenképp olvasd el <Link to="/hirek/tudnivalok-az-otletek-benyujtasarol" target="_blank">a kategóriák leírásait és a beküldésről szóló cikket</Link>.</p>
 
-                  <p>Hasznos, ha akkor kezd neki ötlete beküldésének, ha azt már átgondolta és leírta részleteiben, mert az űrlap kitöltése nem szakítható félbe. A beérkezett ötletek ellenőrzés után nyilvánosan megtekinthetők lesznek a Beküldött ötletek menüpontban.</p>
+                  <p>Hasznos, ha akkor kezdesz neki ötlet beküldésének, ha azt már átgondoltad és leírtad részleteiben, mert az űrlap kitöltése nem szakítható félbe. A beérkezett ötletek ellenőrzés után nyilvánosan megtekinthetők lesznek a Beküldött ötletek menüpontban.</p>
 
-                  <p>Köszönjük, hogy megosztja velünk az ötletét!</p>
+                  <p>Köszönjük, hogy megosztod velünk az ötleted!</p>
 
                   {profile ? <>
                     <div className="form-wrapper-idea">
@@ -304,7 +304,7 @@ export default function IdeaSubmission() {
             </form>
 
             {success ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
-              <p>Az ötletbeküldés sikeres, hamarosan kap egy megerősítő e-mailt.</p>
+              <p>Az ötletbeküldés sikeres, hamarosan kapsz egy megerősítő e-mailt.</p>
             </div> : null}
           </div>
         </div>

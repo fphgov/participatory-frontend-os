@@ -56,7 +56,7 @@ export default function CookieNotice() {
   return (
     <div className="cookie-notice cookie-notice-visible" style={{ display: open ? 'block' : 'none' }}>
       <div className="cookie-notice-container">
-        <div className="cookie-notice-text">Kedves Látogató! Tájékoztatjuk, hogy a honlap felhasználói élmény fokozásának érdekében sütiket alkalmazunk. A honlapunk használatával ön a tájékoztatásunkat tudomásul veszi.</div>
+        <div className="cookie-notice-text">Kedves Látogató! Tájékoztatunk, hogy a honlap felhasználói élmény fokozásának érdekében sütiket alkalmazunk. A honlapunk használatával a tájékoztatásunkat tudomásul veszed.</div>
         <div className="cookie-notice-buttons">
           <a className="cookie-notice-accept" onClick={handlerAccept}>Elfogadom</a>
           <a className="cookie-notice-refuse" onClick={handlerRefuse}>Elutasítom</a>

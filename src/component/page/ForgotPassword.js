@@ -52,7 +52,7 @@ export default function ForgotPassword() {
         <h1>Elfelejtett jelszó</h1>
 
         {error ? <Error message={error} /> : <div>
-          {!success ? <p>Kérjük, adja meg e-mail címét. Az aktiváló linket e-mailben kapja meg.</p> : null}
+          {!success ? <p>Kérlek, add meg az e-mail címed. Az aktiváló linket e-mailben kapod meg.</p> : null}
 
           {success ? <>
             <p>Amennyiben szerepel az e-mail cím a rendszerben, úgy az aktiváló linket kiküldtük.</p>

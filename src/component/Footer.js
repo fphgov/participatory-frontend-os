@@ -18,7 +18,7 @@ export default function Footer() {
             </div>
 
             <div className="sharing">
-              <a href="https://www.facebook.com/budapestmindenkie" title="Kövessen minket Facebookon" rel="noopener noreferrer">
+              <a href="https://www.facebook.com/budapestmindenkie" title="Kövess minket Facebookon" rel="noopener noreferrer">
                 <span className="fa-layers fa-lg">
                   <FontAwesomeIcon icon={faCircle} size='2x' color="white" />
                   <FontAwesomeIcon icon={faFacebookF} mask={[ 'fab' ]} size='lg' style={{ marginLeft: 10 }} />

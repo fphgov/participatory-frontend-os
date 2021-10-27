@@ -235,7 +235,7 @@ export default function Projects() {
   return (
     <div className="projects">
       <SearchArea
-        title="Mely ötleteket látná szívesen megvalósulni?"
+        title="Mely ötleteket látnád szívesen megvalósulni?"
         type="project"
         queryRef={queryRef}
         values={filterData}
