@@ -298,6 +298,10 @@ header .logo-wrapper img {
   padding: 20px 0;
 }
 
+footer .fa-layers {
+  color: #454347;
+}
+
 footer.post-card-meta {
   background: none;
 }
@@ -2100,6 +2104,8 @@ time.post-full-meta-date {
 .hero h2 {
   font-size: 38px;
   font-weight: bold;
+  color: #f6d05f;
+  text-transform: uppercase;
 }
 
 .hero-content .btn {
@@ -2117,16 +2123,14 @@ time.post-full-meta-date {
 
 .category-image {
   width: 180px;
-  height: 180px;
+  height: 80px;
   margin: 0 auto;
 }
 
 .category-image img {
   display: block;
   height: 100%;
-  object-fit: cover;
   width: 100%;
-  border-radius: 50%;
 }
 
 .category-item {

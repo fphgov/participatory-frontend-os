@@ -7,6 +7,9 @@ import {
 import API from '../assets/axios'
 import Newsletter from '../../img/hirlevel.png'
 import HeroLogo from '../../img/kozossegi_koltsegvetes_hero_logo.svg'
+import CategoryLogo1 from '../../img/zold_budapest_white_category.svg'
+import CategoryLogo2 from '../../img/eselyteremto_budapest_white_category.svg'
+import CategoryLogo3 from '../../img/nyitott_budapest_white_category.svg'
 
 export default function Home() {
   const context = useContext(StoreContext)
@@ -153,7 +156,7 @@ export default function Home() {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h2>Kategória cím</h2>
+              <h2>Ezekben a kategóriákban várunk ötleteket</h2>
             </div>
           </div>
 
@@ -161,25 +164,25 @@ export default function Home() {
             <div className="row">
               <div className="col-md-4">
                 <Link to="/hirek/tudnivalok-az-otletek-benyujtasarol-2021#zold-budapest" className="category-item">
-                  <div className="category-image"><img src={`${process.env.REACT_APP_SERVER_FILE}/n_1_1254965691.png`} alt="" /></div>
+                  <div className="category-image"><img src={CategoryLogo1} alt="Zöld Budapest logó" /></div>
                   <h3 className="category-title">Zöld Budapest</h3>
-                  <div className="category-descrption"></div>
+                  <div className="category-descrption">Zöldebb utcák, élettel teli parkok, mindenki számára elérhető, környezettudatos megoldások</div>
                 </Link>
               </div>
 
               <div className="col-md-4">
                 <Link to="/hirek/tudnivalok-az-otletek-benyujtasarol-2021#eselyteremto-budapest" className="category-item">
-                  <div className="category-image"><img src={`${process.env.REACT_APP_SERVER_FILE}/n_1_1254965691.png`} alt="" /></div>
+                  <div className="category-image"><img src={CategoryLogo2} alt="Esélyteremtő Budapest logó" /></div>
                   <h3 className="category-title">Esélyteremtő Budapest</h3>
-                  <div className="category-descrption"></div>
+                  <div className="category-descrption">A társadalmi különbségek csökkentése, hátrányos helyzetű közösségek életének támogatása</div>
                 </Link>
               </div>
 
               <div className="col-md-4">
                 <Link to="/hirek/tudnivalok-az-otletek-benyujtasarol-2021#nyitott-budapest" className="category-item">
-                  <div className="category-image"><img src={`${process.env.REACT_APP_SERVER_FILE}/n_1_1254965691.png`} alt="" /></div>
+                  <div className="category-image"><img src={CategoryLogo3} alt="Nyitott Budapest logó" /></div>
                   <h3 className="category-title">Nyitott Budapest</h3>
-                  <div className="category-descrption"></div>
+                  <div className="category-descrption">Együttműködések, új, kísérleti megoldások, digitális fejlesztések, rövid távú, közösségépítő ötletek</div>
                 </Link>
               </div>
             </div>
