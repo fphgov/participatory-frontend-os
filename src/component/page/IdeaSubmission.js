@@ -9,7 +9,7 @@ import StoreContext from '../../StoreContext'
 import ScrollTo from "../common/ScrollTo"
 import tokenParser from '../assets/tokenParser'
 import IdeaBasic from "../common/form/IdeaBasic"
-import IdeaLocation from "../common/form/IdeaLocation"
+import IdeaCategory from "../common/form/IdeaCategory"
 import IdeaInformation from "../common/form/IdeaInformation"
 import IdeaOverview from "../common/form/IdeaOverview"
 
@@ -256,7 +256,7 @@ export default function IdeaSubmission() {
                             )
                           case 2:
                             return (
-                              <IdeaLocation
+                              <IdeaCategory
                                 nextStep={nextStep}
                                 prevStep={prevStep}
                                 handleChange={handleChangeInput}

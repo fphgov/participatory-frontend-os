@@ -1273,6 +1273,10 @@ button.map-toggle:hover,
   margin: 0 0 15px 0;
 }
 
+.form-group-category h4 {
+  margin-top: 0;
+}
+
 .search-result {
   text-align: right;
   margin-bottom: 15px;
@@ -1287,7 +1291,6 @@ button.map-toggle:hover,
 
 .filter-clear {
   background-color: #0EA6CE;
-  /* color: #555; */
   color: #fff;
   height: 100%;
   align-items: center;

@@ -8,6 +8,7 @@ import fileSize from '../../assets/fileSize'
 import DragAndDrop from '../../common/form/elements/DragAndDrop'
 import InputLengthValidator from './elements/InputLengthValidator'
 import TextareaLengthValidator from './elements/TextareaLengthValidator'
+import QuickSearch from './elements/QuickSearch'
 import FormPaginator from './elements/FormPaginator'
 import clonedeep from 'lodash.clonedeep'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -125,6 +126,13 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
               info={''}
               onChange={handleChange}
             />
+
+            <div className="input-wrapper">
+              <label htmlFor="location">Helyszín</label>
+              <div className="tipp">Ha az ötleted egy konkrét helyszínre szól, vagy szeretnéd, hogy egy adott városrészben valósuljon meg, írd le a helyszínt minél pontosabban! Kérjük, vedd figyelembe, hogy különböző okok miatt nem biztos, hogy ötletedet a Főváros pontosan az általad javasolt helyszínen meg tudja valósítani.</div>
+
+              <QuickSearch changeRaw={changeRaw} location={values.location} error={values.error && values.error.location} />
+            </div>
 
             <div className="input-wrapper">
               <label htmlFor="links">Kapcsolódó hivatkozások</label>
