@@ -548,7 +548,7 @@ input[type="submit"] {
 }
 
 .cookie-notice {
-  background-color: #FCE550;
+  background-color: #f6d05f;
   color: #0ea6ce;
   position: fixed;
   bottom: 0;
@@ -597,6 +597,7 @@ input[type="submit"] {
   color: #fff;
   text-transform: uppercase;
   margin-left: 10px;
+  border-radius: 4px;
 }
 
 .cookie-notice-buttons > a:first-of-type {
@@ -631,6 +632,7 @@ input[type="submit"] {
   padding: 8px;
   font-size: 14px;
   font-weight: bold;
+  border-radius: 4px;
 }
 
 .success-message {
