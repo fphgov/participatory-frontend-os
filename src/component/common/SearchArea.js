@@ -91,8 +91,8 @@ export default function SearchArea({ title, values, queryRef, inputChange, trigg
               <select name="campaign" onChange={inputChange} value={values.campaign}>
                 <option value="">Keresés időszak alapján</option>
                 <option disabled="disabled">----</option>
-                <option value="1">2020/2021</option>
                 <option value="2">2021/2022</option>
+                <option value="1">2020/2021</option>
               </select>
             </div>
 
@@ -108,9 +108,10 @@ export default function SearchArea({ title, values, queryRef, inputChange, trigg
                 </>}
 
                 {type === 'idea' && <>
-                  <option value="published">Közzétéve</option>
+                  <option value="published">Beérkezett</option>
                   <option value="voting_list">Szavazólistán</option>
                   <option value="council_rejected">Tanács elutasította</option>
+                  <option value="status_rejected">Szakmailag nem megfelelő</option>
                 </>}
               </select>
             </div>
