@@ -12,40 +12,44 @@ const MobileMenu = (props) => {
   return (
     <div className="mobile-menu">
       <div className="container">
-        <ul>
-          {props.menu.map((menuItem, i) => {
-            if (
-              menuItem.onHideLoggedIn === true && localStorage.getItem('auth_token') !== null ||
-              menuItem.onHideLoggedOut === true && localStorage.getItem('auth_token') === null
-            ) return;
+        <div className="row">
+          <div className="col-md-12">
+            <ul>
+              {props.menu.map((menuItem, i) => {
+                if (
+                  menuItem.onHideLoggedIn === true && localStorage.getItem('auth_token') !== null ||
+                  menuItem.onHideLoggedOut === true && localStorage.getItem('auth_token') === null
+                ) return;
 
-            if (Array.isArray(menuItem.roles) && !menuItem.roles.includes(tokenParser('user.role'))) return;
+                if (Array.isArray(menuItem.roles) && !menuItem.roles.includes(tokenParser('user.role'))) return;
 
-            if (menuItem.outside) {
-              return (
-                <li key={i.toString()}>
-                  <a href={menuItem.href} onClick={props.onClick} rel="noopener noreferrer">{menuItem.title}</a>
-                </li>
-              )
-            }
+                if (menuItem.outside) {
+                  return (
+                    <li key={i.toString()}>
+                      <a href={menuItem.href} onClick={props.onClick} rel="noopener noreferrer">{menuItem.title}</a>
+                    </li>
+                  )
+                }
 
-            if (menuItem.profile) {
-              return (
-                <li key={i.toString()} className={menuItem.highlight ? 'highlight' : ''}>
-                  <Link to={menuItem.href} className={`profile-menu`} onClick={props.onClick}>
-                    <div className="avatar"><img src={getGravatarURL(tokenParser('user.email'))} alt="Avatar kép" aria-hidden="true" /><span className="profil-name">{tokenParser('user.firstname')}</span></div>
-                  </Link>
-                </li>
-              )
-            }
+                if (menuItem.profile) {
+                  return (
+                    <li key={i.toString()} className={menuItem.highlight ? 'highlight' : ''}>
+                      <Link to={menuItem.href} className={`profile-menu`} onClick={props.onClick}>
+                        <div className="avatar"><img src={getGravatarURL(tokenParser('user.email'))} alt="Avatar kép" aria-hidden="true" /><span className="profil-name">{tokenParser('user.firstname')}</span></div>
+                      </Link>
+                    </li>
+                  )
+                }
 
-            return (
-              <li key={i.toString()}>
-                <Link to={menuItem.href} onClick={props.onClick}>{menuItem.title}</Link>
-              </li>
-            )
-          })}
-        </ul>
+                return (
+                  <li key={i.toString()}>
+                    <Link to={menuItem.href} onClick={props.onClick}>{menuItem.title}</Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   )
@@ -102,7 +106,7 @@ export default class Header extends React.Component {
         <nav className="main-navigation">
           <div className="container-fluid">
             <div className="row flex-center">
-              <div className="col-xs-6 col-sm-6 col-md-4">
+              <div className="col-xs-6 col-sm-6 col-md-2">
                 <div className="logo-wrapper">
                   <a href="/" rel="noopener noreferrer">
                     <img src={Logo} alt="Budapest Közösségi Költségvetés" />
@@ -110,7 +114,7 @@ export default class Header extends React.Component {
                 </div>
               </div>
 
-              <div className="col-xs-6 col-sm-6 col-md-8">
+              <div className="col-xs-6 col-sm-6 col-md-10">
                 <ul className="desktop-menu">
                   {this.state.menu.map((menuItem, i) => {
                     if (

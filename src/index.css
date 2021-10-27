@@ -427,7 +427,7 @@ article.post-card:hover .post-more {
   list-style: none;
 }
 
-.mobile-menu>div>ul>li>a {
+.mobile-menu ul>li>a {
   display: block;
   padding: 8px 0;
   font-weight: bold;
@@ -2117,6 +2117,11 @@ time.post-full-meta-date {
   background-color: #fce550;
 }
 
+.hero-images-wrapper .full-width {
+  width: 100%;
+  height: auto;
+}
+
 .categories {
   margin: 30px 0;
 }
@@ -2434,6 +2439,13 @@ input[disabled] {
 @media screen and (min-width: 1200px) {
   .container, .container-sm, .container-md, .container-lg, .container-xl {
     max-width: 1170px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .main-navigation a {
+    padding-left: 5px;
+    padding-right: 5px;
   }
 }
 
