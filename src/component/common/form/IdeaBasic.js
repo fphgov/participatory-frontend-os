@@ -110,7 +110,7 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
             />
 
             <TextareaLengthValidator
-              title="Mit oldana meg / mire megoldás?*"
+              title="Mire megoldás az ötleted?*"
               name="solution"
               tipp="Írd le röviden, hogy miért van szükség erre a fejlesztésre, kiknek milyen helyzetre, problémára ad választ, megoldást!"
               value={values.solution}
@@ -120,7 +120,7 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
             />
 
             <TextareaLengthValidator
-              title="Leírás*"
+              title="Az ötlet leírása*"
               name="description"
               tipp="Írd le röviden az ötleted, vagyis azt, hogy javaslatod szerint a Főváros mit hozzon létre a közösségi költségvetés keretében!"
               value={values.description}

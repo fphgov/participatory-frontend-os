@@ -221,11 +221,11 @@ export default function IdeaSubmission() {
                 <legend>Ötletbeküldése</legend>
 
                 {!success ? <>
-                  <p>Üdvözlünk Budapest közösségi költségvetésének ötletbenyújtó felületén!</p>
+                  <p>Üdvözlünk a budapesti közösségi költségvetés ötletbenyújtó felületén!</p>
 
-                  <p>Javasoljuk, hogy az ötleted benyújtása előtt mindenképp olvasd el <Link to="/hirek/tudnivalok-az-otletek-benyujtasarol" target="_blank">a kategóriák leírásait és a beküldésről szóló cikket</Link>.</p>
+                  <p>Kérünk, hogy ötleted benyújtása előtt olvasd el <Link to="/hirek/tudnivalok-az-otletek-benyujtasarol" target="_blank">a kategóriák leírásait és a beküldésről szóló cikket</Link>.</p>
 
-                  <p>Hasznos, ha akkor kezdesz neki ötlet beküldésének, ha azt már átgondoltad és leírtad részleteiben, mert az űrlap kitöltése nem szakítható félbe. A beérkezett ötletek ellenőrzés után nyilvánosan megtekinthetők lesznek a Beküldött ötletek menüpontban.</p>
+                  <p>Hasznos, ha akkor kezdesz neki ötleted beküldésének, ha azt már átgondoltad és leírtad részleteiben, mert az űrlap kitöltése nem szakítható félbe. Ötleted és a regisztrációnál megadott neved a beküldés után, rövid ellenőrzést követően mindenki számára láthatóvá válik a honlapon a beküldött ötletek között (erről e-mailen kapsz jelzést).</p>
 
                   <p>Köszönjük, hogy megosztod velünk az ötleted!</p>
 

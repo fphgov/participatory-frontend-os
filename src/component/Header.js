@@ -4,7 +4,7 @@ import {
 } from "react-router-dom"
 import StoreContext from '../StoreContext'
 import tokenParser from './assets/tokenParser'
-import Logo from '../img/logo-bp-participatory.svg'
+import Logo from '../img/kozossegi_koltsegvetes.svg'
 import VoteModal from "./common/VoteModal"
 import getGravatarURL from "./lib/gravatar"
 
@@ -61,14 +61,14 @@ export default class Header extends React.Component {
       pathname: '/',
       openMenu: false,
       menu: [
-        { title: "Mi ez?", href: "/oldal/bovebben-a-reszveteli-koltsegvetesrol", outside: false },
+        { title: "Mi a közösségi költségvetés?", href: "/oldal/bovebben-a-reszveteli-koltsegvetesrol", outside: false },
         { title: "Ötletbeküldés", href: "/bekuldes", outside: false },
         { title: "Beküldött ötletek", href: "/otletek?campaign=2", outside: true },
         { title: "Megvalósuló ötletek", href: "/projektek?status=under_construction", outside: false },
         { title: "Hírek", href: "/hirek", outside: false },
         { title: "Rendezvények", href: "/rendezvenyek", outside: false },
         { title: "Bejelentkezés", href: "/bejelentkezes", highlight: false, onHideLoggedIn: true, onHideLoggedOut: false },
-        { title: "Fiók", href: "/profil", highlight: false, onHideLoggedIn: false, onHideLoggedOut: true, profile: true },
+        { title: "Fiók", href: "/fiok", highlight: false, onHideLoggedIn: false, onHideLoggedOut: true, outside: false, profile: true },
       ]
     }
   }

@@ -5,6 +5,8 @@ import {
   Link,
 } from "react-router-dom"
 import API from '../assets/axios'
+import Newsletter from '../../img/hirlevel.png'
+import HeroLogo from '../../img/kozossegi_koltsegvetes_hero_logo.svg'
 
 export default function Home() {
   const context = useContext(StoreContext)
@@ -52,12 +54,13 @@ export default function Home() {
         <div className="hero-content">
           <div className="container">
             <div className="row">
-              <div className="offset-md-2 col-md-8">
-                <h2>Üdvözlünk a budapesti közösségi költségvetés honlapján!</h2>
+              <div className="col-md-12">
+                <img src={HeroLogo} alt="Közösségi Költségvetés logója" />
 
+                <h2>Adj egy jó ötlet!</h2>
+
+                <p>Üdvözlünk a budapesti közösségi költségvetés honlapján!</p>
                 <p>Regisztrálj és add be ötletedet 2022. január 31-ig!</p>
-
-                <p>Adj egy jó ötlet!</p>
 
                 <Link className="btn btn-primary" to="/bekuldes">Ötletet adok be</Link>
               </div>
@@ -70,7 +73,7 @@ export default function Home() {
         <div className="container">
           <div className="row">
             <div className="col-md-6 col-xs-6 col-sm-6">
-              <h2>Hírek</h2>
+              <h2>Hírek / Rendezvények</h2>
             </div>
 
             <div className="col-md-6 col-xs-6 col-sm-6">
@@ -120,8 +123,6 @@ export default function Home() {
             <div className="col-md-12">
               <h2>Ötletbeküldés menete</h2>
 
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged</p>
-
               <div className="row flex-center">
                 <div className="col-md-6">
                   <div className="iframe-video" dangerouslySetInnerHTML={{ __html: '<iframe width="100%" height="315" src="https://www.youtube.com/embed/gk08qFY9Q7o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' }} />
@@ -134,7 +135,7 @@ export default function Home() {
 
                   <div className="timeline-item">
                     <h3>Beküldés</h3>
-                    <p>Regisztrálj az otlet.budapest.hu oldalon és nyújtsd be ötleted a megfelelő kategóriába 2022 január 31-ig</p>
+                    <p>Regisztrálj az otlet.budapest.hu oldalon és nyújtsd be ötleted a megfelelő kategóriába 2022. január 31-ig</p>
                   </div>
 
                   <div className="timeline-item">
@@ -153,8 +154,6 @@ export default function Home() {
           <div className="row">
             <div className="col-md-12">
               <h2>Kategória cím</h2>
-
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged</p>
             </div>
           </div>
 
@@ -163,7 +162,7 @@ export default function Home() {
               <div className="col-md-4">
                 <Link to="/oldal/kiiras#zold-budapest" className="category-item">
                   <div className="category-image"><img src={`${process.env.REACT_APP_SERVER_FILE}/n_1_1254965691.png`} alt="" /></div>
-                  <h3 className="category-title">Zöldebb városért</h3>
+                  <h3 className="category-title">Zöld Budapest</h3>
                   <div className="category-descrption">Lorem Ipsum is simply dummy text of the printing and typesetting industry</div>
                 </Link>
               </div>
@@ -171,7 +170,7 @@ export default function Home() {
               <div className="col-md-4">
                 <Link to="/oldal/kiiras#eselyteremto-budapest" className="category-item">
                   <div className="category-image"><img src={`${process.env.REACT_APP_SERVER_FILE}/n_1_1254965691.png`} alt="" /></div>
-                  <h3 className="category-title">Esélyteremtő városért</h3>
+                  <h3 className="category-title">Esélyteremtő Budapest</h3>
                   <div className="category-descrption">Lorem Ipsum is simply dummy text of the printing and typesetting industry</div>
                 </Link>
               </div>
@@ -179,7 +178,7 @@ export default function Home() {
               <div className="col-md-4">
                 <Link to="/oldal/kiiras#nyitott-budapest" className="category-item">
                   <div className="category-image"><img src={`${process.env.REACT_APP_SERVER_FILE}/n_1_1254965691.png`} alt="" /></div>
-                  <h3 className="category-title">Mert Budapest mindenkié</h3>
+                  <h3 className="category-title">Nyitott Budapest</h3>
                   <div className="category-descrption">Lorem Ipsum is simply dummy text of the printing and typesetting industry</div>
                 </Link>
               </div>
@@ -192,12 +191,12 @@ export default function Home() {
         <div className="container">
           <div className="row flex-center">
             <div className="col-md-4">
-              <img src="https://budapest.hu/Kpek2021/hirlevel.png" alt="Értesüljön egy helyen a fővárosi ügyekről promóciós kép" />
+              <img src={Newsletter} alt="Értesüljön egy helyen a fővárosi ügyekről promóciós kép" />
             </div>
             <div className="col-md-8">
               <h3>Érdekel, hogy mi történik Budapesten? Iratkozz fel a Fővárosi Önkormányzat hírlevelére!</h3>
 
-              <p>Új, átláthatóbb és letisztultabb formátumban jelentkezünk minden héten a főváros legfontosabb ügyeivel a megújult hírlevelünkben.</p>
+              <p>Új, átláthatóbb és letisztultabb formátumban jelentkezünk minden héten a főváros legfontosabb ügyeivel megújult hírlevelünkben.</p>
 
               <a className="btn btn-primary" href="https://hirlevel.budapest.hu/subscribe.php?cid=8ILl2QAD-" target="_blank" rel="noopener noreferrer">Kattints ide a feliratkozáshoz</a>
             </div>

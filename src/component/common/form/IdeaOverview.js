@@ -37,7 +37,7 @@ export default function IdeaOverview({ firstStep, values, submitIdea, error }) {
       <h3>Áttekintés</h3>
 
       <div className="form-group location">
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit consequuntur fugiat, dolor iste ipsa suscipit illo minima non vel aperiam repellat ex quaerat odio, mollitia, perferendis dicta blanditiis totam odit.</p>
+        <p>Így néz ki ötleted. Küldd be a „beküldöm az ötletet” gombbal, vagy, ha még változtatnál rajta, kiegészítenéd, akkor kattints a „javítom” gombra!</p>
 
         {error && error.form ? <div className="error">
           <ErrorRender error={error} name="form" />

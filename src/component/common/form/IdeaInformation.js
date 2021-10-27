@@ -19,7 +19,7 @@ export default function IdeaInformation({ nextStep, prevStep, handleChange, hand
             </div>
 
             <div className="input-wrapper">
-              <h4>Részt venne a megvalósításban?</h4>
+              <h4>Részt vennél az ötlet részleteinek kidolgozásában?</h4>
 
               <div className="tipp">A szavazást követően a nyertes ötleteket a főváros részletesen kidolgozza, szükség esetén tervezteti. A kidolgozás során bevonjuk azokat az ötletgazdákat, akik ezt szeretnék. Kérjük, jelöld, hogy kívánsz-e az ötlet kidolgozásában részt venni, ha igen milyen tudással, háttérrel!</div>
 
