@@ -218,7 +218,7 @@ export default function IdeaSubmission() {
               <fieldset>
                 {(typeof error === 'string') ? <Error message={error} /> : null}
 
-                <legend>Ötlet beküldése</legend>
+                <legend>Ötletbeküldése</legend>
 
                 {!success ? <>
                   <p>Üdvözöljük Budapest közösségi költségvetésének ötletbenyújtó felületén!</p>
@@ -289,7 +289,7 @@ export default function IdeaSubmission() {
                           }
                       })()}
                     </div>
-                  </> : <p>Ötlet beküldéshez <Link to="/bejelentkezes">be kell jelentkezni</Link>.</p>}
+                  </> : <p>Ötletbeküldéshez <Link to="/bejelentkezes">be kell jelentkezni</Link>.</p>}
                 </>: null}
               </fieldset>
 
@@ -304,7 +304,7 @@ export default function IdeaSubmission() {
             </form>
 
             {success ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
-              <p>Az ötlet beküldés sikeres, hamarosan kap egy megerősítő e-mailt.</p>
+              <p>Az ötletbeküldés sikeres, hamarosan kap egy megerősítő e-mailt.</p>
             </div> : null}
           </div>
         </div>

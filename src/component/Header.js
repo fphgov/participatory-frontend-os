@@ -62,10 +62,9 @@ export default class Header extends React.Component {
       openMenu: false,
       menu: [
         { title: "Mi ez?", href: "/oldal/bovebben-a-reszveteli-koltsegvetesrol", outside: false },
-        { title: "Kiírás", href: "/oldal/kiiras", outside: false },
+        { title: "Ötletbeküldés", href: "/bekuldes", outside: false },
         { title: "Beküldött ötletek", href: "/otletek?campaign=2", outside: true },
         { title: "Megvalósuló ötletek", href: "/projektek?status=under_construction", outside: false },
-        { title: "Ötlet beküldés", href: "/bekuldes", outside: false },
         { title: "Hírek", href: "/hirek", outside: false },
         { title: "Rendezvények", href: "/rendezvenyek", outside: false },
         { title: "Bejelentkezés", href: "/bejelentkezes", highlight: false, onHideLoggedIn: true, onHideLoggedOut: false },
