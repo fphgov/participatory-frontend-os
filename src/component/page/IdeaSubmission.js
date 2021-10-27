@@ -190,7 +190,7 @@ export default function IdeaSubmission() {
         setError(error.response.data.errors)
         setScroll(true)
       } else {
-        setError('Váratlan hiba történt, kérjük próbálja később')
+        setError('Váratlan hiba történt, kérjük próbáld később')
         setScroll(true)
       }
 

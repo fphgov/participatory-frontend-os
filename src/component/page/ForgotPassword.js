@@ -29,7 +29,7 @@ export default function ForgotPassword() {
       if (error.response && error.response.data && error.response.data.message) {
         setError(error.response.data.message)
       } else {
-        setError('Váratlan hiba történt, kérjük próbálja később')
+        setError('Váratlan hiba történt, kérünk próbáld később')
       }
     }).finally(() => {
       context.set('loading', false)
@@ -52,7 +52,7 @@ export default function ForgotPassword() {
         <h1>Elfelejtett jelszó</h1>
 
         {error ? <Error message={error} /> : <div>
-          {!success ? <p>Kérlek, add meg az e-mail címed. Az aktiváló linket e-mailben kapod meg.</p> : null}
+          {!success ? <p>Kérünk, add meg az e-mail címed. Az aktiváló linket e-mailben kapod meg.</p> : null}
 
           {success ? <>
             <p>Amennyiben szerepel az e-mail cím a rendszerben, úgy az aktiváló linket kiküldtük.</p>
