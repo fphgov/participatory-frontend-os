@@ -202,6 +202,7 @@ export default function Registration() {
 
                     <div className="input-wrapper">
                       <label htmlFor="postal_code">Irányítószám</label>
+                      <p className="tipp">Ahol élsz, vagy ha ez nem budapesti, akkor ahol dolgozol/tanulsz.</p>
                       <input type="text" placeholder="Irányítószám" name="postal_code" id="postal_code" maxlength="4" value={filterData.postal_code} onChange={handleChangeNumberInput} />
 
                       {error && error.postal_code ? Object.values(error.postal_code).map((err, i) => {
@@ -232,7 +233,7 @@ export default function Registration() {
                     <div className="form-group">
                       <label htmlFor="live_in_city" className="form-group-label">
                         <input className="form-control" type="checkbox" id="live_in_city" name="live_in_city" value={filterData.live_in_city} onChange={handleChangeInput} />
-                        Kijelentem, hogy elmúltam 18 éves és budapesti lakos vagyok, vagy Budapesten dolgozom, vagy Budapesten tanulok. *
+                        Kijelentem, hogy elmúltam 16 éves és budapesti lakos vagyok, vagy Budapesten dolgozom, vagy Budapesten tanulok. *
                       </label>
 
                       {error && error.live_in_city ? Object.values(error.live_in_city).map((err, i) => {
@@ -243,7 +244,7 @@ export default function Registration() {
                     <div className="form-group">
                       <label htmlFor="privacy" className="form-group-label">
                         <input className="form-control" type="checkbox" id="privacy" name="privacy" value={filterData.privacy} onChange={handleChangeInput} />
-                        Elfogadom az <a href={`${process.env.REACT_APP_SERVER_FILE}/files/adatkezelesi_tajekozato.pdf`} target="_blank" rel="noopener noreferrer">adatvédelmi tájékoztatót</a> *
+                        Elfogadom az <a href={`${process.env.REACT_APP_SERVER_FILE}/adatkezelesi_tajekozato.pdf`} target="_blank" rel="noopener noreferrer">adatvédelmi tájékoztatót</a> *
                       </label>
 
                       {error && error.privacy ? Object.values(error.privacy).map((err, i) => {

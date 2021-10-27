@@ -115,10 +115,10 @@ export default function App() {
               <Route exact path="/otletek/:id" component={Idea} />
               <Route exact path="/projektek" component={Projects} />
               <Route exact path="/projektek/:id" component={Project} />
-              <Route exact path="/fiok" component={Profile} />
-              <Route exact path="/fiok/aktivalas/:hash" component={ProfileActivate} />
-              <Route exact path="/fiok/nyeremeny-aktivalas/:hash" component={PrizeActivate} />
-              <Route exact path="/fiok/jelszo/:hash" component={ResetPassword} />
+              <Route exact path="/profil" component={Profile} />
+              <Route exact path="/profil/aktivalas/:hash" component={ProfileActivate} />
+              <Route exact path="/profil/nyeremeny-aktivalas/:hash" component={PrizeActivate} />
+              <Route exact path="/profil/jelszo/:hash" component={ResetPassword} />
               <Route exact path="/regisztracio" component={Registration} />
               <Route exact path="/elfelejtett-jelszo" component={ForgotPassword} />
               <Route exact path="/404" component={NotFound} />

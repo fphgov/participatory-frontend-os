@@ -68,7 +68,7 @@ export default class Header extends React.Component {
         { title: "Hírek", href: "/hirek", outside: false },
         { title: "Rendezvények", href: "/rendezvenyek", outside: false },
         { title: "Bejelentkezés", href: "/bejelentkezes", highlight: false, onHideLoggedIn: true, onHideLoggedOut: false },
-        { title: "Fiók", href: "/fiok", highlight: false, onHideLoggedIn: false, onHideLoggedOut: true, outside: false, profile: false },
+        { title: "Fiók", href: "/profil", highlight: false, onHideLoggedIn: false, onHideLoggedOut: true, outside: false, profile: false },
       ]
     }
   }

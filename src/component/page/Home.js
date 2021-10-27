@@ -160,26 +160,26 @@ export default function Home() {
           <div className="categories">
             <div className="row">
               <div className="col-md-4">
-                <Link to="/oldal/kiiras#zold-budapest" className="category-item">
+                <Link to="/hirek/tudnivalok-az-otletek-benyujtasarol-2021#zold-budapest" className="category-item">
                   <div className="category-image"><img src={`${process.env.REACT_APP_SERVER_FILE}/n_1_1254965691.png`} alt="" /></div>
                   <h3 className="category-title">Zöld Budapest</h3>
-                  <div className="category-descrption">Lorem Ipsum is simply dummy text of the printing and typesetting industry</div>
+                  <div className="category-descrption"></div>
                 </Link>
               </div>
 
               <div className="col-md-4">
-                <Link to="/oldal/kiiras#eselyteremto-budapest" className="category-item">
+                <Link to="/hirek/tudnivalok-az-otletek-benyujtasarol-2021#eselyteremto-budapest" className="category-item">
                   <div className="category-image"><img src={`${process.env.REACT_APP_SERVER_FILE}/n_1_1254965691.png`} alt="" /></div>
                   <h3 className="category-title">Esélyteremtő Budapest</h3>
-                  <div className="category-descrption">Lorem Ipsum is simply dummy text of the printing and typesetting industry</div>
+                  <div className="category-descrption"></div>
                 </Link>
               </div>
 
               <div className="col-md-4">
-                <Link to="/oldal/kiiras#nyitott-budapest" className="category-item">
+                <Link to="/hirek/tudnivalok-az-otletek-benyujtasarol-2021#nyitott-budapest" className="category-item">
                   <div className="category-image"><img src={`${process.env.REACT_APP_SERVER_FILE}/n_1_1254965691.png`} alt="" /></div>
                   <h3 className="category-title">Nyitott Budapest</h3>
-                  <div className="category-descrption">Lorem Ipsum is simply dummy text of the printing and typesetting industry</div>
+                  <div className="category-descrption"></div>
                 </Link>
               </div>
             </div>
