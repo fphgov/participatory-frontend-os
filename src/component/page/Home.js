@@ -6,7 +6,6 @@ import {
 } from "react-router-dom"
 import API from '../assets/axios'
 import Newsletter from '../../img/hirlevel.png'
-// import HeroLogo from '../../img/kozossegi_koltsegvetes_hero_logo.svg'
 import HeroTexts from '../../img/hero_texts.svg'
 import CategoryLogo1 from '../../img/zold_budapest_white_category.svg'
 import CategoryLogo2 from '../../img/eselyteremto_budapest_white_category.svg'
@@ -21,8 +20,11 @@ export default function Home() {
     setPosts(null)
     context.set('loading', true)
 
+    const categoryIds = [1, 3]
+
     const data = {
-      limit: 3
+      category: categoryIds,
+      limit: 3,
     }
 
     API.get(
@@ -60,7 +62,6 @@ export default function Home() {
             <div className="row">
               <div className="col-md-12">
                 <div className="hero-images-wrapper">
-                  {/* <img src={HeroLogo} alt="Közösségi Költségvetés logója" /> */}
                   <img src={HeroTexts} className="full-width" alt="Szöveg buborék illusztráció" />
                 </div>
 
