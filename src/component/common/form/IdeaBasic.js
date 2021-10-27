@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Link,
 } from "react-router-dom"
@@ -12,8 +12,6 @@ import FormPaginator from './elements/FormPaginator'
 import clonedeep from 'lodash.clonedeep'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlusCircle, faMinusCircle, faFileUpload, faFile } from "@fortawesome/free-solid-svg-icons"
-import getGravatarURL from "../../lib/gravatar"
-import tokenParser from '../../assets/tokenParser'
 
 export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRemoveElem, handleChange, values, profile }) {
   const [ dragged, setDragged ] = useState(false)
@@ -90,7 +88,6 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
 
             {profile ? <>
               <div className="profile">
-                <div className="avatar"><img src={getGravatarURL(tokenParser('user.email'))} alt="Avatar kép" aria-hidden="true" /></div>
                 <div className="profil-information">
                   Ötletbeküldés <span className="profile-name">{`${profile.lastname} ${profile.firstname}`}</span> névvel. Nem Te vagy az? <Link to="/kijelentkezes">Kijelentkezés</Link>
                 </div>
