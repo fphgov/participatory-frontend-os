@@ -9,19 +9,22 @@ import StoreContext from '../../StoreContext'
 export default function ProfileActivate() {
   const context = useContext(StoreContext)
 
+  const [ success, setSuccess ] = useState(false)
   const [ error, setError ] = useState('')
   const [ redirectLogin, setRedirectLogin ] = useState(false)
 
   let { hash } = useParams()
 
-  const profileActivate = () => {
+  const submitProfileActivate = () => {
+    context.set('loading', true)
+
     const link = process.env.REACT_APP_API_REQ_PROFILE_ACTIVATE.toString().replace(':hash', hash)
 
     axios
     .get(link)
     .then(response => {
-      if (response.data) {
-
+      if (response.status === 200) {
+        setSuccess(true)
       }
     })
     .catch(error => {
@@ -38,10 +41,6 @@ export default function ProfileActivate() {
 
   useEffect(() => {
     document.body.classList.add('page-profile-activate')
-
-    context.set('loading', true, () => {
-      profileActivate()
-    })
 
     return () => {
       document.body.classList.remove('page-profile-activate')
@@ -71,11 +70,20 @@ export default function ProfileActivate() {
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <h1>Felhasználói fiók aktíválása</h1>
+            <h1>Felhasználói fiók aktiválása</h1>
 
-            {! context.get('loading') ? (<>
-              {error ? <Error message={error} /> : <Success message="Felhasználói fiókját aktiváltuk" />}
+            <p>Hamarosan újraindul a fővárosi részvételi költségvetés, 2021-ben közösségi költségvetés néven. Aktiváld fiókod, ha szeretnél az idei ötletgyűjtésben is részt venni.</p>
 
+            {error ? <Error message={error} /> : null}
+            {success ? <Success message="Sikeresen jelentkezett a nyereményjátékra!" /> : null}
+
+            {! success ? <input type="submit" value="Aktiválom" className="btn btn-primary" onClick={() => {
+              submitProfileActivate()
+            }} /> : null}
+
+            <p><i>Ha nem nyomsz az aktiválás gombra, 2021. november 1-jén éjfél után töröljük a fiókodat. Ezután ötlet beküldéséhez újra kell majd regisztrálnod.</i></p>
+
+            {!context.get('loading') && success ? (<>
               <div className="small">
                 <button className="btn btn-primary" onClick={() => { setRedirectLogin(true) }}>Tovább</button>
               </div>

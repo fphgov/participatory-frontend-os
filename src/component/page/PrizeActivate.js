@@ -25,7 +25,7 @@ export default function ProfileActivate() {
     .get(link)
     .then(response => {
       if (response.status === 200) {
-        setSuccess(response.data.message)
+        setSuccess(true)
       }
     })
     .catch(error => {

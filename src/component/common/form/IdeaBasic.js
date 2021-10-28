@@ -12,7 +12,7 @@ import QuickSearch from './elements/QuickSearch'
 import FormPaginator from './elements/FormPaginator'
 import clonedeep from 'lodash.clonedeep'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlusCircle, faMinusCircle, faFileUpload, faFile } from "@fortawesome/free-solid-svg-icons"
+import { faPlusCircle, faTrash, faFileUpload, faFile } from "@fortawesome/free-solid-svg-icons"
 
 export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRemoveElem, handleChange, values, profile }) {
   const [ dragged, setDragged ] = useState(false)
@@ -64,7 +64,7 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
 
   const validationAndNext = () => {
     if (tempLink.length > 0) {
-      alert('A kapcsolodó link mező nem üres. Ha valós nyomja meg a Hozzáadás gombot, vagy törölje a mező értékét.')
+      alert('A kapcsolodó hivatkozások mező nem üres. Hivatkozás hozzáadásához nyomd meg a mező alatti Hozzáadás gombot, vagy töröld a mező tartalmát.')
 
       return
     }
@@ -143,7 +143,7 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
                   <div key={i} className="link-elem">
                     <button className="danger" onClick={() => {
                       handleRemoveElem('links', link)
-                    }}><FontAwesomeIcon icon={faMinusCircle} rel="noopener noreferrer" /> Eltávolítás</button>
+                    }}><FontAwesomeIcon icon={faTrash} rel="noopener noreferrer" /> Eltávolítás</button>
 
                     <a href={link} target="_blank">{link}</a>
                   </div>
@@ -197,7 +197,7 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
                       {tempMedia.map((file, i) => {
                         return (
                           <div key={`file-${i}`} className="file-elem">
-                            <div className="file-elem-remove" onClick={() => { removeTempMedia(file) }}><FontAwesomeIcon icon={faMinusCircle} size="1x" /></div>
+                            <div className="file-elem-remove" onClick={() => { removeTempMedia(file) }}><FontAwesomeIcon icon={faTrash} size="1x" /></div>
                             <div className="file-elem-icon"><FontAwesomeIcon icon={faFile} size="2x" /></div>
                             <div className="file-elem-name">{file.name}</div>
                             <div className="file-elem-size">({fileSize(file.size)})</div>

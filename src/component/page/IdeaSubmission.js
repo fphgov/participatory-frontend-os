@@ -218,7 +218,7 @@ export default function IdeaSubmission() {
               <fieldset>
                 {(typeof error === 'string') ? <Error message={error} /> : null}
 
-                <legend>Ötletbeküldése</legend>
+                <legend>Ötlet beküldése</legend>
 
                 {!success ? <>
                   <p>Üdvözlünk a budapesti közösségi költségvetés ötletbenyújtó felületén!</p>

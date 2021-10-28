@@ -1065,7 +1065,7 @@ fieldset .form-group a {
 }
 
 .form-group .link-elem a {
-  margin-left: 12px;
+  margin-left: 12px !important;
 }
 
 .danger {
@@ -2116,6 +2116,7 @@ time.post-full-meta-date {
 .hero-content .btn {
   margin: 30px 0 0 0;
   background-color: #f6d05f;
+  color: #12326E;
 }
 
 .hero-content .btn.btn-primary:hover {
@@ -2125,6 +2126,10 @@ time.post-full-meta-date {
 .hero-images-wrapper .full-width {
   width: 100%;
   height: auto;
+}
+
+.hero-content p {
+  font-size: 18px;
 }
 
 .categories {

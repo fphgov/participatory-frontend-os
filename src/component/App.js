@@ -5,9 +5,7 @@ import {
   Route,
   Switch,
 } from "react-router-dom"
-import Header from "./Header"
-import Footer from "./Footer"
-import Page from "./Page"
+import Layout from "./Layout"
 import NotFound from "./page/NotFound"
 import Login from "./page/Login"
 import Statistics from "./page/Statistics"
@@ -96,38 +94,33 @@ export default function App() {
     <div className="app">
       <Router basename={process.env.REACT_APP_BASENAME}>
         {(process.env.GA_ID || process.env.GTM_ID) ? <CookieNotice /> : ''}
+
         <ScrollToTop>
-          <Header />
+          <Switch>
+            <Route exact path="/" render={() => <Layout><Home /></Layout>} />
+            <Route exact path="/bejelentkezes" render={() => <Layout><Login /></Layout>} />
+            <Route exact path="/kijelentkezes" render={() => <Layout><Logout /></Layout>} />
+            <Route exact path="/bekuldes" render={() => <Layout><IdeaSubmission /></Layout>} />
+            <Route exact path="/oldal/:slug" render={() => <Layout><SimplePage /></Layout>} />
+            <Route exact path="/rendezvenyek" render={() => <Layout><PostsEvent /></Layout>} />
+            <Route exact path="/hirek" render={() => <Layout><Posts /></Layout>} />
+            <Route exact path="/hirek/:slug" render={() => <Layout><Post /></Layout>} />
+            <Route exact path="/statisztika" render={() => <Layout><Statistics /></Layout>} />
+            <Route exact path="/statisztika/:id" render={() => <Layout><Statistics /></Layout>} />
+            <Route exact path="/otletek" render={() => <Layout><Ideas /></Layout>} />
+            <Route exact path="/otletek/:id" render={() => <Layout><Idea /></Layout>} />
+            <Route exact path="/projektek" render={() => <Layout><Projects /></Layout>} />
+            <Route exact path="/projektek/:id" render={() => <Layout><Project /></Layout>} />
+            <Route exact path="/profil" render={() => <Layout><Profile /></Layout>} />
+            <Route exact path="/profil/aktivalas/:hash" render={() => <Layout><ProfileActivate /></Layout>} />
+            <Route exact path="/profil/nyeremeny-aktivalas/:hash" render={() => <Layout><PrizeActivate /></Layout>} />
+            <Route exact path="/profil/jelszo/:hash" render={() => <Layout><ResetPassword /></Layout>} />
+            <Route exact path="/regisztracio" render={() => <Layout><Registration /></Layout>} />
+            <Route exact path="/elfelejtett-jelszo" render={() => <Layout><ForgotPassword /></Layout>} />
+            <Route exact path="/404" render={() => <Layout><NotFound /></Layout>} />
 
-          <Page>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/bejelentkezes" component={Login} />
-              <Route exact path="/kijelentkezes" component={Logout} />
-              <Route exact path="/bekuldes" component={IdeaSubmission} />
-              <Route exact path="/oldal/:slug" component={SimplePage} />
-              <Route exact path="/rendezvenyek" component={PostsEvent} />
-              <Route exact path="/hirek" component={Posts} />
-              <Route exact path="/hirek/:slug" component={Post} />
-              <Route exact path="/statisztika" component={Statistics} />
-              <Route exact path="/statisztika/:id" component={Statistics} />
-              <Route exact path="/otletek" component={Ideas} />
-              <Route exact path="/otletek/:id" component={Idea} />
-              <Route exact path="/projektek" component={Projects} />
-              <Route exact path="/projektek/:id" component={Project} />
-              <Route exact path="/profil" component={Profile} />
-              <Route exact path="/profil/aktivalas/:hash" component={ProfileActivate} />
-              <Route exact path="/profil/nyeremeny-aktivalas/:hash" component={PrizeActivate} />
-              <Route exact path="/profil/jelszo/:hash" component={ResetPassword} />
-              <Route exact path="/regisztracio" component={Registration} />
-              <Route exact path="/elfelejtett-jelszo" component={ForgotPassword} />
-              <Route exact path="/404" component={NotFound} />
-
-              <Route exact path="*" component={NotFound} />
-            </Switch>
-          </Page>
-
-          <Footer />
+            <Route exact path="*" render={() => <Layout><NotFound /></Layout>} />
+          </Switch>
         </ScrollToTop>
       </Router>
     </div>

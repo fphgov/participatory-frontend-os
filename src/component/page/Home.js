@@ -65,7 +65,7 @@ export default function Home() {
                   <img src={HeroTexts} className="full-width" alt="Szöveg buborék illusztráció" />
                 </div>
 
-                <h2>Adj egy jó ötlet!</h2>
+                <h2>Adj egy jó ötletet!</h2>
 
                 <p>Üdvözlünk a budapesti közösségi költségvetés honlapján!</p>
                 <p>Regisztrálj és add be ötletedet 2022. január 31-ig!</p>

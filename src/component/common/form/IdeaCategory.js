@@ -8,7 +8,7 @@ export default function IdeaCategory({ nextStep, prevStep, handleChange, values 
 
   return (
     <div>
-      <h3>Ötlet helye és kategóriája</h3>
+      <h3>Ötlet kategóriája</h3>
 
       <div className="form-group form-group-category">
         <p>Válaszd ki az ötlet <b>témáját</b> *</p>
@@ -17,7 +17,7 @@ export default function IdeaCategory({ nextStep, prevStep, handleChange, values 
           <div className="col-xs-12 col-sm-12">
             <div className="input-wrapper">
               <h4>Kategória *</h4>
-              <div className="tipp">A közösségi költségvetés, az Otthon Budapesten programmal összhangban három kategóriában kínál lehetőséget az ötletek beadására. Kérjük, válassz, hogy a te ötleted melyik kategóriába tartozik az alábbiak közül!</div>
+              <div className="tipp">A közösségi költségvetés az Otthon Budapesten programmal összhangban három kategóriában kínál lehetőséget az ötletek beadására. Kérjük, válassz, hogy a te ötleted melyik kategóriába tartozik az alábbiak közül!</div>
 
               <div className="radio-inline-block">
                 <div className={`radio-inline ${values.theme === "4" ? "active" : ""}`} onClick={() => { if (category4 && category4.current) category4.current.click() }}>
