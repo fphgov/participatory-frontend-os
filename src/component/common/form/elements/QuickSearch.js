@@ -34,7 +34,6 @@ export default function QuickSearch({ changeRaw, location, error }) {
     }
 
     setLoad(true)
-    changeRaw('location', null)
 
     const searchData = new URLSearchParams(data)
 
