@@ -109,7 +109,10 @@ export default function SearchArea({ title, values, queryRef, inputChange, trigg
 
                 {type === 'idea' && <>
                   <option value="published">Beérkezett</option>
+                  <option value="pre_council">Tanács elé kerül</option>
                   <option value="voting_list">Szavazólistán</option>
+                  <option value="under_construction">Megvalósítás alatt</option>
+                  <option value="ready">Megvalósult</option>
                   <option value="not_voted">Szavazáson nem nyert</option>
                   <option value="council_rejected">Tanács elutasította</option>
                   <option value="status_rejected">Szakmailag nem megfelelő</option>
