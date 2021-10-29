@@ -6,7 +6,7 @@ import {
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
 
-export default function ProfileActivate() {
+export default function ProfileSaving() {
   const context = useContext(StoreContext)
 
   const [ success, setSuccess ] = useState(false)
@@ -72,7 +72,7 @@ export default function ProfileActivate() {
           <div className="col-md-12">
             <h1>Felhasználói fiók aktiválása</h1>
 
-            <p>A regisztrációd megerősítéséhez kattints az "Aktíválom" gombra.</p>
+            <p>Hamarosan újraindul a fővárosi részvételi költségvetés, 2021-ben közösségi költségvetés néven. Aktiváld fiókod, ha szeretnél az idei ötletgyűjtésben is részt venni.</p>
 
             {error ? <Error message={error} /> : null}
             {success ? <Success message="Sikeresen aktiváltad a fiókod!" /> : null}
@@ -80,6 +80,8 @@ export default function ProfileActivate() {
             {! success ? <input type="submit" value="Aktiválom" className="btn btn-primary" onClick={() => {
               submitProfileActivate()
             }} /> : null}
+
+            <p><i>Ha nem nyomsz az aktiválás gombra, 2021. november 1-jén éjfél után töröljük a fiókodat. Ezután ötlet beküldéséhez újra kell majd regisztrálnod.</i></p>
 
             {!context.get('loading') && success ? (<>
               <div className="small">

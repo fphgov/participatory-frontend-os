@@ -19,6 +19,7 @@ import Projects from "./page/Projects"
 import Idea from "./page/Idea"
 import Ideas from "./page/Ideas"
 import ProfileActivate from "./page/ProfileActivate"
+import ProfileSaving from "./page/ProfileSaving"
 import PrizeActivate from "./page/PrizeActivate"
 import Registration from "./page/Registration"
 import ResetPassword from "./page/ResetPassword"
@@ -113,6 +114,7 @@ export default function App() {
             <Route exact path="/projektek/:id" render={() => <Layout><Project /></Layout>} />
             <Route exact path="/profil" render={() => <Layout><Profile /></Layout>} />
             <Route exact path="/profil/aktivalas/:hash" render={() => <Layout><ProfileActivate /></Layout>} />
+            <Route exact path="/profil/megorzes/:hash" render={() => <Layout><ProfileSaving /></Layout>} />
             <Route exact path="/profil/nyeremeny-aktivalas/:hash" render={() => <Layout><PrizeActivate /></Layout>} />
             <Route exact path="/profil/jelszo/:hash" render={() => <Layout><ResetPassword /></Layout>} />
             <Route exact path="/regisztracio" render={() => <Layout><Registration /></Layout>} />
