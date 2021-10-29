@@ -1,7 +1,7 @@
 @import "~react-image-gallery/styles/css/image-gallery.css";
 
 body {
-  font-size: 16px;
+  font-size: 18px;
   font-family: 'Source Sans Pro', "Helvetica Neue", Arial, sans-serif;
   font-weight: 400;
   line-height: normal;
@@ -126,7 +126,7 @@ nav.main-navigation ul {
   color: #12326E;
   padding: 12px 13px 12px;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 16px;
   text-decoration: none;
 }
 
@@ -182,7 +182,7 @@ header .logo-wrapper img {
 }
 
 .btn {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   display: inline-block;
   padding: 15px 30px;
@@ -562,7 +562,7 @@ input[type="submit"] {
 .cookie-notice-text {
   color: #19506E;
   font-weight: 300;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .cookie-notice-container {
@@ -775,7 +775,7 @@ input[type="submit"] {
 
 .prop-description {
   margin-bottom: 30px;
-  font-size: 16px;
+  font-size: 18px;
   margin: 0 auto;
   display: block;
   -webkit-line-clamp: 5;
@@ -1159,7 +1159,7 @@ hr {
   align-items: center;
   border: 0px;
   border-radius: 0px;
-  font-size: 16px;
+  font-size: 18px;
   box-shadow: none;
   line-height: 1.42857143;
   color: #555;
@@ -1175,7 +1175,7 @@ hr {
   align-items: center;
   border: 0px;
   border-radius: 0px;
-  font-size: 16px;
+  font-size: 18px;
   box-shadow: none;
   outline: none;
   line-height: 1.42857143;
@@ -2017,10 +2017,11 @@ a.profile-menu:hover span {
 }
 
 h1.post-full-title {
-  font-size: 16px;
+font-size: 18px;
   font-weight: bold;
   margin: 16px 0 32px 0;
   flex: 1;
+  line-height: normal;
 }
 
 .post-item a {

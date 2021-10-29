@@ -69,10 +69,9 @@ export default function Home() {
 
                 <h2>Adj egy jó ötletet!</h2>
 
-                <p>Üdvözlünk a budapesti közösségi költségvetés honlapján!</p>
-
                 { disabledIdeaSubmit ? <>
-                  <p>Hamarosan újraindul a fővárosi részvételi költségvetés, 2021-ben közösségi költségvetés néven. Aktiváld fiókod a tőlünk kapott emailben, ha szeretnél az idei ötletgyűjtésben is részt venni.</p>
+                  <p>Hamarosan újraindul a fővárosi részvételi költségvetés, 2021-ben közösségi költségvetés néven.</p>
+                  <p>Aktiváld fiókod a tőlünk kapott emailben, ha szeretnél az idei ötletgyűjtésben is részt venni.</p>
                 </> : <>
                   <p>Üdvözlünk a budapesti közösségi költségvetés honlapján!</p>
                   <p>Regisztrálj és add be ötletedet 2022. január 31-ig!</p>
