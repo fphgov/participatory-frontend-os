@@ -1,160 +1,56 @@
-import React from "react"
-import qs from 'querystring'
+import React, { useContext, useEffect, useState } from 'react'
+import {
+  useParams,
+} from "react-router-dom"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
-import { rmAllCharForEmail, rmAllCharForName } from '../lib/removeSpecialCharacters'
+import { rmForNumber, rmAllCharForEmail, rmAllCharForName } from '../lib/removeSpecialCharacters'
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
 import ScrollTo from "../common/ScrollTo"
 
-export default class Registration extends React.Component {
-  static contextType = StoreContext
+export default function Registration() {
+  const context = useContext(StoreContext)
 
-  constructor(props, context) {
-    super(props, context)
+  let { hash } = useParams()
 
-    this.state = {
-      scroll: false,
-      error: null,
-      success: false,
-      username: '',
-      email: '',
-      password: '',
-      password_confirm: '',
-      lastname: '',
-      firstname: '',
-      nickname: '',
-      postal_code: '',
-      birthyear: '',
-      hear_about: '',
-      live_in_city: '',
-      privacy: '',
-      prize: '',
-      recaptcha: null,
-    }
+  const [ error, setError ] = useState(null)
+  const [ success, setSuccess ] = useState('')
+  const [ scroll, setScroll ] = useState(false)
+  const [ recaptcha, setRecaptcha ] = useState(null)
+  const [ recaptchaToken, setRecaptchaToken ] = useState('')
+  const [ filterData, setFilterData ] = useState({
+    'email': '',
+    'password': '',
+    'password_confirm': '',
+    'lastname': '',
+    'firstname': '',
+    'postal_code': '',
+    'birthyear': '',
+    'hear_about': '',
+    'live_in_city': '',
+    'privacy': '',
+    'prize': '',
+  })
 
-    this.handleChangeRaw = this.handleChangeRaw.bind(this)
-    this.handleChangeInput = this.handleChangeInput.bind(this)
-    this.handleChangeEmailInput = this.handleChangeEmailInput.bind(this)
-    this.onKeyUp = this.onKeyUp.bind(this)
-  }
-
-  verifyCallback = (recaptchaToken) => {
-    this.setState({
-      recaptcha: recaptchaToken,
-    })
-  }
-
-  updateToken = () => {
-    this.recaptcha.execute();
-  }
-
-  componentDidMount() {
-    document.body.classList.add('page-registration')
-
-    loadReCaptcha(process.env.SITE_KEY, this.verifyCallback)
-  }
-
-  componentWillUnmount() {
-    document.body.classList.remove('page-registration')
-  }
-
-  handleChangeInput(e) {
+  const handleChangeInput = (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : rmAllCharForName(e.target.value)
 
-    this.setState({
-      [e.target.name]: value
-    })
+    setFilterData({ ...filterData, [e.target.name]: value })
   }
 
-  handleChangeEmailInput(e) {
-    this.setState({
-      [e.target.name]: rmAllCharForEmail(e.target.value)
-    })
+  const handleChangeEmailInput = (e) => {
+    setFilterData({ ...filterData, [e.target.name]: rmAllCharForEmail(e.target.value) })
   }
 
-  handleChangeRaw(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
+  const handleChangeNumberInput = (e) => {
+    setFilterData({ ...filterData, [ e.target.name ]: rmForNumber(e.target.value) })
   }
 
-  onKeyUp(e) {
-    if (e.key === 'Enter') {
-      this.submitRegistration(e)
-    }
+  const handleChangeRaw = (e) => {
+    setFilterData({ ...filterData, [e.target.name]: e.target.value })
   }
 
-  submitRegistration(e) {
-    e.preventDefault();
-
-    this.setState({ scroll: false })
-
-    const config = {
-      headers: {
-        'Accept': 'application/json',
-      }
-    }
-
-    const data = {
-      hash: this.props.match.params.hash,
-      username: this.state.username,
-      email: this.state.email,
-      password: this.state.password,
-      password_confirm: this.state.password_confirm,
-      lastname: this.state.lastname,
-      firstname: this.state.firstname,
-      nickname: this.state.nickname,
-      postal_code: this.state.postal_code,
-      birthyear: this.state.birthyear,
-      hear_about: this.state.hear_about,
-      live_in_city: this.state.live_in_city,
-      privacy: this.state.privacy,
-      prize: this.state.prize,
-      'g-recaptcha-response': this.state.recaptcha,
-    }
-
-    this.context.set('loading', true)
-
-    axios.post(
-      process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_REGISTRATION,
-      qs.stringify(data),
-      config
-    ).then(response => {
-      if (response.data) {
-        this.setState({
-          success: true
-        })
-
-        this.context.set('loading', false)
-      }
-    })
-    .catch(error => {
-      if (error.response && error.response.status === 403) {
-        this.setState({
-          error: 'Google reCapcha ellenőrzés sikertelen'
-        }, () => {
-          this.setState({ scroll: true })
-        })
-      } else if (error.response && error.response.data && error.response.data.errors) {
-        this.setState({
-          error: error.response.data.errors
-        }, () => {
-          this.setState({ scroll: true })
-        })
-      } else {
-        this.setState({
-          error: 'Váratlan hiba történt, kérjük próbálja később'
-        }, () => {
-          this.setState({ scroll: true })
-        })
-      }
-
-      this.updateToken()
-      this.context.set('loading', false)
-    })
-  }
-
-  Error(props) {
+  const Error = (props) => {
     return (
       <div className="error-message">
         {props.message}
@@ -162,7 +58,7 @@ export default class Registration extends React.Component {
     )
   }
 
-  ErrorMini(props) {
+  const ErrorMini = (props) => {
     if (typeof props.error === 'object') {
       return Object.values(props.error).map((e, i) => {
         return (<div key={i} className="error-message-inline">{e}</div>)
@@ -172,112 +68,157 @@ export default class Registration extends React.Component {
     }
   }
 
-  render() {
-    return (
-      <div className="page-registration-section">
-        {this.state.scroll && document.querySelector('.error-message-inline') ? <ScrollTo element={document.querySelector('.error-message-inline').offsetTop} /> : null}
+  const submitRegistration = (e) => {
+    e.preventDefault()
 
-        <div className="container">
-          <div className="row">
-            <div className="col-xs-12 col-sm-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
-              <form className="form-horizontal" onSubmit={this.submitRegistration.bind(this)}>
-                <fieldset>
-                  {(typeof this.state.error === 'string') ? <this.Error message={this.state.error} /> : null}
+    setScroll(false)
 
-                  <legend>Regisztráció</legend>
+    const data = {
+      hash,
+      email: filterData.email,
+      password: filterData.password,
+      password_confirm: filterData.password_confirm,
+      lastname: filterData.lastname,
+      firstname: filterData.firstname,
+      postal_code: filterData.postal_code,
+      birthyear: filterData.birthyear,
+      hear_about: filterData.hear_about,
+      live_in_city: filterData.live_in_city,
+      privacy: filterData.privacy,
+      prize: filterData.prize,
+      'g-recaptcha-response': recaptchaToken,
+    }
 
-                  {! this.state.success ? <>
-                    <div className="form-wrapper">
-                    <div className="input-wrapper">
-                      <label htmlFor="username">Felhasználónév <sup>*</sup></label>
-                      <p className="tipp">Az itt megadott névvel fog tudni belépni a rendszerbe. Speciális karakterek és nagybetűk nem elfogadottak.</p>
-                      <input type="text" placeholder="Felhasználónév" name="username" id="username" value={this.state.username} onChange={this.handleChangeInput} />
+    context.set('loading', true)
 
-                      {this.state.error && this.state.error.username ? Object.values(this.state.error.username).map((err, i) => {
-                        return <this.ErrorMini key={i} error={err} increment={`username-${i}`} />
-                      }) : null}
-                    </div>
+    axios.post(
+      process.env.REACT_APP_API_REQ_REGISTRATION,
+      new URLSearchParams(data).toString()
+    )
+    .then(response => {
+      if (response.data) {
+        setSuccess(true)
 
-                    <div className="input-wrapper">
-                      <label htmlFor="email">E-mail <sup>*</sup></label>
-                      <input type="text" placeholder="E-mail" name="email" id="email" value={this.state.email} onChange={this.handleChangeEmailInput} />
+        context.set('loading', false)
+      }
+    })
+    .catch(error => {
+      if (error.response && error.response.status === 403) {
+        setError('Google reCapcha ellenőrzés sikertelen')
+        setScroll(true)
+      } else if (error.response && error.response.data && error.response.data.errors) {
+        setError(error.response.data.errors)
+        setScroll(true)
+      } else {
+        setError('Váratlan hiba történt, kérjük próbáld később')
+        setScroll(true)
+      }
 
-                      {this.state.error && this.state.error.email ? Object.values(this.state.error.email).map((err, i) => {
-                        return <this.ErrorMini key={i} error={err} increment={`email-${i}`} />
-                      }) : null}
-                    </div>
+      recaptcha.execute()
+      context.set('loading', false)
+    })
+  }
 
-                    <div className="input-wrapper">
-                      <label htmlFor="password">Jelszó <sup>*</sup></label>
-                      <input type="password" placeholder="Jelszó" name="password" id="password" value={this.state.password} onChange={this.handleChangeRaw} />
+  useEffect(() => {
+    document.body.classList.add('page-registration')
 
-                      {this.state.error && this.state.error.password ? Object.values(this.state.error.password).map((err, i) => {
-                        return <this.ErrorMini key={i} error={err} increment={`password-${i}`} />
-                      }) : null}
-                    </div>
+    loadReCaptcha(process.env.SITE_KEY, (recaptchaToken) => {
+      setRecaptchaToken(recaptchaToken)
+    })
 
-                    <div className="input-wrapper">
-                      <label htmlFor="password_confirm">Jelszó megerősítése <sup>*</sup></label>
-                      <input type="password" placeholder="Jelszó megerősítése" name="password_confirm" id="password_confirm" value={this.state.password_confirm} onChange={this.handleChangeRaw} />
+    return () => {
+      document.body.classList.remove('page-registration')
+    }
+  }, [])
 
-                      {this.state.error && this.state.error.password_confirm ? Object.values(this.state.error.password_confirm).map((err, i) => {
-                        return <this.ErrorMini key={i} error={err} increment={`password_confirm-${i}`} />
-                      }) : null}
-                    </div>
+  return (
+    <div className="page-registration-section">
+      {scroll && document.querySelector('.error-message-inline') ? <ScrollTo element={document.querySelector('.error-message-inline').offsetTop} /> : null}
 
-                    <div className="input-wrapper">
-                      <label htmlFor="nickname">Nyilvános név <sup>*</sup></label>
-                      <p className="tipp">Ez a név fog megjelenni az oldalon.</p>
-                      <input type="text" placeholder="Nyilvános név" name="nickname" id="nickname" value={this.state.nickname} onChange={this.handleChangeInput} />
+      <div className="container">
+        <div className="row">
+          <div className="col-xs-12 col-sm-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
+            <form className="form-horizontal" onSubmit={submitRegistration}>
+              <fieldset>
+                {(typeof error === 'string') ? <Error message={error} /> : null}
 
-                      {this.state.error && this.state.error.nickname ? Object.values(this.state.error.nickname).map((err, i) => {
-                        return <this.ErrorMini key={i} error={err} increment={`nickname-${i}`} />
-                      }) : null}
-                    </div>
+                <legend>Regisztráció</legend>
 
+                {!success ? <>
+                  <div className="form-wrapper">
                     <div className="input-wrapper">
                       <label htmlFor="lastname">Vezetéknév <sup>*</sup></label>
-                      <input type="text" placeholder="Vezetéknév" name="lastname" id="lastname" value={this.state.lastname} onChange={this.handleChangeInput} />
+                      <p className="tipp">A regisztrációnál megadott név nyilvánosan megjelenik az oldalon a beküldött ötletnél.</p>
+                      <input type="text" placeholder="Vezetéknév" name="lastname" id="lastname" value={filterData.lastname} onChange={handleChangeInput} />
 
-                      {this.state.error && this.state.error.lastname ? Object.values(this.state.error.lastname).map((err, i) => {
-                        return <this.ErrorMini key={i} error={err} increment={`lastname-${i}`} />
+                      {error && error.lastname ? Object.values(error.lastname).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`lastname-${i}`} />
                       }) : null}
                     </div>
 
                     <div className="input-wrapper">
                       <label htmlFor="firstname">Utónév <sup>*</sup></label>
-                      <input type="text" placeholder="Utónév" name="firstname" id="firstname" value={this.state.firstname} onChange={this.handleChangeInput} />
+                      <p className="tipp">A regisztrációnál megadott név nyilvánosan megjelenik az oldalon a beküldött ötletnél.</p>
+                      <input type="text" placeholder="Utónév" name="firstname" id="firstname" value={filterData.firstname} onChange={handleChangeInput} />
 
-                      {this.state.error && this.state.error.firstname ? Object.values(this.state.error.firstname).map((err, i) => {
-                        return <this.ErrorMini key={i} error={err} increment={`firstname-${i}`} />
+                      {error && error.firstname ? Object.values(error.firstname).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`firstname-${i}`} />
+                      }) : null}
+                    </div>
+
+                    <div className="input-wrapper">
+                      <label htmlFor="email">E-mail <sup>*</sup></label>
+                      <input type="text" placeholder="E-mail" name="email" id="email" value={filterData.email} onChange={handleChangeEmailInput} />
+
+                      {error && error.email ? Object.values(error.email).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`email-${i}`} />
+                      }) : null}
+                    </div>
+
+                    <div className="input-wrapper">
+                      <label htmlFor="password">Jelszó <sup>*</sup></label>
+                      <input type="password" placeholder="Jelszó" name="password" id="password" value={filterData.password} onChange={handleChangeRaw} />
+
+                      {error && error.password ? Object.values(error.password).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`password-${i}`} />
+                      }) : null}
+                    </div>
+
+                    <div className="input-wrapper">
+                      <label htmlFor="password_confirm">Jelszó megerősítése <sup>*</sup></label>
+                      <input type="password" placeholder="Jelszó megerősítése" name="password_confirm" id="password_confirm" value={filterData.password_confirm} onChange={handleChangeRaw} />
+
+                      {error && error.password_confirm ? Object.values(error.password_confirm).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`password_confirm-${i}`} />
                       }) : null}
                     </div>
 
                     <div className="input-wrapper">
                       <label htmlFor="birthyear">Születési év <sup>*</sup></label>
-                      <input type="text" placeholder="Születési év" name="birthyear" id="birthyear" value={this.state.birthyear} onChange={this.handleChangeInput} />
+                      <input type="text" placeholder="Születési év" name="birthyear" id="birthyear" maxlength="4" value={filterData.birthyear} onChange={handleChangeNumberInput} />
 
-                      {this.state.error && this.state.error.birthyear ? Object.values(this.state.error.birthyear).map((err, i) => {
-                        return <this.ErrorMini key={i} error={err} increment={`birthyear-${i}`} />
+                      {error && error.birthyear ? Object.values(error.birthyear).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`birthyear-${i}`} />
                       }) : null}
                     </div>
 
                     <div className="input-wrapper">
-                      <label htmlFor="postal_code">Irányítószám <sup>*</sup></label>
-                      <input type="text" placeholder="Irányítószám" name="postal_code" id="postal_code" value={this.state.postal_code} onChange={this.handleChangeInput} />
+                      <label htmlFor="postal_code">Irányítószám</label>
+                      <p className="tipp">Ahol élsz, vagy ha ez nem budapesti, akkor ahol dolgozol/tanulsz.</p>
+                      <input type="text" placeholder="Irányítószám" name="postal_code" id="postal_code" maxlength="4" value={filterData.postal_code} onChange={handleChangeNumberInput} />
 
-                      {this.state.error && this.state.error.postal_code ? Object.values(this.state.error.postal_code).map((err, i) => {
-                        return <this.ErrorMini key={i} error={err} increment={`postal_code-${i}`} />
+                      {error && error.postal_code ? Object.values(error.postal_code).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`postal_code-${i}`} />
                       }) : null}
                     </div>
 
-                    <h4>Honnan értesült a részvételi költségvetésről? <sup>*</sup></h4>
-                    {this.state.error && this.state.error.hear_about ? Object.values(this.state.error.hear_about).map((err, i) => {
-                      return <this.ErrorMini key={i} error={err} increment={`hear_about-${i}`} />
+                    <h4>Honnan értesültél a közösségi költségvetésről?</h4>
+                    {error && error.hear_about ? Object.values(error.hear_about).map((err, i) => {
+                      return <ErrorMini key={i} error={err} increment={`hear_about-${i}`} />
                     }) : null}
                     <div className="form-group form-group-hear-about">
-                      <select name="hear_about" onChange={this.handleChangeInput}>
-                        <option value="">Válasszon a lehetőségek közül</option>
+                      <select name="hear_about" onChange={handleChangeInput}>
+                        <option value="">Válassz a lehetőségek közül</option>
                         <option disabled>---</option>
                         <option value="friend">Barátoktól, ismerőstől, családtól</option>
                         <option value="street">Utcai plakátról</option>
@@ -293,42 +234,33 @@ export default class Registration extends React.Component {
 
                     <div className="form-group">
                       <label htmlFor="live_in_city" className="form-group-label">
-                        <input className="form-control" type="checkbox" id="live_in_city" name="live_in_city" onChange={this.handleChangeInput} />
-                        Kijelentem, hogy elmúltam 18 éves és budapesti lakos vagyok, vagy Budapesten dolgozom, vagy Budapesten tanulok. *
+                        <input className="form-control" type="checkbox" id="live_in_city" name="live_in_city" value={filterData.live_in_city} onChange={handleChangeInput} />
+                        Kijelentem, hogy elmúltam 16 éves és budapesti lakos vagyok, vagy Budapesten dolgozom, vagy Budapesten tanulok. *
                       </label>
 
-                      {this.state.error && this.state.error.live_in_city ? Object.values(this.state.error.live_in_city).map((err, i) => {
-                        return <this.ErrorMini key={i} error={err} increment={`live_in_city-${i}`} />
+                      {error && error.live_in_city ? Object.values(error.live_in_city).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`live_in_city-${i}`} />
                       }) : null}
                     </div>
 
                     <div className="form-group">
                       <label htmlFor="privacy" className="form-group-label">
-                        <input className="form-control" type="checkbox" id="privacy" name="privacy" onChange={this.handleChangeInput} />
-                          Elfogadom az <a href="https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?page=htmlpage&amp;htmlpage_id=5" target="_blank" rel="noopener noreferrer">adatvédelmi tájékoztatót</a>  *
+                        <input className="form-control" type="checkbox" id="privacy" name="privacy" value={filterData.privacy} onChange={handleChangeInput} />
+                        Elfogadom az <a href={`${process.env.REACT_APP_SERVER_FILE}/adatkezelesi_tajekozato.pdf`} target="_blank" rel="noopener noreferrer">adatvédelmi tájékoztatót</a> *
                       </label>
 
-                      {this.state.error && this.state.error.privacy ? Object.values(this.state.error.privacy).map((err, i) => {
-                        return <this.ErrorMini key={i} error={err} increment={`privacy-${i}`} />
-                      }) : null}
-                    </div>
-
-                    <div className="form-group">
-                      <label htmlFor="prize" className="form-group-label">
-                        <input className="form-control" type="checkbox" id="prize" name="prize" onChange={this.handleChangeInput} />
-                          Részt veszek a <a href="https://otlet.budapest.hu/pb/jsp/site/Portal.jsp?document_id=34&portlet_id=159" target="_blank" rel="noopener noreferrer">Budapest Főpolgármesteri Hivatal nyereményjátékában</a>.
-                      </label>
-
-                      {this.state.error && this.state.error.prize ? Object.values(this.state.error.prize).map((err, i) => {
-                        return <this.ErrorMini key={i} error={err} increment={`prize-${i}`} />
+                      {error && error.privacy ? Object.values(error.privacy).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`privacy-${i}`} />
                       }) : null}
                     </div>
 
                     <ReCaptcha
-                      ref={ref => this.recaptcha = ref}
+                      ref={ref => setRecaptcha(ref)}
                       sitekey={process.env.SITE_KEY}
                       action='submit'
-                      verifyCallback={this.verifyCallback}
+                      verifyCallback={(recaptchaToken) => {
+                        setRecaptchaToken(recaptchaToken)
+                      }}
                     />
 
                     <div style={{ display: "inline-block" }}>
@@ -338,17 +270,16 @@ export default class Registration extends React.Component {
                       </button>
                     </div>
                   </div>
-                  </> : null}
-                </fieldset>
-              </form>
+                </> : null}
+              </fieldset>
+            </form>
 
-              {this.state.success ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
-                <p>Kérjük, regisztrációja befejezéséhez aktiválja fiókját az e-mail címére küldött levélben található linkre kattintva.</p>
-              </div> : null}
-            </div>
+            {success ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
+              <p>Kérünk, a regisztrációd befejezéséhez aktiváld a fiókod az e-mail címedre küldött levélben található linkre kattintva.</p>
+            </div> : null}
           </div>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }

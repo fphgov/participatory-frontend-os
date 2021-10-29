@@ -1,62 +1,53 @@
-import React from "react"
+import React, { useContext, useEffect, useState } from "react"
 import {
   Redirect,
+  useParams,
 } from "react-router-dom"
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
 
-export default class ProfileActivate extends React.Component {
-  static contextType = StoreContext
+export default function ProfileActivate() {
+  const context = useContext(StoreContext)
 
-  constructor(props, context) {
-    super(props, context)
+  const [ success, setSuccess ] = useState(false)
+  const [ error, setError ] = useState('')
+  const [ redirectLogin, setRedirectLogin ] = useState(false)
 
-    this.state = {
-      redirectLogin: false
-    }
+  let { hash } = useParams()
 
-    this.context.set('loading', true, () => {
-      this.profileActivate()
-    })
-  }
+  const submitProfileActivate = () => {
+    context.set('loading', true)
 
-  toRedirect() {
-    this.setState({
-      redirectLogin: true
-    })
-  }
+    const link = process.env.REACT_APP_API_REQ_PROFILE_ACTIVATE.toString().replace(':hash', hash)
 
-  profileActivate() {
-    const config = {
-      headers: {
-        'Accept': 'application/json',
+    axios
+    .get(link)
+    .then(response => {
+      if (response.status === 200) {
+        setSuccess(true)
       }
-    }
-
-    const link = process.env.REACT_APP_API_REQ_PROFILE_ACTIVATE.toString().replace(':hash', this.props.match.params.hash)
-
-    axios.get(process.env.REACT_APP_API_SERVER + link, config)
-      .then(response => {
-        if (response.data) {
-          this.context.set('loading', false)
-        }
-      })
-      .catch(error => {
-        if (error.response && error.response.data && error.response.data.message) {
-          this.setState({
-            error: error.response.data.message
-          })
-        } else {
-          this.setState({
-            error: 'Váratlan hiba történt, kérjük próbálja később'
-          })
-        }
-
-        this.context.set('loading', false)
-      })
+    })
+    .catch(error => {
+      if (error.response && error.response.data && error.response.data.message) {
+        setError(error.response.data.message)
+      } else {
+        setError('Váratlan hiba történt, kérjük próbáld később')
+      }
+    })
+    .finally(() => {
+      context.set('loading', false)
+    })
   }
 
-  Error(props) {
+  useEffect(() => {
+    document.body.classList.add('page-profile-activate')
+
+    return () => {
+      document.body.classList.remove('page-profile-activate')
+    }
+  }, [])
+
+  const Error = (props) => {
     return (
       <div className="error-message">
         {props.message}
@@ -64,7 +55,7 @@ export default class ProfileActivate extends React.Component {
     )
   }
 
-  Success(props) {
+  const Success = (props) => {
     return (
       <div className="success-message">
         {props.message}
@@ -72,31 +63,32 @@ export default class ProfileActivate extends React.Component {
     )
   }
 
-  render() {
-    const { redirectLogin } = this.state
+  return (
+    <div className="page-profile-section">
+      {redirectLogin ? <Redirect to='/bejelentkezes' /> : null}
 
-    if (redirectLogin) {
-      return <Redirect to='/bejelentkezes' />
-    }
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <h1>Felhasználói fiók aktiválása</h1>
 
-    return (
-      <div className="page-profile-section">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <h1>Felhasználói fiók aktíválása</h1>
+            <p>A regisztrációd megerősítéséhez kattints az "Aktíválom" gombra.</p>
 
-              {! this.context.get('loading') ? (<>
-                {this.state.error ? <this.Error message={this.state.error} /> : <this.Success message="A felhasználói fiókjának aktiválását elindítottuk." />}
+            {error ? <Error message={error} /> : null}
+            {success ? <Success message="Sikeresen aktiváltad a fiókod!" /> : null}
 
-                <div class="small">
-                  <button className="btn btn-primary" onClick={this.toRedirect.bind(this)}>Vissza</button>
-                </div>
-              </>) : null}
-            </div>
+            {! success ? <input type="submit" value="Aktiválom" className="btn btn-primary" onClick={() => {
+              submitProfileActivate()
+            }} /> : null}
+
+            {!context.get('loading') && success ? (<>
+              <div className="small">
+                <button className="btn btn-primary" onClick={() => { setRedirectLogin(true) }}>Tovább</button>
+              </div>
+            </>) : null}
           </div>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }

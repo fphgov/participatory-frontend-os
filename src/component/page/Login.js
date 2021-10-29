@@ -1,6 +1,5 @@
-import axios from "axios"
-import React from "react"
-import qs from 'querystring'
+import axios from "../assets/axios"
+import React, { useContext, useEffect, useReducer, useState } from 'react'
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import {
   Redirect,
@@ -8,123 +7,102 @@ import {
 } from "react-router-dom"
 import StoreContext from '../../StoreContext'
 import tokenParser from '../assets/tokenParser'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faUser, faSignInAlt } from "@fortawesome/free-solid-svg-icons"
 
-export default class Login extends React.Component {
-  static contextType = StoreContext
+export default function Login() {
+  const context = useContext(StoreContext)
 
-  constructor(props, context) {
-    super(props, context)
+  const [redirect, setRedirect] = useState(false)
+  const [recaptcha, setRecaptcha] = useState(null)
+  const [recaptchaToken, setRecaptchaToken] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const [ignored, forceUpdate] = useReducer(x => x + 1, 0)
 
-    this.state = {
-      email: '',
-      password: '',
-      error: '',
-      redirect: false,
-      recaptcha: null,
-    }
-  }
-
-  verifyCallback = (recaptchaToken) => {
-    this.setState({
-      recaptcha: recaptchaToken,
-    })
-  }
-
-  updateToken = () => {
-    this.recaptcha.execute();
-  }
-
-  componentDidMount() {
-    if (localStorage.getItem('auth_token')) {
-      this.context.set('token', localStorage.getItem('auth_token') || '')
-
-      this.setState({
-        redirect: true,
-      })
-
-      return
-    }
-
-    document.body.classList.add('page-login')
-
-    loadReCaptcha(process.env.SITE_KEY, this.verifyCallback)
-  }
-
-  componentWillUnmount() {
-    document.body.classList.remove('page-login')
-  }
-
-  handleChangeInput(e) {
-    this.setState({ error: '', [ e.target.name ]: e.target.value })
-  }
-
-  submitLogin(e) {
+  const submitLogin = (e) => {
     e.preventDefault();
 
     const data = {
-      email: this.state.email,
-      password: this.state.password,
-      'g-recaptcha-response': this.state.recaptcha,
+      email,
+      password,
+      'g-recaptcha-response': recaptchaToken,
     }
 
-    this.context.set('loading', true)
+    context.set('loading', true)
 
-    axios.post(process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_LOGIN, qs.stringify(data))
+    axios
+    .post(process.env.REACT_APP_API_REQ_LOGIN, new URLSearchParams(data).toString())
     .then(response => {
       if (response.data && response.data.token) {
         localStorage.setItem('auth_token', response.data.token)
 
         if (tokenParser('user.voted') && tokenParser('user.voted') === true) {
           localStorage.setItem('rk_voted', true)
-          this.context.set('successVote', true)
+          context.set('successVote', true)
         }
 
         if (tokenParser('user.votes')) {
           Object.entries(tokenParser('user.votes')).forEach(vote => {
             localStorage.setItem(vote[0], JSON.stringify(vote[1]))
-            this.context.set(vote[0], JSON.stringify(vote[1]))
+            context.set(vote[0], JSON.stringify(vote[1]))
           })
         }
 
-        this.context.set('token', localStorage.getItem('auth_token') || '')
+        context.set('token', localStorage.getItem('auth_token') || '')
 
-        this.forceUpdate()
+        forceUpdate()
 
         setTimeout(() => {
-          this.setState({
-            redirect: true
-          })
+          setRedirect(true)
 
-          this.context.set('loading', false)
+          context.set('loading', false)
         }, 1000)
 
         if (response.status !== 200 && response.data && response.data.message) {
-          this.setState({
-            error: response.data.message
-          })
+          setError(response.data.message)
 
-          this.context.set('token', null)
+          context.set('token', null)
           localStorage.removeItem('auth_token')
         }
-
-        this.context.set('loading', false)
       }
     })
     .catch(error => {
       if (error.response && error.response.data && error.response.data.message) {
-        this.setState({
-          error: error.response.data.message
-        })
+        setError(error.response.data.message)
       }
 
-      this.context.set('token', null)
+      context.set('token', null)
       localStorage.removeItem('auth_token')
-
-      this.context.set('loading', false)
+    })
+    .finally(() => {
+      context.set('loading', false)
+      recaptcha.execute()
     })
   }
 
-  Error(props) {
+  useEffect(() => {
+    if (localStorage.getItem('auth_token')) {
+      context.set('token', localStorage.getItem('auth_token') || '')
+
+      setRedirect(true)
+
+      return
+    }
+
+    document.body.classList.add('page-login')
+
+    loadReCaptcha(process.env.SITE_KEY, (recaptchaToken) => {
+      setRecaptchaToken(recaptchaToken)
+    })
+
+    return () => {
+      document.body.classList.remove('page-login')
+    }
+  }, [])
+
+  const Error = (props) => {
     return (
       <div className="error-message">
         {props.message}
@@ -132,73 +110,68 @@ export default class Login extends React.Component {
     )
   }
 
-  render() {
-    const { redirect } = this.state
+  return (
+    <div className="page-login-section">
+      {redirect ? <Redirect to="/" /> : null}
 
-    if (redirect) {
-      return <Redirect to='/projektek' />
-    }
+      <div className="container">
+        <div className="row">
+          <div className="col-xs-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
+            <form className="form-horizontal" onSubmit={submitLogin}>
+              <fieldset>
+                {error ? <Error message={error} /> : null}
 
-    return (
-      <div className="page-login-section">
-        <div className="container">
-          <div className="row">
-            <div className="col-xs-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
-              <form className="form-horizontal" onSubmit={this.submitLogin.bind(this)}>
-                <fieldset>
-                  {this.state.error ? <this.Error message={this.state.error} /> : null}
+                <legend>Bejelentkezés</legend>
 
-                  <legend>Bejelentkezés</legend>
-
-                  <div className="form-wrapper">
-                    <div className="input-wrapper">
-                      <label htmlFor="email">E-mail cím vagy felhasználónév</label>
-                      <input type="text" autoCorrect="off" autoCapitalize="none" placeholder="E-mail cím" name="email" id="email" value={this.state.email} onChange={this.handleChangeInput.bind(this)} />
-                    </div>
-
-                    <div className="input-wrapper">
-                      <label htmlFor="password">Jelszó</label>
-                      <input type="password" placeholder="Jelszó" name="password" id="password" value={this.state.password} onChange={this.handleChangeInput.bind(this)} />
-                    </div>
-
-                    <ReCaptcha
-                      ref={ref => this.recaptcha = ref}
-                      sitekey={process.env.SITE_KEY}
-                      action='submit'
-                      verifyCallback={this.verifyCallback}
-                    />
-
-                    <div style={{ display: "inline-block" }}>
-                      <button className="btn btn-primary">
-                        <span className="glyphicon glyphicon-lock"></span>
-                        Belépés
-                      </button>
-                    </div>
+                <div className="form-wrapper">
+                  <div className="input-wrapper">
+                    <label htmlFor="email">E-mail cím</label>
+                    <input type="text" autoCorrect="off" autoCapitalize="none" placeholder="E-mail cím" name="email" id="email" value={email} onChange={(e) => {setEmail(e.target.value)}} />
                   </div>
+
+                  <div className="input-wrapper">
+                    <label htmlFor="password">Jelszó</label>
+                    <input type="password" placeholder="Jelszó" name="password" id="password" value={password} onChange={(e) => { setPassword(e.target.value) }} />
+                  </div>
+
+                  <ReCaptcha
+                    ref={ref => setRecaptcha(ref)}
+                    sitekey={process.env.SITE_KEY}
+                    action='submit'
+                    verifyCallback={(recaptchaToken) => {
+                      setRecaptchaToken(recaptchaToken)
+                    }}
+                  />
 
                   <div className="form-group">
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12" style={{ display: "flex", justifyContent: "space-between", padding: 0 }}>
-                      <Link to={`/elfelejtett-felhasznalonev`} className="btn btn-sm" title="Elfelejtettem a felhasználónevem">Elfelejtettem a felhasználónevem</Link>
                       <Link to={`/elfelejtett-jelszo`} className="btn btn-sm" title="Elfelejtettem a jelszavam">Elfelejtettem a jelszavam</Link>
                     </div>
                   </div>
-                </fieldset>
-              </form>
 
-              <div className="registration-info">
-                <hr />
+                  <div style={{ display: "inline-block" }}>
+                    <button className="btn btn-primary">
+                      <FontAwesomeIcon icon={faSignInAlt} />&nbsp;
+                      Belépés
+                    </button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
 
-                <p>Nincs még fiókja? Regisztráljon itt!</p>
+            <div className="registration-info">
+              <hr />
 
-                <Link to={`/regisztracio`} className="btn btn-primary btn-sm" title="Regisztráció">
-                  <span className="glyphicon glyphicon-plus"></span>&nbsp;
-                  Regisztráció
-                </Link>
-              </div>
+              <p>Nincs még fiókod? Regisztrálj itt!</p>
+
+              <Link to={`/regisztracio`} className="btn btn-primary btn-sm" title="Regisztráció">
+                <FontAwesomeIcon icon={faUser} />&nbsp;
+                Regisztráció
+              </Link>
             </div>
           </div>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }

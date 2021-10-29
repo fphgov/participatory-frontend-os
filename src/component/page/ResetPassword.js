@@ -1,79 +1,60 @@
-import React from "react"
+import React, { useContext, useState, useEffect } from "react"
 import {
   Redirect,
-} from "react-router-dom"
-import qs from 'querystring'
+  useParams,
+} from "react-router-dom";
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
 
-export default class ResetPassword extends React.Component {
-  static contextType = StoreContext
+export default function Statistics() {
+  const context = useContext(StoreContext)
 
-  constructor(props, context) {
-    super(props, context)
+  let { hash } = useParams()
 
-    this.state = {
-      password: '',
-      password_2: '',
-      redirectLogin: false
-    }
+  const [ password, setPassword ] = useState('')
+  const [ passwordSec, setPasswordSec ] = useState('')
+  const [ success, setSuccess ] = useState('')
+  const [ error, setError ] = useState('')
+  const [ redirectLogin, setRedirectLogin ] = useState(false)
 
-    this.handleChange = this.handleChange.bind(this)
-    this.onKeyUp = this.onKeyUp.bind(this)
-  }
-
-  postResetPassword() {
-    const config = {
-      headers: {
-        'Accept': 'application/json',
-      }
-    }
-
+  const postResetPassword = () => {
     const data = {
-      hash: this.props.match.params.hash,
-      password: this.state.password,
-      password_2: this.state.password_2,
+      hash: hash,
+      password,
+      password_2: passwordSec,
     }
 
-    axios.post(
-      process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_PROFILE_RESET_PASSWORD,
-      qs.stringify(data),
-      config
+    axios
+    .post(
+      process.env.REACT_APP_API_REQ_PROFILE_RESET_PASSWORD,
+      new URLSearchParams(data).toString()
     ).then(response => {
       if (response.data) {
-        this.setState({
-          redirectLogin: true
-        })
-
-        this.context.set('loading', false)
+        setSuccess(true)
+        setRedirectLogin(true)
       }
     })
     .catch(error => {
       if (error.response && error.response.data && error.response.data.message) {
-        this.setState({
-          error: error.response.data.message
-        })
+        setError(error.response.data.message)
       } else {
-        this.setState({
-          error: 'Váratlan hiba történt, kérjük próbálja később'
-        })
+        setError('Váratlan hiba történt, kérjük próbáld később')
       }
-
-      this.context.set('loading', false)
+    })
+    .finally(() => {
+      context.set('loading', false)
     })
   }
 
-  handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value })
-  }
+  useEffect(() => {
+    document.body.classList.add('page-reset-password')
 
-  onKeyUp(e) {
-    if (e.key === 'Enter') {
-      this.postResetPassword()
+    return () => {
+      document.body.classList.remove('page-reset-password')
     }
-  }
+  }, [])
 
-  Error(props) {
+  const Error = (props) => {
     return (
       <div className="error-message">
         {props.message}
@@ -81,40 +62,41 @@ export default class ResetPassword extends React.Component {
     )
   }
 
-  render() {
-    const { redirectLogin } = this.state
+  return (
+    <div className="page-reset-password-section">
+      {redirectLogin ? <Redirect to='/bejelentkezes' /> : null}
 
-    if (redirectLogin) {
-      return <Redirect to='/bejelentkezes' />
-    }
+      <div className="container">
+        <h1>Új jelszó beállítása</h1>
 
-    return (
-      <div className="page-reset-password-section">
-        <div className="container">
-          <h1>Új jelszó beállítása</h1>
+        {error ? <Error message={error} /> : <p>Add meg az új jelszót.</p>}
 
-          {this.state.error ? <this.Error message={this.state.error} /> : <p>Adja meg az új jelszót.</p>}
-
-          {!this.state.success ? <div className="row">
-            <div className="col-lg-4">
-              <div className="control-group">
-                <label className="control-label" htmlFor="password">Jelszó * : </label>
-                <input className="form-control" type="password" name="password" value={this.state.password} placeholder="Jelszó" id="password" onKeyUp={this.onKeyUp} onChange={this.handleChange} />
-              </div>
-              <div className="control-group">
-                <label className="control-label" htmlFor="password_2">Jelszó újra * : </label>
-                <input className="form-control" type="password" name="password_2" value={this.state.password_2} placeholder="Jelszó újra" id="password_2" onKeyUp={this.onKeyUp} onChange={this.handleChange} />
-              </div>
-              <div className="form-actions">
-                <input className="btn btn-primary btn-small" id="button-send" type="submit" name="btnSend" value="Küldés" onClick={(e) => {
-                  e.preventDefault()
-                  this.postResetPassword()
-                }} />
-              </div>
+        {!success ? <div className="row">
+          <div className="col-lg-4">
+            <div className="control-group">
+              <label className="control-label" htmlFor="password">Jelszó * : </label>
+              <input className="form-control" type="password" name="password" value={password} placeholder="Jelszó" id="password" onChange={(e) => {
+                setPassword(e.target.value)
+              }} />
             </div>
-          </div> : null}
-        </div>
+            <div className="control-group">
+              <label className="control-label" htmlFor="password_2">Jelszó újra * : </label>
+              <input className="form-control" type="password" name="password_2" value={passwordSec} placeholder="Jelszó újra" id="password_2" onChange={(e) => {
+                setPasswordSec(e.target.value)
+              }} />
+            </div>
+            <div className="form-actions">
+              <input className="btn btn-primary btn-small" id="button-send" type="submit" name="btnSend" value="Küldés" onClick={(e) => {
+                e.preventDefault()
+
+                context.set('loading', true, () => {
+                  postResetPassword()
+                })
+              }} />
+            </div>
+          </div>
+        </div> : null}
       </div>
-    )
-  }
+    </div>
+  )
 }

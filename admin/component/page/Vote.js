@@ -5,7 +5,6 @@ import {
 } from "react-router-dom"
 import StoreContext from '../../StoreContext'
 import tokenParser from '../assets/tokenParser'
-import qs from 'querystring'
 import { ToastContainer, toast } from 'react-toastify';
 
 const notify = (message) => toast.dark(message, {
@@ -55,7 +54,7 @@ export default class Vote extends React.Component {
   }
 
   getSettingsData() {
-    if (! [ 'developer', 'admin', 'editor' ].includes(tokenParser('user.role'))) {
+    if (!['developer', 'admin', 'editor'].includes(tokenParser('user.role'))) {
       this.context.set('loading', false)
 
       return
@@ -64,7 +63,6 @@ export default class Vote extends React.Component {
     const config = {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
-        'Accept': 'application/json',
       }
     }
 
@@ -102,7 +100,6 @@ export default class Vote extends React.Component {
     const config = {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
-        'Accept': 'application/json',
       }
     }
 
@@ -115,7 +112,7 @@ export default class Vote extends React.Component {
 
     axios.post(
       process.env.REACT_APP_API_ADMIN_SERVER + process.env.REACT_APP_API_ADMIN_REQ_VOTE,
-      qs.stringify(data),
+      new URLSearchParams(data).toString(),
       config
     ).then(response => {
       if (response.data && response.data.success) {
@@ -131,21 +128,21 @@ export default class Vote extends React.Component {
 
       this.context.set('loading', false)
     })
-    .catch(error => {
-      this.context.set('loading', false)
+      .catch(error => {
+        this.context.set('loading', false)
 
-      notify('⛔️ Sikertelen a szavazat rögzítése')
+        notify('⛔️ Sikertelen a szavazat rögzítése')
 
-      if (error.response && error.response.data && error.response.data.message) {
-        this.setState({
-          error: error.response.data.message
-        })
-      } else if (error.response && error.response.data && error.response.data.errors) {
-        this.setState({
-          error: error.response.data.errors
-        })
-      }
-    })
+        if (error.response && error.response.data && error.response.data.message) {
+          this.setState({
+            error: error.response.data.message
+          })
+        } else if (error.response && error.response.data && error.response.data.errors) {
+          this.setState({
+            error: error.response.data.errors
+          })
+        }
+      })
   }
 
   ErrorMini(props) {
@@ -208,19 +205,28 @@ export default class Vote extends React.Component {
 
           <div className="vote-stat-wrapper">
             {this.state.stats !== null && Object.values(this.state.stats).map((stat, i) => {
+              let contrast = true;
+              let prevProjectId;
               return (
                 <div className="vote-stat-box" key={i}>
                   <h2 className="vote-stat-title">{stat.title}</h2>
                   <div className="vote-stat-content">
-                    {stat.times !== null && Object.values(stat.times).map((stat, y) => {
-                      return (
-                        <div className="vote-stat-elem" key={y}>
-                          <div className="vote-stat-name"><span className="vote-stat-id">#{stat.projectId}</span> {stat.projectName}</div>
-                          <div className="vote-stat-date">{stat.date}</div>
-                          <div className="vote-stat-count">{stat.count} szavazat</div>
-                        </div>
-                      )
-                    })}
+                    {stat.times !== null && Object.values(stat.times)
+                      .sort((a, b) => a.date > b.date ? 1 : -1)
+                      .sort((a, b) => a.projectId > b.projectId ? 1 : -1)
+                      .map((stat, y) => {
+                        if (prevProjectId !== stat.projectId) {
+                          contrast = !contrast;
+                        }
+                        prevProjectId = stat.projectId;
+                        return (
+                          <div className={`vote-stat-elem vote-stat-elem-${contrast ? 'odd' : 'even'}`} key={y}>
+                            <div className="vote-stat-name"><span className="vote-stat-id">#{stat.projectId}</span> {stat.projectName}</div>
+                            <div className="vote-stat-date">{stat.date}</div>
+                            <div className="vote-stat-count">{stat.count} szavazat</div>
+                          </div>
+                        )
+                      })}
                   </div>
                 </div>
               )

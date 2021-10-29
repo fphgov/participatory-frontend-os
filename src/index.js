@@ -1,13 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./component/App";
+import React from "react"
+import ReactDOM from "react-dom"
+import App from "./component/App"
 import store from 'store'
-import "./index.css";
-import "normalize";
-import "grid";
+import "./index.css"
+import "normalize"
+import "grid"
 import StoreContext from './StoreContext'
 import Loading from './component/common/Loading'
 import 'url-polyfill'
+import 'modernizr'
 
 class AppWithContext extends React.Component {
   constructor(props) {
@@ -55,7 +56,7 @@ class AppWithContext extends React.Component {
   }
 
   render() {
-    const { loading } = this.state;
+    const { loading } = this.state
 
     return (
       <StoreContext.Provider value={this.state}>
@@ -67,4 +68,4 @@ class AppWithContext extends React.Component {
   }
 }
 
-ReactDOM.render(<AppWithContext />, document.getElementById("root"));
+ReactDOM.render(<AppWithContext />, document.getElementById("root"))

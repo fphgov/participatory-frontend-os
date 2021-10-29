@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react'
 import ReactMapGL, { Layer, Source, NavigationControl } from 'react-map-gl'
 import districtData from '../geodata/districts.json'
 import useLayers from '../geodata/layerStyles'
+import 'mapbox-gl/dist/mapbox-gl.css'
 
 export default function MapBox(props) {
-
   const [layerStyles, handleLayerOptions] = useLayers();
   const [viewport, setViewport] = useState({
     latitude: 47.484,

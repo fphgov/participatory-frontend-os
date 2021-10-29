@@ -1,90 +1,104 @@
-import axios from "axios"
-import React from "react"
+import React, { useContext, useEffect, useState } from "react"
+import axios from "../assets/axios"
 import {
-  Link
+  Link,
+  useParams,
+  useHistory,
 } from "react-router-dom"
 import StoreContext from '../../StoreContext'
 
-export default class Statistics extends React.Component {
-  static contextType = StoreContext;
+export default function Statistics() {
+  const context = useContext(StoreContext)
 
-  constructor(props, context) {
-    super(props, context)
+  let history = useHistory()
+  let { id } = useParams()
 
-    const id = parseInt(this.props.match.params.id)
+  const [error, setError] = useState('')
+  const [tabs, setTabs] = useState([])
+  const [projects, setProjects] = useState([])
+  const [filteredProjects, setFilteredProjects] = useState([])
+  const [currentTabIndex, setCurrentTabIndex] = useState(1)
 
-    this.state = {
-      count: 0,
-      currentTabIndex: id ? id : 1,
-      pageCount: 0,
-      projects: [],
-      filteredProjects: [],
-      error: [],
-    }
+  const updateProjects = () => {
+    const filteredProjects = currentTabIndex !== 0 ? projects.filter((t) => t.campaign_theme.id === currentTabIndex) : projects
 
-    this.context.set('loading', true, () => {
-      this.getProjectData()
-    })
-
-    this.handleClickTab = this.handleClickTab.bind(this)
+    setFilteredProjects(filteredProjects)
   }
 
-  getProjectData() {
-    const config = {
-      headers: {
-        'Accept': 'application/json',
+  const updateTabs = () => {
+    const tabs = projects.map((t) => {
+      return {
+        id: t.campaign_theme.id,
+        name: t.campaign_theme.name,
       }
+    }).filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i).sort((a, b) => a.id - b.id)
+
+    setTabs(tabs)
+  }
+
+  const handleClickTab = (e) => {
+    history.push(`/statisztika/${e.currentTarget.tabIndex}`)
+
+    setCurrentTabIndex(e.currentTarget.tabIndex)
+  }
+
+  const getStatisticsData = () => {
+    axios
+    .get(process.env.REACT_APP_API_REQ_PROFILE_STATISTICS)
+    .then(response => {
+      if (response.data) {
+        setProjects(response.data._embedded.projects)
+        setFilteredProjects(response.data._embedded.projects)
+      }
+    })
+    .catch(error => {
+      if (error.response && error.response.data && error.response.data.message) {
+        setProjects([])
+        setFilteredProjects([])
+        setError(error.response.data.message)
+      }
+    })
+    .finally(() => {
+      context.set('loading', false)
+    })
+  }
+
+  useEffect(() => {
+    document.body.classList.add('page-statistics')
+
+    const parsedId = parseInt(id)
+
+    if (parsedId) {
+      setCurrentTabIndex(parsedId)
     }
 
-    this.context.set('loading', true)
-
-    axios.get(process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_PROFILE_STATISTICS, config)
-      .then(response => {
-        if (response.data) {
-          this.setState({
-            projects: response.data._embedded.projects,
-            filteredProjects: response.data._embedded.projects
-          })
-
-          this.context.set('loading', false)
-        }
-      })
-      .catch(error => {
-        if (error.response && error.response.data && error.response.data.message) {
-          this.setState({
-            projects: [],
-            filteredProjects: [],
-            error: error.response.data.message
-          })
-        }
-
-        this.context.set('loading', false)
-      })
-      .finally(() => {
-        this.updateProjects()
-      })
-  }
-
-  handleClickTab(e) {
-    this.props.history.push(`/statisztika/${e.currentTarget.tabIndex}`)
-
-    this.setState({
-      currentTabIndex: e.currentTarget.tabIndex
-    }, () => {
-      this.updateProjects()
+    context.set('loading', true, () => {
+      getStatisticsData()
     })
 
+    return () => {
+      document.body.classList.remove('page-statistics')
+    }
+  }, [])
+
+  useEffect(() => {
+    updateProjects()
+  }, [currentTabIndex])
+
+  useEffect(() => {
+    updateProjects()
+    updateTabs()
+  }, [projects])
+
+  const Error = (props) => {
+    return (
+      <div className="error-message">
+        {props.message}
+      </div>
+    )
   }
 
-  updateProjects() {
-    const filteredProjects = this.state.currentTabIndex !== 0 ? this.state.projects.filter((t) => t.campaign_theme.id === this.state.currentTabIndex) : this.state.projects
-
-    this.setState({
-      filteredProjects: filteredProjects
-    })
-  }
-
-  ProjectsWrapper(props) {
+  const ProjectsWrapper = (props) => {
     return (
       <div className="col-sm-12 col-md-12 col-lg-12">
         <div className="stat-wrapper">
@@ -109,27 +123,27 @@ export default class Statistics extends React.Component {
     )
   }
 
-  render() {
-    return (
-      <div className="statistics">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <h1>Ötletekre leadott szavazatok</h1>
+  return (
+    <div className="statistics">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <h1>Ötletekre leadott szavazatok</h1>
 
-              <div className="tab-wrapper">
-                <ul className="tab">
-                  <li tabIndex={1} className={`${this.state.currentTabIndex === 1 ? 'active' : ''}`} onClick={this.handleClickTab}><a>Zöld Budapest</a></li>
-                  <li tabIndex={2} className={`${this.state.currentTabIndex === 2 ? 'active' : ''}`} onClick={this.handleClickTab}><a>Gondoskodó Budapest</a></li>
-                  <li tabIndex={3} className={`${this.state.currentTabIndex === 3 ? 'active' : ''}`} onClick={this.handleClickTab}><a>Egész Budapest</a></li>
-                </ul>
-              </div>
+            {error ? <Error message={error} /> : null}
+
+            <div className="tab-wrapper">
+              <ul className="tab">
+                {tabs.map((tab) => (
+                  <li key={tab.id} tabIndex={tab.id} className={`${currentTabIndex === tab.id ? 'active' : ''}`} onClick={handleClickTab}><a>{tab.name}</a></li>
+                ))}
+              </ul>
             </div>
-
-            {this.state.filteredProjects.map((project, i) => <this.ProjectsWrapper key={i} project={project} place={i} />)}
           </div>
+
+          {filteredProjects.map((project, i) => <ProjectsWrapper key={i} project={project} place={i} tagClick={() => {}} />)}
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }

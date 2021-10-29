@@ -1,13 +1,13 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import loadG from './loadG.js'
 import docCookies from '../lib/docCookies.js'
 
 export default function CookieNotice() {
   const cookieName = 'cookie-notice'
-  const [ accepted, setAccepted ] = React.useState(false)
-  const [ open, setOpen ] = React.useState(true)
+  const [accepted, setAccepted] = useState(false)
+  const [open, setOpen] = useState(true)
 
-  React.useEffect(() => {
+  useEffect(() => {
     const cookieValue = docCookies.getItem(cookieName)
 
     if (cookieValue) {
@@ -56,12 +56,12 @@ export default function CookieNotice() {
   return (
     <div className="cookie-notice cookie-notice-visible" style={{ display: open ? 'block' : 'none' }}>
       <div className="cookie-notice-container">
-        <div className="cookie-notice-text">Kedves Látogató! Tájékoztatjuk, hogy a honlap felhasználói élmény fokozásának érdekében sütiket alkalmazunk. A honlapunk használatával ön a tájékoztatásunkat tudomásul veszi.</div>
+        <div className="cookie-notice-text">Kedves Látogató! Tájékoztatunk, hogy a honlap felhasználói élmény fokozásának érdekében sütiket alkalmazunk. A honlapunk használatával a tájékoztatásunkat tudomásul veszed.</div>
         <div className="cookie-notice-buttons">
           <a className="cookie-notice-accept" onClick={handlerAccept}>Elfogadom</a>
           <a className="cookie-notice-refuse" onClick={handlerRefuse}>Elutasítom</a>
 
-          <a href="https://budapest.hu/Lapok/2018/adatkezelesi-tajekoztato.aspx" target="_blank" rel="noopener" className="cookie-notice-info">Adatvédelmi</a>
+          <a href="https://budapest.hu/Lapok/2018/adatkezelesi-tajekoztato.aspx" target="_blank" rel="noopener noreferrer" className="cookie-notice-info">Adatkezelés</a>
         </div>
       </div>
     </div>
