@@ -65,6 +65,8 @@ export default function Profile() {
         if (error.response && error.response.data && error.response.data.message) {
           setError(error.response.data.message)
         }
+
+        console.log(error)
       })
       .finally(() => {
         context.set('loading', false)
@@ -101,6 +103,8 @@ export default function Profile() {
         if (error.response && error.response.data && error.response.data.message) {
           setError(error.response.data.message)
         }
+
+        console.log(error)
       })
       .finally(() => {
         setLoadIdeas(false)
@@ -153,6 +157,8 @@ export default function Profile() {
       }
 
       notify('⛔️ Sikertelen jelszó módosítás')
+
+      console.log(error)
     })
   }
 
@@ -259,6 +265,8 @@ export default function Profile() {
       }
 
       notify('⛔️ Sikertelen fiók törlés')
+
+      console.log(error)
     })
   }
 

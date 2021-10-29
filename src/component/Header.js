@@ -109,8 +109,6 @@ export default function Header({ children }) {
                     menuItem.onHideLoggedOut === true && localStorage.getItem('auth_token') === null
                   ) return;
 
-                  console.log(pathname)
-
                   if (Array.isArray(menuItem.roles) && !menuItem.roles.includes(tokenParser('user.role'))) return;
 
                   if (menuItem.outside) {
