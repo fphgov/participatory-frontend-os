@@ -20,7 +20,7 @@ export default function QuickSearch({ changeRaw, location, error }) {
   const renderSuggestion = (suggestion) => <div>{suggestion.title}</div>
 
   const inputProps = {
-    placeholder: 'Írd be a közterület nevét, ha konkrét helyszínhez köthető',
+    placeholder: 'Írd be a közterület nevét, ha konkrét helyszínhez köthető az ötleted',
     value: quickSeach,
     disabled: false,
     onChange: (_event, { newValue }) => {
