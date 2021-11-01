@@ -1,9 +1,16 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react'
 import FormPaginator from './elements/FormPaginator'
 import InputLengthValidator from './elements/InputLengthValidator'
 
 export default function IdeaInformation({ nextStep, prevStep, handleChange, handleChangeTitle, values }) {
   const [ participateChoose, setParticipateChoose ] = useState('no')
+
+  useEffect(() => {
+    if (values.participate) {
+      setParticipateChoose('yes')
+    }
+  }, [values.participate])
 
   return (
     <>
