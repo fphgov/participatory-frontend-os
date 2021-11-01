@@ -215,7 +215,7 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
                     <label htmlFor="file" className="input-file-content">
                       <FontAwesomeIcon icon={faFileUpload} size="3x" />
 
-                      <p>Tallózd be, vagy húzd a kijelőlt mezőbe a kapcsolódó anyagokat!</p>
+                      <p>Tallózd be, vagy húzd a kijelölt mezőbe a kapcsolódó anyagokat!</p>
 
                     </label>
                   </> : null}

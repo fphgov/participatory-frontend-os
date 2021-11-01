@@ -16,7 +16,7 @@ export default function Home() {
 
   const [posts, setPosts] = useState([])
 
-  const disabledIdeaSubmit = 1
+  const disabledIdeaSubmit = 0
 
   const getPageContent = () => {
     setPosts(null)
