@@ -4,6 +4,10 @@ export const rmEmojis = (text) => {
         .replace(/(\u00A9|\u00AE|[\u2000-\u3300]|\uD83C[\uD000-\uDFFF]|\uD83D[\uD000-\uDFFF]|\uD83E[\uD000-\uDFFF])/g, '')
 }
 
+export const rmHrefs = (text) => {
+  return text.replace(/http(s?):\/\/|ftp:\/\/|www./g, '')
+}
+
 export const rmForNumber = (text) => {
   return rmEmojis(text.replace(/[\D]/gi, ''))
 }
@@ -17,13 +21,13 @@ export const rmAllCharForEmail = (text) => {
 }
 
 export const rmAllCharForName = (text) => {
-  return rmEmojis(text.replace(/[`~!@#$%^&*()_|+\=?;:'",<>\{\}\[\]\\\/]/gi, ''))
+  return rmHrefs(rmEmojis(text.replace(/[`~!@#$%^&*()_|+\=?;:'",<>\{\}\[\]\\\/]/gi, '')))
 }
 
 export const rmAllCharForTitle = (text) => {
-  return rmEmojis(text.replace(/[`~@#$^*_|\=;<>\{\}\[\]\\]/gi, ''))
+  return rmHrefs(rmEmojis(text.replace(/[`~@#$^*_|\=;<>\{\}\[\]\\]/gi, '')))
 }
 
 export const rmAllCharForAddress = (text) => {
-  return rmEmojis(text.replace(/[`~!@#$%^&*()_|+\=?;:'"<>\{\}\[\]\\]/gi, ''))
+  return rmHrefs(rmEmojis(text.replace(/[`~!@#$%^&*()_|+\=?;:'"<>\{\}\[\]\\]/gi, '')))
 }
