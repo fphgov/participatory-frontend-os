@@ -127,7 +127,7 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
               onChange={handleChange}
             />
 
-            <div className="input-wrapper">
+            <div className="input-wrapper input-map">
               <label htmlFor="location">Helyszín</label>
               <div className="tipp">Ha az ötleted egy konkrét helyszínre szól, vagy szeretnéd, hogy egy adott városrészben valósuljon meg, írd le a helyszínt minél pontosabban! Kérjük, vedd figyelembe, hogy különböző okok miatt nem biztos, hogy ötletedet a Főváros pontosan az általad javasolt helyszínen meg tudja valósítani.</div>
 
@@ -141,7 +141,7 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
               {values.links.map((link, i) => {
                 return (
                   <div key={i} className="link-elem">
-                    <button className="danger" onClick={() => {
+                    <button className="btn danger" onClick={() => {
                       handleRemoveElem('links', link)
                     }}><FontAwesomeIcon icon={faTrash} rel="noopener noreferrer" /> Eltávolítás</button>
 

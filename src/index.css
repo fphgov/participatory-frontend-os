@@ -609,16 +609,7 @@ input[type="submit"] {
 }
 
 .page-login .page {
-  display: block;
-  background-color: transparent;
-  background: none;
-  border-radius: 0;
-  margin-top: 30px;
-  box-shadow: none;
-  border: 0;
-  min-height: 20px;
-  padding: 19px;
-  margin-bottom: 20px;
+  margin: 30px 0;
 }
 
 .page-login-section {
@@ -1017,7 +1008,8 @@ form fieldset textarea {
   transition: none;
 }
 
-fieldset button,
+fieldset .input-wrapper:not(.input-map) button,
+.navigation-wrapper button,
 .small .btn,
 .registration-info .btn {
   max-width: 100%;
@@ -1046,13 +1038,14 @@ fieldset button,
   border-radius: 4px;
 }
 
-fieldset button:hover,
+fieldset .input-wrapper:not(.input-map) button.btn:hover,
+.navigation-wrapper button:hover,
 .small .btn:hover,
 .registration-info .btn:hover {
   background-color: #0d94b7;
 }
 
-fieldset .form-group a {
+fieldset .form-group > a {
   padding: 15px 0;
   max-width: 100%;
   border-radius: 0px;
@@ -1064,8 +1057,17 @@ fieldset .form-group a {
   font-size: 12px;
 }
 
+.forgot-btn-wrapper > .btn {
+  padding: 8px 0 0 0;
+  font-size: 16px;
+}
+
 .form-group .link-elem a {
   margin-left: 12px !important;
+}
+
+.form-group .overview-value .link-elem a {
+  margin-left: 0 !important;
 }
 
 .danger {
@@ -1091,6 +1093,23 @@ hr {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
+}
+
+.autosuggest-wrapper .map-container {
+  margin-top: 10px;
+}
+
+.location-information-wrapper {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  margin: 12px 0;
+}
+
+.location-information-wrapper .location-delete {
+  display: inline-block;
+  margin-left: 12px;
 }
 
 .section fieldset {
@@ -1406,7 +1425,7 @@ button, input, optgroup, select, textarea {
 }
 
 .form-group-label {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: normal;
 }
 
