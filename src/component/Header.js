@@ -92,7 +92,7 @@ export default function Header({ children }) {
       <nav className="main-navigation">
         <div className="container-fluid">
           <div className="row flex-center">
-            <div className="col-xs-6 col-sm-6 col-md-2">
+            <div className="col-xs-6 col-sm-6 col-md-6">
               <div className="logo-wrapper">
                 <a href="/" rel="noopener noreferrer">
                   <img src={Logo} alt="Budapest Közösségi Költségvetés" />

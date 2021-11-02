@@ -590,22 +590,25 @@ input[type="submit"] {
   margin: 10px;
 }
 
-.cookie-notice-buttons > a {
+.cookie-notice-buttons > button, .cookie-notice-buttons > a {
   display: inline-block;
-  padding: 4px 8px;
+  padding: 6px 8px;
   background-color: #0EA6CE;
   color: #fff;
   text-transform: uppercase;
-  margin-left: 10px;
+  margin: 5px 0px 5px 10px;
   border-radius: 4px;
+  border: none;
+  font-family: 'Source Sans Pro', "Helvetica Neue", Arial, sans-serif;
 }
 
-.cookie-notice-buttons > a:first-of-type {
+.cookie-notice-buttons > button:first-of-type {
   margin-left: 0;
 }
 
-.cookie-notice-buttons > a:hover {
+.cookie-notice-buttons > button:hover {
   background-color: #11415b;
+  cursor: pointer;
 }
 
 .page-login .page {
