@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import FormPaginator from './elements/FormPaginator'
 import InputLengthValidator from './elements/InputLengthValidator'
 
-export default function IdeaInformation({ nextStep, prevStep, handleChange, handleChangeTitle, values }) {
+export default function IdeaInformation({ nextStep, prevStep, handleChangeNumber, handleChangeTitle, values }) {
   const [ participateChoose, setParticipateChoose ] = useState('no')
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function IdeaInformation({ nextStep, prevStep, handleChange, hand
             <div className="input-wrapper">
               <label htmlFor="cost">Becsült költség</label>
               <div className="tipp">Ha van elképzelésed ötleted megvalósításának költségéről, itt leírhatod. Fontos, hogy javaslatod a meghatározott keretekbe beleférjen. Kisebb projektekből több tud megvalósulni, ezért azok nagyobb eséllyel indulnak a szavazáson. A költségbecslést minden esetben a Főpolgármesteri Hivatal szakértői véglegesítik.</div>
-              <input type="text" autoCorrect="off" autoCapitalize="none" name="cost" id="cost" value={values.cost} onChange={handleChange} />
+              <input type="text" autoCorrect="off" autoCapitalize="none" name="cost" id="cost" value={values.cost} onChange={handleChangeNumber} />
             </div>
 
             <div className="input-wrapper">

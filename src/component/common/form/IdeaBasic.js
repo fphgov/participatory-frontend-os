@@ -112,7 +112,7 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
               name="solution"
               tipp="Írd le röviden, hogy miért van szükség erre a fejlesztésre, kiknek milyen helyzetre, problémára ad választ, megoldást!"
               value={values.solution}
-              options={{ min: 4, max: 500 }}
+              options={{ min: 20, max: 500 }}
               info={''}
               onChange={handleChange}
             />

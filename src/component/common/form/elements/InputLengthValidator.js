@@ -14,13 +14,21 @@ export default function InputLengthValidator({ title, tipp, name, value, onChang
       <input type="text" aria-invalid={titleIsInvalid} autoCorrect="off" autoCapitalize="none" name={name} id={name} value={value} onChange={onChange} />
 
       <div className="validator-info">
-        <span id="links-help-text">{info ?? ' '}</span>
-        <span className={`info-text ${value.length == 0 ? 'info-text-empty' : ''}`}>
-          {value.length}/{options.max} karakter
-          {value.length ? <>
-            {titleIsInvalid ? <FontAwesomeIcon icon={faTimes} /> : <FontAwesomeIcon icon={faCheck} />}
-          </> : null}
-        </span>
+        <div className="validator-info-elem">
+          <span className={`info-text ${value.length == 0 ? 'info-text-empty' : ''}`}>
+            {options.min && titleIsInvalid ? <>Még nem érted el a minimum karaktert, ami {options.min}</> : null}
+          </span>
+        </div>
+
+        <div className="validator-info-elem">
+          <span id="links-help-text">{info ?? ' '}</span>
+          <span className={`info-text ${value.length == 0 ? 'info-text-empty' : ''}`}>
+            {value.length}/{options.max} karakter
+            {value.length ? <>
+              {titleIsInvalid ? <FontAwesomeIcon icon={faTimes} /> : <FontAwesomeIcon icon={faCheck} />}
+            </> : null}
+          </span>
+        </div>
       </div>
     </div>
   )
