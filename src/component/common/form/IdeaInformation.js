@@ -58,7 +58,7 @@ export default function IdeaInformation({ nextStep, prevStep, handleChangeNumber
 
               {participateChoose === 'yes' ? <>
                 <InputLengthValidator
-                  title="Milyen módon tudna részt venni a megvalósításban?"
+                  title="Milyen módon tudnál részt venni a megvalósításban?"
                   name="participate"
                   tipp=""
                   value={values.participate}

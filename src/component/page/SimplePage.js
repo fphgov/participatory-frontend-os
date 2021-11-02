@@ -47,6 +47,20 @@ export default function SimplePage() {
   }
 
   useEffect(() => {
+    setTimeout(() => {
+      const scrollContent = document.getElementById(window.location.hash.toString().replace('#', ''))
+
+      if (scrollContent) {
+        window.scrollTo({
+          top: scrollContent.offsetTop,
+          left: 0,
+          behavior: 'smooth'
+        })
+      }
+    }, 100)
+  }, [rawContent])
+
+  useEffect(() => {
     getPageContent()
   }, [slug])
 
