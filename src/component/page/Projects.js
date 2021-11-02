@@ -236,6 +236,7 @@ export default function Projects() {
     <div className="projects">
       <SearchArea
         title="Mely ötleteket látnád szívesen megvalósulni?"
+        tipp="Itt szerepel minden ötlet, ami a közösségi költségvetés szavazólapjára került. Köztük a legnépszerűbbek, amelyeket a szavazatok alapján a Fővárosi Önkormányzat megvalósít."
         type="project"
         queryRef={queryRef}
         values={filterData}

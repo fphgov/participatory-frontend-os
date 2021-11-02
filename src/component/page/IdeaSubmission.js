@@ -33,6 +33,7 @@ export default function IdeaSubmission() {
     'participateChoose': '',
     'participate': '',
     'location': '',
+    'locationDescription': '',
     'privacy': false,
   })
 

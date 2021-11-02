@@ -222,6 +222,7 @@ export default function Ideas() {
     <div className="ideas">
       <SearchArea
         title="Beküldött ötletek"
+        tipp="Itt szerepel minden ötlet, ami 2020. óta beérkezett a közösségi költségvetésbe. Szűrők segítségével tudod beállítani, melyeket szeretnéd megnézni."
         type="idea"
         queryRef={queryRef}
         values={filterData}

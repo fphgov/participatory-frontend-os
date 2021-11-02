@@ -92,7 +92,14 @@ export default function IdeaOverview({ firstStep, values, submitIdea, error }) {
           </div>
 
           <div className="overview">
-            <div className="overview-name">Helyszín</div>
+            <div className="overview-name">Helyszín megnevezése</div>
+            <div className="overview-value">{values.locationDescription ? values.locationDescription : "-"}</div>
+
+            <ErrorRender error={error} name="locationDescription" />
+          </div>
+
+          <div className="overview">
+            <div className="overview-name">Helyszín térképre helyezése</div>
             <div className="overview-value">{values.location ? location : "-"}</div>
 
             <ErrorRender error={error} name="location" />

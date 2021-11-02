@@ -1218,6 +1218,12 @@ hr {
   min-width: 34px;
 }
 
+.search-area p {
+  color: #fff;
+  text-transform: none;
+  text-align: center;
+}
+
 button.map-toggle {
   background-color: #fff;
   color: #12326e;

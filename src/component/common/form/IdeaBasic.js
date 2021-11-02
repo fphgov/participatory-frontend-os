@@ -127,9 +127,19 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
               onChange={handleChange}
             />
 
+            <InputLengthValidator
+              title="Helyszín megnevezése"
+              name="locationDescription"
+              tipp="Ha az ötleted egy konkrét helyszínre szól, vagy szeretnéd, hogy egy adott városrészben valósuljon meg, írd le a helyszínt minél pontosabban! Kérjük, vedd figyelembe, hogy különböző okok miatt nem biztos, hogy ötletedet a Főváros pontosan az általad javasolt helyszínen meg tudja valósítani. A helyszín megnevezését kérjük, hogy kezdd a kerülettel ebben a formátumban: 17. kerület, Minta utca."
+              value={values.locationDescription}
+              options={{ min: 0, max: 200 }}
+              info={''}
+              onChange={handleChange}
+            />
+
             <div className="input-wrapper input-map">
-              <label htmlFor="location">Helyszín</label>
-              <div className="tipp">Ha az ötleted egy konkrét helyszínre szól, vagy szeretnéd, hogy egy adott városrészben valósuljon meg, írd le a helyszínt minél pontosabban! Kérjük, vedd figyelembe, hogy különböző okok miatt nem biztos, hogy ötletedet a Főváros pontosan az általad javasolt helyszínen meg tudja valósítani.</div>
+              <label htmlFor="location">Helyszín térképre helyezése</label>
+              <div className="tipp">Konkrét helyszínre szóló ötletedet szeretnénk térképen is elhelyezni, ebben kérjük a segítségedet. Gépeld be ötleted javasolt helyszínét, majd a felugró ablakból válassz egy címet (ezek házszámot is fognak tartalmazni). A térképen ekkor megjelenik a kék színű helyszín jelölő, ami, ha nem a legkifejezőbb helyen jelent meg (mert például az ötleted az egész utcára, térre vonatkozik, vagy még nagyobb területre), akkor az egereddel kézileg húzd át oda, ahol a legpontosabban jelöli ötleted helyszínét.</div>
 
               <QuickSearch changeRaw={changeRaw} location={values.location} error={values.error && values.error.location} />
             </div>
