@@ -116,7 +116,7 @@ export default function Login() {
 
       <div className="container">
         <div className="row">
-          <div className="col-xs-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
+          <div className="col-xs-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
             <form className="form-horizontal" onSubmit={submitLogin}>
               <fieldset>
                 {error ? <Error message={error} /> : null}
@@ -143,18 +143,20 @@ export default function Login() {
                     }}
                   />
 
-                  <div className="form-group">
-                    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12" style={{ display: "flex", justifyContent: "space-between", padding: 0 }}>
-                      <Link to={`/elfelejtett-jelszo`} className="btn btn-sm" title="Elfelejtettem a jelszavam">Elfelejtettem a jelszavam</Link>
-                    </div>
-                  </div>
+                  <div className="input-wrapper">
+                    <div className="row">
+                      <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <button className="btn btn-primary">
+                          <FontAwesomeIcon icon={faSignInAlt} />&nbsp;
+                          Belépés
+                        </button>
+                      </div>
 
-                  <div style={{ display: "inline-block" }}>
-                    <button className="btn btn-primary">
-                      <FontAwesomeIcon icon={faSignInAlt} />&nbsp;
-                      Belépés
-                    </button>
-                  </div>
+                      <div className="forgot-btn-wrapper col-xs-8 col-sm-8 col-md-8 col-lg-8" style={{ textAlign: 'right' }}>
+                        <Link to={`/elfelejtett-jelszo`} className="btn btn-sm" title="Elfelejtettem a jelszavam">Elfelejtettem a jelszavam</Link>
+                      </div>
+                    </div>
+                 </div>
                 </div>
               </fieldset>
             </form>

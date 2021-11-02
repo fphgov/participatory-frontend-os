@@ -3,7 +3,7 @@ import {
   Link,
 } from "react-router-dom"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
-import { rmAllCharForName, rmAllCharForTitle, rmAllCharForAddress } from '../lib/removeSpecialCharacters'
+import { rmForNumber, rmAllCharForName, rmAllCharForTitle, rmAllCharForAddress } from '../lib/removeSpecialCharacters'
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
 import ScrollTo from "../common/ScrollTo"
@@ -33,6 +33,7 @@ export default function IdeaSubmission() {
     'participateChoose': '',
     'participate': '',
     'location': '',
+    'locationDescription': '',
     'privacy': false,
   })
 
@@ -66,6 +67,12 @@ export default function IdeaSubmission() {
 
   const handleChangeInputAddress = (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : rmAllCharForAddress(e.target.value)
+
+    setFormData({ ...formData, [ e.target.name ]: value })
+  }
+
+  const handleChangeInputNumber = (e) => {
+    const value = e.target.type === 'checkbox' ? e.target.checked : rmForNumber(e.target.value)
 
     setFormData({ ...formData, [ e.target.name ]: value })
   }
@@ -271,7 +278,7 @@ export default function IdeaSubmission() {
                               <IdeaInformation
                                 nextStep={nextStep}
                                 prevStep={prevStep}
-                                handleChange={handleChangeInput}
+                                handleChangeNumber={handleChangeInputNumber}
                                 handleChangeTitle={handleChangeInputTitle}
                                 profile={profile}
                                 error={error}

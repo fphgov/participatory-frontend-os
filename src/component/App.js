@@ -30,7 +30,7 @@ import ScrollToTop from "./common/ScrollToTop"
 import CookieNotice from "./common/CookieNotice"
 import StoreContext from '../StoreContext'
 import tokenParser from './assets/tokenParser'
-// import IdeaSubmission from "./page/IdeaSubmission"
+import IdeaSubmission from "./page/IdeaSubmission"
 import 'react-toastify/dist/ReactToastify.css'
 
 export default function App() {
@@ -101,7 +101,7 @@ export default function App() {
             <Route exact path="/" render={() => <Layout><Home /></Layout>} />
             <Route exact path="/bejelentkezes" render={() => <Layout><Login /></Layout>} />
             <Route exact path="/kijelentkezes" render={() => <Layout><Logout /></Layout>} />
-            {/* <Route exact path="/bekuldes" render={() => <Layout><IdeaSubmission /></Layout>} /> */}
+            <Route exact path="/bekuldes" render={() => <Layout><IdeaSubmission /></Layout>} />
             <Route exact path="/oldal/:slug" render={() => <Layout><SimplePage /></Layout>} />
             <Route exact path="/rendezvenyek" render={() => <Layout><PostsEvent /></Layout>} />
             <Route exact path="/hirek" render={() => <Layout><Posts /></Layout>} />

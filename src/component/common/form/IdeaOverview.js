@@ -12,7 +12,7 @@ export default function IdeaOverview({ firstStep, values, submitIdea, error }) {
     6: "Nyitott Budapest"
   }
 
-  const location = typeof values.location === 'object' && values.location.nfn ? `${values.location.nfn} kerület, ${values.location.php}` : '-'
+  const location = typeof values.location === 'object' && values.location.nfn ? `${values.location.nfn} kerület, ${values.location.php}` : (typeof values.location === 'object' && values.location.geometry) ? 'Egyéni koordináta' : '-'
 
   const ErrorMini = (props) => {
     if (typeof props.error === 'object') {
@@ -92,7 +92,14 @@ export default function IdeaOverview({ firstStep, values, submitIdea, error }) {
           </div>
 
           <div className="overview">
-            <div className="overview-name">Helyszín</div>
+            <div className="overview-name">Helyszín megnevezése</div>
+            <div className="overview-value">{values.locationDescription ? values.locationDescription : "-"}</div>
+
+            <ErrorRender error={error} name="locationDescription" />
+          </div>
+
+          <div className="overview">
+            <div className="overview-name">Helyszín térképre helyezése</div>
             <div className="overview-value">{values.location ? location : "-"}</div>
 
             <ErrorRender error={error} name="location" />
