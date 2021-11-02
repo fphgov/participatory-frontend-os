@@ -48,7 +48,7 @@ export default function SimplePage() {
 
   useEffect(() => {
     setTimeout(() => {
-      const scrollContent = document.querySelector(window.location.hash)
+      const scrollContent = document.getElementById(window.location.hash.toString().replace('#', ''))
 
       if (scrollContent) {
         window.scrollTo({
