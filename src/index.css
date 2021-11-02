@@ -347,7 +347,7 @@ footer.post-card-meta {
 }
 
 header.post-full-header {
-  flex: 1;
+  flex: 1 0 auto;
 }
 
 article.post-card:hover .post-more {
