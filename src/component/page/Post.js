@@ -48,6 +48,20 @@ export default function Post() {
   }
 
   useEffect(() => {
+    setTimeout(() => {
+      const scrollContent = document.querySelector(window.location.hash)
+
+      if (scrollContent) {
+        window.scrollTo({
+          top: scrollContent.offsetTop,
+          left: 0,
+          behavior: 'smooth'
+        })
+      }
+    }, 100)
+  }, [rawContent])
+
+  useEffect(() => {
     document.body.classList.add('page-post')
 
     getPageContent()

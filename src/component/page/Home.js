@@ -37,9 +37,9 @@ export default function Home() {
       }
     }).catch(error => {
       if (error.response && error.response.data && error.response.data.message) {
-        setError(error.response.data.message)
+        console.log(error.response.data.message)
       } else {
-        setError('Váratlan hiba történt, kérjük próbáld később')
+        console.log('Váratlan hiba történt a hírek lekérdezésében')
       }
     }).finally(() => {
       context.set('loading', false)
@@ -147,7 +147,7 @@ export default function Home() {
                 <div className="col-md-6">
                   <div className="timeline-item">
                     <h3>Ötletelés</h3>
-                    <p>Nézz körül, járj nyitott szemmel. Gondolkodj új dolgokban, ötleteddel hozz létre valamit. Ismerd meg a kategóriákat és a kereteket, hogy ötleted minden kritériumnak megfeleljen és sikeresen eljusson a megvalósításig.</p>
+                    <p>Nézz körül, járj nyitott szemmel. Gondolkodj új dolgokban, ötleteddel hozz létre valamit. <Link to="/hirek/tudnivalok-az-otletek-benyujtasarol-2021">Ismerd meg a kategóriákat és a kereteket</Link>, hogy ötleted minden kritériumnak megfeleljen és sikeresen eljusson a megvalósításig.</p>
                   </div>
 
                   <div className="timeline-item">
@@ -157,7 +157,7 @@ export default function Home() {
 
                   <div className="timeline-item">
                     <h3>Beküldés után</h3>
-                    <p>Nézd meg, mi történik az ötleteddel beküldés után</p>
+                    <p><Link to="/hirek/tudnivalok-az-otletek-benyujtasarol-2021#mi-tortenik-az-otletek-beadasa-utan">Nézd meg</Link>, mi történik az ötleteddel beküldés után</p>
                   </div>
                 </div>
               </div>
