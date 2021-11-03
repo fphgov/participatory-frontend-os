@@ -38,6 +38,7 @@ export default function IdeaSubmission() {
   })
 
   const firstStep = () => {
+    setError(null)
     setStep(1)
   }
 
@@ -153,12 +154,15 @@ export default function IdeaSubmission() {
 
     const data = {
       ...formData,
+      'location_description': formData['locationDescription'],
+      'participate_comment': formData['participate'],
       'g-recaptcha-response': recaptchaToken,
     }
 
     delete data['links']
     delete data['medias']
     delete data['participateChoose']
+    delete data['locationDescription']
 
     if (typeof data['location'] === 'object') {
       data['location'] = new URLSearchParams(data['location'])

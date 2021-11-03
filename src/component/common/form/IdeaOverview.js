@@ -95,7 +95,7 @@ export default function IdeaOverview({ firstStep, values, submitIdea, error }) {
             <div className="overview-name">Helyszín megnevezése</div>
             <div className="overview-value">{values.locationDescription ? values.locationDescription : "-"}</div>
 
-            <ErrorRender error={error} name="locationDescription" />
+            <ErrorRender error={error} name="location_description" />
           </div>
 
           <div className="overview">
@@ -124,6 +124,7 @@ export default function IdeaOverview({ firstStep, values, submitIdea, error }) {
             <div className="overview-value">{values.participate && values.participate != " " ? values.participate : 'Nem'}</div>
 
             <ErrorRender error={error} name="participate" />
+            <ErrorRender error={error} name="participate_comment" />
           </div>
         </div>
 
