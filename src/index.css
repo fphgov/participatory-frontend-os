@@ -332,7 +332,7 @@ footer.post-card-meta {
 
 .more-posts {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   height: 100%;
   align-items: center;
 }
@@ -2127,6 +2127,16 @@ time.post-full-meta-date {
   align-items: center;
   justify-content: center;
   padding: 32px 0;
+}
+
+.no-arrow .hero {
+  display: block;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.no-arrow .hero img {
+  max-width: 755px;
 }
 
 .hero h2 {
