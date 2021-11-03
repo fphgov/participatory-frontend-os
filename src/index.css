@@ -66,7 +66,9 @@ textarea {
   flex: 1 0 auto;
 }
 
-.app > .page > div:not(.home,.page-home-section,.ideas) {
+.app > .page > div:not(.home),
+.app > .page > div:not(.page-home-section),
+.app > .page > div:not(.ideas) {
   margin: 35px 0;
 }
 
@@ -2001,6 +2003,10 @@ input[type="file"] {
 .form-status span.active {
   background-color: #0ea6ce;
   color: #fff;
+}
+
+.no-arrow .form-status:after {
+  display: none;
 }
 
 .profile {
