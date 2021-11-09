@@ -66,10 +66,14 @@ textarea {
   flex: 1 0 auto;
 }
 
-.app > .page > div:not(.home),
-.app > .page > div:not(.page-home-section),
-.app > .page > div:not(.ideas) {
+.app > .page > div {
   margin: 35px 0;
+}
+
+.app > .page > div.home,
+.app > .page > div.page-home-section,
+.app > .page > div.ideas {
+  margin: 0;
 }
 
 .col-sm-6 {
@@ -268,6 +272,7 @@ header .logo-wrapper img {
   display: block;
   width: 100%;
   margin: 0 0 24px 0;
+  font-size: 16px;
 }
 
 .btn.btn-vote:hover {

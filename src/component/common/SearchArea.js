@@ -2,7 +2,7 @@ import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 
-export default function SearchArea({ title, tipp, values, queryRef, inputChange, triggerFindAction, clearQuery, error, type }) {
+export default function SearchArea({ title, tipp, tipp2, values, queryRef, inputChange, triggerFindAction, clearQuery, error, type }) {
   const onKeyUp = (e) => {
     if (e.key === 'Enter') {
       triggerFindAction()
@@ -32,6 +32,8 @@ export default function SearchArea({ title, tipp, values, queryRef, inputChange,
               <h1>{title}</h1>
 
               <p>{tipp}</p>
+
+              <p>{tipp2}</p>
 
               <div className="form-group">
                 <label className="sr-only" htmlFor="search">Keresés</label>

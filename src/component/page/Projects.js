@@ -236,7 +236,8 @@ export default function Projects() {
     <div className="projects">
       <SearchArea
         title="Megvalósuló ötletek"
-        tipp="Itt szerepel minden ötlet, ami a közösségi költségvetés szavazólapjára került. Köztük a legnépszerűbbek, amelyeket a szavazatok alapján a Fővárosi Önkormányzat megvalósít."
+        tipp="Itt láthatók a megvalósuló, nyertes ötletek, de emellett minden olyan ötlet is, ami a közösségi költségvetés szavazólapjára került."
+        tipp2="Ezen az oldalon nem az ötletgazdák által beadott eredeti ötleteket látod, hanem azok letisztázott, adott esetben módosított szövegű verzióját, illetve a hasonló javaslatok összevonásából létrehozott ötleteket. Az eredeti ötleteket is meg tudod nyitni az adatlapon szereplő Kapcsolódó ötletek cím alatt."
         type="project"
         queryRef={queryRef}
         values={filterData}
