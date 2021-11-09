@@ -7,7 +7,10 @@ export default function CookieNotice() {
   const [accepted, setAccepted] = useState(false)
   const [open, setOpen] = useState(true)
 
-  useEffect(() => {
+  useEffect(loadTagsEffect, [])
+  useEffect(loadTagsEffect, [accepted])
+
+  function loadTagsEffect() {
     const cookieValue = docCookies.getItem(cookieName)
 
     if (cookieValue) {
@@ -18,7 +21,7 @@ export default function CookieNotice() {
         loadTags()
       }
     }
-  }, [])
+  }
 
   function loadTags() {
     if (!window.dataLayer) {
@@ -39,6 +42,7 @@ export default function CookieNotice() {
     e.preventDefault()
 
     setAccepted(true)
+    setOpen(false)
     docCookies.setItem(cookieName, true)
 
     if (accepted) {
@@ -58,8 +62,8 @@ export default function CookieNotice() {
       <div className="cookie-notice-container">
         <div className="cookie-notice-text">Kedves Látogató! Tájékoztatunk, hogy a honlap felhasználói élmény fokozásának érdekében sütiket alkalmazunk. A honlapunk használatával a tájékoztatásunkat tudomásul veszed.</div>
         <div className="cookie-notice-buttons">
-          <a className="cookie-notice-accept" onClick={handlerAccept}>Elfogadom</a>
-          <a className="cookie-notice-refuse" onClick={handlerRefuse}>Elutasítom</a>
+          <button className="cookie-notice-accept" onClick={handlerAccept}>Elfogadom</button>
+          <button className="cookie-notice-refuse" onClick={handlerRefuse}>Elutasítom</button>
 
           <a href="https://budapest.hu/Lapok/2018/adatkezelesi-tajekoztato.aspx" target="_blank" rel="noopener noreferrer" className="cookie-notice-info">Adatkezelés</a>
         </div>
