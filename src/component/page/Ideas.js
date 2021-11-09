@@ -161,7 +161,7 @@ export default function Ideas() {
     const locationId = e.features[0] && e.features[0].layer.id ? e.features[0].layer.id : ''
 
     if (filterData.location !== locationId) {
-      setFilterData({ location: locationId })
+      setFilterData({ ...filterData, location: locationId })
 
       refreshURLParams()
     }
