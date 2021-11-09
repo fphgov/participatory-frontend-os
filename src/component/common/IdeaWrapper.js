@@ -157,7 +157,7 @@ export default function IdeaWrapper(props) {
                     <div className="prop-single-elem prop-single-paper">
                       <Link to={`/projektek/${props.idea.project.id}`} className="btn btn-primary btn-vote" style={{ backgroundColor: theme.rgb }} onClick={props.onClickVote}>Tovább a módosított ötletre *</Link>
 
-                      <p className="tipp">* Ez az ötlet módosult, összevonásra került. A fenti gombra kattinva megtekinthető az új ötlet.</p>
+                      <p className="tipp">* Ide kattintva megismerheti, hogy a beadott ötlet milyen formában került szavazólapra letisztázott szöveggel, adott esetben más hasonló ötletekkel összevonva.</p>
                     </div>
                   </>
                 ) : null}
