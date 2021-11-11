@@ -106,20 +106,20 @@ export default function SearchArea({ title, tipp, tipp2, values, queryRef, input
                 <option disabled="disabled">----</option>
 
                 {type === 'project' && <>
-                  <option value="under_construction">Megvalósítás alatt</option>
+                  <option value="under_construction">Szavazáson nyert, megvalósítás alatt áll</option>
                   <option value="ready">Megvalósult</option>
-                  <option value="not_voted">Szavazáson nem nyert</option>
+                  <option value="not_voted">Szavazólapra került, de szavazáson nem nyert</option>
                 </>}
 
                 {type === 'idea' && <>
-                  <option value="published">Beérkezett</option>
-                  <option value="pre_council">Tanács elé kerül</option>
-                  <option value="voting_list">Szavazólistán</option>
-                  <option value="under_construction">Megvalósítás alatt</option>
+                  <option value="published">Beérkezett, feldolgozásra vár</option>
+                  <option value="pre_council">Szakmailag jóváhagyva, tanács elé kerül</option>
+                  <option value="voting_list">Szavazólapra került</option>
+                  <option value="under_construction">Szavazáson nyert, megvalósítás alatt áll</option>
                   <option value="ready">Megvalósult</option>
-                  <option value="not_voted">Szavazáson nem nyert</option>
-                  <option value="council_rejected">Tanács elutasította</option>
-                  <option value="status_rejected">Szakmailag nem megfelelő</option>
+                  <option value="not_voted">Szavazólapra került, de szavazáson nem nyert</option>
+                  <option value="council_rejected">Szakmai jóváhagyást nyert, tanács nem fogadta be</option>
+                  <option value="status_rejected">Nem kapott szakmai jóváhagyást</option>
                 </>}
               </select>
             </div>
