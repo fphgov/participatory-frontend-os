@@ -64,30 +64,30 @@ export default function SearchArea({ title, tipp, tipp2, values, queryRef, input
               <select name="location" onChange={inputChange} value={values.location}>
                 <option value="">Keresés kerület alapján</option>
                 <option disabled="disabled">----</option>
-                <option value="1">Nem köthető konkrét helyszínhez</option>
-                <option value="2">I. kerület</option>
-                <option value="3">II. kerület</option>
-                <option value="4">III. kerület</option>
-                <option value="5">IV. kerület</option>
-                <option value="6">V. kerület</option>
-                <option value="7">VI. kerület</option>
-                <option value="8">VII. kerület</option>
-                <option value="9">VIII. kerület</option>
-                <option value="10">IX. kerület</option>
-                <option value="11">X. kerület</option>
-                <option value="12">XI. kerület</option>
-                <option value="13">XII. kerület</option>
-                <option value="14">XIII. kerület</option>
-                <option value="15">XIV. kerület</option>
-                <option value="16">XV. kerület</option>
-                <option value="17">XVI. kerület</option>
-                <option value="18">XVII. kerület</option>
-                <option value="19">XVIII. kerület</option>
-                <option value="20">XIX. kerület</option>
-                <option value="21">XX. kerület</option>
-                <option value="22">XXI. kerület</option>
-                <option value="23">XXII. kerület</option>
-                <option value="24">Margitsziget</option>
+                <option value="AREA0">Nem köthető konkrét helyszínhez</option>
+                <option value="AREA1">I. kerület</option>
+                <option value="AREA2">II. kerület</option>
+                <option value="AREA3">III. kerület</option>
+                <option value="AREA4">IV. kerület</option>
+                <option value="AREA5">V. kerület</option>
+                <option value="AREA6">VI. kerület</option>
+                <option value="AREA7">VII. kerület</option>
+                <option value="AREA8">VIII. kerület</option>
+                <option value="AREA9">IX. kerület</option>
+                <option value="AREA10">X. kerület</option>
+                <option value="AREA11">XI. kerület</option>
+                <option value="AREA12">XII. kerület</option>
+                <option value="AREA13">XIII. kerület</option>
+                <option value="AREA14">XIV. kerület</option>
+                <option value="AREA15">XV. kerület</option>
+                <option value="AREA16">XVI. kerület</option>
+                <option value="AREA17">XVII. kerület</option>
+                <option value="AREA18">XVIII. kerület</option>
+                <option value="AREA19">XIX. kerület</option>
+                <option value="AREA20">XX. kerület</option>
+                <option value="AREA21">XXI. kerület</option>
+                <option value="AREA22">XXII. kerület</option>
+                <option value="AREA23">Margitsziget</option>
               </select>
             </div>
 
