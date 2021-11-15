@@ -2086,8 +2086,9 @@ font-size: 18px;
 }
 
 .page-post-section span,
-.post-full-meta span {
+.post-full-meta div {
   margin-left: 4px;
+  display: inline-block;
 }
 
 time.post-full-meta-date {
