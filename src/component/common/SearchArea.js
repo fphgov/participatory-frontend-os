@@ -81,6 +81,16 @@ export default function SearchArea({ title, tipp, tipp2, values, queryRef, input
 
           <div className="row">
             <div className="col-lg-3 col-md-4 col-xs-12">
+              <select name="campaign" onChange={inputChange} value={values.campaign}>
+                <option value="">Keresés időszak alapján</option>
+                <option disabled="disabled">----</option>
+                {campaigns && campaigns.map((campaign, i) => (
+                  <option key={i} value={campaign.id}>{campaign.name}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="col-lg-3 col-md-4 col-xs-12">
               <select name="theme" onChange={inputChange} value={values.theme}>
                 <option value="">Keresés kategória alapján</option>
                 <option disabled="disabled">----</option>
@@ -96,16 +106,6 @@ export default function SearchArea({ title, tipp, tipp2, values, queryRef, input
                 <option disabled="disabled">----</option>
                 {locations && locations.map((location, i) => (
                   <option key={i} value={location.code}>{location.name}</option>
-                ))}
-              </select>
-            </div>
-
-            <div className="col-lg-3 col-md-4 col-xs-12">
-              <select name="campaign" onChange={inputChange} value={values.campaign}>
-                <option value="">Keresés időszak alapján</option>
-                <option disabled="disabled">----</option>
-                {campaigns && campaigns.map((campaign, i) => (
-                  <option key={i} value={campaign.id}>{campaign.name}</option>
                 ))}
               </select>
             </div>
