@@ -66,8 +66,7 @@ export default function Header({ children }) {
     { title: "Ötletbeküldés", href: "/bekuldes", outside: false },
     { title: "Beküldött ötletek", href: "/otletek?campaign=2", outside: true },
     { title: "Megvalósuló ötletek", href: "/projektek?status=under_construction", outside: false },
-    { title: "Hírek", href: "/hirek", outside: false },
-    { title: "Rendezvények", href: "/rendezvenyek", outside: false },
+    { title: "Hírek, rendezvények", href: "/hirek", outside: false },
     { title: "Bejelentkezés", href: "/bejelentkezes", highlight: false, onHideLoggedIn: true, onHideLoggedOut: false },
     { title: "Fiók", href: "/profil", highlight: false, onHideLoggedIn: false, onHideLoggedOut: true, outside: false, profile: false },
   ]

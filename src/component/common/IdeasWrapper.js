@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import {
   Link,
 } from "react-router-dom"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faComments } from "@fortawesome/free-solid-svg-icons"
 
 export default function IdeasWrapper({ idea, handleClick }) {
   const [isHover, setIsHover] = useState(false)
@@ -18,7 +20,10 @@ export default function IdeasWrapper({ idea, handleClick }) {
       <div className="prop-wrapper">
         <div className={`prop-inner prop-status-${statusCode}`}>
           <div className="prop-picture"></div>
-          <div className="prop-category" style={{ backgroundColor: themeColor }}>{themeName} <span>({themeTitle})</span></div>
+          <div className="prop-category" style={{ backgroundColor: themeColor }}>
+            <div className="prop-theme">{themeName} <span>({themeTitle})</span></div>
+            <div className="prop-status"><FontAwesomeIcon icon={faComments} mask={['far']} /> {status}</div>
+          </div>
           <div className="prop-content-wrapper" style={{ borderColor: themeColor }}>
             <div className="prop-content">
               <div className="prop-title">
@@ -33,8 +38,6 @@ export default function IdeasWrapper({ idea, handleClick }) {
                 <Link to={`/otletek/${idea.id}`} className="btn btn-secondary" onClick={handleClick} style={{ borderColor: themeColor, color: isHover ? '#fff' : themeColor, backgroundColor: isHover ? themeColor : 'transparent' }}>Megtekintés</Link>
               </div>
             </div>
-
-            <div className="prop-footer" style={{ backgroundColor: themeColor }}>{status}</div>
           </div>
         </div>
       </div>

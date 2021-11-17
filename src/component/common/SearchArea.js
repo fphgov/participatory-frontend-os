@@ -1,8 +1,14 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
+import axios from "../assets/axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 
 export default function SearchArea({ title, tipp, tipp2, values, queryRef, inputChange, triggerFindAction, clearQuery, error, type }) {
+  const [ themes, setThemes ] = useState([])
+  const [ locations, setLocations ] = useState([])
+  const [ statuses, setStatuses ] = useState([])
+  const [ campaigns, setCampaigns ] = useState([])
+
   const onKeyUp = (e) => {
     if (e.key === 'Enter') {
       triggerFindAction()
@@ -14,6 +20,30 @@ export default function SearchArea({ title, tipp, tipp2, values, queryRef, input
 
     return !!window.location.search && !hasPageParam && values.query !== '' || values.theme !== '' || values.location !== '' || values.campaign !== '' || values.status !== ''
   }
+
+  const getFilterParams = () => {
+    const reqLink = type === 'project' ? process.env.REACT_APP_API_REQ_FILTER_PROJECTS : process.env.REACT_APP_API_REQ_FILTER_IDEAS
+
+    axios
+      .get(reqLink + window.location.search)
+      .then(response => {
+        if (response.data) {
+          setThemes(response.data.theme)
+          setLocations(response.data.location)
+          setStatuses(response.data.status)
+          setCampaigns(response.data.campaign)
+        }
+      })
+      .catch(error => {
+        if (error.response && error.response.data && error.response.data.message) {
+          setError(error.response.data.message)
+        }
+      })
+  }
+
+  useEffect(() => {
+    getFilterParams()
+  }, [])
 
   const Error = (props) => {
     return (
@@ -51,12 +81,22 @@ export default function SearchArea({ title, tipp, tipp2, values, queryRef, input
 
           <div className="row">
             <div className="col-lg-3 col-md-4 col-xs-12">
+              <select name="campaign" onChange={inputChange} value={values.campaign}>
+                <option value="">Keresés időszak alapján</option>
+                <option disabled="disabled">----</option>
+                {campaigns && campaigns.map((campaign, i) => (
+                  <option key={i} value={campaign.id}>{campaign.name}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="col-lg-3 col-md-4 col-xs-12">
               <select name="theme" onChange={inputChange} value={values.theme}>
                 <option value="">Keresés kategória alapján</option>
                 <option disabled="disabled">----</option>
-                <option value="GREEN">Zöld Budapest</option>
-                <option value="CARE">Esélyteremtő Budapest</option>
-                <option value="WHOLE">Nyitott Budapest</option>
+                {themes && themes.map((theme, i) => (
+                  <option key={i} value={theme.code}>{theme.name}</option>
+                ))}
               </select>
             </div>
 
@@ -64,39 +104,9 @@ export default function SearchArea({ title, tipp, tipp2, values, queryRef, input
               <select name="location" onChange={inputChange} value={values.location}>
                 <option value="">Keresés kerület alapján</option>
                 <option disabled="disabled">----</option>
-                <option value="1">Nem köthető konkrét helyszínhez</option>
-                <option value="2">I. kerület</option>
-                <option value="3">II. kerület</option>
-                <option value="4">III. kerület</option>
-                <option value="5">IV. kerület</option>
-                <option value="6">V. kerület</option>
-                <option value="7">VI. kerület</option>
-                <option value="8">VII. kerület</option>
-                <option value="9">VIII. kerület</option>
-                <option value="10">IX. kerület</option>
-                <option value="11">X. kerület</option>
-                <option value="12">XI. kerület</option>
-                <option value="13">XII. kerület</option>
-                <option value="14">XIII. kerület</option>
-                <option value="15">XIV. kerület</option>
-                <option value="16">XV. kerület</option>
-                <option value="17">XVI. kerület</option>
-                <option value="18">XVII. kerület</option>
-                <option value="19">XVIII. kerület</option>
-                <option value="20">XIX. kerület</option>
-                <option value="21">XX. kerület</option>
-                <option value="22">XXI. kerület</option>
-                <option value="23">XXII. kerület</option>
-                <option value="24">Margitsziget</option>
-              </select>
-            </div>
-
-            <div className="col-lg-3 col-md-4 col-xs-12">
-              <select name="campaign" onChange={inputChange} value={values.campaign}>
-                <option value="">Keresés időszak alapján</option>
-                <option disabled="disabled">----</option>
-                <option value="2">2021/2022</option>
-                <option value="1">2020/2021</option>
+                {locations && locations.map((location, i) => (
+                  <option key={i} value={location.code}>{location.name}</option>
+                ))}
               </select>
             </div>
 
@@ -104,23 +114,9 @@ export default function SearchArea({ title, tipp, tipp2, values, queryRef, input
               <select name="status" onChange={inputChange} value={values.status}>
                 <option value="">Keresés állapot alapján</option>
                 <option disabled="disabled">----</option>
-
-                {type === 'project' && <>
-                  <option value="under_construction">Megvalósítás alatt</option>
-                  <option value="ready">Megvalósult</option>
-                  <option value="not_voted">Szavazáson nem nyert</option>
-                </>}
-
-                {type === 'idea' && <>
-                  <option value="published">Beérkezett</option>
-                  <option value="pre_council">Tanács elé kerül</option>
-                  <option value="voting_list">Szavazólistán</option>
-                  <option value="under_construction">Megvalósítás alatt</option>
-                  <option value="ready">Megvalósult</option>
-                  <option value="not_voted">Szavazáson nem nyert</option>
-                  <option value="council_rejected">Tanács elutasította</option>
-                  <option value="status_rejected">Szakmailag nem megfelelő</option>
-                </>}
+                {statuses && statuses.map((status, i) => (
+                  <option key={i} value={status.code}>{status.name}</option>
+                ))}
               </select>
             </div>
           </div>

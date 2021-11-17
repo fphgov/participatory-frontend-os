@@ -12,7 +12,6 @@ import Statistics from "./page/Statistics"
 import Home from "./page/Home"
 import SimplePage from "./page/SimplePage"
 import Posts from "./page/Posts"
-import PostsEvent from "./page/PostsEvent"
 import Post from "./page/Post"
 import Project from "./page/Project"
 import Projects from "./page/Projects"
@@ -103,7 +102,6 @@ export default function App() {
             <Route exact path="/kijelentkezes" render={() => <Layout><Logout /></Layout>} />
             <Route exact path="/bekuldes" render={() => <Layout><IdeaSubmission /></Layout>} />
             <Route exact path="/oldal/:slug" render={() => <Layout><SimplePage /></Layout>} />
-            <Route exact path="/rendezvenyek" render={() => <Layout><PostsEvent /></Layout>} />
             <Route exact path="/hirek" render={() => <Layout><Posts /></Layout>} />
             <Route exact path="/hirek/:slug" render={() => <Layout><Post /></Layout>} />
             <Route exact path="/statisztika" render={() => <Layout><Statistics /></Layout>} />

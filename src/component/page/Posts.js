@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import {
   Redirect,
-  Link
+  Link,
 } from "react-router-dom"
 import API from '../assets/axios'
 import { getDateFormat, getHungarianDateFormat } from '../assets/dateFormats'
@@ -12,16 +12,29 @@ export default function Posts() {
 
   const [ rawContent, setRawContent ] = useState(null)
   const [ error, setError ] = useState('')
+  const [ tabs, setTabs ] = useState([])
   const [ redirect, setRedirect ] = useState(false)
+  const [ currentTabIndex, setCurrentTabIndex ] = useState(0)
+
+  const categories = [
+    { category: { id: 0, name: 'összes' } },
+    { category: { id: 1, name: 'hír' } },
+    { category: { id: 2, name: 'rendezvény' } },
+    { category: { id: 3, name: 'blog' } },
+  ];
 
   const getPageContent = () => {
     setRawContent(null)
     context.set('loading', true)
 
-    const categoryIds = [1, 3]
+    const categoryIds = [1, 2, 3]
 
     const data = {
       category: categoryIds,
+    }
+
+    if (currentTabIndex !== 0) {
+      data['category'] = currentTabIndex;
     }
 
     API.get(
@@ -43,6 +56,23 @@ export default function Posts() {
     })
   }
 
+  const updateTabs = () => {
+    if (! rawContent) return
+
+    const tabs = categories.map((t) => {
+      return {
+        id: t.category.id,
+        name: t.category.name,
+      }
+    }).filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i).sort((a, b) => a.id - b.id)
+
+    setTabs(tabs)
+  }
+
+  const handleClickTab = (e) => {
+    setCurrentTabIndex(e.currentTarget.tabIndex)
+  }
+
   const Error = (props) => {
     return (
       <div className="error-message">
@@ -52,9 +82,15 @@ export default function Posts() {
   }
 
   useEffect(() => {
-    document.body.classList.add('page-posts')
-
     getPageContent()
+  }, [currentTabIndex])
+
+  useEffect(() => {
+    updateTabs()
+  }, [rawContent])
+
+  useEffect(() => {
+    document.body.classList.add('page-posts')
 
     return () => {
       document.body.classList.remove('page-posts')
@@ -70,6 +106,14 @@ export default function Posts() {
           <div className="col-md-12">
             {error ? <Error message={error} /> : null}
 
+            <div className="tab-wrapper">
+              <ul className="tab">
+                {tabs.map((tab) => (
+                  <li key={tab.id} tabIndex={tab.id} tabname={tab.name} className={`${currentTabIndex === tab.id ? 'active' : ''}`} onClick={handleClickTab}><a>{tab.name}</a></li>
+                ))}
+              </ul>
+            </div>
+
             <div className="posts">
               {rawContent && rawContent.map((post, i) => (
                 <article key={i} className="post-card">
@@ -82,7 +126,7 @@ export default function Posts() {
                       <header className="post-full-header">
                         <section className="post-full-meta">
                           {post.createdAt ? <time className="post-full-meta-date" dateTime={getDateFormat(post.createdAt)}>{getHungarianDateFormat(post.createdAt)}</time> : null}
-                          <span>• {post.category.name}</span>
+                          <div>• <span>{post.category.name}</span></div>
                         </section>
 
                         <h1 className="post-full-title">{post.title}</h1>

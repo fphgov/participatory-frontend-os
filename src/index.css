@@ -747,7 +747,7 @@ input[type="submit"] {
   font-weight: bold;
   background-color: #0EA6CE;
   color: #fff;
-  padding: 14px;
+  padding: 10px 14px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 }
@@ -2086,8 +2086,9 @@ font-size: 18px;
 }
 
 .page-post-section span,
-.post-full-meta span {
+.post-full-meta div {
   margin-left: 4px;
+  display: inline-block;
 }
 
 time.post-full-meta-date {
@@ -2351,18 +2352,21 @@ select:focus {
   margin: 0 0 60px 0;
 }
 
-/* .prop-inner.prop-status-status_rejected,
-.prop-inner.prop-status-council_rejected,
-.prop-inner.prop-status-not_voted {
-  opacity: 0.6;
-} */
+.prop-status {
+  padding: 2px 0;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.prop-status > svg {
+  margin-right: 4px;
+}
 
 .prop-footer {
   background-color: #ef5556;
   color: #fff;
-  font-weight: bold;
   text-align: center;
-  padding: 2px 0;
+  font-size: 14px;
 }
 
 .fix-section {
