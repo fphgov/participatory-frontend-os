@@ -63,7 +63,7 @@ export default function IdeaWrapper(props) {
                   ) : null}
 
                   {props.idea.solution ? <>
-                    <h3 style={{ color: theme.rgb }}>Mire megoldás?</h3>
+                    <h3 style={{ color: theme.rgb }}>Min szeretnél változtatni?</h3>
 
                     <div className="prop-single-solution" dangerouslySetInnerHTML={{ __html: props.idea.solution }} />
                   </> : null}

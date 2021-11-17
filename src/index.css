@@ -826,6 +826,7 @@ input[type="submit"] {
 .prop-single-content {
   padding: 25px 15px;
   flex: 1 0 auto;
+  overflow: hidden;
 }
 
 .prop-single-submitter {
