@@ -22,7 +22,7 @@ export default function Ideas() {
   const [ count, setCount ] = useState(0)
   const [ pageCount, setPageCount ] = useState(0)
   const [ links, setLinks ] = useState([])
-  const [ ideas, setProjects ] = useState([])
+  const [ ideas, setIdeas ] = useState([])
   const [ error, setError ] = useState('')
   const [ refresh, setRefresh ] = useState(false)
   const [ filterData, setFilterData ] = useState({
@@ -54,7 +54,7 @@ export default function Ideas() {
   const hasQueryField = useHasChanged(filterData.query)
 
   const clearState = () => {
-    setProjects([])
+    setIdeas([])
     setLinks(null)
     setCount(0)
     setPageCount(0)
@@ -82,7 +82,7 @@ export default function Ideas() {
     .get(process.env.REACT_APP_API_REQ_IDEAS + window.location.search)
     .then(response => {
       if (response.data) {
-        setProjects(response.data._embedded.ideas)
+        setIdeas(response.data._embedded.ideas)
         setLinks(response.data._links)
         setCount(response.data._total_items)
         setPageCount(response.data._page_count)
