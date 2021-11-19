@@ -1,3 +1,5 @@
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
 :root {
     --primary-color: #4d2a88;
     --secondary-color: #fce65d;
@@ -548,6 +550,14 @@ input[type="submit"] {
   font-weight: bold;
 }
 
+.idea {
+  padding-bottom: 30px;
+}
+
+.idea textarea {
+  min-height: 400px;
+}
+
 input[type="checkbox"] {
   display: inline;
   margin-right: 6px;
@@ -605,11 +615,10 @@ label+.tipp {
 
 .article-title {
   color: #fff;
-  font-weight: bold;
   background-color: #19506e;
   padding: 10px;
-  text-transform: uppercase;
   width: 100%;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -2px rgb(0 0 0 / 5%);
 }
 
 .article-flex {
@@ -624,6 +633,11 @@ label+.tipp {
 
 .article-status.article-status-attended {
   background-color: #069e00;
+}
+
+.article-category {
+  width: 12px !important;
+  display: inline-block;
 }
 
 input[name="search"] {
@@ -649,12 +663,10 @@ input[name="search"] {
 }
 
 .box {
-  border: 1px solid #fff;
   padding: 12px;
   display: inline-block;
   text-align: center;
   border-radius: 8px;
-  background-color: #fff;
   margin-right: 20px;
 }
 
@@ -772,7 +784,7 @@ input[name="search"] {
 
 .search-wrapper {
   display: flex;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .search-wrapper > input {
@@ -781,6 +793,11 @@ input[name="search"] {
 
 .search-wrapper input + .btn {
   margin-left: 20px;
+}
+
+.search-result {
+  text-align: right;
+  margin-bottom: 20px;
 }
 
 .vote-selection select {
@@ -833,11 +850,82 @@ span.vote-stat-id {
   display: inline-block;
   text-align: right;
   font-weight: bold;
-
 }
 
 .vote-stat-elem-odd {
 	background-color: #f0f0f1;
+}
+
+nav.pagination {
+  text-align: center;
+  padding: 30px 0px 40px 0px;
+}
+
+nav.pagination > ul > li {
+  display: inline-block;
+}
+
+nav.pagination button {
+  display: inline-block;
+  padding: 5px 10px 5px 10px;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  background: none;
+  border: 0;
+}
+
+nav.pagination button.active {
+  color: #fce65d;
+  text-decoration: none !important;
+  cursor: default;
+}
+
+ul.links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.box-wrapper-card {
+  display: flex;
+  margin: 12px 0;
+}
+
+.box-card {
+  display: flex;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -2px rgb(0 0 0 / 5%);
+  margin-right: 20px;
+}
+
+.box-title {
+  background-color: var(--secondary-color);
+  color: var(--blue-color);
+  writing-mode: vertical-rl;
+  transform: scale(-1, -1);
+  text-align: center;
+}
+
+.box-content {
+  padding: 26px;
+  display: flex;
+}
+
+.box-content .box {
+  display: inline-block;
+  text-align: center;
+  margin: auto;
+  padding: 12px;
+}
+
+.action-wrapper {
+  display: flex;
+  margin: 20px 0;
+}
+
+.sortable {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 991px) {

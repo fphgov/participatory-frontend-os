@@ -50,8 +50,6 @@ export default class Dashboard extends React.Component {
             countOfflineVotes: response.data.infos && response.data.infos.countOfflineVotes ? response.data.infos.countOfflineVotes : 'N/A',
             countUsers: response.data.infos && response.data.infos.countUsers ? response.data.infos.countUsers : 'N/A',
           })
-
-          this.context.set('loading', false)
         }
       })
       .catch(error => {
@@ -60,7 +58,8 @@ export default class Dashboard extends React.Component {
             error: error.response.data.message
           })
         }
-
+      })
+      .finally(() => {
         this.context.set('loading', false)
       })
   }
@@ -94,7 +93,7 @@ export default class Dashboard extends React.Component {
     })
   }
 
-  submitForm() {
+  handleVoteClose() {
     const config = {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
@@ -118,22 +117,51 @@ export default class Dashboard extends React.Component {
         }
       })
       .catch(error => {
-        if (error.response && error.response.status === 401) {
-          this.setState({
-            redirectLogin: true
-          })
-
-          this.context.set('loading', false)
-
-          return
-        }
-
         if (error.response && error.response.data && error.response.data.errors) {
           this.setState({
             error: error.response.data.errors
           })
         }
+      })
+      .finally(() => {
+        this.context.set('loading', false)
+      })
+  }
 
+  handleIdeaExport() {
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
+        'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      },
+      responseType: 'blob'
+    }
+
+    this.context.set('loading', true)
+
+    axios.get(
+      process.env.REACT_APP_API_ADMIN_SERVER + process.env.REACT_APP_API_ADMIN_REQ_IDEA_EXPORT,
+      config
+    )
+      .then(response => {
+        const url = window.URL.createObjectURL(new Blob([ response.data ]));
+        const link = document.createElement('a');
+
+        link.href = url;
+        link.setAttribute('download', `export-ideas-${(new Date()) - 0}.xlsx`);
+
+        document.body.appendChild(link);
+
+        link.click();
+      })
+      .catch(error => {
+        if (error.response && error.response.data && error.response.data.errors) {
+          this.setState({
+            error: error.response.data.errors
+          })
+        }
+      })
+      .finally(() => {
         this.context.set('loading', false)
       })
   }
@@ -155,22 +183,13 @@ export default class Dashboard extends React.Component {
         this.context.set('loading', false)
       })
       .catch(error => {
-        if (error.response && error.response.status === 401) {
-          this.setState({
-            redirectLogin: true
-          })
-
-          this.context.set('loading', false)
-
-          return
-        }
-
         if (error.response && error.response.data && error.response.data.errors) {
           this.setState({
             error: error.response.data.errors
           })
         }
-
+      })
+      .finally(() => {
         this.context.set('loading', false)
       })
   }
@@ -206,43 +225,56 @@ export default class Dashboard extends React.Component {
 
           {['developer', 'admin'].includes(tokenParser('user.role')) ? (
             <>
-              <div className="box-wrapper">
-                <div className="box-left">
-                  <div className="box">Felhasználók száma<br /><span>{this.state.countUsers}</span></div>
-                  <div className="box">Online szavazatok száma<br /><span>{this.state.countVotes}</span></div>
-                  <div className="box">Offline szavazatok száma<br /><span>{this.state.countOfflineVotes}</span></div>
-                  <div className="box">Szavazatok száma összesen<br />
-                    <span>{
-                      this.state.countVotes != 'N/A' && this.state.countOfflineVotes !== 'N/A' ? this.state.countVotes + this.state.countOfflineVotes : 'N/A'
-                    }</span>
+              <h4>Statisztika</h4>
+
+              <div className="box-wrapper-card">
+                <div className="box-card">
+                  <div className="box-title">
+                    <h3>Ötletek</h3>
+                  </div>
+
+                  <div className="box-content">
+                    <div className="box">Összesen<br /><span>N/A</span></div>
+                    <div className="box">Közzétett<br /><span>N/A</span></div>
+                    <div className="box">Elutasított<br /><span>N/A</span></div>
                   </div>
                 </div>
 
-                <div className="box-right">
-                  <div className="input-wrapper">
-                    <div className="box box-button" onClick={this.handleCacheClear.bind(this)}>Gyorsítótár ürítés</div>
+                <div className="box-card">
+                  <div className="box-title">
+                    <h3>Szavazatok</h3>
+                  </div>
+
+                  <div className="box-content">
+                    <div className="box" aria-label={`Online szavazatok száma ${this.state.countVotes}`}>Online<br /><span>{this.state.countVotes}</span></div>
+                    <div className="box" aria-label={`Offline szavazatok száma ${this.state.countOfflineVotes}`}>Offline<br /><span>{this.state.countOfflineVotes}</span></div>
+                    <div className="box" aria-label={`Szavazatok száma összesen ${this.state.countVotes != 'N/A' && this.state.countOfflineVotes !== 'N/A' ? this.state.countVotes + this.state.countOfflineVotes : 'N/A'}`}>Összesen<br />
+                      <span>{
+                        this.state.countVotes != 'N/A' && this.state.countOfflineVotes !== 'N/A' ? this.state.countVotes + this.state.countOfflineVotes : 'N/A'
+                      }</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="box-card">
+                  <div className="box-title">
+                    <h3>Felhasználók</h3>
+                  </div>
+
+                  <div className="box-content">
+                    <div className="box">Összesen<br /><span>{this.state.countUsers}</span></div>
                   </div>
                 </div>
               </div>
 
-              <div className="section"></div>
+              <h4>Gyorsgombok</h4>
 
-              <div style={{ marginBottom: 40 }}>
-                <div className="form">
-                  <div className="input-wrapper">
-                    <label htmlFor="close">
-                      <input type="checkbox" name="close" id="close" checked={this.state.close} onChange={this.handleChangeInput.bind(this)} />
-
-                      A szavazás lezárása
-                    </label>
-
-                    {this.state.error && this.state.error.close ? Object.values(this.state.error.close).map((err, i) => {
-                      return <this.ErrorMini error={err} increment={i} />
-                    }) : null}
-                  </div>
+              <div>
+                <div className="action-wrapper">
+                  <button className="box box-button" onClick={this.handleCacheClear.bind(this)}>Gyorsítótár ürítés</button>
+                  <button className="box box-button" onClick={this.handleIdeaExport.bind(this)}>Ötletek exportálás</button>
+                  <button className="box box-button" onClick={this.handleVoteClose.bind(this)} disabled>Szavazás megnyitása</button>
                 </div>
-
-                <input type="submit" value="Beállítások mentése" className="btn btn-primary" onClick={this.submitForm.bind(this)} />
               </div>
             </>
           ) : <div>Válasszon a menüpontok közül.</div>}
