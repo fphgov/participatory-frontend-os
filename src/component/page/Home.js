@@ -22,7 +22,7 @@ export default function Home() {
     setPosts(null)
     context.set('loading', true)
 
-    const categoryIds = [1, 3]
+    const categoryIds = [1, 2, 3]
 
     const data = {
       category: categoryIds,
