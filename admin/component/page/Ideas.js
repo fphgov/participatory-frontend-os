@@ -111,11 +111,11 @@ export default function Ideas() {
             <div className="sortable" onClick={toggleSort}>
               {requestBody.sort === 'desc' ? (
                 <>
-                  <FontAwesomeIcon icon={faSortAmountDown} aria-hidden="true" /> Csökkenő
+                  <FontAwesomeIcon icon={faSortAmountDown} aria-hidden="true" /> Rendezés: Csökkenő
                 </>
               ) : (
                 <>
-                  <FontAwesomeIcon icon={faSortAmountUp} aria-hidden="true" /> Növekvő
+                  <FontAwesomeIcon icon={faSortAmountUp} aria-hidden="true" /> Rendezés: Növekvő
                 </>
               )}
             </div>
