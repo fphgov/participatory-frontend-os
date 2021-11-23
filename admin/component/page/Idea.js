@@ -115,7 +115,7 @@ export default function Idea() {
       title: idea.title,
       solution: idea.solution,
       description: idea.description,
-      cost: idea.cost,
+      cost: idea.cost ? idea.cost : null,
       locationDescription: idea.locationDescription,
       workflowState: typeof idea.workflowState.code === 'undefined' ? idea.workflowState : idea.workflowState.code,
     }
@@ -213,7 +213,7 @@ export default function Idea() {
                   <div className="col-sm-12 col-md-6">
                     <div className="input-wrapper">
                       <label htmlFor="campaign-location">Kerület</label>
-                      <input type="text" name="campaign-location" id="campaign-location" value={idea.campaignLocation.description} onChange={handleChangeInput} disabled />
+                      <input type="text" name="campaign-location" id="campaign-location" value={idea.campaignLocation ? idea.campaignLocation.description : ' '} onChange={handleChangeInput} disabled />
                     </div>
                   </div>
 
@@ -227,7 +227,7 @@ export default function Idea() {
                   <div className="col-sm-12 col-md-6">
                     <div className="input-wrapper">
                       <label htmlFor="cost">Becsült költség</label>
-                      <input type="text" name="cost" id="cost" value={idea.cost} onChange={handleChangeInput} />
+                      <input type="text" name="cost" id="cost" value={idea.cost !== null ? idea.cost : ''} onChange={handleChangeInput} />
                     </div>
                   </div>
 
