@@ -14,7 +14,9 @@ export default function Idea() {
   const context = useContext(StoreContext)
   const { id } = useParams()
 
+  const [options, setOptions] = useState(null)
   const [idea, setIdea] = useState(null)
+  const [ originalWorkflowState, setOriginalWorkflowState] = useState(null)
 
   const documentMimes = [
     'application/msword',
@@ -32,7 +34,7 @@ export default function Idea() {
     progress: undefined,
   })
 
-  const getDetection = () => {
+  const getOptions = () => {
     context.set('loading', true)
 
     const config = {
@@ -42,12 +44,10 @@ export default function Idea() {
       }
     }
 
-    const link = process.env.REACT_APP_API_ADMIN_REQ_IDEA.toString().replace(':id', id)
-
-    axios.get(process.env.REACT_APP_API_ADMIN_SERVER + link, config)
+    axios.get(process.env.REACT_APP_API_ADMIN_REQ_WORKFLOW_STATES, config)
       .then(response => {
-        if (response.data && response.data) {
-          setIdea(response.data)
+        if (response.data && response.data.data) {
+          setOptions(response.data.data)
         } else {
           notify('⛔️ Sikertelen adat lekérés')
         }
@@ -60,8 +60,83 @@ export default function Idea() {
       })
   }
 
+  const getIdeas = () => {
+    context.set('loading', true)
+
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
+        'Accept': 'application/json',
+      }
+    }
+
+    const link = process.env.REACT_APP_API_ADMIN_REQ_IDEA.toString().replace(':id', id)
+
+    axios.get(link, config)
+      .then(response => {
+        if (response.data && response.data) {
+          setIdea(response.data)
+          setOriginalWorkflowState(response.data.workflowState)
+        } else {
+          notify('⛔️ Sikertelen adat lekérés')
+        }
+      })
+      .catch(() => {
+        notify('⛔️ Sikertelen adat lekérés')
+      })
+      .finally(() => {
+        context.set('loading', false)
+      })
+  }
+
+  const postDetection = () => {
+    context.set('loading', true)
+
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
+        'Accept': 'application/json',
+      }
+    }
+
+    const link = process.env.REACT_APP_API_ADMIN_REQ_IDEA.toString().replace(':id', id)
+
+    const workflowStateCode = typeof idea.workflowState.code === 'undefined' ? idea.workflowState : idea.workflowState.code;
+
+    if (originalWorkflowState.code !== workflowStateCode) {
+      if (!confirm('Az állapotnak a változtatása e-mail küldéssel járhat. Biztosan módosítod az állapotot?')) {
+        context.set('loading', false)
+
+        return
+      }
+    }
+
+    const data = {
+      title: idea.title,
+      solution: idea.solution,
+      description: idea.description,
+      cost: idea.cost,
+      locationDescription: idea.locationDescription,
+      workflowState: typeof idea.workflowState.code === 'undefined' ? idea.workflowState : idea.workflowState.code,
+    }
+
+    axios.post(link, new URLSearchParams(data), config)
+      .then(response => {
+        if (response.data && response.data.data.success) {
+          notify('🎉 Sikeres módosítás')
+        }
+      })
+      .catch(() => {
+        notify('⛔️ Sikertelen módosítás')
+      })
+      .finally(() => {
+        context.set('loading', false)
+      })
+  }
+
   useEffect(() => {
-    getDetection()
+    getOptions()
+    getIdeas()
   }, [])
 
   const handleChangeInput = (e) => {
@@ -110,21 +185,21 @@ export default function Idea() {
                   <div className="col-sm-12 col-md-12">
                     <div className="input-wrapper">
                       <label htmlFor="title">Megnevezés</label>
-                      <input type="text" name="title" id="title" value={idea.title} onChange={handleChangeInput} disabled />
+                      <input type="text" name="title" id="title" value={idea.title} onChange={handleChangeInput} />
                     </div>
                   </div>
 
                   <div className="col-sm-12 col-md-12">
                     <div className="input-wrapper">
                       <label htmlFor="solution">Mit oldana meg?</label>
-                      <textarea type="text" name="solution" id="solution" value={idea.solution} onChange={handleChangeInput} disabled />
+                      <textarea type="text" name="solution" id="solution" value={idea.solution} onChange={handleChangeInput} />
                     </div>
                   </div>
 
                   <div className="col-sm-12 col-md-12">
                     <div className="input-wrapper">
                       <label htmlFor="description">Leírás</label>
-                      <textarea type="text" name="description" id="description" value={idea.description} onChange={handleChangeInput} disabled />
+                      <textarea type="text" name="description" id="description" value={idea.description} onChange={handleChangeInput} />
                     </div>
                   </div>
 
@@ -152,14 +227,25 @@ export default function Idea() {
                   <div className="col-sm-12 col-md-6">
                     <div className="input-wrapper">
                       <label htmlFor="cost">Becsült költség</label>
-                      <input type="text" name="cost" id="cost" value={idea.cost} onChange={handleChangeInput} disabled />
+                      <input type="text" name="cost" id="cost" value={idea.cost} onChange={handleChangeInput} />
                     </div>
                   </div>
 
                   <div className="col-sm-12 col-md-6">
                     <div className="input-wrapper">
-                      <label htmlFor="status">Állapot</label>
-                      <input type="text" name="status" id="status" value={idea.workflowState.title} onChange={handleChangeInput} disabled />
+                      <label htmlFor="workflowState">Állapot</label>
+                      <select name="workflowState" id="workflowState" value={idea.workflowState.code} onChange={handleChangeInput}>
+                        {options ? options.map((option, i) => (
+                          <option key={i} value={option.code}>{option.title}</option>
+                        )) : null}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="col-sm-12 col-md-6">
+                    <div className="input-wrapper">
+                      <label htmlFor="location_description">Helyszín leírás</label>
+                      <input type="text" name="location_description" id="location_description" value={idea.locationDescription} onChange={handleChangeInput} />
                     </div>
                   </div>
                 </div>
@@ -167,7 +253,7 @@ export default function Idea() {
                 <div className="row">
                   <div className="col-sm-12 col-md-6">
                     <div className="input-wrapper">
-                      <h4>Beküldés</h4>
+                      <h4>Beküldési információk</h4>
                       <div>Név: <b>{idea.submitter.lastname} {idea.submitter.firstname}</b></div>
                       <div>Időpont: <b>{dateCoverter(idea.createdAt)}</b></div>
                     </div>
@@ -227,6 +313,14 @@ export default function Idea() {
                         </div>
                       </>
                     ) : 'Nincs kapcsolódó kép'}
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col-sm-12 col-md-6">
+                    <div className="button-wrapper">
+                      <button className="btn btn-primary" onClick={postDetection}>Mentés</button>
+                    </div>
                   </div>
                 </div>
               </div>

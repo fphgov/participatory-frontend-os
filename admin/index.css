@@ -928,6 +928,10 @@ ul.links {
   cursor: pointer;
 }
 
+.button-wrapper {
+  margin: 20px 0;
+}
+
 @media screen and (max-width: 991px) {
   .desktop-menu {
     display: none;
