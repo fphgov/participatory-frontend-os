@@ -108,11 +108,11 @@ export default function IdeaBasic({ nextStep, handleAddElem, changeRaw, handleRe
             />
 
             <TextareaLengthValidator
-              title="Mire megoldás az ötleted?*"
+              title="Min szeretnél változtatni?*"
               name="solution"
               tipp="Írd le röviden, hogy miért van szükség erre a fejlesztésre, kiknek milyen helyzetre, problémára ad választ, megoldást!"
               value={values.solution}
-              options={{ min: 20, max: 500 }}
+              options={{ min: 20, max: 250 }}
               info={''}
               onChange={handleChange}
             />

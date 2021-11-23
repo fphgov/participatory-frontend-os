@@ -1,20 +1,20 @@
-import React from "react";
+import React from "react"
 import {
   Route,
   Switch,
   HashRouter
-} from "react-router-dom";
-import Header from "./Header";
-import Footer from "./Footer";
-import Page from "./Page";
-import NotFound from "./page/NotFound";
-import Dashboard from "./page/Dashboard";
-import Login from "./page/Login";
-import Logout from "./page/Logout";
-import Vote from "./page/Vote";
-import ScrollToTop from "./common/ScrollToTop";
-import Profile from "./page/Profile";
-import 'react-toastify/dist/ReactToastify.css';
+} from "react-router-dom"
+import Layout from "./Layout"
+import NotFound from "./page/NotFound"
+import Dashboard from "./page/Dashboard"
+import Login from "./page/Login"
+import Logout from "./page/Logout"
+import Vote from "./page/Vote"
+import Ideas from "./page/Ideas"
+import Idea from "./page/Idea"
+import ScrollToTop from "./common/ScrollToTop"
+import Profile from "./page/Profile"
+import 'react-toastify/dist/ReactToastify.css'
 
 export default class App extends React.Component {
   render() {
@@ -22,24 +22,20 @@ export default class App extends React.Component {
       <div className="app">
         <HashRouter>
           <ScrollToTop>
-            <Header />
+            <Switch>
+              <Route exact path="/" render={() => <Layout><Dashboard /></Layout>} />
+              <Route exact path="/login" render={() => <Layout><Login /></Layout>} />
+              <Route exact path="/logout" render={() => <Layout><Logout /></Layout>} />
+              <Route exact path="/vote" render={() => <Layout><Vote /></Layout>} />
+              <Route exact path="/profile" render={() => <Layout><Profile /></Layout>} />
+              <Route exact path="/ideas" render={() => <Layout><Ideas /></Layout>} />
+              <Route exact path="/ideas/:id" render={() => <Layout><Idea /></Layout>} />
 
-            <Page>
-              <Switch>
-                <Route exact path="/" component={Dashboard} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/logout" component={Logout} />
-                <Route exact path="/vote" component={Vote} />
-                <Route exact path="/profile" component={Profile} />
-
-                <Route exact path="*" component={NotFound} />
-              </Switch>
-            </Page>
-
-            <Footer />
+              <Route exact path="*" component={NotFound} />
+            </Switch>
           </ScrollToTop>
         </HashRouter>
       </div>
-    );
+    )
   }
 }

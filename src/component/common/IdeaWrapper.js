@@ -50,7 +50,7 @@ export default function IdeaWrapper(props) {
 
                   {props.idea.links && props.idea.links.length > 0 ? (
                     <>
-                      <h3 style={{ color: theme.rgb }}>Kapcsolodó hivatkozások</h3>
+                      <h3 style={{ color: theme.rgb }}>Kapcsolódó hivatkozások</h3>
 
                       <ul className="links">
                         {props.idea.links.map((link, i) => {
@@ -63,7 +63,7 @@ export default function IdeaWrapper(props) {
                   ) : null}
 
                   {props.idea.solution ? <>
-                    <h3 style={{ color: theme.rgb }}>Mire megoldás?</h3>
+                    <h3 style={{ color: theme.rgb }}>Min szeretnél változtatni?</h3>
 
                     <div className="prop-single-solution" dangerouslySetInnerHTML={{ __html: props.idea.solution }} />
                   </> : null}

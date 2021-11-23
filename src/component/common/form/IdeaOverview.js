@@ -51,7 +51,7 @@ export default function IdeaOverview({ firstStep, values, submitIdea, error }) {
             <ErrorRender error={error} name="title" />
           </div>
           <div className="overview">
-            <div className="overview-name">Mit oldana meg / mire megoldás?</div>
+            <div className="overview-name">Min szeretnél változtatni?</div>
             <div className="overview-value">{values.solution ? values.solution : "-"}</div>
 
             <ErrorRender error={error} name="solution" />

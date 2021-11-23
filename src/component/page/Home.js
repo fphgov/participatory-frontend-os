@@ -22,7 +22,7 @@ export default function Home() {
     setPosts(null)
     context.set('loading', true)
 
-    const categoryIds = [1, 3]
+    const categoryIds = [1, 2, 3]
 
     const data = {
       category: categoryIds,
@@ -113,6 +113,7 @@ export default function Home() {
                       <header className="post-full-header">
                         <section className="post-full-meta">
                           {post.createdAt ? <time className="post-full-meta-date" dateTime={getDateFormat(post.createdAt)}>{getHungarianDateFormat(post.createdAt)}</time> : null}
+                          <div>• <span>{post.category.name}</span></div>
                         </section>
 
                         <h1 className="post-full-title">{post.title}</h1>
