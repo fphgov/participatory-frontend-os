@@ -833,6 +833,14 @@ input[type="submit"] {
   font-weight: bold;
 }
 
+.prop-single-history {
+  background-color: #f9f9f9;
+}
+
+.prop-single-history .prop-single-content {
+  padding: 20px 35px;
+}
+
 .prop-inner-wrapper {
   margin-top: 100px;
   margin-bottom: 60px;
@@ -1000,7 +1008,8 @@ fieldset label {
 form fieldset input[type="submit"],
 form fieldset input[type="text"],
 form fieldset input[type="password"],
-form fieldset textarea {
+form fieldset textarea,
+.page-forgot-password-section input:not(.btn) {
   display: block;
   width: 100%;
   min-height: 34px;
@@ -1412,8 +1421,7 @@ div.tipp {
 .control-group label {
   display: block;
   font-weight: bold;
-  margin-bottom: 0;
-  padding-top: 7px;
+  margin-bottom: 4px;
 }
 
 button, input, optgroup, select, textarea {
@@ -1426,10 +1434,6 @@ button, input, optgroup, select, textarea {
   text-transform: uppercase;
   font-size: 14px;
   margin-top: 20px !important;
-}
-
-.page-forgot-password-section input:not(.btn) {
-  width: 100%;
 }
 
 .control-group input {
