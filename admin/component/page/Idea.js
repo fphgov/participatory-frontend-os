@@ -117,6 +117,7 @@ export default function Idea() {
       description: idea.description,
       cost: idea.cost ? idea.cost : null,
       locationDescription: idea.locationDescription,
+      answer: idea.answer,
       workflowState: typeof idea.workflowState.code === 'undefined' ? idea.workflowState : idea.workflowState.code,
     }
 
@@ -246,6 +247,13 @@ export default function Idea() {
                     <div className="input-wrapper">
                       <label htmlFor="location_description">Helyszín leírás</label>
                       <input type="text" name="location_description" id="location_description" value={idea.locationDescription} onChange={handleChangeInput} />
+                    </div>
+                  </div>
+
+                  <div className="col-sm-12 col-md-12">
+                    <div className="input-wrapper">
+                      <label htmlFor="answer">Hivatal válasza</label>
+                      <textarea name="answer" id="answer" value={idea.answer} onChange={handleChangeInput} />
                     </div>
                   </div>
                 </div>
