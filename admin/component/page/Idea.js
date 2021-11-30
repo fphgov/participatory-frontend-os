@@ -14,9 +14,10 @@ export default function Idea() {
   const context = useContext(StoreContext)
   const { id } = useParams()
 
-  const [options, setOptions] = useState(null)
+  const [workflowStateOptions, setWorkflowStateOptions] = useState(null)
+  const [workflowStateExtraOptions, setWorkflowStateExtraOptions] = useState(null)
   const [idea, setIdea] = useState(null)
-  const [ originalWorkflowState, setOriginalWorkflowState] = useState(null)
+  const [originalWorkflowState, setOriginalWorkflowState] = useState(null)
 
   const documentMimes = [
     'application/msword',
@@ -34,7 +35,7 @@ export default function Idea() {
     progress: undefined,
   })
 
-  const getOptions = () => {
+  const getWorkflowStateOptions = () => {
     context.set('loading', true)
 
     const config = {
@@ -47,7 +48,33 @@ export default function Idea() {
     axios.get(process.env.REACT_APP_API_ADMIN_REQ_WORKFLOW_STATES, config)
       .then(response => {
         if (response.data && response.data.data) {
-          setOptions(response.data.data)
+          setWorkflowStateOptions(response.data.data)
+        } else {
+          notify('⛔️ Sikertelen adat lekérés')
+        }
+      })
+      .catch(() => {
+        notify('⛔️ Sikertelen adat lekérés')
+      })
+      .finally(() => {
+        context.set('loading', false)
+      })
+  }
+
+  const getWorkflowStateExtraOptions = () => {
+    context.set('loading', true)
+
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
+        'Accept': 'application/json',
+      }
+    }
+
+    axios.get(process.env.REACT_APP_API_ADMIN_REQ_WORKFLOW_STATE_EXTRAS, config)
+      .then(response => {
+        if (response.data && response.data.data) {
+          setWorkflowStateExtraOptions(response.data.data)
         } else {
           notify('⛔️ Sikertelen adat lekérés')
         }
@@ -119,6 +146,7 @@ export default function Idea() {
       locationDescription: idea.locationDescription,
       answer: idea.answer,
       workflowState: typeof idea.workflowState.code === 'undefined' ? idea.workflowState : idea.workflowState.code,
+      workflowStateExtra: idea.workflowStateExtra === null || typeof idea.workflowStateExtra.code === 'undefined' ? idea.workflowStateExtra : idea.workflowStateExtra.code,
     }
 
     axios.post(link, new URLSearchParams(data), config)
@@ -136,7 +164,8 @@ export default function Idea() {
   }
 
   useEffect(() => {
-    getOptions()
+    getWorkflowStateOptions()
+    getWorkflowStateExtraOptions()
     getIdeas()
   }, [])
 
@@ -236,12 +265,27 @@ export default function Idea() {
                     <div className="input-wrapper">
                       <label htmlFor="workflowState">Állapot</label>
                       <select name="workflowState" id="workflowState" value={idea.workflowState.code} onChange={handleChangeInput}>
-                        {options ? options.map((option, i) => (
+                        {workflowStateOptions ? workflowStateOptions.map((option, i) => (
                           <option key={i} value={option.code}>{option.title}</option>
                         )) : null}
                       </select>
                     </div>
                   </div>
+
+                  {idea.workflowState === 'PUBLISHED_WITH_MOD' || idea.workflowState.code === 'PUBLISHED_WITH_MOD'  ? <>
+                    <div className="col-sm-12 col-md-6">
+                      <div className="input-wrapper">
+                        <label htmlFor="workflowStateExtra">Módosítás oka</label>
+                        <select name="workflowStateExtra" id="workflowStateExtra" value={idea.workflowStateExtra ? idea.workflowStateExtra.code : ''} onChange={handleChangeInput}>
+                          <option value="" disabled>Válassz az indokok közül</option>
+
+                          {workflowStateExtraOptions ? workflowStateExtraOptions.map((option, i) => (
+                            <option key={i} value={option.code}>{option.title}</option>
+                          )) : null}
+                        </select>
+                      </div>
+                    </div>
+                  </> : null}
 
                   <div className="col-sm-12 col-md-6">
                     <div className="input-wrapper">
