@@ -246,7 +246,7 @@ export default function Registration() {
                     <div className="form-group">
                       <label htmlFor="privacy" className="form-group-label">
                         <input className="form-control" type="checkbox" id="privacy" name="privacy" value={filterData.privacy} onChange={handleChangeInput} />
-                        Elfogadom az <a href={`${process.env.REACT_APP_SERVER_FILE}/adatkezelesi_tajekozato.pdf`} target="_blank" rel="noopener noreferrer">adatvédelmi tájékoztatót</a> *
+                        Elfogadom az <a href={`${process.env.REACT_APP_SERVER_FILE}/adatvedelmi_tajekozato.pdf`} target="_blank" rel="noopener noreferrer">adatvédelmi tájékoztatót</a> *
                       </label>
 
                       {error && error.privacy ? Object.values(error.privacy).map((err, i) => {

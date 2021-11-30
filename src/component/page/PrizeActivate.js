@@ -67,7 +67,7 @@ export default function ProfileActivate() {
 
             <p>A fővárosi közösségi költségvetésbe szavazatot leadó és a nyereményjátékra jelentkező budapestiek közül kisorsolunk 20 főt, akik a BKV Zrt. jóvoltából ellátogathatnak az 50-es években - a 2-es metróval egyidőben - kiépített, sokáig titokban tartott, a köznyelvben Rákosi-bunkerként ismert atombiztos óvóhelyre.</p>
 
-            <p>A lenti gombra kattintva tudsz jelentkezni a nyereményjátékra.<br />A jelentkezéssel elfogadod az adatkezelési tájékoztatónk 5/C pontja szerinti, a nyereményjátékhoz <a href={`${process.env.REACT_APP_SERVER_FILE}/adatkezelesi_tajekozato.pdf`} style={{ textDecoration: 'underline' }} rel="noopener noreferrer">kapcsolódó adatkezelést</a>.</p>
+            <p>A lenti gombra kattintva tudsz jelentkezni a nyereményjátékra.<br />A jelentkezéssel elfogadod az adatvédelmi tájékoztatónk 5/C pontja szerinti, a nyereményjátékhoz <a href={`${process.env.REACT_APP_SERVER_FILE}/adatvedelmi_tajekozato.pdf`} style={{ textDecoration: 'underline' }} rel="noopener noreferrer">kapcsolódó adatkezelést</a>.</p>
 
             <p>A nyerteseket augusztus folyamán emailben értesítjük.</p>
 
