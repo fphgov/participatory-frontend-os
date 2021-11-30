@@ -170,7 +170,7 @@ export default function IdeaWrapper(props) {
           <div className="prop-single-history">
             <div className="prop-single-inner">
               <div className="prop-single-content">
-                <h3 style={{ color: theme.rgb }}>Városháza válasza</h3>
+                <h3 style={{ color: theme.rgb }}>Hivatal visszajelzése</h3>
 
                 <div className="prop-single-answer" dangerouslySetInnerHTML={{ __html: props.idea.answer }} />
               </div>

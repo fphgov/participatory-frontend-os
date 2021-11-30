@@ -252,7 +252,7 @@ export default function Idea() {
 
                   <div className="col-sm-12 col-md-12">
                     <div className="input-wrapper">
-                      <label htmlFor="answer">Hivatal válasza</label>
+                      <label htmlFor="answer">Hivatal visszajelzése</label>
                       <textarea name="answer" id="answer" value={idea.answer} onChange={handleChangeInput} />
                     </div>
                   </div>
