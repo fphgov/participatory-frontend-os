@@ -266,7 +266,7 @@ export default function Idea() {
                       <label htmlFor="workflowState">Állapot</label>
                       <select name="workflowState" id="workflowState" value={idea.workflowState.code} onChange={handleChangeInput}>
                         {workflowStateOptions ? workflowStateOptions.map((option, i) => (
-                          <option key={i} value={option.code}>{option.title}</option>
+                          <option key={i} value={option.code}>{option.privateTitle}</option>
                         )) : null}
                       </select>
                     </div>
