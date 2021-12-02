@@ -11,7 +11,11 @@ export default function ListElement({ name, object }) {
               <div className="article-category" title={`${object.campaign_theme.name} ${object.campaign_theme.title}`} style={{ backgroundColor: object.campaign_theme.rgb }}></div>
 
               <div role="alert" aria-label={`Azonosító: ${object.id}`} className="article-title">
-                {object.id} | {object.title}
+                <div className="article-id">{object.id}</div>
+                <div className="article-row-content">
+                  <div className="article-row-title">{object.title}</div>
+                  <div className="article-row-status">Státusz: {object.status.title} | {object.campaign_theme.title}</div>
+                </div>
               </div>
             </Link>
           </div>
