@@ -4,6 +4,7 @@ import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import {
   Redirect,
   Link,
+  useLocation
 } from "react-router-dom"
 import StoreContext from '../../StoreContext'
 import tokenParser from '../assets/tokenParser'
@@ -20,6 +21,7 @@ export default function Login() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0)
+  const location = useLocation()
 
   const submitLogin = (e) => {
     e.preventDefault();
@@ -110,9 +112,19 @@ export default function Login() {
     )
   }
 
+  const ManualRedirect = ({byState, byLocation}) => {
+    if (byState) {
+      if (byLocation) {
+        return <Redirect to='/bekuldes' />
+      }
+      return <Redirect to="/" />
+    }
+    return null
+  }
+
   return (
     <div className="page-login-section">
-      {redirect ? <Redirect to="/" /> : null}
+      <ManualRedirect byState={redirect} byLocation={location.state ? location.state : false} />
 
       <div className="container">
         <div className="row">
