@@ -112,14 +112,14 @@ export default function Login() {
     )
   }
 
-  const ManualRedirect = ({byState, byLocation}) => {
-    if (byState) {
-      if (byLocation) {
-        return <Redirect to='/bekuldes' />
-      }
-      return <Redirect to="/" />
+  const ManualRedirect = ({ byState, byLocation }) => {
+    if (!byState) {
+      return null
     }
-    return null
+    if (byLocation) {
+      return <Redirect to="/bekuldes" />
+    }
+    return <Redirect to="/" />
   }
 
   return (
