@@ -656,6 +656,24 @@ label+.tipp {
   display: inline-block;
 }
 
+.article-status-icon {
+  flex: 1;
+  text-align: right;
+}
+
+textarea#description {
+  min-height: 150px;
+}
+
+textarea#content {
+  min-height: 450px;
+}
+
+.post-image img {
+  width: 100%;
+  height: auto;
+}
+
 input[name="search"] {
   width: 100%;
   margin: 16px 0;

@@ -13,6 +13,8 @@ import Vote from "./page/Vote"
 import Ideas from "./page/Ideas"
 import Idea from "./page/Idea"
 import ScrollToTop from "./common/ScrollToTop"
+import Posts from "./page/Posts"
+import Post from "./page/Post"
 import Profile from "./page/Profile"
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -27,6 +29,8 @@ export default class App extends React.Component {
               <Route exact path="/login" render={() => <Layout><Login /></Layout>} />
               <Route exact path="/logout" render={() => <Layout><Logout /></Layout>} />
               <Route exact path="/vote" render={() => <Layout><Vote /></Layout>} />
+              <Route exact path="/posts" render={() => <Layout><Posts /></Layout>} />
+              <Route exact path="/posts/:id" render={() => <Layout><Post /></Layout>} />
               <Route exact path="/profile" render={() => <Layout><Profile /></Layout>} />
               <Route exact path="/ideas" render={() => <Layout><Ideas /></Layout>} />
               <Route exact path="/ideas/:id" render={() => <Layout><Idea /></Layout>} />
