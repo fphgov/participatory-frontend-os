@@ -1,18 +1,25 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useState, useContext, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
-import { useParams } from "react-router-dom"
+import { useParams } from 'react-router-dom'
+import slugify from 'slugify'
 import StoreContext from '../../StoreContext'
 import axios from '../assets/axios'
 import { getDateLocalFormat } from '../assets/dateFormats'
+import { Editor } from 'react-draft-wysiwyg'
+import { EditorState } from 'draft-js'
+import { createEditorStateWithText } from 'draft-js-plugins-editor'
+import { stateFromHTML } from 'draft-js-import-html'
+import { stateToHTML } from 'draft-js-export-html'
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 export default function Post() {
   const context = useContext(StoreContext)
   const { id } = useParams()
 
+  const [editorState, setEditorState] = useState(createEditorStateWithText(''))
   const [statusOptions, setStatusOptions] = useState(null)
   const [categoryOptions, setCategoryOptions] = useState(null)
   const [post, setPost] = useState()
-  const [file, setFile] = useState()
 
   let formData = new FormData()
 
@@ -98,6 +105,10 @@ export default function Post() {
           data.createdAt = getDateLocalFormat(data.createdAt)
 
           setPost(data)
+
+          let contentState = stateFromHTML(data.content)
+
+          setEditorState(EditorState.createWithContent(contentState))
         } else {
           notify('⛔️ Sikertelen adat lekérés')
         }
@@ -132,7 +143,7 @@ export default function Post() {
     formData.append('title', post.title)
     formData.append('slug', post.slug)
     formData.append('description', post.description)
-    formData.append('content', post.content)
+    formData.append('content', stateToHTML(editorState.getCurrentContent()))
     formData.append('category', typeof post.category.code === 'undefined' ? post.category : post.category.code)
     formData.append('status', typeof post.status.code === 'undefined' ? post.status : post.status.code)
     formData.append('created', post.createdAt)
@@ -167,6 +178,20 @@ export default function Post() {
     }
   }
 
+  const handleChangeSlugInput = (e) => {
+    e.persist()
+
+    const sluged = slugify(e.target.value, {
+      replacement: '-',
+      lower: true,
+      locale: 'hu',
+      trim: true,
+      strict: false
+    })
+
+    setPost(state => ({ ...state, [ e.target.name ]: sluged }))
+  }
+
   return (
     <>
       <div className="proposal post">
@@ -190,7 +215,8 @@ export default function Post() {
                   <div className="col-sm-12 col-md-12">
                     <div className="input-wrapper">
                       <label htmlFor="slug">URL hivatkozás</label>
-                      <input type="text" name="slug" id="slug" value={post.slug} onChange={handleChangeInput} />
+                      <div className="tipp">Megnevezés tartalmát másold át.</div>
+                      <input type="text" name="slug" id="slug" value={post.slug} onChange={handleChangeSlugInput} />
                     </div>
                   </div>
 
@@ -254,7 +280,13 @@ export default function Post() {
                   <div className="col-sm-12 col-md-12">
                     <div className="input-wrapper">
                       <label htmlFor="content">Tartalom</label>
-                      <textarea type="text" name="content" id="content" value={post.content} onChange={handleChangeInput} />
+                      <Editor
+                        editorState={editorState}
+                        toolbarClassName="toolbarClassName"
+                        wrapperClassName="wrapperClassName"
+                        editorClassName="editorClassName"
+                        onEditorStateChange={setEditorState}
+                      />
                     </div>
                   </div>
                 </div>

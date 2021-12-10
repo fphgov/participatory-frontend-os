@@ -967,6 +967,20 @@ ul.links {
   margin: 20px 0;
 }
 
+.rdw-editor-toolbar.toolbarClassName {
+  border-color: #19506e;
+}
+
+.rdw-dropdown-wrapper,
+.rdw-option-wrapper {
+  border-color: #19506e;
+}
+
+.rdw-editor-main {
+  border: 1px solid #19506e;
+  padding: 0 14px;
+}
+
 @media screen and (max-width: 991px) {
   .desktop-menu {
     display: none;
