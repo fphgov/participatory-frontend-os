@@ -2130,6 +2130,11 @@ time.post-full-meta-date {
 
 .featured-image {
   text-align: center;
+  margin: 16px 0;
+}
+
+.page-post-section .description {
+  font-weight: bold;
 }
 
 .page-post .featured-image img {
