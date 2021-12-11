@@ -4,7 +4,7 @@ import {
 } from "react-router-dom"
 import StoreContext from '../StoreContext'
 import tokenParser from './assets/tokenParser'
-import Logo from '../img/kozossegi_koltsegvetes.svg'
+import Logo from '../img/bp_logo.svg'
 import VoteModal from "./common/VoteModal"
 import getGravatarURL from "./lib/gravatar"
 
@@ -91,7 +91,7 @@ export default function Header({ children }) {
       <nav className="main-navigation">
         <div className="container-fluid">
           <div className="row flex-center">
-            <div className="col-xs-6 col-sm-6 col-md-2">
+            <div className="col-xs-6 col-sm-6 col-md-3 col-lg-2">
               <div className="logo-wrapper">
                 <a href="/" rel="noopener noreferrer">
                   <img src={Logo} alt="Budapest Közösségi Költségvetés" />
@@ -99,7 +99,7 @@ export default function Header({ children }) {
               </div>
             </div>
 
-            <div className="col-xs-6 col-sm-6 col-md-10">
+            <div className="col-xs-6 col-sm-6 col-md-9 col-lg-10">
               <ul className="desktop-menu">
                 {menu.map((menuItem, i) => {
                   if (
