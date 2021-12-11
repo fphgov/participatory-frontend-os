@@ -1,4 +1,7 @@
 import axios from '../assets/axios'
+import {
+  Link,
+} from "react-router-dom"
 import React, { useState, useContext, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import StoreContext from '../../StoreContext'
@@ -61,6 +64,12 @@ export default function Posts() {
       <div className="container">
 
         <h2 className="mt-5">Hírek</h2>
+
+        <div>
+          <div className="action-wrapper">
+            <Link to="/posts/new" className="box box-button">Új cikk létrehozása</Link>
+          </div>
+        </div>
 
         <div className="mt-4 row">
           {posts && posts.map((post, i) => <div key={i} style={{ width: "100%" }}> <PostListElement key={i} name="post" object={post} /></div>)}

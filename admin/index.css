@@ -960,6 +960,10 @@ ul.links {
   margin: 20px 0;
 }
 
+.action-wrapper > a {
+  text-decoration: none;
+}
+
 .sortable {
   cursor: pointer;
 }

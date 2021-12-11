@@ -65,8 +65,6 @@ export default function Profile() {
         if (error.response && error.response.data && error.response.data.message) {
           setError(error.response.data.message)
         }
-
-        console.log(error)
       })
       .finally(() => {
         context.set('loading', false)
