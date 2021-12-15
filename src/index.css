@@ -168,7 +168,7 @@ a.profile-menu {
 }
 
 header .logo-wrapper img {
-  height: 34px;
+  height: 52px;
   vertical-align: middle;
   text-align: left;
   width: auto;
@@ -977,6 +977,10 @@ footer .app-version {
   margin-bottom: 0;
   padding-left: 0;
   list-style: none;
+}
+
+footer li.nav {
+  margin-right: 0 !important;
 }
 
 fieldset {
@@ -2547,7 +2551,7 @@ input[disabled] {
   }
 
   header .logo-wrapper img {
-    height: 32px;
+    height: 40px;
   }
 
   .prop-inner-header {
