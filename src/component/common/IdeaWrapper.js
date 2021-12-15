@@ -119,6 +119,11 @@ export default function IdeaWrapper(props) {
               <div className="prop-single-content">
                 <h2>Ötlet</h2>
 
+                <div className="prop-single-id">
+                  <div className="prop-info-title">Sorszám</div>
+                  <div className="prop-info-content"><b>{props.idea.id}</b></div>
+                </div>
+
                 {props.idea.campaign ? (
                   <div className="prop-single-campaign">
                     <div className="prop-info-title">Kampány</div>
@@ -136,7 +141,7 @@ export default function IdeaWrapper(props) {
                 </div>
 
                 <div className="prop-single-cost">
-                  <div className="prop-info-title">Becsült ráfordítás</div>
+                  <div className="prop-info-title">Becsült költség</div>
                   <div className="prop-info-content">
                     {!props.idea.cost ? <b>A költségeket nem becsülték meg</b> : <b>{nFormatter(props.idea.cost)}</b>}
                   </div>

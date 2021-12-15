@@ -85,7 +85,7 @@ export default function Post() {
 
               {rawContent.createdAt ? <span className="time">{getHungarianDateFormat(rawContent.createdAt)}</span> : null}<span>• {rawContent.category.name}</span>
               {rawContent.featuredImage ? <div className="featured-image"><img src={`${process.env.REACT_APP_SERVER_FILE}/${rawContent.featuredImage.filename}`} /></div> : null}
-              {rawContent.description ? <div dangerouslySetInnerHTML={{ __html: rawContent.description }} /> : null}
+              {rawContent.description ? <div className="description" dangerouslySetInnerHTML={{ __html: rawContent.description }} /> : null}
               {rawContent.content ? <div dangerouslySetInnerHTML={{ __html: rawContent.content }} /> : null}
             </> : null}
           </div>

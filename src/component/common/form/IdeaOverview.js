@@ -113,7 +113,7 @@ export default function IdeaOverview({ firstStep, values, submitIdea, error }) {
           </div>
 
           <div className="overview">
-            <div className="overview-name">Becsült ráfordítás</div>
+            <div className="overview-name">Becsült költség</div>
             <div className="overview-value">{values.cost ? nFormatter(values.cost) : "-"}</div>
 
             <ErrorRender error={error} name="cost" />

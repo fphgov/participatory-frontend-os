@@ -89,11 +89,11 @@ export default function Home() {
       <div className="dark-section news-feed">
         <div className="container">
           <div className="row">
-            <div className="col-md-6 col-xs-6 col-sm-6">
+            <div className="col-md-6 col-xs-12 col-sm-12">
               <h2>Hírek / Rendezvények</h2>
             </div>
 
-            <div className="col-md-6 col-xs-6 col-sm-6">
+            <div className="col-md-6 col-xs-12 col-sm-12">
               <div className="more-posts">
                 <Link to="/hirek">További hírek</Link>
               </div>

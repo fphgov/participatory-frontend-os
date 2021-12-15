@@ -619,6 +619,22 @@ label+.tipp {
   padding: 10px;
   width: 100%;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -2px rgb(0 0 0 / 5%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.article-id {
+  font-weight: bold;
+  margin-right: 12px;
+}
+
+.article-row-title {
+  font-weight: bold;
+}
+
+.article-row-status {
+  font-style: italic;
 }
 
 .article-flex {
@@ -638,6 +654,24 @@ label+.tipp {
 .article-category {
   width: 12px !important;
   display: inline-block;
+}
+
+.article-status-icon {
+  flex: 1;
+  text-align: right;
+}
+
+textarea#description {
+  min-height: 150px;
+}
+
+textarea#content {
+  min-height: 450px;
+}
+
+.post-image img {
+  width: 100%;
+  height: auto;
 }
 
 input[name="search"] {
@@ -873,6 +907,7 @@ nav.pagination button {
   cursor: pointer;
   background: none;
   border: 0;
+  vertical-align: -webkit-baseline-middle;
 }
 
 nav.pagination button.active {
@@ -925,12 +960,30 @@ ul.links {
   margin: 20px 0;
 }
 
+.action-wrapper > a {
+  text-decoration: none;
+}
+
 .sortable {
   cursor: pointer;
 }
 
 .button-wrapper {
   margin: 20px 0;
+}
+
+.rdw-editor-toolbar.toolbarClassName {
+  border-color: #19506e;
+}
+
+.rdw-dropdown-wrapper,
+.rdw-option-wrapper {
+  border-color: #19506e;
+}
+
+.rdw-editor-main {
+  border: 1px solid #19506e;
+  padding: 0 14px;
 }
 
 @media screen and (max-width: 991px) {

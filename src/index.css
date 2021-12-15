@@ -130,7 +130,7 @@ nav.main-navigation ul {
 
 .main-navigation a {
   color: #12326E;
-  padding: 12px 13px 12px;
+  padding: 16px 13px 16px;
   font-weight: 700;
   font-size: 16px;
   text-decoration: none;
@@ -409,11 +409,11 @@ article.post-card:hover .post-more {
 .hamburger-menu-subtitle {
   font-size: 14px;
   font-weight: bold;
-  color: #FFF;
+  color: #12326E;
 }
 
 .hamburger-menu > .hamburger-menu-elem {
-  background-color: #FFF;
+  background-color: #12326E;
   height: 4px;
   margin-bottom: 4px;
 }
@@ -438,7 +438,7 @@ article.post-card:hover .post-more {
   display: block;
   padding: 8px 0;
   font-weight: bold;
-  color: #FFF;
+  color: #12326E;
   text-decoration: 0;
 }
 
@@ -979,6 +979,10 @@ footer .app-version {
   list-style: none;
 }
 
+footer li.nav {
+  margin-right: 0 !important;
+}
+
 fieldset {
   padding: 0;
   margin: 0;
@@ -1375,6 +1379,7 @@ nav.pagination button {
   cursor: pointer;
   background: none;
   border: 0;
+  vertical-align: -webkit-baseline-middle;
 }
 
 nav.pagination button.active {
@@ -2129,6 +2134,11 @@ time.post-full-meta-date {
 
 .featured-image {
   text-align: center;
+  margin: 16px 0;
+}
+
+.page-post-section .description {
+  font-weight: bold;
 }
 
 .page-post .featured-image img {
@@ -2187,6 +2197,7 @@ time.post-full-meta-date {
 
 .hero-content p {
   font-size: 18px;
+  margin: 4px 0;
 }
 
 .categories {
@@ -2509,6 +2520,13 @@ input[disabled] {
 @media screen and (min-width: 1200px) {
   .container, .container-sm, .container-md, .container-lg, .container-xl {
     max-width: 1170px;
+  }
+}
+
+@media screen and (max-width: 1210px) {
+  .main-navigation a {
+    padding-left: 4px;
+    padding-right: 4px;
   }
 }
 

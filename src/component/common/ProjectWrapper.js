@@ -134,9 +134,9 @@ export default function ProjectWrapper(props) {
                 </div>
 
                 <div className="prop-single-cost">
-                  <div className="prop-info-title">Becsült ráfordítás</div>
+                  <div className="prop-info-title">Becsült költség</div>
                   <div className="prop-info-content">
-                    {!props.project.cost ? <b>Nincs becsült ráfordítás</b> : <b>{nFormatter(props.project.cost)}</b>}
+                    {!props.project.cost ? <b>Nincs becsült költség</b> : <b>{nFormatter(props.project.cost)}</b>}
                   </div>
                 </div>
 
