@@ -300,7 +300,7 @@ export default function IdeaSubmission() {
                           }
                       })()}
                     </div>
-                  </> : <p>Ötletbeküldéshez <Link to="/bejelentkezes">be kell jelentkezni</Link>.</p>}
+                  </> : <p>Ötletbeküldéshez <Link to={{pathname: '/bejelentkezes', state: true}}>be kell jelentkezni</Link>.</p>}
                 </>: null}
               </fieldset>
 
