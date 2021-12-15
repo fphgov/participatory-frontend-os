@@ -15,6 +15,9 @@ export default class Dashboard extends React.Component {
     this.state = {
       redirectLogin: false,
       close: false,
+      countIdeas: 'N/A',
+      countIdeasPublished: 'N/A',
+      countIdeasRejected: 'N/A',
       countVotes: 'N/A',
       countOfflineVotes: 'N/A',
       countUsers: 'N/A',
@@ -46,6 +49,9 @@ export default class Dashboard extends React.Component {
         if (response.data) {
           this.setState({
             close: response.data.settings && response.data.settings.close ? response.data.settings.close : false,
+            countIdeas: response.data.infos && response.data.infos.countIdeas ? response.data.infos.countIdeas : 'N/A',
+            countIdeasPublished: response.data.infos && response.data.infos.countIdeasPublished ? response.data.infos.countIdeasPublished : 'N/A',
+            countIdeasRejected: response.data.infos && response.data.infos.countIdeasRejected ? response.data.infos.countIdeasRejected : 'N/A',
             countVotes: response.data.infos && response.data.infos.countVotes ? response.data.infos.countVotes : 'N/A',
             countOfflineVotes: response.data.infos && response.data.infos.countOfflineVotes ? response.data.infos.countOfflineVotes : 'N/A',
             countUsers: response.data.infos && response.data.infos.countUsers ? response.data.infos.countUsers : 'N/A',
@@ -234,9 +240,9 @@ export default class Dashboard extends React.Component {
                   </div>
 
                   <div className="box-content">
-                    <div className="box">Összesen<br /><span>N/A</span></div>
-                    <div className="box">Közzétett<br /><span>N/A</span></div>
-                    <div className="box">Elutasított<br /><span>N/A</span></div>
+                    <div className="box" aria-label={`Összes ötletek száma ${this.state.countIdeas}`}>Összesen<br /><span>{this.state.countIdeas}</span></div>
+                    <div className="box" aria-label={`Közzétett ötletek száma ${this.state.countIdeasPublished}`}>Közzétett<br /><span>{this.state.countIdeasPublished}</span></div>
+                    <div className="box" aria-label={`Elutasított ötletek száma ${this.state.countIdeasRejected}`}>Elutasított<br /><span>{this.state.countIdeasRejected}</span></div>
                   </div>
                 </div>
 
