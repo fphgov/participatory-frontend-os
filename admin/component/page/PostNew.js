@@ -13,6 +13,7 @@ export default function PostNew() {
 
   const [editorState, setEditorState] = useState(createEditorStateWithText(''))
   const [error, setError] = useState('')
+  const [file, setFile] = useState(null)
   const [statusOptions, setStatusOptions] = useState(null)
   const [categoryOptions, setCategoryOptions] = useState(null)
   const [post, setPost] = useState({
@@ -91,7 +92,7 @@ export default function PostNew() {
 
   const onFileChange = (e) => {
     if (e.target.files && e.target.files[0] instanceof File) {
-      formData.append('file', e.target.files[0])
+      setFile(e.target.files[0])
     }
   }
 
@@ -114,6 +115,7 @@ export default function PostNew() {
     formData.append('content', stateToHTML(editorState.getCurrentContent()))
     formData.append('category', typeof post.category.code === 'undefined' ? post.category : post.category.code)
     formData.append('status', typeof post.status.code === 'undefined' ? post.status : post.status.code)
+    formData.append('file', file)
     formData.append('created', post.created)
 
     axios.post(link, formData, config)

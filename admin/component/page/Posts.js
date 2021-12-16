@@ -22,7 +22,7 @@ export default function Posts() {
     progress: undefined,
   })
 
-  const findNews = (e) => {
+  const findPosts = (e) => {
     if (e) {
       e.preventDefault()
     }
@@ -56,7 +56,7 @@ export default function Posts() {
   }
 
   useEffect(() => {
-    findNews()
+    findPosts()
   }, [])
 
   return (
