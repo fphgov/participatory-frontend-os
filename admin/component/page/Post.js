@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
-import { useParams } from 'react-router-dom'
+import { useParams, Redirect } from 'react-router-dom'
 import slugify from 'slugify'
 import StoreContext from '../../StoreContext'
 import axios from '../assets/axios'
@@ -18,6 +18,8 @@ export default function Post() {
 
   const [editorState, setEditorState] = useState(createEditorStateWithText(''))
   const [error, setError] = useState('')
+  const [redirect, setRedirect] = useState(false)
+  const [file, setFile] = useState(null)
   const [statusOptions, setStatusOptions] = useState(null)
   const [categoryOptions, setCategoryOptions] = useState(null)
   const [post, setPost] = useState()
@@ -124,7 +126,7 @@ export default function Post() {
 
   const onFileChange = (e) => {
     if (e.target.files && e.target.files[0] instanceof File) {
-      formData.append('file', e.target.files[0])
+      setFile(e.target.files[0])
     }
   }
 
@@ -147,16 +149,51 @@ export default function Post() {
     formData.append('content', stateToHTML(editorState.getCurrentContent()))
     formData.append('category', typeof post.category.code === 'undefined' ? post.category : post.category.code)
     formData.append('status', typeof post.status.code === 'undefined' ? post.status : post.status.code)
+    formData.append('file', file)
     formData.append('created', post.createdAt)
 
     axios.post(link, formData, config)
       .then(response => {
         if (response.data && response.data.data.success) {
           notify('🎉 Sikeres módosítás')
+
+          setRedirect(true)
         }
       })
       .catch((error) => {
         notify('⛔️ Sikertelen módosítás')
+
+        if (error.response && error.response.data && error.response.data.errors) {
+          setError(error.response.data.errors)
+        }
+      })
+      .finally(() => {
+        context.set('loading', false)
+      })
+  }
+
+  const deleteDetection = () => {
+    context.set('loading', true)
+
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
+        'Accept': 'application/json',
+      }
+    }
+
+    const link = process.env.REACT_APP_API_ADMIN_REQ_POST_DELETE.toString().replace(':id', id)
+
+    axios.delete(link, config)
+      .then(response => {
+        if (response.data && response.data.data.success) {
+          notify('🎉 Sikeres törlés')
+
+          setRedirect(true)
+        }
+      })
+      .catch((error) => {
+        notify('⛔️ Sikertelen törlés')
 
         if (error.response && error.response.data && error.response.data.errors) {
           setError(error.response.data.errors)
@@ -209,6 +246,10 @@ export default function Post() {
 
   return (
     <>
+      {redirect ? (
+        <Redirect to='/posts' />
+      ) : null}
+
       <div className="proposal post">
         <div className="container">
           {post ? (
@@ -339,9 +380,10 @@ export default function Post() {
                 </div>
 
                 <div className="row">
-                  <div className="col-sm-12 col-md-6">
-                    <div className="button-wrapper">
+                  <div className="col-sm-12 col-md-12">
+                    <div className="button-wrapper button-wrapper-justify">
                       <button className="btn btn-primary" onClick={postDetection}>Mentés</button>
+                      <button className="btn btn-danger" onClick={deleteDetection}>Törlés</button>
                     </div>
                   </div>
                 </div>

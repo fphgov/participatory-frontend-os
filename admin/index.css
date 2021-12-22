@@ -972,6 +972,12 @@ ul.links {
   margin: 20px 0;
 }
 
+.button-wrapper.button-wrapper-justify {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .rdw-editor-toolbar.toolbarClassName {
   border-color: #19506e;
 }
