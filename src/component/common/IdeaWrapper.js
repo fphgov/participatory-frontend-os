@@ -3,6 +3,7 @@ import {
   Link,
 } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faFacebookF } from "@fortawesome/free-brands-svg-icons"
 import { faMapMarkerAlt, faFilePdf } from "@fortawesome/free-solid-svg-icons"
 import nFormatter from '../assets/nFormatter'
 import modernizr from 'modernizr'
@@ -166,6 +167,17 @@ export default function IdeaWrapper(props) {
                     </div>
                   </>
                 ) : null}
+
+                <div className="prop-single-share">
+                  <div className="prop-info-title">Megosztás</div>
+                  <div className="prop-info-content">
+                    <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} title="Megosztom az ötletet Facebookon" rel="noopener noreferrer">
+                      <span className="fa-layers fa-lg">
+                        <FontAwesomeIcon icon={faFacebookF} size='xs' style={{ marginLeft: 10 }} />
+                      </span>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
