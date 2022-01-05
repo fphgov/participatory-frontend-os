@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --mode=development",
-    "build": "webpack --env REACT_APP_PWA_NAME='Budapest Közösségi költségvetés' --env REACT_APP_PWA_SHORT_NAME='Közösségi költségvetés' --env REACT_APP_PWA_START_URL='/' --env REACT_APP_PWA_DESCRIPTION='Adj egy jó ötletet!' --env REACT_APP_PWA_COLOR='#ffffff' --env REACT_APP_PWA_BAR_STYLE=white --mode=production --node-env=production",
+    "build": "webpack --env REACT_APP_PWA_NAME='Budapest Közösségi költségvetés' --env REACT_APP_PWA_SHORT_NAME='Közösségi költségvetés' --env REACT_APP_PWA_START_URL='/' --env REACT_APP_PWA_DESCRIPTION='Adj egy jó ötletet!' --env REACT_APP_PWA_COLOR='#ffffff' --env REACT_APP_PWA_THEME_COLOR='#f6d05f' --env REACT_APP_PWA_BAR_STYLE='#f6d05f' --mode=production --node-env=production",
     "watch": "webpack --watch"
   },
   "keywords": [],
