@@ -4,6 +4,9 @@ import {
   useParams,
 } from "react-router-dom"
 import API from '../assets/axios'
+import PopUp from '../assets/PopUp'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faFacebookF } from "@fortawesome/free-brands-svg-icons"
 import { getHungarianDateFormat } from '../assets/dateFormats'
 import StoreContext from '../../StoreContext'
 
@@ -87,6 +90,17 @@ export default function Post() {
               {rawContent.featuredImage ? <div className="featured-image"><img src={`${process.env.REACT_APP_SERVER_FILE}/${rawContent.featuredImage.filename}`} /></div> : null}
               {rawContent.description ? <div className="description" dangerouslySetInnerHTML={{ __html: rawContent.description }} /> : null}
               {rawContent.content ? <div dangerouslySetInnerHTML={{ __html: rawContent.content }} /> : null}
+
+              <div className="prop-single-share">
+                <div className="prop-info-title">Megosztás</div>
+                <div className="prop-info-content">
+                  <PopUp url={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} title="Megosztom a cikket a Facebookon">
+                    <span className="fa-layers fa-lg">
+                      <FontAwesomeIcon icon={faFacebookF} size='xs' style={{ marginLeft: 10 }} />
+                    </span>
+                  </PopUp>
+                </div>
+              </div>
             </> : null}
           </div>
         </div>
