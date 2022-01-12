@@ -34,7 +34,7 @@ export default function Footer() {
               <li className="nav"><a href={`${process.env.REACT_APP_SERVER_FILE}/adatvedelmi_tajekozato.pdf`} target="_blank" rel="noopener noreferrer">Adatvédelmi tájékoztató</a></li>
               <li className="nav"><Link to="/oldal/dokumentumok">Dokumentumok</Link></li>
               <li className="nav"><Link to="/oldal/kapcsolat">Kapcsolat</Link></li>
-              {/* <li className="nav"><a href={`${process.env.REACT_APP_SERVER_FILE}/participatory-budgeting-in-budapest.pdf`} target="_blank" rel="noopener noreferrer">Information in English</a></li> */}
+              <li className="nav"><a href={`${process.env.REACT_APP_SERVER_FILE}/participatory-budgeting-in-budapest.pdf`} target="_blank" rel="noopener noreferrer">Information in English</a></li>
             </ul>
           </div>
         </div>
