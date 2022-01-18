@@ -23,7 +23,7 @@ export default class Footer extends React.Component {
 
                 <div className="col-md-12 col-lg-8 pt-2 justify-content-md-center justify-content-lg-start">
                   <div className="footer-text">
-                    © 2021 Budapest Főváros Önkormányzata | Minden jog fenntartva
+                    © 2022 Budapest Főváros Önkormányzata | Minden jog fenntartva
                   </div>
                 </div>
 

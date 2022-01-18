@@ -41,6 +41,7 @@ export default class Header extends React.Component {
         { title: "Ötletek", href: "/ideas", onHideLoggedOut: true, roles: [ 'developer', 'admin', 'editor' ] },
         { title: "Szavazat hozzáadása", href: "/vote", onHideLoggedOut: true, roles: [ 'developer', 'admin', 'editor' ] },
         { title: "Cikkek", href: "/posts", onHideLoggedOut: true, roles: [ 'developer', 'admin', 'editor' ] },
+        { title: "Beállítások", href: "/settings", onHideLoggedOut: true, roles: [ 'developer', 'admin' ] },
         { title: "Bejelentkezés", href: "/login", onHideLoggedIn: true },
         { title: "Profil", href: "/profile", onHideLoggedOut: true },
         { title: "Kijelentkezés", href: "/logout", onHideLoggedOut: true },

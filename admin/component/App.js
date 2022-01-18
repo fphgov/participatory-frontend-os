@@ -17,6 +17,7 @@ import Posts from "./page/Posts"
 import Post from "./page/Post"
 import PostNew from "./page/PostNew"
 import Profile from "./page/Profile"
+import Settings from "./page/Settings"
 import 'react-toastify/dist/ReactToastify.css'
 
 export default class App extends React.Component {
@@ -33,6 +34,7 @@ export default class App extends React.Component {
               <Route exact path="/posts" render={() => <Layout><Posts /></Layout>} />
               <Route exact path="/posts/new" render={() => <Layout><PostNew /></Layout>} />
               <Route exact path="/posts/:id(\d+)" render={() => <Layout><Post /></Layout>} />
+              <Route exact path="/settings" render={() => <Layout><Settings /></Layout>} />
               <Route exact path="/profile" render={() => <Layout><Profile /></Layout>} />
               <Route exact path="/ideas" render={() => <Layout><Ideas /></Layout>} />
               <Route exact path="/ideas/:id(\d+)" render={() => <Layout><Idea /></Layout>} />
