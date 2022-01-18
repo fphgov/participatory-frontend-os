@@ -3,7 +3,9 @@ import {
   Link,
 } from "react-router-dom"
 import StoreContext from '../../StoreContext'
+import PopUp from '../assets/PopUp'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faFacebookF } from "@fortawesome/free-brands-svg-icons"
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons"
 import nFormatter from '../assets/nFormatter'
 import modernizr from 'modernizr'
@@ -176,6 +178,17 @@ export default function ProjectWrapper(props) {
                 {props.showVoteButton ? <>
                   <div className="tipp">* A szavazat akkor érvényes, ha a felső, kék sávban található <div onClick={() => { context.set('rk_modal_open', true); props.onTipClick() }} style={{ textDecoration: 'underline', display: 'inline', cursor: 'pointer' }}>Szavazás</div> menüpontban mindhárom kategóriából választottál egy-egy ötletet, és azokat a beküldés gombbal beküldted.</div>
                 </> : null}
+
+                <div className="prop-single-share">
+                  <div className="prop-info-title">Megosztás</div>
+                  <div className="prop-info-content">
+                    <PopUp url={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} title="Megosztom az ötletet Facebookon">
+                      <span className="fa-layers fa-lg">
+                        <FontAwesomeIcon icon={faFacebookF} size='xs' style={{ marginLeft: 10 }} />
+                      </span>
+                    </PopUp>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

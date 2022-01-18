@@ -56,9 +56,6 @@ module.exports = (env, argv) => {
               loader: MiniCssExtractPlugin.loader,
               options: {
                 esModule: true,
-                modules: {
-                  namedExport: true,
-                },
               },
             },
             {
@@ -143,6 +140,7 @@ module.exports = (env, argv) => {
         display: 'standalone',
         description: env.REACT_APP_PWA_DESCRIPTION,
         background_color: env.REACT_APP_PWA_COLOR,
+        theme_color: env.REACT_APP_PWA_THEME_COLOR,
         crossorigin: 'use-credentials',
         fingerprints: false,
         icons: [

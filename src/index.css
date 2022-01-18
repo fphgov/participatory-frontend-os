@@ -636,6 +636,10 @@ input[type="submit"] {
   border-radius: 4px;
 }
 
+.error-message a {
+  color: #fff;
+}
+
 .success-message {
   margin: 0 0 25px 0;
   background-color: darkgreen;
@@ -902,6 +906,22 @@ input[type="submit"] {
 
 .prop-info-content {
   font-size: 21px;
+}
+
+.prop-single-share .prop-info-content {
+  display: flex;
+}
+
+.prop-single-share .prop-info-content a {
+  width: 30px;
+  height: 30px;
+  background-color: #19506E;
+  border-radius: 4px;
+  color: #fff;
+  vertical-align: middle;
+  align-items: center;
+  display: flex;
+  margin: 2px;
 }
 
 .idea,

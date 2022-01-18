@@ -122,20 +122,9 @@ export default function IdeaSubmission() {
 
   const Error = (props) => {
     return (
-      <div className="error-message">
-        {props.message}
+      <div className="error-message" dangerouslySetInnerHTML={{ __html: props.message }}>
       </div>
     )
-  }
-
-  const ErrorMini = (props) => {
-    if (typeof props.error === 'object') {
-      return Object.values(props.error).map((e, i) => {
-        return (<div key={i} className="error-message-inline">{e}</div>)
-      })
-    } else {
-      return (<div key={props.increment} className="error-message-inline">{props.error}</div>)
-    }
   }
 
   const submitIdea = (e) => {
@@ -197,6 +186,13 @@ export default function IdeaSubmission() {
       if (error.response && error.response.status === 403) {
         setError('Google reCapcha ellenőrzés sikertelen')
         setScroll(true)
+      } if (error.response && error.response.status === 500) {
+        if (error.response.headers['content-type'] && error.response.headers['content-type'].match(/text\/html/)) {
+          const wafInfo = getWafInfo(error.response.data)
+
+          setError('A tűzfalunk hibát érzékelt, ezért az ötletet nem tudjuk befogadni. A kellemetlenségért elnézést kérünk! Kérjük, vedd fel velünk a kapcsolatot a <a href="mailto:nyitott@budapest.hu?subject=WAF%20probléma%20(' + wafInfo.messageId + ')&body=Tisztelt%20Főváros!%0D%0A%0D%0APróbáltam%20ötletet%20beadni,%20de%20hibaüzenetet%20kaptam.%0D%0A%0D%0AA%20hiba%20azonosítója:%20' + wafInfo.messageId + '">nyitott@budapest.hu</a> címen! (A hiba azonosítója: ' + wafInfo.messageId + ')')
+          setScroll(true)
+        }
       } else if (error.response && error.response.data && error.response.data.errors) {
         setError(error.response.data.errors)
         setScroll(true)
@@ -210,6 +206,24 @@ export default function IdeaSubmission() {
     })
   }
 
+  const getWafInfo = (htmlContent) => {
+    const el = document.createElement('html')
+
+    el.innerHTML = htmlContent
+
+    if (el.getElementsByTagName('p') && el.getElementsByTagName('p')[1]) {
+      const infos = el.getElementsByTagName('p')[1].innerText.match(/^URL: (.*)Client IP: (.*)Attack ID: (.*)Message ID: (.*)$/)
+
+      return {
+        url: infos[1],
+        attackId: infos[3],
+        messageId: infos[4]
+      }
+    }
+
+    return null
+  }
+
   useEffect(() => {
     setProfile(tokenParser('user'))
 
@@ -220,7 +234,7 @@ export default function IdeaSubmission() {
 
   return (
     <div className="page-idea-submission-section">
-      {scroll && document.querySelector('.error-message-inline') ? <ScrollTo element={document.querySelector('.error-message-inline').offsetTop} /> : null}
+      {scroll && document.querySelector('.error-message') ? <ScrollTo element={document.querySelector('.error-message').offsetTop} /> : null}
 
       <div className="container">
         <div className="row">

@@ -2,7 +2,9 @@ import React, { Suspense, lazy } from "react"
 import {
   Link,
 } from "react-router-dom"
+import PopUp from '../assets/PopUp'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faFacebookF } from "@fortawesome/free-brands-svg-icons"
 import { faMapMarkerAlt, faFilePdf } from "@fortawesome/free-solid-svg-icons"
 import nFormatter from '../assets/nFormatter'
 import modernizr from 'modernizr'
@@ -166,6 +168,17 @@ export default function IdeaWrapper(props) {
                     </div>
                   </>
                 ) : null}
+
+                <div className="prop-single-share">
+                  <div className="prop-info-title">Megosztás</div>
+                  <div className="prop-info-content">
+                    <PopUp url={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} title="Megosztom az ötletet Facebookon">
+                      <span className="fa-layers fa-lg">
+                        <FontAwesomeIcon icon={faFacebookF} size='xs' style={{ marginLeft: 10 }} />
+                      </span>
+                    </PopUp>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

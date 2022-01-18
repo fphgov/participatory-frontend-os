@@ -992,6 +992,33 @@ ul.links {
   padding: 0 14px;
 }
 
+.tabs-wrapper {
+  display: flex;
+}
+
+.tabs-wrapper .tabs-contents {
+  width: 100%;
+}
+
+.tabs-wrapper .tabs {
+  min-width: 20%;
+}
+
+.tabs-wrapper .tab {
+  margin-right: 24px;
+  border-bottom: 1px solid #ccc;
+  padding: 12px 6px;
+  cursor: pointer;
+}
+
+.tabs-wrapper .tab-active {
+  font-weight: bold;
+}
+
+.tab-content > h2:first-of-type {
+  margin-top: 0;
+}
+
 @media screen and (max-width: 991px) {
   .desktop-menu {
     display: none;
