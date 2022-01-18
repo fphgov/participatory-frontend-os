@@ -56,9 +56,6 @@ module.exports = (env, argv) => {
               loader: MiniCssExtractPlugin.loader,
               options: {
                 esModule: true,
-                modules: {
-                  namedExport: true,
-                },
               },
             },
             {
