@@ -1,8 +1,6 @@
 export function dateConverter(date) {
   let tdate = new Date(date)
 
-  console.log(tdate)
-
   let dd = tdate.getDate().toString().padStart(2, '0')
   let mm = (tdate.getMonth() + 1).toString().padStart(2, '0')
   let yyyy = tdate.getFullYear()
