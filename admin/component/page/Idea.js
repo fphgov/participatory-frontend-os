@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons"
 import StoreContext from '../../StoreContext'
 import axios from '../assets/axios'
-import { dateCoverter } from '../assets/helperFunctions'
+import { dateConverter } from '../assets/helperFunctions'
 import modernizr from 'modernizr'
 
 const ImageGallery = lazy(() => import('react-image-gallery'))
@@ -307,7 +307,7 @@ export default function Idea() {
                     <div className="input-wrapper">
                       <h4>Beküldési információk</h4>
                       <div>Név: <b>{idea.submitter.lastname} {idea.submitter.firstname}</b></div>
-                      <div>Időpont: <b>{dateCoverter(idea.createdAt)}</b></div>
+                      <div>Időpont: <b>{dateConverter(idea.createdAt)}</b></div>
                     </div>
                   </div>
                 </div>
