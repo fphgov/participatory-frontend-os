@@ -101,7 +101,7 @@ export default function Idea() {
 
     axios.get(link, config)
       .then(response => {
-        if (response.data && response.data) {
+        if (response.data && response.data.workflowState) {
           setIdea(response.data)
           setOriginalWorkflowState(response.data.workflowState)
         } else {

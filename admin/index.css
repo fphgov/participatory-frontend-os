@@ -111,26 +111,6 @@ header {
 	z-index: 2;
 }
 
-.header-top {
-	background-color: #19506e;
-	color: rgba(255, 255, 255, .79);
-	font-family: "Segoe UI";
-	font-weight: 500;
-	font-size: 13px;
-	padding: 10px 0 11px 0;
-}
-
-.header-top a {
-	color: rgba(255, 255, 255, .79);
-	font-family: "Segoe UI";
-	font-weight: 500;
-	font-size: 13px;
-}
-
-.header-top a:hover {
-	color: rgba(255, 255, 255, .99);
-}
-
 .main-navigation-top {
   font-size: 13px;
   background-color: var(--secondary-color);
@@ -215,7 +195,6 @@ nav.main-navigation ul {
   white-space: nowrap;
   vertical-align: middle;
   touch-action: manipulation;
-  cursor: pointer;
   background-image: none;
   border-radius: 2em;
   -webkit-user-select: none;
