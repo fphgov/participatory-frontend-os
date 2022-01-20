@@ -7,7 +7,6 @@ export default function Tabs({ children, value, onChange }) {
         {
           React.Children
             .toArray(children)
-            .filter((child) => child.type.name === 'TabContent')
             .map((child, key) =>
               <div key={key} className={`tab ${value === child.props.id ? 'tab-active': ''}`} onClick={() => { onChange(child.props.id) }}>
                 {child.props.name}
@@ -17,7 +16,7 @@ export default function Tabs({ children, value, onChange }) {
       </div>
 
       <div className="tabs-contents">
-        {React.Children.toArray(children).filter((child) => child.type.name === 'TabContent' && child.props.id === value)}
+        {React.Children.toArray(children).filter((child) => child.props.id === value)}
       </div>
     </div>
   )
