@@ -224,9 +224,11 @@ export default function Settings() {
                     </div>
                   </div>
 
-                  <div className="mt-4 mb-4">
-                    <button className="btn btn-primary" onClick={saveEmail}>Mentés</button>
-                  </div>
+                  {mail && mail.html && mail.plainText ? (
+                    <div className="mt-4 mb-4">
+                      <button className="btn btn-primary" onClick={saveEmail}>Mentés</button>
+                    </div>
+                  ) : null}
                 </TabContent>
 
                 <TabContent id="periods" name="Időszakok">
