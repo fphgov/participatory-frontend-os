@@ -998,6 +998,10 @@ ul.links {
   margin-top: 0;
 }
 
+.settings textarea {
+  min-height: 480px;
+}
+
 @media screen and (max-width: 991px) {
   .desktop-menu {
     display: none;
