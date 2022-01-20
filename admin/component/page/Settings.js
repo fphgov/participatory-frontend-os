@@ -204,7 +204,7 @@ export default function Settings() {
                       <div className="input-wrapper">
                         <label htmlFor="plainText">Szöveges formátum</label>
                         <div className="tipp">Ügyelj arra, hogy 1 sorban maximálisan 78 karakter helyezhető el! <a href="https://www.rfc-editor.org/rfc/rfc5322.txt" target="_blank">RFC5322</a></div>
-                        <textarea type="plainText" name="plainText" id="plainText" onChange={handleChangeEmail} value={mail.plainText} data-limit-col-len="true" rows={20} cols="2" wrap="hard" />
+                        <textarea type="plainText" name="plainText" id="plainText" onChange={handleChangeEmail} value={mail.plainText} />
 
                         {error && error.plainText ? Object.values(error.plainText).map((err, i) => {
                           return <ErrorMini key={i} error={err} increment={`plainText-${i}`} />
