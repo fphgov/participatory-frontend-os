@@ -1,9 +1,10 @@
 import axios from "../assets/axios"
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import { ToastContainer, toast } from 'react-toastify'
 import StoreContext from '../../StoreContext'
 import Tabs from '../common/Tabs'
 import TabContent from '../common/TabContent'
+import tokenParser from '../assets/tokenParser'
 
 export default function Settings() {
   const context = useContext(StoreContext)
@@ -12,7 +13,13 @@ export default function Settings() {
 
   const [ error, setError ] = useState('')
   const [ state, setState ] = useState({
-    email: '',
+    mailCode: '',
+  })
+
+  const [ mailOptions, setMailOptions ] = useState([])
+  const [ mail, setMail ] = useState({
+    html: '',
+    plainText: ''
   })
 
   const notify = (message) => toast.dark(message, {
@@ -32,7 +39,93 @@ export default function Settings() {
     setError('')
   }
 
-  const submitPassword = (e) => {
+  const handleChangeEmail = (e) => {
+    e.persist()
+
+    setMail({ ...mail, [ e.target.name ]: e.target.value })
+    setError('')
+  }
+
+  const getMails = () => {
+    context.set('loading', true)
+
+    if (! ['developer', 'admin'].includes(tokenParser('user.role'))) {
+      context.set('loading', false)
+
+      return
+    }
+
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
+      }
+    }
+
+    const link = process.env.REACT_APP_API_ADMIN_REQ_EMAILS.toString()
+
+    axios.get(process.env.REACT_APP_API_ADMIN_SERVER + link, config)
+      .then(response => {
+        if (response.data && response.data.data) {
+          setMailOptions(response.data.data)
+        }
+      })
+      .catch(error => {
+        if (error.response && error.response.data && error.response.data.message) {
+          setError(error.response.data.message)
+        }
+
+        notify('⛔️ Sikertelen adatlekérés')
+      })
+      .finally(() => {
+        context.set('loading', false)
+      })
+  }
+
+  const getMail = () => {
+    setMail({
+      html: '',
+      plainText: ''
+    })
+
+    context.set('loading', true)
+
+    if (![ 'developer', 'admin' ].includes(tokenParser('user.role'))) {
+      context.set('loading', false)
+
+      return
+    }
+
+    if (! state.mailCode) {
+      return
+    }
+
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
+      }
+    }
+
+    const link = process.env.REACT_APP_API_ADMIN_REQ_EMAIL.toString().replace(':code', state.mailCode)
+
+    axios.get(process.env.REACT_APP_API_ADMIN_SERVER + link, config)
+      .then(response => {
+        if (response.data && response.data.data) {
+          setMail(response.data.data)
+        }
+      })
+      .catch(error => {
+        if (error.response && error.response.data && error.response.data.message) {
+          setError(error.response.data.message)
+        }
+
+        notify('⛔️ Sikertelen adatlekérés')
+      })
+      .finally(() => {
+        context.set('loading', false)
+      })
+  }
+
+  const saveEmail = (e) => {
     e.preventDefault()
 
     context.set('loading', true)
@@ -43,23 +136,24 @@ export default function Settings() {
       }
     }
 
+    const link = process.env.REACT_APP_API_ADMIN_REQ_EMAIL.toString().replace(':code', state.mailCode)
+
     axios.post(
-      process.env.REACT_APP_API_ADMIN_SERVER + process.env.REACT_APP_API_ADMIN_REQ_PASSWORD,
-      new URLSearchParams(data).toString(),
+      process.env.REACT_APP_API_ADMIN_SERVER + link,
+      new URLSearchParams(mail).toString(),
       config
     ).then(response => {
-      context.set('loading', false)
-
       if (response.status === 200) {
-        notify('🎉 Sikeres jelszó módosítás')
+        notify('🎉 Sikeres módosítás')
       } else {
-        notify('⛔️ Sikertelen jelszó módosítás')
+        notify('⛔️ Sikertelen módosítás')
       }
     }).catch(() => {
-      context.set('loading', false)
-
-      notify('⛔️ Sikertelen jelszó módosítás')
+      notify('⛔️ Sikertelen módosítás')
     })
+      .finally(() => {
+        context.set('loading', false)
+      })
   }
 
   const ErrorMini = (props) => {
@@ -72,63 +166,78 @@ export default function Settings() {
     }
   }
 
+  useEffect(() => {
+    getMails()
+  }, [])
+
+  useEffect(() => {
+    getMail()
+  }, [state.mailCode])
+
   return (
     <>
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <div className="profile">
+            <div className="settings">
               <h1>Beállítások</h1>
+
+              <Tabs value={tab} onChange={(id) => { setTab(id) }}>
+                <TabContent id="email" name="E-mail szövegek">
+                  <h2>E-mail szövegek</h2>
+
+                  <div className="row">
+                    <div className="col-lg-12">
+                      <div className="input-wrapper">
+                        <label htmlFor="mailCode">E-mail sablon</label>
+                        <select type="text" name="mailCode" id="mailCode" onChange={handleChangeInput} value={state.mailCode}>
+                          <option value="" disabled>Válassz az e-mail sablonok közül</option>
+
+                          {mailOptions ? mailOptions.map((option, i) => (
+                            <option key={i} value={option.code}>{option.name}</option>
+                          )) : null}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="col-lg-12">
+                      <div className="input-wrapper">
+                        <label htmlFor="plainText">Szöveges formátum</label>
+                        <div className="tipp">Ügyelj arra, hogy 1 sorban maximálisan 78 karakter helyezhető el! <a href="https://www.rfc-editor.org/rfc/rfc5322.txt" target="_blank">RFC5322</a></div>
+                        <textarea type="plainText" name="plainText" id="plainText" onChange={handleChangeEmail} value={mail.plainText} />
+
+                        {error && error.plainText ? Object.values(error.plainText).map((err, i) => {
+                          return <ErrorMini key={i} error={err} increment={`plainText-${i}`} />
+                        }) : null}
+                      </div>
+                    </div>
+
+                    <div className="col-lg-12">
+                      <div className="input-wrapper">
+                        <label htmlFor="html">HTML formátum</label>
+                        <textarea type="html" name="html" id="html" onChange={handleChangeEmail} value={mail.html} />
+
+                        {error && error.html ? Object.values(error.html).map((err, i) => {
+                          return <ErrorMini key={i} error={err} increment={`html-${i}`} />
+                        }) : null}
+                      </div>
+                    </div>
+                  </div>
+
+                  {mail && mail.html && mail.plainText ? (
+                    <div className="mt-4 mb-4">
+                      <button className="btn btn-primary" onClick={saveEmail}>Mentés</button>
+                    </div>
+                  ) : null}
+                </TabContent>
+
+                <TabContent id="periods" name="Időszakok">
+                  <h2>Időszakok</h2>
+
+                  Hamarosan...
+                </TabContent>
+              </Tabs>
             </div>
-
-            <Tabs value={tab} onChange={(id) => { setTab(id) }}>
-              <TabContent id="email" name="E-mail szövegek">
-                <h2>E-mail szövegek</h2>
-
-                <div className="row">
-                  <div className="col-lg-12">
-                    <div className="input-wrapper">
-                      <label htmlFor="emailType">E-mail sablon</label>
-                      <select type="text" name="emailType" id="emailType" onChange={handleChangeInput}>
-                        <option value="Valami">Valami 2</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="col-lg-12">
-                    <div className="input-wrapper">
-                      <label htmlFor="emailText">Szöveges formátum</label>
-                      <textarea type="emailText" name="emailText" id="emailText" onChange={handleChangeInput} value="ok" />
-
-                      {error && error.emailText ? Object.values(error.emailText).map((err, i) => {
-                        return <ErrorMini key={i} error={err} increment={`emailText-${i}`} />
-                      }) : null}
-                    </div>
-                  </div>
-
-                  <div className="col-lg-12">
-                    <div className="input-wrapper">
-                      <label htmlFor="emailHtml">HTML formátum</label>
-                      <textarea type="emailHtml" name="emailHtml" id="emailHtml" onChange={handleChangeInput} value="ok" />
-
-                      {error && error.emailHtml ? Object.values(error.emailHtml).map((err, i) => {
-                        return <ErrorMini key={i} error={err} increment={`emailHtml-${i}`} />
-                      }) : null}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-4 mb-4">
-                  <button className="btn btn-primary" onClick={submitPassword}>Mentés</button>
-                </div>
-              </TabContent>
-
-              <TabContent id="periods" name="Időszakok">
-                <h2>Időszakok</h2>
-
-                Hamarosan...
-              </TabContent>
-            </Tabs>
           </div>
         </div>
       </div>

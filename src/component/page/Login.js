@@ -40,7 +40,7 @@ export default function Login() {
       if (response.data && response.data.token) {
         localStorage.setItem('auth_token', response.data.token)
 
-        if (tokenParser('user.voted') && tokenParser('user.voted') === true) {
+        if (tokenParser('user.voted') && tokenParser('user.voted') == true) {
           localStorage.setItem('rk_voted', true)
           context.set('successVote', true)
         }

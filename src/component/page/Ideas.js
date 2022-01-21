@@ -9,6 +9,7 @@ import modernizr from 'modernizr'
 import Pagination from "../common/Pagination"
 import FindMap from "../common/FindMap"
 import SearchArea from '../common/SearchArea'
+import generateRandomValue from '../assets/generateRandomValue'
 
 export default function Ideas() {
   const context = useContext(StoreContext)
@@ -185,15 +186,13 @@ export default function Ideas() {
 
     const search = new URLSearchParams(document.location.search)
 
-    const rand = Math.floor(Math.random() * 100000)
-
     setFilterData({
       query: search.get('query') ? search.get('query') : '',
       theme: search.get('theme') ? search.get('theme') : '',
       location: search.get('location') ? search.get('location') : '',
       campaign: search.get('campaign') ? search.get('campaign') : '',
       status: search.get('status') ? search.get('status') : '',
-      rand: search.get('rand') && search.get('rand') != '' ? search.get('rand') : rand,
+      rand: search.get('rand') && search.get('rand') != '' ? search.get('rand') : generateRandomValue(),
     })
 
     return () => {

@@ -102,7 +102,7 @@ export default function Post() {
 
     axios.get(link, config)
       .then(response => {
-        if (response.data && response.data) {
+        if (response.data && response.data.data) {
           const data = response.data.data
 
           data.createdAt = getDateLocalFormat(data.createdAt)
