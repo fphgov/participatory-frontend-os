@@ -183,6 +183,10 @@ export default function IdeaSubmission() {
       }
     })
     .catch(error => {
+      if (window.Rollbar && window.Rollbar.info) {
+        window.Rollbar.info("Idea submission impossible", error.response)
+      }
+
       if (error.response && error.response.status === 403) {
         setError('Google reCapcha ellenőrzés sikertelen')
         setScroll(true)
