@@ -33,7 +33,7 @@ export default function Post() {
       if (error.response && error.response.data && error.response.data.message) {
         setError(error.response.data.message)
       } else {
-        setError('Váratlan hiba történt, kérjük próbáld később')
+        setError('Váratlan hiba történt, kérünk próbáld később')
       }
 
       setRedirect(true)
