@@ -110,7 +110,7 @@ export default function Registration() {
         setError(error.response.data.errors)
         setScroll(true)
       } else {
-        setError('Váratlan hiba történt, kérjük próbáld később')
+        setError('Váratlan hiba történt, kérünk próbáld később')
         setScroll(true)
       }
 

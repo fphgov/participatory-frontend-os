@@ -67,19 +67,23 @@ export default function Home() {
                   <img src={HeroTexts} className="full-width" alt="Szöveg buborék illusztráció" />
                 </div>
 
-                <h2>Adj egy jó ötletet!</h2>
+                <h2>Köszönjük az ötleteket!</h2>
 
-                { disabledIdeaSubmit ? <>
+                {/* { disabledIdeaSubmit ? <>
                   <p>Hamarosan újraindul a fővárosi részvételi költségvetés, 2021-ben közösségi költségvetés néven.</p>
                   <p>Aktiváld fiókod a tőlünk kapott emailben, ha szeretnél az idei ötletgyűjtésben is részt venni.</p>
                 </> : <>
                   <p>Üdvözlünk a budapesti közösségi költségvetés honlapján!</p>
                   <p>Regisztrálj és add be ötletedet 2022. január 31-ig!</p>
-                </> }
+                </> } */}
 
-                {disabledIdeaSubmit ? null : <>
+                <p>Az ötletek jelenleg feldolgozás alatt vannak, nézd meg mi történik most az ötletekkel!</p>
+
+                <a className="btn btn-primary" href="/oldal/bovebben-a-reszveteli-koltsegvetesrol">Mi történik most?</a>
+
+                {/* {disabledIdeaSubmit ? null : <>
                   <Link className="btn btn-primary" to="/bekuldes">Ötletet adok be</Link>
-                </>}
+                </>} */}
               </div>
             </div>
           </div>
@@ -139,9 +143,14 @@ export default function Home() {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h2>Ötletbeküldés menete</h2>
+              {/* <h2>Ötletbeküldés menete</h2> */}
+              <h2>A közösségi költségvetés menete</h2>
 
-              <div className="row flex-center">
+              <Link to={`/oldal/bovebben-a-reszveteli-koltsegvetesrol`}>
+                <img src="/files/folyamatabra.png" alt="Közösségi költségvetés folyamat ábrája" />
+              </Link>
+
+              {/* <div className="row flex-center">
                 <div className="col-md-6">
                   <div className="iframe-video" dangerouslySetInnerHTML={{ __html: '<iframe width="100%" height="315" src="https://www.youtube.com/embed/w9P1n0ZZJW4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' }} />
                 </div>
@@ -161,7 +170,7 @@ export default function Home() {
                     <p><Link to="/hirek/tudnivalok-az-otletek-benyujtasarol-2021#mi-tortenik-az-otletek-beadasa-utan">Nézd meg</Link>, mi történik az ötleteddel beküldés után</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
