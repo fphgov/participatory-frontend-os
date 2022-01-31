@@ -63,7 +63,7 @@ export default function Header({ children }) {
 
   const menu = [
     { title: "Mi a közösségi költségvetés?", href: "/oldal/bovebben-a-reszveteli-koltsegvetesrol", outside: false },
-    { title: "Ötletbeküldés", href: "/bekuldes", outside: false },
+    // { title: "Ötletbeküldés", href: "/bekuldes", outside: false },
     { title: "Beküldött ötletek", href: "/otletek?campaign=2", outside: true },
     { title: "Megvalósuló ötletek", href: "/projektek?status=under_construction", outside: false },
     { title: "Hírek, rendezvények", href: "/hirek", outside: false },
