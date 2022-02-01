@@ -127,7 +127,7 @@ export default function Ideas() {
             </div>
           </div>
 
-          {ideas && ideas.map((idea, i) => <div key={i} style={{ width: "100%" }}> <ListElement key={i} name="idea" object={idea} /></div>)}
+          {Array.isArray(ideas) && ideas.map((idea, i) => <div key={i} style={{ width: "100%" }}> <ListElement key={i} name="idea" object={idea} /></div>)}
         </div>
 
         <Pagination links={links} onChange={pagination} size={pageCount} />

@@ -105,7 +105,7 @@ export default function Home() {
           </div>
 
           <div className="posts">
-            {posts && posts.map((post, i) => {
+            {Array.isArray(posts) && posts.map((post, i) => {
               return (
                 <article key={i} className="post-card">
                   <Link className="post-card-image-link" to={`/hirek/${post.slug}`}>
