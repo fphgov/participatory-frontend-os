@@ -79,7 +79,9 @@ export default function Home() {
 
                 <p>Az ötletek jelenleg feldolgozás alatt vannak, nézd meg mi történik most az ötletekkel!</p>
 
-                <a className="btn btn-primary" href="/oldal/bovebben-a-reszveteli-koltsegvetesrol">Mi történik most?</a>
+                <Link to="/hirek/lezarult-az-otletbeadasi-szakasz-mi-jon-most" className="btn btn-primary">
+                  Mi történik most?
+                </Link>
 
                 {/* {disabledIdeaSubmit ? null : <>
                   <Link className="btn btn-primary" to="/bekuldes">Ötletet adok be</Link>
