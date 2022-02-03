@@ -138,33 +138,35 @@ export default function IdeaSubmission() {
     const config = {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data'
       }
     }
 
-    const data = {
-      ...formData,
-      'location_description': formData['locationDescription'],
-      'participate_comment': formData['participate'],
-      'g-recaptcha-response': recaptchaToken,
+    const ideaFormData = new FormData()
+
+    ideaFormData.append('title', formData.title)
+    ideaFormData.append('solution', formData.solution)
+    ideaFormData.append('description', formData.description)
+    ideaFormData.append('theme', formData.theme)
+    ideaFormData.append('participate', formData.participate)
+    ideaFormData.append('participate_comment', formData.participate)
+    ideaFormData.append('location_description', formData.locationDescription)
+    ideaFormData.append('privacy', formData.privacy)
+    ideaFormData.append('g-recaptcha-response', recaptchaToken)
+
+    if (typeof formData['location'] === 'object') {
+      ideaFormData.append('location', new URLSearchParams(formData['location']))
     }
-
-    delete data['links']
-    delete data['medias']
-    delete data['participateChoose']
-    delete data['locationDescription']
-
-    if (typeof data['location'] === 'object') {
-      data['location'] = new URLSearchParams(data['location'])
-    }
-
-    const search = new URLSearchParams(data)
 
     formData.links.forEach((link, i) => {
-      search.append(`links[${i}]`, link)
+      ideaFormData.append(`links[${i}]`, link)
     })
 
     Array.from(formData.medias).forEach((file, i) => {
-      search.append(`medias[${i}]`, file)
+      if (file instanceof File) {
+        ideaFormData.append(`medias[${i}]`, file)
+      }
     })
 
     context.set('loading', true)
@@ -172,7 +174,7 @@ export default function IdeaSubmission() {
     axios
     .post(
       process.env.REACT_APP_API_REQ_PROFILE_IDEA,
-      search.toString(),
+      ideaFormData,
       config
     )
     .then(response => {

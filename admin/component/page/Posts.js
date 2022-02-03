@@ -72,7 +72,7 @@ export default function Posts() {
         </div>
 
         <div className="mt-4 row">
-          {posts && posts.map((post, i) => <div key={i} style={{ width: "100%" }}> <PostListElement key={i} name="post" object={post} /></div>)}
+          {Array.isArray(posts) && posts.map((post, i) => <div key={i} style={{ width: "100%" }}> <PostListElement key={i} name="post" object={post} /></div>)}
         </div>
       </div>
 

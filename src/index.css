@@ -482,6 +482,10 @@ footer .fa-inverse {
   margin-bottom: 20px;
 }
 
+.input-wrapper.overflow {
+  overflow: hidden;
+}
+
 .input-wrapper:last-of-type {
   margin-bottom: 0;
 }
@@ -505,6 +509,7 @@ footer .fa-inverse {
   min-height: 120px;
 }
 
+.page-reset-password-section .form-wrapper,
 .page-login .form-wrapper {
   display: block;
 }
@@ -600,6 +605,7 @@ input[type="submit"] {
   cursor: pointer;
 }
 
+.page-reset-password .page,
 .page-login .page {
   margin: 30px 0;
 }
@@ -1030,6 +1036,10 @@ form fieldset textarea,
   -webkit-transition: none;
   -o-transition: none;
   transition: none;
+}
+
+form fieldset input[type="submit"] {
+  border: none;
 }
 
 fieldset .input-wrapper:not(.input-map) button,
@@ -1838,6 +1848,7 @@ div:not(.radio-inline-block) > .radio-inline + .radio-inline {
 
 .link-elem {
   margin-bottom: 8px;
+  display: inline-flex;
 }
 
 .link-elem > a {
