@@ -2268,6 +2268,11 @@ ul.links {
   margin: 0;
 }
 
+ul.links a {
+  margin-bottom: 12px;
+  display: block;
+}
+
 button:focus,
 a:focus,
 input:focus,
