@@ -113,7 +113,7 @@ export default function ProjectWrapper(props) {
 
                 {props.project.voted !== null ? (
                   <div className="prop-single-voted">
-                    <div className="prop-info-title">Beérkezett szavazatok:</div>
+                    <div className="prop-info-title">Beérkezett szavazatok</div>
                     <div className="prop-info-content">
                       <b>{props.project.voted} szavazat</b></div>
                   </div>
