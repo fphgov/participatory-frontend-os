@@ -20,13 +20,13 @@ export default function Ideas() {
 
   const isEnableMap = modernizr.arrow && modernizr.webgl
 
-  const [ count, setCount ] = useState(0)
-  const [ pageCount, setPageCount ] = useState(0)
-  const [ links, setLinks ] = useState([])
-  const [ ideas, setIdeas ] = useState([])
-  const [ error, setError ] = useState('')
-  const [ refresh, setRefresh ] = useState(false)
-  const [ filterData, setFilterData ] = useState({
+  const [count, setCount] = useState(0)
+  const [pageCount, setPageCount] = useState(0)
+  const [links, setLinks] = useState([])
+  const [ideas, setIdeas] = useState([])
+  const [error, setError] = useState('')
+  const [refresh, setRefresh] = useState(false)
+  const [filterData, setFilterData] = useState({
     'theme': '',
     'location': '',
     'campaign': '',
@@ -36,6 +36,18 @@ export default function Ideas() {
     'rand': '',
     'tag': '',
   })
+
+  const linkClicked = useRef()
+
+  const setSessionVariable = (key, value) => {
+    sessionStorage.setItem(key, value)
+  }
+
+  const setPageInSearchParams = (page) => {
+    const search = new URLSearchParams(document.location.search)
+    search.set('page', page)
+    history.push({ search: search.toString() })
+  }
 
   const usePrevious = (value) => {
     const ref = useRef()
@@ -72,7 +84,11 @@ export default function Ideas() {
     })
   }
 
-  const getProjects = () => {
+  const getProjects = (e) => {
+    if (e) {
+      setPageInSearchParams(1)
+    }
+
     context.set('loading', true, () => {
       getProjectData()
     })
@@ -80,27 +96,27 @@ export default function Ideas() {
 
   const getProjectData = () => {
     axios
-    .get(process.env.REACT_APP_API_REQ_IDEAS + window.location.search)
-    .then(response => {
-      if (response.data) {
-        setIdeas(response.data._embedded.ideas)
-        setLinks(response.data._links)
-        setCount(response.data._total_items)
-        setPageCount(response.data._page_count)
+      .get(process.env.REACT_APP_API_REQ_IDEAS + window.location.search)
+      .then(response => {
+        if (response.data) {
+          setIdeas(response.data._embedded.ideas)
+          setLinks(response.data._links)
+          setCount(response.data._total_items)
+          setPageCount(response.data._page_count)
 
-        handleScrollPosition()
-      }
-    })
-    .catch(error => {
-      if (error.response && error.response.data && error.response.data.message) {
-        clearState()
+          handleScrollPosition()
+        }
+      })
+      .catch(error => {
+        if (error.response && error.response.data && error.response.data.message) {
+          clearState()
 
-        setError(error.response.data.message)
-      }
-    })
-    .finally(() => {
-      context.set('loading', false)
-    })
+          setError(error.response.data.message)
+        }
+      })
+      .finally(() => {
+        context.set('loading', false)
+      })
   }
 
   const clearQuery = () => {
@@ -116,12 +132,7 @@ export default function Ideas() {
   }
 
   const pagination = (page) => {
-    const search = new URLSearchParams(document.location.search)
-
-    search.set("page", page)
-
-    history.push({ search: search.toString() })
-
+    setPageInSearchParams(page)
     setRefresh(true)
   }
 
@@ -130,20 +141,24 @@ export default function Ideas() {
       e.preventDefault()
     }
 
+    const page = sessionStorage.getItem('page') || 1
     const search = new URLSearchParams(document.location.search)
 
-    search.delete("page")
     search.set("query", filterData.query)
     search.set("theme", filterData.theme)
     search.set("location", filterData.location)
     search.set("status", filterData.status)
     search.set("campaign", filterData.campaign)
     search.set("rand", filterData.rand)
+    search.set("page", page)
 
     history.push({ search: search.toString() })
   }
 
   const handleChange = ({ target: { name, value } }) => {
+    if (name != 'query') {
+      setPageInSearchParams(1)
+    }
     setFilterData({ ...filterData, [name]: value })
 
     queryRef.current.focus()
@@ -178,7 +193,8 @@ export default function Ideas() {
   }
 
   const handleClick = () => {
-    sessionStorage.setItem("scrollPosition", window.pageYOffset)
+    setSessionVariable('scrollPosition', window.pageYOffset)
+    linkClicked.current = true
   }
 
   useEffect(() => {
@@ -198,14 +214,26 @@ export default function Ideas() {
     return () => {
       document.body.classList.remove('page-ideas')
 
+      if (!linkClicked.current) {
+        setSessionVariable('page', 1)
+      }
+
       clearState()
     }
   }, [])
 
   useEffect(() => {
+    const search = new URLSearchParams(document.location.search)
+    const newPage = search.get('page') || 1
+
+    setSessionVariable('page', newPage)
+
+  }, [document.location.search])
+
+  useEffect(() => {
     refreshURLParams()
 
-    if (! hasQueryField) {
+    if (!hasQueryField) {
       setRefresh(true)
     }
   }, [filterData])

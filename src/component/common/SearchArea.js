@@ -11,7 +11,7 @@ export default function SearchArea({ title, tipp, tipp2, values, queryRef, input
 
   const onKeyUp = (e) => {
     if (e.key === 'Enter') {
-      triggerFindAction()
+      triggerFindAction(e)
     }
   }
 
