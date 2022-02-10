@@ -2559,6 +2559,10 @@ input[disabled] {
   white-space: pre-line;
 }
 
+.comment-replies {
+  margin-left: 16px;
+}
+
 @media screen and (min-width: 1200px) {
   .container, .container-sm, .container-md, .container-lg, .container-xl {
     max-width: 1170px;
