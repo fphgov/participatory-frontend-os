@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons"
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons"
 import nFormatter from '../assets/nFormatter'
+import { getFullDateFormat } from '../assets/dateFormats'
 import modernizr from 'modernizr'
 
 const ImageGallery = lazy(() => import('react-image-gallery'));
@@ -170,7 +171,7 @@ export default function ProjectWrapper(props) {
                     <div className="prop-info-title">Beküldte</div>
                     <div className="prop-single-content">
                       <div className="prop-single-submitter">{props.project.submitter.lastname} {props.project.submitter.firstname}</div>
-                      <div className="prop-single-submited">{new Date(props.project.createdAt).toLocaleString()}</div>
+                      <div className="prop-single-submited">{getFullDateFormat(new Date(props.project.createdAt))}</div>
                     </div>
                   </div>
                 ) : null}

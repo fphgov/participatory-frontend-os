@@ -825,6 +825,7 @@ input[type="submit"] {
 
 .prop-single-history {
   background-color: #f9f9f9;
+  border-top: 4px solid #f9f9f9;
 }
 
 .prop-single-history .prop-single-content {
@@ -2533,6 +2534,29 @@ ul.react-autosuggest__suggestions-list {
 input[disabled] {
   box-shadow: 0 0 0 1000px #d3d3d3 inset;
   border-color: #c7c7c7;
+}
+
+.comment-item {
+  margin: 16px 0;
+  border-bottom: 1px solid #bbbbc2;
+}
+
+.comment-item:last-of-type {
+  border: 0;
+}
+
+.comment-heading .comment-info .comment-submitter {
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.comment-heading .comment-info .comment-time {
+  color: #bbbbc2;
+}
+
+.comment-body {
+  margin: 12px 0;
+  white-space: pre-line;
 }
 
 @media screen and (min-width: 1200px) {

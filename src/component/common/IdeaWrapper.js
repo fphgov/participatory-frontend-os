@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons"
 import { faMapMarkerAlt, faFilePdf } from "@fortawesome/free-solid-svg-icons"
 import nFormatter from '../assets/nFormatter'
+import { getFullDateFormat } from '../assets/dateFormats'
 import modernizr from 'modernizr'
 
 const ImageGallery = lazy(() => import('react-image-gallery'));
@@ -154,7 +155,7 @@ export default function IdeaWrapper(props) {
                     <div className="prop-info-title">Beküldés</div>
                     <div className="prop-single-body">
                       <div className="prop-single-submitter">{props.idea.submitter.lastname} {props.idea.submitter.firstname}</div>
-                      <div className="prop-single-submited">{new Date(props.idea.createdAt).toLocaleString()}</div>
+                      <div className="prop-single-submited">{getFullDateFormat(new Date(props.idea.createdAt))}</div>
                     </div>
                   </div>
                 ) : null}
@@ -185,7 +186,7 @@ export default function IdeaWrapper(props) {
         </div>
 
         {props.idea.answer ? <>
-          <div className="prop-single-history">
+          <div className="prop-single-history" style={{ borderColor: theme.rgb }}>
             <div className="prop-single-inner">
               <div className="prop-single-content">
                 <h3 style={{ color: theme.rgb }}>Hivatal visszajelzése</h3>
