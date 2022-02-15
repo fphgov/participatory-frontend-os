@@ -9,6 +9,7 @@ import { faMapMarkerAlt, faFilePdf } from "@fortawesome/free-solid-svg-icons"
 import nFormatter from '../assets/nFormatter'
 import { getFullDateFormat } from '../assets/dateFormats'
 import modernizr from 'modernizr'
+import Comment from '../common/Comment'
 
 const ImageGallery = lazy(() => import('react-image-gallery'));
 
@@ -196,6 +197,19 @@ export default function IdeaWrapper(props) {
             </div>
           </div>
         </> : null}
+
+        {props.idea.comments && props.idea.comments.length > 0 ? <>
+          <div className="prop-single-history" style={{ borderColor: theme.rgb }}>
+            <div className="prop-single-inner">
+              <div className="prop-single-content">
+                <h3 style={{ color: theme.rgb }}>Megjegyzések</h3>
+
+                <Comment comments={props.idea.comments} />
+              </div>
+            </div>
+          </div>
+        </> : null}
+
       </div>
     </div>
   )

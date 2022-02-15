@@ -10,7 +10,7 @@ import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons"
 import nFormatter from '../assets/nFormatter'
 import { getFullDateFormat } from '../assets/dateFormats'
 import modernizr from 'modernizr'
-import Comment from '../common/Comment'
+import Implementation from '../common/Implementation'
 
 const ImageGallery = lazy(() => import('react-image-gallery'));
 
@@ -196,13 +196,13 @@ export default function ProjectWrapper(props) {
           </div>
         </div>
 
-        {props.project.comments && props.project.comments.length > 0 ? <>
+        {props.project.implementations && props.project.implementations.length > 0 ? <>
           <div className="prop-single-history" style={{ borderColor: theme.rgb }}>
             <div className="prop-single-inner">
               <div className="prop-single-content">
                 <h3 style={{ color: theme.rgb }}>Hol tartunk a megvalósítással?</h3>
 
-                <Comment comments={props.project.comments} />
+                <Implementation implementations={props.project.implementations} />
               </div>
             </div>
           </div>
