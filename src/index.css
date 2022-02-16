@@ -2579,6 +2579,24 @@ input[disabled] {
   white-space: pre-line;
 }
 
+.image-gallery {
+  width: 40%;
+  height: auto;
+}
+
+.image-gallery-slide img {
+  width: 100%;
+  height: auto;
+  max-height: 280px !important;
+  object-fit: cover;
+  overflow: hidden;
+  object-position: center center;
+}
+
+.implementation-attachments h4 {
+  margin-bottom: 0;
+}
+
 @media screen and (min-width: 1200px) {
   .container, .container-sm, .container-md, .container-lg, .container-xl {
     max-width: 1170px;
