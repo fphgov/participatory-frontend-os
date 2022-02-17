@@ -2586,7 +2586,7 @@ input[disabled] {
 
 .image-gallery-slide img {
   width: 100%;
-  height: 280px !important;
+  max-height: 280px !important;
   object-fit: cover;
   overflow: hidden;
   object-position: center center;
