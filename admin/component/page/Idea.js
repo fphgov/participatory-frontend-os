@@ -14,6 +14,9 @@ export default function Idea() {
   const context = useContext(StoreContext)
   const { id } = useParams()
 
+  let formData = new FormData()
+
+  const [tempMedia, setTempMedia] = useState([])
   const [workflowStateOptions, setWorkflowStateOptions] = useState(null)
   const [workflowStateExtraOptions, setWorkflowStateExtraOptions] = useState(null)
   const [idea, setIdea] = useState(null)
@@ -123,6 +126,7 @@ export default function Idea() {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
         'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data'
       }
     }
 
@@ -138,18 +142,23 @@ export default function Idea() {
       }
     }
 
-    const data = {
-      title: idea.title,
-      solution: idea.solution,
-      description: idea.description,
-      cost: idea.cost ? idea.cost : null,
-      locationDescription: idea.locationDescription,
-      answer: idea.answer,
-      workflowState: typeof idea.workflowState.code === 'undefined' ? idea.workflowState : idea.workflowState.code,
-      workflowStateExtra: idea.workflowStateExtra === null || typeof idea.workflowStateExtra.code === 'undefined' ? idea.workflowStateExtra : idea.workflowStateExtra.code,
-    }
+    formData.append('title', idea.title)
+    formData.append('solution', idea.solution)
+    formData.append('description', idea.description)
+    formData.append('cost', idea.cost ? idea.cost : null)
+    formData.append('locationDescription', idea.locationDescription)
+    formData.append('answer', idea.answer)
+    formData.append('workflowState', typeof idea.workflowState.code === 'undefined' ? idea.workflowState : idea.workflowState.code)
+    formData.append('workflowStateExtra', idea.workflowStateExtra === null || typeof idea.workflowStateExtra.code === 'undefined' ? idea.workflowStateExtra : idea.workflowStateExtra.code)
+    formData.append('theme', idea.campaignTheme.id)
 
-    axios.post(link, new URLSearchParams(data), config)
+    Array.from(tempMedia).forEach((file, i) => {
+      if (file instanceof File) {
+        formData.append(`medias[${i}]`, file)
+      }
+    })
+
+    axios.post(link, formData, config)
       .then(response => {
         if (response.data && response.data.data.success) {
           notify('🎉 Sikeres módosítás')
@@ -179,8 +188,8 @@ export default function Idea() {
     }
   }
 
-  const submitDetection = (e) => {
-    e.preventDefault()
+  const onFileChange = (e) => {
+    setTempMedia(e.target.files)
   }
 
   const getImageObjects = (_idea) => {
@@ -249,8 +258,8 @@ export default function Idea() {
 
                   <div className="col-sm-12 col-md-6">
                     <div className="input-wrapper">
-                      <label htmlFor="campaign-theme">Kategória</label>
-                      <input type="text" name="campaign-theme" id="campaign-theme" value={idea.campaignTheme.name} onChange={handleChangeInput} disabled />
+                      <label htmlFor="theme">Kategória</label>
+                      <input type="text" name="theme" id="theme" value={idea.campaignTheme.name} onChange={handleChangeInput} disabled />
                     </div>
                   </div>
 
@@ -365,6 +374,14 @@ export default function Idea() {
                         </div>
                       </>
                     ) : 'Nincs kapcsolódó kép'}
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col-sm-12 col-md-6">
+                    <h4>Média feltöltés</h4>
+
+                    <input id="file" name="file" type="file" multiple onChange={onFileChange} />
                   </div>
                 </div>
 
