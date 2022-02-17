@@ -2586,11 +2586,14 @@ input[disabled] {
 
 .image-gallery-slide img {
   width: 100%;
-  height: auto;
-  max-height: 280px !important;
+  height: 280px !important;
   object-fit: cover;
   overflow: hidden;
   object-position: center center;
+}
+
+.image-gallery-slide .image-gallery-image {
+  width: 99%;
 }
 
 .implementation-attachments h4 {
