@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from "react"
 import { getHungarianDateFormat } from '../assets/dateFormats'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faFilePdf } from "@fortawesome/free-solid-svg-icons"
+import { faFilePdf, faCalendarDay } from "@fortawesome/free-solid-svg-icons"
 import modernizr from 'modernizr'
 
 const ImageGallery = lazy(() => import('react-image-gallery'))
@@ -30,7 +30,10 @@ export default function Implementation({ implementations }) {
       <>
         <div className="implementation-heading">
           <div className="implementation-info">
-            <span className="implementation-time">{getHungarianDateFormat(new Date(implementation.createdAt))}</span>
+            <span className="implementation-time">
+              <FontAwesomeIcon icon={faCalendarDay} />
+              {getHungarianDateFormat(new Date(implementation.createdAt))}
+            </span>
           </div>
         </div>
 
@@ -39,7 +42,6 @@ export default function Implementation({ implementations }) {
         <div className="implementation-attachments">
           {implementation.medias && implementation.medias.length > 0 && images.length > 0 ? (
             <>
-              <h4>Galéria:</h4>
               <div className="media-sep">
                 {modernizr.arrow && modernizr.webgl ?
                   <Suspense fallback={<div>Betöltés...</div>}>

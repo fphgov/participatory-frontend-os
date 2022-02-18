@@ -8,9 +8,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons"
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons"
 import nFormatter from '../assets/nFormatter'
-import { getFullDateFormat } from '../assets/dateFormats'
+import { getHungarianDateFormat } from '../assets/dateFormats'
 import modernizr from 'modernizr'
 import Implementation from '../common/Implementation'
+import GREEN from '../../img/zold_budapest_white_category.svg'
+import CARE from '../../img/eselyteremto_budapest_white_category.svg'
+import OPEN from '../../img/nyitott_budapest_white_category.svg'
 
 const ImageGallery = lazy(() => import('react-image-gallery'));
 
@@ -24,6 +27,20 @@ export default function ProjectWrapper(props) {
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     'application/pdf',
   ]
+
+  const getThemeLogo = (themeCode, themeName) => {
+    let src = GREEN
+
+    if (themeCode === 'OPEN' || themeCode === 'WHOLE') {
+      src = OPEN
+    } else if (themeCode === 'CARE') {
+      src = CARE
+    }
+
+    return (
+      <img src={src} alt={`${themeName} logó`} />
+    )
+  }
 
   const images = props.project.medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
     const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
@@ -39,14 +56,16 @@ export default function ProjectWrapper(props) {
 
   return (
     <div className="prop-inner-wrapper">
-      <div className="prop-inner-header" style={{ backgroundColor: theme.rgb }}>
-        {theme.name}
-      </div>
       <div className="prop-inner-content" style={{ borderColor: theme.rgb }}>
         <div className="row">
           <div className="col-lg-8">
             <div className="prop-single-wrapper prop-single-body">
               <div className="prop-single-inner">
+                <div className="prop-picture">
+                  {getThemeLogo(theme.code, theme.name)}
+                  <div className="prop-campaign-inner" style={{ backgroundColor: theme.rgb }}>{theme.name} <span>({props.project.campaign.shortTitle})</span></div>
+                </div>
+
                 <div className="prop-single-content">
                   <div className="prop-location">
                     <FontAwesomeIcon icon={faMapMarkerAlt} /> {props.project.location}
@@ -105,7 +124,7 @@ export default function ProjectWrapper(props) {
           </div>
 
           <div className="col-lg-4">
-            <div className="prop-single-wrapper prop-single-sidebar">
+            <div className="prop-single-wrapper prop-single-sidebar" style={{ backgroundColor: theme.rgb }}>
               <div className="prop-single-content">
                 {props.showVoteButton ? <>
                   <button className={`btn btn-primary btn-vote ${props.disableVoteButton ? 'btn-disable' : ''}`} style={{ backgroundColor: theme.rgb }} onClick={props.onClickVote}>Erre az ötletetre szavazok *</button>
@@ -150,7 +169,7 @@ export default function ProjectWrapper(props) {
                     {props.project.ideas.length === 0 ? <b>Nincs kapcsolódó ötlet</b> : null}
                     {props.project.ideas.map((idea, i) => {
                       return (<div className="idea" key={i}>
-                        <Link to={`/otletek/${idea}`} style={{ backgroundColor: theme.rgb }}>{idea}</Link>
+                        <Link to={`/otletek/${idea}`} style={{ backgroundColor: '#fff', color: theme.rgb }}>{idea}</Link>
                       </div>)
                     })}
                   </div>
@@ -161,7 +180,7 @@ export default function ProjectWrapper(props) {
                   <div className="prop-info-content">
                     {props.project.tags.map((tag, i) => {
                       return (<div className="tag" key={i}>
-                        <Link to={`/projektek?tag=${tag.id}`} style={{ backgroundColor: theme.rgb }}>#{tag.name}</Link>
+                        <Link to={`/projektek?tag=${tag.id}`} style={{ backgroundColor: '#fff', color: theme.rgb }}>#{tag.name}</Link>
                       </div>)
                     })}
                   </div>
@@ -172,7 +191,7 @@ export default function ProjectWrapper(props) {
                     <div className="prop-info-title">Beküldte</div>
                     <div className="prop-single-content">
                       <div className="prop-single-submitter">{props.project.submitter.lastname} {props.project.submitter.firstname}</div>
-                      <div className="prop-single-submited">{getFullDateFormat(new Date(props.project.createdAt))}</div>
+                      <div className="prop-single-submited">{getHungarianDateFormat(new Date(props.project.createdAt))}</div>
                     </div>
                   </div>
                 ) : null}
@@ -197,7 +216,7 @@ export default function ProjectWrapper(props) {
         </div>
 
         {props.project.implementations && props.project.implementations.length > 0 ? <>
-          <div className="prop-single-history" style={{ borderColor: theme.rgb }}>
+          <div className="prop-single-history">
             <div className="prop-single-inner">
               <div className="prop-single-content">
                 <h3 style={{ color: theme.rgb }}>Hol tartunk a megvalósítással?</h3>
