@@ -316,6 +316,7 @@ export default function Idea() {
                     <div className="input-wrapper">
                       <h4>Beküldési információk</h4>
                       <div>Név: <b>{idea.submitter.lastname} {idea.submitter.firstname}</b></div>
+                      <div>E-mail: <b>{idea.submitter.email}</b></div>
                       <div>Időpont: <b>{dateConverter(idea.createdAt)}</b></div>
                     </div>
                   </div>
