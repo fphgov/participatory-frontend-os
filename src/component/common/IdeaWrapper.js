@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useMemo } from "react"
+import React, { useState, useMemo } from "react"
 import {
   Link,
 } from "react-router-dom"
@@ -8,17 +8,19 @@ import { faFacebookF } from "@fortawesome/free-brands-svg-icons"
 import { faMapMarkerAlt, faFilePdf, faInfoCircle } from "@fortawesome/free-solid-svg-icons"
 import nFormatter from '../assets/nFormatter'
 import { getHungarianDateFormat } from '../assets/dateFormats'
-import modernizr from 'modernizr'
 import Comment from '../common/Comment'
 import GREEN from '../../img/zold_budapest_white_category.svg'
 import CARE from '../../img/eselyteremto_budapest_white_category.svg'
 import OPEN from '../../img/nyitott_budapest_white_category.svg'
-
-const ImageGallery = lazy(() => import('react-image-gallery'));
+import Lightbox from "react-image-lightbox"
+import "react-image-lightbox/style.css"
 
 export default function IdeaWrapper(props) {
   const theme = props.idea.campaignTheme
   const statusId = props.idea.workflowState.id - 0
+
+  const [photoIndex, setPhotoIndex] = useState(0)
+  const [isOpen, setIsOpen] = useState(false)
 
   const documentMimes = [
     'application/msword',
@@ -49,8 +51,35 @@ export default function IdeaWrapper(props) {
   const images = props.idea.medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
     const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
 
-    return { original: link }
+    return link
   })
+
+  const onThumbnail = (index) => {
+    setPhotoIndex(index)
+    setIsOpen(true)
+  }
+
+  const thumbnails = () => {
+    return (
+      <div className="implementation-thumbnail-container">
+        {images.map((image, index) =>
+        (
+          <div
+            className="implementation-thumbnail-block"
+            key={index} tabIndex="0"
+            aria-label="Miniatűr előnézeti kép"
+            onClick={() => onThumbnail(index)}
+            onKeyUp={(e) => {
+              if (e.key === 'Enter') {
+                onThumbnail(index)
+              }
+            }}>
+            <img className="implementation-thumbnail-image" src={image} />
+          </div>
+        ))}
+      </div>
+    )
+  }
 
   const documents = props.idea.medias.filter(media => documentMimes.indexOf(media.type) > -1).map((item) => {
     const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA_DOWNLOAD.toString().replace(':id', item.id)
@@ -115,11 +144,15 @@ export default function IdeaWrapper(props) {
                   {props.idea.medias && props.idea.medias.length > 0 ? (
                     <>
                       <div className="media-sep">
-                        {modernizr.arrow && modernizr.webgl ?
-                          <Suspense fallback={<div>Betöltés...</div>}>
-                            <ImageGallery items={images} showFullscreenButton={false} showNav={false} showPlayButton={false} showBullets={true} showThumbnails={false} />
-                          </Suspense> : null
-                        }
+                        {images && thumbnails()}
+                        {isOpen && <Lightbox
+                          mainSrc={images[photoIndex]}
+                          nextSrc={images[(photoIndex + 1) % images.length]}
+                          prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+                          onCloseRequest={() => setIsOpen(false)}
+                          onMovePrevRequest={() => setPhotoIndex((photoIndex + images.length - 1) % images.length)}
+                          onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % images.length)}
+                        />}
                       </div>
                     </>
                   ) : null}

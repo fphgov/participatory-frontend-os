@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, Suspense, lazy } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import { ToastContainer, toast } from 'react-toastify'
 import { useParams } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -6,9 +6,8 @@ import { faFilePdf } from "@fortawesome/free-solid-svg-icons"
 import StoreContext from '../../StoreContext'
 import axios from '../assets/axios'
 import { dateConverter } from '../assets/helperFunctions'
-import modernizr from 'modernizr'
-
-const ImageGallery = lazy(() => import('react-image-gallery'))
+import Lightbox from "react-image-lightbox"
+import "react-image-lightbox/style.css"
 
 export default function Idea() {
   const context = useContext(StoreContext)
@@ -21,6 +20,8 @@ export default function Idea() {
   const [workflowStateExtraOptions, setWorkflowStateExtraOptions] = useState(null)
   const [idea, setIdea] = useState(null)
   const [originalWorkflowState, setOriginalWorkflowState] = useState(null)
+  const [photoIndex, setPhotoIndex] = useState(0)
+  const [isOpen, setIsOpen] = useState(false)
 
   const documentMimes = [
     'application/msword',
@@ -182,9 +183,9 @@ export default function Idea() {
     e.persist()
 
     if (e.target.type === "checkbox") {
-      setIdea(state => ({ ...state, [ e.target.name ]: e.target.checked }))
+      setIdea(state => ({ ...state, [e.target.name]: e.target.checked }))
     } else {
-      setIdea(state => ({ ...state, [ e.target.name ]: e.target.value }))
+      setIdea(state => ({ ...state, [e.target.name]: e.target.value }))
     }
   }
 
@@ -196,7 +197,7 @@ export default function Idea() {
     return _idea.medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
       const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
 
-      return { original: link }
+      return link
     })
   }
 
@@ -206,6 +207,35 @@ export default function Idea() {
 
       return { original: link }
     })
+  }
+
+  const images = idea ? getImageObjects(idea) : []
+
+  const onThumbnail = (index) => {
+    setPhotoIndex(index)
+    setIsOpen(true)
+  }
+
+  const thumbnails = () => {
+    return (
+      <div className="implementation-thumbnail-container">
+        {images.map((image, index) =>
+        (
+          <div
+            className="implementation-thumbnail-block"
+            key={index} tabIndex="0"
+            aria-label="Miniatűr előnézeti kép"
+            onClick={() => onThumbnail(index)}
+            onKeyUp={(e) => {
+              if (e.key === 'Enter') {
+                onThumbnail(index)
+              }
+            }}>
+            <img className="implementation-thumbnail-image" src={image} />
+          </div>
+        ))}
+      </div>
+    )
   }
 
   return (
@@ -281,7 +311,7 @@ export default function Idea() {
                     </div>
                   </div>
 
-                  {idea.workflowState === 'PUBLISHED_WITH_MOD' || idea.workflowState.code === 'PUBLISHED_WITH_MOD'  ? <>
+                  {idea.workflowState === 'PUBLISHED_WITH_MOD' || idea.workflowState.code === 'PUBLISHED_WITH_MOD' ? <>
                     <div className="col-sm-12 col-md-6">
                       <div className="input-wrapper">
                         <label htmlFor="workflowStateExtra">Módosítás oka</label>
@@ -364,14 +394,18 @@ export default function Idea() {
                   <div className="col-sm-12 col-md-6">
                     <h4>Képek</h4>
 
-                    {getImageObjects(idea) && getImageObjects(idea).length > 0 ? (
+                    {images && images.length > 0 ? (
                       <>
                         <div className="media-sep">
-                          {modernizr.arrow && modernizr.webgl ?
-                            <Suspense fallback={<div>Betöltés...</div>}>
-                              <ImageGallery items={getImageObjects(idea)} showFullscreenButton={false} showNav={false} showPlayButton={false} showBullets={true} showThumbnails={false} />
-                            </Suspense> : null
-                          }
+                          {images && thumbnails()}
+                          {isOpen && <Lightbox
+                            mainSrc={images[photoIndex]}
+                            nextSrc={images[(photoIndex + 1) % images.length]}
+                            prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+                            onCloseRequest={() => setIsOpen(false)}
+                            onMovePrevRequest={() => setPhotoIndex((photoIndex + images.length - 1) % images.length)}
+                            onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % images.length)}
+                          />}
                         </div>
                       </>
                     ) : 'Nincs kapcsolódó kép'}
