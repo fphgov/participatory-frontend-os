@@ -163,6 +163,12 @@ export default function Idea() {
       .then(response => {
         if (response.data && response.data.data.success) {
           notify('🎉 Sikeres módosítás')
+
+          setTimeout(() => {
+            context.set('loading', true)
+
+            getIdeas()
+          }, 1000)
         }
       })
       .catch(() => {

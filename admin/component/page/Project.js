@@ -8,13 +8,16 @@ import axios from '../assets/axios'
 import { dateConverter } from '../assets/helperFunctions'
 import Lightbox from "react-image-lightbox"
 import "react-image-lightbox/style.css"
+import Implementation from "../common/Implementation"
 
 export default function Project() {
   const context = useContext(StoreContext)
   const { id } = useParams()
 
+  let formData = new FormData()
+
+  const [tempMedia, setTempMedia] = useState([])
   const [workflowStateOptions, setWorkflowStateOptions] = useState(null)
-  const [workflowStateExtraOptions, setWorkflowStateExtraOptions] = useState(null)
   const [project, setProject] = useState(null)
   const [originalWorkflowState, setOriginalWorkflowState] = useState(null)
   const [photoIndex, setPhotoIndex] = useState(0)
@@ -50,32 +53,6 @@ export default function Project() {
       .then(response => {
         if (response.data && response.data.data) {
           setWorkflowStateOptions(response.data.data)
-        } else {
-          notify('⛔️ Sikertelen adat lekérés')
-        }
-      })
-      .catch(() => {
-        notify('⛔️ Sikertelen adat lekérés')
-      })
-      .finally(() => {
-        context.set('loading', false)
-      })
-  }
-
-  const getWorkflowStateExtraOptions = () => {
-    context.set('loading', true)
-
-    const config = {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
-        'Accept': 'application/json',
-      }
-    }
-
-    axios.get(process.env.REACT_APP_API_ADMIN_REQ_WORKFLOW_STATE_EXTRAS, config)
-      .then(response => {
-        if (response.data && response.data.data) {
-          setWorkflowStateExtraOptions(response.data.data)
         } else {
           notify('⛔️ Sikertelen adat lekérés')
         }
@@ -139,21 +116,31 @@ export default function Project() {
       }
     }
 
-    const data = {
-      title: project.title,
-      solution: project.solution,
-      description: project.description,
-      cost: project.cost ? project.cost : null,
-      locationDescription: project.locationDescription,
-      answer: project.answer,
-      workflowState: typeof project.workflowState.code === 'undefined' ? project.workflowState : project.workflowState.code,
-      workflowStateExtra: project.workflowStateExtra === null || typeof project.workflowStateExtra.code === 'undefined' ? project.workflowStateExtra : project.workflowStateExtra.code,
-    }
+    formData.append('title', project.title)
+    formData.append('solution', project.solution)
+    formData.append('description', project.description)
+    formData.append('cost', project.cost ? project.cost : null)
+    formData.append('locationDescription', project.locationDescription)
+    formData.append('answer', project.answer)
+    formData.append('workflowState', workflowStateCode)
+    formData.append('theme', project.campaignTheme.id)
 
-    axios.post(link, new URLSearchParams(data), config)
+    Array.from(tempMedia).forEach((file, i) => {
+      if (file instanceof File) {
+        formData.append(`medias[${i}]`, file)
+      }
+    })
+
+    axios.post(link, formData, config)
       .then(response => {
         if (response.data && response.data.data.success) {
           notify('🎉 Sikeres módosítás')
+
+          setTimeout(() => {
+            context.set('loading', true)
+
+            getProjects()
+          }, 1000)
         }
       })
       .catch(() => {
@@ -166,7 +153,6 @@ export default function Project() {
 
   useEffect(() => {
     getWorkflowStateOptions()
-    getWorkflowStateExtraOptions()
     getProjects()
   }, [])
 
@@ -180,8 +166,8 @@ export default function Project() {
     }
   }
 
-  const submitDetection = (e) => {
-    e.preventDefault()
+  const onFileChange = (e) => {
+    setTempMedia(e.target.files)
   }
 
   const getImageObjects = (_project) => {
@@ -302,21 +288,6 @@ export default function Project() {
                       </select>
                     </div>
                   </div>
-
-                  {project.workflowState === 'PUBLISHED_WITH_MOD' || project.workflowState.code === 'PUBLISHED_WITH_MOD' ? <>
-                    <div className="col-sm-12 col-md-6">
-                      <div className="input-wrapper">
-                        <label htmlFor="workflowStateExtra">Módosítás oka</label>
-                        <select name="workflowStateExtra" id="workflowStateExtra" value={project.workflowStateExtra ? project.workflowStateExtra.code : ''} onChange={handleChangeInput}>
-                          <option value="" disabled>Válassz az indokok közül</option>
-
-                          {workflowStateExtraOptions ? workflowStateExtraOptions.map((option, i) => (
-                            <option key={i} value={option.code}>{option.title}</option>
-                          )) : null}
-                        </select>
-                      </div>
-                    </div>
-                  </> : null}
                 </div>
 
                 <div className="row">
@@ -369,6 +340,22 @@ export default function Project() {
                         </div>
                       </>
                     ) : 'Nincs kapcsolódó kép'}
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col-sm-12 col-md-6">
+                    <h4>Média feltöltés</h4>
+
+                    <input id="file" name="file" type="file" multiple onChange={onFileChange} />
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col-sm-12 col-md-12">
+                    <h4>Hol tartunk a megvalósítással?</h4>
+
+                    <Implementation implementations={project.implementations} />
                   </div>
                 </div>
 
