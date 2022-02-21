@@ -7,6 +7,7 @@ import StoreContext from '../../StoreContext'
 import axios from '../assets/axios'
 import { dateConverter } from '../assets/helperFunctions'
 import modernizr from 'modernizr'
+import Implementation from "../common/Implementation"
 
 const ImageGallery = lazy(() => import('react-image-gallery'))
 
@@ -51,32 +52,6 @@ export default function Project() {
       .then(response => {
         if (response.data && response.data.data) {
           setWorkflowStateOptions(response.data.data)
-        } else {
-          notify('⛔️ Sikertelen adat lekérés')
-        }
-      })
-      .catch(() => {
-        notify('⛔️ Sikertelen adat lekérés')
-      })
-      .finally(() => {
-        context.set('loading', false)
-      })
-  }
-
-  const getWorkflowStateExtraOptions = () => {
-    context.set('loading', true)
-
-    const config = {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
-        'Accept': 'application/json',
-      }
-    }
-
-    axios.get(process.env.REACT_APP_API_ADMIN_REQ_WORKFLOW_STATE_EXTRAS, config)
-      .then(response => {
-        if (response.data && response.data.data) {
-          setWorkflowStateExtraOptions(response.data.data)
         } else {
           notify('⛔️ Sikertelen adat lekérés')
         }
@@ -177,7 +152,6 @@ export default function Project() {
 
   useEffect(() => {
     getWorkflowStateOptions()
-    getWorkflowStateExtraOptions()
     getProjects()
   }, [])
 
@@ -339,6 +313,14 @@ export default function Project() {
                     <h4>Média feltöltés</h4>
 
                     <input id="file" name="file" type="file" multiple onChange={onFileChange} />
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col-sm-12 col-md-12">
+                    <h4>Hol tartunk a megvalósítással?</h4>
+
+                    <Implementation implementations={project.implementations} />
                   </div>
                 </div>
 

@@ -1002,6 +1002,27 @@ ul.links {
   min-height: 480px;
 }
 
+.implementation-item {
+  margin: 16px 0 32px 0;
+}
+
+.implementation-item:last-of-type {
+  border: 0;
+}
+
+.implementation-heading .implementation-info .implementation-time {
+  color: #bbbbc2;
+}
+
+.implementation-time svg {
+  margin-right: 4px;
+}
+
+.implementation-body {
+  margin: 12px 0;
+  white-space: pre-line;
+}
+
 @media screen and (max-width: 991px) {
   .desktop-menu {
     display: none;
