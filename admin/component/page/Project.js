@@ -8,6 +8,10 @@ import axios from '../assets/axios'
 import { dateConverter } from '../assets/helperFunctions'
 import modernizr from 'modernizr'
 import Implementation from "../common/Implementation"
+import { Editor } from 'react-draft-wysiwyg'
+import { createEditorStateWithText } from 'draft-js-plugins-editor'
+import { stateToHTML } from 'draft-js-export-html'
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 const ImageGallery = lazy(() => import('react-image-gallery'))
 
@@ -17,7 +21,9 @@ export default function Project() {
 
   let formData = new FormData()
 
+  const [editorState, setEditorState] = useState(createEditorStateWithText(''))
   const [tempMedia, setTempMedia] = useState([])
+  const [implementationMedia, setImplementationMedia] = useState([])
   const [workflowStateOptions, setWorkflowStateOptions] = useState(null)
   const [project, setProject] = useState(null)
   const [originalWorkflowState, setOriginalWorkflowState] = useState(null)
@@ -123,10 +129,17 @@ export default function Project() {
     formData.append('answer', project.answer)
     formData.append('workflowState', workflowStateCode)
     formData.append('theme', project.campaignTheme.id)
+    formData.append('implementation', stateToHTML(editorState.getCurrentContent()))
 
     Array.from(tempMedia).forEach((file, i) => {
       if (file instanceof File) {
         formData.append(`medias[${i}]`, file)
+      }
+    })
+
+    Array.from(implementationMedia).forEach((file, i) => {
+      if (file instanceof File) {
+        formData.append(`implementationMedia[${i}]`, file)
       }
     })
 
@@ -167,6 +180,10 @@ export default function Project() {
 
   const onFileChange = (e) => {
     setTempMedia(e.target.files)
+  }
+
+  const onImplementationFileChange = (e) => {
+    setImplementationMedia(e.target.files)
   }
 
   const getImageObjects = (_project) => {
@@ -310,7 +327,7 @@ export default function Project() {
 
                 <div className="row">
                   <div className="col-sm-12 col-md-6">
-                    <h4>Média feltöltés</h4>
+                    <h4>Csatolmány feltöltés</h4>
 
                     <input id="file" name="file" type="file" multiple onChange={onFileChange} />
                   </div>
@@ -321,6 +338,26 @@ export default function Project() {
                     <h4>Hol tartunk a megvalósítással?</h4>
 
                     <Implementation implementations={project.implementations} />
+
+                    <div className="implementation-add">
+                      <details>
+                        <summary>
+                          <h4>Új megvalósítás</h4>
+                        </summary>
+
+                        <Editor
+                          editorState={editorState}
+                          toolbarClassName="toolbarClassName"
+                          wrapperClassName="wrapperClassName"
+                          editorClassName="editorClassName"
+                          onEditorStateChange={setEditorState}
+                        />
+
+                        <h4>Megvalósítási média feltöltés</h4>
+
+                        <input id="implementationMedia" name="implementationMedia" type="file" multiple onChange={onImplementationFileChange} />
+                      </details>
+                    </div>
                   </div>
                 </div>
 

@@ -1010,10 +1010,6 @@ ul.links {
   border: 0;
 }
 
-.implementation-heading .implementation-info .implementation-time {
-  color: #bbbbc2;
-}
-
 .implementation-time svg {
   margin-right: 4px;
 }
@@ -1021,6 +1017,20 @@ ul.links {
 .implementation-body {
   margin: 12px 0;
   white-space: pre-line;
+}
+
+summary {
+  cursor: pointer;
+}
+
+summary h4 {
+  display: inline-block;
+}
+
+.implementation-item summary {
+  background-color: #19506e;
+  padding: 4px;
+  color: #fff;
 }
 
 @media screen and (max-width: 991px) {

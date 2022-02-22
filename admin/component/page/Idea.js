@@ -386,7 +386,7 @@ export default function Idea() {
 
                 <div className="row">
                   <div className="col-sm-12 col-md-6">
-                    <h4>Média feltöltés</h4>
+                    <h4>Csatolmány feltöltés</h4>
 
                     <input id="file" name="file" type="file" multiple onChange={onFileChange} />
                   </div>

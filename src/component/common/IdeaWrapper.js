@@ -100,7 +100,7 @@ export default function IdeaWrapper(props) {
 
                   {props.idea.video || (props.idea.medias && props.idea.medias.length > 0) ? (
                     <>
-                      <h3 style={{ color: theme.rgb }}>Média</h3>
+                      <h3 style={{ color: theme.rgb }}>Csatolmány</h3>
                     </>
                   ) : null}
 
