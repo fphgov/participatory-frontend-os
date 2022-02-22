@@ -31,6 +31,7 @@ import StoreContext from '../StoreContext'
 import tokenParser from './assets/tokenParser'
 import IdeaSubmission from "./page/IdeaSubmission"
 import 'react-toastify/dist/ReactToastify.css'
+import "react-image-lightbox/style.css"
 
 export default function App() {
   const context = useContext(StoreContext)

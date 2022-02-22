@@ -1,4 +1,4 @@
-import React, { useContext, Suspense, lazy } from "react"
+import React, { useContext } from "react"
 import {
   Link,
 } from "react-router-dom"
@@ -6,11 +6,11 @@ import StoreContext from '../../StoreContext'
 import PopUp from '../assets/PopUp'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons"
-import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons"
+import { faMapMarkerAlt, faFilePdf } from "@fortawesome/free-solid-svg-icons"
 import nFormatter from '../assets/nFormatter'
-import modernizr from 'modernizr'
-
-const ImageGallery = lazy(() => import('react-image-gallery'));
+import { getHungarianDateFormat } from '../assets/dateFormats'
+import Implementation from '../common/Implementation'
+import Gallery from "../common/Gallery"
 
 export default function ProjectWrapper(props) {
   const context = useContext(StoreContext)
@@ -26,7 +26,7 @@ export default function ProjectWrapper(props) {
   const images = props.project.medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
     const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
 
-    return { original: link }
+    return link
   })
 
   const documents = props.project.medias.filter(media => documentMimes.indexOf(media.type) > -1).map((item) => {
@@ -58,7 +58,7 @@ export default function ProjectWrapper(props) {
 
                   {props.project.video || (props.project.medias && props.project.medias.length > 0) ? (
                     <>
-                      <h3 style={{ color: theme.rgb }}>Média</h3>
+                      <h3 style={{ color: theme.rgb }}>Csatolmány</h3>
                     </>
                   ) : null}
 
@@ -73,11 +73,7 @@ export default function ProjectWrapper(props) {
                   {props.project.medias && props.project.medias.length > 0 ? (
                     <>
                       <div className="media-sep">
-                        {context.get('map') && modernizr.arrow && modernizr.webgl ?
-                          <Suspense fallback={<div>Betöltés...</div>}>
-                            <ImageGallery items={images} showFullscreenButton={false} showNav={false} showPlayButton={false} showBullets={true} showThumbnails={false} />
-                          </Suspense> : null
-                        }
+                        <Gallery items={images} showThumbnails={true} />
                       </div>
                     </>
                   ) : null}
@@ -113,7 +109,7 @@ export default function ProjectWrapper(props) {
 
                 {props.project.voted !== null ? (
                   <div className="prop-single-voted">
-                    <div className="prop-info-title">Beérkezett szavazatok:</div>
+                    <div className="prop-info-title">Beérkezett szavazatok</div>
                     <div className="prop-info-content">
                       <b>{props.project.voted} szavazat</b></div>
                   </div>
@@ -170,7 +166,7 @@ export default function ProjectWrapper(props) {
                     <div className="prop-info-title">Beküldte</div>
                     <div className="prop-single-content">
                       <div className="prop-single-submitter">{props.project.submitter.lastname} {props.project.submitter.firstname}</div>
-                      <div className="prop-single-submited">{new Date(props.project.createdAt).toLocaleString()}</div>
+                      <div className="prop-single-submited">{getHungarianDateFormat(new Date(props.project.createdAt))}</div>
                     </div>
                   </div>
                 ) : null}
@@ -193,6 +189,19 @@ export default function ProjectWrapper(props) {
             </div>
           </div>
         </div>
+
+        {props.project.implementations && props.project.implementations.length > 0 ? <>
+          <div className="prop-single-history" style={{ borderColor: theme.rgb }}>
+            <div className="prop-single-inner">
+              <div className="prop-single-content">
+                <h3 style={{ color: theme.rgb }}>Hol tartunk a megvalósítással?</h3>
+
+                <Implementation implementations={props.project.implementations} />
+              </div>
+            </div>
+          </div>
+        </> : null}
+
       </div>
     </div>
   )

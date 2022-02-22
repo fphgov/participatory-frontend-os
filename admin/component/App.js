@@ -12,6 +12,8 @@ import Logout from "./page/Logout"
 import Vote from "./page/Vote"
 import Ideas from "./page/Ideas"
 import Idea from "./page/Idea"
+import Projects from "./page/Projects"
+import Project from "./page/Project"
 import ScrollToTop from "./common/ScrollToTop"
 import Posts from "./page/Posts"
 import Post from "./page/Post"
@@ -19,6 +21,7 @@ import PostNew from "./page/PostNew"
 import Profile from "./page/Profile"
 import Settings from "./page/Settings"
 import 'react-toastify/dist/ReactToastify.css'
+import "react-image-lightbox/style.css"
 
 export default class App extends React.Component {
   render() {
@@ -38,6 +41,8 @@ export default class App extends React.Component {
               <Route exact path="/profile" render={() => <Layout><Profile /></Layout>} />
               <Route exact path="/ideas" render={() => <Layout><Ideas /></Layout>} />
               <Route exact path="/ideas/:id(\d+)" render={() => <Layout><Idea /></Layout>} />
+              <Route exact path="/projects" render={() => <Layout><Projects /></Layout>} />
+              <Route exact path="/projects/:id(\d+)" render={() => <Layout><Project /></Layout>} />
 
               <Route exact path="*" component={NotFound} />
             </Switch>

@@ -11,7 +11,7 @@ export default function SearchArea({ title, tipp, tipp2, values, queryRef, input
 
   const onKeyUp = (e) => {
     if (e.key === 'Enter') {
-      triggerFindAction()
+      triggerFindAction(e)
     }
   }
 
@@ -21,11 +21,13 @@ export default function SearchArea({ title, tipp, tipp2, values, queryRef, input
     return !!window.location.search && !hasPageParam && values.query !== '' || values.theme !== '' || values.location !== '' || values.campaign !== '' || values.status !== ''
   }
 
-  const getFilterParams = () => {
+  const getFilterParams = (params) => {
     const reqLink = type === 'project' ? process.env.REACT_APP_API_REQ_FILTER_PROJECTS : process.env.REACT_APP_API_REQ_FILTER_IDEAS
 
+    const searchParams = typeof params === 'undefined' ? window.location.search : '?' + params
+
     axios
-      .get(reqLink + window.location.search)
+      .get(reqLink + searchParams)
       .then(response => {
         if (response.data) {
           setThemes(response.data.theme)
@@ -81,7 +83,14 @@ export default function SearchArea({ title, tipp, tipp2, values, queryRef, input
 
           <div className="row">
             <div className="col-lg-3 col-md-4 col-xs-12">
-              <select name="campaign" onChange={inputChange} value={values.campaign}>
+              <select name="campaign" onChange={(e) => {
+                const search = new URLSearchParams(document.location.search)
+                search.set("campaign", e.target.value)
+
+                getFilterParams(search.toString())
+
+                inputChange(e)
+              }} value={values.campaign}>
                 <option value="">Keresés időszak alapján</option>
                 <option disabled="disabled">----</option>
                 {campaigns && campaigns.map((campaign, i) => (

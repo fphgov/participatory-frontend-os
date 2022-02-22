@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react"
+import React from "react"
 import {
   Link,
 } from "react-router-dom"
@@ -7,9 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons"
 import { faMapMarkerAlt, faFilePdf } from "@fortawesome/free-solid-svg-icons"
 import nFormatter from '../assets/nFormatter'
-import modernizr from 'modernizr'
-
-const ImageGallery = lazy(() => import('react-image-gallery'));
+import { getHungarianDateFormat } from '../assets/dateFormats'
+import Comment from '../common/Comment'
+import Gallery from '../common/Gallery'
 
 export default function IdeaWrapper(props) {
   const theme = props.idea.campaignTheme
@@ -23,7 +23,7 @@ export default function IdeaWrapper(props) {
   const images = props.idea.medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
     const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
 
-    return { original: link }
+    return link
   })
 
   const documents = props.idea.medias.filter(media => documentMimes.indexOf(media.type) > -1).map((item) => {
@@ -72,7 +72,7 @@ export default function IdeaWrapper(props) {
 
                   {props.idea.video || (props.idea.medias && props.idea.medias.length > 0) ? (
                     <>
-                      <h3 style={{ color: theme.rgb }}>Média</h3>
+                      <h3 style={{ color: theme.rgb }}>Csatolmány</h3>
                     </>
                   ) : null}
 
@@ -87,11 +87,7 @@ export default function IdeaWrapper(props) {
                   {props.idea.medias && props.idea.medias.length > 0 ? (
                     <>
                       <div className="media-sep">
-                        {modernizr.arrow && modernizr.webgl ?
-                          <Suspense fallback={<div>Betöltés...</div>}>
-                            <ImageGallery items={images} showFullscreenButton={false} showNav={false} showPlayButton={false} showBullets={true} showThumbnails={false} />
-                          </Suspense> : null
-                        }
+                        <Gallery items={images} showThumbnails={true} />
                       </div>
                     </>
                   ) : null}
@@ -154,7 +150,7 @@ export default function IdeaWrapper(props) {
                     <div className="prop-info-title">Beküldés</div>
                     <div className="prop-single-body">
                       <div className="prop-single-submitter">{props.idea.submitter.lastname} {props.idea.submitter.firstname}</div>
-                      <div className="prop-single-submited">{new Date(props.idea.createdAt).toLocaleString()}</div>
+                      <div className="prop-single-submited">{getHungarianDateFormat(new Date(props.idea.createdAt))}</div>
                     </div>
                   </div>
                 ) : null}
@@ -185,7 +181,7 @@ export default function IdeaWrapper(props) {
         </div>
 
         {props.idea.answer ? <>
-          <div className="prop-single-history">
+          <div className="prop-single-history" style={{ borderColor: theme.rgb }}>
             <div className="prop-single-inner">
               <div className="prop-single-content">
                 <h3 style={{ color: theme.rgb }}>Hivatal visszajelzése</h3>
@@ -195,6 +191,19 @@ export default function IdeaWrapper(props) {
             </div>
           </div>
         </> : null}
+
+        {props.idea.comments && props.idea.comments.length > 0 ? <>
+          <div className="prop-single-history" style={{ borderColor: theme.rgb }}>
+            <div className="prop-single-inner">
+              <div className="prop-single-content">
+                <h3 style={{ color: theme.rgb }}>Megjegyzések</h3>
+
+                <Comment comments={props.idea.comments} />
+              </div>
+            </div>
+          </div>
+        </> : null}
+
       </div>
     </div>
   )

@@ -18,6 +18,7 @@ export default function Settings() {
 
   const [ mailOptions, setMailOptions ] = useState([])
   const [ mail, setMail ] = useState({
+    subject: '',
     html: '',
     plainText: ''
   })
@@ -83,6 +84,7 @@ export default function Settings() {
 
   const getMail = () => {
     setMail({
+      subject: '',
       html: '',
       plainText: ''
     })
@@ -202,9 +204,20 @@ export default function Settings() {
 
                     <div className="col-lg-12">
                       <div className="input-wrapper">
+                        <label htmlFor="subject">Tárgy</label>
+                        <input type="text" name="subject" id="subject" onChange={handleChangeEmail} value={mail.subject} />
+
+                        {error && error.subject ? Object.values(error.subject).map((err, i) => {
+                          return <ErrorMini key={i} error={err} increment={`subject-${i}`} />
+                        }) : null}
+                      </div>
+                    </div>
+
+                    <div className="col-lg-12">
+                      <div className="input-wrapper">
                         <label htmlFor="plainText">Szöveges formátum</label>
                         <div className="tipp">Ügyelj arra, hogy 1 sorban maximálisan 78 karakter helyezhető el! <a href="https://www.rfc-editor.org/rfc/rfc5322.txt" target="_blank">RFC5322</a></div>
-                        <textarea type="plainText" name="plainText" id="plainText" onChange={handleChangeEmail} value={mail.plainText} />
+                        <textarea name="plainText" id="plainText" onChange={handleChangeEmail} value={mail.plainText} />
 
                         {error && error.plainText ? Object.values(error.plainText).map((err, i) => {
                           return <ErrorMini key={i} error={err} increment={`plainText-${i}`} />
@@ -215,7 +228,7 @@ export default function Settings() {
                     <div className="col-lg-12">
                       <div className="input-wrapper">
                         <label htmlFor="html">HTML formátum</label>
-                        <textarea type="html" name="html" id="html" onChange={handleChangeEmail} value={mail.html} />
+                        <textarea name="html" id="html" onChange={handleChangeEmail} value={mail.html} />
 
                         {error && error.html ? Object.values(error.html).map((err, i) => {
                           return <ErrorMini key={i} error={err} increment={`html-${i}`} />

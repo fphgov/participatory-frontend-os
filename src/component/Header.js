@@ -72,7 +72,7 @@ export default function Header({ children }) {
   ]
 
   const toggleMenu = () => {
-    setOpenMenu(! openMenu)
+    setOpenMenu(!openMenu)
   }
 
   useEffect(() => {
@@ -93,7 +93,7 @@ export default function Header({ children }) {
           <div className="row flex-center">
             <div className="col-xs-6 col-sm-6 col-md-2">
               <div className="logo-wrapper">
-                <a href="/" rel="noopener noreferrer">
+                <a href="/" rel="noopener noreferrer" onClick={() => { sessionStorage.removeItem('page') }}>
                   <img src={Logo} alt="Budapest Közösségi Költségvetés" />
                 </a>
               </div>
@@ -112,7 +112,7 @@ export default function Header({ children }) {
                   if (menuItem.outside) {
                     return (
                       <li key={i.toString()} className={menuItem.highlight ? 'highlight' : ''}>
-                        <a href={menuItem.href} className={menuItem.href.split("?")[ 0 ] === pathname ? 'active' : ''} rel="noopener noreferrer">{menuItem.title}</a>
+                        <a href={menuItem.href} className={menuItem.href.split("?")[0] === pathname ? 'active' : ''} rel="noopener noreferrer">{menuItem.title}</a>
                       </li>
                     )
                   }

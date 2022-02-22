@@ -38,7 +38,6 @@ export default function ProjectsWrapper({ project, handleClick, tagClick }) {
                 <Link to={`/projektek/${project.id}`}>{project.title}</Link>
               </div>
 
-              {/* <div className="prop-line" style={{ backgroundColor: themeColor }}></div> */}
               <div className="prop-description">{shortDescription}</div>
             </div>
 

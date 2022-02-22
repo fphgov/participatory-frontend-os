@@ -47,7 +47,6 @@ export default function Posts() {
         }
       })
       .catch((e) => {
-        console.log(e)
         notify('⛔️ Sikertelen adat lekérés')
       })
       .finally(() => {

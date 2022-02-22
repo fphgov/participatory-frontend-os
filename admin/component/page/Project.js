@@ -6,18 +6,24 @@ import { faFilePdf } from "@fortawesome/free-solid-svg-icons"
 import StoreContext from '../../StoreContext'
 import axios from '../assets/axios'
 import { dateConverter } from '../assets/helperFunctions'
+import Implementation from "../common/Implementation"
+import { Editor } from 'react-draft-wysiwyg'
+import { createEditorStateWithText } from 'draft-js-plugins-editor'
+import { stateToHTML } from 'draft-js-export-html'
 import Gallery from "../common/Gallery"
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
-export default function Idea() {
+export default function Project() {
   const context = useContext(StoreContext)
   const { id } = useParams()
 
   let formData = new FormData()
 
+  const [editorState, setEditorState] = useState(createEditorStateWithText(''))
   const [tempMedia, setTempMedia] = useState([])
+  const [implementationMedia, setImplementationMedia] = useState([])
   const [workflowStateOptions, setWorkflowStateOptions] = useState(null)
-  const [workflowStateExtraOptions, setWorkflowStateExtraOptions] = useState(null)
-  const [idea, setIdea] = useState(null)
+  const [project, setProject] = useState(null)
   const [originalWorkflowState, setOriginalWorkflowState] = useState(null)
 
   const documentMimes = [
@@ -62,7 +68,7 @@ export default function Idea() {
       })
   }
 
-  const getWorkflowStateExtraOptions = () => {
+  const getProjects = () => {
     context.set('loading', true)
 
     const config = {
@@ -72,38 +78,12 @@ export default function Idea() {
       }
     }
 
-    axios.get(process.env.REACT_APP_API_ADMIN_REQ_WORKFLOW_STATE_EXTRAS, config)
-      .then(response => {
-        if (response.data && response.data.data) {
-          setWorkflowStateExtraOptions(response.data.data)
-        } else {
-          notify('⛔️ Sikertelen adat lekérés')
-        }
-      })
-      .catch(() => {
-        notify('⛔️ Sikertelen adat lekérés')
-      })
-      .finally(() => {
-        context.set('loading', false)
-      })
-  }
-
-  const getIdeas = () => {
-    context.set('loading', true)
-
-    const config = {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
-        'Accept': 'application/json',
-      }
-    }
-
-    const link = process.env.REACT_APP_API_ADMIN_REQ_IDEA.toString().replace(':id', id)
+    const link = process.env.REACT_APP_API_ADMIN_REQ_PROJECT.toString().replace(':id', id)
 
     axios.get(link, config)
       .then(response => {
         if (response.data && response.data.workflowState) {
-          setIdea(response.data)
+          setProject(response.data)
           setOriginalWorkflowState(response.data.workflowState)
         } else {
           notify('⛔️ Sikertelen adat lekérés')
@@ -124,13 +104,12 @@ export default function Idea() {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
         'Accept': 'application/json',
-        'Content-Type': 'multipart/form-data'
       }
     }
 
-    const link = process.env.REACT_APP_API_ADMIN_REQ_IDEA.toString().replace(':id', id)
+    const link = process.env.REACT_APP_API_ADMIN_REQ_PROJECT.toString().replace(':id', id)
 
-    const workflowStateCode = typeof idea.workflowState.code === 'undefined' ? idea.workflowState : idea.workflowState.code;
+    const workflowStateCode = typeof project.workflowState.code === 'undefined' ? project.workflowState : project.workflowState.code;
 
     if (originalWorkflowState.code !== workflowStateCode) {
       if (!confirm('Az állapotnak a változtatása e-mail küldéssel járhat. Biztosan módosítod az állapotot?')) {
@@ -140,19 +119,25 @@ export default function Idea() {
       }
     }
 
-    formData.append('title', idea.title)
-    formData.append('solution', idea.solution)
-    formData.append('description', idea.description)
-    formData.append('cost', idea.cost ? idea.cost : null)
-    formData.append('locationDescription', idea.locationDescription)
-    formData.append('answer', idea.answer)
-    formData.append('workflowState', typeof idea.workflowState.code === 'undefined' ? idea.workflowState : idea.workflowState.code)
-    formData.append('workflowStateExtra', idea.workflowStateExtra === null || typeof idea.workflowStateExtra.code === 'undefined' ? idea.workflowStateExtra : idea.workflowStateExtra.code)
-    formData.append('theme', idea.campaignTheme.id)
+    formData.append('title', project.title)
+    formData.append('solution', project.solution)
+    formData.append('description', project.description)
+    formData.append('cost', project.cost ? project.cost : null)
+    formData.append('locationDescription', project.locationDescription)
+    formData.append('answer', project.answer)
+    formData.append('workflowState', workflowStateCode)
+    formData.append('theme', project.campaignTheme.id)
+    formData.append('implementation', stateToHTML(editorState.getCurrentContent()))
 
     Array.from(tempMedia).forEach((file, i) => {
       if (file instanceof File) {
         formData.append(`medias[${i}]`, file)
+      }
+    })
+
+    Array.from(implementationMedia).forEach((file, i) => {
+      if (file instanceof File) {
+        formData.append(`implementationMedia[${i}]`, file)
       }
     })
 
@@ -164,7 +149,7 @@ export default function Idea() {
           setTimeout(() => {
             context.set('loading', true)
 
-            getIdeas()
+            getProjects()
           }, 1000)
         }
       })
@@ -178,17 +163,16 @@ export default function Idea() {
 
   useEffect(() => {
     getWorkflowStateOptions()
-    getWorkflowStateExtraOptions()
-    getIdeas()
+    getProjects()
   }, [])
 
   const handleChangeInput = (e) => {
     e.persist()
 
     if (e.target.type === "checkbox") {
-      setIdea(state => ({ ...state, [e.target.name]: e.target.checked }))
+      setProject(state => ({ ...state, [e.target.name]: e.target.checked }))
     } else {
-      setIdea(state => ({ ...state, [e.target.name]: e.target.value }))
+      setProject(state => ({ ...state, [e.target.name]: e.target.value }))
     }
   }
 
@@ -196,31 +180,35 @@ export default function Idea() {
     setTempMedia(e.target.files)
   }
 
-  const getImageObjects = (_idea) => {
-    return _idea.medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
+  const onImplementationFileChange = (e) => {
+    setImplementationMedia(e.target.files)
+  }
+
+  const getImageObjects = (_project) => {
+    return _project.medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
       const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
 
       return link
     })
   }
 
-  const getDocumentObjects = (_idea) => {
-    return _idea.medias.filter(media => documentMimes.indexOf(media.type) > -1).map((item) => {
+  const getDocumentObjects = (_project) => {
+    return _project.medias.filter(media => documentMimes.indexOf(media.type) > -1).map((item) => {
       const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA_DOWNLOAD.toString().replace(':id', item.id)
 
       return { original: link }
     })
   }
 
-  const images = idea ? getImageObjects(idea) : []
+  const images = project ? getImageObjects(project) : []
 
   return (
     <>
-      <div className="proposal idea">
+      <div className="proposal project">
         <div className="container">
-          {idea ? (
+          {project ? (
             <>
-              <h1 tabIndex="0" role="alert" aria-label={`Ötlet azonosító: ${idea.id}`}>{idea.id ? `Ötlet (${idea.id})` : ''}</h1>
+              <h1 tabIndex="0" role="alert" aria-label={`Megvalósuló ötlet azonosító: ${project.id}`}>{project.id ? `Megvalósuló ötlet (${project.id})` : ''}</h1>
 
               <div className="error-wrapper">
               </div>
@@ -230,89 +218,60 @@ export default function Idea() {
                   <div className="col-sm-12 col-md-12">
                     <div className="input-wrapper">
                       <label htmlFor="title">Megnevezés</label>
-                      <input type="text" name="title" id="title" value={idea.title} onChange={handleChangeInput} />
+                      <input type="text" name="title" id="title" value={project.title} onChange={handleChangeInput} />
                     </div>
                   </div>
 
                   <div className="col-sm-12 col-md-12">
                     <div className="input-wrapper">
                       <label htmlFor="solution">Mit oldana meg?</label>
-                      <textarea type="text" name="solution" id="solution" value={idea.solution} onChange={handleChangeInput} />
+                      <textarea type="text" name="solution" id="solution" value={project.solution} onChange={handleChangeInput} />
                     </div>
                   </div>
 
                   <div className="col-sm-12 col-md-12">
                     <div className="input-wrapper">
                       <label htmlFor="description">Leírás</label>
-                      <textarea type="text" name="description" id="description" value={idea.description} onChange={handleChangeInput} />
+                      <textarea type="text" name="description" id="description" value={project.description} onChange={handleChangeInput} />
                     </div>
                   </div>
 
                   <div className="col-sm-12 col-md-6">
                     <div className="input-wrapper">
                       <label htmlFor="campaign">Kampány</label>
-                      <input type="text" name="campaign" id="campaign" value={idea.campaign.title} onChange={handleChangeInput} disabled />
+                      <input type="text" name="campaign" id="campaign" value={project.campaign.title} onChange={handleChangeInput} disabled />
                     </div>
                   </div>
 
                   <div className="col-sm-12 col-md-6">
                     <div className="input-wrapper">
                       <label htmlFor="campaign-location">Kerület</label>
-                      <input type="text" name="campaign-location" id="campaign-location" value={idea.campaignLocation ? idea.campaignLocation.description : ' '} onChange={handleChangeInput} disabled />
+                      <input type="text" name="campaign-location" id="campaign-location" value={project.campaignLocation ? project.campaignLocation.description : ' '} onChange={handleChangeInput} disabled />
                     </div>
                   </div>
 
                   <div className="col-sm-12 col-md-6">
                     <div className="input-wrapper">
-                      <label htmlFor="theme">Kategória</label>
-                      <input type="text" name="theme" id="theme" value={idea.campaignTheme.name} onChange={handleChangeInput} disabled />
+                      <label htmlFor="campaign-theme">Kategória</label>
+                      <input type="text" name="campaign-theme" id="campaign-theme" value={project.campaignTheme.name} onChange={handleChangeInput} disabled />
                     </div>
                   </div>
 
                   <div className="col-sm-12 col-md-6">
                     <div className="input-wrapper">
                       <label htmlFor="cost">Becsült költség</label>
-                      <input type="text" name="cost" id="cost" value={idea.cost !== null ? idea.cost : ''} onChange={handleChangeInput} />
+                      <input type="text" name="cost" id="cost" value={project.cost !== null ? project.cost : ''} onChange={handleChangeInput} />
                     </div>
                   </div>
 
                   <div className="col-sm-12 col-md-6">
                     <div className="input-wrapper">
                       <label htmlFor="workflowState">Állapot</label>
-                      <select name="workflowState" id="workflowState" value={idea.workflowState.code} onChange={handleChangeInput}>
+                      <select name="workflowState" id="workflowState" value={project.workflowState.code} onChange={handleChangeInput}>
                         {workflowStateOptions ? workflowStateOptions.map((option, i) => (
                           <option key={i} value={option.code}>{option.privateTitle}</option>
                         )) : null}
                       </select>
-                    </div>
-                  </div>
-
-                  {idea.workflowState === 'PUBLISHED_WITH_MOD' || idea.workflowState.code === 'PUBLISHED_WITH_MOD' ? <>
-                    <div className="col-sm-12 col-md-6">
-                      <div className="input-wrapper">
-                        <label htmlFor="workflowStateExtra">Módosítás oka</label>
-                        <select name="workflowStateExtra" id="workflowStateExtra" value={idea.workflowStateExtra ? idea.workflowStateExtra.code : ''} onChange={handleChangeInput}>
-                          <option value="" disabled>Válassz az indokok közül</option>
-
-                          {workflowStateExtraOptions ? workflowStateExtraOptions.map((option, i) => (
-                            <option key={i} value={option.code}>{option.title}</option>
-                          )) : null}
-                        </select>
-                      </div>
-                    </div>
-                  </> : null}
-
-                  <div className="col-sm-12 col-md-6">
-                    <div className="input-wrapper">
-                      <label htmlFor="location_description">Helyszín leírás</label>
-                      <input type="text" name="location_description" id="location_description" value={idea.locationDescription} onChange={handleChangeInput} />
-                    </div>
-                  </div>
-
-                  <div className="col-sm-12 col-md-12">
-                    <div className="input-wrapper">
-                      <label htmlFor="answer">Hivatal visszajelzése</label>
-                      <textarea name="answer" id="answer" value={idea.answer} onChange={handleChangeInput} />
                     </div>
                   </div>
                 </div>
@@ -321,38 +280,20 @@ export default function Idea() {
                   <div className="col-sm-12 col-md-6">
                     <div className="input-wrapper">
                       <h4>Beküldési információk</h4>
-                      <div>Név: <b>{idea.submitter.lastname} {idea.submitter.firstname}</b></div>
-                      <div>E-mail: <b>{idea.submitter.email}</b></div>
-                      <div>Időpont: <b>{dateConverter(idea.createdAt)}</b></div>
+                      <div>Időpont: <b>{dateConverter(project.createdAt)}</b></div>
                     </div>
                   </div>
                 </div>
 
                 <div className="row">
                   <div className="col-sm-12 col-md-6">
-                    <h4>Hivatkozások</h4>
-
-                    {idea.links && idea.links.length > 0 ? (
-                      <>
-                        <ul className="links">
-                          {idea.links.map((link, i) => {
-                            return (
-                              <li key={`link-${i}`}><a href={link} rel="noopener noreferrer">{link}</a></li>
-                            )
-                          })}
-                        </ul>
-                      </>
-                    ) : 'Nincs kapcsolódó hivatkozás'}
-                  </div>
-
-                  <div className="col-sm-12 col-md-6">
                     <h4>Dokumentumok</h4>
 
-                    {getDocumentObjects(idea) && getDocumentObjects(idea).length > 0 ? (
+                    {getDocumentObjects(project) && getDocumentObjects(project).length > 0 ? (
                       <>
                         <div className="media-sep">
                           <div className="documents">
-                            {getDocumentObjects(idea).length > 0 && getDocumentObjects(idea).map((document, i) => (
+                            {getDocumentObjects(project).length > 0 && getDocumentObjects(project).map((document, i) => (
                               <a key={i} href={document.original} target="_blank" rel="noopener noreferrer">
                                 <div key={i} className="document">
                                   <FontAwesomeIcon icon={faFilePdf} />
@@ -385,6 +326,34 @@ export default function Idea() {
                     <h4>Csatolmány feltöltés</h4>
 
                     <input id="file" name="file" type="file" multiple onChange={onFileChange} />
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col-sm-12 col-md-12">
+                    <h4>Hol tartunk a megvalósítással?</h4>
+
+                    <Implementation implementations={project.implementations} />
+
+                    <div className="implementation-add">
+                      <details>
+                        <summary>
+                          <h4>Új megvalósítás</h4>
+                        </summary>
+
+                        <Editor
+                          editorState={editorState}
+                          toolbarClassName="toolbarClassName"
+                          wrapperClassName="wrapperClassName"
+                          editorClassName="editorClassName"
+                          onEditorStateChange={setEditorState}
+                        />
+
+                        <h4>Megvalósítási média feltöltés</h4>
+
+                        <input id="implementationMedia" name="implementationMedia" type="file" multiple onChange={onImplementationFileChange} />
+                      </details>
+                    </div>
                   </div>
                 </div>
 

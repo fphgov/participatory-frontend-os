@@ -38,6 +38,7 @@ export default class Header extends React.Component {
     this.state = {
       openMenu: false,
       menu: [
+        { title: "Projektek", href: "/projects", onHideLoggedOut: true, roles: [ 'developer', 'admin', 'editor' ] },
         { title: "Ötletek", href: "/ideas", onHideLoggedOut: true, roles: [ 'developer', 'admin', 'editor' ] },
         { title: "Szavazat hozzáadása", href: "/vote", onHideLoggedOut: true, roles: [ 'developer', 'admin', 'editor' ] },
         { title: "Cikkek", href: "/posts", onHideLoggedOut: true, roles: [ 'developer', 'admin', 'editor' ] },
