@@ -1,4 +1,4 @@
-import React, { useContext, Suspense, lazy } from "react"
+import React, { useContext, useState } from "react"
 import {
   Link,
 } from "react-router-dom"
@@ -6,16 +6,18 @@ import StoreContext from '../../StoreContext'
 import PopUp from '../assets/PopUp'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons"
-import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons"
+import { faMapMarkerAlt, faFilePdf } from "@fortawesome/free-solid-svg-icons"
 import nFormatter from '../assets/nFormatter'
-import { getFullDateFormat } from '../assets/dateFormats'
-import modernizr from 'modernizr'
+import { getHungarianDateFormat } from '../assets/dateFormats'
 import Implementation from '../common/Implementation'
-
-const ImageGallery = lazy(() => import('react-image-gallery'));
+import Lightbox from "react-image-lightbox"
+import "react-image-lightbox/style.css"
 
 export default function ProjectWrapper(props) {
   const context = useContext(StoreContext)
+
+  const [photoIndex, setPhotoIndex] = useState(0)
+  const [isOpen, setIsOpen] = useState(false)
 
   const theme = props.project.campaignTheme
 
@@ -28,8 +30,35 @@ export default function ProjectWrapper(props) {
   const images = props.project.medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
     const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
 
-    return { original: link }
+    return link
   })
+
+  const onThumbnail = (index) => {
+    setPhotoIndex(index)
+    setIsOpen(true)
+  }
+
+  const thumbnails = () => {
+    return (
+      <div className="implementation-thumbnail-container">
+        {images.map((image, index) =>
+        (
+          <div
+            className="implementation-thumbnail-block"
+            key={index} tabIndex="0"
+            aria-label="Miniatűr előnézeti kép"
+            onClick={() => onThumbnail(index)}
+            onKeyUp={(e) => {
+              if (e.key === 'Enter') {
+                onThumbnail(index)
+              }
+            }}>
+            <img className="implementation-thumbnail-image" src={image} />
+          </div>
+        ))}
+      </div>
+    )
+  }
 
   const documents = props.project.medias.filter(media => documentMimes.indexOf(media.type) > -1).map((item) => {
     const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA_DOWNLOAD.toString().replace(':id', item.id)
@@ -75,11 +104,15 @@ export default function ProjectWrapper(props) {
                   {props.project.medias && props.project.medias.length > 0 ? (
                     <>
                       <div className="media-sep">
-                        {context.get('map') && modernizr.arrow && modernizr.webgl ?
-                          <Suspense fallback={<div>Betöltés...</div>}>
-                            <ImageGallery items={images} showFullscreenButton={false} showNav={false} showPlayButton={false} showBullets={true} showThumbnails={false} />
-                          </Suspense> : null
-                        }
+                        {images && thumbnails()}
+                        {isOpen && <Lightbox
+                          mainSrc={images[photoIndex]}
+                          nextSrc={images[(photoIndex + 1) % images.length]}
+                          prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+                          onCloseRequest={() => setIsOpen(false)}
+                          onMovePrevRequest={() => setPhotoIndex((photoIndex + images.length - 1) % images.length)}
+                          onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % images.length)}
+                        />}
                       </div>
                     </>
                   ) : null}
@@ -172,7 +205,7 @@ export default function ProjectWrapper(props) {
                     <div className="prop-info-title">Beküldte</div>
                     <div className="prop-single-content">
                       <div className="prop-single-submitter">{props.project.submitter.lastname} {props.project.submitter.firstname}</div>
-                      <div className="prop-single-submited">{getFullDateFormat(new Date(props.project.createdAt))}</div>
+                      <div className="prop-single-submited">{getHungarianDateFormat(new Date(props.project.createdAt))}</div>
                     </div>
                   </div>
                 ) : null}

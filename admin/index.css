@@ -1,5 +1,3 @@
-@import "~react-image-gallery/styles/css/image-gallery.css";
-
 :root {
     --primary-color: #4d2a88;
     --secondary-color: #fce65d;
@@ -1002,21 +1000,37 @@ ul.links {
   min-height: 480px;
 }
 
-.implementation-item {
-  margin: 16px 0 32px 0;
+.implementation-thumbnail-container {
+  display: flex;
+  margin-left: 5px;
+  flex-wrap: wrap;
 }
 
-.implementation-item:last-of-type {
-  border: 0;
+.implementation-thumbnail-block {
+  width: 130px;
+  height: 100px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  margin: 0px 10px 10px 0px;
+}
+
+.implementation-thumbnail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  overflow: hidden;
+  object-position: center center;
 }
 
 .implementation-time svg {
   margin-right: 4px;
 }
 
-.implementation-body {
-  margin: 12px 0;
-  white-space: pre-line;
+.implementation-thumbnail-block:hover {
+  border: none;
+  box-shadow: 0 0 2px 1px #72BE97;
+  cursor: pointer;
 }
 
 summary {
