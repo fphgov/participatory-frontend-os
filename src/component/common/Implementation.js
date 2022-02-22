@@ -1,9 +1,8 @@
-import React, { useState } from "react"
+import React from "react"
 import { getHungarianDateFormat } from '../assets/dateFormats'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons"
-import Lightbox from "react-image-lightbox"
-import "react-image-lightbox/style.css"
+import Gallery from "../common/Gallery"
 
 export default function Implementation({ implementations }) {
   const documentMimes = [
@@ -12,41 +11,11 @@ export default function Implementation({ implementations }) {
     'application/pdf',
   ]
 
-  const [photoIndex, setPhotoIndex] = useState(0)
-  const [isOpen, setIsOpen] = useState(false)
-
   const renderImplementation = (implementation) => {
     const images = implementation.medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
       const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
       return link
     })
-
-    const onThumbnail = (index) => {
-      setPhotoIndex(index)
-      setIsOpen(true)
-    }
-
-    const thumbnails = () => {
-      return (
-        <div className="implementation-thumbnail-container">
-          {images.map((image, index) =>
-          (
-            <div
-              className="implementation-thumbnail-block"
-              key={index} tabIndex="0"
-              aria-label="Miniatűr előnézeti kép"
-              onClick={() => onThumbnail(index)}
-              onKeyUp={(e) => {
-                if (e.key === 'Enter') {
-                  onThumbnail(index)
-                }
-              }}>
-              <img className="implementation-thumbnail-image" src={image} />
-            </div>
-          ))}
-        </div>
-      )
-    }
 
     const documents = implementation.medias.filter(media => documentMimes.indexOf(media.type) > -1).map((item) => {
       const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA_DOWNLOAD.toString().replace(':id', item.id)
@@ -69,15 +38,7 @@ export default function Implementation({ implementations }) {
             <>
               <h4>Galéria:</h4>
               <div className="media-sep">
-                {images && thumbnails()}
-                {isOpen && <Lightbox
-                  mainSrc={images[photoIndex]}
-                  nextSrc={images[(photoIndex + 1) % images.length]}
-                  prevSrc={images[(photoIndex + images.length - 1) % images.length]}
-                  onCloseRequest={() => setIsOpen(false)}
-                  onMovePrevRequest={() => setPhotoIndex((photoIndex + images.length - 1) % images.length)}
-                  onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % images.length)}
-                />}
+                <Gallery items={images} showThumbnails={true} />
               </div>
             </>
           ) : null}

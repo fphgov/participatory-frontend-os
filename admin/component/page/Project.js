@@ -6,12 +6,11 @@ import { faFilePdf } from "@fortawesome/free-solid-svg-icons"
 import StoreContext from '../../StoreContext'
 import axios from '../assets/axios'
 import { dateConverter } from '../assets/helperFunctions'
-import Lightbox from "react-image-lightbox"
-import "react-image-lightbox/style.css"
 import Implementation from "../common/Implementation"
 import { Editor } from 'react-draft-wysiwyg'
 import { createEditorStateWithText } from 'draft-js-plugins-editor'
 import { stateToHTML } from 'draft-js-export-html'
+import Gallery from "../common/Gallery"
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 export default function Project() {
@@ -26,8 +25,6 @@ export default function Project() {
   const [workflowStateOptions, setWorkflowStateOptions] = useState(null)
   const [project, setProject] = useState(null)
   const [originalWorkflowState, setOriginalWorkflowState] = useState(null)
-  const [photoIndex, setPhotoIndex] = useState(0)
-  const [isOpen, setIsOpen] = useState(false)
 
   const documentMimes = [
     'application/msword',
@@ -205,34 +202,6 @@ export default function Project() {
 
   const images = project ? getImageObjects(project) : []
 
-  const onThumbnail = (index) => {
-    setPhotoIndex(index)
-    setIsOpen(true)
-  }
-
-  const thumbnails = () => {
-    return (
-      <div className="implementation-thumbnail-container">
-        {images.map((image, index) =>
-        (
-          <div
-            className="implementation-thumbnail-block"
-            key={index} tabIndex="0"
-            aria-label="Miniatűr előnézeti kép"
-            onClick={() => onThumbnail(index)}
-            onKeyUp={(e) => {
-              if (e.key === 'Enter') {
-                onThumbnail(index)
-              }
-            }}>
-            <img className="implementation-thumbnail-image" src={image} />
-          </div>
-        ))}
-      </div>
-    )
-  }
-
-
   return (
     <>
       <div className="proposal project">
@@ -345,15 +314,7 @@ export default function Project() {
                     {images && images.length > 0 ? (
                       <>
                         <div className="media-sep">
-                          {images && thumbnails()}
-                          {isOpen && <Lightbox
-                            mainSrc={images[photoIndex]}
-                            nextSrc={images[(photoIndex + 1) % images.length]}
-                            prevSrc={images[(photoIndex + images.length - 1) % images.length]}
-                            onCloseRequest={() => setIsOpen(false)}
-                            onMovePrevRequest={() => setPhotoIndex((photoIndex + images.length - 1) % images.length)}
-                            onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % images.length)}
-                          />}
+                          <Gallery items={images} showThumbnails={true} />
                         </div>
                       </>
                     ) : 'Nincs kapcsolódó kép'}

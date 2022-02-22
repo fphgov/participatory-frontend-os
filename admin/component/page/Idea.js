@@ -6,8 +6,7 @@ import { faFilePdf } from "@fortawesome/free-solid-svg-icons"
 import StoreContext from '../../StoreContext'
 import axios from '../assets/axios'
 import { dateConverter } from '../assets/helperFunctions'
-import Lightbox from "react-image-lightbox"
-import "react-image-lightbox/style.css"
+import Gallery from "../common/Gallery"
 
 export default function Idea() {
   const context = useContext(StoreContext)
@@ -20,8 +19,6 @@ export default function Idea() {
   const [workflowStateExtraOptions, setWorkflowStateExtraOptions] = useState(null)
   const [idea, setIdea] = useState(null)
   const [originalWorkflowState, setOriginalWorkflowState] = useState(null)
-  const [photoIndex, setPhotoIndex] = useState(0)
-  const [isOpen, setIsOpen] = useState(false)
 
   const documentMimes = [
     'application/msword',
@@ -217,33 +214,6 @@ export default function Idea() {
 
   const images = idea ? getImageObjects(idea) : []
 
-  const onThumbnail = (index) => {
-    setPhotoIndex(index)
-    setIsOpen(true)
-  }
-
-  const thumbnails = () => {
-    return (
-      <div className="implementation-thumbnail-container">
-        {images.map((image, index) =>
-        (
-          <div
-            className="implementation-thumbnail-block"
-            key={index} tabIndex="0"
-            aria-label="Miniatűr előnézeti kép"
-            onClick={() => onThumbnail(index)}
-            onKeyUp={(e) => {
-              if (e.key === 'Enter') {
-                onThumbnail(index)
-              }
-            }}>
-            <img className="implementation-thumbnail-image" src={image} />
-          </div>
-        ))}
-      </div>
-    )
-  }
-
   return (
     <>
       <div className="proposal idea">
@@ -403,15 +373,7 @@ export default function Idea() {
                     {images && images.length > 0 ? (
                       <>
                         <div className="media-sep">
-                          {images && thumbnails()}
-                          {isOpen && <Lightbox
-                            mainSrc={images[photoIndex]}
-                            nextSrc={images[(photoIndex + 1) % images.length]}
-                            prevSrc={images[(photoIndex + images.length - 1) % images.length]}
-                            onCloseRequest={() => setIsOpen(false)}
-                            onMovePrevRequest={() => setPhotoIndex((photoIndex + images.length - 1) % images.length)}
-                            onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % images.length)}
-                          />}
+                          <Gallery items={images} showThumbnails={true} />
                         </div>
                       </>
                     ) : 'Nincs kapcsolódó kép'}

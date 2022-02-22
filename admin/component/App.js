@@ -21,6 +21,7 @@ import PostNew from "./page/PostNew"
 import Profile from "./page/Profile"
 import Settings from "./page/Settings"
 import 'react-toastify/dist/ReactToastify.css'
+import "react-image-lightbox/style.css"
 
 export default class App extends React.Component {
   render() {

@@ -1,10 +1,8 @@
-import React, { Suspense, lazy } from "react"
+import React from "react"
 import { getHungarianDateFormat } from '../assets/dateFormats'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFilePdf, faCalendarDay } from "@fortawesome/free-solid-svg-icons"
-import modernizr from 'modernizr'
-
-const ImageGallery = lazy(() => import('react-image-gallery'))
+import Gallery from "./Gallery"
 
 export default function Implementation({ implementations }) {
   const documentMimes = [
@@ -17,7 +15,7 @@ export default function Implementation({ implementations }) {
     const images = implementation.medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
       const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
 
-      return { original: link }
+      return link
     })
 
     const documents = implementation.medias.filter(media => documentMimes.indexOf(media.type) > -1).map((item) => {
@@ -46,11 +44,7 @@ export default function Implementation({ implementations }) {
             {implementation.medias && implementation.medias.length > 0 && images.length > 0 ? (
               <>
                 <div className="media-sep">
-                  {modernizr.arrow && modernizr.webgl ?
-                    <Suspense fallback={<div>Betöltés...</div>}>
-                      <ImageGallery items={images} showFullscreenButton={false} showNav={false} showPlayButton={false} showBullets={true} showThumbnails={false} />
-                    </Suspense> : null
-                  }
+                  <Gallery items={implementation.medias} showThumbnails={false}  />
                 </div>
               </>
             ) : null}
