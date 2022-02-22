@@ -108,7 +108,7 @@ export default function ProjectWrapper(props) {
 
                   {props.project.video || (props.project.medias && props.project.medias.length > 0) ? (
                     <>
-                      <h3 style={{ color: theme.rgb }}>Média</h3>
+                      <h3 style={{ color: theme.rgb }}>Csatolmány</h3>
                     </>
                   ) : null}
 

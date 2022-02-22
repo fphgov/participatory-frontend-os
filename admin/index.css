@@ -1023,10 +1023,28 @@ ul.links {
   object-position: center center;
 }
 
+.implementation-time svg {
+  margin-right: 4px;
+}
+
 .implementation-thumbnail-block:hover {
   border: none;
   box-shadow: 0 0 2px 1px #72BE97;
   cursor: pointer;
+}
+
+summary {
+  cursor: pointer;
+}
+
+summary h4 {
+  display: inline-block;
+}
+
+.implementation-item summary {
+  background-color: #19506e;
+  padding: 4px;
+  color: #fff;
 }
 
 @media screen and (max-width: 991px) {

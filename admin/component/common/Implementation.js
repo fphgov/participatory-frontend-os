@@ -28,47 +28,51 @@ export default function Implementation({ implementations }) {
 
     return (
       <>
-        <div className="implementation-heading">
-          <div className="implementation-info">
-            <span className="implementation-time">
-              <FontAwesomeIcon icon={faCalendarDay} />
-              {getHungarianDateFormat(new Date(implementation.createdAt))}
+        <details>
+          <summary>
+            <span className="implementation-heading">
+              <span className="implementation-info">
+                <span className="implementation-time">
+                  <FontAwesomeIcon icon={faCalendarDay} />
+                  {getHungarianDateFormat(new Date(implementation.createdAt))}
+                </span>
+              </span>
             </span>
-          </div>
-        </div>
+          </summary>
 
-        <div className="implementation-body" dangerouslySetInnerHTML={{ __html: implementation.content }} />
+          <div className="implementation-body" dangerouslySetInnerHTML={{ __html: implementation.content }} />
 
-        <div className="implementation-attachments">
-          {implementation.medias && implementation.medias.length > 0 && images.length > 0 ? (
-            <>
-              <div className="media-sep">
-                {modernizr.arrow && modernizr.webgl ?
-                  <Suspense fallback={<div>Betöltés...</div>}>
-                    <ImageGallery items={images} showFullscreenButton={false} showNav={false} showPlayButton={false} showBullets={true} showThumbnails={false} />
-                  </Suspense> : null
-                }
-              </div>
-            </>
-          ) : null}
-
-          {implementation.medias && implementation.medias.length > 0 && documents.length > 0 ? (
-            <>
-              <h4>Csatolmányok:</h4>
-              <div className="media-sep">
-                <div className="documents">
-                  {documents.length > 0 && documents.map((document, i) => (
-                    <a key={i} href={document.original} target="_blank" rel="noopener noreferrer">
-                      <div key={i} className="document">
-                        <FontAwesomeIcon icon={faFilePdf} />
-                      </div>
-                    </a>
-                  ))}
+          <div className="implementation-attachments">
+            {implementation.medias && implementation.medias.length > 0 && images.length > 0 ? (
+              <>
+                <div className="media-sep">
+                  {modernizr.arrow && modernizr.webgl ?
+                    <Suspense fallback={<div>Betöltés...</div>}>
+                      <ImageGallery items={images} showFullscreenButton={false} showNav={false} showPlayButton={false} showBullets={true} showThumbnails={false} />
+                    </Suspense> : null
+                  }
                 </div>
-              </div>
-            </>
-          ) : null}
-        </div>
+              </>
+            ) : null}
+
+            {implementation.medias && implementation.medias.length > 0 && documents.length > 0 ? (
+              <>
+                <h4>Csatolmányok:</h4>
+                <div className="media-sep">
+                  <div className="documents">
+                    {documents.length > 0 && documents.map((document, i) => (
+                      <a key={i} href={document.original} target="_blank" rel="noopener noreferrer">
+                        <div key={i} className="document">
+                          <FontAwesomeIcon icon={faFilePdf} />
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </>
+            ) : null}
+          </div>
+        </details>
       </>
     )
   }
