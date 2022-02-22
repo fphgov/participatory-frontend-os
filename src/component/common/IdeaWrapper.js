@@ -1,50 +1,26 @@
-import React, { Suspense, lazy, useMemo } from "react"
+import React, { Suspense, lazy } from "react"
 import {
   Link,
 } from "react-router-dom"
 import PopUp from '../assets/PopUp'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons"
-import { faMapMarkerAlt, faFilePdf, faInfoCircle } from "@fortawesome/free-solid-svg-icons"
+import { faMapMarkerAlt, faFilePdf } from "@fortawesome/free-solid-svg-icons"
 import nFormatter from '../assets/nFormatter'
-import { getHungarianDateFormat } from '../assets/dateFormats'
+import { getFullDateFormat } from '../assets/dateFormats'
 import modernizr from 'modernizr'
 import Comment from '../common/Comment'
-import GREEN from '../../img/zold_budapest_white_category.svg'
-import CARE from '../../img/eselyteremto_budapest_white_category.svg'
-import OPEN from '../../img/nyitott_budapest_white_category.svg'
 
 const ImageGallery = lazy(() => import('react-image-gallery'));
 
 export default function IdeaWrapper(props) {
   const theme = props.idea.campaignTheme
-  const statusId = props.idea.workflowState.id - 0
 
   const documentMimes = [
     'application/msword',
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     'application/pdf',
   ]
-
-  const getThemeLogo = (themeCode, themeName) => {
-    let src = GREEN
-
-    if (themeCode === 'OPEN' || themeCode === 'WHOLE') {
-      src = OPEN
-    } else if (themeCode === 'CARE') {
-      src = CARE
-    }
-
-    return (
-      <img src={src} alt={`${themeName} logó`} />
-    )
-  }
-
-  const isActiveStatus = (id) => {
-    return id <= 200
-  }
-
-  const isActive = useMemo(() => isActiveStatus(statusId), [statusId])
 
   const images = props.idea.medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
     const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
@@ -60,16 +36,14 @@ export default function IdeaWrapper(props) {
 
   return (
     <div className="prop-inner-wrapper">
-      <div className={`prop-inner-content prop-state-${isActive ? 'active' : 'inactive'}`}>
+      <div className="prop-inner-header" style={{ backgroundColor: theme.rgb }}>
+        {theme.name}
+      </div>
+      <div className="prop-inner-content" style={{ borderColor: theme.rgb }}>
         <div className="row">
           <div className="col-lg-8">
             <div className="prop-single-wrapper prop-single-body">
               <div className="prop-single-inner">
-                <div className="prop-picture">
-                  {getThemeLogo(theme.code, theme.name)}
-                  <div className="prop-campaign-inner" style={{ backgroundColor: theme.rgb }}>{theme.name} <span>({props.idea.campaign.shortTitle})</span></div>
-                </div>
-
                 <div className="prop-single-content">
                   <div className="prop-location">
                     <FontAwesomeIcon icon={faMapMarkerAlt} /> {props.idea.campaignLocation && props.idea.campaignLocation.name}
@@ -145,7 +119,7 @@ export default function IdeaWrapper(props) {
           </div>
 
           <div className="col-lg-4">
-            <div className="prop-single-wrapper prop-single-sidebar" style={{ backgroundColor: theme.rgb }}>
+            <div className="prop-single-wrapper prop-single-sidebar">
               <div className="prop-single-content">
                 <h2>Ötlet</h2>
 
@@ -182,7 +156,7 @@ export default function IdeaWrapper(props) {
                     <div className="prop-info-title">Beküldés</div>
                     <div className="prop-single-body">
                       <div className="prop-single-submitter">{props.idea.submitter.lastname} {props.idea.submitter.firstname}</div>
-                      <div className="prop-single-submited">{getHungarianDateFormat(new Date(props.idea.createdAt))}</div>
+                      <div className="prop-single-submited">{getFullDateFormat(new Date(props.idea.createdAt))}</div>
                     </div>
                   </div>
                 ) : null}
@@ -190,7 +164,7 @@ export default function IdeaWrapper(props) {
                 {props.idea.project ? (
                   <>
                     <div className="prop-single-elem prop-single-paper">
-                      <Link to={`/projektek/${props.idea.project.id}`} className="btn btn-primary btn-vote" style={{ backgroundColor: '#fff', color: theme.rgb }} onClick={props.onClickVote}>Tovább a módosított ötletre *</Link>
+                      <Link to={`/projektek/${props.idea.project.id}`} className="btn btn-primary btn-vote" style={{ backgroundColor: theme.rgb }} onClick={props.onClickVote}>Tovább a módosított ötletre *</Link>
 
                       <p className="tipp">* Ide kattintva megismerheti, hogy a beadott ötlet milyen formában került szavazólapra letisztázott szöveggel, adott esetben más hasonló ötletekkel összevonva.</p>
                     </div>
@@ -213,28 +187,19 @@ export default function IdeaWrapper(props) {
         </div>
 
         {props.idea.answer ? <>
-          <div className="prop-single-feedback">
+          <div className="prop-single-history" style={{ borderColor: theme.rgb }}>
             <div className="prop-single-inner">
               <div className="prop-single-content">
-                <div className="row">
-                  <div className="col-md-1" style={{ alignSelf: 'center', textAlign: 'center' }}>
-                    <div className="info-icon">
-                      <FontAwesomeIcon icon={faInfoCircle} />
-                    </div>
-                  </div>
-                  <div className="col-md-11">
-                    <h3 style={{ color: theme.rgb }}>Hivatal visszajelzése</h3>
+                <h3 style={{ color: theme.rgb }}>Hivatal visszajelzése</h3>
 
-                    <div className="prop-single-answer" dangerouslySetInnerHTML={{ __html: props.idea.answer }} />
-                  </div>
-                </div>
+                <div className="prop-single-answer" dangerouslySetInnerHTML={{ __html: props.idea.answer }} />
               </div>
             </div>
           </div>
         </> : null}
 
         {props.idea.comments && props.idea.comments.length > 0 ? <>
-          <div className="prop-single-comments">
+          <div className="prop-single-history" style={{ borderColor: theme.rgb }}>
             <div className="prop-single-inner">
               <div className="prop-single-content">
                 <h3 style={{ color: theme.rgb }}>Megjegyzések</h3>

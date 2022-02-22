@@ -1,9 +1,0 @@
-@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-  .prop-status {
-    font-size: 13px;
-  }
-
-  .prop-state-inactive {
-    opacity: 0.5;
-  }
-}

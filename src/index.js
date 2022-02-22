@@ -3,7 +3,6 @@ import ReactDOM from "react-dom"
 import App from "./component/App"
 import store from 'store'
 import "./index.css"
-import "./ie11.css"
 import "normalize"
 import "grid"
 import StoreContext from './StoreContext'
