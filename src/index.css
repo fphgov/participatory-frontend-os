@@ -2620,7 +2620,7 @@ input[disabled] {
 
 .implementation-thumbnail-block:hover {
   border: none;
-  box-shadow: 0 0 2px 1px #72BE97;
+  box-shadow: 0 0 2px 1px #19506e;
   cursor: pointer;
 }
 
