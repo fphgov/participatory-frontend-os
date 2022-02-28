@@ -14,6 +14,7 @@ export default function Idea() {
 
   let formData = new FormData()
 
+  const [error, setError] = useState('')
   const [tempMedia, setTempMedia] = useState([])
   const [workflowStateOptions, setWorkflowStateOptions] = useState(null)
   const [workflowStateExtraOptions, setWorkflowStateExtraOptions] = useState(null)
@@ -168,8 +169,12 @@ export default function Idea() {
           }, 1000)
         }
       })
-      .catch(() => {
+      .catch(error => {
         notify('⛔️ Sikertelen módosítás')
+
+        if (error.response && error.response.data && error.response.data.errors) {
+          setError(error.response.data.errors)
+        }
       })
       .finally(() => {
         context.set('loading', false)
@@ -189,6 +194,16 @@ export default function Idea() {
       setIdea(state => ({ ...state, [e.target.name]: e.target.checked }))
     } else {
       setIdea(state => ({ ...state, [e.target.name]: e.target.value }))
+    }
+  }
+
+  const ErrorMini = (props) => {
+    if (typeof props.error === 'object') {
+      return Object.values(props.error).map((e, i) => {
+        return (<div key={i} className="error-message-inline">{e}</div>)
+      })
+    } else {
+      return (<div key={props.increment} className="error-message-inline">{props.error}</div>)
     }
   }
 
@@ -231,6 +246,10 @@ export default function Idea() {
                     <div className="input-wrapper">
                       <label htmlFor="title">Megnevezés</label>
                       <input type="text" name="title" id="title" value={idea.title} onChange={handleChangeInput} />
+
+                      {error && error.title ? Object.values(error.title).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`title-${i}`} />
+                      }) : null}
                     </div>
                   </div>
 
@@ -238,6 +257,10 @@ export default function Idea() {
                     <div className="input-wrapper">
                       <label htmlFor="solution">Mit oldana meg?</label>
                       <textarea type="text" name="solution" id="solution" value={idea.solution} onChange={handleChangeInput} />
+
+                      {error && error.solution ? Object.values(error.solution).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`solution-${i}`} />
+                      }) : null}
                     </div>
                   </div>
 
@@ -245,6 +268,10 @@ export default function Idea() {
                     <div className="input-wrapper">
                       <label htmlFor="description">Leírás</label>
                       <textarea type="text" name="description" id="description" value={idea.description} onChange={handleChangeInput} />
+
+                      {error && error.description ? Object.values(error.description).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`description-${i}`} />
+                      }) : null}
                     </div>
                   </div>
 
@@ -252,6 +279,10 @@ export default function Idea() {
                     <div className="input-wrapper">
                       <label htmlFor="campaign">Kampány</label>
                       <input type="text" name="campaign" id="campaign" value={idea.campaign.title} onChange={handleChangeInput} disabled />
+
+                      {error && error.campaign ? Object.values(error.campaign).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`campaign-${i}`} />
+                      }) : null}
                     </div>
                   </div>
 
@@ -259,6 +290,10 @@ export default function Idea() {
                     <div className="input-wrapper">
                       <label htmlFor="campaign-location">Kerület</label>
                       <input type="text" name="campaign-location" id="campaign-location" value={idea.campaignLocation ? idea.campaignLocation.description : ' '} onChange={handleChangeInput} disabled />
+
+                      {error && error.campaignLocation ? Object.values(error.campaignLocation).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`campaignLocation-${i}`} />
+                      }) : null}
                     </div>
                   </div>
 
@@ -266,6 +301,10 @@ export default function Idea() {
                     <div className="input-wrapper">
                       <label htmlFor="theme">Kategória</label>
                       <input type="text" name="theme" id="theme" value={idea.campaignTheme.name} onChange={handleChangeInput} disabled />
+
+                      {error && error.campaignTheme ? Object.values(error.campaignTheme).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`campaignTheme-${i}`} />
+                      }) : null}
                     </div>
                   </div>
 
@@ -273,6 +312,10 @@ export default function Idea() {
                     <div className="input-wrapper">
                       <label htmlFor="cost">Becsült költség</label>
                       <input type="text" name="cost" id="cost" value={idea.cost !== null ? idea.cost : ''} onChange={handleChangeInput} />
+
+                      {error && error.cost ? Object.values(error.cost).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`cost-${i}`} />
+                      }) : null}
                     </div>
                   </div>
 
@@ -283,6 +326,10 @@ export default function Idea() {
                         {workflowStateOptions ? workflowStateOptions.map((option, i) => (
                           <option key={i} value={option.code}>{option.privateTitle}</option>
                         )) : null}
+
+                        {error && error.workflowState ? Object.values(error.workflowState).map((err, i) => {
+                          return <ErrorMini key={i} error={err} increment={`workflowState-${i}`} />
+                        }) : null}
                       </select>
                     </div>
                   </div>
@@ -297,6 +344,10 @@ export default function Idea() {
                           {workflowStateExtraOptions ? workflowStateExtraOptions.map((option, i) => (
                             <option key={i} value={option.code}>{option.title}</option>
                           )) : null}
+
+                          {error && error.workflowStateExtra ? Object.values(error.workflowStateExtra).map((err, i) => {
+                            return <ErrorMini key={i} error={err} increment={`workflowStateExtra-${i}`} />
+                          }) : null}
                         </select>
                       </div>
                     </div>
@@ -306,6 +357,10 @@ export default function Idea() {
                     <div className="input-wrapper">
                       <label htmlFor="location_description">Helyszín leírás</label>
                       <input type="text" name="location_description" id="location_description" value={idea.locationDescription} onChange={handleChangeInput} />
+
+                      {error && error.locationDescription ? Object.values(error.locationDescription).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`locationDescription-${i}`} />
+                      }) : null}
                     </div>
                   </div>
 
@@ -313,6 +368,10 @@ export default function Idea() {
                     <div className="input-wrapper">
                       <label htmlFor="answer">Hivatal visszajelzése</label>
                       <textarea name="answer" id="answer" value={idea.answer} onChange={handleChangeInput} />
+
+                      {error && error.answer ? Object.values(error.answer).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`answer-${i}`} />
+                      }) : null}
                     </div>
                   </div>
                 </div>
@@ -343,6 +402,10 @@ export default function Idea() {
                         </ul>
                       </>
                     ) : 'Nincs kapcsolódó hivatkozás'}
+
+                    {error && error.links ? Object.values(error.links).map((err, i) => {
+                      return <ErrorMini key={i} error={err} increment={`links-${i}`} />
+                    }) : null}
                   </div>
 
                   <div className="col-sm-12 col-md-6">
@@ -385,6 +448,10 @@ export default function Idea() {
                     <h4>Csatolmány feltöltés</h4>
 
                     <input id="file" name="file" type="file" multiple onChange={onFileChange} />
+
+                    {error && error.file ? Object.values(error.file).map((err, i) => {
+                      return <ErrorMini key={i} error={err} increment={`file-${i}`} />
+                    }) : null}
                   </div>
                 </div>
 

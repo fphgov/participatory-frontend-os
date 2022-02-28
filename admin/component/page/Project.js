@@ -19,6 +19,7 @@ export default function Project() {
 
   let formData = new FormData()
 
+  const [error, setError] = useState('')
   const [editorState, setEditorState] = useState(createEditorStateWithText(''))
   const [tempMedia, setTempMedia] = useState([])
   const [implementationMedia, setImplementationMedia] = useState([])
@@ -153,8 +154,12 @@ export default function Project() {
           }, 1000)
         }
       })
-      .catch(() => {
+      .catch(error => {
         notify('⛔️ Sikertelen módosítás')
+
+        if (error.response && error.response.data && error.response.data.errors) {
+          setError(error.response.data.errors)
+        }
       })
       .finally(() => {
         context.set('loading', false)
@@ -182,6 +187,16 @@ export default function Project() {
 
   const onImplementationFileChange = (e) => {
     setImplementationMedia(e.target.files)
+  }
+
+  const ErrorMini = (props) => {
+    if (typeof props.error === 'object') {
+      return Object.values(props.error).map((e, i) => {
+        return (<div key={i} className="error-message-inline">{e}</div>)
+      })
+    } else {
+      return (<div key={props.increment} className="error-message-inline">{props.error}</div>)
+    }
   }
 
   const getImageObjects = (_project) => {
@@ -219,6 +234,10 @@ export default function Project() {
                     <div className="input-wrapper">
                       <label htmlFor="title">Megnevezés</label>
                       <input type="text" name="title" id="title" value={project.title} onChange={handleChangeInput} />
+
+                      {error && error.title ? Object.values(error.title).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`title-${i}`} />
+                      }) : null}
                     </div>
                   </div>
 
@@ -226,6 +245,10 @@ export default function Project() {
                     <div className="input-wrapper">
                       <label htmlFor="solution">Mit oldana meg?</label>
                       <textarea type="text" name="solution" id="solution" value={project.solution} onChange={handleChangeInput} />
+
+                      {error && error.solution ? Object.values(error.solution).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`solution-${i}`} />
+                      }) : null}
                     </div>
                   </div>
 
@@ -233,6 +256,10 @@ export default function Project() {
                     <div className="input-wrapper">
                       <label htmlFor="description">Leírás</label>
                       <textarea type="text" name="description" id="description" value={project.description} onChange={handleChangeInput} />
+
+                      {error && error.description ? Object.values(error.description).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`description-${i}`} />
+                      }) : null}
                     </div>
                   </div>
 
@@ -240,6 +267,10 @@ export default function Project() {
                     <div className="input-wrapper">
                       <label htmlFor="campaign">Kampány</label>
                       <input type="text" name="campaign" id="campaign" value={project.campaign.title} onChange={handleChangeInput} disabled />
+
+                      {error && error.campaign ? Object.values(error.campaign).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`campaign-${i}`} />
+                      }) : null}
                     </div>
                   </div>
 
@@ -247,6 +278,10 @@ export default function Project() {
                     <div className="input-wrapper">
                       <label htmlFor="campaign-location">Kerület</label>
                       <input type="text" name="campaign-location" id="campaign-location" value={project.campaignLocation ? project.campaignLocation.description : ' '} onChange={handleChangeInput} disabled />
+
+                      {error && error.campaignLocation ? Object.values(error.campaignLocation).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`campaignLocation-${i}`} />
+                      }) : null}
                     </div>
                   </div>
 
@@ -254,6 +289,10 @@ export default function Project() {
                     <div className="input-wrapper">
                       <label htmlFor="campaign-theme">Kategória</label>
                       <input type="text" name="campaign-theme" id="campaign-theme" value={project.campaignTheme.name} onChange={handleChangeInput} disabled />
+
+                      {error && error.campaignTheme ? Object.values(error.campaignTheme).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`campaignTheme-${i}`} />
+                      }) : null}
                     </div>
                   </div>
 
@@ -261,6 +300,10 @@ export default function Project() {
                     <div className="input-wrapper">
                       <label htmlFor="cost">Becsült költség</label>
                       <input type="text" name="cost" id="cost" value={project.cost !== null ? project.cost : ''} onChange={handleChangeInput} />
+
+                      {error && error.cost ? Object.values(error.cost).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`cost-${i}`} />
+                      }) : null}
                     </div>
                   </div>
 
@@ -272,6 +315,10 @@ export default function Project() {
                           <option key={i} value={option.code}>{option.privateTitle}</option>
                         )) : null}
                       </select>
+
+                      {error && error.workflowState ? Object.values(error.workflowState).map((err, i) => {
+                        return <ErrorMini key={i} error={err} increment={`workflowState-${i}`} />
+                      }) : null}
                     </div>
                   </div>
                 </div>
