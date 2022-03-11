@@ -177,7 +177,7 @@ export default function Home() {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h2>Ezekben a kategóriákban várunk ötleteket</h2>
+              <h2>A közösségi költségvetés kategóriái</h2>
             </div>
           </div>
 
