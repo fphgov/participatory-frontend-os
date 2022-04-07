@@ -62,8 +62,8 @@ export default function CookieNotice() {
       <div className="cookie-notice-container">
         <div className="cookie-notice-text">Kedves Látogató! Tájékoztatunk, hogy a honlap felhasználói élmény fokozásának érdekében sütiket alkalmazunk. A honlapunk használatával a tájékoztatásunkat tudomásul veszed.</div>
         <div className="cookie-notice-buttons">
-          <button className="cookie-notice-accept" onClick={handlerAccept}>Elfogadom</button>
-          <button className="cookie-notice-refuse" onClick={handlerRefuse}>Elutasítom</button>
+          <button type="button" className="cookie-notice-accept" onClick={handlerAccept}>Elfogadom</button>
+          <button type="button" className="cookie-notice-refuse" onClick={handlerRefuse}>Elutasítom</button>
 
           <a href="https://budapest.hu/Lapok/2018/adatkezelesi-tajekoztato.aspx" target="_blank" rel="noopener noreferrer" className="cookie-notice-info">Adatkezelés</a>
         </div>

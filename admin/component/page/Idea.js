@@ -7,6 +7,7 @@ import StoreContext from '../../StoreContext'
 import axios from '../assets/axios'
 import { dateConverter } from '../assets/helperFunctions'
 import Gallery from "../common/Gallery"
+import { getImages, getDocuments } from '../assets/helperFunctions'
 
 export default function Idea() {
   const context = useContext(StoreContext)
@@ -20,12 +21,6 @@ export default function Idea() {
   const [workflowStateExtraOptions, setWorkflowStateExtraOptions] = useState(null)
   const [idea, setIdea] = useState(null)
   const [originalWorkflowState, setOriginalWorkflowState] = useState(null)
-
-  const documentMimes = [
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    'application/pdf',
-  ]
 
   const notify = (message) => toast.dark(message, {
     position: "bottom-right",
@@ -211,23 +206,8 @@ export default function Idea() {
     setTempMedia(e.target.files)
   }
 
-  const getImageObjects = (_idea) => {
-    return _idea.medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
-      const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
-
-      return link
-    })
-  }
-
-  const getDocumentObjects = (_idea) => {
-    return _idea.medias.filter(media => documentMimes.indexOf(media.type) > -1).map((item) => {
-      const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA_DOWNLOAD.toString().replace(':id', item.id)
-
-      return { original: link }
-    })
-  }
-
-  const images = idea ? getImageObjects(idea) : []
+  const images = getImages(idea.medias)
+  const documents = getDocuments(idea.medias)
 
   return (
     <>
@@ -411,11 +391,11 @@ export default function Idea() {
                   <div className="col-sm-12 col-md-6">
                     <h4>Dokumentumok</h4>
 
-                    {getDocumentObjects(idea) && getDocumentObjects(idea).length > 0 ? (
+                    {documents && documents.length > 0 ? (
                       <>
                         <div className="media-sep">
                           <div className="documents">
-                            {getDocumentObjects(idea).length > 0 && getDocumentObjects(idea).map((document, i) => (
+                            {documents.length > 0 && documents.map((document, i) => (
                               <a key={i} href={document.original} target="_blank" rel="noopener noreferrer">
                                 <div key={i} className="document">
                                   <FontAwesomeIcon icon={faFilePdf} />

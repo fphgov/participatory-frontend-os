@@ -19,7 +19,7 @@ export default function Pagination({ links, onChange, size }) {
 
     return (
       <li>
-        <button onClick={() => { onChange(cPage) }} aria-label={`${cPage} oldal`} title={`${cPage} oldal`}>
+        <button type="button" onClick={() => { onChange(cPage) }} aria-label={`${cPage} oldal`} title={`${cPage} oldal`}>
           {cPage}
         </button>
       </li>
@@ -33,7 +33,7 @@ export default function Pagination({ links, onChange, size }) {
           <ul>
             {(firstPageNum && prevPageNum) && (firstPageNum !== prevPageNum) && (
               <li>
-                <button onClick={() => { onChange(firstPageNum) }} aria-label="Első oldal" title="Első oldal">
+                <button type="button" onClick={() => { onChange(firstPageNum) }} aria-label="Első oldal" title="Első oldal">
                   <FontAwesomeIcon icon={faAngleDoubleLeft} aria-hidden="true" />
                 </button>
               </li>
@@ -41,7 +41,7 @@ export default function Pagination({ links, onChange, size }) {
 
             {prevPageNum && (firstPageNum !== prevPageNum) && (
               <li>
-                <button onClick={() => { onChange(prevPageNum) }} aria-label={`Előző oldal ${prevPageNum}`} title={`Előző oldal ${prevPageNum}`}>
+                <button type="button" onClick={() => { onChange(prevPageNum) }} aria-label={`Előző oldal ${prevPageNum}`} title={`Előző oldal ${prevPageNum}`}>
                   <FontAwesomeIcon icon={faAngleLeft} aria-hidden="true" />
                 </button>
               </li>
@@ -56,7 +56,7 @@ export default function Pagination({ links, onChange, size }) {
             )}
 
             {selfPageNum && (
-              <li><button aria-label={`Aktuális oldal ${selfPageNum}`} title={`Aktuális oldal ${selfPageNum}`} className="active" aria-current="true">{selfPageNum}</button></li>
+              <li><button type="button" aria-label={`Aktuális oldal ${selfPageNum}`} title={`Aktuális oldal ${selfPageNum}`} className="active" aria-current="true">{selfPageNum}</button></li>
             )}
 
             {(lastPageNum && nextPageNum) && (
@@ -69,7 +69,7 @@ export default function Pagination({ links, onChange, size }) {
 
             {nextPageNum && (lastPageNum !== nextPageNum) && (
               <li>
-                <button onClick={() => { onChange(nextPageNum) }} aria-label={`Következő oldal ${nextPageNum}`} title={`Következő oldal ${nextPageNum}`}>
+                <button type="button" onClick={() => { onChange(nextPageNum) }} aria-label={`Következő oldal ${nextPageNum}`} title={`Következő oldal ${nextPageNum}`}>
                   <FontAwesomeIcon icon={faAngleRight} aria-hidden="true" />
                 </button>
               </li>
@@ -77,7 +77,7 @@ export default function Pagination({ links, onChange, size }) {
 
             {(lastPageNum && nextPageNum) && (lastPageNum !== nextPageNum) && (
               <li>
-                <button onClick={() => { onChange(lastPageNum) }} aria-label="Utolsó oldal" title="Utolsó oldal">
+                <button type="button" onClick={() => { onChange(lastPageNum) }} aria-label="Utolsó oldal" title="Utolsó oldal">
                   <FontAwesomeIcon icon={faAngleDoubleRight} aria-hidden="true" />
                 </button>
               </li>

@@ -382,8 +382,8 @@ export default function Post() {
                 <div className="row">
                   <div className="col-sm-12 col-md-12">
                     <div className="button-wrapper button-wrapper-justify">
-                      <button className="btn btn-primary" onClick={postDetection}>Mentés</button>
-                      <button className="btn btn-danger" onClick={deleteDetection}>Törlés</button>
+                      <button type="submit" className="btn btn-primary" onClick={postDetection}>Mentés</button>
+                      <button type="button" className="btn btn-danger" onClick={deleteDetection}>Törlés</button>
                     </div>
                   </div>
                 </div>

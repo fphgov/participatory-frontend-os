@@ -198,7 +198,7 @@ export default class Vote extends React.Component {
           </div>
 
           <div style={{ marginTop: 25, marginBottom: 45 }}>
-            <button className="btn btn-primary" onClick={this.addVoteData.bind(this)}>Szavazat hozzáadása</button>
+            <button type="button" className="btn btn-primary" onClick={this.addVoteData.bind(this)}>Szavazat hozzáadása</button>
           </div>
 
           <h1>Offline szavazatok</h1>

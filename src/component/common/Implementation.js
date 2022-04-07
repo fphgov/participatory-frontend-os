@@ -3,25 +3,12 @@ import { getHungarianDateFormat } from '../assets/dateFormats'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons"
 import Gallery from "../common/Gallery"
+import { getImages, getDocuments } from '../assets/helperFunctions'
 
 export default function Implementation({ implementations }) {
-  const documentMimes = [
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    'application/pdf',
-  ]
-
   const renderImplementation = (implementation) => {
-    const images = implementation.medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
-      const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
-      return link
-    })
-
-    const documents = implementation.medias.filter(media => documentMimes.indexOf(media.type) > -1).map((item) => {
-      const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA_DOWNLOAD.toString().replace(':id', item.id)
-
-      return { original: link }
-    })
+    const images = getImages(implementation.medias)
+    const documents = getDocuments(implementation.medias)
 
     return (
       <>

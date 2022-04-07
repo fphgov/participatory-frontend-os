@@ -10,27 +10,13 @@ import nFormatter from '../assets/nFormatter'
 import { getHungarianDateFormat } from '../assets/dateFormats'
 import Comment from '../common/Comment'
 import Gallery from '../common/Gallery'
+import { getImages, getDocuments } from '../assets/helperFunctions'
 
 export default function IdeaWrapper(props) {
   const theme = props.idea.campaignTheme
 
-  const documentMimes = [
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    'application/pdf',
-  ]
-
-  const images = props.idea.medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
-    const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
-
-    return link
-  })
-
-  const documents = props.idea.medias.filter(media => documentMimes.indexOf(media.type) > -1).map((item) => {
-    const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA_DOWNLOAD.toString().replace(':id', item.id)
-
-    return { original: link }
-  })
+  const images = getImages(props.idea.medias)
+  const documents = getDocuments(props.idea.medias)
 
   return (
     <div className="prop-inner-wrapper">
