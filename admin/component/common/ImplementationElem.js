@@ -16,6 +16,8 @@ import { getImages, getDocuments } from '../assets/helperFunctions'
 export default function ImplementationElem({ implementation, onChangeElem }) {
   const context = useContext(StoreContext)
 
+  const [error, setError] = useState('')
+
   const notify = (message) => toast.dark(message, {
     position: "bottom-right",
     autoClose: 5000,
