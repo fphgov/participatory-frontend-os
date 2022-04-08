@@ -1,4 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
+import {
+  Redirect,
+} from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify'
 import slugify from 'slugify'
 import StoreContext from '../../StoreContext'
@@ -12,6 +15,7 @@ export default function PostNew() {
   const context = useContext(StoreContext)
 
   const [editorState, setEditorState] = useState(createEditorStateWithText(''))
+  const [redirect, setRedirect] = useState(false)
   const [error, setError] = useState('')
   const [file, setFile] = useState(null)
   const [statusOptions, setStatusOptions] = useState(null)
@@ -122,6 +126,8 @@ export default function PostNew() {
       .then(response => {
         if (response.data && response.data.data.success) {
           notify('🎉 Sikeres módosítás')
+
+          setRedirect(true)
         }
       })
       .catch((error) => {
@@ -173,6 +179,10 @@ export default function PostNew() {
     } else {
       return (<div key={props.increment} className="error-message-inline">{props.error}</div>)
     }
+  }
+
+  if (redirect) {
+    return <Redirect to='/posts' />
   }
 
   return (
