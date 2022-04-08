@@ -206,8 +206,8 @@ export default function Idea() {
     setTempMedia(e.target.files)
   }
 
-  const images = getImages(idea.medias)
-  const documents = getDocuments(idea.medias)
+  const images = getImages(idea && idea.medias ? idea.medias : [])
+  const documents = getDocuments(idea && idea.medias ? idea.medias : [])
 
   return (
     <>
