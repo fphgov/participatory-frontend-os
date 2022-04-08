@@ -8,6 +8,10 @@ import axios from '../assets/axios'
 import { dateConverter } from '../assets/helperFunctions'
 import Gallery from "../common/Gallery"
 import { getImages, getDocuments } from '../assets/helperFunctions'
+import { Editor } from 'react-draft-wysiwyg'
+import { createEditorStateWithText } from 'draft-js-plugins-editor'
+import { stateToHTML } from 'draft-js-export-html'
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 export default function Idea() {
   const context = useContext(StoreContext)
@@ -21,6 +25,7 @@ export default function Idea() {
   const [workflowStateExtraOptions, setWorkflowStateExtraOptions] = useState(null)
   const [idea, setIdea] = useState(null)
   const [originalWorkflowState, setOriginalWorkflowState] = useState(null)
+  const [editorState, setEditorState] = useState(createEditorStateWithText(''))
 
   const notify = (message) => toast.dark(message, {
     position: "bottom-right",
@@ -116,6 +121,8 @@ export default function Idea() {
   const postDetection = () => {
     context.set('loading', true)
 
+    setError('')
+
     const config = {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('auth_admin_token')}`,
@@ -141,7 +148,7 @@ export default function Idea() {
     formData.append('description', idea.description)
     formData.append('cost', idea.cost ? idea.cost : null)
     formData.append('locationDescription', idea.locationDescription)
-    formData.append('answer', idea.answer)
+    formData.append('answer', stateToHTML(editorState.getCurrentContent()))
     formData.append('workflowState', typeof idea.workflowState.code === 'undefined' ? idea.workflowState : idea.workflowState.code)
     formData.append('workflowStateExtra', idea.workflowStateExtra === null || typeof idea.workflowStateExtra.code === 'undefined' ? idea.workflowStateExtra : idea.workflowStateExtra.code)
     formData.append('theme', idea.campaignTheme.id)
@@ -347,7 +354,13 @@ export default function Idea() {
                   <div className="col-sm-12 col-md-12">
                     <div className="input-wrapper">
                       <label htmlFor="answer">Hivatal visszajelzése</label>
-                      <textarea name="answer" id="answer" value={idea.answer} onChange={handleChangeInput} />
+                      <Editor
+                        editorState={editorState}
+                        toolbarClassName="toolbarClassName"
+                        wrapperClassName="wrapperClassName"
+                        editorClassName="editorClassName"
+                        onEditorStateChange={setEditorState}
+                      />
 
                       {error && error.answer ? Object.values(error.answer).map((err, i) => {
                         return <ErrorMini key={i} error={err} increment={`answer-${i}`} />
