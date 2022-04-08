@@ -10,6 +10,7 @@ import { EditorState } from 'draft-js'
 import { createEditorStateWithText } from 'draft-js-plugins-editor'
 import { stateFromHTML } from 'draft-js-import-html'
 import { stateToHTML } from 'draft-js-export-html'
+import { draftExportOptions } from '../assets/draftExportOptions'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 export default function Post() {
@@ -146,7 +147,7 @@ export default function Post() {
     formData.append('title', post.title)
     formData.append('slug', post.slug)
     formData.append('description', post.description)
-    formData.append('content', stateToHTML(editorState.getCurrentContent()))
+    formData.append('content', stateToHTML(editorState.getCurrentContent(), draftExportOptions))
     formData.append('category', typeof post.category.code === 'undefined' ? post.category : post.category.code)
     formData.append('status', typeof post.status.code === 'undefined' ? post.status : post.status.code)
     formData.append('file', file)

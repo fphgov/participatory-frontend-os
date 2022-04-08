@@ -9,8 +9,11 @@ import { dateConverter } from '../assets/helperFunctions'
 import Gallery from "../common/Gallery"
 import { getImages, getDocuments } from '../assets/helperFunctions'
 import { Editor } from 'react-draft-wysiwyg'
+import { EditorState } from 'draft-js'
 import { createEditorStateWithText } from 'draft-js-plugins-editor'
+import { stateFromHTML } from 'draft-js-import-html'
 import { stateToHTML } from 'draft-js-export-html'
+import { draftExportOptions } from '../assets/draftExportOptions'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 export default function Idea() {
@@ -106,6 +109,10 @@ export default function Idea() {
         if (response.data && response.data.workflowState) {
           setIdea(response.data)
           setOriginalWorkflowState(response.data.workflowState)
+
+          let contentState = stateFromHTML(response.data.answer)
+
+          setEditorState(EditorState.createWithContent(contentState))
         } else {
           notify('⛔️ Sikertelen adat lekérés')
         }
@@ -148,7 +155,7 @@ export default function Idea() {
     formData.append('description', idea.description)
     formData.append('cost', idea.cost ? idea.cost : null)
     formData.append('locationDescription', idea.locationDescription)
-    formData.append('answer', stateToHTML(editorState.getCurrentContent()))
+    formData.append('answer', stateToHTML(editorState.getCurrentContent(), draftExportOptions).replace('<p><br></p>', ''))
     formData.append('workflowState', typeof idea.workflowState.code === 'undefined' ? idea.workflowState : idea.workflowState.code)
     formData.append('workflowStateExtra', idea.workflowStateExtra === null || typeof idea.workflowStateExtra.code === 'undefined' ? idea.workflowStateExtra : idea.workflowStateExtra.code)
     formData.append('theme', idea.campaignTheme.id)

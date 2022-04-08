@@ -11,6 +11,7 @@ import { Editor } from 'react-draft-wysiwyg'
 import { createEditorStateWithText } from 'draft-js-plugins-editor'
 import { stateFromHTML } from 'draft-js-import-html'
 import { stateToHTML } from 'draft-js-export-html'
+import { draftExportOptions } from '../assets/draftExportOptions'
 import { getImages, getDocuments } from '../assets/helperFunctions'
 
 export default function ImplementationElem({ implementation, onChangeElem }) {
@@ -43,7 +44,7 @@ export default function ImplementationElem({ implementation, onChangeElem }) {
 
     let formData = new FormData()
 
-    formData.append('content', stateToHTML(editorState.getCurrentContent()).replace('<p><br></p>', ''))
+    formData.append('content', stateToHTML(editorState.getCurrentContent(), draftExportOptions).replace('<p><br></p>', ''))
 
     Array.from(media).forEach((file, i) => {
       if (file instanceof File) {

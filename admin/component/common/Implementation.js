@@ -8,6 +8,7 @@ import ImplementationElem from './ImplementationElem'
 import { Editor } from 'react-draft-wysiwyg'
 import { createEditorStateWithText } from 'draft-js-plugins-editor'
 import { stateToHTML } from 'draft-js-export-html'
+import { draftExportOptions } from '../assets/draftExportOptions'
 
 export default function Implementation({ projectId }) {
   const context = useContext(StoreContext)
@@ -89,7 +90,7 @@ export default function Implementation({ projectId }) {
     let formData = new FormData()
 
     formData.append('project', projectId)
-    formData.append('content', stateToHTML(newEditorState.getCurrentContent()).replace('<p><br></p>', ''))
+    formData.append('content', stateToHTML(newEditorState.getCurrentContent(), draftExportOptions).replace('<p><br></p>', ''))
 
     Array.from(medias).forEach((file, i) => {
       if (file instanceof File) {
