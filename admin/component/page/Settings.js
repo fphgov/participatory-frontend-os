@@ -5,6 +5,7 @@ import StoreContext from '../../StoreContext'
 import Tabs from '../common/Tabs'
 import TabContent from '../common/TabContent'
 import tokenParser from '../assets/tokenParser'
+import IdeaAnswer from './settings/IdeaAnswer'
 
 export default function Settings() {
   const context = useContext(StoreContext)
@@ -242,6 +243,10 @@ export default function Settings() {
                       <button className="btn btn-primary" onClick={saveEmail}>Mentés</button>
                     </div>
                   ) : null}
+                </TabContent>
+
+                <TabContent id="idea_answer" name="Ötlet válaszok importálása">
+                  <IdeaAnswer />
                 </TabContent>
 
                 <TabContent id="periods" name="Időszakok">

@@ -1,4 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
+import {
+  Redirect,
+} from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify'
 import slugify from 'slugify'
 import StoreContext from '../../StoreContext'
@@ -6,12 +9,14 @@ import axios from '../assets/axios'
 import { Editor } from 'react-draft-wysiwyg'
 import { createEditorStateWithText } from 'draft-js-plugins-editor'
 import { stateToHTML } from 'draft-js-export-html'
+import { draftExportOptions } from '../assets/draftExportOptions'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 export default function PostNew() {
   const context = useContext(StoreContext)
 
   const [editorState, setEditorState] = useState(createEditorStateWithText(''))
+  const [redirect, setRedirect] = useState(false)
   const [error, setError] = useState('')
   const [file, setFile] = useState(null)
   const [statusOptions, setStatusOptions] = useState(null)
@@ -112,7 +117,7 @@ export default function PostNew() {
     formData.append('title', post.title)
     formData.append('slug', post.slug)
     formData.append('description', post.description)
-    formData.append('content', stateToHTML(editorState.getCurrentContent()))
+    formData.append('content', stateToHTML(editorState.getCurrentContent(), draftExportOptions))
     formData.append('category', typeof post.category.code === 'undefined' ? post.category : post.category.code)
     formData.append('status', typeof post.status.code === 'undefined' ? post.status : post.status.code)
     formData.append('file', file)
@@ -122,6 +127,8 @@ export default function PostNew() {
       .then(response => {
         if (response.data && response.data.data.success) {
           notify('🎉 Sikeres módosítás')
+
+          setRedirect(true)
         }
       })
       .catch((error) => {
@@ -173,6 +180,10 @@ export default function PostNew() {
     } else {
       return (<div key={props.increment} className="error-message-inline">{props.error}</div>)
     }
+  }
+
+  if (redirect) {
+    return <Redirect to='/posts' />
   }
 
   return (

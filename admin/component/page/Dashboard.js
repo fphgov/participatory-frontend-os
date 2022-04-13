@@ -277,9 +277,9 @@ export default class Dashboard extends React.Component {
 
               <div>
                 <div className="action-wrapper">
-                  <button className="box box-button" onClick={this.handleCacheClear.bind(this)}>Gyorsítótár ürítés</button>
-                  <button className="box box-button" onClick={this.handleIdeaExport.bind(this)}>Ötletek exportálás</button>
-                  <button className="box box-button" onClick={this.handleVoteClose.bind(this)} disabled>Szavazás megnyitása</button>
+                  <button type="button" className="box box-button" onClick={this.handleCacheClear.bind(this)}>Gyorsítótár ürítés</button>
+                  <button type="button" className="box box-button" onClick={this.handleIdeaExport.bind(this)}>Ötletek exportálás</button>
+                  <button type="button" className="box box-button" onClick={this.handleVoteClose.bind(this)} disabled>Szavazás megnyitása</button>
                 </div>
               </div>
             </>

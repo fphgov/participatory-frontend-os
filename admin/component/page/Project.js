@@ -7,10 +7,8 @@ import StoreContext from '../../StoreContext'
 import axios from '../assets/axios'
 import { dateConverter } from '../assets/helperFunctions'
 import Implementation from "../common/Implementation"
-import { Editor } from 'react-draft-wysiwyg'
-import { createEditorStateWithText } from 'draft-js-plugins-editor'
-import { stateToHTML } from 'draft-js-export-html'
 import Gallery from "../common/Gallery"
+import { getImages, getDocuments } from '../assets/helperFunctions'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 export default function Project() {
@@ -20,18 +18,10 @@ export default function Project() {
   let formData = new FormData()
 
   const [error, setError] = useState('')
-  const [editorState, setEditorState] = useState(createEditorStateWithText(''))
   const [tempMedia, setTempMedia] = useState([])
-  const [implementationMedia, setImplementationMedia] = useState([])
   const [workflowStateOptions, setWorkflowStateOptions] = useState(null)
   const [project, setProject] = useState(null)
   const [originalWorkflowState, setOriginalWorkflowState] = useState(null)
-
-  const documentMimes = [
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    'application/pdf',
-  ]
 
   const notify = (message) => toast.dark(message, {
     position: "bottom-right",
@@ -98,7 +88,9 @@ export default function Project() {
       })
   }
 
-  const postDetection = () => {
+  const postDetection = (e) => {
+    e.preventDefault()
+
     context.set('loading', true)
 
     const config = {
@@ -128,17 +120,10 @@ export default function Project() {
     formData.append('answer', project.answer)
     formData.append('workflowState', workflowStateCode)
     formData.append('theme', project.campaignTheme.id)
-    formData.append('implementation', stateToHTML(editorState.getCurrentContent()))
 
     Array.from(tempMedia).forEach((file, i) => {
       if (file instanceof File) {
         formData.append(`medias[${i}]`, file)
-      }
-    })
-
-    Array.from(implementationMedia).forEach((file, i) => {
-      if (file instanceof File) {
-        formData.append(`implementationMedia[${i}]`, file)
       }
     })
 
@@ -185,10 +170,6 @@ export default function Project() {
     setTempMedia(e.target.files)
   }
 
-  const onImplementationFileChange = (e) => {
-    setImplementationMedia(e.target.files)
-  }
-
   const ErrorMini = (props) => {
     if (typeof props.error === 'object') {
       return Object.values(props.error).map((e, i) => {
@@ -199,23 +180,8 @@ export default function Project() {
     }
   }
 
-  const getImageObjects = (_project) => {
-    return _project.medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
-      const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
-
-      return link
-    })
-  }
-
-  const getDocumentObjects = (_project) => {
-    return _project.medias.filter(media => documentMimes.indexOf(media.type) > -1).map((item) => {
-      const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA_DOWNLOAD.toString().replace(':id', item.id)
-
-      return { original: link }
-    })
-  }
-
-  const images = project ? getImageObjects(project) : []
+  const images = getImages(project && project.medias ? project.medias : [])
+  const documents = getDocuments(project && project.medias ? project.medias : [])
 
   return (
     <>
@@ -228,7 +194,7 @@ export default function Project() {
               <div className="error-wrapper">
               </div>
 
-              <div className="form-wrapper">
+              <form className="form-wrapper" onSubmit={postDetection}>
                 <div className="row">
                   <div className="col-sm-12 col-md-12">
                     <div className="input-wrapper">
@@ -336,11 +302,11 @@ export default function Project() {
                   <div className="col-sm-12 col-md-6">
                     <h4>Dokumentumok</h4>
 
-                    {getDocumentObjects(project) && getDocumentObjects(project).length > 0 ? (
+                    {documents && documents.length > 0 ? (
                       <>
                         <div className="media-sep">
                           <div className="documents">
-                            {getDocumentObjects(project).length > 0 && getDocumentObjects(project).map((document, i) => (
+                            {documents.length > 0 && documents.map((document, i) => (
                               <a key={i} href={document.original} target="_blank" rel="noopener noreferrer">
                                 <div key={i} className="document">
                                   <FontAwesomeIcon icon={faFilePdf} />
@@ -377,39 +343,21 @@ export default function Project() {
                 </div>
 
                 <div className="row">
-                  <div className="col-sm-12 col-md-12">
-                    <h4>Hol tartunk a megvalósítással?</h4>
-
-                    <Implementation implementations={project.implementations} />
-
-                    <div className="implementation-add">
-                      <details>
-                        <summary>
-                          <h4>Új megvalósítás</h4>
-                        </summary>
-
-                        <Editor
-                          editorState={editorState}
-                          toolbarClassName="toolbarClassName"
-                          wrapperClassName="wrapperClassName"
-                          editorClassName="editorClassName"
-                          onEditorStateChange={setEditorState}
-                        />
-
-                        <h4>Megvalósítási média feltöltés</h4>
-
-                        <input id="implementationMedia" name="implementationMedia" type="file" multiple onChange={onImplementationFileChange} />
-                      </details>
+                  <div className="col-sm-12 col-md-6">
+                    <div className="button-wrapper">
+                      <button type="submit" className="btn btn-primary">Mentés</button>
                     </div>
                   </div>
                 </div>
+              </form>
 
-                <div className="row">
-                  <div className="col-sm-12 col-md-6">
-                    <div className="button-wrapper">
-                      <button className="btn btn-primary" onClick={postDetection}>Mentés</button>
-                    </div>
-                  </div>
+              <div className="space"></div>
+
+              <div className="row">
+                <div className="col-sm-12 col-md-12">
+                  <h2>Hol tartunk a megvalósítással?</h2>
+
+                  <Implementation implementations={project.implementations} projectId={project.id} />
                 </div>
               </div>
             </>

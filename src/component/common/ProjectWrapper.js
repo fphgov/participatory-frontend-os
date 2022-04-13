@@ -11,29 +11,15 @@ import nFormatter from '../assets/nFormatter'
 import { getHungarianDateFormat } from '../assets/dateFormats'
 import Implementation from '../common/Implementation'
 import Gallery from "../common/Gallery"
+import { getImages, getDocuments } from '../assets/helperFunctions'
 
 export default function ProjectWrapper(props) {
   const context = useContext(StoreContext)
 
   const theme = props.project.campaignTheme
 
-  const documentMimes = [
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    'application/pdf',
-  ]
-
-  const images = props.project.medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
-    const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
-
-    return link
-  })
-
-  const documents = props.project.medias.filter(media => documentMimes.indexOf(media.type) > -1).map((item) => {
-    const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA_DOWNLOAD.toString().replace(':id', item.id)
-
-    return { original: link }
-  })
+  const images = getImages(props.project.medias)
+  const documents = getDocuments(props.project.medias)
 
   return (
     <div className="prop-inner-wrapper">

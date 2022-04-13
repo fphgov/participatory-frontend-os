@@ -7,6 +7,14 @@ import StoreContext from '../../StoreContext'
 import axios from '../assets/axios'
 import { dateConverter } from '../assets/helperFunctions'
 import Gallery from "../common/Gallery"
+import { getImages, getDocuments } from '../assets/helperFunctions'
+import { Editor } from 'react-draft-wysiwyg'
+import { EditorState } from 'draft-js'
+import { createEditorStateWithText } from 'draft-js-plugins-editor'
+import { stateFromHTML } from 'draft-js-import-html'
+import { stateToHTML } from 'draft-js-export-html'
+import { draftExportOptions } from '../assets/draftExportOptions'
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 export default function Idea() {
   const context = useContext(StoreContext)
@@ -20,12 +28,7 @@ export default function Idea() {
   const [workflowStateExtraOptions, setWorkflowStateExtraOptions] = useState(null)
   const [idea, setIdea] = useState(null)
   const [originalWorkflowState, setOriginalWorkflowState] = useState(null)
-
-  const documentMimes = [
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    'application/pdf',
-  ]
+  const [editorState, setEditorState] = useState(createEditorStateWithText(''))
 
   const notify = (message) => toast.dark(message, {
     position: "bottom-right",
@@ -106,6 +109,10 @@ export default function Idea() {
         if (response.data && response.data.workflowState) {
           setIdea(response.data)
           setOriginalWorkflowState(response.data.workflowState)
+
+          let contentState = stateFromHTML(response.data.answer)
+
+          setEditorState(EditorState.createWithContent(contentState))
         } else {
           notify('⛔️ Sikertelen adat lekérés')
         }
@@ -120,6 +127,8 @@ export default function Idea() {
 
   const postDetection = () => {
     context.set('loading', true)
+
+    setError('')
 
     const config = {
       headers: {
@@ -146,7 +155,7 @@ export default function Idea() {
     formData.append('description', idea.description)
     formData.append('cost', idea.cost ? idea.cost : null)
     formData.append('locationDescription', idea.locationDescription)
-    formData.append('answer', idea.answer)
+    formData.append('answer', stateToHTML(editorState.getCurrentContent(), draftExportOptions).replace('<p><br></p>', ''))
     formData.append('workflowState', typeof idea.workflowState.code === 'undefined' ? idea.workflowState : idea.workflowState.code)
     formData.append('workflowStateExtra', idea.workflowStateExtra === null || typeof idea.workflowStateExtra.code === 'undefined' ? idea.workflowStateExtra : idea.workflowStateExtra.code)
     formData.append('theme', idea.campaignTheme.id)
@@ -211,23 +220,8 @@ export default function Idea() {
     setTempMedia(e.target.files)
   }
 
-  const getImageObjects = (_idea) => {
-    return _idea.medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
-      const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA.toString().replace(':id', item.id)
-
-      return link
-    })
-  }
-
-  const getDocumentObjects = (_idea) => {
-    return _idea.medias.filter(media => documentMimes.indexOf(media.type) > -1).map((item) => {
-      const link = process.env.REACT_APP_API_SERVER + process.env.REACT_APP_API_REQ_MEDIA_DOWNLOAD.toString().replace(':id', item.id)
-
-      return { original: link }
-    })
-  }
-
-  const images = idea ? getImageObjects(idea) : []
+  const images = getImages(idea && idea.medias ? idea.medias : [])
+  const documents = getDocuments(idea && idea.medias ? idea.medias : [])
 
   return (
     <>
@@ -367,7 +361,13 @@ export default function Idea() {
                   <div className="col-sm-12 col-md-12">
                     <div className="input-wrapper">
                       <label htmlFor="answer">Hivatal visszajelzése</label>
-                      <textarea name="answer" id="answer" value={idea.answer} onChange={handleChangeInput} />
+                      <Editor
+                        editorState={editorState}
+                        toolbarClassName="toolbarClassName"
+                        wrapperClassName="wrapperClassName"
+                        editorClassName="editorClassName"
+                        onEditorStateChange={setEditorState}
+                      />
 
                       {error && error.answer ? Object.values(error.answer).map((err, i) => {
                         return <ErrorMini key={i} error={err} increment={`answer-${i}`} />
@@ -411,11 +411,11 @@ export default function Idea() {
                   <div className="col-sm-12 col-md-6">
                     <h4>Dokumentumok</h4>
 
-                    {getDocumentObjects(idea) && getDocumentObjects(idea).length > 0 ? (
+                    {documents && documents.length > 0 ? (
                       <>
                         <div className="media-sep">
                           <div className="documents">
-                            {getDocumentObjects(idea).length > 0 && getDocumentObjects(idea).map((document, i) => (
+                            {documents.length > 0 && documents.map((document, i) => (
                               <a key={i} href={document.original} target="_blank" rel="noopener noreferrer">
                                 <div key={i} className="document">
                                   <FontAwesomeIcon icon={faFilePdf} />

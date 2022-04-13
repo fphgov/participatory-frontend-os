@@ -201,6 +201,12 @@ nav.main-navigation ul {
   user-select: none;
 }
 
+.btn-small {
+  padding: 8px 15px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
 .btn.btn-primary {
   background-color: var(--secondary-color);
   color: #fff;
@@ -1034,6 +1040,10 @@ ul.links {
   cursor: pointer;
 }
 
+.implementation-item {
+  margin: 0 0 12px 0;
+}
+
 summary {
   cursor: pointer;
 }
@@ -1042,10 +1052,75 @@ summary h4 {
   display: inline-block;
 }
 
+.implementation-item details {
+  border: 2px solid #19506e;
+  border-bottom: 0;
+}
+
+.implementation-item details[open] {
+  border: 2px solid #19506e;
+}
+
 .implementation-item summary {
   background-color: #19506e;
-  padding: 4px;
+  padding: 8px;
   color: #fff;
+  display: flex;
+  cursor: pointer;
+}
+
+.implementation-item details > div {
+  padding: 12px;
+}
+
+.implementation-heading {
+  display: inline-block;
+  width: 100%;
+  margin: 0 4px;
+}
+
+.implementation-time {
+  display: inline-block;
+}
+
+.implementation-time svg {
+  margin-right: 6px;
+}
+
+.implementation-info {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+.implementation-info .action {
+  display: inline-block;
+}
+
+.implementation-info .action a {
+  padding: 0 4px;
+  display: inline-block;
+  color: #fff;
+}
+
+.implementation-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px !important;
+}
+
+.implementation-add-footer {
+  margin-top: 24px;
+}
+
+.space {
+  margin: 48px 0;
+  background-color: #19506e;
+  height: 2px;
+}
+
+.space + .row div h2 {
+  margin-top: 0;
 }
 
 @media screen and (max-width: 991px) {
