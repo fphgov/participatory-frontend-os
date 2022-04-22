@@ -72,11 +72,12 @@ export default function Home() {
                 </> } */}
 
                 <p>Az ötletek jelenleg feldolgozás alatt vannak, nézd meg <Link to="/hirek/lezarult-az-otletbeadasi-szakasz-mi-jon-most" style={{ color: '#fff' }}>mi történik most</Link> az ötletekkel!</p>
-                <p>Jelentkezz a közösségi költségvetés tanácsába!</p>
+                <p>Szavazni nyáron tudsz majd.</p>
+                {/* <p>Jelentkezz a közösségi költségvetés tanácsába!</p> */}
 
-                <Link to="/hirek/vegyel-reszt-a-dontesben-hogy-a-beadott-es-jovahagyott-otletek-kozul-melyek-valosulhassanak-meg-budapesten-jelentkezz-a-kozossegi-koltsegvetes-tanacsaba" className="btn btn-primary">
+                {/* <Link to="/hirek/vegyel-reszt-a-dontesben-hogy-a-beadott-es-jovahagyott-otletek-kozul-melyek-valosulhassanak-meg-budapesten-jelentkezz-a-kozossegi-koltsegvetes-tanacsaba" className="btn btn-primary">
                   Jelentkezés
-                </Link>
+                </Link> */}
 
                 {/* {disabledIdeaSubmit ? null : <>
                   <Link className="btn btn-primary" to="/bekuldes">Ötletet adok be</Link>

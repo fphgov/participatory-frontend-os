@@ -6,6 +6,7 @@ import Tabs from '../common/Tabs'
 import TabContent from '../common/TabContent'
 import tokenParser from '../assets/tokenParser'
 import IdeaAnswer from './settings/IdeaAnswer'
+import IdeaEmail from './settings/IdeaEmail'
 
 export default function Settings() {
   const context = useContext(StoreContext)
@@ -247,6 +248,10 @@ export default function Settings() {
 
                 <TabContent id="idea_answer" name="Ötlet válaszok importálása">
                   <IdeaAnswer />
+                </TabContent>
+
+                <TabContent id="idea_email" name="E-mail küldés ötletgazdáknak">
+                  <IdeaEmail />
                 </TabContent>
 
                 <TabContent id="periods" name="Időszakok">
