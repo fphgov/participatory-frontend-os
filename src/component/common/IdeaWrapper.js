@@ -36,6 +36,18 @@ export default function IdeaWrapper(props) {
                   <h1 className="prop-single-title" style={{ color: theme.rgb }}>{props.idea.title}</h1>
                   <div className="prop-single-description" dangerouslySetInnerHTML={{ __html: props.idea.description }} />
 
+                  {props.idea.solution ? <>
+                    <h3 style={{ color: theme.rgb }}>Min szeretnél változtatni?</h3>
+
+                    <div className="prop-single-solution" dangerouslySetInnerHTML={{ __html: props.idea.solution }} />
+                  </> : null}
+
+                  {props.idea.locationDescription ? <>
+                    <h3 style={{ color: theme.rgb }}>Helyszín</h3>
+
+                    <div className="prop-single-location-description" dangerouslySetInnerHTML={{ __html: props.idea.locationDescription }} />
+                  </> : null}
+
                   {props.idea.links && props.idea.links.length > 0 ? (
                     <>
                       <h3 style={{ color: theme.rgb }}>Kapcsolódó hivatkozások</h3>
@@ -49,18 +61,6 @@ export default function IdeaWrapper(props) {
                       </ul>
                     </>
                   ) : null}
-
-                  {props.idea.solution ? <>
-                    <h3 style={{ color: theme.rgb }}>Min szeretnél változtatni?</h3>
-
-                    <div className="prop-single-solution" dangerouslySetInnerHTML={{ __html: props.idea.solution }} />
-                  </> : null}
-
-                  {props.idea.locationDescription ? <>
-                    <h3 style={{ color: theme.rgb }}>Helyszín leírás</h3>
-
-                    <div className="prop-single-location-description" dangerouslySetInnerHTML={{ __html: props.idea.locationDescription }} />
-                  </> : null}
 
                   {props.idea.video || (props.idea.medias && props.idea.medias.length > 0) ? (
                     <>
