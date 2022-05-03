@@ -56,6 +56,12 @@ export default function IdeaWrapper(props) {
                     <div className="prop-single-solution" dangerouslySetInnerHTML={{ __html: props.idea.solution }} />
                   </> : null}
 
+                  {props.idea.locationDescription ? <>
+                    <h3 style={{ color: theme.rgb }}>Helyszín leírás</h3>
+
+                    <div className="prop-single-location-description" dangerouslySetInnerHTML={{ __html: props.idea.locationDescription }} />
+                  </> : null}
+
                   {props.idea.video || (props.idea.medias && props.idea.medias.length > 0) ? (
                     <>
                       <h3 style={{ color: theme.rgb }}>Csatolmány</h3>
