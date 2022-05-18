@@ -15,6 +15,7 @@ import Posts from "./page/Posts"
 import Post from "./page/Post"
 import Project from "./page/Project"
 import Projects from "./page/Projects"
+import Plans from "./page/Plans"
 import Idea from "./page/Idea"
 import Ideas from "./page/Ideas"
 import ProfileActivate from "./page/ProfileActivate"
@@ -109,6 +110,7 @@ export default function App() {
             <Route exact path="/statisztika/:id" render={() => <Layout><Statistics /></Layout>} />
             <Route exact path="/otletek" render={() => <Layout><Ideas /></Layout>} />
             <Route exact path="/otletek/:id" render={() => <Layout><Idea /></Layout>} />
+            <Route exact path="/tervek" render={() => <Layout><Plans /></Layout>} />
             <Route exact path="/projektek" render={() => <Layout><Projects /></Layout>} />
             <Route exact path="/projektek/:id" render={() => <Layout><Project /></Layout>} />
             <Route exact path="/profil" render={() => <Layout><Profile /></Layout>} />

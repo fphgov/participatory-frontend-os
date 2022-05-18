@@ -250,7 +250,7 @@ export default function Ideas() {
       <SearchArea
         title="Beküldött ötletek"
         tipp="Itt szerepel minden ötlet, ami 2020. óta beérkezett a közösségi költségvetésbe. Az ötleteket itt abban a formában láthatod, ahogyan az ötletgazdák azokat beadták. Szűrők segítségével tudod szűkíteni a megjelenített ötletek körét."
-        tipp2="A szakmai jóváhagyást kapott ötletek szövegét később egységes formára hoztuk, rövidítettük, a hasonló ötleteket összevontuk. Az ötletek továbbfejlesztett verzióját az adatlapon a „Tovább a módosított ötletre” gombra kattintva ismerheted meg."
+        tipp2="A szakmai jóváhagyást kapott ötletek szövegét később egységes formára hoztuk, rövidítettük, a hasonló ötleteket összevontuk. Az ötletek továbbfejlesztett verzióját az adatlapon a „Tovább a módosított ötletre” gombra kattintva ismerheted meg. Ezeket a „Feldolgozott ötletek” menüpontban találod, vagy akár az egyes ötletekről is átléphetsz annak továbbfejlesztett verziójára az adatlapon szereplő, „Tovább a módosított ötletre” gombra kattintva."
         type="idea"
         queryRef={queryRef}
         values={filterData}

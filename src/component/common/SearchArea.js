@@ -22,7 +22,13 @@ export default function SearchArea({ title, tipp, tipp2, values, queryRef, input
   }
 
   const getFilterParams = (params) => {
-    const reqLink = type === 'project' ? process.env.REACT_APP_API_REQ_FILTER_PROJECTS : process.env.REACT_APP_API_REQ_FILTER_IDEAS
+    let reqLink = process.env.REACT_APP_API_REQ_FILTER_IDEAS
+
+    if (type === 'project') {
+      reqLink = process.env.REACT_APP_API_REQ_FILTER_PROJECTS
+    } else if (type === 'plan') {
+      reqLink = process.env.REACT_APP_API_REQ_FILTER_PLANS
+    }
 
     const searchParams = typeof params === 'undefined' ? window.location.search : '?' + params
 
