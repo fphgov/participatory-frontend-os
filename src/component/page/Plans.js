@@ -11,7 +11,7 @@ import FindMap from "../common/FindMap"
 import SearchArea from '../common/SearchArea'
 import generateRandomValue from '../assets/generateRandomValue'
 
-export default function Projects() {
+export default function Plans() {
   const context = useContext(StoreContext)
 
   const queryRef = createRef()
@@ -80,7 +80,7 @@ export default function Projects() {
 
   const getProjectData = () => {
     axios
-    .get(process.env.REACT_APP_API_REQ_PROJECTS + window.location.search)
+    .get(process.env.REACT_APP_API_REQ_PLANS + window.location.search)
     .then(response => {
       if (response.data) {
         setProjects(response.data._embedded.projects)
@@ -234,10 +234,10 @@ export default function Projects() {
   return (
     <div className="projects">
       <SearchArea
-        title="Megvalósuló ötletek"
-        tipp="Itt láthatod a nyertes ötleteket, vagyis azokat az egyes években legtöbb szavazatot kapott javaslatokat, amelyek a rendelkezésre álló keretösszegbe belefértek. Ezeket a Főpolgármesteri Hivatal megvalósítja."
-        tipp2="A megvalósulás folyamatáról, helyzetéről a projektek adatlapján tájékoztatást adunk."
-        type="project"
+        title="Feldolgozott ötletek"
+        tipp="Itt láthatók az eredetileg beadott és szakmai jóváhagyást kapott ötletek átdolgozásával, újrafogalmazásával, adott esetben összevonásával létrehozott végleges ötletek."
+        tipp2="Az eredeti ötleteket is meg tudod nyitni az adatlapon szereplő „Kapcsolódó ötletek” cím alatt, és azt is látod itt, ha több ötlet összevonásával alakult ki egy javaslat. Az itt látható feldolgozott ötletek kerülnek évente a közösségi költségvetési tanács elé, amely értékeli ezeket, majd javaslatot tesz arra, hogy melyik ötletek kerüljenek szavazólapra."
+        type="plan"
         queryRef={queryRef}
         values={filterData}
         inputChange={handleChange}
