@@ -5,7 +5,6 @@ import {
 import StoreContext from '../StoreContext'
 import tokenParser from './assets/tokenParser'
 import Logo from '../img/kozossegi_koltsegvetes.svg'
-import VoteModal from "./common/VoteModal"
 import getGravatarURL from "./lib/gravatar"
 
 const MobileMenu = (props) => {
@@ -84,9 +83,6 @@ export default function Header({ children }) {
     setPathname(window.location.pathname)
   }, [window.location.pathname])
 
-  const config = context.get('config')
-  const showVoteModal = config && !(config && config.options && config.options.close)
-
   return (
     <header>
       <nav className="main-navigation">
@@ -148,8 +144,6 @@ export default function Header({ children }) {
           </div>
         </div>
       </nav>
-
-      {showVoteModal && 0 ? <VoteModal open={context.get('rk_modal_open')} /> : null}
 
       {openMenu ? <MobileMenu menu={menu} onClick={toggleMenu} /> : null}
 

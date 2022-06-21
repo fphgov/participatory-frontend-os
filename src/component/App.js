@@ -67,14 +67,6 @@ export default function App() {
 
     if (localStorage.getItem('auth_token')) {
       context.set('token', localStorage.getItem('auth_token') || '')
-
-      const voted = tokenParser('user.voted')
-
-      const successVote = voted || !!localStorage.getItem('rk_voted')
-
-      setTimeout(() => {
-        context.set('successVote', successVote)
-      }, 100)
     } else {
       context.set('token', null)
     }

@@ -15,11 +15,6 @@ class AppWithContext extends React.Component {
     super(props)
 
     this.state = {
-      rk_vote_GREEN: null,
-      rk_vote_CARE: null,
-      rk_vote_WHOLE: null,
-      rk_modal_open: false,
-      successVote: false,
       loading: false,
       token: false,
       map: false,

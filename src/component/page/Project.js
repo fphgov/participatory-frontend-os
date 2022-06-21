@@ -13,7 +13,6 @@ export default function Statistics() {
 
   let { id } = useParams()
 
-  const [ showVoteButton, setShowVoteButton ] = useState(false)
   const [ scroll, setScroll ] = useState(false)
   const [ project, setProject ] = useState(null)
   const [ error, setError ] = useState('')
@@ -79,16 +78,6 @@ export default function Statistics() {
     }
   }, [])
 
-  useEffect(() => {
-    const config = context.get('config')
-
-    setShowVoteButton(!context.get('successVote') && !(config && config.options && config.options.close) && 0)
-
-    return () => {
-
-    }
-  }, [context.get('config')])
-
   const Error = (props) => {
     return (
       <div className="error-message">
@@ -106,7 +95,7 @@ export default function Statistics() {
       <div className="container">
         {scroll && document.querySelector('.vote-modal') ? <ScrollTo element={document.querySelector('.vote-modal').offsetTop} /> : null}
         {error ? <Error message={error} /> : null}
-        {project ? <ProjectWrapper project={project} onClickVote={vote} disableVoteButton={voteBtn} showVoteButton={showVoteButton} onTipClick={() => { setScroll(true) }} /> : null}
+        {project ? <ProjectWrapper project={project} onClickVote={vote} disableVoteButton={voteBtn} showVoteButton={false} onTipClick={() => { setScroll(true) }} /> : null}
       </div>
     </div>
   )
