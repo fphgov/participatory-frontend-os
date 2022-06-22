@@ -7,7 +7,6 @@ import {
   useLocation
 } from "react-router-dom"
 import StoreContext from '../../StoreContext'
-import tokenParser from '../assets/tokenParser'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser, faSignInAlt } from "@fortawesome/free-solid-svg-icons"
 
@@ -39,18 +38,6 @@ export default function Login() {
     .then(response => {
       if (response.data && response.data.token) {
         localStorage.setItem('auth_token', response.data.token)
-
-        if (tokenParser('user.voted') && tokenParser('user.voted') == true) {
-          localStorage.setItem('rk_voted', true)
-          context.set('successVote', true)
-        }
-
-        if (tokenParser('user.votes')) {
-          Object.entries(tokenParser('user.votes')).forEach(vote => {
-            localStorage.setItem(vote[0], JSON.stringify(vote[1]))
-            context.set(vote[0], JSON.stringify(vote[1]))
-          })
-        }
 
         context.set('token', localStorage.getItem('auth_token') || '')
 
