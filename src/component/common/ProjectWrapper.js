@@ -13,13 +13,14 @@ import Implementation from '../common/Implementation'
 import Gallery from "../common/Gallery"
 import { getImages, getDocuments } from '../assets/helperFunctions'
 
-export default function ProjectWrapper(props) {
+export default function ProjectWrapper({ project, showVoteButton, disableVoteButton, onClickVote, onTipClick }) {
   const context = useContext(StoreContext)
+  const isProject = [ 140, 200 ].indexOf(project.workflowState.id) !== -1;
 
-  const theme = props.project.campaignTheme
+  const theme = project.campaignTheme
 
-  const images = getImages(props.project.medias)
-  const documents = getDocuments(props.project.medias)
+  const images = getImages(project.medias)
+  const documents = getDocuments(project.medias)
 
   return (
     <div className="prop-inner-wrapper">
@@ -33,30 +34,30 @@ export default function ProjectWrapper(props) {
               <div className="prop-single-inner">
                 <div className="prop-single-content">
                   <div className="prop-location">
-                    <FontAwesomeIcon icon={faMapMarkerAlt} /> {props.project.location}
+                    <FontAwesomeIcon icon={faMapMarkerAlt} /> {project.location}
                   </div>
 
-                  <h1 className="prop-single-title" style={{ color: theme.rgb }}>{props.project.title}</h1>
-                  <div className="prop-single-description" dangerouslySetInnerHTML={{ __html: props.project.description }} />
+                  <h1 className="prop-single-title" style={{ color: theme.rgb }}>{project.title}</h1>
+                  <div className="prop-single-description" dangerouslySetInnerHTML={{ __html: project.description }} />
 
                   <h3 style={{ color: theme.rgb }}>Mire megoldás?</h3>
-                  <div className="prop-single-solution" dangerouslySetInnerHTML={{ __html: props.project.solution }} />
+                  <div className="prop-single-solution" dangerouslySetInnerHTML={{ __html: project.solution }} />
 
-                  {props.project.video || (props.project.medias && props.project.medias.length > 0) ? (
+                  {project.video || (project.medias && project.medias.length > 0) ? (
                     <>
                       <h3 style={{ color: theme.rgb }}>Csatolmány</h3>
                     </>
                   ) : null}
 
-                  {props.project.video ? (
+                  {project.video ? (
                     <>
                       <div className="media-sep">
-                        <div className="prop-single-video" dangerouslySetInnerHTML={{ __html: `<iframe width="100%" height="315" src="${props.project.video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>` }} />
+                        <div className="prop-single-video" dangerouslySetInnerHTML={{ __html: `<iframe width="100%" height="315" src="${project.video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>` }} />
                       </div>
                     </>
                   ) : null}
 
-                  {props.project.medias && props.project.medias.length > 0 ? (
+                  {project.medias && project.medias.length > 0 ? (
                     <>
                       <div className="media-sep">
                         <Gallery items={images} showThumbnails={true} />
@@ -64,7 +65,7 @@ export default function ProjectWrapper(props) {
                     </>
                   ) : null}
 
-                  {props.project.medias && props.project.medias.length > 0 ? (
+                  {project.medias && project.medias.length > 0 ? (
                     <>
                       <div className="media-sep">
                         <div className="documents">
@@ -87,25 +88,25 @@ export default function ProjectWrapper(props) {
           <div className="col-lg-4">
             <div className="prop-single-wrapper prop-single-sidebar">
               <div className="prop-single-content">
-                {props.showVoteButton ? <>
-                  <button className={`btn btn-primary btn-vote ${props.disableVoteButton ? 'btn-disable' : ''}`} style={{ backgroundColor: theme.rgb }} onClick={props.onClickVote}>Erre az ötletetre szavazok *</button>
+                {showVoteButton ? <>
+                  <button className={`btn btn-primary btn-vote ${disableVoteButton ? 'btn-disable' : ''}`} style={{ backgroundColor: theme.rgb }} onClick={onClickVote}>Erre az ötletetre szavazok *</button>
                 </> : null}
 
                 <h2>Ötlet</h2>
 
-                {props.project.voted !== null ? (
+                {project.voted !== null ? (
                   <div className="prop-single-voted">
                     <div className="prop-info-title">Beérkezett szavazatok</div>
                     <div className="prop-info-content">
-                      <b>{props.project.voted} szavazat</b></div>
+                      <b>{project.voted} szavazat</b></div>
                   </div>
                 ) : null}
 
-                {props.project.campaign ? (
+                {project.campaign ? (
                   <div className="prop-single-campaign">
                     <div className="prop-info-title">Kampány</div>
                     <div className="prop-info-content">
-                      <b>{props.project.campaign.title}</b>
+                      <b>{project.campaign.title}</b>
                     </div>
                   </div>
                 ) : null}
@@ -113,22 +114,22 @@ export default function ProjectWrapper(props) {
                 <div className="prop-single-status">
                   <div className="prop-info-title">Állapot</div>
                   <div className="prop-info-content">
-                    <b>{props.project.workflowState.title}</b>
+                    <b>{project.workflowState.title}</b>
                   </div>
                 </div>
 
                 <div className="prop-single-cost">
                   <div className="prop-info-title">Becsült költség</div>
                   <div className="prop-info-content">
-                    {!props.project.cost ? <b>Nincs becsült költség</b> : <b>{nFormatter(props.project.cost)}</b>}
+                    {!project.cost ? <b>Nincs becsült költség</b> : <b>{nFormatter(project.cost)}</b>}
                   </div>
                 </div>
 
                 <div className="prop-single-ideas">
                   <div className="prop-info-title">Kapcsolódó ötletek</div>
                   <div className="prop-info-content">
-                    {props.project.ideas.length === 0 ? <b>Nincs kapcsolódó ötlet</b> : null}
-                    {props.project.ideas.map((idea, i) => {
+                    {project.ideas.length === 0 ? <b>Nincs kapcsolódó ötlet</b> : null}
+                    {project.ideas.map((idea, i) => {
                       return (<div className="idea" key={i}>
                         <Link to={`/otletek/${idea}`} style={{ backgroundColor: theme.rgb }}>{idea}</Link>
                       </div>)
@@ -139,7 +140,7 @@ export default function ProjectWrapper(props) {
                 <div className="prop-single-tags">
                   <div className="prop-info-title">Címkék</div>
                   <div className="prop-info-content">
-                    {props.project.tags.map((tag, i) => {
+                    {project.tags.map((tag, i) => {
                       return (<div className="tag" key={i}>
                         <Link to={`/projektek?tag=${tag.id}`} style={{ backgroundColor: theme.rgb }}>#{tag.name}</Link>
                       </div>)
@@ -147,18 +148,18 @@ export default function ProjectWrapper(props) {
                   </div>
                 </div>
 
-                {props.project.submitter ? (
+                {project.submitter ? (
                   <div className="prop-single-wrapper">
                     <div className="prop-info-title">Beküldte</div>
                     <div className="prop-single-content">
-                      <div className="prop-single-submitter">{props.project.submitter.lastname} {props.project.submitter.firstname}</div>
-                      <div className="prop-single-submited">{getHungarianDateFormat(new Date(props.project.createdAt))}</div>
+                      <div className="prop-single-submitter">{project.submitter.lastname} {project.submitter.firstname}</div>
+                      <div className="prop-single-submited">{getHungarianDateFormat(new Date(project.createdAt))}</div>
                     </div>
                   </div>
                 ) : null}
 
-                {props.showVoteButton ? <>
-                  <div className="tipp">* A szavazat akkor érvényes, ha a felső, kék sávban található <div onClick={() => { context.set('rk_modal_open', true); props.onTipClick() }} style={{ textDecoration: 'underline', display: 'inline', cursor: 'pointer' }}>Szavazás</div> menüpontban mindhárom kategóriából választottál egy-egy ötletet, és azokat a beküldés gombbal beküldted.</div>
+                {showVoteButton ? <>
+                  <div className="tipp">* A szavazat akkor érvényes, ha a felső, kék sávban található <div onClick={() => { context.set('rk_modal_open', true); onTipClick() }} style={{ textDecoration: 'underline', display: 'inline', cursor: 'pointer' }}>Szavazás</div> menüpontban mindhárom kategóriából választottál egy-egy ötletet, és azokat a beküldés gombbal beküldted.</div>
                 </> : null}
 
                 <div className="prop-single-share">
@@ -176,13 +177,15 @@ export default function ProjectWrapper(props) {
           </div>
         </div>
 
-        {props.project.implementations && props.project.implementations.length > 0 ? <>
+        {project.implementations && project.implementations.length > 0 ? <>
           <div className="prop-single-history" style={{ borderColor: theme.rgb }}>
             <div className="prop-single-inner">
               <div className="prop-single-content">
-                <h3 style={{ color: theme.rgb }}>Hol tartunk a megvalósítással?</h3>
+                <h3 style={{ color: theme.rgb }}>
+                  {isProject ? 'Hol tartunk a megvalósítással?' : 'Hivatal visszajelzése'}
+                </h3>
 
-                <Implementation implementations={props.project.implementations} />
+                <Implementation implementations={project.implementations} />
               </div>
             </div>
           </div>
