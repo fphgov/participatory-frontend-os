@@ -100,13 +100,8 @@ nav.main-navigation ul {
 
 .main-navigation li {
   display: inline-flex;
-  /* height: 66px; */
   align-items: center;
 }
-
-/* .main-navigation li.highlight {
-  background-color: #0EA6CE;
-} */
 
 .main-navigation a {
   color: #12326E;
@@ -123,10 +118,6 @@ a.profile-menu {
 .main-navigation a.active {
   color: #fff;
 }
-
-/* .main-navigation li.highlight a {
-  color: #fff;
-} */
 
 .main-navigation a:hover {
   text-decoration: underline;
@@ -349,21 +340,6 @@ article.post-card:hover .post-more {
   color: #fff;
   border: 2px solid #fff;
 }
-
-/* article.post-card:hover .post-more::before {
-  position: absolute;
-  top: 6px;
-  background-color: #f6d05f;
-  width: 100%;
-  height: 35px;
-  bottom: 0;
-  left: -12px;
-  right: 0;
-  margin: auto;
-  content: ' ';
-  z-index: -1;
-  border-radius: 4px;
-} */
 
 .section-title {
   font-size: 36px;
@@ -2468,6 +2444,136 @@ input[disabled] {
   cursor: pointer;
 }
 
+summary {
+  cursor: pointer;
+}
+
+summary {
+  display: list-item;
+  background-color: #454347;
+  color: #fff;
+  padding: 12px;
+}
+
+details {
+  margin: 32px 0;
+}
+
+.vote-flow legend {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  color: #19506e !important;
+  padding: 12px 0 0 0;
+}
+
+.vote-flow fieldset {
+  padding: 0;
+}
+
+.vote-button {
+  margin: 16px 0;
+}
+
+.vote-flow h2 {
+  text-align: center;
+  margin-bottom: 42px;
+}
+
+.vote-flow .information {
+  display: flex;
+  align-items: center;
+  margin: 12px 0 28px 0;
+}
+
+.vote-flow .information svg {
+  font-size: 34px;
+  margin-right: 12px;
+}
+
+.radio-click-area {
+  width: 100%;
+  display: flex;
+  min-height: 82px;
+}
+
+.radio-details {
+  padding: 0;
+  display: block;
+  margin: 12px 0 0 0;
+  width: 100%;
+}
+
+.radio-details details {
+  margin: 0;
+  padding: 0;
+  color: #19506E;
+  cursor: initial;
+}
+
+.radio-details summary {
+  margin: 0 auto;
+  padding: 0;
+  display: block;
+  text-align: center;
+  background: none;
+  color: #fff;
+  background-color: #19506E;
+  width: 100%;
+  padding: 6px 0;
+  font-size: 18px;
+  border-radius: 4px;
+}
+
+.page-vote .radio-inline-block {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.page-vote .form-group .radio-inline-block .radio-inline {
+  width: 47%;
+  width: calc(50% - 24px);
+  margin: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-vote .form-group .overview .radio-inline-block .radio-inline {
+  margin-left: 0;
+}
+
+.no-selected-idea {
+  font-style: italic;
+  margin: 12px 0;
+}
+
+.overview-value-wrapper {
+  display: flex;
+}
+
+.overview-value-wrapper > div {
+  width: 100%;
+}
+
+.page-vote .form-group .overview .overview-value-wrapper .radio-inline-block .radio-inline {
+  width: 100%;
+}
+
+button.next-step[disabled] {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+button.first-step {
+  background-color: #0ECE41;
+}
+
+.overview-value-wrapper .radio-inline-block {
+  margin-right: 12px;
+  margin-top: 12px;
+}
+
 @media screen and (min-width: 1200px) {
   .container, .container-sm, .container-md, .container-lg, .container-xl {
     max-width: 1170px;
@@ -2533,6 +2639,15 @@ input[disabled] {
   .category-item {
     margin: 24px 0 !important;
     display: block;
+  }
+
+  .page-vote .form-group .radio-inline-block .radio-inline {
+    width: 100%;
+    margin: 12px 0;
+  }
+
+  .radio-click-area {
+    min-height: auto;
   }
 }
 
