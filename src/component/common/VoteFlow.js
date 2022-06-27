@@ -89,8 +89,6 @@ export default function VoteFlow() {
       } else {
         setError('Váratlan hiba történt, kérünk próbáld később')
       }
-
-      setRedirect(true)
     }).finally(() => {
       context.set('loading', false)
     })
