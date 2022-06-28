@@ -46,6 +46,9 @@ export default function VoteCategory({ name, code, description, nextStep, prevSt
                       <h4>Mire megoldás?</h4>
 
                       <p>{project.solution}</p>
+
+                      <h4>Helyszín</h4>
+                      <p>{project.location ? project.location : '-'}</p>
                     </>}
                     handleChange={handleChange}
                   />
@@ -76,6 +79,9 @@ export default function VoteCategory({ name, code, description, nextStep, prevSt
                         <h4>Mire megoldás?</h4>
 
                         <p>{project.solution}</p>
+
+                        <h4>Helyszín</h4>
+                        <p>{project.location ? project.location : '-'}</p>
                       </>}
                       handleChange={handleChange}
                     />
