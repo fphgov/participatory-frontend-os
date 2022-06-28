@@ -15,6 +15,7 @@ export default function VoteFlow() {
   const [ projects, setProjects ] = useState([])
   const [ profile, setProfile ] = useState(null)
   const [ error, setError ] = useState(null)
+  const [ isClosed, setIsClosed ] = useState(false)
   const [ success, setSuccess ] = useState(false)
   const [ scroll, setScroll ] = useState(false)
   const [ recaptcha, setRecaptcha ] = useState(null)
@@ -86,9 +87,15 @@ export default function VoteFlow() {
     }).catch(error => {
       if (error.response && error.response.data && error.response.data.message) {
         setError(error.response.data.message)
+
+        if (error.response.data.code && error.response.data.code === 'CLOSED') {
+          setIsClosed(true)
+        }
       } else {
         setError('Váratlan hiba történt, kérünk próbáld később')
       }
+
+      setScroll(true)
     }).finally(() => {
       context.set('loading', false)
     })
@@ -162,14 +169,24 @@ export default function VoteFlow() {
     })
   }
 
+  const Error = ({ message }) => {
+    return (
+      <div className="error-message">
+        {message}
+      </div>
+    )
+  }
+
   return (
     <div className="vote-flow">
-      {scroll && document.querySelector('.error-message') ? <ScrollTo element={document.querySelector('.error-message').offsetTop} /> : null}
-
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            {! success ? <>
+            {error && !isClosed ? <Error message={error} /> : null}
+
+            {scroll && document.querySelector('.error-message') ? <ScrollTo element={document.querySelector('.error-message').offsetTop} /> : null}
+
+            {!success && !isClosed ? <>
               <form className="form-horizontal" onSubmit={(e) => { e.preventDefault() }}>
                 <h2>Szavazás a 2021/22-es közösségi költségvetés ötleteire</h2>
 
@@ -196,7 +213,6 @@ export default function VoteFlow() {
                           nextStep={nextStep}
                           prevStep={null}
                           handleChange={handleChangeInput}
-                          error={error}
                           values={formData}
                           projects={projects}
                         />
@@ -216,7 +232,6 @@ export default function VoteFlow() {
                           nextStep={nextStep}
                           prevStep={prevStep}
                           handleChange={handleChangeInput}
-                          error={error}
                           values={formData}
                           projects={projects}
                         />
@@ -229,14 +244,13 @@ export default function VoteFlow() {
                           name={'Nyitott Budapest'}
                           code="OPEN"
                           description={<>
-                            <p>Egy nyitott város a szívügyed?Együttműködések, új, kísérleti megoldások, digitális fejlesztések, rövid távú, közösségépítő ötletek.Ilyen ötleteket találsz ebben a kategóriában.</p>
+                            <p>Egy nyitott város a szívügyed? Együttműködések, új, kísérleti megoldások, digitális fejlesztések, rövid távú, közösségépítő ötletek.Ilyen ötleteket találsz ebben a kategóriában.</p>
 
                             <p>Kérjük jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
                           </>}
                           nextStep={nextStep}
                           prevStep={prevStep}
                           handleChange={handleChangeInput}
-                          error={error}
                           values={formData}
                           projects={projects}
                         />
@@ -250,7 +264,6 @@ export default function VoteFlow() {
                           values={formData}
                           onSubmit={submitVote}
                           profile={profile}
-                          error={error}
                           projects={projects}
                         />
                       </ScrollToTop>
@@ -269,10 +282,16 @@ export default function VoteFlow() {
               </form>
             </> : null}
 
-            {success ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
+            {success && ! isClosed ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
               <h3>Köszönjük, hogy leadtad a 2021/22-es közösségi költségvetésben is a szavazatodat</h3>
               <p>A beküldést sikeresen rögzítettük. Pár percen belül kapni fogsz erről egy megerősítő e-mailt, melyben szerepelni fog az általad kiválasztott ötleteknek a listája.</p>
             </div> : null}
+
+            {isClosed ? <>
+              <h3>A szavazás jelenleg zárva tart!</h3>
+
+              <p>A közösségi költségvetés 2022-es szavazási időszaka július 1-től augusztus 31-ig tart, ebben az időszakban van lehetőség online szavazásra is.</p>
+            </> : null}
           </div>
         </div>
       </div>
