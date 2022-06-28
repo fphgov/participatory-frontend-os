@@ -1591,6 +1591,10 @@ p.error {
   opacity: 0.5;
   z-index: -1;
   margin: 4px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -ms-progress-appearance: none;
 }
 
 .radio-inline-hide {
@@ -2525,6 +2529,10 @@ details {
   border-radius: 4px;
 }
 
+.radio-details summary::-webkit-details-marker {
+  display: none;
+}
+
 .page-vote .radio-inline-block {
   display: flex;
   flex-wrap: wrap;
@@ -2736,6 +2744,10 @@ button.first-step {
 
   .newsletter {
     padding: 60px 0;
+  }
+
+  .overview-value-wrapper {
+    flex-direction: column;
   }
 }
 
