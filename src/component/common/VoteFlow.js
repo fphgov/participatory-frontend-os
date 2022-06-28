@@ -1,4 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
+import {
+  useHistory,
+} from "react-router-dom"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import { rmAllCharForName } from '../lib/removeSpecialCharacters'
 import API from '../assets/axios'
@@ -7,9 +10,12 @@ import tokenParser from '../assets/tokenParser'
 import StoreContext from '../../StoreContext'
 import VoteCategory from '../common/form/VoteCategory'
 import VoteOverview from '../common/form/VoteOverview'
+import generateRandomValue from '../assets/generateRandomValue'
 
 export default function VoteFlow() {
   const context = useContext(StoreContext)
+
+  let history = useHistory()
 
   const [ projects, setProjects ] = useState([])
   const [ profile, setProfile ] = useState(null)
@@ -20,6 +26,9 @@ export default function VoteFlow() {
   const [ recaptcha, setRecaptcha ] = useState(null)
   const [ recaptchaToken, setRecaptchaToken ] = useState('')
   const [ step, setStep ] = useState(1)
+  const [ filterData, setFilterData ] = useState({
+    'rand': '',
+  })
   const [ formData, setFormData ] = useState({
     'theme_CARE_small': 0,
     'theme_CARE_big': 0,
@@ -66,19 +75,43 @@ export default function VoteFlow() {
     setFormData({ ...formData, [ e.target.name ]: value })
   }
 
+  const refreshURLParams = (e) => {
+    if (e) {
+      e.preventDefault()
+    }
+
+    const search = new URLSearchParams(document.location.search)
+
+    search.set("rand", filterData.rand)
+
+    history.push({ search: search.toString() })
+  }
+
   useEffect(() => {
     document.body.classList.add('page-vote')
 
-    getVotableProjects()
-
     loadReCaptcha(process.env.SITE_KEY, (recaptchaToken) => {
       setRecaptchaToken(recaptchaToken)
+    })
+
+    const search = new URLSearchParams(document.location.search)
+
+    setFilterData({
+      rand: search.get('rand') && search.get('rand') != '' ? search.get('rand') : generateRandomValue(),
     })
 
     return () => {
       document.body.classList.remove('page-vote')
     }
   }, [])
+
+  useEffect(() => {
+    refreshURLParams()
+
+    if (filterData.rand !== '') {
+      getVotableProjects()
+    }
+  }, [filterData])
 
   useEffect(() => {
     setProfile(tokenParser('user'))
@@ -92,7 +125,7 @@ export default function VoteFlow() {
     context.set('loading', true)
 
     API.get(
-      process.env.REACT_APP_API_REQ_VOTE_LIST
+      process.env.REACT_APP_API_REQ_VOTE_LIST + window.location.search
     ).then(response => {
       if (response.data && response.data.data) {
         setProjects(response.data.data)
