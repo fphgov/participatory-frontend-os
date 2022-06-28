@@ -283,7 +283,7 @@ export default function VoteFlow() {
             </> : null}
 
             {success && ! isClosed ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
-              <h3>Köszönjük, hogy leadtad a 2021/22-es közösségi költségvetésben is a szavazatodat</h3>
+              <h3>Köszönjük, hogy leadtad a 2021/22-es közösségi költségvetésben a szavazatodat</h3>
               <p>A beküldést sikeresen rögzítettük. Pár percen belül kapni fogsz erről egy megerősítő e-mailt, melyben szerepelni fog az általad kiválasztott ötleteknek a listája.</p>
             </div> : null}
 

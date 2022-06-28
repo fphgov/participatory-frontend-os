@@ -77,7 +77,7 @@ export default function VoteOverview({ firstStep, values, profile, projects, onS
             <div className="overview-name">Zöld Budapest</div>
             <div className="overview-value-wrapper">
               <div className="overview-value">
-                <div className="radio-title">Kis ötlet*</div>
+                <div className="radio-title">Kis ötlet</div>
                 <div className="radio-inline-block">
                   <OverviewVote projects={greenSmallProject} type="small" index={'gs1'} />
 
@@ -86,7 +86,7 @@ export default function VoteOverview({ firstStep, values, profile, projects, onS
               </div>
 
               <div className="overview-value">
-                <div className="radio-title">Nagy ötlet*</div>
+                <div className="radio-title">Nagy ötlet</div>
                 <div className="radio-inline-block">
                   <OverviewVote projects={greenBigProject} type="big" index={'gb1'} />
 
@@ -100,7 +100,7 @@ export default function VoteOverview({ firstStep, values, profile, projects, onS
             <div className="overview-name">Esélyteremtő Budapest</div>
             <div className="overview-value-wrapper">
               <div className="overview-value">
-                <div className="radio-title">Kis ötlet*</div>
+                <div className="radio-title">Kis ötlet</div>
                 <div className="radio-inline-block">
                   <OverviewVote projects={careSmallProject} type="small" index={'cs1'} />
 
@@ -109,7 +109,7 @@ export default function VoteOverview({ firstStep, values, profile, projects, onS
               </div>
 
               <div className="overview-value">
-                <div className="radio-title">Nagy ötlet*</div>
+                <div className="radio-title">Nagy ötlet</div>
                 <div className="radio-inline-block">
                   <OverviewVote projects={careBigProject} type="big" index={'cb1'} />
 
@@ -123,7 +123,7 @@ export default function VoteOverview({ firstStep, values, profile, projects, onS
             <div className="overview-name">Nyitott Budapest</div>
             <div className="overview-value-wrapper">
               <div className="overview-value">
-                <div className="radio-title">Kis ötlet*</div>
+                <div className="radio-title">Kis ötlet</div>
                 <div className="radio-inline-block">
                   <OverviewVote projects={openSmallProject} type="small" index={'os1'} />
 
@@ -132,7 +132,7 @@ export default function VoteOverview({ firstStep, values, profile, projects, onS
               </div>
 
               <div className="overview-value">
-                <div className="radio-title">Nagy ötlet*</div>
+                <div className="radio-title">Nagy ötlet</div>
                 <div className="radio-inline-block">
                   <OverviewVote projects={openBigProject} type="big" index={'ob1'} />
 
@@ -145,7 +145,7 @@ export default function VoteOverview({ firstStep, values, profile, projects, onS
 
         <p>Ha változtatni szeretnél, másik ötletre szavaznál, kattints arra az ötletre, amelyet le szeretnél cserélni, így automatikusan annak a kategóriának az oldalára jutsz, ahol az ötlet listázva van. Itt jelöld ki az új ötletet amire szavazni szeretnél és kattints a tovább gombra.</p>
 
-        <p>Ha biztos vagy abban, hogy a neked legjobban tetsző ötleteket jelölted ki, kattints a Leadom a szavazatom gombra. Szavazatodon, ezután már nincs módod változtatni!</p>
+        <p>Ha biztos vagy abban, hogy a neked legjobban tetsző ötleteket jelölted ki, kattints a "Szavazok" gombra. Szavazatodon ezután már nincs módod változtatni!</p>
 
         {profile ? <>
           <div className="profile">

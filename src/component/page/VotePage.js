@@ -93,7 +93,7 @@ export default function VotePage() {
                   <li>Ezután az összesítő oldalra érsz, ahol azokat az ötleteket látod, melyeket előzőleg kijelöltél. Ha változtatni szeretnél, másik ötletre szavaznál, kattints arra az ötletre, amelyet le szeretnél cserélni, így automatikusan annak a kategóriának az oldalára jutsz, ahol az ötlet listázva van. Itt jelöld ki az új ötletet, amire szavazni szeretnél és kattints a tovább gombra.</li>
                 </ol>
 
-                <p>Ha biztos vagy abban, hogy a neked legjobban tetsző ötleteket jelölted ki, kattints a Leadom a szavazatom gombra! Szavazatodon ezután már nincs módod változtatni.</p>
+                <p>Ha biztos vagy abban, hogy a neked legjobban tetsző ötleteket jelölted ki, kattints a "Szavazok" gombra! Szavazatodon ezután már nincs módod változtatni.</p>
 
                 <p>Készen állsz?</p>
               </details>
