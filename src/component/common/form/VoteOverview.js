@@ -70,7 +70,7 @@ export default function VoteOverview({ firstStep, values, profile, projects, onS
       <h3>Áttekintés</h3>
 
       <div className="form-group location">
-        <p>Az alábbi ötleteket jelölted be, ha most leadod a szavazatod, ezekre az ötletekre fogsz szavazni.</p>
+        <p>Az alábbi ötleteket jelölted be. Ha most leadod a szavazatod, ezekre az ötletekre fogsz szavazni.</p>
 
         <div className="overview-wrapper">
           <div className="overview">
@@ -143,9 +143,9 @@ export default function VoteOverview({ firstStep, values, profile, projects, onS
           </div>
         </div>
 
-        <p>Ha változtatni szeretnél, másik ötletre szavaznál, kattints arra az ötletre, amelyet le szeretnél cserélni, így automatikusan annak a kategóriának az oldalára jutsz, ahol az ötlet listázva van. Itt jelöld ki az új ötletet amire szavazni szeretnél és kattints a tovább gombra.</p>
+        <p>Ha változtatni szeretnél, másik ötletre szavaznál, kattints arra az ötletre, amelyet le szeretnél cserélni, így automatikusan annak a kategóriának az oldalára jutsz, ahol az ötlet listázva van. Itt jelöld ki az új ötletet, amire szavazni szeretnél és kattints a Tovább gombra.</p>
 
-        <p>Ha biztos vagy abban, hogy a neked legjobban tetsző ötleteket jelölted ki, kattints a "Szavazok" gombra. Szavazatodon ezután már nincs módod változtatni!</p>
+        <p>Ha biztos vagy abban, hogy a neked legjobban tetsző ötleteket jelölted ki, kattints a Szavazok gombra. Szavazatodon ezután már nincs módod változtatni!</p>
 
         {profile ? <>
           <div className="profile">
@@ -160,7 +160,7 @@ export default function VoteOverview({ firstStep, values, profile, projects, onS
         <ErrorRender error={error} name="form" />
       </div> : null}
 
-      <FormPaginator firstStep={firstStep}>
+      <FormPaginator firstStep={firstStep} nextButtonName="Tovább">
         <button type="submit" className="submit" onClick={onSubmit}>Szavazok</button>
       </FormPaginator>
     </>

@@ -213,9 +213,9 @@ export default function VoteFlow() {
                         name={'Zöld Budapest'}
                         code="GREEN"
                         description={<>
-                          <p>Budapest felkészül a klímaváltozásra. Zöldebb utcák, élettel teli parkok, mindenki számára elérhető, környezettudatos megoldások - ilyen ötleteket találsz ebben a kategóriában.</p>
+                          <p>Budapest felkészül a klímaváltozásra.Zöldebb utcák, élettel teli parkok, mindenki számára elérhető, környezettudatos megoldások – ilyen ötleteket találsz ebben a kategóriában.</p>
 
-                          <p>Kérjük jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
+                          <p>Kérjük, jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
                         </>}
                         nextStep={nextStep}
                         prevStep={null}
@@ -230,9 +230,9 @@ export default function VoteFlow() {
                         name={'Esélyteremtő Budapest'}
                         code="CARE"
                         description={<>
-                          <p>A cél a társadalmi különbségek csökkentése, hátrányos helyzetű közösségek életét támogató ötletekkel, például szociális segítségnyújtással. Ilyen ötleteket találsz ebben a kategóriában.</p>
+                          <p>A cél a társadalmi különbségek csökkentése, hátrányos helyzetű közösségek életét támogató ötletekkel, például szociális segítségnyújtással. – Ilyen ötleteket találsz ebben a kategóriában.</p>
 
-                          <p>Kérjük jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
+                          <p>Kérjük, jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
                         </>}
                         nextStep={nextStep}
                         prevStep={prevStep}
@@ -247,9 +247,9 @@ export default function VoteFlow() {
                         name={'Nyitott Budapest'}
                         code="OPEN"
                         description={<>
-                          <p>Egy nyitott város a szívügyed? Együttműködések, új, kísérleti megoldások, digitális fejlesztések, rövid távú, közösségépítő ötletek.Ilyen ötleteket találsz ebben a kategóriában.</p>
+                          <p>Egy nyitott város a szívügyed?Együttműködések, új, kísérleti megoldások, digitális fejlesztések, rövid távú, közösségépítő ötletek. – Ilyen ötleteket találsz ebben a kategóriában.</p>
 
-                          <p>Kérjük jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
+                          <p>Kérjük, jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
                         </>}
                         nextStep={nextStep}
                         prevStep={prevStep}
@@ -283,8 +283,8 @@ export default function VoteFlow() {
             </> : null}
 
             {success && ! isClosed ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
-              <h3>Köszönjük, hogy leadtad a 2021/22-es közösségi költségvetésben a szavazatodat</h3>
-              <p>A beküldést sikeresen rögzítettük. Pár percen belül kapni fogsz erről egy megerősítő e-mailt, melyben szerepelni fog az általad kiválasztott ötleteknek a listája.</p>
+              <h3>Köszönjük, hogy leadtad szavazatodat a 2021/22-es közösségi költségvetésen!</h3>
+              <p>A beküldést sikeresen rögzítettük. Pár percen belül kapni fogsz erről egy megerősítő e-mailt, melyben szerepelni fog az általad kiválasztott ötletek listája.</p>
             </div> : null}
 
             {isClosed ? <>
