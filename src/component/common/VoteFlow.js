@@ -3,7 +3,6 @@ import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import { rmAllCharForName } from '../lib/removeSpecialCharacters'
 import API from '../assets/axios'
 import ScrollTo from "../common/ScrollTo"
-import ScrollToTop from "../common/ScrollToTop"
 import tokenParser from '../assets/tokenParser'
 import StoreContext from '../../StoreContext'
 import VoteCategory from '../common/form/VoteCategory'
@@ -30,20 +29,29 @@ export default function VoteFlow() {
     'theme_OPEN_big': 0,
   })
 
+  const scrollTop = () => {
+    setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+    }, 1)
+  }
+
   const firstStep = () => {
     setError(null)
     setStep(1)
+    scrollTop()
   }
 
   const prevStep = () => {
     if (step > 1) {
       setStep(step - 1)
+      scrollTop()
     }
   }
 
   const nextStep = () => {
     if (step <= 4) {
       setStep(step + 1)
+      scrollTop()
     }
   }
 
@@ -201,72 +209,64 @@ export default function VoteFlow() {
                 switch (step) {
                   case 1:
                     return (
-                      <ScrollToTop>
-                        <VoteCategory
-                          name={'Zöld Budapest'}
-                          code="GREEN"
-                          description={<>
-                            <p>Budapest felkészül a klímaváltozásra. Zöldebb utcák, élettel teli parkok, mindenki számára elérhető, környezettudatos megoldások - ilyen ötleteket találsz ebben a kategóriában.</p>
+                      <VoteCategory
+                        name={'Zöld Budapest'}
+                        code="GREEN"
+                        description={<>
+                          <p>Budapest felkészül a klímaváltozásra. Zöldebb utcák, élettel teli parkok, mindenki számára elérhető, környezettudatos megoldások - ilyen ötleteket találsz ebben a kategóriában.</p>
 
-                            <p>Kérjük jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
-                          </>}
-                          nextStep={nextStep}
-                          prevStep={null}
-                          handleChange={handleChangeInput}
-                          values={formData}
-                          projects={projects}
-                        />
-                      </ScrollToTop>
+                          <p>Kérjük jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
+                        </>}
+                        nextStep={nextStep}
+                        prevStep={null}
+                        handleChange={handleChangeInput}
+                        values={formData}
+                        projects={projects}
+                      />
                     )
                   case 2:
                     return (
-                      <ScrollToTop>
-                        <VoteCategory
-                          name={'Esélyteremtő Budapest'}
-                          code="CARE"
-                          description={<>
-                            <p>A cél a társadalmi különbségek csökkentése, hátrányos helyzetű közösségek életét támogató ötletekkel, például szociális segítségnyújtással. Ilyen ötleteket találsz ebben a kategóriában.</p>
+                      <VoteCategory
+                        name={'Esélyteremtő Budapest'}
+                        code="CARE"
+                        description={<>
+                          <p>A cél a társadalmi különbségek csökkentése, hátrányos helyzetű közösségek életét támogató ötletekkel, például szociális segítségnyújtással. Ilyen ötleteket találsz ebben a kategóriában.</p>
 
-                            <p>Kérjük jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
-                          </>}
-                          nextStep={nextStep}
-                          prevStep={prevStep}
-                          handleChange={handleChangeInput}
-                          values={formData}
-                          projects={projects}
-                        />
-                      </ScrollToTop>
+                          <p>Kérjük jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
+                        </>}
+                        nextStep={nextStep}
+                        prevStep={prevStep}
+                        handleChange={handleChangeInput}
+                        values={formData}
+                        projects={projects}
+                      />
                     )
                   case 3:
                     return (
-                      <ScrollToTop>
-                        <VoteCategory
-                          name={'Nyitott Budapest'}
-                          code="OPEN"
-                          description={<>
-                            <p>Egy nyitott város a szívügyed? Együttműködések, új, kísérleti megoldások, digitális fejlesztések, rövid távú, közösségépítő ötletek.Ilyen ötleteket találsz ebben a kategóriában.</p>
+                      <VoteCategory
+                        name={'Nyitott Budapest'}
+                        code="OPEN"
+                        description={<>
+                          <p>Egy nyitott város a szívügyed? Együttműködések, új, kísérleti megoldások, digitális fejlesztések, rövid távú, közösségépítő ötletek.Ilyen ötleteket találsz ebben a kategóriában.</p>
 
-                            <p>Kérjük jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
-                          </>}
-                          nextStep={nextStep}
-                          prevStep={prevStep}
-                          handleChange={handleChangeInput}
-                          values={formData}
-                          projects={projects}
-                        />
-                      </ScrollToTop>
+                          <p>Kérjük jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
+                        </>}
+                        nextStep={nextStep}
+                        prevStep={prevStep}
+                        handleChange={handleChangeInput}
+                        values={formData}
+                        projects={projects}
+                      />
                     )
                   case 4:
                     return (
-                      <ScrollToTop>
-                        <VoteOverview
-                          firstStep={firstStep}
-                          values={formData}
-                          onSubmit={submitVote}
-                          profile={profile}
-                          projects={projects}
-                        />
-                      </ScrollToTop>
+                      <VoteOverview
+                        firstStep={firstStep}
+                        values={formData}
+                        onSubmit={submitVote}
+                        profile={profile}
+                        projects={projects}
+                      />
                     )
                 }
               })()}
