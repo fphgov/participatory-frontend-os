@@ -4,8 +4,10 @@ import {
 } from "react-router-dom"
 import VoteRadio from './elements/VoteRadio'
 import FormPaginator from './elements/FormPaginator'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faVoteYea } from "@fortawesome/free-solid-svg-icons"
 
-export default function VoteOverview({ firstStep, values, profile, projects, onSubmit, error }) {
+export default function VoteOverview({ firstStep, changeStep, values, profile, projects, onSubmit, error }) {
   const greenSmallProject = projects.filter(elem => elem.id.toString() === values.theme_GREEN_small.toString())
   const greenBigProject = projects.filter(elem => elem.id.toString() === values.theme_GREEN_big.toString())
   const careSmallProject = projects.filter(elem => elem.id.toString() === values.theme_CARE_small.toString())
@@ -31,7 +33,7 @@ export default function VoteOverview({ firstStep, values, profile, projects, onS
     </>)
   }
 
-  const OverviewVote = ({ projects, type, index }) => {
+  const OverviewVote = ({ projects, type, index, onClickArea }) => {
     if (!projects && typeof projects[0] !== "undefined") {
       return (<div className="no-selected-idea">Nincs kiválaszott ötlet</div>)
     }
@@ -51,6 +53,7 @@ export default function VoteOverview({ firstStep, values, profile, projects, onS
         radioValue={values[ `theme_${project.campaignTheme.code}_${type}` ]}
         title={project.title}
         price={project.cost}
+        onClickArea={onClickArea}
         details={<>
           <p>{project.description}</p>
 
@@ -79,7 +82,7 @@ export default function VoteOverview({ firstStep, values, profile, projects, onS
               <div className="overview-value">
                 <div className="radio-title">Kis ötlet</div>
                 <div className="radio-inline-block">
-                  <OverviewVote projects={greenSmallProject} type="small" index={'gs1'} />
+                  <OverviewVote projects={greenSmallProject} type="small" index={'gs1'} onClickArea={() => { changeStep(1) }} />
 
                   <ErrorRender error={error} name="theme_GREEN_small" />
                 </div>
@@ -88,7 +91,7 @@ export default function VoteOverview({ firstStep, values, profile, projects, onS
               <div className="overview-value">
                 <div className="radio-title">Nagy ötlet</div>
                 <div className="radio-inline-block">
-                  <OverviewVote projects={greenBigProject} type="big" index={'gb1'} />
+                  <OverviewVote projects={greenBigProject} type="big" index={'gb1'} onClickArea={() => { changeStep(1) }} />
 
                   <ErrorRender error={error} name="theme_GREEN_big" />
                 </div>
@@ -102,7 +105,7 @@ export default function VoteOverview({ firstStep, values, profile, projects, onS
               <div className="overview-value">
                 <div className="radio-title">Kis ötlet</div>
                 <div className="radio-inline-block">
-                  <OverviewVote projects={careSmallProject} type="small" index={'cs1'} />
+                  <OverviewVote projects={careSmallProject} type="small" index={'cs1'} onClickArea={() => { changeStep(2) }} />
 
                   <ErrorRender error={error} name="theme_CARE_small" />
                 </div>
@@ -111,7 +114,7 @@ export default function VoteOverview({ firstStep, values, profile, projects, onS
               <div className="overview-value">
                 <div className="radio-title">Nagy ötlet</div>
                 <div className="radio-inline-block">
-                  <OverviewVote projects={careBigProject} type="big" index={'cb1'} />
+                  <OverviewVote projects={careBigProject} type="big" index={'cb1'} onClickArea={() => { changeStep(2) }} />
 
                   <ErrorRender error={error} name="theme_CARE_big" />
                 </div>
@@ -125,7 +128,7 @@ export default function VoteOverview({ firstStep, values, profile, projects, onS
               <div className="overview-value">
                 <div className="radio-title">Kis ötlet</div>
                 <div className="radio-inline-block">
-                  <OverviewVote projects={openSmallProject} type="small" index={'os1'} />
+                  <OverviewVote projects={openSmallProject} type="small" index={'os1'} onClickArea={() => { changeStep(3) }} />
 
                   <ErrorRender error={error} name="theme_OPEN_small" />
                 </div>
@@ -134,7 +137,7 @@ export default function VoteOverview({ firstStep, values, profile, projects, onS
               <div className="overview-value">
                 <div className="radio-title">Nagy ötlet</div>
                 <div className="radio-inline-block">
-                  <OverviewVote projects={openBigProject} type="big" index={'ob1'} />
+                  <OverviewVote projects={openBigProject} type="big" index={'ob1'} onClickArea={() => { changeStep(3) }} />
 
                   <ErrorRender error={error} name="theme_OPEN_big" />
                 </div>
@@ -161,7 +164,9 @@ export default function VoteOverview({ firstStep, values, profile, projects, onS
       </div> : null}
 
       <FormPaginator firstStep={firstStep} nextButtonName="Tovább">
-        <button type="submit" className="submit" onClick={onSubmit}>Szavazok</button>
+        <button type="submit" className="submit" onClick={onSubmit}>
+          <FontAwesomeIcon icon={faVoteYea} /> Szavazok
+        </button>
       </FormPaginator>
     </>
   )

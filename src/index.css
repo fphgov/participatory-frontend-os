@@ -2592,6 +2592,27 @@ button.first-step {
   margin-top: 0;
 }
 
+.overview-value .radio-inline-symbol {
+  display: none;
+}
+
+.overview-value .radio-inline,
+.overview-value .radio-inline.active label {
+  color: #19506E !important;
+}
+
+.overview-value .radio-click-area {
+  cursor: pointer;
+}
+
+.page-vote button.first-step {
+  background-color: #0EA6CE;
+}
+
+.page-vote button.submit {
+  background-color: #0ECE41;
+}
+
 @media screen and (min-width: 1200px) {
   .container, .container-sm, .container-md, .container-lg, .container-xl {
     max-width: 1170px;

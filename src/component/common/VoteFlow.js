@@ -55,6 +55,11 @@ export default function VoteFlow() {
     }
   }
 
+  const changeStep = (step) => {
+    setStep(step)
+    scrollTop()
+  }
+
   const handleChangeInput = (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : rmAllCharForName(e.target.value)
 
@@ -262,6 +267,7 @@ export default function VoteFlow() {
                     return (
                       <VoteOverview
                         firstStep={firstStep}
+                        changeStep={changeStep}
                         values={formData}
                         onSubmit={submitVote}
                         profile={profile}
