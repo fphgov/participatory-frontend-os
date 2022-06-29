@@ -19,11 +19,12 @@ class AppWithContext extends React.Component {
       token: false,
       map: false,
       get: (key) => {
-        return typeof store.get('state') !== 'undefined' && typeof store.get('state')[ key ] !== 'undefined' ? store.get('state')[ key ] : this.state[ key ]
+        return typeof store.get('state') !== 'undefined' && typeof store.get('state')[key] !== 'undefined' ? store.get('state')[key] : this.state[key]
       },
       set: (key, value, cb) => {
         const state = this.state
-        state[ key ] = value
+
+        state[key] = value
 
         if (typeof cb === 'function') {
           this.setState(state, cb)
@@ -40,6 +41,21 @@ class AppWithContext extends React.Component {
         } else {
           this.setState(state)
         }
+      },
+      storeGet: (contextName) => {
+        return typeof store.get(contextName) !== 'undefined' ? store.get(contextName) : null
+      },
+      storeSave: (contextName, key, value) => {
+        const state = this.state
+
+        state[key] = value
+
+        store.set(contextName, { ...store.get(contextName), [key]: value })
+
+        this.setState(state)
+      },
+      storeRemove: (contextName) => {
+        store.remove(contextName)
       }
     }
   }

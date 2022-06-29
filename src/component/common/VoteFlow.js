@@ -74,6 +74,8 @@ export default function VoteFlow() {
     const value = e.target.type === 'checkbox' ? e.target.checked : rmAllCharForName(e.target.value)
 
     setFormData({ ...formData, [ e.target.name ]: value })
+
+    context.storeSave('votes', e.target.name, value)
   }
 
   const refreshURLParams = (e) => {
@@ -106,6 +108,18 @@ export default function VoteFlow() {
     }
   }, [])
 
+  const restoreSelectedProjects = () => {
+    const selectedProjects = context.storeGet('votes')
+
+    if (selectedProjects) {
+      setFormData({ ...formData, ...selectedProjects })
+
+      if (Object.keys(selectedProjects).length === 6 && Object.values(selectedProjects).map(p => p - 0).filter(p => p !== 0).length === 6) {
+        changeStep(4)
+      }
+    }
+  }
+
   useEffect(() => {
     refreshURLParams()
 
@@ -130,6 +144,7 @@ export default function VoteFlow() {
     ).then(response => {
       if (response.data && response.data.data) {
         setProjects(response.data.data)
+        restoreSelectedProjects()
       }
     }).catch(error => {
       if (error.response && error.response.data && error.response.data.message) {
@@ -184,6 +199,7 @@ export default function VoteFlow() {
     .then(response => {
       if (response.data && response.status === 200) {
         setSuccess(true)
+        context.storeRemove('votes')
       }
     })
     .catch(error => {
