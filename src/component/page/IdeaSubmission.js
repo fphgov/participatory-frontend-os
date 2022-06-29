@@ -4,6 +4,7 @@ import {
 } from "react-router-dom"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import { rmForNumber, rmAllCharForName, rmAllCharForTitle, rmAllCharForAddress } from '../lib/removeSpecialCharacters'
+import { getWafInfo } from '../assets/helperFunctions'
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
 import ScrollTo from "../common/ScrollTo"
@@ -200,7 +201,7 @@ export default function IdeaSubmission() {
           setScroll(true)
         }
       } else if (error.response && error.response.data && error.response.data.errors) {
-        setError(error.response.data.errors)
+        console.log(error.response.data.errors)
         setScroll(true)
       } else {
         setError('Váratlan hiba történt, kérünk próbáld később. Amennyiben a hiba ismétlődik, kérünk, küldd el ötleted a <a href="mailto:nyitott@budapest.hu">nyitott@budapest.hu</a>-ra január 31. éjfélig. Köszönjük megértésedet!')
@@ -210,24 +211,6 @@ export default function IdeaSubmission() {
       recaptcha.execute()
       context.set('loading', false)
     })
-  }
-
-  const getWafInfo = (htmlContent) => {
-    const el = document.createElement('html')
-
-    el.innerHTML = htmlContent
-
-    if (el.getElementsByTagName('p') && el.getElementsByTagName('p')[1]) {
-      const infos = el.getElementsByTagName('p')[1].innerText.match(/^URL: (.*)Client IP: (.*)Attack ID: (.*)Message ID: (.*)$/)
-
-      return {
-        url: infos[1],
-        attackId: infos[3],
-        messageId: infos[4]
-      }
-    }
-
-    return null
   }
 
   useEffect(() => {

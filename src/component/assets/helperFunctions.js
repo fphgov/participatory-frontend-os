@@ -19,3 +19,21 @@ export function getDocuments(medias) {
     return { original: link }
   })
 }
+
+export function getWafInfo(htmlContent) {
+  const el = document.createElement('html')
+
+  el.innerHTML = htmlContent
+
+  if (el.getElementsByTagName('p') && el.getElementsByTagName('p')[ 1 ]) {
+    const infos = el.getElementsByTagName('p')[ 1 ].innerText.match(/^URL: (.*)Client IP: (.*)Attack ID: (.*)Message ID: (.*)$/)
+
+    return {
+      url: infos[ 1 ],
+      attackId: infos[ 3 ],
+      messageId: infos[ 4 ]
+    }
+  }
+
+  return null
+}
