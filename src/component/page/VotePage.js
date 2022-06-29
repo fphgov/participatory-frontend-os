@@ -72,7 +72,7 @@ export default function VotePage() {
                 <p>A szavazáshoz <Link to={'/bejelentkezes'}>be kell jelentkezned</Link>, vagy <Link to={'/regisztracio'}>létre kell hoznod</Link> egy felhasználói fiókot. Ezt a szavazás végén is megteheted.</p>
               </> : null}
 
-                <p>Ha szeretnéd megismerni a közösségi költségvetés szavazásának menetét, akkor kattints a Bővebben a szavazásról gombra!</p>
+              <p>Ha szeretnéd megismerni a közösségi költségvetés szavazásának menetét, akkor kattints a Bővebben a szavazásról gombra!</p>
 
               <details>
                 <summary>Bővebben a szavazásról</summary>

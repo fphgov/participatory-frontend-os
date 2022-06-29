@@ -12,6 +12,8 @@ export default function VoteCategory({ name, code, description, nextStep, prevSt
   const validationAndNext = () => {
     if (isSelectedAll) {
       nextStep()
+    } else {
+      alert('Mind a kis, mind a nagy ötletek közül jelölj meg egyet a továbblépéshez.')
     }
   }
 

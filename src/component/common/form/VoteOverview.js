@@ -54,6 +54,7 @@ export default function VoteOverview({ firstStep, changeStep, values, profile, p
         title={project.title}
         price={project.cost}
         onClickArea={onClickArea}
+        htmlTitle="Vissza a kategória oldalra"
         details={<>
           <p>{project.description}</p>
 

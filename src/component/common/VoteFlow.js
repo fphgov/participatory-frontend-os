@@ -257,7 +257,7 @@ export default function VoteFlow() {
                         name={'Zöld Budapest'}
                         code="GREEN"
                         description={<>
-                          <p>Budapest felkészül a klímaváltozásra.Zöldebb utcák, élettel teli parkok, mindenki számára elérhető, környezettudatos megoldások – ilyen ötleteket találsz ebben a kategóriában.</p>
+                          <p>Budapest felkészül a klímaváltozásra. Zöldebb utcák, élettel teli parkok, mindenki számára elérhető, környezettudatos megoldások – ilyen ötleteket találsz ebben a kategóriában.</p>
 
                           <p>Kérjük, jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
                         </>}
@@ -291,7 +291,7 @@ export default function VoteFlow() {
                         name={'Nyitott Budapest'}
                         code="OPEN"
                         description={<>
-                          <p>Egy nyitott város a szívügyed?Együttműködések, új, kísérleti megoldások, digitális fejlesztések, rövid távú, közösségépítő ötletek. – Ilyen ötleteket találsz ebben a kategóriában.</p>
+                          <p>Egy nyitott város a szívügyed? Együttműködések, új, kísérleti megoldások, digitális fejlesztések, rövid távú, közösségépítő ötletek. – Ilyen ötleteket találsz ebben a kategóriában.</p>
 
                           <p>Kérjük, jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
                         </>}

@@ -2570,6 +2570,7 @@ details {
   width: 100%;
 }
 
+button.next-step.disabled,
 button.next-step[disabled] {
   background-color: gray;
   cursor: not-allowed;
@@ -2601,6 +2602,11 @@ button.first-step {
   color: #19506E !important;
 }
 
+.overview-value .radio-inline.active label:hover {
+  text-decoration: underline;
+}
+
+.overview-value .radio-inline label,
 .overview-value .radio-click-area {
   cursor: pointer;
 }
@@ -2612,6 +2618,7 @@ button.first-step {
 .page-vote button.submit {
   background-color: #0ECE41;
 }
+
 
 @media screen and (min-width: 1200px) {
   .container, .container-sm, .container-md, .container-lg, .container-xl {
