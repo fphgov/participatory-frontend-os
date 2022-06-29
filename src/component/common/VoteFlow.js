@@ -1,25 +1,34 @@
 import React, { useEffect, useState, useContext } from 'react'
+import {
+  useHistory,
+} from "react-router-dom"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import { rmAllCharForName } from '../lib/removeSpecialCharacters'
 import API from '../assets/axios'
 import ScrollTo from "../common/ScrollTo"
-import ScrollToTop from "../common/ScrollToTop"
 import tokenParser from '../assets/tokenParser'
 import StoreContext from '../../StoreContext'
 import VoteCategory from '../common/form/VoteCategory'
 import VoteOverview from '../common/form/VoteOverview'
+import generateRandomValue from '../assets/generateRandomValue'
 
 export default function VoteFlow() {
   const context = useContext(StoreContext)
 
+  let history = useHistory()
+
   const [ projects, setProjects ] = useState([])
   const [ profile, setProfile ] = useState(null)
   const [ error, setError ] = useState(null)
+  const [ isClosed, setIsClosed ] = useState(false)
   const [ success, setSuccess ] = useState(false)
   const [ scroll, setScroll ] = useState(false)
   const [ recaptcha, setRecaptcha ] = useState(null)
   const [ recaptchaToken, setRecaptchaToken ] = useState('')
   const [ step, setStep ] = useState(1)
+  const [ filterData, setFilterData ] = useState({
+    'rand': '',
+  })
   const [ formData, setFormData ] = useState({
     'theme_CARE_small': 0,
     'theme_CARE_big': 0,
@@ -29,21 +38,35 @@ export default function VoteFlow() {
     'theme_OPEN_big': 0,
   })
 
+  const scrollTop = () => {
+    setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+    }, 1)
+  }
+
   const firstStep = () => {
     setError(null)
     setStep(1)
+    scrollTop()
   }
 
   const prevStep = () => {
     if (step > 1) {
       setStep(step - 1)
+      scrollTop()
     }
   }
 
   const nextStep = () => {
     if (step <= 4) {
       setStep(step + 1)
+      scrollTop()
     }
+  }
+
+  const changeStep = (step) => {
+    setStep(step)
+    scrollTop()
   }
 
   const handleChangeInput = (e) => {
@@ -52,19 +75,43 @@ export default function VoteFlow() {
     setFormData({ ...formData, [ e.target.name ]: value })
   }
 
+  const refreshURLParams = (e) => {
+    if (e) {
+      e.preventDefault()
+    }
+
+    const search = new URLSearchParams(document.location.search)
+
+    search.set("rand", filterData.rand)
+
+    history.push({ search: search.toString() })
+  }
+
   useEffect(() => {
     document.body.classList.add('page-vote')
 
-    getVotableProjects()
-
     loadReCaptcha(process.env.SITE_KEY, (recaptchaToken) => {
       setRecaptchaToken(recaptchaToken)
+    })
+
+    const search = new URLSearchParams(document.location.search)
+
+    setFilterData({
+      rand: search.get('rand') && search.get('rand') != '' ? search.get('rand') : generateRandomValue(),
     })
 
     return () => {
       document.body.classList.remove('page-vote')
     }
   }, [])
+
+  useEffect(() => {
+    refreshURLParams()
+
+    if (filterData.rand !== '') {
+      getVotableProjects()
+    }
+  }, [filterData])
 
   useEffect(() => {
     setProfile(tokenParser('user'))
@@ -78,7 +125,7 @@ export default function VoteFlow() {
     context.set('loading', true)
 
     API.get(
-      process.env.REACT_APP_API_REQ_VOTE_LIST
+      process.env.REACT_APP_API_REQ_VOTE_LIST + window.location.search
     ).then(response => {
       if (response.data && response.data.data) {
         setProjects(response.data.data)
@@ -86,11 +133,15 @@ export default function VoteFlow() {
     }).catch(error => {
       if (error.response && error.response.data && error.response.data.message) {
         setError(error.response.data.message)
+
+        if (error.response.data.code && error.response.data.code === 'CLOSED') {
+          setIsClosed(true)
+        }
       } else {
         setError('Váratlan hiba történt, kérünk próbáld később')
       }
 
-      setRedirect(true)
+      setScroll(true)
     }).finally(() => {
       context.set('loading', false)
     })
@@ -164,14 +215,24 @@ export default function VoteFlow() {
     })
   }
 
+  const Error = ({ message }) => {
+    return (
+      <div className="error-message">
+        {message}
+      </div>
+    )
+  }
+
   return (
     <div className="vote-flow">
-      {scroll && document.querySelector('.error-message') ? <ScrollTo element={document.querySelector('.error-message').offsetTop} /> : null}
-
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            {! success ? <>
+            {error && !isClosed ? <Error message={error} /> : null}
+
+            {scroll && document.querySelector('.error-message') ? <ScrollTo element={document.querySelector('.error-message').offsetTop} /> : null}
+
+            {!success && !isClosed ? <>
               <form className="form-horizontal" onSubmit={(e) => { e.preventDefault() }}>
                 <h2>Szavazás a 2021/22-es közösségi költségvetés ötleteire</h2>
 
@@ -186,76 +247,65 @@ export default function VoteFlow() {
                 switch (step) {
                   case 1:
                     return (
-                      <ScrollToTop>
-                        <VoteCategory
-                          name={'Zöld Budapest'}
-                          code="GREEN"
-                          description={<>
-                            <p>Budapest felkészül a klímaváltozásra. Zöldebb utcák, élettel teli parkok, mindenki számára elérhető, környezettudatos megoldások - ilyen ötleteket találsz ebben a kategóriában.</p>
+                      <VoteCategory
+                        name={'Zöld Budapest'}
+                        code="GREEN"
+                        description={<>
+                          <p>Budapest felkészül a klímaváltozásra.Zöldebb utcák, élettel teli parkok, mindenki számára elérhető, környezettudatos megoldások – ilyen ötleteket találsz ebben a kategóriában.</p>
 
-                            <p>Kérjük jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
-                          </>}
-                          nextStep={nextStep}
-                          prevStep={null}
-                          handleChange={handleChangeInput}
-                          error={error}
-                          values={formData}
-                          projects={projects}
-                        />
-                      </ScrollToTop>
+                          <p>Kérjük, jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
+                        </>}
+                        nextStep={nextStep}
+                        prevStep={null}
+                        handleChange={handleChangeInput}
+                        values={formData}
+                        projects={projects}
+                      />
                     )
                   case 2:
                     return (
-                      <ScrollToTop>
-                        <VoteCategory
-                          name={'Esélyteremtő Budapest'}
-                          code="CARE"
-                          description={<>
-                            <p>A cél a társadalmi különbségek csökkentése, hátrányos helyzetű közösségek életét támogató ötletekkel, például szociális segítségnyújtással. Ilyen ötleteket találsz ebben a kategóriában.</p>
+                      <VoteCategory
+                        name={'Esélyteremtő Budapest'}
+                        code="CARE"
+                        description={<>
+                          <p>A cél a társadalmi különbségek csökkentése, hátrányos helyzetű közösségek életét támogató ötletekkel, például szociális segítségnyújtással. – Ilyen ötleteket találsz ebben a kategóriában.</p>
 
-                            <p>Kérjük jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
-                          </>}
-                          nextStep={nextStep}
-                          prevStep={prevStep}
-                          handleChange={handleChangeInput}
-                          error={error}
-                          values={formData}
-                          projects={projects}
-                        />
-                      </ScrollToTop>
+                          <p>Kérjük, jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
+                        </>}
+                        nextStep={nextStep}
+                        prevStep={prevStep}
+                        handleChange={handleChangeInput}
+                        values={formData}
+                        projects={projects}
+                      />
                     )
                   case 3:
                     return (
-                      <ScrollToTop>
-                        <VoteCategory
-                          name={'Nyitott Budapest'}
-                          code="OPEN"
-                          description={<>
-                            <p>Egy nyitott város a szívügyed?Együttműködések, új, kísérleti megoldások, digitális fejlesztések, rövid távú, közösségépítő ötletek.Ilyen ötleteket találsz ebben a kategóriában.</p>
+                      <VoteCategory
+                        name={'Nyitott Budapest'}
+                        code="OPEN"
+                        description={<>
+                          <p>Egy nyitott város a szívügyed?Együttműködések, új, kísérleti megoldások, digitális fejlesztések, rövid távú, közösségépítő ötletek. – Ilyen ötleteket találsz ebben a kategóriában.</p>
 
-                            <p>Kérjük jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
-                          </>}
-                          nextStep={nextStep}
-                          prevStep={prevStep}
-                          handleChange={handleChangeInput}
-                          error={error}
-                          values={formData}
-                          projects={projects}
-                        />
-                      </ScrollToTop>
+                          <p>Kérjük, jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
+                        </>}
+                        nextStep={nextStep}
+                        prevStep={prevStep}
+                        handleChange={handleChangeInput}
+                        values={formData}
+                        projects={projects}
+                      />
                     )
                   case 4:
                     return (
-                      <ScrollToTop>
-                        <VoteOverview
-                          firstStep={firstStep}
-                          values={formData}
-                          onSubmit={submitVote}
-                          profile={profile}
-                          error={error}
-                          projects={projects}
-                        />
-                      </ScrollToTop>
+                      <VoteOverview
+                        firstStep={firstStep}
+                        changeStep={changeStep}
+                        values={formData}
+                        onSubmit={submitVote}
+                        profile={profile}
+                        projects={projects}
+                      />
                     )
                 }
               })()}
@@ -271,10 +321,16 @@ export default function VoteFlow() {
               </form>
             </> : null}
 
-            {success ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
-              <h3>Köszönjük, hogy leadtad a 2021/22-es közösségi költségvetésben is a szavazatodat</h3>
-              <p>A beküldést sikeresen rögzítettük. Pár percen belül kapni fogsz erről egy megerősítő e-mailt, melyben szerepelni fog az általad kiválasztott ötleteknek a listája.</p>
+            {success && ! isClosed ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
+              <h3>Köszönjük, hogy leadtad szavazatodat a 2021/22-es közösségi költségvetésen!</h3>
+              <p>A beküldést sikeresen rögzítettük. Pár percen belül kapni fogsz erről egy megerősítő e-mailt, melyben szerepelni fog az általad kiválasztott ötletek listája.</p>
             </div> : null}
+
+            {isClosed ? <>
+              <h3>A szavazás jelenleg zárva tart!</h3>
+
+              <p>A közösségi költségvetés 2022-es szavazási időszaka július 1-től augusztus 31-ig tart, ebben az időszakban van lehetőség online szavazásra is.</p>
+            </> : null}
           </div>
         </div>
       </div>

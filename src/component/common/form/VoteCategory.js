@@ -25,9 +25,9 @@ export default function VoteCategory({ name, code, description, nextStep, prevSt
             <div>{description}</div>
 
             <fieldset>
-              <legend>Kis ötlet*</legend>
+              <legend>Kis ötlet</legend>
 
-              <div className="information"><FontAwesomeIcon icon={faInfoCircle} /> A kis ötleteknek alsó értékhatára nincs, de maximum 50 millió Ft-ból megvalósíthatónak kell lenniük. Minden kategóriában maximum 4 ilyen ötlet nyerhet.</div>
+              <div className="information"><FontAwesomeIcon icon={faInfoCircle} /> A kis ötleteknek alsó értékhatára nincs, de maximum 50 millió Ft-ból megvalósíthatónak kell lenniük. Minden kategóriában maximum 4 kis ötlet nyerhet.</div>
 
               <div className="radio-inline-block">
                 {smallProjects.map((project, i) => {
@@ -46,6 +46,9 @@ export default function VoteCategory({ name, code, description, nextStep, prevSt
                       <h4>Mire megoldás?</h4>
 
                       <p>{project.solution}</p>
+
+                      <h4>Helyszín</h4>
+                      <p>{project.location ? project.location : '-'}</p>
                     </>}
                     handleChange={handleChange}
                   />
@@ -55,9 +58,9 @@ export default function VoteCategory({ name, code, description, nextStep, prevSt
             </fieldset>
 
             <fieldset>
-              <legend>Nagy ötlet*</legend>
+              <legend>Nagy ötlet</legend>
 
-              <div className="information"><FontAwesomeIcon icon={faInfoCircle} /> Nagy ötletnek az számít, aminek a megvalósítása 50 és 133 millió Ft közé esik.Minden kategóriában csak egy ilyen ötlet nyerhet.</div>
+              <div className="information"><FontAwesomeIcon icon={faInfoCircle} /> Nagy ötletnek az számít, aminek a megvalósítása 50 és 133 millió Ft közé esik. Minden kategóriában csak egy nagy ötlet nyerhet.</div>
 
               <div className="radio-inline-block">
                 {bigProjects.map((project, i) => {
@@ -76,6 +79,9 @@ export default function VoteCategory({ name, code, description, nextStep, prevSt
                         <h4>Mire megoldás?</h4>
 
                         <p>{project.solution}</p>
+
+                        <h4>Helyszín</h4>
+                        <p>{project.location ? project.location : '-'}</p>
                       </>}
                       handleChange={handleChange}
                     />
@@ -85,7 +91,7 @@ export default function VoteCategory({ name, code, description, nextStep, prevSt
             </fieldset>
 
             <div className="input-wrapper">
-              <FormPaginator prevStep={prevStep} nextStep={validationAndNext} nextStepInvalid={!isSelectedAll} />
+              <FormPaginator prevStep={prevStep} nextStep={validationAndNext} nextStepInvalid={!isSelectedAll} nextButtonName="Tovább" />
             </div>
           </div>
         </div>

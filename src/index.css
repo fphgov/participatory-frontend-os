@@ -1586,11 +1586,16 @@ p.error {
 }
 
 .radio-inline-block .radio-inline input[type="radio"] {
-  padding: 22px;
+  padding: 12px;
   display: block;
   opacity: 0.5;
   z-index: -1;
-  margin: 4px;
+  margin: -2px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -ms-progress-appearance: none;
+  border: none;
 }
 
 .radio-inline-hide {
@@ -2469,6 +2474,7 @@ details {
 
 .vote-flow fieldset {
   padding: 0;
+  margin: 36px 0;
 }
 
 .vote-button {
@@ -2525,6 +2531,10 @@ details {
   border-radius: 4px;
 }
 
+.radio-details summary::-webkit-details-marker {
+  display: none;
+}
+
 .page-vote .radio-inline-block {
   display: flex;
   flex-wrap: wrap;
@@ -2572,6 +2582,35 @@ button.first-step {
 .overview-value-wrapper .radio-inline-block {
   margin-right: 12px;
   margin-top: 12px;
+}
+
+.overview-value .radio-title {
+  margin-top: 12px;
+}
+
+.overview-value-wrapper .radio-inline-block {
+  margin-top: 0;
+}
+
+.overview-value .radio-inline-symbol {
+  display: none;
+}
+
+.overview-value .radio-inline,
+.overview-value .radio-inline.active label {
+  color: #19506E !important;
+}
+
+.overview-value .radio-click-area {
+  cursor: pointer;
+}
+
+.page-vote button.first-step {
+  background-color: #0EA6CE;
+}
+
+.page-vote button.submit {
+  background-color: #0ECE41;
 }
 
 @media screen and (min-width: 1200px) {
@@ -2736,6 +2775,10 @@ button.first-step {
 
   .newsletter {
     padding: 60px 0;
+  }
+
+  .overview-value-wrapper {
+    flex-direction: column;
   }
 }
 
