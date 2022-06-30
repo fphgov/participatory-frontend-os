@@ -4,7 +4,8 @@ import {
 } from "react-router-dom"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import { rmAllCharForName } from '../lib/removeSpecialCharacters'
-import API from '../assets/axios'
+import { getWafInfo } from '../assets/helperFunctions'
+import axios from "axios"
 import ScrollTo from "../common/ScrollTo"
 import tokenParser from '../assets/tokenParser'
 import StoreContext from '../../StoreContext'
@@ -73,6 +74,8 @@ export default function VoteFlow() {
     const value = e.target.type === 'checkbox' ? e.target.checked : rmAllCharForName(e.target.value)
 
     setFormData({ ...formData, [ e.target.name ]: value })
+
+    context.storeSave('votes', e.target.name, value)
   }
 
   const refreshURLParams = (e) => {
@@ -105,6 +108,18 @@ export default function VoteFlow() {
     }
   }, [])
 
+  const restoreSelectedProjects = () => {
+    const selectedProjects = context.storeGet('votes')
+
+    if (selectedProjects) {
+      setFormData({ ...formData, ...selectedProjects })
+
+      if (Object.keys(selectedProjects).length === 6 && Object.values(selectedProjects).map(p => p - 0).filter(p => p !== 0).length === 6) {
+        changeStep(4)
+      }
+    }
+  }
+
   useEffect(() => {
     refreshURLParams()
 
@@ -124,11 +139,12 @@ export default function VoteFlow() {
   const getVotableProjects = () => {
     context.set('loading', true)
 
-    API.get(
+    axios.get(
       process.env.REACT_APP_API_REQ_VOTE_LIST + window.location.search
     ).then(response => {
       if (response.data && response.data.data) {
         setProjects(response.data.data)
+        restoreSelectedProjects()
       }
     }).catch(error => {
       if (error.response && error.response.data && error.response.data.message) {
@@ -175,7 +191,7 @@ export default function VoteFlow() {
     ideaFormData.append('projects[5]', formData.theme_OPEN_big)
     ideaFormData.append('g-recaptcha-response', recaptchaToken)
 
-    API.post(
+    axios.post(
       process.env.REACT_APP_API_REQ_PROFILE_VOTE,
       ideaFormData,
       config
@@ -183,6 +199,7 @@ export default function VoteFlow() {
     .then(response => {
       if (response.data && response.status === 200) {
         setSuccess(true)
+        context.storeRemove('votes')
       }
     })
     .catch(error => {
@@ -190,21 +207,27 @@ export default function VoteFlow() {
         window.Rollbar.info("Send vote impossible", error.response)
       }
 
-      if (error.response && error.response.status === 403) {
+      if (error.response && error.response.status === 401) {
+        setError('Nem vagy bejelentkezve. <a href="/bejelentkezes">Belépni itt tudsz.</a> Belépést követően, innen folytathatod a szavazást.')
+        setScroll(true)
+      } else if (error.response && error.response.status === 403) {
         setError('Google reCapcha ellenőrzés sikertelen')
         setScroll(true)
-      } if (error.response && error.response.status === 500) {
-        if (error.response.headers[ 'content-type' ] && error.response.headers[ 'content-type' ].match(/text\/html/)) {
+      } else if (error.response && error.response.status === 500) {
+        if (error.response.headers['content-type'] && error.response.headers['content-type'].match(/text\/html/)) {
           const wafInfo = getWafInfo(error.response.data)
 
           setError('A tűzfalunk hibát érzékelt, ezért az ötletet nem tudjuk befogadni. A kellemetlenségért elnézést kérünk! Kérünk, vedd fel velünk a kapcsolatot a <a href="mailto:nyitott@budapest.hu?subject=WAF%20probléma%20(' + wafInfo.messageId + ')&body=Tisztelt%20Főváros!%0D%0A%0D%0APróbáltam%20ötletet%20beadni,%20de%20hibaüzenetet%20kaptam.%0D%0A%0D%0AA%20hiba%20azonosítója:%20' + wafInfo.messageId + '">nyitott@budapest.hu</a> címen! (A hiba azonosítója: ' + wafInfo.messageId + ')')
           setScroll(true)
         }
       } else if (error.response && error.response.data && error.response.data.errors) {
-        setError(error.response.data.errors)
+        console.log(error.response.data.errors)
+        setScroll(true)
+      } else if (error.response && error.response.data && error.response.data.message) {
+        setError(error.response.data.message)
         setScroll(true)
       } else {
-        setError('Váratlan hiba történt, kérünk próbáld később. Amennyiben a hiba ismétlődik, kérünk, küldd el ötleted a <a href="mailto:nyitott@budapest.hu">nyitott@budapest.hu</a>-ra január 31. éjfélig. Köszönjük megértésedet!')
+        setError('Váratlan hiba történt, kérünk próbáld később. Amennyiben a hiba ismétlődik, kérünk, küldd el szavazatodat a <a href="mailto:nyitott@budapest.hu">nyitott@budapest.hu</a>-ra augusztus 31. éjfélig. Köszönjük megértésedet!')
         setScroll(true)
       }
 
@@ -217,8 +240,7 @@ export default function VoteFlow() {
 
   const Error = ({ message }) => {
     return (
-      <div className="error-message">
-        {message}
+      <div className="error-message" dangerouslySetInnerHTML={{ __html: message }}>
       </div>
     )
   }
@@ -251,7 +273,7 @@ export default function VoteFlow() {
                         name={'Zöld Budapest'}
                         code="GREEN"
                         description={<>
-                          <p>Budapest felkészül a klímaváltozásra.Zöldebb utcák, élettel teli parkok, mindenki számára elérhető, környezettudatos megoldások – ilyen ötleteket találsz ebben a kategóriában.</p>
+                          <p>Budapest felkészül a klímaváltozásra. Zöldebb utcák, élettel teli parkok, mindenki számára elérhető, környezettudatos megoldások – ilyen ötleteket találsz ebben a kategóriában.</p>
 
                           <p>Kérjük, jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
                         </>}
@@ -285,7 +307,7 @@ export default function VoteFlow() {
                         name={'Nyitott Budapest'}
                         code="OPEN"
                         description={<>
-                          <p>Egy nyitott város a szívügyed?Együttműködések, új, kísérleti megoldások, digitális fejlesztések, rövid távú, közösségépítő ötletek. – Ilyen ötleteket találsz ebben a kategóriában.</p>
+                          <p>Egy nyitott város a szívügyed? Együttműködések, új, kísérleti megoldások, digitális fejlesztések, rövid távú, közösségépítő ötletek. – Ilyen ötleteket találsz ebben a kategóriában.</p>
 
                           <p>Kérjük, jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
                         </>}

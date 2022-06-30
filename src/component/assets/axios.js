@@ -3,7 +3,9 @@ import axios from "axios"
 axios.defaults.baseURL = process.env.REACT_APP_API_SERVER
 axios.defaults.headers.common['Accept'] = 'application/json';
 
-axios.interceptors.response.use(response => {
+const uninterceptedAxiosInstance = axios.create();
+
+uninterceptedAxiosInstance.interceptors.response.use(response => {
    return response
 }, error => {
   if (error.response && error.response.status === 401) {
@@ -15,4 +17,4 @@ axios.interceptors.response.use(response => {
   return Promise.reject(error)
 })
 
-export default axios
+export default uninterceptedAxiosInstance
