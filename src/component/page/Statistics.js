@@ -17,7 +17,7 @@ export default function Statistics() {
   const [tabs, setTabs] = useState([])
   const [projects, setProjects] = useState([])
   const [filteredProjects, setFilteredProjects] = useState([])
-  const [currentTabIndex, setCurrentTabIndex] = useState(1)
+  const [currentTabIndex, setCurrentTabIndex] = useState(4)
 
   const updateProjects = () => {
     const filteredProjects = currentTabIndex !== 0 ? projects.filter((t) => t.campaign_theme.id === currentTabIndex) : projects

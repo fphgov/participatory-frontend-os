@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import {
   useHistory,
+  Link,
 } from "react-router-dom"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import { rmAllCharForName } from '../lib/removeSpecialCharacters'
@@ -208,7 +209,7 @@ export default function VoteFlow() {
       }
 
       if (error.response && error.response.status === 401) {
-        setError('Nem vagy bejelentkezve. <a href="/bejelentkezes">Belépni itt tudsz.</a> Belépést követően, innen folytathatod a szavazást.')
+        setError('Nem vagy bejelentkezve. <a href="/bejelentkezes">Belépni itt tudsz.</a> Belépést követően onnan folytathatod a szavazást, ahol abba hagytad.')
         setScroll(true)
       } else if (error.response && error.response.status === 403) {
         setError('Google reCapcha ellenőrzés sikertelen')
@@ -217,7 +218,7 @@ export default function VoteFlow() {
         if (error.response.headers['content-type'] && error.response.headers['content-type'].match(/text\/html/)) {
           const wafInfo = getWafInfo(error.response.data)
 
-          setError('A tűzfalunk hibát érzékelt, ezért az ötletet nem tudjuk befogadni. A kellemetlenségért elnézést kérünk! Kérünk, vedd fel velünk a kapcsolatot a <a href="mailto:nyitott@budapest.hu?subject=WAF%20probléma%20(' + wafInfo.messageId + ')&body=Tisztelt%20Főváros!%0D%0A%0D%0APróbáltam%20ötletet%20beadni,%20de%20hibaüzenetet%20kaptam.%0D%0A%0D%0AA%20hiba%20azonosítója:%20' + wafInfo.messageId + '">nyitott@budapest.hu</a> címen! (A hiba azonosítója: ' + wafInfo.messageId + ')')
+          setError('A tűzfalunk hibát érzékelt, ezért a szavazatodat nem tudjuk befogadni. A kellemetlenségért elnézést kérünk! Kérünk, vedd fel velünk a kapcsolatot a <a href="mailto:nyitott@budapest.hu?subject=WAF%20probléma%20(' + wafInfo.messageId + ')&body=Tisztelt%20Főváros!%0D%0A%0D%0APróbáltam%20ötletet%20beadni,%20de%20hibaüzenetet%20kaptam.%0D%0A%0D%0AA%20hiba%20azonosítója:%20' + wafInfo.messageId + '">nyitott@budapest.hu</a> címen! (A hiba azonosítója: ' + wafInfo.messageId + ')')
           setScroll(true)
         }
       } else if (error.response && error.response.data && error.response.data.errors) {
@@ -346,6 +347,8 @@ export default function VoteFlow() {
             {success && ! isClosed ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
               <h3>Köszönjük, hogy leadtad szavazatodat a 2021/22-es közösségi költségvetésen!</h3>
               <p>A beküldést sikeresen rögzítettük. Pár percen belül kapni fogsz erről egy megerősítő e-mailt, melyben szerepelni fog az általad kiválasztott ötletek listája.</p>
+
+              <Link to="/statisztika" className="btn btn-primary" style={{ margin: '24px 0' }}>Megnézem a szavazás állását</Link>
             </div> : null}
 
             {isClosed ? <>
