@@ -8,6 +8,7 @@ import { rmAllCharForName } from '../lib/removeSpecialCharacters'
 import { getWafInfo } from '../assets/helperFunctions'
 import axios from "axios"
 import ScrollTo from "../common/ScrollTo"
+import PopUp from '../assets/PopUp'
 import tokenParser from '../assets/tokenParser'
 import StoreContext from '../../StoreContext'
 import VoteCategory from '../common/form/VoteCategory'
@@ -351,7 +352,11 @@ export default function VoteFlow() {
               <h3>Köszönjük, hogy leadtad szavazatodat a 2021/22-es közösségi költségvetésen!</h3>
               <p>A beküldést sikeresen rögzítettük. Pár percen belül kapni fogsz erről egy megerősítő e-mailt, melyben szerepelni fog az általad kiválasztott ötletek listája.</p>
 
-              <Link to="/statisztika" className="btn btn-primary" style={{ margin: '24px 0' }}>Megnézem a szavazás állását</Link>
+              <Link to="/statisztika" className="btn btn-primary" style={{ margin: '24px 12px 24px 0' }}>Megnézem a szavazás állását</Link>
+
+              <PopUp url={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.origin + window.location.pathname)}`} title="Megosztom az ötletet Facebookon">
+                <div className="btn btn-primary">Megosztom Facebookon</div>
+              </PopUp>
             </div> : null}
 
             {isClosed ? <>

@@ -5,6 +5,7 @@ import {
 import axios from 'axios'
 import VoteFlow from '../common/VoteFlow'
 import StoreContext from '../../StoreContext'
+import PopUp from '../assets/PopUp'
 
 export default function VotePage() {
   const context = useContext(StoreContext)
@@ -86,7 +87,11 @@ export default function VotePage() {
 
                   <p>A beküldést sikeresen rögzítettük.</p>
 
-                  <Link to="/statisztika" className="btn btn-primary" style={{ margin: '24px 0' }}>Megnézem a szavazás állását</Link>
+                  <Link to="/statisztika" className="btn btn-primary" style={{ margin: '24px 12px 24px 0' }}>Megnézem a szavazás állását</Link>
+
+                  <PopUp url={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.origin + window.location.pathname)}`} title="Megosztom az ötletet Facebookon">
+                    <div className="btn btn-primary">Megosztom Facebookon</div>
+                  </PopUp>
               </>}
             </> : <>
               <h2>Üdvözlünk a 2021/22-es közösségi költségvetés szavazófelületén!</h2>
