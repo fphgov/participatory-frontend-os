@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
 import {
-  useHistory,
   Link,
 } from "react-router-dom"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
@@ -14,11 +13,10 @@ import StoreContext from '../../StoreContext'
 import VoteCategory from '../common/form/VoteCategory'
 import VoteOverview from '../common/form/VoteOverview'
 import generateRandomValue from '../assets/generateRandomValue'
+import store from 'store'
 
 export default function VoteFlow() {
   const context = useContext(StoreContext)
-
-  let history = useHistory()
 
   const [ projects, setProjects ] = useState([])
   const [ profile, setProfile ] = useState(null)
@@ -30,9 +28,6 @@ export default function VoteFlow() {
   const [ recaptcha, setRecaptcha ] = useState(null)
   const [ recaptchaToken, setRecaptchaToken ] = useState('')
   const [ step, setStep ] = useState(1)
-  const [ filterData, setFilterData ] = useState({
-    'rand': '',
-  })
   const [ formData, setFormData ] = useState({
     'theme_CARE_small': 0,
     'theme_CARE_big': 0,
@@ -81,18 +76,6 @@ export default function VoteFlow() {
     context.storeSave('votes', e.target.name, value)
   }
 
-  const refreshURLParams = (e) => {
-    if (e) {
-      e.preventDefault()
-    }
-
-    const search = new URLSearchParams(document.location.search)
-
-    search.set("rand", filterData.rand)
-
-    history.push({ search: search.toString() })
-  }
-
   useEffect(() => {
     document.body.classList.add('page-vote')
 
@@ -100,11 +83,9 @@ export default function VoteFlow() {
       setRecaptchaToken(recaptchaToken)
     })
 
-    const search = new URLSearchParams(document.location.search)
+    store.set('rand', store.get('rand') ? store.get('rand') : generateRandomValue())
 
-    setFilterData({
-      rand: search.get('rand') && search.get('rand') != '' ? search.get('rand') : generateRandomValue(),
-    })
+    getVotableProjects()
 
     return () => {
       document.body.classList.remove('page-vote')
@@ -124,14 +105,6 @@ export default function VoteFlow() {
   }
 
   useEffect(() => {
-    refreshURLParams()
-
-    if (filterData.rand !== '') {
-      getVotableProjects()
-    }
-  }, [filterData])
-
-  useEffect(() => {
     setProfile(tokenParser('user'))
 
     return () => {
@@ -142,8 +115,10 @@ export default function VoteFlow() {
   const getVotableProjects = () => {
     context.set('loading', true)
 
+    const rand = store.get('rand') && typeof store.get('rand')[0] !== "undefined" ? store.get('rand')[0] : '';
+
     axios.get(
-      process.env.REACT_APP_API_REQ_VOTE_LIST + window.location.search
+      process.env.REACT_APP_API_REQ_VOTE_LIST + `?rand=${rand}`
     ).then(response => {
       if (response.data && response.data.data) {
         setProjects(response.data.data)
@@ -203,6 +178,7 @@ export default function VoteFlow() {
       if (response.data && response.status === 200) {
         setSuccess(true)
         context.storeRemove('votes')
+        store.remove('rand')
       }
     })
     .catch(error => {

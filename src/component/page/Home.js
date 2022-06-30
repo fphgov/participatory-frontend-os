@@ -5,7 +5,6 @@ import {
   Link,
 } from "react-router-dom"
 import API from '../assets/axios'
-import generateRandomValue from '../assets/generateRandomValue'
 import Newsletter from '../../img/hirlevel.png'
 import HeroTexts from '../../img/kozossegi_koltsegvetes_hero_logo.svg'
 import CategoryLogo1 from '../../img/zold_budapest_white_category.svg'
@@ -91,7 +90,7 @@ export default function Home() {
                   <Link className="btn btn-primary" to="/bekuldes">Ötletet adok be</Link>
                 </>} */}
 
-                <Link className="btn btn-primary" to={`/szavazas?rand=${generateRandomValue()}`}>Szavazom</Link>
+                <Link className="btn btn-primary" to="/szavazas">Szavazom</Link>
 
               </div>
             </div>
