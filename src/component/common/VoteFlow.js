@@ -276,7 +276,7 @@ export default function VoteFlow() {
                         description={<>
                           <p>Budapest felkészül a klímaváltozásra. Zöldebb utcák, élettel teli parkok, mindenki számára elérhető, környezettudatos megoldások – ilyen ötleteket találsz ebben a kategóriában.</p>
 
-                          <p>Kérjük, jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
+                          <p><b>Kérjük, jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</b></p>
                         </>}
                         nextStep={nextStep}
                         prevStep={null}
@@ -293,7 +293,7 @@ export default function VoteFlow() {
                         description={<>
                           <p>A cél a társadalmi különbségek csökkentése, hátrányos helyzetű közösségek életét támogató ötletekkel, például szociális segítségnyújtással. – Ilyen ötleteket találsz ebben a kategóriában.</p>
 
-                          <p>Kérjük, jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
+                          <p><b>Kérjük, jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</b></p>
                         </>}
                         nextStep={nextStep}
                         prevStep={prevStep}
@@ -310,7 +310,7 @@ export default function VoteFlow() {
                         description={<>
                           <p>Egy nyitott város a szívügyed? Együttműködések, új, kísérleti megoldások, digitális fejlesztések, rövid távú, közösségépítő ötletek. – Ilyen ötleteket találsz ebben a kategóriában.</p>
 
-                          <p>Kérjük, jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</p>
+                          <p><b>Kérjük, jelöld be a kis ötletek és a nagy ötletek közül, amelyikre szavazni szeretnél, majd kattints a Tovább gombra.</b></p>
                         </>}
                         nextStep={nextStep}
                         prevStep={prevStep}
