@@ -6,7 +6,7 @@ import {
 } from "react-router-dom"
 import API from '../assets/axios'
 import Newsletter from '../../img/hirlevel.png'
-import HeroTexts from '../../img/hero_texts.svg'
+import HeroTexts from '../../img/kozossegi_koltsegvetes_hero_logo.svg'
 import CategoryLogo1 from '../../img/zold_budapest_white_category.svg'
 import CategoryLogo2 from '../../img/eselyteremto_budapest_white_category.svg'
 import CategoryLogo3 from '../../img/nyitott_budapest_white_category.svg'
@@ -57,11 +57,17 @@ export default function Home() {
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <div className="hero-images-wrapper">
+                {/* <div className="hero-images-wrapper">
                   <img src={HeroTexts} className="full-width" alt="Szöveg buborék illusztráció" />
+                </div> */}
+
+                <div className="hero-images-wrapper">
+                  <img src={HeroTexts} alt="Közösségi költségvetés logója" />
                 </div>
 
-                <h2>Köszönjük az ötleteket!</h2>
+                <h2>SZAVAZZ A LEGJOBB ÖTLETRE!</h2>
+
+                <p>Dönts te arról, mire fordítson Budapest egymilliárd forintot!</p>
 
                 {/* { disabledIdeaSubmit ? <>
                   <p>Hamarosan újraindul a fővárosi részvételi költségvetés, 2021-ben közösségi költségvetés néven.</p>
@@ -71,8 +77,9 @@ export default function Home() {
                   <p>Regisztrálj és add be ötletedet 2022. január 31-ig!</p>
                 </> } */}
 
-                <p>Az ötletek jelenleg feldolgozás alatt vannak, nézd meg <Link to="/hirek/lezarult-az-otletbeadasi-szakasz-mi-jon-most" style={{ color: '#fff' }}>mi történik most</Link> az ötletekkel!</p>
-                <p>Szavazni nyáron tudsz majd.</p>
+                {/* <p>Az ötletek jelenleg feldolgozás alatt vannak, nézd meg <Link to="/hirek/lezarult-az-otletbeadasi-szakasz-mi-jon-most" style={{ color: '#fff' }}>mi történik most</Link> az ötletekkel!</p>
+                <p>Szavazni nyáron tudsz majd.</p> */}
+
                 {/* <p>Jelentkezz a közösségi költségvetés tanácsába!</p> */}
 
                 {/* <Link to="/hirek/vegyel-reszt-a-dontesben-hogy-a-beadott-es-jovahagyott-otletek-kozul-melyek-valosulhassanak-meg-budapesten-jelentkezz-a-kozossegi-koltsegvetes-tanacsaba" className="btn btn-primary">
@@ -82,6 +89,9 @@ export default function Home() {
                 {/* {disabledIdeaSubmit ? null : <>
                   <Link className="btn btn-primary" to="/bekuldes">Ötletet adok be</Link>
                 </>} */}
+
+                <Link className="btn btn-primary" to="/szavazas">Szavazom</Link>
+
               </div>
             </div>
           </div>

@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react'
 import nFormatter from '../../../assets/nFormatter'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faChevronCircleDown } from "@fortawesome/free-solid-svg-icons"
+import { faChevronCircleDown, faChevronCircleUp } from "@fortawesome/free-solid-svg-icons"
 
-export default function VoteRadio({ id, name, value, radioValue, title, tipp, price, details, handleChange }) {
+export default function VoteRadio({ id, name, value, radioValue, title, tipp, price, details, htmlTitle = null, handleChange, onClickArea }) {
   const radioRef = useRef(null)
   const isChecked = radioValue.toString() === value.toString()
 
@@ -17,7 +17,15 @@ export default function VoteRadio({ id, name, value, radioValue, title, tipp, pr
 
   return (
     <div className={`radio-inline radio-inline-vote ${isChecked ? "active" : ""} ${isOpen ? 'open' : ""}`}>
-      <div className="radio-click-area" onClick={() => { if (radioRef && radioRef.current && handleChange !== null) radioRef.current.click() }}>
+      <div className="radio-click-area" onClick={() => {
+        if (radioRef && radioRef.current && handleChange !== null) {
+          radioRef.current.click()
+        }
+
+        if (typeof onClickArea === "function") {
+          onClickArea()
+        }
+      }}>
         <div className="radio-inline-symbol">
           <div className="radio-inline-hide"></div>
           <input
@@ -30,16 +38,16 @@ export default function VoteRadio({ id, name, value, radioValue, title, tipp, pr
             onChange={handleChange ? handleChange : () => {}} />
         </div>
         <div className="radio-inline-content">
-          <label htmlFor={id}>{title}</label>
+          <label htmlFor={id} title={htmlTitle}>{title}</label>
 
-          <p className="tipp">Becsült költség: {price ? nFormatter(price) : '-'}</p>
+          <p className="tipp">Becsült költség: <b>{price ? nFormatter(price) : '-'}</b></p>
           {tipp ? <p className="tipp">{tipp}</p> : null}
         </div>
       </div>
 
       <div className="radio-details">
         <details open={isOpen}>
-          <summary onClick={handleSummary}><FontAwesomeIcon icon={faChevronCircleDown} /> Bővebben</summary>
+          <summary onClick={handleSummary}>{isOpen ? <FontAwesomeIcon icon={faChevronCircleUp} /> : <FontAwesomeIcon icon={faChevronCircleDown} />} Bővebben</summary>
 
           {details}
         </details>

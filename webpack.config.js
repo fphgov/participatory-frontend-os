@@ -22,7 +22,7 @@ module.exports = (env, argv) => {
         modernizr$: path.resolve(__dirname, ".modernizrrc.js")
       }
     },
-    devtool: debug ? 'source-map' : null,
+    devtool: debug ? 'eval-source-map' : false,
     devServer: {
       static: {
         directory: path.join(__dirname, 'public'),
