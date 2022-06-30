@@ -141,7 +141,17 @@ export default function Statistics() {
             </div>
           </div>
 
-          {filteredProjects.map((project, i) => <ProjectsWrapper key={i} project={project} place={i} tagClick={() => {}} />)}
+          {context.get('loading') === false ? <>
+            <div className="col-md-12">
+              <h3>Kis ötletek</h3>
+            </div>
+            {filteredProjects.filter(p => p.type === "2").map((project, i) => <ProjectsWrapper key={i} project={project} place={i} tagClick={() => { }} />)}
+
+            <div className="col-md-12">
+              <h3>Nagy ötletek</h3>
+            </div>
+            {filteredProjects.filter(p => p.type === "3").map((project, i) => <ProjectsWrapper key={i} project={project} place={i} tagClick={() => { }} />)}
+          </> : null}
         </div>
       </div>
     </div>
