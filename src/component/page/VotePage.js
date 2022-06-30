@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import {
   Link,
 } from "react-router-dom"
-import API from '../assets/axios'
+import axios from 'axios'
 import VoteFlow from '../common/VoteFlow'
 import StoreContext from '../../StoreContext'
 
@@ -13,6 +13,7 @@ export default function VotePage() {
   const [ isLoggedIn, setIsLoggedIn ] = useState(false)
   const [ error, setError ] = useState('')
   const [ isClosed, setIsClosed ] = useState(false)
+  const [ isAlreadyVoted, setIsAlreadyVoted ] = useState(false)
 
   useEffect(() => {
     if (localStorage.getItem('auth_token')) {
@@ -25,17 +26,31 @@ export default function VotePage() {
   const getVoteableStatus = () => {
     context.set('loading', true)
 
-    API.get(
-      process.env.REACT_APP_API_REQ_PHASE_CHECK
-    ).then(response => {
-      if (response.data && response.data.data && response.data.data.code) {
-        setIsClosed(response.data.data.code !== 'VOTE')
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+      }
+    }
+
+    const checkPhase = axios.get(process.env.REACT_APP_API_REQ_PHASE_CHECK);
+    const checkVote = axios.get(process.env.REACT_APP_API_REQ_VOTE_CHECK, config);
+
+    axios.all([checkPhase, checkVote]).then(responses => {
+      const phaseResponse = responses[0]
+
+      if (phaseResponse.data && phaseResponse.data.data && phaseResponse.data.data.code) {
+        setIsClosed(phaseResponse.data.data.code !== 'VOTE')
       }
     }).catch(error => {
-      if (error.response && error.response.data && error.response.data.message) {
-        setError(error.response.data.message)
-      } else {
-        setError('Váratlan hiba történt, kérünk próbáld később')
+      if (error.response.status !== 401) {
+        if (error.response.status === 409) {
+          setIsAlreadyVoted(true)
+          context.storeRemove('votes')
+        } else if (error.response && error.response.data && error.response.data.message) {
+          setError(error.response.data.message)
+        } else {
+          setError('Váratlan hiba történt, kérünk próbáld később')
+        }
       }
     }).finally(() => {
       context.set('loading', false)
@@ -61,10 +76,16 @@ export default function VotePage() {
           <div className="col-md-12">
             {error && !isClosed ? <Error message={error} /> : null}
 
-            {isClosed ? <>
-              <h3>A szavazás jelenleg zárva tart!</h3>
+            {isClosed || isAlreadyVoted ? <>
+              {isClosed ? <>
+                <h3>A szavazás jelenleg zárva tart!</h3>
 
-              <p>A közösségi költségvetés 2022-es szavazási időszaka július 1-től augusztus 31-ig tart, ebben az időszakban van lehetőség online szavazásra is.</p>
+                <p>A közösségi költségvetés 2022-es szavazási időszaka július 1-től augusztus 31-ig tart, ebben az időszakban van lehetőség online szavazásra is.</p>
+              </> : <>
+                  <h3>Köszönjük, hogy leadtad szavazatodat a 2021/22-es közösségi költségvetésen!</h3>
+
+                  <p>A beküldést sikeresen rögzítettük.</p>
+              </>}
             </> : <>
               <h2>Üdvözlünk a 2021/22-es közösségi költségvetés szavazófelületén!</h2>
 
