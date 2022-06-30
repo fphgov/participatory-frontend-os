@@ -22,6 +22,7 @@ export default function VoteFlow() {
   const [ projects, setProjects ] = useState([])
   const [ profile, setProfile ] = useState(null)
   const [ error, setError ] = useState(null)
+  const [ errorNoLogin, setErrorNoLogin ] = useState(false)
   const [ isClosed, setIsClosed ] = useState(false)
   const [ success, setSuccess ] = useState(false)
   const [ scroll, setScroll ] = useState(false)
@@ -209,7 +210,7 @@ export default function VoteFlow() {
       }
 
       if (error.response && error.response.status === 401) {
-        setError('Nem vagy bejelentkezve. <a href="/bejelentkezes">Belépni itt tudsz.</a> Belépést követően onnan folytathatod a szavazást, ahol abba hagytad.')
+        setErrorNoLogin(true)
         setScroll(true)
       } else if (error.response && error.response.status === 403) {
         setError('Google reCapcha ellenőrzés sikertelen')
@@ -252,6 +253,8 @@ export default function VoteFlow() {
         <div className="row">
           <div className="col-md-12">
             {error && !isClosed ? <Error message={error} /> : null}
+
+            {errorNoLogin && !isClosed ? <div className="error-message">Nem vagy bejelentkezve. <Link to={{ pathname: '/bejelentkezes', state: { redirect: '/szavazas' } }}>Belépni itt tudsz.</Link> Belépést követően onnan folytathatod a szavazást, ahol abba hagytad.</div> : null}
 
             {scroll && document.querySelector('.error-message') ? <ScrollTo element={document.querySelector('.error-message').offsetTop} /> : null}
 

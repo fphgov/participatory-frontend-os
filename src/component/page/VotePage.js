@@ -92,7 +92,7 @@ export default function VotePage() {
               <h2>Üdvözlünk a 2021/22-es közösségi költségvetés szavazófelületén!</h2>
 
               {!isLoggedIn ? <>
-                <p>A szavazáshoz <Link to={'/bejelentkezes'}>be kell jelentkezned</Link>, vagy <Link to={'/regisztracio'}>létre kell hoznod</Link> egy felhasználói fiókot. Ezt a szavazás végén is megteheted.</p>
+                  <p>A szavazáshoz <Link to={{ pathname: '/bejelentkezes', state: { redirect: '/szavazas' } }}>be kell jelentkezned</Link>, vagy <Link to={'/regisztracio'}>létre kell hoznod</Link> egy felhasználói fiókot. Ezt a szavazás végén is megteheted.</p>
               </> : null}
 
               <p>Ha szeretnéd megismerni a közösségi költségvetés szavazásának menetét, akkor kattints a Bővebben a szavazásról gombra!</p>

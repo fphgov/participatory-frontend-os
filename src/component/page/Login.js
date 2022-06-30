@@ -99,19 +99,21 @@ export default function Login() {
     )
   }
 
-  const ManualRedirect = ({ byState, byLocation }) => {
-    if (!byState) {
+  const ManualRedirect = ({ byState, location }) => {
+    if (! byState) {
       return null
     }
-    if (byLocation) {
-      return <Redirect to="/bekuldes" />
+
+    if (location) {
+      return <Redirect to={location.redirect} />
     }
+
     return <Redirect to="/" />
   }
 
   return (
     <div className="page-login-section">
-      <ManualRedirect byState={redirect} byLocation={location.state ? location.state : false} />
+      <ManualRedirect byState={redirect} location={location.state ? location.state : false} />
 
       <div className="container">
         <div className="row">
