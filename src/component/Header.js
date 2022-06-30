@@ -3,6 +3,7 @@ import {
   Link,
 } from "react-router-dom"
 import tokenParser from './assets/tokenParser'
+import generateRandomValue from './assets/generateRandomValue'
 import Logo from '../img/kozossegi_koltsegvetes.svg'
 import getGravatarURL from "./lib/gravatar"
 
@@ -60,7 +61,7 @@ export default function Header({ children }) {
   const menu = [
     { title: "Mi ez?", href: "/oldal/bovebben-a-reszveteli-koltsegvetesrol", outside: false },
     // { title: "Ötletbeküldés", href: "/bekuldes", outside: false },
-    { title: "Szavazás", href: "/szavazas", outside: false },
+    { title: "Szavazás", href: `/szavazas?rand=${generateRandomValue()}`, outside: false },
     { title: "Beküldött ötletek", href: "/otletek?campaign=2", outside: true },
     { title: "Feldolgozott ötletek", href: "/tervek", outside: false },
     { title: "Megvalósuló ötletek", href: "/projektek?status=under_construction", outside: false },

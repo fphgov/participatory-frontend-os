@@ -85,6 +85,8 @@ export default function VotePage() {
                   <h3>Köszönjük, hogy leadtad szavazatodat a 2021/22-es közösségi költségvetésen!</h3>
 
                   <p>A beküldést sikeresen rögzítettük.</p>
+
+                  <Link to="/statisztika" className="btn btn-primary" style={{ margin: '24px 0' }}>Megnézem a szavazás állását</Link>
               </>}
             </> : <>
               <h2>Üdvözlünk a 2021/22-es közösségi költségvetés szavazófelületén!</h2>
