@@ -2619,7 +2619,6 @@ button.first-step {
   background-color: #0ECE41;
 }
 
-
 @media screen and (min-width: 1200px) {
   .container, .container-sm, .container-md, .container-lg, .container-xl {
     max-width: 1170px;
