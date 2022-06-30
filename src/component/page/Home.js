@@ -90,8 +90,7 @@ export default function Home() {
                   <Link className="btn btn-primary" to="/bekuldes">Ötletet adok be</Link>
                 </>} */}
 
-                <Link className="btn btn-primary" to="/szavazas">Szavazom</Link>
-
+                <Link className="btn btn-primary" to="/szavazas">Szavazok</Link>
               </div>
             </div>
           </div>
