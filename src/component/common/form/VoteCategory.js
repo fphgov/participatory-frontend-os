@@ -29,7 +29,7 @@ export default function VoteCategory({ name, code, description, nextStep, prevSt
             <fieldset>
               <legend>Kis ötlet</legend>
 
-              <div className="information"><FontAwesomeIcon icon={faInfoCircle} /> A kis ötleteknek alsó értékhatára nincs, de maximum 50 millió Ft-ból megvalósíthatónak kell lenniük. Minden kategóriában maximum 4 kis ötlet nyerhet.</div>
+              <div className="information"><FontAwesomeIcon icon={faInfoCircle} /> A kis ötleteknek alsó értékhatára nincs, de maximum 50 millió Ft-ból megvalósíthatónak kell lenniük.Minden kategóriában minimum 4 kis ötlet nyerhet.</div>
 
               <div className="radio-inline-block">
                 {smallProjects.map((project, i) => {
