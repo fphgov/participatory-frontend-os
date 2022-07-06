@@ -65,7 +65,7 @@ export default function Home() {
                   <img src={HeroTexts} alt="Közösségi költségvetés logója" />
                 </div>
 
-                <h2>SZAVAZZ A LEGJOBB ÖTLETRE!</h2>
+                <h2>Szavazz a legjobb ötletre!</h2>
 
                 <p>Dönts te arról, mire fordítson Budapest egymilliárd forintot!</p>
 
