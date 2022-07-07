@@ -2017,10 +2017,12 @@ time.post-full-meta-date {
 }
 
 .hero h2 {
-  font-size: 38px;
+  /* font-size: 38px; */
+  /* color: #f6d05f; */
+  /* text-transform: uppercase; */
+  font-size: 42px;
   font-weight: bold;
-  color: #f6d05f;
-  text-transform: uppercase;
+  color: #fff;
 }
 
 .hero-content .btn {
