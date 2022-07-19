@@ -94,7 +94,7 @@ export default function VotePage() {
                   </PopUp>
               </>}
             </> : <>
-              <h2>Üdvözlünk a 2021/22-es közösségi költségvetés szavazófelületén!</h2>
+              <h2>Üdvözlünk a 2022-es közösségi költségvetés szavazófelületén</h2>
 
               {!isLoggedIn ? <>
                   <p>A szavazáshoz <Link to={{ pathname: '/bejelentkezes', state: { redirect: '/szavazas' } }}>be kell jelentkezned</Link>, vagy <Link to={'/regisztracio'}>létre kell hoznod</Link> egy felhasználói fiókot. Ezt a szavazás végén is megteheted.</p>

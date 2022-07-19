@@ -130,6 +130,8 @@ export default function Statistics() {
           <div className="col-md-12">
             <h1>Ötletekre leadott szavazatok</h1>
 
+            <p className="stat-info">Lenti szavazatszámok nem tartalmazzák a papíralapon leadott szavazatokat, amelyek feltöltése 2022. szeptember 15-ig várható.</p>
+
             {error ? <Error message={error} /> : null}
 
             <div className="tab-wrapper">

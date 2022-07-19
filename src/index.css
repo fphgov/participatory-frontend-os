@@ -1463,6 +1463,11 @@ fieldset h4 {
   padding-bottom: 30px;
 }
 
+.stat-info {
+  text-align: center;
+  margin: 45px 0;
+}
+
 .stat-wrapper {
   border-top: 1px solid #ddd;
 }
@@ -2019,7 +2024,7 @@ time.post-full-meta-date {
 .hero h2 {
   /* font-size: 38px; */
   /* color: #f6d05f; */
-  /* text-transform: uppercase; */
+  text-transform: uppercase;
   font-size: 42px;
   font-weight: bold;
   color: #fff;
