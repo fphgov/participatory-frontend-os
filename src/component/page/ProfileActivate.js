@@ -72,7 +72,7 @@ export default function ProfileActivate() {
           <div className="col-md-12">
             <h1>Felhasználói fiók aktiválása</h1>
 
-            <p>A regisztrációd megerősítéséhez kattints az "Aktíválom" gombra.</p>
+            <p>A regisztrációd megerősítéséhez kattints az "Aktiválom" gombra.</p>
 
             {error ? <Error message={error} /> : null}
             {success ? <Success message="Sikeresen aktiváltad a fiókod!" /> : null}
