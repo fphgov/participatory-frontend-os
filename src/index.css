@@ -2626,6 +2626,16 @@ button.first-step {
   background-color: #0ECE41;
 }
 
+.countdown {
+  font-weight: bold;
+  font-size: 28px;
+  margin: 22px;
+}
+
+.countdown span:last-of-type {
+  display: inline-block;
+}
+
 @media screen and (min-width: 1200px) {
   .container, .container-sm, .container-md, .container-lg, .container-xl {
     max-width: 1170px;
