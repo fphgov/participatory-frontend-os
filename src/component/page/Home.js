@@ -5,6 +5,7 @@ import {
   Link,
 } from "react-router-dom"
 import API from '../assets/axios'
+import CountDown from '../common/CountDown'
 import Newsletter from '../../img/hirlevel.png'
 import HeroTexts from '../../img/kozossegi_koltsegvetes_hero_logo.svg'
 import CategoryLogo1 from '../../img/zold_budapest_white_category.svg'
@@ -68,6 +69,8 @@ export default function Home() {
                 <h2>Szavazz a legjobb ötletre!</h2>
 
                 <p>Dönts te arról, mire fordítson Budapest egymilliárd forintot!</p>
+
+                <CountDown endDate={new Date(`09/01/2022`)} beforeText="Még " afterText="-ig" finalText="A szavazás lezárult." />
 
                 {/* { disabledIdeaSubmit ? <>
                   <p>Hamarosan újraindul a fővárosi részvételi költségvetés, 2021-ben közösségi költségvetés néven.</p>

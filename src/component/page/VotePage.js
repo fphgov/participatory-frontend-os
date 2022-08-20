@@ -83,9 +83,9 @@ export default function VotePage() {
 
                 <p>A közösségi költségvetés 2022-es szavazási időszaka július 1-től augusztus 31-ig tart, ebben az időszakban van lehetőség online szavazásra is.</p>
               </> : <>
-                  <h3>Köszönjük, hogy leadtad szavazatodat a 2021/22-es közösségi költségvetésen!</h3>
+                  <h3>Köszönjük, hogy leadtad már szavazatodat a 2021/22-es közösségi költségvetésen!</h3>
 
-                  <p>A beküldést sikeresen rögzítettük.</p>
+                  <p>A beküldést korábban rögzítettük, új szavazat leadására nincs lehetőség.</p>
 
                   <Link to="/statisztika" className="btn btn-primary" style={{ margin: '24px 12px 24px 0' }}>Megnézem a szavazás állását</Link>
 
