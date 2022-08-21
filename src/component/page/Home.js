@@ -68,9 +68,9 @@ export default function Home() {
 
                 <h2>Szavazz a legjobb ötletre!</h2>
 
-                <p>Dönts te arról, mire fordítson Budapest egymilliárd forintot!</p>
-
                 <CountDown endDate={new Date(`09/01/2022`)} beforeText="Még " afterText="-ig" finalText="A szavazás lezárult." />
+
+                <p>Dönts te arról, mire fordítson Budapest egymilliárd forintot!</p>
 
                 {/* { disabledIdeaSubmit ? <>
                   <p>Hamarosan újraindul a fővárosi részvételi költségvetés, 2021-ben közösségi költségvetés néven.</p>
