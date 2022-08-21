@@ -17,7 +17,7 @@ export default function Statistics() {
   const [tabs, setTabs] = useState([])
   const [projects, setProjects] = useState([])
   const [filteredProjects, setFilteredProjects] = useState([])
-  const [currentTabIndex, setCurrentTabIndex] = useState(1)
+  const [currentTabIndex, setCurrentTabIndex] = useState(4)
 
   const updateProjects = () => {
     const filteredProjects = currentTabIndex !== 0 ? projects.filter((t) => t.campaign_theme.id === currentTabIndex) : projects
@@ -130,6 +130,8 @@ export default function Statistics() {
           <div className="col-md-12">
             <h1>Ötletekre leadott szavazatok</h1>
 
+            <p className="stat-info">Lenti szavazatszámok nem tartalmazzák a papíralapon leadott szavazatokat, amelyek feltöltése 2022. szeptember 15-ig várható.</p>
+
             {error ? <Error message={error} /> : null}
 
             <div className="tab-wrapper">
@@ -141,7 +143,17 @@ export default function Statistics() {
             </div>
           </div>
 
-          {filteredProjects.map((project, i) => <ProjectsWrapper key={i} project={project} place={i} tagClick={() => {}} />)}
+          {context.get('loading') === false ? <>
+            <div className="col-md-12">
+              <h3>Kis ötletek</h3>
+            </div>
+            {filteredProjects.filter(p => p.type === "2").map((project, i) => <ProjectsWrapper key={i} project={project} place={i} tagClick={() => { }} />)}
+
+            <div className="col-md-12">
+              <h3>Nagy ötletek</h3>
+            </div>
+            {filteredProjects.filter(p => p.type === "3").map((project, i) => <ProjectsWrapper key={i} project={project} place={i} tagClick={() => { }} />)}
+          </> : null}
         </div>
       </div>
     </div>

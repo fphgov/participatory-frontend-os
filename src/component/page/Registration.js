@@ -148,7 +148,7 @@ export default function Registration() {
                   <div className="form-wrapper">
                     <div className="input-wrapper">
                       <label htmlFor="lastname">Vezetéknév <sup>*</sup></label>
-                      <p className="tipp">A regisztrációnál megadott név nyilvánosan megjelenik az oldalon a beküldött ötletnél.</p>
+                      <p className="tipp">Ha ötletet küldesz be, akkor az itt megadott neved nyilvánosan megjelenik az oldalon a beküldött ötletednél.</p>
                       <input type="text" placeholder="Vezetéknév" name="lastname" id="lastname" value={filterData.lastname} onChange={handleChangeInput} />
 
                       {error && error.lastname ? Object.values(error.lastname).map((err, i) => {
@@ -158,7 +158,7 @@ export default function Registration() {
 
                     <div className="input-wrapper">
                       <label htmlFor="firstname">Utónév <sup>*</sup></label>
-                      <p className="tipp">A regisztrációnál megadott név nyilvánosan megjelenik az oldalon a beküldött ötletnél.</p>
+                      <p className="tipp">Ha ötletet küldesz be, akkor az itt megadott neved nyilvánosan megjelenik az oldalon a beküldött ötletednél.</p>
                       <input type="text" placeholder="Utónév" name="firstname" id="firstname" value={filterData.firstname} onChange={handleChangeInput} />
 
                       {error && error.firstname ? Object.values(error.firstname).map((err, i) => {

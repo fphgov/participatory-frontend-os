@@ -6,6 +6,7 @@ import {
   Switch,
 } from "react-router-dom"
 import Layout from "./Layout"
+import VoteLayout from "./VoteLayout"
 import NotFound from "./page/NotFound"
 import Login from "./page/Login"
 import Statistics from "./page/Statistics"
@@ -18,6 +19,7 @@ import Projects from "./page/Projects"
 import Plans from "./page/Plans"
 import Idea from "./page/Idea"
 import Ideas from "./page/Ideas"
+import VotePage from "./page/VotePage"
 import ProfileActivate from "./page/ProfileActivate"
 import ProfileSaving from "./page/ProfileSaving"
 import PrizeActivate from "./page/PrizeActivate"
@@ -94,7 +96,8 @@ export default function App() {
             <Route exact path="/" render={() => <Layout><Home /></Layout>} />
             <Route exact path="/bejelentkezes" render={() => <Layout><Login /></Layout>} />
             <Route exact path="/kijelentkezes" render={() => <Layout><Logout /></Layout>} />
-            {/* <Route exact path="/bekuldes" render={() => <Layout><IdeaSubmission /></Layout>} /> */}
+            <Route exact path="/bekuldes" render={() => <Layout><IdeaSubmission /></Layout>} />
+            <Route exact path="/szavazas" render={() => <VoteLayout><VotePage /></VoteLayout>} />
             <Route exact path="/oldal/:slug" render={() => <Layout><SimplePage /></Layout>} />
             <Route exact path="/hirek" render={() => <Layout><Posts /></Layout>} />
             <Route exact path="/hirek/:slug" render={() => <Layout><Post /></Layout>} />

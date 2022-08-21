@@ -5,6 +5,7 @@ const WebpackPwaManifest = require('webpack-pwa-manifest')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const Dotenv = require('dotenv-webpack');
+const debug = process.env.NODE_ENV !== 'production';
 
 module.exports = (env, argv) => {
   const config = {
@@ -21,6 +22,7 @@ module.exports = (env, argv) => {
         modernizr$: path.resolve(__dirname, ".modernizrrc.js")
       }
     },
+    devtool: debug ? 'eval-source-map' : false,
     devServer: {
       static: {
         directory: path.join(__dirname, 'public'),
