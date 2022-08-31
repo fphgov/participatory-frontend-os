@@ -66,11 +66,11 @@ export default function Home() {
                   <img src={HeroTexts} alt="Közösségi költségvetés logója" />
                 </div>
 
-                <h2>Szavazz a legjobb ötletre!</h2>
+                {/* <h2>Szavazz a legjobb ötletre!</h2> */}
 
-                <CountDown endDate={new Date(`09/01/2022`)} beforeText="Még " afterText="-ig" finalText="A szavazás lezárult." />
+                {/* <CountDown endDate={new Date(`09/01/2022`)} beforeText="Még " afterText="-ig" finalText="A szavazás lezárult." /> */}
 
-                <p>Dönts te arról, mire fordítson Budapest egymilliárd forintot!</p>
+                {/* <p>Dönts te arról, mire fordítson Budapest egymilliárd forintot!</p> */}
 
                 {/* { disabledIdeaSubmit ? <>
                   <p>Hamarosan újraindul a fővárosi részvételi költségvetés, 2021-ben közösségi költségvetés néven.</p>
@@ -93,7 +93,11 @@ export default function Home() {
                   <Link className="btn btn-primary" to="/bekuldes">Ötletet adok be</Link>
                 </>} */}
 
-                <Link className="btn btn-primary" to="/szavazas">Szavazok</Link>
+                {/* <Link className="btn btn-primary" to="/szavazas">Szavazok</Link> */}
+
+                <h2>Lezárult a szavazás</h2>
+
+                <p>A személyesen leadott szavazatok összesítését követően jelentkezünk a nyertes ötletek listájával</p>
               </div>
             </div>
           </div>
