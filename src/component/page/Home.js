@@ -101,6 +101,8 @@ export default function Home() {
 
                 <h2>Kihirdettük a közösségi költségvetés idei 18 nyertes ötletét</h2>
 
+                <p>Hamarosan újra várjuk a Budapest jobbító ötleteket.</p>
+
                 <Link className="btn btn-primary" to="/hirek/ujabb-18-lakossagi-otletet-valosit-meg-a-fovarosi-onkormanyzat-ime-a-budapesti-kozossegi-koltsegvetes-idei-nyertesei">Megnézem az ötleteket</Link>
               </div>
             </div>
