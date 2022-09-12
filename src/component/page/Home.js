@@ -95,9 +95,13 @@ export default function Home() {
 
                 {/* <Link className="btn btn-primary" to="/szavazas">Szavazok</Link> */}
 
-                <h2>Lezárult a szavazás</h2>
+                {/* <h2>Lezárult a szavazás</h2> */}
 
-                <p>A személyesen leadott szavazatok összesítését követően jelentkezünk a nyertes ötletek listájával</p>
+                {/* <p>A személyesen leadott szavazatok összesítését követően jelentkezünk a nyertes ötletek listájával</p> */}
+
+                <h2>Kihirdettük a közösségi költségvetés idei 18 nyertes ötletét</h2>
+
+                <Link className="btn btn-primary" to="/hirek/ujabb-18-lakossagi-otletet-valosit-meg-a-fovarosi-onkormanyzat-ime-a-budapesti-kozossegi-koltsegvetes-idei-nyertesei">Megnézem az ötleteket</Link>
               </div>
             </div>
           </div>
