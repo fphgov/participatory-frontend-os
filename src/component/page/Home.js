@@ -99,7 +99,7 @@ export default function Home() {
 
                 {/* <p>A személyesen leadott szavazatok összesítését követően jelentkezünk a nyertes ötletek listájával</p> */}
 
-                <h2>Kihirdettük a közösségi költségvetés idei 18 nyertes ötletét</h2>
+                <h2>Kihirdettük az idei nyertes ötleteket!</h2>
 
                 <p>Hamarosan újra várjuk a Budapest jobbító ötleteket.</p>
 
