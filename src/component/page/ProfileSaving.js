@@ -99,12 +99,12 @@ export default function ProfileSaving() {
           <div className="col-md-12">
             <h1>Felhasználói fiók megerősítése</h1>
 
-            <p>Köszönjük, hogy velünk maradsz! Kérjük, most erősítsd meg regisztrációdat!</p>
-
             {error && typeof error === 'string' ? <Error message={error} /> : null}
             {success ? <Success message="Sikeresen aktiváltad a fiókod!" /> : null}
 
             {! success ? <>
+              <p>Köszönjük, hogy velünk maradsz! Kérjük, most erősítsd meg regisztrációdat!</p>
+
               <form onSubmit={submitProfileActivate}>
                 <div className="form-group">
                   <label htmlFor="profile_save" className="form-group-label">
