@@ -111,7 +111,7 @@ export default function ProfileSaving() {
                     <input className="form-control" type="checkbox" id="profile_save" name="profile_save" value={profileSave} onClick={() => { setProfileSave(! profileSave)} } />
                     Regisztráció megerősítése
                   </label>
-                  <p className="tipp">A most megerősített regisztrációdat később már nem kell évente újra jóváhagyni. Ha a jövőben megszüntetnéd regisztrációdat, a honlapon bejelentkezést követően a Fiók menüpontban ezt bármikor megteheted.</p>
+                  <p className="tipp">A most megerősített regisztrációdat később már nem kell évente újra jóváhagyni. Ha a jövőben megszüntetnéd regisztrációdat, a honlapon a bejelentkezést követően a Fiók menüpontban ezt bármikor megteheted.</p>
 
                   {error && error.profile_save ? Object.values(error.profile_save).map((err, i) => {
                     return <ErrorMini key={i} error={err} increment={`profile_save-${i}`} />
