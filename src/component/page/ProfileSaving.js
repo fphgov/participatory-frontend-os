@@ -9,26 +9,45 @@ import StoreContext from '../../StoreContext'
 export default function ProfileSaving() {
   const context = useContext(StoreContext)
 
+  const [ profileSave, setProfileSave ] = useState(false)
+  const [ subscribeNewsletter, setSubscribeNewsletter ] = useState(false)
+  const [ liveInCity, setLiveInCity ] = useState(false)
+  const [ privacy, setPrivacy ] = useState(false)
   const [ success, setSuccess ] = useState(false)
+  const [ successMessage, setSuccessMessage ] = useState('')
   const [ error, setError ] = useState('')
   const [ redirectLogin, setRedirectLogin ] = useState(false)
 
   let { hash } = useParams()
 
-  const submitProfileActivate = () => {
+  const submitProfileActivate = (e) => {
+    e.preventDefault();
+
     context.set('loading', true)
 
-    const link = process.env.REACT_APP_API_REQ_PROFILE_ACTIVATE.toString().replace(':hash', hash)
+    setError('')
+
+    const link = process.env.REACT_APP_API_REQ_PROFILE_CONFIRMATION.toString().replace(':hash', hash)
+
+    const formData = {
+      profile_save: profileSave,
+      newsletter: subscribeNewsletter,
+      live_in_city: liveInCity,
+      privacy: privacy,
+    }
 
     axios
-    .get(link)
+    .post(link, new URLSearchParams(formData).toString())
     .then(response => {
-      if (response.status === 200) {
+      if (response.status === 200 && response.data.message) {
         setSuccess(true)
+        setSuccessMessage(response.data.message)
       }
     })
     .catch(error => {
-      if (error.response && error.response.data && error.response.data.message) {
+      if (error.response && error.response.data && error.response.data.errors) {
+        setError(error.response.data.errors)
+      } else if (error.response && error.response.data.message) {
         setError(error.response.data.message)
       } else {
         setError('Váratlan hiba történt, kérünk próbáld később')
@@ -55,6 +74,16 @@ export default function ProfileSaving() {
     )
   }
 
+  const ErrorMini = (props) => {
+    if (typeof props.error === 'object') {
+      return Object.values(props.error).map((e, i) => {
+        return (<div key={i} className="error-message-inline">{e}</div>)
+      })
+    } else {
+      return (<div key={props.increment} className="error-message-inline">{props.error}</div>)
+    }
+  }
+
   const Success = (props) => {
     return (
       <div className="success-message">
@@ -70,18 +99,64 @@ export default function ProfileSaving() {
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <h1>Felhasználói fiók aktiválása</h1>
+            <h1>Felhasználói fiók megerősítése</h1>
 
-            <p>Hamarosan újraindul a fővárosi részvételi költségvetés, 2021-ben közösségi költségvetés néven. Aktiváld fiókod, ha szeretnél az idei ötletgyűjtésben is részt venni.</p>
+            {error && typeof error === 'string' ? <Error message={error} /> : null}
+            {success ? <Success message={successMessage} /> : null}
 
-            {error ? <Error message={error} /> : null}
-            {success ? <Success message="Sikeresen aktiváltad a fiókod!" /> : null}
+            {! success ? <>
+              <p>Köszönjük, hogy velünk maradsz! Kérjük, most erősítsd meg regisztrációdat!</p>
 
-            {! success ? <input type="submit" value="Aktiválom" className="btn btn-primary" onClick={() => {
-              submitProfileActivate()
-            }} /> : null}
+              <form onSubmit={submitProfileActivate}>
+                <div className="form-group">
+                  <label htmlFor="profile_save" className="form-group-label">
+                    <input className="form-control" type="checkbox" id="profile_save" name="profile_save" value={profileSave} onClick={() => { setProfileSave(! profileSave)} } />
+                    Regisztráció megerősítése
+                  </label>
+                  <p className="tipp">A most megerősített regisztrációdat később már nem kell évente újra jóváhagyni. Ha a jövőben megszüntetnéd regisztrációdat, a honlapon a bejelentkezést követően a Fiók menüpontban ezt bármikor megteheted.</p>
 
-            <p><i>Ha nem nyomsz az aktiválás gombra, 2021. november 1-jén éjfél után töröljük a fiókodat. Ezután ötlet beküldéséhez újra kell majd regisztrálnod.</i></p>
+                  {error && error.profile_save ? Object.values(error.profile_save).map((err, i) => {
+                    return <ErrorMini key={i} error={err} increment={`profile_save-${i}`} />
+                  }) : null}
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="newsletter" className="form-group-label">
+                    <input className="form-control"  type="checkbox" id="newsletter" name="newsletter" value={subscribeNewsletter} onClick={() => { setSubscribeNewsletter(! subscribeNewsletter)} } />
+                    Feliratkozom a közösségi költségvetés hírlevelére
+                  </label>
+                  <p className="tipp">Ne maradj le a közösségi költségvetéssel kapcsolatos legfontosabb hírekről és eseményekről, iratkozz fel hírlevelünkre! A hírlevelet körülbelül havonta egyszer küldjük ki, abban kizárólag a közösségi költségvetéssel kapcsolatban adunk információt, tájékoztatást, és a jövőben bármikor leiratkozhatsz róla.</p>
+
+                  {error && error.newsletter ? Object.values(error.newsletter).map((err, i) => {
+                    return <ErrorMini key={i} error={err} increment={`newsletter-${i}`} />
+                  }) : null}
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="live_in_city" className="form-group-label">
+                    <input className="form-control" type="checkbox" id="live_in_city" name="live_in_city" onClick={() => { setLiveInCity(! liveInCity)} } />
+                    Megerősítem, hogy elmúltam 16 éves, és jelenleg is budapesti lakos vagyok, vagy Budapesten dolgozom, vagy Budapesten tanulok.
+                  </label>
+
+                  {error && error.live_in_city ? Object.values(error.live_in_city).map((err, i) => {
+                    return <ErrorMini key={i} error={err} increment={`live_in_city-${i}`} />
+                  }) : null}
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="privacy" className="form-group-label">
+                    <input className="form-control" type="checkbox" id="privacy" name="privacy" value={privacy} onChange={() => { setPrivacy(! privacy)} } />
+                    Elfogadom az <a href={`${process.env.REACT_APP_SERVER_FILE}/adatvedelmi_tajekozato.pdf`} target="_blank" rel="noopener noreferrer">adatvédelmi tájékoztatót</a> *
+                  </label>
+
+                  {error && error.privacy ? Object.values(error.privacy).map((err, i) => {
+                    return <ErrorMini key={i} error={err} increment={`privacy-${i}`} />
+                  }) : null}
+                </div>
+
+                <input type="submit" value="Aktiválom" className="btn btn-primary" />
+              </form>
+            </> : null}
 
             {!context.get('loading') && success ? (<>
               <div className="small">
