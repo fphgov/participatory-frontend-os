@@ -14,6 +14,7 @@ export default function ProfileSaving() {
   const [ liveInCity, setLiveInCity ] = useState(false)
   const [ privacy, setPrivacy ] = useState(false)
   const [ success, setSuccess ] = useState(false)
+  const [ successMessage, setSuccessMessage ] = useState('')
   const [ error, setError ] = useState('')
   const [ redirectLogin, setRedirectLogin ] = useState(false)
 
@@ -40,6 +41,7 @@ export default function ProfileSaving() {
     .then(response => {
       if (response.status === 200 && response.data.message) {
         setSuccess(true)
+        setSuccessMessage(response.data.message)
       }
     })
     .catch(error => {
@@ -100,7 +102,7 @@ export default function ProfileSaving() {
             <h1>Felhasználói fiók megerősítése</h1>
 
             {error && typeof error === 'string' ? <Error message={error} /> : null}
-            {success ? <Success message="Sikeresen aktiváltad a fiókod!" /> : null}
+            {success ? <Success message={successMessage} /> : null}
 
             {! success ? <>
               <p>Köszönjük, hogy velünk maradsz! Kérjük, most erősítsd meg regisztrációdat!</p>
