@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react'
 import {
   Redirect,
-  Link,
 } from "react-router-dom"
 import API from '../assets/axios'
-import { getDateFormat, getHungarianDateFormat } from '../assets/dateFormats'
 import StoreContext from '../../StoreContext'
+import ArticleCard from '../common/ArticleCard'
+import HeroPage from '../common/HeroPage'
+import Tabs from '../common/Tabs'
 
 export default function Posts() {
   const context = useContext(StoreContext)
@@ -17,10 +18,10 @@ export default function Posts() {
   const [ currentTabIndex, setCurrentTabIndex ] = useState(0)
 
   const categories = [
-    { category: { id: 0, name: 'összes' } },
-    { category: { id: 1, name: 'hír' } },
-    { category: { id: 2, name: 'rendezvény' } },
-    { category: { id: 3, name: 'blog' } },
+    { category: { id: 0, name: 'Összes' } },
+    { category: { id: 1, name: 'Hír' } },
+    { category: { id: 2, name: 'Rendezvény' } },
+    { category: { id: 3, name: 'Blog' } },
   ];
 
   const getPageContent = () => {
@@ -101,46 +102,19 @@ export default function Posts() {
     <div className="page-posts-section">
       {redirect ? <Redirect to="/404" /> : null}
 
+      <HeroPage title="Hírek, rendezvények" content="A közösség költségvetéssel kapcsolatos legfrissebb hírek és tudnivalók." />
+
       <div className="container">
         <div className="row">
           <div className="col-md-12">
             {error ? <Error message={error} /> : null}
 
-            <div className="tab-wrapper">
-              <ul className="tab">
-                {tabs.map((tab) => (
-                  <li key={tab.id} tabIndex={tab.id} tabname={tab.name} className={`${currentTabIndex === tab.id ? 'active' : ''}`} onClick={handleClickTab}><a>{tab.name}</a></li>
-                ))}
-              </ul>
-            </div>
+            <Tabs tabs={tabs} currentTabIndex={currentTabIndex} handleClickTab={handleClickTab} />
 
             <div className="posts">
-              {rawContent && rawContent.map((post, i) => (
-                <article key={i} className="post-card">
-                  <Link className="post-card-image-link" to={`/hirek/${post.slug}`}>
-                    <div className="post-image">{post.featuredImage ? <img src={`${process.env.REACT_APP_SERVER_FILE}/${post.featuredImage.filename}`} /> : null}</div>
-                  </Link>
-
-                  <div className="post-card-content">
-                    <Link to={`/hirek/${post.slug}`}>
-                      <header className="post-full-header">
-                        <section className="post-full-meta">
-                          {post.createdAt ? <time className="post-full-meta-date" dateTime={getDateFormat(post.createdAt)}>{getHungarianDateFormat(post.createdAt)}</time> : null}
-                          <div>• <span>{post.category.name}</span></div>
-                        </section>
-
-                        <h1 className="post-full-title">{post.title}</h1>
-                      </header>
-
-                      <footer className="post-card-meta">
-                        <div className="post-more-wrapper">
-                          <div className="post-more">Tovább</div>
-                        </div>
-                      </footer>
-                    </Link>
-                  </div>
-                </article>
-              ))}
+              <div className="row">
+                {Array.isArray(rawContent) && rawContent.map((post, i) => <div key={i} className="col-lg-3 col-md-6 col-sm-6 col-12 article-wrapper"><ArticleCard post={post} /></div>)}
+              </div>
             </div>
           </div>
         </div>

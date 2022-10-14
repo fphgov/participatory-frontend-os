@@ -5,9 +5,7 @@ import {
 import axios from "../assets/axios"
 import IdeasWrapper from "../common/IdeasWrapper"
 import StoreContext from '../../StoreContext'
-import modernizr from 'modernizr'
 import Pagination from "../common/Pagination"
-import FindMap from "../common/FindMap"
 import SearchArea from '../common/SearchArea'
 import generateRandomValue from '../assets/generateRandomValue'
 
@@ -17,8 +15,6 @@ export default function Ideas() {
   const queryRef = createRef()
 
   let history = useHistory()
-
-  const isEnableMap = modernizr.arrow && modernizr.webgl
 
   const [count, setCount] = useState(0)
   const [pageCount, setPageCount] = useState(0)
@@ -164,25 +160,6 @@ export default function Ideas() {
     queryRef.current.focus()
   }
 
-  const toggleMap = (e) => {
-    e.preventDefault()
-
-    const map = !context.get('map')
-
-    localStorage.setItem('map', map)
-    context.set('map', map)
-  }
-
-  const crossLocationChange = (e) => {
-    const locationId = e.features[0] && e.features[0].layer.id ? e.features[0].layer.id : ''
-
-    if (filterData.location !== locationId) {
-      setFilterData({ ...filterData, location: 'AREA' + locationId })
-
-      refreshURLParams()
-    }
-  }
-
   const handleScrollPosition = () => {
     const scrollPosition = sessionStorage.getItem("scrollPosition")
 
@@ -249,8 +226,8 @@ export default function Ideas() {
     <div className="ideas">
       <SearchArea
         title="Beküldött ötletek"
-        tipp="Itt szerepel minden ötlet, ami 2020. óta beérkezett a közösségi költségvetésbe. Az ötleteket itt abban a formában láthatod, ahogyan az ötletgazdák azokat beadták. Szűrők segítségével tudod szűkíteni a megjelenített ötletek körét."
-        tipp2="A szakmai jóváhagyást kapott ötletek szövegét később egységes formára hoztuk, rövidítettük, a hasonló ötleteket összevontuk. Az ötletek továbbfejlesztett verzióját az adatlapon a „Tovább a módosított ötletre” gombra kattintva ismerheted meg. Ezeket a „Feldolgozott ötletek” menüpontban találod, vagy akár az egyes ötletekről is átléphetsz annak továbbfejlesztett verziójára az adatlapon szereplő, „Tovább a módosított ötletre” gombra kattintva."
+        tipp="Az ötleteket itt abban a formában láthatod, ahogy azokat az ötletgazdák beadták. A szűrők segítségével tudod szűkíteni a megjelenített listát."
+        tipp2=""
         type="idea"
         queryRef={queryRef}
         values={filterData}
@@ -260,8 +237,6 @@ export default function Ideas() {
         error={error} />
 
       <div className="container">
-        <FindMap isEnableMap={isEnableMap} location={filterData.location} crossLocationChange={crossLocationChange} toggleMap={toggleMap} />
-
         <div className="search-result mt-3">
           {count} találat
         </div>

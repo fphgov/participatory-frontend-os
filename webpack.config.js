@@ -12,7 +12,6 @@ module.exports = (env, argv) => {
     entry: {
       index: [ 'babel-polyfill', './src/index.js' ],
       admin: [ 'babel-polyfill', './admin/index.js' ],
-      mapbox: [ 'babel-polyfill', './src/component/assets/MapBox.js' ]
     },
     resolve: {
       extensions: ['.js', '.css', '.scss'],
@@ -71,15 +70,19 @@ module.exports = (env, argv) => {
           ]
         },
         {
-          test: /\.(png|jpe?g|gif)$/i,
-          loader: 'file-loader',
-          options: {
-            esModule: false,
-          },
+          test: /\.(jpe?g|png|gif)$/,
+          type: 'asset/resource',
         },
         {
-          test: /\.svg$/,
-          use: ['@svgr/webpack', 'url-loader'],
+          test: /\.svg/,
+          type: 'asset/inline',
+        },
+        {
+          test: /\.(woff|woff2|eot|ttf)$/,
+          type: 'asset/resource',
+          generator: {
+            filename: 'fonts/[hash][ext][query]'
+          },
         },
         {
           test: /\.(js|jsx)$/,

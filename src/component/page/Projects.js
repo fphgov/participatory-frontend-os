@@ -3,11 +3,9 @@ import {
   useHistory,
 } from "react-router-dom"
 import axios from "../assets/axios"
-import ProjectsWrapper from "../common/ProjectsWrapper"
+import IdeasWrapper from "../common/IdeasWrapper"
 import StoreContext from '../../StoreContext'
-import modernizr from 'modernizr'
 import Pagination from "../common/Pagination"
-import FindMap from "../common/FindMap"
 import SearchArea from '../common/SearchArea'
 import generateRandomValue from '../assets/generateRandomValue'
 
@@ -17,8 +15,6 @@ export default function Projects() {
   const queryRef = createRef()
 
   let history = useHistory()
-
-  const isEnableMap = modernizr.arrow && modernizr.webgl
 
   const [ count, setCount ] = useState(0)
   const [ pageCount, setPageCount ] = useState(0)
@@ -163,25 +159,6 @@ export default function Projects() {
     queryRef.current.focus()
   }
 
-  const toggleMap = (e) => {
-    e.preventDefault()
-
-    const map = !context.get('map')
-
-    localStorage.setItem('map', map)
-    context.set('map', map)
-  }
-
-  const crossLocationChange = (e) => {
-    const locationId = e.features[0] && e.features[0].layer.id ? e.features[0].layer.id : ''
-
-    if (filterData.location !== locationId) {
-      setFilterData({ ...filterData, location: 'AREA' + locationId })
-
-      refreshURLParams()
-    }
-  }
-
   const handleScrollPosition = () => {
     const scrollPosition = sessionStorage.getItem("scrollPosition")
 
@@ -235,8 +212,8 @@ export default function Projects() {
     <div className="projects">
       <SearchArea
         title="Megvalósuló ötletek"
-        tipp="Itt láthatod a nyertes ötleteket, vagyis azokat az egyes években legtöbb szavazatot kapott javaslatokat, amelyek a rendelkezésre álló keretösszegbe belefértek. Ezeket a Főpolgármesteri Hivatal megvalósítja."
-        tipp2="A megvalósulás folyamatáról, helyzetéről a projektek adatlapján tájékoztatást adunk."
+        tipp="Az ötleteket itt abban a formában láthatod, ahogy azokat az ötletgazdák beadták. A szűrők segítségével tudod szűkíteni a megjelenített listát."
+        tipp2=""
         type="project"
         queryRef={queryRef}
         values={filterData}
@@ -246,8 +223,6 @@ export default function Projects() {
         error={error} />
 
       <div className="container">
-        <FindMap isEnableMap={isEnableMap} location={filterData.location} crossLocationChange={crossLocationChange} toggleMap={toggleMap} />
-
         <div className="search-result mt-3">
           {count} találat
         </div>
@@ -255,7 +230,7 @@ export default function Projects() {
 
       <div className="container">
         <div className="row">
-          {projects.map((project, i) => <ProjectsWrapper handleClick={handleClick} key={i} project={project} tagClick={filterByTag} />)}
+          {projects.map((project, i) => <IdeasWrapper handleClick={handleClick} key={i} idea={project} isBuilding={true} tagClick={filterByTag} />)}
         </div>
       </div>
 

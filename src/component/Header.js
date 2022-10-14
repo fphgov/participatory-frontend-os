@@ -1,50 +1,81 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
+import randomId from 'random-id'
 import {
   Link,
 } from "react-router-dom"
 import tokenParser from './assets/tokenParser'
-import Logo from '../img/kozossegi_koltsegvetes.svg'
-import getGravatarURL from "./lib/gravatar"
+import Logo from '../img/logo-horizontal.svg'
 
-const MobileMenu = (props) => {
+function useOutside(ref, cb) {
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        cb()
+      }
+    }
+
+    document.addEventListener("focusin", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("focusout", handleClickOutside);
+    };
+  }, [ref]);
+}
+
+const Menu = ({ menu, pathname, onClick, rand }) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const submenuRef = useRef(null)
+
+  useOutside(submenuRef, () => { setIsOpen(false) })
+
+  return (<>
+    {menu.map((menuItem, i) => {
+      if (
+        menuItem.onHideLoggedIn === true && localStorage.getItem('auth_token') !== null ||
+        menuItem.onHideLoggedOut === true && localStorage.getItem('auth_token') === null
+      ) return;
+
+      if (Array.isArray(menuItem.roles) && !menuItem.roles.includes(tokenParser('user.role'))) return;
+
+      if (menuItem.outside) {
+        return (
+          <li key={`${rand}-${i}`} className={menuItem.highlight ? 'highlight' : ''}>
+            <a href={menuItem.href} onClick={onClick} rel="noopener noreferrer">{menuItem.title}</a>
+          </li>
+        )
+      }
+
+      if (menuItem.submenu) {
+        return (
+          <li key={`${rand}-${i}`} className={isOpen ? 'open' : ''} ref={submenuRef}>
+            <button type="button" aria-expanded={isOpen} onClick={() => { setIsOpen(! isOpen) }}>{menuItem.title}<span className="caret"></span></button>
+
+            <ul className="submenu">
+              <Menu menu={menuItem.submenu} pathname={pathname} onClick={() => { setIsOpen(! isOpen); onClick() }} rand={randomId(30, 'aA0')} />
+            </ul>
+          </li>
+        )
+      }
+
+      return (
+        <li key={`${rand}-${i}`} className={menuItem.highlight ? 'highlight' : ''}>
+          <Link to={menuItem.href} className={menuItem.href.split("?")[0] === pathname ? 'active' : ''} onClick={onClick}>{menuItem.title}</Link>
+        </li>
+      )
+    })}
+  </>)
+}
+
+const MobileMenu = ({ menu, pathname, onClick }) => {
   return (
     <div className="mobile-menu">
       <div className="container">
         <div className="row">
           <div className="col-md-12">
             <ul>
-              {props.menu.map((menuItem, i) => {
-                if (
-                  menuItem.onHideLoggedIn === true && localStorage.getItem('auth_token') !== null ||
-                  menuItem.onHideLoggedOut === true && localStorage.getItem('auth_token') === null
-                ) return;
-
-                if (Array.isArray(menuItem.roles) && !menuItem.roles.includes(tokenParser('user.role'))) return;
-
-                if (menuItem.outside) {
-                  return (
-                    <li key={i.toString()}>
-                      <a href={menuItem.href} onClick={props.onClick} rel="noopener noreferrer">{menuItem.title}</a>
-                    </li>
-                  )
-                }
-
-                if (menuItem.profile) {
-                  return (
-                    <li key={i.toString()} className={menuItem.highlight ? 'highlight' : ''}>
-                      <Link to={menuItem.href} className={`profile-menu`} onClick={props.onClick}>
-                        <div className="avatar"><img src={getGravatarURL(tokenParser('user.email'))} alt="Avatar kép" aria-hidden="true" /><span className="profil-name">{tokenParser('user.firstname')}</span></div>
-                      </Link>
-                    </li>
-                  )
-                }
-
-                return (
-                  <li key={i.toString()}>
-                    <Link to={menuItem.href} onClick={props.onClick}>{menuItem.title}</Link>
-                  </li>
-                )
-              })}
+              <Menu menu={menu} pathname={pathname} onClick={onClick} rand={randomId(30, 'aA0')} />
             </ul>
           </div>
         </div>
@@ -59,14 +90,16 @@ export default function Header({ children }) {
 
   const menu = [
     { title: "Mi ez?", href: "/oldal/bovebben-a-reszveteli-koltsegvetesrol", outside: false },
-    // { title: "Ötletbeküldés", href: "/bekuldes", outside: false },
-    // { title: "Szavazás", href: "/szavazas", outside: false },
-    { title: "Beküldött ötletek", href: "/otletek?campaign=2", outside: true },
-    { title: "Feldolgozott ötletek", href: "/tervek", outside: false },
-    { title: "Megvalósuló ötletek", href: "/projektek?status=under_construction", outside: false },
+    { title: "Ötletek", href: '', outside: false, submenu: [
+      { title: "Beküldött", href: "/otletek?campaign=2", outside: true },
+      { title: "Feldolgozott", href: "/tervek", outside: false },
+      { title: "Megvalósuló", href: "/projektek?status=under_construction", outside: false },
+    ] },
     { title: "Hírek, rendezvények", href: "/hirek", outside: false },
     { title: "Bejelentkezés", href: "/bejelentkezes", highlight: false, onHideLoggedIn: true, onHideLoggedOut: false },
     { title: "Fiók", href: "/profil", highlight: false, onHideLoggedIn: false, onHideLoggedOut: true, outside: false, profile: false },
+    // { title: "Szavazás", href: "/szavazas", outside: false, highlight: true },
+    { title: "Ötletbeküldés", href: "/bekuldesi-informacio", outside: false, highlight: true },
   ]
 
   const toggleMenu = () => {
@@ -96,38 +129,7 @@ export default function Header({ children }) {
 
             <div className="col-xs-6 col-sm-6 col-md-10">
               <ul className="desktop-menu">
-                {menu.map((menuItem, i) => {
-                  if (
-                    menuItem.onHideLoggedIn === true && localStorage.getItem('auth_token') !== null ||
-                    menuItem.onHideLoggedOut === true && localStorage.getItem('auth_token') === null
-                  ) return;
-
-                  if (Array.isArray(menuItem.roles) && !menuItem.roles.includes(tokenParser('user.role'))) return;
-
-                  if (menuItem.outside) {
-                    return (
-                      <li key={i.toString()} className={menuItem.highlight ? 'highlight' : ''}>
-                        <a href={menuItem.href} className={menuItem.href.split("?")[0] === pathname ? 'active' : ''} rel="noopener noreferrer">{menuItem.title}</a>
-                      </li>
-                    )
-                  }
-
-                  if (menuItem.profile) {
-                    return (
-                      <li key={i.toString()} className={menuItem.highlight ? 'highlight' : ''}>
-                        <Link to={menuItem.href} className={`profile-menu`}>
-                          <div className="avatar"><img src={getGravatarURL(tokenParser('user.email'))} alt="Avatar kép" aria-hidden="true" /><span className="profil-name">{tokenParser('user.firstname')}</span></div>
-                        </Link>
-                      </li>
-                    )
-                  }
-
-                  return (
-                    <li key={i.toString()} className={menuItem.highlight ? 'highlight' : ''}>
-                      <Link to={menuItem.href} className={menuItem.href.split("?")[0] === pathname ? 'active' : ''}>{menuItem.title}</Link>
-                    </li>
-                  )
-                })}
+                <Menu menu={menu} pathname={pathname} onClick={() => {}} rand={randomId(30, 'aA0')} />
               </ul>
 
               <div className="hamburger-menu-wrapper">
@@ -143,7 +145,7 @@ export default function Header({ children }) {
         </div>
       </nav>
 
-      {openMenu ? <MobileMenu menu={menu} onClick={toggleMenu} /> : null}
+      {openMenu ? <MobileMenu menu={menu} pathname={pathname} onClick={toggleMenu} /> : null}
 
       {children}
     </header>

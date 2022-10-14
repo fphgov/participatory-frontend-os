@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import {
   Redirect,
 } from "react-router-dom"
@@ -14,6 +14,8 @@ export default function ForgotPassword() {
   const [redirectLogin, setRedirectLogin] = useState(false)
 
   const postForgotPassword = () => {
+    context.set('loading', true)
+
     const data = {
       email,
     }
@@ -36,6 +38,14 @@ export default function ForgotPassword() {
     })
   }
 
+  useEffect(() => {
+    document.body.classList.add('page-forgot-password', 'page-full-dark')
+
+    return () => {
+      document.body.classList.remove('page-forgot-password', 'page-full-dark')
+    }
+  }, [])
+
   const Error = (props) => {
     return (
       <div className="error-message">
@@ -49,47 +59,50 @@ export default function ForgotPassword() {
       {redirectLogin ? <Redirect to='/bejelentkezes' /> : null}
 
       <div className="container">
-        <h1>Elfelejtett jelszó</h1>
+        <div className="row">
+          <div className="col-xs-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+            {success ? <>
+              <p>Amennyiben szerepel az e-mail cím a rendszerben, úgy az aktiváló linket kiküldtük.</p>
 
-        {error ? <Error message={error} /> : <div>
-          {!success ? <p>Kérünk, add meg az e-mail címed. Az aktiváló linket e-mailben kapod meg.</p> : null}
+              <div className="row">
+                <div className="col-lg-4">
+                  <div className="form-actions">
+                    <input className="btn btn-primary btn-small" id="button-send" type="submit" name="btnSend" value="Tovább a bejelentkezésre" onClick={(e) => {
+                      e.preventDefault()
 
-          {success ? <>
-            <p>Amennyiben szerepel az e-mail cím a rendszerben, úgy az aktiváló linket kiküldtük.</p>
-
-            <div className="row">
-              <div className="col-lg-4">
-                <div className="form-actions">
-                  <input className="btn btn-primary btn-small" id="button-send" type="submit" name="btnSend" value="Tovább a bejelentkezésre" onClick={(e) => {
-                    e.preventDefault()
-
-                    setRedirectLogin(true)
-                  }} />
+                      setRedirectLogin(true)
+                    }} />
+                  </div>
                 </div>
               </div>
-            </div>
-          </> : null}
+            </> : null}
 
-          {!success ? <div className="row">
-            <div className="col-lg-4">
-              <div className="control-group">
-                <label className="control-label" htmlFor="email">E-mail * : </label>
-                <input className="form-control" type="text" name="email" value={email} placeholder="E-mail" id="email" onChange={(e) => {
-                  setEmail(e.target.value)
-                }} />
-              </div>
-              <div className="form-actions">
-                <input className="btn btn-primary btn-small" id="button-send" type="submit" name="btnSend" value="Küldés" onClick={(e) => {
-                  e.preventDefault()
+            <form className="form-horizontal" onSubmit={postForgotPassword}>
+              <fieldset>
+                {error ? <Error message={error} /> : null}
 
-                  context.set('loading', true, () => {
-                    postForgotPassword()
-                  })
-                }} />
-              </div>
-            </div>
-          </div> : null}
-        </div>}
+                <div className="legend-wrapper">
+                  <legend>Elfelejtett jelszó</legend>
+                </div>
+
+                {! success ? <p className="info">Kérünk, add meg az e-mail címed. Az aktiváló linket e-mailben kapod meg.</p> : null}
+
+                <div className="form-wrapper" style={{ width: '100%' }}>
+                  <div className="input-wrapper">
+                    <label htmlFor="email">E-mail cím</label>
+                    <input type="text" autoCorrect="off" autoCapitalize="none" placeholder="E-mail cím" name="email" id="email" value={email} onChange={(e) => {setEmail(e.target.value)}} />
+                  </div>
+
+                  <div className="input-wrapper">
+                    <button className="btn btn-primary btn-headline btn-next">
+                      Küldés
+                    </button>
+                 </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   )

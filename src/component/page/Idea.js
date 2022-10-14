@@ -1,10 +1,12 @@
 import axios from "../assets/axios"
 import React, { useContext, useState, useEffect } from "react"
 import {
+  Link,
   useParams,
 } from "react-router-dom";
 import StoreContext from '../../StoreContext'
 import IdeaWrapper from '../common/IdeaWrapper'
+import HeroPage from '../common/HeroPage'
 
 export default function Idea() {
   const context = useContext(StoreContext)
@@ -58,6 +60,10 @@ export default function Idea() {
 
   return (
     <div className="prop">
+      {idea ? <>
+        <HeroPage title={idea.title} link={<Link className="link-attention" to="/otletek">Vissza</Link>} />
+      </> : null}
+
       <div className="container">
         {error ? <Error message={error} /> : null}
         {idea ? <IdeaWrapper idea={idea} /> : null}

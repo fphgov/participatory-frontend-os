@@ -1,12 +1,13 @@
 import axios from "../assets/axios"
 import React, { useContext, useState, useEffect } from "react"
 import {
+  Link,
   Redirect,
   useParams,
 } from "react-router-dom";
 import StoreContext from '../../StoreContext'
 import ProjectWrapper from '../common/ProjectWrapper'
-import ScrollTo from "../common/ScrollTo"
+import HeroPage from '../common/HeroPage'
 
 export default function Statistics() {
   const context = useContext(StoreContext)
@@ -92,8 +93,19 @@ export default function Statistics() {
     <div className="prop">
       {redirectLogin ? <Redirect to='/bejelentkezes' /> : null}
 
+      {project ? <>
+        <HeroPage title={project.title} link={<Link className="link-attention" to="/projektek">Vissza</Link>}>
+          <div className="hero-tags">
+            {project.tags.map((tag, i) => {
+              return (<div className="tag" key={i}>
+                <Link to={`/projektek?tag=${tag.id}`}>#{tag.name}</Link>
+              </div>)
+            })}
+          </div>
+        </HeroPage>
+      </> : null}
+
       <div className="container">
-        {scroll && document.querySelector('.vote-modal') ? <ScrollTo element={document.querySelector('.vote-modal').offsetTop} /> : null}
         {error ? <Error message={error} /> : null}
         {project ? <ProjectWrapper project={project} onClickVote={vote} disableVoteButton={voteBtn} showVoteButton={false} onTipClick={() => { setScroll(true) }} /> : null}
       </div>

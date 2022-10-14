@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 
-export default function VoteRadio({ id, name, value, radioValue, title, tipp, handleChange }) {
+export default function SimpleRadio({ id, name, value, radioValue, title, tipp, handleChange }) {
   const radioRef = useRef(null)
 
   return (
@@ -19,7 +19,7 @@ export default function VoteRadio({ id, name, value, radioValue, title, tipp, ha
       <div className="radio-inline-content">
         <label htmlFor={id}>{title}</label>
 
-        {tipp ? <p className="tipp">{tipp}</p> : null}
+        {tipp ? <p>{tipp}</p> : null}
       </div>
     </div>
   )

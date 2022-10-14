@@ -7,8 +7,6 @@ import {
   useLocation
 } from "react-router-dom"
 import StoreContext from '../../StoreContext'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faUser, faSignInAlt } from "@fortawesome/free-solid-svg-icons"
 
 export default function Login() {
   const context = useContext(StoreContext)
@@ -80,14 +78,14 @@ export default function Login() {
       return
     }
 
-    document.body.classList.add('page-login')
+    document.body.classList.add('page-login', 'page-full-dark')
 
     loadReCaptcha(process.env.SITE_KEY, (recaptchaToken) => {
       setRecaptchaToken(recaptchaToken)
     })
 
     return () => {
-      document.body.classList.remove('page-login')
+      document.body.classList.remove('page-login', 'page-full-dark')
     }
   }, [])
 
@@ -122,7 +120,11 @@ export default function Login() {
               <fieldset>
                 {error ? <Error message={error} /> : null}
 
-                <legend>Bejelentkezés</legend>
+                <div className="legend-wrapper">
+                  <legend>Bejelentkezés</legend>
+
+                  <Link to={`/regisztracio`} className="create-account">Nincs még fiókod?</Link>
+                </div>
 
                 <div className="form-wrapper">
                   <div className="input-wrapper">
@@ -145,33 +147,21 @@ export default function Login() {
                   />
 
                   <div className="input-wrapper">
-                    <div className="row">
+                    <div className="row flex-center">
                       <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <button className="btn btn-primary">
-                          <FontAwesomeIcon icon={faSignInAlt} />&nbsp;
+                        <button className="btn btn-primary btn-headline btn-next">
                           Belépés
                         </button>
                       </div>
 
                       <div className="forgot-btn-wrapper col-xs-8 col-sm-8 col-md-8 col-lg-8" style={{ textAlign: 'right' }}>
-                        <Link to={`/elfelejtett-jelszo`} className="btn btn-sm" title="Elfelejtettem a jelszavam">Elfelejtettem a jelszavam</Link>
+                        <Link to={`/elfelejtett-jelszo`} title="Elfelejtett jelszó">Elfelejtett jelszó</Link>
                       </div>
                     </div>
                  </div>
                 </div>
               </fieldset>
             </form>
-
-            <div className="registration-info">
-              <hr />
-
-              <p>Nincs még fiókod? Regisztrálj itt!</p>
-
-              <Link to={`/regisztracio`} className="btn btn-primary btn-sm" title="Regisztráció">
-                <FontAwesomeIcon icon={faUser} />&nbsp;
-                Regisztráció
-              </Link>
-            </div>
           </div>
         </div>
       </div>

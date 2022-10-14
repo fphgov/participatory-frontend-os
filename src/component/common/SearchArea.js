@@ -142,7 +142,7 @@ export default function SearchArea({ title, tipp, tipp2, values, queryRef, input
               <div className="filter-wrapper">
                 {hasQueryFilter() && (
                   <button className="filter-clear bg-transition" onClick={clearQuery}>
-                    Szűrő feltételek törlése
+                    Feltételek törlése
                   </button>
                 )}
               </div>

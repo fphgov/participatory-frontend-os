@@ -28,11 +28,11 @@ import ResetPassword from "./page/ResetPassword"
 import ForgotPassword from "./page/ForgotPassword"
 import Logout from "./page/Logout"
 import Profile from "./page/Profile"
-import ScrollToTop from "./common/ScrollToTop"
 import CookieNotice from "./common/CookieNotice"
 import StoreContext from '../StoreContext'
 import tokenParser from './assets/tokenParser'
 import IdeaSubmission from "./page/IdeaSubmission"
+import IdeaInfo from "./page/IdeaInfo"
 import 'react-toastify/dist/ReactToastify.css'
 import "react-image-lightbox/style.css"
 
@@ -91,35 +91,34 @@ export default function App() {
       <Router basename={process.env.REACT_APP_BASENAME}>
         {(process.env.GA_ID || process.env.GTM_ID) ? <CookieNotice /> : ''}
 
-        <ScrollToTop>
-          <Switch>
-            <Route exact path="/" render={() => <Layout><Home /></Layout>} />
-            <Route exact path="/bejelentkezes" render={() => <Layout><Login /></Layout>} />
-            <Route exact path="/kijelentkezes" render={() => <Layout><Logout /></Layout>} />
-            <Route exact path="/bekuldes" render={() => <Layout><IdeaSubmission /></Layout>} />
-            <Route exact path="/szavazas" render={() => <VoteLayout><VotePage /></VoteLayout>} />
-            <Route exact path="/oldal/:slug" render={() => <Layout><SimplePage /></Layout>} />
-            <Route exact path="/hirek" render={() => <Layout><Posts /></Layout>} />
-            <Route exact path="/hirek/:slug" render={() => <Layout><Post /></Layout>} />
-            <Route exact path="/statisztika" render={() => <Layout><Statistics /></Layout>} />
-            <Route exact path="/statisztika/:id" render={() => <Layout><Statistics /></Layout>} />
-            <Route exact path="/otletek" render={() => <Layout><Ideas /></Layout>} />
-            <Route exact path="/otletek/:id" render={() => <Layout><Idea /></Layout>} />
-            <Route exact path="/tervek" render={() => <Layout><Plans /></Layout>} />
-            <Route exact path="/projektek" render={() => <Layout><Projects /></Layout>} />
-            <Route exact path="/projektek/:id" render={() => <Layout><Project /></Layout>} />
-            <Route exact path="/profil" render={() => <Layout><Profile /></Layout>} />
-            <Route exact path="/profil/aktivalas/:hash" render={() => <Layout><ProfileActivate /></Layout>} />
-            <Route exact path="/profil/megorzes/:hash" render={() => <Layout><ProfileSaving /></Layout>} />
-            <Route exact path="/profil/nyeremeny-aktivalas/:hash" render={() => <Layout><PrizeActivate /></Layout>} />
-            <Route exact path="/profil/jelszo/:hash" render={() => <Layout><ResetPassword /></Layout>} />
-            <Route exact path="/regisztracio" render={() => <Layout><Registration /></Layout>} />
-            <Route exact path="/elfelejtett-jelszo" render={() => <Layout><ForgotPassword /></Layout>} />
-            <Route exact path="/404" render={() => <Layout><NotFound /></Layout>} />
+        <Switch>
+          <Route exact path="/" render={() => <Layout><Home /></Layout>} />
+          <Route exact path="/bejelentkezes" render={() => <Layout><Login /></Layout>} />
+          <Route exact path="/kijelentkezes" render={() => <Layout><Logout /></Layout>} />
+          <Route path="/bekuldesi-informacio" render={() => <Layout withScrollTop={false}><IdeaInfo /></Layout>} />
+          <Route exact path="/bekuldes" render={() => <Layout><IdeaSubmission /></Layout>} />
+          <Route exact path="/szavazas" render={() => <VoteLayout><VotePage /></VoteLayout>} />
+          <Route exact path="/oldal/:slug" render={() => <Layout><SimplePage /></Layout>} />
+          <Route exact path="/hirek" render={() => <Layout><Posts /></Layout>} />
+          <Route exact path="/hirek/:slug" render={() => <Layout><Post /></Layout>} />
+          <Route exact path="/statisztika" render={() => <Layout><Statistics /></Layout>} />
+          <Route exact path="/statisztika/:id" render={() => <Layout><Statistics /></Layout>} />
+          <Route exact path="/otletek" render={() => <Layout><Ideas /></Layout>} />
+          <Route exact path="/otletek/:id" render={() => <Layout><Idea /></Layout>} />
+          <Route exact path="/tervek" render={() => <Layout><Plans /></Layout>} />
+          <Route exact path="/projektek" render={() => <Layout><Projects /></Layout>} />
+          <Route exact path="/projektek/:id" render={() => <Layout><Project /></Layout>} />
+          <Route exact path="/profil" render={() => <Layout><Profile /></Layout>} />
+          <Route exact path="/profil/aktivalas/:hash" render={() => <Layout><ProfileActivate /></Layout>} />
+          <Route exact path="/profil/megorzes/:hash" render={() => <Layout><ProfileSaving /></Layout>} />
+          <Route exact path="/profil/nyeremeny-aktivalas/:hash" render={() => <Layout><PrizeActivate /></Layout>} />
+          <Route exact path="/profil/jelszo/:hash" render={() => <Layout><ResetPassword /></Layout>} />
+          <Route exact path="/regisztracio" render={() => <Layout><Registration /></Layout>} />
+          <Route exact path="/elfelejtett-jelszo" render={() => <Layout><ForgotPassword /></Layout>} />
+          <Route exact path="/404" render={() => <Layout><NotFound /></Layout>} />
 
-            <Route exact path="*" render={() => <Layout><NotFound /></Layout>} />
-          </Switch>
-        </ScrollToTop>
+          <Route exact path="*" render={() => <Layout><NotFound /></Layout>} />
+        </Switch>
       </Router>
     </div>
   )
