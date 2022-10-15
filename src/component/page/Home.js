@@ -93,7 +93,7 @@ export default function Home() {
           </div>
 
           <div className="row">
-            {Array.isArray(ideas) && ideas.map((idea, i) => <div key={i} className="col-md-4"><IdeaCard idea={idea} isBuilding={true} /></div>)}
+            {Array.isArray(ideas) && ideas.map((idea, i) => <div key={i} className="col-md-6 col-lg-4"><IdeaCard idea={idea} isBuilding={true} /></div>)}
           </div>
 
           <div className="mobile-only" style={{ textAlign: 'center' }}>
@@ -134,7 +134,7 @@ export default function Home() {
             <div className="col-md-9">
               <div className="posts">
                 <div className="row">
-                  {Array.isArray(posts) && posts.map((post, i) => <div key={i} className="col-md-4"><ArticleCard post={post} /></div>)}
+                  {Array.isArray(posts) && posts.map((post, i) => <div key={i} className="col-md-12 col-lg-4"><ArticleCard post={post} /></div>)}
                 </div>
               </div>
             </div>
