@@ -44,6 +44,7 @@ export default function FileArea({ changeRaw, originalMedias }) {
   }
 
   const handleDrop = (files) => {
+    console.log('handleDrop')
     addTempMedia(files)
   }
 

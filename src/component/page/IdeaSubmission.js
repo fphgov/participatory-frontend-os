@@ -38,6 +38,7 @@ export default function IdeaSubmission() {
     'medias': [],
     'theme': '',
     'location': '',
+    'cost': '',
     'locationDescription': '',
     'locationDistrict': '',
     'privacy': false,
@@ -221,7 +222,6 @@ export default function IdeaSubmission() {
   }, [])
 
   useEffect(() => {
-    console.log('update')
     localStorage.setItem('idea', JSON.stringify(formData))
   }, [formData])
 

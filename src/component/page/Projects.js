@@ -212,7 +212,7 @@ export default function Projects() {
     <div className="projects">
       <SearchArea
         title="Megvalósuló ötletek"
-        tipp="Az ötleteket itt abban a formában láthatod, ahogy azokat az ötletgazdák beadták. A szűrők segítségével tudod szűkíteni a megjelenített listát."
+        tipp="Itt láthatod a nyertes ötleteket, vagyis azokat az egyes években legtöbb szavazatot kapott javaslatokat, amelyeket a Főpolgármesteri Hivatal megvalósít. A megvalósulás állapotáról a projektek adatlapján tájékoztatást adunk."
         tipp2=""
         type="project"
         queryRef={queryRef}

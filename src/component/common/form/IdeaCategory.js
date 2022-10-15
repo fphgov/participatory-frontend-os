@@ -27,7 +27,7 @@ export default function IdeaCategory({ nextStepTo, handleChange, values }) {
                     value="7"
                     radioValue={values.theme}
                     title={<div><CategoryIcon color="blue" size={24} name="Zöld Budapest" /> Zöld Budapest</div>}
-                    tipp="Zöldebb utcák, élettel teli parkok, mindenki számára elérhető, környezettudatos megoldások"
+                    tipp="Zöldebb utcák, üdébb parkok, mindenki számára elérhető, környezettudatos megoldások. Budapest reagál a klímaváltozásra."
                     handleChange={handleChange}
                   />
                 </div>
@@ -38,7 +38,7 @@ export default function IdeaCategory({ nextStepTo, handleChange, values }) {
                     value="8"
                     radioValue={values.theme}
                     title={<div><CategoryIcon color="blue" size={24} name="Esélyteremtő Budapest" /> Esélyteremtő Budapest</div>}
-                    tipp="A társadalmi különbségek csökkentése, hátrányos helyzetű közösségek életének támogatása"
+                    tipp="A cél a társadalmi különbségek csökkentése, hátrányos helyzetű közösségek életét támogató ötletekkel."
                     handleChange={handleChange}
                   />
                 </div>
@@ -49,7 +49,7 @@ export default function IdeaCategory({ nextStepTo, handleChange, values }) {
                     value="9"
                     radioValue={values.theme}
                     title={<div><CategoryIcon color="blue" size={24} name="Nyitott Budapest" /> Nyitott Budapest</div>}
-                    tipp="Együttműködések, új, kísérleti megoldások, digitális fejlesztések, rövid távú, közösségépítő ötletek"
+                    tipp="Egy nyitott város a szívügyed? Együttműködések, kísérleti megoldások, digitális fejlesztések, közösségépítő ötletek."
                     handleChange={handleChange}
                   />
                 </div>

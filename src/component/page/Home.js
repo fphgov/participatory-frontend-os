@@ -84,11 +84,11 @@ export default function Home() {
         <div className="container">
           <div className="row flex-center">
             <div className="col-md-3">
-              <h2>Eddigi nyertes ötletek</h2>
+              <h2>Korábbi évek nyertes ötletei</h2>
             </div>
 
             <div className="col-md-9" style={{ textAlign: 'right' }}>
-              <Link to="/projektek?status=under_construction" className="btn btn-primary desktop-only">További nyertes ötletek</Link>
+              <Link to="/bekuldesi-informacio" className="btn btn-primary desktop-only">Ötletbeküldés</Link>
             </div>
           </div>
 
@@ -97,7 +97,7 @@ export default function Home() {
           </div>
 
           <div className="mobile-only" style={{ textAlign: 'center' }}>
-              <Link to="/projektek?status=under_construction" className="btn btn-primary">További nyertes ötletek</Link>
+              <Link to="/bekuldesi-informacio" className="btn btn-primary">Ötletbeküldés</Link>
           </div>
         </div>
       </div>
@@ -112,10 +112,10 @@ export default function Home() {
             <div className="col-md-12">
               <div className="timeline-wrapper">
                 <TimeLineItem icon={TimelineIcon1} date="2022.10.15. - 12.31." description="Ötletek beküldése" />
-                <TimeLineItem icon={TimelineIcon2} date="Első negyedév" description="Szakmai jóváhagyás" />
+                <TimeLineItem icon={TimelineIcon2} date="2023. első negyedév" description="Szakmai jóváhagyás" />
                 <TimeLineItem icon={TimelineIcon3} date="2023. tavasz" description="Ötletfejlesztés" />
                 <TimeLineItem icon={TimelineIcon4} date="2023. nyár" description="Szavazás" />
-                <TimeLineItem icon={TimelineIcon4} date="2023. ősztől" description="Megvalósítás elkezdése" />
+                <TimeLineItem icon={TimelineIcon4} date="2023. ősztől" description="Megvalósítás" />
               </div>
             </div>
           </div>

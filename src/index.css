@@ -319,11 +319,13 @@ header .logo-wrapper img {
 
 .btn.btn-secondary:hover,
 .btn.btn-headline:hover {
-  color: #fff;
+  color: #fff !important;
   background-color: #21A7CC;
 }
 
-.hero .btn.btn-headline:hover {
+.hero .btn.btn-headline:hover,
+.information-section-left .btn.btn-headline:hover {
+  color: #fff !important;
   background-color: #12326E;
 }
 
@@ -1786,7 +1788,7 @@ label.radio-inline > input[type="radio"] {
 }
 
 input[type="checkbox"] {
-  margin-right: 5px;
+  margin-right: 6px;
 }
 
 .form-group-label a {
@@ -3527,6 +3529,16 @@ ul.side-menu li.active::after {
   font-size: 16px;
 }
 
+form.form-horizontal {
+  margin: 48px 0;
+}
+
+.send-idea {
+  padding-bottom: 36px;
+  text-align: center;
+  margin-top: 36px;
+}
+
 @media screen and (min-width: 1440px) {
   .container,
   .container-sm,
@@ -3762,13 +3774,22 @@ ul.side-menu li.active::after {
     display: none;
   }
 
-  .post-more-wrapper,
-  .post-more-wrapper .post-more {
+  .prop-wrapper .post-more-wrapper,
+  .prop-wrapper .post-more-wrapper .post-more {
     width: 100%;
   }
 
   .prop-content .prop-category {
     display: flex !important;
+  }
+
+  .information-section-left {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .information-section details:last-of-type {
+    margin-bottom: 0;
   }
 }
 

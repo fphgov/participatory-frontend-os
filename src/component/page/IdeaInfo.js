@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Link,
   Switch,
@@ -10,6 +10,7 @@ import NewsletterArea from '../common/NewsletterArea'
 import Details from '../common/Details'
 import HeroPage from '../common/HeroPage'
 import CategoryIcon from '../common/CategoryIcon'
+import ScrollTo from "../common/ScrollTo"
 import IconLamp from '../../img/icon-lamp.svg'
 import IconAllow from '../../img/icon-allow.svg'
 import IconAccept from '../../img/icon-accept.svg'
@@ -62,17 +63,17 @@ const Entitled = () => <>
   <ul>
     <li>Budapesten élő vagy dolgozó, tanuló személyek <i>(Bejelentett lakóhely/tartózkodási hely nem szükséges.)</i></li>
     <li>Elmúltak 16 évesek</li>
-    <li>Regisztráltak az <a href="https://otlet.budapest.hu" rel="noopener noreferrer">otlet.budapest.hu</a> oldalon.</li>
+    <li>Regisztráltak az otlet.budapest.hu oldalon.</li>
   </ul>
 
-  <p>Ötletet, a fenti feltételeknek megfelelő külföldiek is küldhetnek.</p>
+  <p>Ötletet a fenti feltételeknek megfelelő külföldiek is küldhetnek.</p>
 
   <p><b>Több ötleted is van?</b></p>
 
   <p>Valamennyit beadhatod, de kérjük, hogy külön ötletként küldd be őket!</p>
 </>
 const How = () => <>
-  <p><b>Az ötleteket 2022. december 31-ig várjuk.</b> Ötletet az interneten, az <a href="https://otlet.budapest.hu" rel="noopener noreferrer">otlet.budapest.hu</a> felületén keresztül lehet beadni. A beküldés folyamata egyszerű, de segítséget is kérhetsz hozzá a Főpolgármesteri Hivatal ügyfélszolgálati irodájában <i>(Bp., V. Bárczy István utca 1-3.)</i>.</p>
+  <p><b>Az ötleteket 2022. december 31-ig várjuk.</b> Ötletet az interneten, az otlet.budapest.hu felületén keresztül lehet beadni. A beküldés folyamata egyszerű, de segítséget is kérhetsz hozzá a Főpolgármesteri Hivatal ügyfélszolgálati irodájában <i>(Bp., V. Bárczy István utca 1-3.)</i>.</p>
 </>
 const Happening = () => <>
   <p>Ötleted és a regisztrációnál megadott neved a beküldés után, rövid ellenőrzést követően mindenki számára láthatóvá válik a honlapon a beküldött ötletek között <i>(erről e-mailen kapsz jelzést, de ez még nem jelenti azt, hogy az ötletedet véglegesen megvalósíthatónak ítélte a Főváros)</i>.</p>
@@ -91,6 +92,14 @@ export default function IdeaInfo() {
   let location = useLocation()
   let { path } = useRouteMatch()
 
+  const [scrollTo, setScrollTo] = useState(false)
+
+  useEffect(() => {
+    if (scrollTo !== false) {
+      setScrollTo(false)
+    }
+  }, [scrollTo])
+
   useEffect(() => {
     document.body.classList.add('page-idea-info')
 
@@ -102,6 +111,8 @@ export default function IdeaInfo() {
   return (
     <div className="page-idea-info-section">
       <HeroPage title="Hogyan tudsz ötletet beküldeni?">
+
+      {scrollTo && document.querySelector(scrollTo) ? <ScrollTo element={document.querySelector(scrollTo).offsetTop} /> : null}
 
         <div className="row">
           <div className="col-lg-1"></div>
@@ -127,7 +138,7 @@ export default function IdeaInfo() {
                   Találj ki egy ötletet!
                 </div>
                 <div className="info-box-content">
-                  A beküldés előtt készítsd előaz ötlete(i)det.
+                  A beküldés előtt készítsd elő az ötlete(i)det.
                 </div>
               </div>
 
@@ -147,21 +158,21 @@ export default function IdeaInfo() {
           <div className="col-lg-1"></div>
         </div>
 
-        <Link className="btn btn-primary btn-headline btn-next" to="/bekuldes">Szeretnék ötletelni!</Link>
+        <button type="button" className="btn btn-primary btn-headline btn-next" onClick={() => {setScrollTo('#tematikus-kategoriak')}}>Szeretnék ötletelni!</button>
       </HeroPage>
 
-      <div className="light-section">
+      <div id="tematikus-kategoriak" className="light-section">
         <div className="container">
           <div className="row">
             <div className="col-md-4">
               <h2>Tematikus kategóriák</h2>
               <p>Ebben a három kategóriában várjuk az ötleteket.</p>
 
-              <Link className="btn btn-primary btn-headline btn-next" to="/bekuldes">Fontos tudnivalók</Link>
+              <button type="button" className="btn btn-primary btn-headline btn-next" onClick={() => {setScrollTo('#fontos-tudnivalok')}}>Fontos tudnivalók</button>
             </div>
 
             <div className="col-md-8">
-              <Details className="section-more" summary={() => <div><CategoryIcon color="blue" size={24} name="Zöld Budapest" />Zöld Budapest</div>}>
+              <Details className="section-more" summary={() => <div><CategoryIcon color="blue" size={24} name="Zöld Budapest" />Zöld Budapest</div>} startOpen={true}>
                 <p><b>Zöldebb utcák, üdébb parkok, mindenki számára elérhető, környezettudatos megoldások. Budapest reagál a klímaváltozásra.</b></p>
                 <p>A Zöld Budapest kategória azt képviseli, hogy a Fővárosi Önkormányzat szerepet vállal abban, hogy városunk zöldebbé váljon és segíti a budapestieket, hogy környezettudatosan éljenek, közlekedjenek. Közös célunk, hogy a főváros alkalmazkodjon a 21. század egyik legnagyobb kihívásához, a klímaváltozáshoz.</p>
               </Details>
@@ -182,7 +193,7 @@ export default function IdeaInfo() {
         </div>
       </div>
 
-      <div className="information-section">
+      <div id="fontos-tudnivalok" className="information-section">
         <div className="information-section-bg">
           <div className="information-section-bg-left"></div>
           <div className="information-section-bg-right"></div>
@@ -253,6 +264,10 @@ export default function IdeaInfo() {
                 </Details>
               </div>
             </div>
+          </div>
+
+          <div className="send-idea">
+            <Link className="btn btn-primary btn-headline btn-next" to="/bekuldes">Beküldöm az ötletem</Link>
           </div>
         </div>
       </div>

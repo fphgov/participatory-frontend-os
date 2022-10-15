@@ -89,7 +89,7 @@ export default function Header({ children }) {
   const [openMenu, setOpenMenu] = useState(false)
 
   const menu = [
-    { title: "Mi ez?", href: "/oldal/bovebben-a-reszveteli-koltsegvetesrol", outside: false },
+    { title: "Mi ez?", href: "/oldal/bovebben-a-kozossegi-koltsegvetesrol", outside: false },
     { title: "Ötletek", href: '', outside: false, submenu: [
       { title: "Beküldött", href: "/otletek?campaign=2", outside: true },
       { title: "Feldolgozott", href: "/tervek", outside: false },

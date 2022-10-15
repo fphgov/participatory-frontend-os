@@ -212,7 +212,7 @@ export default function Plans() {
     <div className="projects">
       <SearchArea
         title="Feldolgozott ötletek"
-        tipp="Az ötleteket itt abban a formában láthatod, ahogy azokat az ötletgazdák beadták. A szűrők segítségével tudod szűkíteni a megjelenített listát."
+        tipp="Itt láthatók az eredetileg beadott és szakmai jóváhagyást kapott ötletek átdolgozásával, újrafogalmazásával, adott esetben összevonásával létrehozott végleges ötletek, amelyek a szavazólapra kerülhetnek."
         tipp2=""
         type="plan"
         queryRef={queryRef}
