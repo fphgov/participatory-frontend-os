@@ -73,7 +73,7 @@ export default function Home() {
 
                 <p>A Fővárosi Önkormányzat 2023-ban harmadik alkalommal indítja el közösségi költségvetését. A budapestiek ötletei alapján ismét 1 milliárd forint felhasználásáról dönthetnek majd a város lakói.</p>
 
-                <Link className="btn btn-primary btn-headline btn-next" to="/bekuldes">Megnézem az ötleteket</Link>
+                <Link className="btn btn-primary btn-headline btn-next" to="/bekuldes">Ötletbeküldés</Link>
               </div>
             </div>
           </div>
@@ -88,7 +88,7 @@ export default function Home() {
             </div>
 
             <div className="col-md-9" style={{ textAlign: 'right' }}>
-              <Link to="/bekuldesi-informacio" className="btn btn-primary desktop-only">Ötletbeküldés</Link>
+              <Link to="/projektek?status=under_construction" className="btn btn-primary desktop-only">További nyertes ötletek</Link>
             </div>
           </div>
 
@@ -97,7 +97,7 @@ export default function Home() {
           </div>
 
           <div className="mobile-only" style={{ textAlign: 'center' }}>
-              <Link to="/bekuldesi-informacio" className="btn btn-primary">Ötletbeküldés</Link>
+              <Link to="/projektek?status=under_construction" className="btn btn-primary">További nyertes ötletek</Link>
           </div>
         </div>
       </div>
