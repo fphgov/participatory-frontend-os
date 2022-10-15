@@ -73,7 +73,7 @@ export default function Home() {
 
                 <p>A Fővárosi Önkormányzat 2023-ban harmadik alkalommal indítja el közösségi költségvetését. A budapestiek ötletei alapján ismét 1 milliárd forint felhasználásáról dönthetnek majd a város lakói.</p>
 
-                <Link className="btn btn-primary btn-headline btn-next" to="/bekuldes">Ötletbeküldés</Link>
+                <Link className="btn btn-primary btn-headline btn-next" to="/bekuldesi-informacio">Ötletbeküldés</Link>
               </div>
             </div>
           </div>

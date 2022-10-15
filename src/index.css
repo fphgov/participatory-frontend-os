@@ -587,7 +587,7 @@ header.post-full-header {
   padding: 8px 0;
   font-weight: bold;
   color: #12326E;
-  text-decoration: 0;
+  text-decoration: none;
   border: 0;
   background: none;
 }
@@ -3546,6 +3546,10 @@ form.form-horizontal {
 
 .button-wrapper {
   display: flex;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
 }
 
 @media screen and (min-width: 1440px) {
