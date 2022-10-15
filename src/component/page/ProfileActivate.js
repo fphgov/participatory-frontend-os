@@ -40,10 +40,10 @@ export default function ProfileActivate() {
   }
 
   useEffect(() => {
-    document.body.classList.add('page-profile-activate')
+    document.body.classList.add('page-profile-activate', 'page-full-dark')
 
     return () => {
-      document.body.classList.remove('page-profile-activate')
+      document.body.classList.remove('page-profile-activate', 'page-full-dark')
     }
   }, [])
 
@@ -70,22 +70,25 @@ export default function ProfileActivate() {
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <h1>Felhasználói fiók aktiválása</h1>
 
-            <p>A regisztrációd megerősítéséhez kattints az "Aktiválom" gombra.</p>
+            <div className="info-page">
+              <h1>Felhasználói fiók aktiválása</h1>
 
-            {error ? <Error message={error} /> : null}
-            {success ? <Success message="Sikeresen aktiváltad a fiókod!" /> : null}
+              <p>A fiók aktiválásához kattints az alábbi gombra:</p>
 
-            {! success ? <input type="submit" value="Aktiválom" className="btn btn-primary" onClick={() => {
-              submitProfileActivate()
-            }} /> : null}
+              {error ? <Error message={error} /> : null}
+              {success ? <Success message="Sikeresen aktiváltad a fiókod!" /> : null}
 
-            {!context.get('loading') && success ? (<>
-              <div className="small">
-                <button className="btn btn-primary" onClick={() => { setRedirectLogin(true) }}>Tovább</button>
-              </div>
-            </>) : null}
+              {! success ? <input type="submit" value="Aktiválom" className="btn btn-secondary" onClick={() => {
+                submitProfileActivate()
+              }} /> : null}
+
+              {!context.get('loading') && success ? (<>
+                <div className="small">
+                  <button className="btn btn-secondary" onClick={() => { setRedirectLogin(true) }}>Tovább</button>
+                </div>
+              </>) : null}
+            </div>
           </div>
         </div>
       </div>

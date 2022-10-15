@@ -217,27 +217,29 @@ export default function Registration() {
                         }) : null}
                       </div>
 
-                      <label htmlFor="hear_about">Honnan értesültél a közösségi költségvetésről?</label>
-                      {error && error.hear_about ? Object.values(error.hear_about).map((err, i) => {
-                        return <ErrorMini key={i} error={err} increment={`hear_about-${i}`} />
-                      }) : null}
-                      <div className="form-group form-group-hear-about">
-                        <select name="hear_about" onChange={handleChangeInput}>
-                          <option value="">Válassz a lehetőségek közül</option>
-                          <option disabled>---</option>
-                          <option value="friend">Családtól / baráttól / ismerőstől (személyesen)</option>
-                          <option value="street">Utcai plakátról</option>
-                          <option value="news">Híroldalon olvastam</option>
-                          <option value="news_ads">Híroldalon hirdetésből</option>
-                          <option value="transport">Buszon/villamoson láttam</option>
-                          <option value="facebook_municipatory">Budapest Városháza Facebook oldalról</option>
-                          <option value="facebook_im_in_budapest">Énbudapestem Facebook oldalról</option>
-                          <option value="facebook">Facebook csoportból</option>
-                          <option value="facebook_firend">Ismerős / barát / szervezet Facebook posztjából</option>
-                          <option value="civil">Civil szervezet hírleveléből, civil szervezettől</option>
-                          <option value="library">Fővárosi Szabó Ervin Könyvtárban</option>
-                          <option value="other">Egyéb</option>
-                        </select>
+                      <div className="input-wrapper">
+                        <label htmlFor="hear_about">Honnan értesültél a közösségi költségvetésről?</label>
+                        {error && error.hear_about ? Object.values(error.hear_about).map((err, i) => {
+                          return <ErrorMini key={i} error={err} increment={`hear_about-${i}`} />
+                        }) : null}
+                        <div className="form-group form-group-hear-about">
+                          <select name="hear_about" onChange={handleChangeInput}>
+                            <option value="">Válassz a lehetőségek közül</option>
+                            <option disabled>---</option>
+                            <option value="friend">Családtól / baráttól / ismerőstől (személyesen)</option>
+                            <option value="street">Utcai plakátról</option>
+                            <option value="news">Híroldalon olvastam</option>
+                            <option value="news_ads">Híroldalon hirdetésből</option>
+                            <option value="transport">Buszon/villamoson láttam</option>
+                            <option value="facebook_municipatory">Budapest Városháza Facebook oldalról</option>
+                            <option value="facebook_im_in_budapest">Énbudapestem Facebook oldalról</option>
+                            <option value="facebook">Facebook csoportból</option>
+                            <option value="facebook_firend">Ismerős / barát / szervezet Facebook posztjából</option>
+                            <option value="civil">Civil szervezet hírleveléből, civil szervezettől</option>
+                            <option value="library">Fővárosi Szabó Ervin Könyvtárban</option>
+                            <option value="other">Egyéb</option>
+                          </select>
+                        </div>
                       </div>
 
                       <div className="form-group">
@@ -282,19 +284,17 @@ export default function Registration() {
                         }}
                       />
 
-                      <div style={{ display: "inline-block" }}>
-                        <button className="btn btn-primary">
-                          <span className="glyphicon glyphicon-lock"></span>
-                          Regisztrálok
-                        </button>
-                      </div>
+                      <button className="btn btn-primary btn-headline next-step">
+                        Regisztrálok
+                      </button>
                     </div>
                   </> : null}
                 </fieldset>
               </form>
 
               {success ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
-                <p>Kérünk, a regisztrációd befejezéséhez aktiváld a fiókod az e-mail címedre küldött levélben található linkre kattintva.</p>
+                <h2>Köszönjük regisztrációd!</h2>
+                <p>A végelesítéshez kérjük kattints az általunk küldött megerősítő e-mail-ben található linkre, amit ide küldtünk: {filterData.email}</p>
               </div> : null}
             </div>
           </div>

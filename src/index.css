@@ -311,11 +311,13 @@ header .logo-wrapper img {
   background-color: #21A7CC;
 }
 
+.btn.btn-secondary,
 .btn.btn-headline {
   background-color: #F5CF68;
   color: #12326E;
 }
 
+.btn.btn-secondary:hover,
 .btn.btn-headline:hover {
   color: #fff;
   background-color: #21A7CC;
@@ -855,6 +857,7 @@ body.page-full-dark .btn.btn-headline:hover {
 
 .page-forgot-password .page,
 .page-reset-password .page,
+.page-profile-activate .page,
 .page-login .page {
   display: flex;
   align-items: center;
@@ -863,6 +866,12 @@ body.page-full-dark .btn.btn-headline:hover {
 .page-forgot-password-section,
 .page-login-section {
   width: 100%;
+}
+
+.page-full-dark .info-page {
+  color: #fff;
+  text-align: center;
+  margin: 64px 0;
 }
 
 .error-message {
