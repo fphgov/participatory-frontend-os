@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
+import {
+  Redirect
+} from "react-router-dom"
 import fileSize from '../../assets/fileSize'
 import nFormatter from '../../assets/nFormatter'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -6,6 +9,8 @@ import { faFile } from "@fortawesome/free-solid-svg-icons"
 import CategoryIcon from '../CategoryIcon'
 
 export default function IdeaOverview({ values, submitIdea, error }) {
+  const [ redirect, setRedirect ] = useState(false)
+
   const categories = {
     7: "Zöld Budapest",
     8: "Esélyteremtő Budapest",
@@ -33,6 +38,8 @@ export default function IdeaOverview({ values, submitIdea, error }) {
   return (
     <>
       <h3>Áttekintés</h3>
+
+      {redirect ? <Redirect to="/bekuldes" /> : null}
 
       <div className="form-group location">
         <p>Így néz ki ötleted. Küldd be a „beküldöm az ötletem” gombbal, vagy, ha még változtatnál rajta, kiegészítenéd, akkor kattints a „javítom” gombra!</p>
@@ -123,7 +130,10 @@ export default function IdeaOverview({ values, submitIdea, error }) {
 
       </div>
 
-      <button type="submit" className="btn btn-headline next-step submit" onClick={submitIdea}>Beküldöm az ötletem</button>
+      <div className="button-wrapper">
+        <button type="button" className="btn first-step" onClick={() => { setRedirect(true) }}>Javítom</button>
+        <button type="submit" className="btn btn-headline next-step submit" onClick={submitIdea}>Beküldöm az ötletem</button>
+      </div>
     </>
   )
 }

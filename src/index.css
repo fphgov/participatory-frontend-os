@@ -758,8 +758,8 @@ input[type="submit"] {
   display: inline-block;
   background-image: url(./img/icon-info.svg);
   background-repeat: no-repeat;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   margin-right: 8px;
 }
 
@@ -3240,7 +3240,8 @@ button.next-step[disabled] {
 }
 
 button.first-step {
-  background-color: #0ECE41;
+  background-color: #21A7CC;
+  color: #fff;
 }
 
 .overview-value-wrapper .radio-inline-block {
@@ -3543,6 +3544,10 @@ form.form-horizontal {
   color: #fff;
 }
 
+.button-wrapper {
+  display: flex;
+}
+
 @media screen and (min-width: 1440px) {
   .container,
   .container-sm,
@@ -3794,6 +3799,30 @@ form.form-horizontal {
 
   .information-section details:last-of-type {
     margin-bottom: 0;
+  }
+
+  .button-wrapper {
+    flex-direction: column;
+    margin: 36px 0 0 0;
+  }
+
+  .button-wrapper > button {
+    width: 100% !important;
+    margin: 0 0 16px 0 !important;
+  }
+
+  .input-wrapper.card-radio-wrapper > div > div {
+    margin-bottom: 16px;
+  }
+
+  ul.form-status {
+    flex-direction: column;
+    margin: 0;
+    text-align: center;
+  }
+
+  .form-status li {
+    margin: 8px 0px;
   }
 }
 

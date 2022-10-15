@@ -148,13 +148,13 @@ export default function Login() {
 
                   <div className="input-wrapper">
                     <div className="row flex-center">
-                      <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                      <div className="col-6 col-sm-8 col-md-8 col-lg-8">
                         <button className="btn btn-primary btn-headline btn-next">
                           Belépés
                         </button>
                       </div>
 
-                      <div className="forgot-btn-wrapper col-xs-8 col-sm-8 col-md-8 col-lg-8" style={{ textAlign: 'right' }}>
+                      <div className="forgot-btn-wrapper col-6 col-sm-4 col-md-4 col-lg-4" style={{ textAlign: 'right' }}>
                         <Link to={`/elfelejtett-jelszo`} title="Elfelejtett jelszó">Elfelejtett jelszó</Link>
                       </div>
                     </div>

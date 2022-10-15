@@ -255,15 +255,13 @@ export default function IdeaSubmission() {
         <div className="form-status-wrapper">
           <div className="container">
             <div className="row">
-              <div className="col-md-3"></div>
-              <div className="col-md-6">
+              <div className="col-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
                 <ul className="form-status">
                   <li><Link to={`${path}`}><span className={location.pathname === `${path}` ? 'active': ''}>1</span> <div className="description">Kategória megadása</div></Link></li>
                   <li><Link to={`${path}/adatok`}><span className={location.pathname === `${path}/adatok` ? 'active' : ''}>2</span> <div className="description">Részletek leírása</div></Link></li>
                   <li><Link to={`${path}/attekintes`}><span className={location.pathname === `${path}/attekintes` ? 'active' : ''}>3</span> <div className="description">Áttekintés és beküldés</div></Link></li>
                 </ul>
               </div>
-              <div className="col-md-3"></div>
             </div>
           </div>
         </div>
@@ -271,8 +269,7 @@ export default function IdeaSubmission() {
 
       <div className="container">
         <div className="row">
-          <div className="col-md-3"></div>
-          <div className="col-md-6">
+          <div className="col-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
             <form className="form-horizontal" onSubmit={(e) => { e.preventDefault() }}>
               <fieldset>
                 {(typeof error === 'string') ? <Error message={error} /> : null}
@@ -332,7 +329,6 @@ export default function IdeaSubmission() {
               <a href="/bekuldes" className="btn btn-secondary">Új ötletet küldök be</a>
             </div> : null}
           </div>
-          <div className="col-md-3"></div>
         </div>
       </div>
     </div>
