@@ -9,7 +9,7 @@ import TextareaLengthValidator from './elements/TextareaLengthValidator'
 import InputAddition from '../../common/form/elements/InputAddition'
 import FileArea from './elements/FileArea'
 
-export default function IdeaBasic({ nextStepTo, handleAddElem, changeRaw, handleRemoveElem, handleChange, handleChangeNumber, values, profile }) {
+export default function IdeaBasic({ nextStepTo, handleAddElem, changeRaw, handleRemoveElem, handleChange, handleChangeNumber, values }) {
   const [ errorLink, setErrorLink ] = useState('')
   const [ tempLink, setTempLink ] = useState('')
 
@@ -19,14 +19,6 @@ export default function IdeaBasic({ nextStepTo, handleAddElem, changeRaw, handle
       <div className="form-group location">
         <div className="row">
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-            {profile ? <>
-              <div className="profile">
-                <div className="profil-information">
-                  Ötletbeküldés <span className="profile-name">{`${profile.lastname} ${profile.firstname}`}</span> névvel. Nem Te vagy az? <Link to="/kijelentkezes">Kijelentkezés</Link>
-                </div>
-              </div>
-            </> : null}
 
             <h2>Kötelezően kitöltendő mezők</h2>
 

@@ -4,7 +4,8 @@ import {
   Switch,
   Route,
   useRouteMatch,
-  useLocation
+  useLocation,
+  Redirect
 } from "react-router-dom"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import { rmForNumber, rmAllCharForName, rmAllCharForTitle, rmAllCharForAddress } from '../lib/removeSpecialCharacters'
@@ -24,7 +25,8 @@ export default function IdeaSubmission() {
   let location = useLocation()
   let { path } = useRouteMatch()
 
-  const [ profile, setProfile ] = useState(null)
+  const [ redirect, setRedirect ] = useState(false)
+  const [ profile, setProfile ] = useState(false)
   const [ error, setError ] = useState(null)
   const [ success, setSuccess ] = useState('')
   const [ scroll, setScroll ] = useState(false)
@@ -233,9 +235,17 @@ export default function IdeaSubmission() {
     }
   }, [context.get('token')])
 
+  useEffect(() => {
+    if (profile === null) {
+      setRedirect(true)
+    }
+  }, [profile])
+
   return (
     <div className="page-idea-submission-section">
       {scroll && document.querySelector('.error-message') ? <ScrollTo element={document.querySelector('.error-message').offsetTop} /> : null}
+
+      {redirect ? <Redirect to={{ pathname: '/bejelentkezes', state: { redirect: '/bekuldes' } }}/> : null}
 
       {!success ? <>
         <HeroPage title="Ötlet beküldése">
