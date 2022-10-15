@@ -3539,6 +3539,10 @@ form.form-horizontal {
   margin-top: 36px;
 }
 
+.page-full-dark .page-forgot-password-section h2 {
+  color: #fff;
+}
+
 @media screen and (min-width: 1440px) {
   .container,
   .container-sm,
