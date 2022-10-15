@@ -16,7 +16,7 @@ export default function TextareaLengthValidator({ title, tipp, name, value, onCh
       <div className="validator-info">
         <div className="validator-info-elem">
           <span className={`info-text ${value.length == 0 ? 'info-text-empty' : ''}`}>
-            {options.min && titleIsInvalid ? <>Még nem érted el a minimum karaktert, ami {options.min}</> : null}
+            {options.min && titleIsInvalid ? <>Még nem érted el a minimum {options.min} karaktert</> : null}
           </span>
         </div>
 
