@@ -28,6 +28,10 @@ export default function IdeaCard({ idea, handleClick = () => {}, tags = null, is
               </div>
             </> : null}
 
+            <div className="prop-category mobile-only">
+              <div className="prop-theme"><CategoryIcon name={themeName} />{themeName}</div>
+            </div>
+
             <h2 className="prop-title">
               <Link to={`/otletek/${idea.id}`}>{idea.title}</Link>
             </h2>
@@ -39,7 +43,7 @@ export default function IdeaCard({ idea, handleClick = () => {}, tags = null, is
           <hr />
 
           <footer className="post-card-meta">
-            <div className="prop-category">
+            <div className="prop-category desktop-only">
               <div className="prop-theme"><CategoryIcon name={themeName} />{themeName}</div>
             </div>
 

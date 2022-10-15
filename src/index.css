@@ -1002,6 +1002,11 @@ body.page-full-dark .btn.btn-headline:hover {
   flex: 1 0 0;
 }
 
+.prop-content .prop-category {
+  display: flex;
+  margin: 0 0 12px 0;
+}
+
 .page-idea .hero-page,
 .page-project .hero-page {
   text-align: left;
@@ -3473,7 +3478,7 @@ ul.side-menu li.active::after {
 }
 
 .mobile-only {
-  display: none;
+  display: none !important;
 }
 
 .info-box {
@@ -3712,7 +3717,7 @@ ul.side-menu li.active::after {
   }
 
   .mobile-only {
-    display: block;
+    display: block !important;
   }
 
   .win-feed h2 {
@@ -3754,6 +3759,15 @@ ul.side-menu li.active::after {
 
   .timeline-wrapper:after {
     display: none;
+  }
+
+  .post-more-wrapper,
+  .post-more-wrapper .post-more {
+    width: 100%;
+  }
+
+  .prop-content .prop-category {
+    display: flex !important;
   }
 }
 
