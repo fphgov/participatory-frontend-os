@@ -249,7 +249,7 @@ export default function IdeaSubmission() {
 
       {!success ? <>
         <HeroPage title="Ötlet beküldése">
-          <p>Köszönjük, hogy megosztod velünk ötleted! A kitöltési folyamat nem szakítható meg!</p>
+          <p>Köszönjük, hogy megosztod velünk ötleted!</p>
         </HeroPage>
 
         <div className="form-status-wrapper">
