@@ -5,6 +5,7 @@ import {
 } from "react-router-dom"
 import API from '../assets/axios'
 import StoreContext from '../../StoreContext'
+import HeroPage from '../common/HeroPage'
 
 export default function SimplePage() {
   const context = useContext(StoreContext)
@@ -76,12 +77,16 @@ export default function SimplePage() {
     <div className="page-page-section">
       {redirect ? <Redirect to="/404" /> : null}
 
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12">
-            {error ? <Error message={error} /> : null}
+      {rawContent ? <HeroPage title={rawContent.title} /> : null}
 
-            {rawContent && rawContent.content ? <div dangerouslySetInnerHTML={{ __html: rawContent.content }} /> : null}
+      <div className="page-content">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              {error ? <Error message={error} /> : null}
+
+              {rawContent && rawContent.content ? <div dangerouslySetInnerHTML={{ __html: rawContent.content }} /> : null}
+            </div>
           </div>
         </div>
       </div>

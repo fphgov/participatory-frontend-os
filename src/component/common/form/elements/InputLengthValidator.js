@@ -11,12 +11,12 @@ export default function InputLengthValidator({ title, tipp, name, value, onChang
 
       <div className="tipp">{tipp}</div>
 
-      <input type="text" aria-invalid={titleIsInvalid} autoCorrect="off" autoCapitalize="none" name={name} id={name} value={value} onChange={onChange} />
+      <input type="text" className={(value.length === 0 || titleIsInvalid) ? "" : "valid"} aria-invalid={titleIsInvalid} autoCorrect="off" autoCapitalize="none" name={name} id={name} value={value} onChange={onChange} />
 
       <div className="validator-info">
         <div className="validator-info-elem">
           <span className={`info-text ${value.length == 0 ? 'info-text-empty' : ''}`}>
-            {options.min && titleIsInvalid ? <>Még nem érted el a minimum karaktert, ami {options.min}</> : null}
+            {options.min && titleIsInvalid ? <>Még nem érted el a minimum {options.min} karaktert</> : null}
           </span>
         </div>
 

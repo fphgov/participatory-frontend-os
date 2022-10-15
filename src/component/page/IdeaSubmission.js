@@ -1,6 +1,11 @@
 import React, { useEffect, useContext, useState } from 'react'
 import {
   Link,
+  Switch,
+  Route,
+  useRouteMatch,
+  useLocation,
+  Redirect
 } from "react-router-dom"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import { rmForNumber, rmAllCharForName, rmAllCharForTitle, rmAllCharForAddress } from '../lib/removeSpecialCharacters'
@@ -11,17 +16,20 @@ import ScrollTo from "../common/ScrollTo"
 import tokenParser from '../assets/tokenParser'
 import IdeaBasic from "../common/form/IdeaBasic"
 import IdeaCategory from "../common/form/IdeaCategory"
-import IdeaInformation from "../common/form/IdeaInformation"
 import IdeaOverview from "../common/form/IdeaOverview"
+import HeroPage from '../common/HeroPage'
 
 export default function IdeaSubmission() {
   const context = useContext(StoreContext)
 
-  const [ profile, setProfile ] = useState(null)
+  let location = useLocation()
+  let { path } = useRouteMatch()
+
+  const [ redirect, setRedirect ] = useState(false)
+  const [ profile, setProfile ] = useState(false)
   const [ error, setError ] = useState(null)
   const [ success, setSuccess ] = useState('')
   const [ scroll, setScroll ] = useState(false)
-  const [ step, setStep ] = useState(1)
   const [ recaptcha, setRecaptcha ] = useState(null)
   const [ recaptchaToken, setRecaptchaToken ] = useState('')
   const [ formData, setFormData ] = useState({
@@ -31,29 +39,12 @@ export default function IdeaSubmission() {
     'links': [],
     'medias': [],
     'theme': '',
-    'participateChoose': '',
-    'participate': '',
     'location': '',
+    'cost': '',
     'locationDescription': '',
+    'locationDistrict': '',
     'privacy': false,
   })
-
-  const firstStep = () => {
-    setError(null)
-    setStep(1)
-  }
-
-  const prevStep = () => {
-    if (step > 1) {
-      setStep(step - 1)
-    }
-  }
-
-  const nextStep = () => {
-    if (step <= 4) {
-      setStep(step + 1)
-    }
-  }
 
   const handleChangeInput = (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : rmAllCharForName(e.target.value)
@@ -109,18 +100,6 @@ export default function IdeaSubmission() {
     return array;
   }
 
-  useEffect(() => {
-    document.body.classList.add('page-idea-submission')
-
-    loadReCaptcha(process.env.SITE_KEY, (recaptchaToken) => {
-      setRecaptchaToken(recaptchaToken)
-    })
-
-    return () => {
-      document.body.classList.remove('page-idea-submission')
-    }
-  }, [])
-
   const Error = (props) => {
     return (
       <div className="error-message" dangerouslySetInnerHTML={{ __html: props.message }}>
@@ -150,14 +129,16 @@ export default function IdeaSubmission() {
     ideaFormData.append('solution', formData.solution)
     ideaFormData.append('description', formData.description)
     ideaFormData.append('theme', formData.theme)
-    ideaFormData.append('participate', formData.participate)
-    ideaFormData.append('participate_comment', formData.participate)
+    ideaFormData.append('cost', formData.cost)
     ideaFormData.append('location_description', formData.locationDescription)
+    ideaFormData.append('location_district', formData.locationDistrict)
     ideaFormData.append('privacy', formData.privacy)
     ideaFormData.append('g-recaptcha-response', recaptchaToken)
 
     if (typeof formData['location'] === 'object') {
       ideaFormData.append('location', new URLSearchParams(formData['location']))
+    } else {
+      ideaFormData.append('location', formData.location)
     }
 
     formData.links.forEach((link, i) => {
@@ -182,6 +163,8 @@ export default function IdeaSubmission() {
       if (response.data) {
         setSuccess(true)
 
+        localStorage.removeItem('idea')
+
         context.set('loading', false)
       }
     })
@@ -202,9 +185,10 @@ export default function IdeaSubmission() {
         }
       } else if (error.response && error.response.data && error.response.data.errors) {
         console.log(error.response.data.errors)
+        setError(error.response.data.errors)
         setScroll(true)
       } else {
-        setError('Váratlan hiba történt, kérünk próbáld később. Amennyiben a hiba ismétlődik, kérünk, küldd el ötleted a <a href="mailto:nyitott@budapest.hu">nyitott@budapest.hu</a>-ra január 31. éjfélig. Köszönjük megértésedet!')
+        setError('Váratlan hiba történt, kérünk próbáld később. Amennyiben a hiba ismétlődik, kérünk, küldd el ötleted a <a href="mailto:nyitott@budapest.hu">nyitott@budapest.hu</a>-ra december 31. éjfélig. Köszönjük megértésedet!')
         setScroll(true)
       }
 
@@ -214,6 +198,36 @@ export default function IdeaSubmission() {
   }
 
   useEffect(() => {
+    document.body.classList.add('page-idea-submission')
+
+    loadReCaptcha(process.env.SITE_KEY, (recaptchaToken) => {
+      setRecaptchaToken(recaptchaToken)
+    })
+
+    if (localStorage.getItem('idea') !== null) {
+      try {
+        const jsonIdea = JSON.parse(localStorage.getItem('idea'))
+
+        if (jsonIdea['medias']) {
+          jsonIdea['medias'] = []
+        }
+
+        setFormData(jsonIdea)
+      } catch (error) {
+        console.warn(error);
+      }
+    }
+
+    return () => {
+      document.body.classList.remove('page-idea-submission')
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('idea', JSON.stringify(formData))
+  }, [formData])
+
+  useEffect(() => {
     setProfile(tokenParser('user'))
 
     return () => {
@@ -221,89 +235,79 @@ export default function IdeaSubmission() {
     }
   }, [context.get('token')])
 
+  useEffect(() => {
+    if (profile === null) {
+      setRedirect(true)
+    }
+  }, [profile])
+
   return (
     <div className="page-idea-submission-section">
       {scroll && document.querySelector('.error-message') ? <ScrollTo element={document.querySelector('.error-message').offsetTop} /> : null}
 
+      {redirect ? <Redirect to={{ pathname: '/bejelentkezes', state: { redirect: '/bekuldes' } }}/> : null}
+
+      {!success ? <>
+        <HeroPage title="Ötlet beküldése">
+          <p>Köszönjük, hogy megosztod velünk ötleted!</p>
+        </HeroPage>
+
+        <div className="form-status-wrapper">
+          <div className="container">
+            <div className="row">
+              <div className="col-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+                <ul className="form-status">
+                  <li><Link to={`${path}`}><span className={location.pathname === `${path}` ? 'active': ''}>1</span> <div className="description">Kategória megadása</div></Link></li>
+                  <li><Link to={`${path}/adatok`}><span className={location.pathname === `${path}/adatok` ? 'active' : ''}>2</span> <div className="description">Részletek leírása</div></Link></li>
+                  <li><Link to={`${path}/attekintes`}><span className={location.pathname === `${path}/attekintes` ? 'active' : ''}>3</span> <div className="description">Áttekintés és beküldés</div></Link></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </> : null}
+
       <div className="container">
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
             <form className="form-horizontal" onSubmit={(e) => { e.preventDefault() }}>
               <fieldset>
                 {(typeof error === 'string') ? <Error message={error} /> : null}
 
-                <legend>Ötlet beküldése</legend>
-
                 {!success ? <>
-                  <p>Üdvözlünk a budapesti közösségi költségvetés ötletbenyújtó felületén!</p>
-
-                  <p>Kérünk, hogy ötleted benyújtása előtt olvasd el <Link to="/hirek/tudnivalok-az-otletek-benyujtasarol-2021" target="_blank">a kategóriák leírásait és a beküldésről szóló cikket</Link>.</p>
-
-                  <p>Hasznos, ha akkor kezdesz neki ötleted beküldésének, ha azt már átgondoltad és leírtad részleteiben, mert az űrlap kitöltése nem szakítható félbe. Ötleted és a regisztrációnál megadott neved a beküldés után, rövid ellenőrzést követően mindenki számára láthatóvá válik a honlapon a beküldött ötletek között (erről e-mailen kapsz jelzést).</p>
-
-                  <p>Köszönjük, hogy megosztod velünk az ötleted!</p>
-
-                  {profile ? <>
-                    <div className="form-wrapper-idea">
-                      <ul className="form-status">
-                        <li><span className={step >= 1 ? 'active': ''}>1</span></li>
-                        <li><span className={step >= 2 ? 'active' : ''}>2</span></li>
-                        <li><span className={step >= 3 ? 'active' : ''}>3</span></li>
-                        <li><span className={step >= 4 ? 'active' : ''}>4</span></li>
-                      </ul>
-
-                      {(() => {
-                        switch (step) {
-                          case 1:
-                            return (
-                              <IdeaBasic
-                                nextStep={nextStep}
-                                prevStep={null}
-                                handleAddElem={handleAddElem}
-                                handleRemoveElem={handleRemoveElem}
-                                handleChange={handleChangeInputTitle}
-                                profile={profile}
-                                changeRaw={changeRaw}
-                                profile={profile}
-                                error={error}
-                                values={formData} />
-                            )
-                          case 2:
-                            return (
-                              <IdeaCategory
-                                nextStep={nextStep}
-                                prevStep={prevStep}
-                                handleChange={handleChangeInput}
-                                changeRaw={changeRaw}
-                                changeInputAddress={handleChangeInputAddress}
-                                profile={profile}
-                                error={error}
-                                values={formData} />
-                            )
-                          case 3:
-                            return (
-                              <IdeaInformation
-                                nextStep={nextStep}
-                                prevStep={prevStep}
-                                handleChangeNumber={handleChangeInputNumber}
-                                handleChangeTitle={handleChangeInputTitle}
-                                profile={profile}
-                                error={error}
-                                values={formData} />
-                            )
-                          case 4:
-                            return (
-                              <IdeaOverview
-                                firstStep={firstStep}
-                                values={formData}
-                                profile={profile}
-                                error={error}
-                                submitIdea={submitIdea} />
-                            )
-                          }
-                      })()}
-                    </div>
-                  </> : <p>Ötletbeküldéshez <Link to={{pathname: '/bejelentkezes', state: { redirect: '/bekuldes' }}}>be kell jelentkezni</Link>.</p>}
+                  <div className="form-wrapper-idea">
+                    <Switch>
+                      <Route path={`${path}`} exact>
+                        <IdeaCategory
+                          nextStepTo={`${path}/adatok`}
+                          handleChange={handleChangeInput}
+                          changeRaw={changeRaw}
+                          changeInputAddress={handleChangeInputAddress}
+                          profile={profile}
+                          error={error}
+                          values={formData} />
+                      </Route>
+                      <Route path={`${path}/adatok`}>
+                        <IdeaBasic
+                          nextStepTo={`${path}/attekintes`}
+                          handleAddElem={handleAddElem}
+                          handleRemoveElem={handleRemoveElem}
+                          handleChange={handleChangeInputTitle}
+                          handleChangeNumber={handleChangeInputNumber}
+                          profile={profile}
+                          changeRaw={changeRaw}
+                          error={error}
+                          values={formData} />
+                      </Route>
+                      <Route path={`${path}/attekintes`}>
+                        <IdeaOverview
+                          values={formData}
+                          profile={profile}
+                          error={error}
+                          submitIdea={submitIdea} />
+                      </Route>
+                    </Switch>
+                  </div>
                 </>: null}
               </fieldset>
 
@@ -317,8 +321,12 @@ export default function IdeaSubmission() {
               />
             </form>
 
-            {success ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
-              <p>Az ötletbeküldés sikeres, hamarosan kapsz egy megerősítő e-mailt.</p>
+            {success ? <div className="info-page">
+              {document.body.classList.add('page-full-dark')}
+
+              <h2>Köszönjük, hogy megosztottad velünk ötleted!</h2>
+              <p>Megkaptuk ötletedet, pár napon belül, rövid ellenőrzést követően mindenki számára láthatóvá válik a honlapon a beküldött ötletek között. Erről e-mailen kapsz majd visszajelzést. Ha van további ötleted, add be azt is most!</p>
+              <a href="/bekuldes" className="btn btn-secondary">Új ötletet küldök be</a>
             </div> : null}
           </div>
         </div>

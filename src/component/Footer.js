@@ -1,8 +1,6 @@
 import React from "react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faFacebookF } from "@fortawesome/free-brands-svg-icons"
-import { faCircle } from "@fortawesome/free-solid-svg-icons"
-import OpenBP from '../img/nyitott_budapest_white.svg'
+import OpenBP from '../img/category-open-text.svg'
+import SocialFb from '../img/social-fb.svg'
 import {
   Link,
 } from "react-router-dom"
@@ -19,10 +17,7 @@ export default function Footer() {
 
             <div className="sharing">
               <a href="https://www.facebook.com/budapestmindenkie" title="Kövess minket Facebookon" rel="noopener noreferrer">
-                <span className="fa-layers fa-lg">
-                  <FontAwesomeIcon icon={faCircle} size='2x' color="white" />
-                  <FontAwesomeIcon icon={faFacebookF} mask={[ 'fab' ]} size='lg' style={{ marginLeft: 10 }} />
-                </span>
+                <img className="logo" src={SocialFb} alt="Facebook logo" aria-hidden={true} />
               </a>
             </div>
           </div>

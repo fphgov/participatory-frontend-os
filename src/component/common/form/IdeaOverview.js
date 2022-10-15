@@ -1,18 +1,21 @@
-import React from 'react'
-import FormPaginator from './elements/FormPaginator'
+import React, { useState } from 'react'
+import {
+  Redirect
+} from "react-router-dom"
 import fileSize from '../../assets/fileSize'
 import nFormatter from '../../assets/nFormatter'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFile } from "@fortawesome/free-solid-svg-icons"
+import CategoryIcon from '../CategoryIcon'
 
-export default function IdeaOverview({ firstStep, values, submitIdea, error }) {
+export default function IdeaOverview({ values, submitIdea, error }) {
+  const [ redirect, setRedirect ] = useState(false)
+
   const categories = {
-    4: "Zöld Budapest",
-    5: "Esélyteremtő Budapest",
-    6: "Nyitott Budapest"
+    7: "Zöld Budapest",
+    8: "Esélyteremtő Budapest",
+    9: "Nyitott Budapest"
   }
-
-  const location = typeof values.location === 'object' && values.location.nfn ? `${values.location.nfn} kerület, ${values.location.php}` : (typeof values.location === 'object' && values.location.geometry) ? 'Egyéni koordináta' : '-'
 
   const ErrorMini = (props) => {
     if (typeof props.error === 'object') {
@@ -36,8 +39,10 @@ export default function IdeaOverview({ firstStep, values, submitIdea, error }) {
     <>
       <h3>Áttekintés</h3>
 
+      {redirect ? <Redirect to="/bekuldes" /> : null}
+
       <div className="form-group location">
-        <p>Így néz ki ötleted. Küldd be a „beküldöm az ötletet” gombbal, vagy, ha még változtatnál rajta, kiegészítenéd, akkor kattints a „javítom” gombra!</p>
+        <p>Így néz ki ötleted. Küldd be a „beküldöm az ötletem” gombbal, vagy, ha még változtatnál rajta, kiegészítenéd, akkor kattints a „javítom” gombra!</p>
 
         {error && error.form ? <div className="error">
           <ErrorRender error={error} name="form" />
@@ -45,38 +50,55 @@ export default function IdeaOverview({ firstStep, values, submitIdea, error }) {
 
         <div className="overview-wrapper">
           <div className="overview">
-            <div className="overview-name">Ötlet megnevezése</div>
+            <div className="overview-name">Kategória</div>
+            <div className="overview-value">
+              {values.theme && categories[values.theme] ? <div className="prop-category"><div className="prop-theme"><CategoryIcon size={24} name={categories[values.theme]} />{categories[values.theme]}</div></div> : "-"}
+            </div>
+
+            <ErrorRender error={error} name="theme" />
+          </div>
+
+          <div className="overview">
+            <div className="overview-name">Ötleted helyszíne</div>
+            <div className="overview-value">{values.location === "1" ? "Konkrét helyszínhez kötődik" : "Nem kötődik konkrét helyszínhez"}</div>
+            <div className="overview-value">{values.locationDescription ? values.locationDescription : ""}</div>
+            <div className="overview-value">{values.locationDistrict ? values.locationDistrict !== 'Margit sziget' ? `${values.locationDistrict.replace('AREA', '')}. kerület` : values.locationDistrict.replace('AREA', '') : ""}</div>
+
+            <ErrorRender error={error} name="location" />
+            <ErrorRender error={error} name="location_description" />
+            <ErrorRender error={error} name="location_district" />
+          </div>
+
+          <div className="overview">
+            <div className="overview-name">Ötleted megnevezése</div>
             <div className="overview-value">{values.title ? values.title : "-"}</div>
 
             <ErrorRender error={error} name="title" />
           </div>
+
+          <div className="overview">
+            <div className="overview-name">Ötleted leírása:</div>
+            <div className="overview-value">{values.description ? values.description : "-"}</div>
+
+            <ErrorRender error={error} name="description" />
+          </div>
+
           <div className="overview">
             <div className="overview-name">Min szeretnél változtatni?</div>
             <div className="overview-value">{values.solution ? values.solution : "-"}</div>
 
             <ErrorRender error={error} name="solution" />
           </div>
-          <div className="overview">
-            <div className="overview-name">Leírás</div>
-            <div className="overview-value">{values.description ? values.description : "-"}</div>
 
-            <ErrorRender error={error} name="description" />
-          </div>
           <div className="overview">
-            <div className="overview-name">Kapcsolódó hivatkozások</div>
-            <div className="overview-value">{
-              values.links.length > 0 ?
-                values.links.map((link, i) => (
-                  <div key={i} className="link-elem">
-                    <a href={link} target="_blank" rel="noopener noreferrer">{link}</a>
-                  </div>
-                )) : <>Nincs</>
-            }</div>
+            <div className="overview-name">Becsült költség</div>
+            <div className="overview-value">{values.cost ? nFormatter(values.cost) : "-"}</div>
 
-            <ErrorRender error={error} name="links" />
+            <ErrorRender error={error} name="cost" />
           </div>
+
           <div className="overview">
-            <div className="overview-name">Kapcsolodó anyagok</div>
+            <div className="overview-name">Képek, dokumentumok</div>
             <div className="overview-value">{
               values.medias.length > 0 ?
                 values.medias.map((file, i) => (
@@ -92,47 +114,26 @@ export default function IdeaOverview({ firstStep, values, submitIdea, error }) {
           </div>
 
           <div className="overview">
-            <div className="overview-name">Helyszín megnevezése</div>
-            <div className="overview-value">{values.locationDescription ? values.locationDescription : "-"}</div>
+            <div className="overview-name">Kapcsolódó hivatkozások</div>
+            <div className="overview-value">{
+              values.links.length > 0 ?
+                values.links.map((link, i) => (
+                  <div key={i} className="link-elem">
+                    <a href={link} target="_blank" rel="noopener noreferrer">{link}</a>
+                  </div>
+                )) : <>Nincs</>
+            }</div>
 
-            <ErrorRender error={error} name="location_description" />
-          </div>
-
-          <div className="overview">
-            <div className="overview-name">Helyszín térképre helyezése</div>
-            <div className="overview-value">{values.location ? location : "-"}</div>
-
-            <ErrorRender error={error} name="location" />
-          </div>
-
-          <div className="overview">
-            <div className="overview-name">Kategória</div>
-            <div className="overview-value">{values.theme && categories[values.theme] ? categories[values.theme] : "-"}</div>
-
-            <ErrorRender error={error} name="theme" />
-          </div>
-
-          <div className="overview">
-            <div className="overview-name">Becsült költség</div>
-            <div className="overview-value">{values.cost ? nFormatter(values.cost) : "-"}</div>
-
-            <ErrorRender error={error} name="cost" />
-          </div>
-
-          <div className="overview">
-            <div className="overview-name">Részvétel a megvalósításban</div>
-            <div className="overview-value">{values.participate && values.participate != " " ? values.participate : 'Nem'}</div>
-
-            <ErrorRender error={error} name="participate" />
-            <ErrorRender error={error} name="participate_comment" />
+            <ErrorRender error={error} name="links" />
           </div>
         </div>
 
       </div>
 
-      <FormPaginator firstStep={firstStep}>
-        <button type="submit" className="submit" onClick={submitIdea}>Beküldöm az ötletet</button>
-      </FormPaginator>
+      <div className="button-wrapper">
+        <button type="button" className="btn first-step" onClick={() => { setRedirect(true) }}>Javítom</button>
+        <button type="submit" className="btn btn-headline next-step submit" onClick={submitIdea}>Beküldöm az ötletem</button>
+      </div>
     </>
   )
 }

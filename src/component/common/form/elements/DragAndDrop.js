@@ -51,8 +51,6 @@ export default function DragAndDrop({ children, onHandleDrop }) {
   }
 
   const clear = (e) => {
-    // console.log("törlés", e.dataTransfer.items)
-
     if (e.dataTransfer.items) {
       e.dataTransfer.items.clear()
     }
