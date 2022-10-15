@@ -95,7 +95,7 @@ export default function App() {
           <Route exact path="/" render={() => <Layout><Home /></Layout>} />
           <Route exact path="/bejelentkezes" render={() => <Layout><Login /></Layout>} />
           <Route exact path="/kijelentkezes" render={() => <Layout><Logout /></Layout>} />
-          <Route path="/bekuldesi-informacio" render={() => <Layout withScrollTop={false}><IdeaInfo /></Layout>} />
+          <Route path="/bekuldesi-informacio" render={() => <Layout><IdeaInfo /></Layout>} />
           <Route path="/bekuldes" render={() => <Layout><IdeaSubmission /></Layout>} />
           <Route exact path="/szavazas" render={() => <VoteLayout><VotePage /></VoteLayout>} />
           <Route exact path="/oldal/:slug" render={() => <Layout><SimplePage /></Layout>} />
