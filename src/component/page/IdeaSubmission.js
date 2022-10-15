@@ -1,6 +1,10 @@
 import React, { useEffect, useContext, useState } from 'react'
 import {
   Link,
+  Switch,
+  Route,
+  useRouteMatch,
+  useLocation
 } from "react-router-dom"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import { rmForNumber, rmAllCharForName, rmAllCharForTitle, rmAllCharForAddress } from '../lib/removeSpecialCharacters'
@@ -17,11 +21,13 @@ import HeroPage from '../common/HeroPage'
 export default function IdeaSubmission() {
   const context = useContext(StoreContext)
 
+  let location = useLocation()
+  let { path } = useRouteMatch()
+
   const [ profile, setProfile ] = useState(null)
   const [ error, setError ] = useState(null)
   const [ success, setSuccess ] = useState('')
   const [ scroll, setScroll ] = useState(false)
-  const [ step, setStep ] = useState(1)
   const [ recaptcha, setRecaptcha ] = useState(null)
   const [ recaptchaToken, setRecaptchaToken ] = useState('')
   const [ formData, setFormData ] = useState({
@@ -36,23 +42,6 @@ export default function IdeaSubmission() {
     'locationDistrict': '',
     'privacy': false,
   })
-
-  const firstStep = () => {
-    setError(null)
-    setStep(1)
-  }
-
-  const prevStep = () => {
-    if (step > 1) {
-      setStep(step - 1)
-    }
-  }
-
-  const nextStep = () => {
-    if (step <= 4) {
-      setStep(step + 1)
-    }
-  }
 
   const handleChangeInput = (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : rmAllCharForName(e.target.value)
@@ -107,6 +96,38 @@ export default function IdeaSubmission() {
 
     return array;
   }
+
+  const PageCategory = () => <>
+    <IdeaCategory
+      nextStepTo={`${path}/adatok`}
+      handleChange={handleChangeInput}
+      changeRaw={changeRaw}
+      changeInputAddress={handleChangeInputAddress}
+      profile={profile}
+      error={error}
+      values={formData} />
+    </>
+
+  const PageData = () => <>
+    <IdeaBasic
+      nextStepTo={`${path}/attekintes`}
+      handleAddElem={handleAddElem}
+      handleRemoveElem={handleRemoveElem}
+      handleChange={handleChangeInputTitle}
+      handleChangeNumber={handleChangeInputNumber}
+      profile={profile}
+      changeRaw={changeRaw}
+      error={error}
+      values={formData} />
+    </>
+
+  const PageOverview = () => <>
+    <IdeaOverview
+      values={formData}
+      profile={profile}
+      error={error}
+      submitIdea={submitIdea} />
+    </>
 
   useEffect(() => {
     document.body.classList.add('page-idea-submission')
@@ -235,9 +256,9 @@ export default function IdeaSubmission() {
             <div className="col-md-3"></div>
             <div className="col-md-6">
               <ul className="form-status">
-                <li><span className={step >= 1 ? 'active': ''}>1</span> <div className="description">Kategória megadása</div></li>
-                <li><span className={step >= 2 ? 'active' : ''}>2</span> <div className="description">Részletek leírása</div></li>
-                <li><span className={step >= 3 ? 'active' : ''}>3</span> <div className="description">Áttekintés és beküldés</div></li>
+                <li><Link to={`${path}`}><span className={location.pathname === `${path}` ? 'active': ''}>1</span> <div className="description">Kategória megadása</div></Link></li>
+                <li><Link to={`${path}/adatok`}><span className={location.pathname === `${path}/adatok` ? 'active' : ''}>2</span> <div className="description">Részletek leírása</div></Link></li>
+                <li><Link to={`${path}/attekintes`}><span className={location.pathname === `${path}/attekintes` ? 'active' : ''}>3</span> <div className="description">Áttekintés és beküldés</div></Link></li>
               </ul>
             </div>
             <div className="col-md-3"></div>
@@ -255,43 +276,11 @@ export default function IdeaSubmission() {
 
                 {!success ? <>
                   <div className="form-wrapper-idea">
-                    {(() => {
-                      switch (step) {
-                        case 1:
-                          return (
-                            <IdeaCategory
-                              nextStep={nextStep}
-                              handleChange={handleChangeInput}
-                              changeRaw={changeRaw}
-                              changeInputAddress={handleChangeInputAddress}
-                              profile={profile}
-                              error={error}
-                              values={formData} />
-                          )
-                        case 2:
-                          return (
-                            <IdeaBasic
-                              nextStep={nextStep}
-                              handleAddElem={handleAddElem}
-                              handleRemoveElem={handleRemoveElem}
-                              handleChange={handleChangeInputTitle}
-                              handleChangeNumber={handleChangeInputNumber}
-                              profile={profile}
-                              changeRaw={changeRaw}
-                              error={error}
-                              values={formData} />
-                          )
-                        case 3:
-                          return (
-                            <IdeaOverview
-                              firstStep={firstStep}
-                              values={formData}
-                              profile={profile}
-                              error={error}
-                              submitIdea={submitIdea} />
-                          )
-                        }
-                    })()}
+                    <Switch>
+                      <Route path={`${path}`} exact component={PageCategory} />
+                      <Route path={`${path}/adatok`} component={PageData} />
+                      <Route path={`${path}/attekintes`} component={PageOverview} />
+                    </Switch>
                   </div>
                 </>: null}
               </fieldset>

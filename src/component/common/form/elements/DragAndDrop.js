@@ -5,14 +5,14 @@ export default function DragAndDrop({ children, onHandleDrop }) {
   const [ drag, setDrag ] = useState(false)
   const [ dragCounter, setDragCounter ] = useState(0)
 
-  const handleDrag = (e) => {
+  const handleDrag = React.useCallback((e) => {
     e.preventDefault()
     e.stopPropagation()
 
     e.dataTransfer.dropEffect = "move"
-  }
+  })
 
-  const handleDragIn = (e) => {
+  const handleDragIn = React.useCallback((e) => {
     e.preventDefault()
     e.stopPropagation()
 
@@ -21,9 +21,11 @@ export default function DragAndDrop({ children, onHandleDrop }) {
     if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
       setDrag(true)
     }
-  }
 
-  const handleDragOut = (e) => {
+    return false;
+  })
+
+  const handleDragOut = React.useCallback((e) => {
     e.preventDefault()
     e.stopPropagation()
 
@@ -32,9 +34,11 @@ export default function DragAndDrop({ children, onHandleDrop }) {
     if (dragCounter === 0) {
       setDrag(false)
     }
-  }
 
-  const handleDrop = (e) => {
+    return false;
+  })
+
+  const handleDrop = React.useCallback((e) => {
     e.preventDefault()
     e.stopPropagation()
 
@@ -48,11 +52,11 @@ export default function DragAndDrop({ children, onHandleDrop }) {
 
     clear(e)
     setDragCounter(0)
-  }
 
-  const clear = (e) => {
-    // console.log("törlés", e.dataTransfer.items)
+    return false;
+  })
 
+  const clear = React.useCallback((e) => {
     if (e.dataTransfer.items) {
       e.dataTransfer.items.clear()
     }
@@ -60,21 +64,23 @@ export default function DragAndDrop({ children, onHandleDrop }) {
     if (e.dataTransfer) {
       e.dataTransfer.clearData()
     }
-  }
+
+    return false;
+  })
 
   useEffect(() => {
-    dropRef.current.addEventListener('dragenter', handleDragIn)
-    dropRef.current.addEventListener('dragleave', handleDragOut)
-    dropRef.current.addEventListener('dragover', handleDrag)
-    dropRef.current.addEventListener('drop', handleDrop)
+    const element = dropRef.current;
+
+    element.addEventListener('dragenter', handleDragIn)
+    element.addEventListener('dragleave', handleDragOut)
+    element.addEventListener('dragover', handleDrag)
+    element.addEventListener('drop', handleDrop)
 
     return () => {
-      if (dropRef.current) {
-        dropRef.current.removeEventListener('dragenter', handleDragIn)
-        dropRef.current.removeEventListener('dragleave', handleDragOut)
-        dropRef.current.removeEventListener('dragover', handleDrag)
-        dropRef.current.removeEventListener('drop', handleDrop)
-      }
+      element.removeEventListener('dragenter', handleDragIn)
+      element.removeEventListener('dragleave', handleDragOut)
+      element.removeEventListener('dragover', handleDrag)
+      element.removeEventListener('drop', handleDrop)
     }
   }, [])
 

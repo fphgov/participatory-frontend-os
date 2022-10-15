@@ -328,6 +328,7 @@ header .logo-wrapper img {
 .btn.btn-headline.next-step {
   padding: 12px 18px;
   width: 100%;
+  text-align: center;
 }
 
 .btn.btn-warning {
@@ -2267,6 +2268,11 @@ input[type="file"] {
 
 .form-status li {
   display: inline-block;
+}
+
+.form-status li a {
+  text-decoration: none;
+  display: block;
 }
 
 .form-status span {

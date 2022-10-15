@@ -1,84 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
   Link,
 } from "react-router-dom"
 import { rmEmojis } from '../../lib/removeSpecialCharacters'
 import { matchUrl } from '../../lib/matches'
-import fileSize from '../../assets/fileSize'
-import DragAndDrop from '../../common/form/elements/DragAndDrop'
 import InputLengthValidator from './elements/InputLengthValidator'
 import TextareaLengthValidator from './elements/TextareaLengthValidator'
-import FormPaginator from './elements/FormPaginator'
-import clonedeep from 'lodash.clonedeep'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTrash, faFileUpload, faFile } from "@fortawesome/free-solid-svg-icons"
 import InputAddition from '../../common/form/elements/InputAddition'
+import FileArea from './elements/FileArea'
 
-export default function IdeaBasic({ nextStep, prevStep, handleAddElem, changeRaw, handleRemoveElem, handleChange, handleChangeNumber, values, profile }) {
-  const [ dragged, setDragged ] = useState(false)
+export default function IdeaBasic({ nextStepTo, handleAddElem, changeRaw, handleRemoveElem, handleChange, handleChangeNumber, values, profile }) {
   const [ errorLink, setErrorLink ] = useState('')
   const [ tempLink, setTempLink ] = useState('')
-  const [ tempMedia, setTempMedia ] = useState([])
-
-  const maxFiles = 5
-
-  const removeItemOnce = (array, value) => {
-    const index = array.indexOf(value)
-
-    if (index > -1) {
-      array.splice(index, 1)
-    }
-
-    return array
-  }
-
-  const addTempMedia = (newMediaList) => {
-    const medias = clonedeep(tempMedia)
-
-    if ((tempMedia.length + newMediaList.length) <= maxFiles) {
-      for (let i = 0; i < newMediaList.length; i++) {
-        medias.push(newMediaList[i])
-      }
-    }
-
-    setTempMedia([ ...medias ])
-  }
-
-  const removeTempMedia = (file) => {
-    const medias = clonedeep(tempMedia)
-    const removedMedias = removeItemOnce(medias, file)
-
-    setTempMedia([ ...removedMedias ])
-  }
-
-  const onFileChange = (e) => {
-    addTempMedia(e.target.files)
-    // setTempMedia(e.target.files)
-  }
-
-  const handleDrop = (files) => {
-    addTempMedia(files)
-
-    // setTempMedia(files)
-  }
-
-  const validationAndNext = () => {
-    if (tempLink.length > 0) {
-      alert('A kapcsolodó hivatkozások mező nem üres. Hivatkozás hozzáadásához nyomd meg a mező alatti Hozzáadás gombot, vagy töröld a mező tartalmát.')
-
-      return
-    }
-
-    nextStep()
-  }
-
-  useEffect(() => {
-    changeRaw('medias', tempMedia)
-  }, [tempMedia])
-
-  useEffect(() => {
-    setTempMedia([...values.medias])
-  }, [])
 
   return (
     <>
@@ -151,41 +84,7 @@ export default function IdeaBasic({ nextStep, prevStep, handleAddElem, changeRaw
               <label htmlFor="medias">Képek, dokumentumok feltöltése</label>
               <div className="tipp">Itt tudsz képeket vagy egyéb dokumentumokat feltölteni, amikről úgy gondolod, segítik az ötleted megértését, kapcsolódnak hozzá. Max. 5 darab fájl tölthető fel!</div>
 
-              <DragAndDrop
-                onHandleDrop={handleDrop}
-                onChangeDrag={(drag) => { setDragged(drag) }}
-              >
-                <div className={`input-file-wrapper ${dragged ? 'dragged' : ''}`}>
-                  <input id="file" name="file" type="file" multiple onChange={onFileChange} />
-
-                  {tempMedia.length > 0 ? <>
-                    <div className="file-list">
-                      {tempMedia.map((file, i) => {
-                        return (
-                          <div key={`file-${i}`} className="file-elem">
-                            <div className="file-elem-remove" onClick={() => { removeTempMedia(file) }}><FontAwesomeIcon icon={faTrash} size="1x" /></div>
-                            <div className="file-elem-icon"><FontAwesomeIcon icon={faFile} size="2x" /></div>
-                            <div className="file-elem-name">{file.name}</div>
-                            <div className="file-elem-size">({fileSize(file.size)})</div>
-                          </div>
-                        )
-                      })}
-                    </div>
-                  </> : null}
-
-                  {tempMedia.length > 0 && tempMedia.length < maxFiles ? <>
-                    <div className="file-list-separator"></div>
-                  </> : null}
-
-                  {tempMedia.length < maxFiles ? <>
-                    <label htmlFor="file" className="input-file-content">
-                      <FontAwesomeIcon icon={faFileUpload} size="3x" />
-
-                      <p>Tallózd be, vagy húzd a kijelölt mezőbe a kapcsolódó anyagokat!</p>
-                    </label>
-                  </> : null}
-                </div>
-              </DragAndDrop>
+              <FileArea changeRaw={changeRaw} originalMedias={values.medias} />
             </div>
 
             <hr />
@@ -236,7 +135,7 @@ export default function IdeaBasic({ nextStep, prevStep, handleAddElem, changeRaw
 
             <hr />
 
-            <FormPaginator prevStep={prevStep} nextStep={validationAndNext} />
+            <Link className="btn btn-headline next-step" to={nextStepTo}>Következő lépés</Link>
           </div>
         </div>
       </div>

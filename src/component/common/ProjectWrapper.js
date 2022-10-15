@@ -28,7 +28,6 @@ export default function ProjectWrapper({ project, showVoteButton, disableVoteBut
             <div className="prop-single-wrapper prop-single-body">
               <div className="prop-single-inner">
                 <div className="prop-single-content">
-                  { console.log(project) }
                   {project.description ? <>
                     <div className="prop-single-section">
                       <h3>Leírás</h3>

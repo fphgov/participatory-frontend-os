@@ -1,19 +1,16 @@
 import React from 'react'
-import FormPaginator from './elements/FormPaginator'
 import fileSize from '../../assets/fileSize'
 import nFormatter from '../../assets/nFormatter'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFile } from "@fortawesome/free-solid-svg-icons"
 import CategoryIcon from '../CategoryIcon'
 
-export default function IdeaOverview({ firstStep, values, submitIdea, error }) {
+export default function IdeaOverview({ values, submitIdea, error }) {
   const categories = {
     7: "Zöld Budapest",
     8: "Esélyteremtő Budapest",
     9: "Nyitott Budapest"
   }
-
-  const location = typeof values.location === 'object' && values.location.nfn ? `${values.location.nfn} kerület, ${values.location.php}` : (typeof values.location === 'object' && values.location.geometry) ? 'Egyéni koordináta' : '-'
 
   const ErrorMini = (props) => {
     if (typeof props.error === 'object') {
@@ -57,8 +54,8 @@ export default function IdeaOverview({ firstStep, values, submitIdea, error }) {
           <div className="overview">
             <div className="overview-name">Ötleted helyszíne</div>
             <div className="overview-value">{values.location === "1" ? "Konkrét helyszínhez kötődik" : "Nem kötődik konkrét helyszínhez"}</div>
-            <div className="overview-value">{values.locationDescription ? values.locationDescription : "-"}</div>
-            <div className="overview-value">{values.locationDistrict ? values.locationDistrict !== 'Margit sziget' ? `${values.locationDistrict}. kerület` : values.locationDistrict : "-"}</div>
+            <div className="overview-value">{values.locationDescription ? values.locationDescription : ""}</div>
+            <div className="overview-value">{values.locationDistrict ? values.locationDistrict !== 'Margit sziget' ? `${values.locationDistrict}. kerület` : values.locationDistrict : ""}</div>
 
             <ErrorRender error={error} name="location" />
             <ErrorRender error={error} name="location_description" />
@@ -126,9 +123,7 @@ export default function IdeaOverview({ firstStep, values, submitIdea, error }) {
 
       </div>
 
-      <FormPaginator firstStep={firstStep}>
-        <button type="submit" className="submit" onClick={submitIdea}>Beküldöm az ötletem</button>
-      </FormPaginator>
+      <button type="submit" className="btn btn-headline next-step submit" onClick={submitIdea}>Beküldöm az ötletem</button>
     </>
   )
 }

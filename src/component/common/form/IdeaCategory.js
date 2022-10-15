@@ -1,12 +1,14 @@
 import React from 'react'
+import {
+  Link,
+} from "react-router-dom"
 import CardRadio from './elements/CardRadio'
 import SimpleRadio from './elements/SimpleRadio'
-import FormPaginator from './elements/FormPaginator'
 import InputLengthValidator from './elements/InputLengthValidator'
 import CategoryIcon from '../CategoryIcon'
 import Select from '../../common/form/elements/Select'
 
-export default function IdeaCategory({ nextStep, prevStep, handleChange, values }) {
+export default function IdeaCategory({ nextStepTo, handleChange, values }) {
   return (
     <div>
       <h3>Ötlet kategóriája</h3>
@@ -143,7 +145,7 @@ export default function IdeaCategory({ nextStep, prevStep, handleChange, values 
         </div>
       </div>
 
-      <FormPaginator nextStep={nextStep} />
+      <Link className="btn btn-headline next-step" to={nextStepTo}>Következő lépés</Link>
     </div>
   )
 }
