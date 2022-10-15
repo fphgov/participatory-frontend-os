@@ -26,7 +26,7 @@ const Conditions = () => <>
 
   <p><b>HATÁSKÖR / JOGSZABÁLYOK:</b></p>
 
-  <p>A közösségi költségvetésben javasolt projekteknek a Fővárosi Önkormányzat vagy a kerületi önkormányzatok hatáskörébe kell tartozniuk. Kerületekhez tartozó projektek esetében a megvalósítás az adott kerület hozzájárulásához kötött. Az egyeztetéseket a Fővárosi Önkormányzat intézi. A projekteknek meg kell felelniük a mindenkori jogszabályoknak.</p>
+  <p>A közösségi költségvetésen javasolt projekteknek a Fővárosi Önkormányzat hatáskörébe kell tartozniuk. Ezen belül az ötlet fejleszthet fővárosi vagy kerületi területet, utóbbi esetben a kerület hozzájárulása is szükséges. Az egyeztetéseket a Fővárosi Önkormányzat intézi. A projekteknek meg kell felelniük a mindenkori jogszabályoknak.</p>
 
   <p><b>HELYSZÍNEK:</b></p>
 
