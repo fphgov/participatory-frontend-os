@@ -97,18 +97,6 @@ export default function IdeaSubmission() {
     return array;
   }
 
-  useEffect(() => {
-    document.body.classList.add('page-idea-submission')
-
-    loadReCaptcha(process.env.SITE_KEY, (recaptchaToken) => {
-      setRecaptchaToken(recaptchaToken)
-    })
-
-    return () => {
-      document.body.classList.remove('page-idea-submission')
-    }
-  }, [])
-
   const Error = (props) => {
     return (
       <div className="error-message" dangerouslySetInnerHTML={{ __html: props.message }}>
@@ -138,6 +126,7 @@ export default function IdeaSubmission() {
     ideaFormData.append('solution', formData.solution)
     ideaFormData.append('description', formData.description)
     ideaFormData.append('theme', formData.theme)
+    ideaFormData.append('cost', formData.cost)
     ideaFormData.append('location_description', formData.locationDescription)
     ideaFormData.append('location_district', formData.locationDistrict)
     ideaFormData.append('privacy', formData.privacy)
@@ -171,6 +160,8 @@ export default function IdeaSubmission() {
       if (response.data) {
         setSuccess(true)
 
+        localStorage.removeItem('idea')
+
         context.set('loading', false)
       }
     })
@@ -191,9 +182,10 @@ export default function IdeaSubmission() {
         }
       } else if (error.response && error.response.data && error.response.data.errors) {
         console.log(error.response.data.errors)
+        setError(error.response.data.errors)
         setScroll(true)
       } else {
-        setError('Váratlan hiba történt, kérünk próbáld később. Amennyiben a hiba ismétlődik, kérünk, küldd el ötleted a <a href="mailto:nyitott@budapest.hu">nyitott@budapest.hu</a>-ra január 31. éjfélig. Köszönjük megértésedet!')
+        setError('Váratlan hiba történt, kérünk próbáld később. Amennyiben a hiba ismétlődik, kérünk, küldd el ötleted a <a href="mailto:nyitott@budapest.hu">nyitott@budapest.hu</a>-ra december 31. éjfélig. Köszönjük megértésedet!')
         setScroll(true)
       }
 
@@ -201,6 +193,37 @@ export default function IdeaSubmission() {
       context.set('loading', false)
     })
   }
+
+  useEffect(() => {
+    document.body.classList.add('page-idea-submission')
+
+    loadReCaptcha(process.env.SITE_KEY, (recaptchaToken) => {
+      setRecaptchaToken(recaptchaToken)
+    })
+
+    if (localStorage.getItem('idea') !== null) {
+      try {
+        const jsonIdea = JSON.parse(localStorage.getItem('idea'))
+
+        if (jsonIdea['medias']) {
+          jsonIdea['medias'] = []
+        }
+
+        setFormData(jsonIdea)
+      } catch (error) {
+        console.warn(error);
+      }
+    }
+
+    return () => {
+      document.body.classList.remove('page-idea-submission')
+    }
+  }, [])
+
+  useEffect(() => {
+    console.log('update')
+    localStorage.setItem('idea', JSON.stringify(formData))
+  }, [formData])
 
   useEffect(() => {
     setProfile(tokenParser('user'))
@@ -214,25 +237,27 @@ export default function IdeaSubmission() {
     <div className="page-idea-submission-section">
       {scroll && document.querySelector('.error-message') ? <ScrollTo element={document.querySelector('.error-message').offsetTop} /> : null}
 
-      <HeroPage title="Ötlet beküldése">
-        <p>Köszönjük, hogy megosztod velünk ötleted! A kitöltési folyamat nem szakítható meg!</p>
-      </HeroPage>
+      {!success ? <>
+        <HeroPage title="Ötlet beküldése">
+          <p>Köszönjük, hogy megosztod velünk ötleted! A kitöltési folyamat nem szakítható meg!</p>
+        </HeroPage>
 
-      <div className="form-status-wrapper">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-3"></div>
-            <div className="col-md-6">
-              <ul className="form-status">
-                <li><Link to={`${path}`}><span className={location.pathname === `${path}` ? 'active': ''}>1</span> <div className="description">Kategória megadása</div></Link></li>
-                <li><Link to={`${path}/adatok`}><span className={location.pathname === `${path}/adatok` ? 'active' : ''}>2</span> <div className="description">Részletek leírása</div></Link></li>
-                <li><Link to={`${path}/attekintes`}><span className={location.pathname === `${path}/attekintes` ? 'active' : ''}>3</span> <div className="description">Áttekintés és beküldés</div></Link></li>
-              </ul>
+        <div className="form-status-wrapper">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-3"></div>
+              <div className="col-md-6">
+                <ul className="form-status">
+                  <li><Link to={`${path}`}><span className={location.pathname === `${path}` ? 'active': ''}>1</span> <div className="description">Kategória megadása</div></Link></li>
+                  <li><Link to={`${path}/adatok`}><span className={location.pathname === `${path}/adatok` ? 'active' : ''}>2</span> <div className="description">Részletek leírása</div></Link></li>
+                  <li><Link to={`${path}/attekintes`}><span className={location.pathname === `${path}/attekintes` ? 'active' : ''}>3</span> <div className="description">Áttekintés és beküldés</div></Link></li>
+                </ul>
+              </div>
+              <div className="col-md-3"></div>
             </div>
-            <div className="col-md-3"></div>
           </div>
         </div>
-      </div>
+      </> : null}
 
       <div className="container">
         <div className="row">
@@ -289,8 +314,12 @@ export default function IdeaSubmission() {
               />
             </form>
 
-            {success ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
-              <p>Az ötletbeküldés sikeres, hamarosan kapsz egy megerősítő e-mailt.</p>
+            {success ? <div className="info-page">
+              {document.body.classList.add('page-full-dark')}
+
+              <h2>Köszönjük, hogy megosztottad velünk ötleted!</h2>
+              <p>Megkaptuk ötletedet, pár napon belül, rövid ellenőrzést követően mindenki számára láthatóvá válik a honlapon a beküldött ötletek között. Erről e-mailen kapsz majd visszajelzést. Ha van további ötleted, add be azt is most!</p>
+              <a href="/bekuldes" className="btn btn-secondary">Új ötletet küldök be</a>
             </div> : null}
           </div>
           <div className="col-md-3"></div>

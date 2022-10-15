@@ -55,7 +55,7 @@ export default function IdeaOverview({ values, submitIdea, error }) {
             <div className="overview-name">Ötleted helyszíne</div>
             <div className="overview-value">{values.location === "1" ? "Konkrét helyszínhez kötődik" : "Nem kötődik konkrét helyszínhez"}</div>
             <div className="overview-value">{values.locationDescription ? values.locationDescription : ""}</div>
-            <div className="overview-value">{values.locationDistrict ? values.locationDistrict !== 'Margit sziget' ? `${values.locationDistrict}. kerület` : values.locationDistrict : ""}</div>
+            <div className="overview-value">{values.locationDistrict ? values.locationDistrict !== 'Margit sziget' ? `${values.locationDistrict.replace('AREA', '')}. kerület` : values.locationDistrict.replace('AREA', '') : ""}</div>
 
             <ErrorRender error={error} name="location" />
             <ErrorRender error={error} name="location_description" />

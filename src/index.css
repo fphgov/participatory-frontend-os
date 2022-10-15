@@ -314,7 +314,7 @@ header .logo-wrapper img {
 .btn.btn-secondary,
 .btn.btn-headline {
   background-color: #F5CF68;
-  color: #12326E;
+  color: #12326E !important;
 }
 
 .btn.btn-secondary:hover,
@@ -882,6 +882,7 @@ body.page-full-dark .btn.btn-headline:hover {
   font-size: 14px;
   font-weight: bold;
   border-radius: 4px;
+  margin: 18px 0;
 }
 
 .error-message a {
