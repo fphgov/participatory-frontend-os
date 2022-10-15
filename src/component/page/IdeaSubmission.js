@@ -97,38 +97,6 @@ export default function IdeaSubmission() {
     return array;
   }
 
-  const PageCategory = () => <>
-    <IdeaCategory
-      nextStepTo={`${path}/adatok`}
-      handleChange={handleChangeInput}
-      changeRaw={changeRaw}
-      changeInputAddress={handleChangeInputAddress}
-      profile={profile}
-      error={error}
-      values={formData} />
-    </>
-
-  const PageData = () => <>
-    <IdeaBasic
-      nextStepTo={`${path}/attekintes`}
-      handleAddElem={handleAddElem}
-      handleRemoveElem={handleRemoveElem}
-      handleChange={handleChangeInputTitle}
-      handleChangeNumber={handleChangeInputNumber}
-      profile={profile}
-      changeRaw={changeRaw}
-      error={error}
-      values={formData} />
-    </>
-
-  const PageOverview = () => <>
-    <IdeaOverview
-      values={formData}
-      profile={profile}
-      error={error}
-      submitIdea={submitIdea} />
-    </>
-
   useEffect(() => {
     document.body.classList.add('page-idea-submission')
 
@@ -277,9 +245,35 @@ export default function IdeaSubmission() {
                 {!success ? <>
                   <div className="form-wrapper-idea">
                     <Switch>
-                      <Route path={`${path}`} exact component={PageCategory} />
-                      <Route path={`${path}/adatok`} component={PageData} />
-                      <Route path={`${path}/attekintes`} component={PageOverview} />
+                      <Route path={`${path}`} exact>
+                        <IdeaCategory
+                          nextStepTo={`${path}/adatok`}
+                          handleChange={handleChangeInput}
+                          changeRaw={changeRaw}
+                          changeInputAddress={handleChangeInputAddress}
+                          profile={profile}
+                          error={error}
+                          values={formData} />
+                      </Route>
+                      <Route path={`${path}/adatok`}>
+                        <IdeaBasic
+                          nextStepTo={`${path}/attekintes`}
+                          handleAddElem={handleAddElem}
+                          handleRemoveElem={handleRemoveElem}
+                          handleChange={handleChangeInputTitle}
+                          handleChangeNumber={handleChangeInputNumber}
+                          profile={profile}
+                          changeRaw={changeRaw}
+                          error={error}
+                          values={formData} />
+                      </Route>
+                      <Route path={`${path}/attekintes`}>
+                        <IdeaOverview
+                          values={formData}
+                          profile={profile}
+                          error={error}
+                          submitIdea={submitIdea} />
+                      </Route>
                     </Switch>
                   </div>
                 </>: null}
