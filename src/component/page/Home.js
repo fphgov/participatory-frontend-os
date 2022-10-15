@@ -105,11 +105,11 @@ export default function Home() {
       <div className="light-section fix-section">
         <div className="container">
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-md-12">
               <h2>Közösségi költségvetés menete</h2>
             </div>
 
-            <div className="col-md-9">
+            <div className="col-md-12">
               <div className="timeline-wrapper">
                 <TimeLineItem icon={TimelineIcon1} date="2022.10.15. - 12.31." description="Ötletek beküldése" />
                 <TimeLineItem icon={TimelineIcon2} date="Első negyedév" description="Szakmai jóváhagyás" />
