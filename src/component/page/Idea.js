@@ -61,7 +61,7 @@ export default function Idea() {
   return (
     <div className="prop">
       {idea ? <>
-        <HeroPage title={idea.title} link={<Link className="link-attention" to="/otletek">Vissza</Link>} />
+        <HeroPage title={idea.title} link={<Link className="link-back" to="/otletek">Vissza</Link>} />
       </> : null}
 
       <div className="container">

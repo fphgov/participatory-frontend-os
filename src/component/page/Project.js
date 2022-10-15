@@ -94,7 +94,7 @@ export default function Statistics() {
       {redirectLogin ? <Redirect to='/bejelentkezes' /> : null}
 
       {project ? <>
-        <HeroPage title={project.title} link={<Link className="link-attention" to="/projektek">Vissza</Link>}>
+        <HeroPage title={project.title} link={<Link className="link-back" to="/projektek">Vissza</Link>}>
           <div className="hero-tags">
             {project.tags.map((tag, i) => {
               return (<div className="tag" key={i}>

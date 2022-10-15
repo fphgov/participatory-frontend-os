@@ -149,12 +149,10 @@ export default function Registration() {
                 <fieldset>
                   {(typeof error === 'string') ? <Error message={error} /> : null}
 
-                  <legend>Regisztráció</legend>
-
                   {!success ? <>
                     <div className="form-wrapper">
                       <div className="input-wrapper">
-                        <label htmlFor="lastname">Vezetéknév <sup>*</sup></label>
+                        <label htmlFor="lastname">Családnév <sup>*</sup></label>
                         <p className="tipp">Ha ötletet küldesz be, akkor az itt megadott neved nyilvánosan megjelenik az oldalon a beküldött ötletednél.</p>
                         <input type="text" placeholder="Vezetéknév" name="lastname" id="lastname" value={filterData.lastname} onChange={handleChangeInput} />
 
@@ -227,14 +225,17 @@ export default function Registration() {
                         <select name="hear_about" onChange={handleChangeInput}>
                           <option value="">Válassz a lehetőségek közül</option>
                           <option disabled>---</option>
-                          <option value="friend">Barátoktól, ismerőstől, családtól</option>
+                          <option value="friend">Családtól / baráttól / ismerőstől (személyesen)</option>
                           <option value="street">Utcai plakátról</option>
-                          <option value="news">Híroldalról, rádióból, TV-ből</option>
-                          <option value="transport">Tömegközlekedési jármű hirdetésből</option>
-                          <option value="districtevent">Kerületi tájékoztató eseményről</option>
-                          <option value="facebook">Facebook bejegyzésből vagy hirdetésből</option>
-                          <option value="civil">Civil szervezet hírleveléből, vagy civil szervezeti találkozón</option>
-                          <option value="library">A Fővárosi Szabó Ervin Könyvtárban található brosúrából</option>
+                          <option value="news">Híroldalon olvastam</option>
+                          <option value="news_ads">Híroldalon hirdetésből</option>
+                          <option value="transport">Buszon/villamoson láttam</option>
+                          <option value="facebook_municipatory">Budapest Városháza Facebook oldalról</option>
+                          <option value="facebook_im_in_budapest">Énbudapestem Facebook oldalról</option>
+                          <option value="facebook">Facebook csoportból</option>
+                          <option value="facebook_firend">Ismerős / barát / szervezet Facebook posztjából</option>
+                          <option value="civil">Civil szervezet hírleveléből, civil szervezettől</option>
+                          <option value="library">Fővárosi Szabó Ervin Könyvtárban</option>
                           <option value="other">Egyéb</option>
                         </select>
                       </div>

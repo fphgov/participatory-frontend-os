@@ -1762,7 +1762,7 @@ button, input, optgroup, select, textarea {
 
 .form-group-label {
   font-size: 16px;
-  font-weight: 700;
+  font-weight: normal !important;
   line-height: 18px;
 }
 
@@ -2633,7 +2633,7 @@ time.post-full-meta-date::before {
   margin: 0;
 }
 
-.hero-page a.link-attention {
+a.link-back {
   color: #21A7CC;
   margin-bottom: 16px;
   display: flex;
@@ -2641,9 +2641,10 @@ time.post-full-meta-date::before {
   font-size: 16px;
   font-weight: 700;
   line-height: 18px;
+  text-decoration: none;
 }
 
-.hero-page a.link-attention::before {
+a.link-back::before {
   content: '';
   background-image: url(./img/arrow-backspace.svg);
   width: 24px;
