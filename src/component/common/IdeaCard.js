@@ -4,7 +4,7 @@ import {
 } from "react-router-dom"
 import CategoryIcon from './CategoryIcon'
 
-export default function IdeaCard({ idea, handleClick = () => {}, tags = null, isBuilding = false, tagClick = null }) {
+export default function IdeaCard({ idea, ideaPreLink, handleClick = () => {}, tags = null, isBuilding = false, tagClick = null }) {
   if (idea == null) {
     return null
   }
@@ -33,7 +33,7 @@ export default function IdeaCard({ idea, handleClick = () => {}, tags = null, is
             </div>
 
             <h2 className="prop-title">
-              <Link to={`/otletek/${idea.id}`}>{idea.title}</Link>
+              <Link to={`${ideaPreLink}/${idea.id}`}>{idea.title}</Link>
             </h2>
 
             <div className="prop-description">{shortDescription}</div>
@@ -48,7 +48,7 @@ export default function IdeaCard({ idea, handleClick = () => {}, tags = null, is
             </div>
 
             <div className="post-more-wrapper">
-              <Link to={`/otletek/${idea.id}`} className="btn post-more" onClick={handleClick}>Megtekintés</Link>
+              <Link to={`${ideaPreLink}/${idea.id}`} className="btn post-more" onClick={handleClick}>Megtekintés</Link>
             </div>
           </footer>
         </div>

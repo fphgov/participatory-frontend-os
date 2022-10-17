@@ -244,7 +244,7 @@ export default function Ideas() {
 
       <div className="container">
         <div className="row">
-          {ideas.map((idea, i) => <IdeasWrapper handleClick={handleClick} key={i} idea={idea} />)}
+          {ideas.map((idea, i) => <IdeasWrapper ideaPreLink="/otletek" handleClick={handleClick} key={i} idea={idea} />)}
         </div>
       </div>
 
