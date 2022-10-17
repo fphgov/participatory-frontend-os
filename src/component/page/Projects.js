@@ -230,7 +230,7 @@ export default function Projects() {
 
       <div className="container">
         <div className="row">
-          {projects.map((project, i) => <IdeasWrapper handleClick={handleClick} key={i} idea={project} isBuilding={true} tagClick={filterByTag} />)}
+          {projects.map((project, i) => <IdeasWrapper ideaPreLink="/projektek" handleClick={handleClick} key={i} idea={project} isBuilding={true} tagClick={filterByTag} />)}
         </div>
       </div>
 
