@@ -759,8 +759,9 @@ input[type="submit"] {
   background-image: url(./img/icon-info.svg);
   background-repeat: no-repeat;
   width: 30px;
-  height: 30px;
+  height: 18px;
   margin-right: 8px;
+  align-self: baseline;
 }
 
 .cookie-notice {
@@ -3834,7 +3835,14 @@ details summary::-webkit-details-marker {
   }
 
   .form-status li {
+    display: flex;
+    justify-content: center;
     margin: 8px 0px;
+  }
+
+  .form-status li a {
+    text-align: left;
+    min-width: 190px;
   }
 }
 
@@ -3880,5 +3888,9 @@ details summary::-webkit-details-marker {
 @media screen and (max-width: 576px) {
   .form-status {
     margin: 40px 0;
+  }
+
+  .info::before {
+    width: 40px;
   }
 }
