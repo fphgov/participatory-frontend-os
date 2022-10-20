@@ -32,9 +32,9 @@ const Conditions = () => <>
 
   <p>Helyszínek szempontjából két kategóriában várjuk az ötleteket:</p>
 
-  <p><b>Egész Budapest ötletek:</b> Egész Budapestre vonatkozó ötletek azok, amelyek a város vagy az itt lakók nagyobb részét érintik, de nem kötődnek konkrét helyszínekhez, vagy sok helyszínes mikrófejlesztések.</p>
+  <p><b>Egész Budapest ötletek:</b> Egész Budapestre vonatkozó ötletek azok, amelyek a város vagy az itt lakók nagyobb részét érintik, de nem kötődnek konkrét helyszínekhez, vagy sok helyszínes mikrofejlesztések.</p>
 
-  <p><b>Helyi ötletek:</b> Helyi ötletek kategóriában olyan ötletek indulhatnak, amelyek jellemzően egy, kivételes esetben több konkrét helyszínen valósíthatóak meg. A Helyi ötleteken belül vannak Kis és Nagy ötletek.</p>
+  <p><b>Helyi ötletek:</b> Helyi ötletek kategóriában olyan ötletek indulhatnak, amelyek jellemzően egy, kivételes esetben több konkrét helyszínen valósíthatóak meg. A helyi ötleteken belül vannak kis és nagy ötletek.</p>
 </>
 const Amount = () => <>
   <p>Összesen 1 milliárd forint felhasználásáról döntünk közösen. Az összeghatárok az alábbiak szerint vannak megállapítva:</p>
@@ -146,7 +146,7 @@ export default function IdeaInfo() {
                   Találj ki egy ötletet!
                 </div>
                 <div className="info-box-content">
-                  A beküldés előtt készítsd elő az ötlete(i)det.
+                  A beküldés előtt készítsd elő az ötleted.
                 </div>
               </div>
 
