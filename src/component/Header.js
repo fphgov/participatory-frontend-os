@@ -91,7 +91,7 @@ export default function Header({ children }) {
   const menu = [
     { title: "Mi ez?", href: "/oldal/bovebben-a-kozossegi-koltsegvetesrol", outside: false },
     { title: "Ötletek", href: '', outside: false, submenu: [
-      { title: "Beküldött", href: "/otletek?campaign=2", outside: true },
+      { title: "Beküldött", href: "/otletek?campaign=3", outside: true },
       { title: "Feldolgozott", href: "/tervek", outside: false },
       { title: "Megvalósuló", href: "/projektek?status=under_construction", outside: false },
     ] },
