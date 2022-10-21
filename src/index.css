@@ -3922,4 +3922,12 @@ form fieldset .link-elem input {
   .info::before {
     width: 40px;
   }
+
+  body.page-full-dark a.create-account {
+    font-size: 16px;
+  }
+
+  .btn-next {
+    padding: 12px 12px 12px 18px;
+  }
 }
