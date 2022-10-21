@@ -37,7 +37,7 @@ export default function IdeaOverview({ values, submitIdea, error }) {
 
   return (
     <>
-      <h3>Áttekintés</h3>
+      <h2>Áttekintés</h2>
 
       {redirect ? <Redirect to="/bekuldes" /> : null}
 
@@ -62,7 +62,7 @@ export default function IdeaOverview({ values, submitIdea, error }) {
             <div className="overview-name">Ötleted helyszíne</div>
             <div className="overview-value">{values.location === "1" ? "Konkrét helyszínhez kötődik" : "Nem kötődik konkrét helyszínhez"}</div>
             <div className="overview-value">{values.locationDescription ? values.locationDescription : ""}</div>
-            <div className="overview-value">{values.locationDistrict ? values.locationDistrict !== 'Margit sziget' ? `${values.locationDistrict.replace('AREA', '')}. kerület` : values.locationDistrict.replace('AREA', '') : ""}</div>
+            <div className="overview-value">{values.locationDistrict ? values.locationDistrict !== 'Margit sziget' && values.locationDistrict !== "0" ? `${values.locationDistrict.replace('AREA', '')}. kerület` : values.locationDistrict.replace('AREA', '').replace('0', '') : ""}</div>
 
             <ErrorRender error={error} name="location" />
             <ErrorRender error={error} name="location_description" />

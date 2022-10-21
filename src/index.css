@@ -3553,6 +3553,15 @@ details summary::-webkit-details-marker {
   display: none;
 }
 
+.form-wrapper-idea .asterisk {
+  margin-top: 16px;
+  font-size: 16px;
+}
+
+form fieldset .link-elem input {
+  padding-right: 46px !important;
+}
+
 @media screen and (min-width: 1440px) {
   .container,
   .container-sm,

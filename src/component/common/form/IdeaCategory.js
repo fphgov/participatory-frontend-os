@@ -11,7 +11,7 @@ import Select from '../../common/form/elements/Select'
 export default function IdeaCategory({ nextStepTo, handleChange, values }) {
   return (
     <div>
-      <h3>Ötlet kategóriája</h3>
+      <h3>Ötlet kategóriája *</h3>
 
       <div className="form-group form-group-category">
         <p className="info">Kérjük, válassz, hogy a te ötleted melyik kategóriába tartozik!</p>
@@ -146,6 +146,8 @@ export default function IdeaCategory({ nextStepTo, handleChange, values }) {
       </div>
 
       <Link className="btn btn-headline next-step" to={nextStepTo}>Következő lépés</Link>
+
+      <div className="asterisk">* Kötelező mező</div>
     </div>
   )
 }
