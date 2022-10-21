@@ -1121,7 +1121,7 @@ body.page-full-dark .btn.btn-headline:hover {
 }
 
 .prop-single-history {
-  background: #F5CF68;
+  background: rgba(245, 207, 104, 0.2);
   border-radius: 4px;
   margin: 48px 0;
 }
@@ -1132,6 +1132,9 @@ body.page-full-dark .btn.btn-headline:hover {
 
 .prop-single-history .prop-single-content h3 {
   margin-top: 0;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 .prop-single-title {
@@ -3063,7 +3066,10 @@ input[disabled] {
 }
 
 .implementation-item {
-  margin: 16px 0 32px 0;
+  margin: 24px 0;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #DDDDDD;
+  margin-bottom: 18px;
 }
 
 .implementation-item:last-of-type {
@@ -3071,7 +3077,21 @@ input[disabled] {
 }
 
 .implementation-heading .implementation-info .implementation-time {
-  color: #bbbbc2;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: #21A7CC;
+}
+
+.implementation-body a {
+  color: #12326E;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.implementation-body a:hover {
+  color: #12326E;
+  text-decoration: underline;
 }
 
 .implementation-body {
