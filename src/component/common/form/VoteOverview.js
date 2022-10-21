@@ -71,7 +71,7 @@ export default function VoteOverview({ firstStep, changeStep, values, profile, p
 
   return (
     <>
-      <h3>Áttekintés</h3>
+      <h2>Áttekintés</h2>
 
       <div className="form-group location">
         <p>Az alábbi ötleteket jelölted be. Ha most leadod a szavazatod, ezekre az ötletekre fogsz szavazni.</p>

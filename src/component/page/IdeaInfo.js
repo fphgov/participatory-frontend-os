@@ -32,9 +32,9 @@ const Conditions = () => <>
 
   <p>Helyszínek szempontjából két kategóriában várjuk az ötleteket:</p>
 
-  <p><b>Egész Budapest ötletek:</b> Egész Budapestre vonatkozó ötletek azok, amelyek a város vagy az itt lakók nagyobb részét érintik, de nem kötődnek konkrét helyszínekhez, vagy sok helyszínes mikrófejlesztések.</p>
+  <p><b>Egész Budapest ötletek:</b> Egész Budapestre vonatkozó ötletek azok, amelyek a város vagy az itt lakók nagyobb részét érintik, de nem kötődnek konkrét helyszínekhez, vagy sok helyszínes mikrofejlesztések.</p>
 
-  <p><b>Helyi ötletek:</b> Helyi ötletek kategóriában olyan ötletek indulhatnak, amelyek jellemzően egy, kivételes esetben több konkrét helyszínen valósíthatóak meg. A Helyi ötleteken belül vannak Kis és Nagy ötletek.</p>
+  <p><b>Helyi ötletek:</b> Helyi ötletek kategóriában olyan ötletek indulhatnak, amelyek jellemzően egy, kivételes esetben több konkrét helyszínen valósíthatóak meg. A helyi ötleteken belül vannak kis és nagy ötletek.</p>
 </>
 const Amount = () => <>
   <p>Összesen 1 milliárd forint felhasználásáról döntünk közösen. Az összeghatárok az alábbiak szerint vannak megállapítva:</p>
@@ -106,6 +106,16 @@ export default function IdeaInfo() {
     }
   }, [])
 
+  useEffect(() => {
+    if (location.state && location.state.sameSite === true) {
+      window.scrollTo({
+        top: document.querySelector('#fontos-tudnivalok').offsetTop,
+        left: 0,
+        behavior: 'smooth'
+      })
+    }
+  }, [location])
+
   return (
     <div className="page-idea-info-section">
       <HeroPage title="Hogyan tudsz ötletet beküldeni?">
@@ -136,7 +146,7 @@ export default function IdeaInfo() {
                   Találj ki egy ötletet!
                 </div>
                 <div className="info-box-content">
-                  A beküldés előtt készítsd elő az ötlete(i)det.
+                  A beküldés előtt készítsd elő az ötleted.
                 </div>
               </div>
 
@@ -204,12 +214,12 @@ export default function IdeaInfo() {
                 <h2>Fontos tudnivalók az ötlet leadásához</h2>
 
                 <ul className="side-menu">
-                  <li className={location.pathname === `${path}` ? 'active' : ''}><Link to={`${path}`}>Milyen feltételeknek kell megfelelni?</Link></li>
-                  <li className={location.pathname === `${path}/osszeg` ? 'active' : ''}><Link to={`${path}/osszeg`}>Mekkora összeg áll rendelkezésre?</Link></li>
-                  <li className={location.pathname === `${path}/mit-ne` ? 'active' : ''}><Link to={`${path}/mit-ne`}>Milyen ötletet NE adjunk be?</Link></li>
-                  <li className={location.pathname === `${path}/jogosultak` ? 'active' : ''}><Link to={`${path}/jogosultak`}>Kik adhatnak be ötleteket?</Link></li>
-                  <li className={location.pathname === `${path}/hogyan` ? 'active' : ''}><Link to={`${path}/hogyan`}>Hogyan lehet ötletet beadni?</Link></li>
-                  <li className={location.pathname === `${path}/mi-tortenik` ? 'active' : ''}><Link to={`${path}/mi-tortenik`}>Mi történik az ötlet beadása után?</Link></li>
+                  <li className={location.pathname === `${path}` ? 'active' : ''}><Link to={{ pathname: `${path}`, state: { sameSite: true } }}>Milyen feltételeknek kell megfelelni?</Link></li>
+                  <li className={location.pathname === `${path}/osszeg` ? 'active' : ''}><Link to={{ pathname: `${path}/osszeg`, state: { sameSite: true } }}>Mekkora összeg áll rendelkezésre?</Link></li>
+                  <li className={location.pathname === `${path}/mit-ne` ? 'active' : ''}><Link to={{ pathname: `${path}/mit-ne`, state: { sameSite: true } }}>Milyen ötletet NE adjunk be?</Link></li>
+                  <li className={location.pathname === `${path}/jogosultak` ? 'active' : ''}><Link to={{ pathname: `${path}/jogosultak`, state: { sameSite: true } }}>Kik adhatnak be ötleteket?</Link></li>
+                  <li className={location.pathname === `${path}/hogyan` ? 'active' : ''}><Link to={{ pathname: `${path}/hogyan`, state: { sameSite: true } }}>Hogyan lehet ötletet beadni?</Link></li>
+                  <li className={location.pathname === `${path}/mi-tortenik` ? 'active' : ''}><Link to={{ pathname: `${path}/mi-tortenik`, state: { sameSite: true } }}>Mi történik az ötlet beadása után?</Link></li>
                 </ul>
 
                 <Link className="btn btn-primary btn-headline btn-next" to="/bekuldes">Beküldöm az ötletem</Link>

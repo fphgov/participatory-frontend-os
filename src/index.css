@@ -759,8 +759,9 @@ input[type="submit"] {
   background-image: url(./img/icon-info.svg);
   background-repeat: no-repeat;
   width: 30px;
-  height: 30px;
+  height: 18px;
   margin-right: 8px;
+  align-self: baseline;
 }
 
 .cookie-notice {
@@ -1120,7 +1121,7 @@ body.page-full-dark .btn.btn-headline:hover {
 }
 
 .prop-single-history {
-  background: #F5CF68;
+  background: rgba(245, 207, 104, 0.2);
   border-radius: 4px;
   margin: 48px 0;
 }
@@ -1131,6 +1132,9 @@ body.page-full-dark .btn.btn-headline:hover {
 
 .prop-single-history .prop-single-content h3 {
   margin-top: 0;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 .prop-single-title {
@@ -3062,7 +3066,10 @@ input[disabled] {
 }
 
 .implementation-item {
-  margin: 16px 0 32px 0;
+  margin: 24px 0;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #DDDDDD;
+  margin-bottom: 18px;
 }
 
 .implementation-item:last-of-type {
@@ -3070,7 +3077,21 @@ input[disabled] {
 }
 
 .implementation-heading .implementation-info .implementation-time {
-  color: #bbbbc2;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: #21A7CC;
+}
+
+.implementation-body a {
+  color: #12326E;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.implementation-body a:hover {
+  color: #12326E;
+  text-decoration: underline;
 }
 
 .implementation-body {
@@ -3552,6 +3573,15 @@ details summary::-webkit-details-marker {
   display: none;
 }
 
+.form-wrapper-idea .asterisk {
+  margin-top: 16px;
+  font-size: 16px;
+}
+
+form fieldset .link-elem input {
+  padding-right: 46px !important;
+}
+
 @media screen and (min-width: 1440px) {
   .container,
   .container-sm,
@@ -3834,7 +3864,14 @@ details summary::-webkit-details-marker {
   }
 
   .form-status li {
+    display: flex;
+    justify-content: center;
     margin: 8px 0px;
+  }
+
+  .form-status li a {
+    text-align: left;
+    min-width: 190px;
   }
 }
 
@@ -3880,5 +3917,17 @@ details summary::-webkit-details-marker {
 @media screen and (max-width: 576px) {
   .form-status {
     margin: 40px 0;
+  }
+
+  .info::before {
+    width: 40px;
+  }
+
+  body.page-full-dark a.create-account {
+    font-size: 16px;
+  }
+
+  .btn-next {
+    padding: 12px 12px 12px 18px;
   }
 }

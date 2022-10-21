@@ -25,7 +25,7 @@ export default function IdeaBasic({ nextStepTo, handleAddElem, changeRaw, handle
             <p className="info">Minden fontos információt itt tudsz megadni az ötleteddel kapcsolatban, minden mező kitöltése kötelező.</p>
 
             <InputLengthValidator
-              title="Ötleted megnevezése"
+              title="Ötleted megnevezése *"
               name="title"
               tipp="Adj ötletednek olyan címet, ami tömör, lényegretörő, kiderül, mit javasolsz."
               value={values.title}
@@ -37,7 +37,7 @@ export default function IdeaBasic({ nextStepTo, handleAddElem, changeRaw, handle
             <hr />
 
             <TextareaLengthValidator
-              title="Ötleted leírása"
+              title="Ötleted leírása  *"
               name="description"
               tipp="Írd le az ötleted, vagyis azt, hogy javaslatod szerint mit valósítson meg a Főváros a közösségi költségvetés keretében."
               value={values.description}
@@ -49,7 +49,7 @@ export default function IdeaBasic({ nextStepTo, handleAddElem, changeRaw, handle
             <hr />
 
             <TextareaLengthValidator
-              title="Milyen problémát old meg az ötleted?"
+              title="Milyen problémát old meg az ötleted?  *"
               name="solution"
               tipp="Írd le röviden, hogy miért van szükség erre a fejlesztésre. Kinek milyen helyzetre, problémára ad választ, megoldást?"
               value={values.solution}
@@ -128,6 +128,8 @@ export default function IdeaBasic({ nextStepTo, handleAddElem, changeRaw, handle
             <hr />
 
             <Link className="btn btn-headline next-step" to={nextStepTo}>Következő lépés</Link>
+
+            <div className="asterisk">* Kötelező mező</div>
           </div>
         </div>
       </div>
