@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFile } from "@fortawesome/free-solid-svg-icons"
 import CategoryIcon from '../CategoryIcon'
 
-export default function IdeaOverview({ values, submitIdea, error }) {
+export default function IdeaOverview({ values, submitIdea, error, onClickCorrection }) {
   const [ redirect, setRedirect ] = useState(false)
 
   const categories = {
@@ -131,7 +131,7 @@ export default function IdeaOverview({ values, submitIdea, error }) {
       </div>
 
       <div className="button-wrapper">
-        <button type="button" className="btn first-step" onClick={() => { setRedirect(true) }}>Javítom</button>
+        <button type="button" className="btn first-step" onClick={() => { onClickCorrection(); setRedirect(true) }}>Javítom</button>
         <button type="submit" className="btn btn-headline next-step submit" onClick={submitIdea}>Beküldöm az ötletem</button>
       </div>
     </>

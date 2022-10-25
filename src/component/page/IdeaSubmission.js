@@ -304,6 +304,7 @@ export default function IdeaSubmission() {
                           values={formData}
                           profile={profile}
                           error={error}
+                          onClickCorrection={() => { setError(null) }}
                           submitIdea={submitIdea} />
                       </Route>
                     </Switch>
