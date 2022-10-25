@@ -3582,6 +3582,10 @@ form fieldset .link-elem input {
   padding-right: 46px !important;
 }
 
+.page-profile-single-section {
+  padding-top: 32px;
+}
+
 @media screen and (min-width: 1440px) {
   .container,
   .container-sm,
