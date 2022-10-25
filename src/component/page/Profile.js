@@ -262,7 +262,7 @@ export default function Profile() {
   }
 
   return (
-    <div className="page-profile-section">
+    <div className="page-profile-single-section">
       {redirectLogin ? <Redirect to='/bejelentkezes' /> : null}
       {redirectLogout ? <Redirect to='/kijelentkezes' /> : null}
 
@@ -319,7 +319,7 @@ export default function Profile() {
               <h2><FontAwesomeIcon icon={faLightbulb} /> Beküldött ötletek ({ideas.length})</h2>
 
               <div className="row">
-                {ideas.length > 0 && !loadIdeas && ideas.map((idea, i) => <IdeasWrapper handleClick={() => {}} key={i} idea={idea} />)}
+                {ideas.length > 0 && !loadIdeas && ideas.map((idea, i) => <IdeasWrapper ideaPreLink="/otletek" handleClick={() => {}} key={i} idea={idea} />)}
 
                 {ideas.length == 0 && loadIdeas && <>
                   <div className="col-sm-12 col-md-6 col-lg-4">

@@ -245,7 +245,7 @@ export default function IdeaSubmission() {
     <div className="page-idea-submission-section">
       {scroll && document.querySelector('.error-message') ? <ScrollTo element={document.querySelector('.error-message').offsetTop} /> : null}
 
-      {redirect ? <Redirect to={{ pathname: '/bejelentkezes', state: { redirect: '/bekuldes' } }}/> : null}
+      {redirect ? <Redirect to={{ pathname: '/bejelentkezes', state: { redirect: '/bekuldes' } }} /> : null}
 
       {!success ? <>
         <HeroPage title="Ötlet beküldése">
@@ -321,13 +321,7 @@ export default function IdeaSubmission() {
               />
             </form>
 
-            {success ? <div className="info-page">
-              {document.body.classList.add('page-full-dark')}
-
-              <h2>Köszönjük, hogy megosztottad velünk ötleted!</h2>
-              <p>Megkaptuk ötletedet, pár napon belül, rövid ellenőrzést követően mindenki számára láthatóvá válik a honlapon a beküldött ötletek között. Erről e-mailen kapsz majd visszajelzést. Ha van további ötleted, add be azt is most!</p>
-              <a href="/bekuldes" className="btn btn-secondary">Új ötletet küldök be</a>
-            </div> : null}
+            {success ? <Redirect to={{ pathname: '/bekuldes/sikeres', state: { access: true } }} /> : null}
           </div>
         </div>
       </div>
