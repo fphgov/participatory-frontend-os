@@ -3586,6 +3586,33 @@ form fieldset .link-elem input {
   padding-top: 32px;
 }
 
+.sidebar-card {
+  background-color: #f6d05f;
+  padding: 36px;
+  border-radius: 4px;
+}
+
+.sidebar-card + .sidebar-card {
+  margin-top: 36px;
+}
+
+.page-post-section h1:first-of-type {
+  margin-top: 0;
+}
+
+.page-post-section {
+  margin: 36px 0 !important;
+}
+
+.page-post-section figure {
+  margin: 0;
+}
+
+.page-post-section figure img {
+  width: 100%;
+  height: auto;
+}
+
 @media screen and (min-width: 1440px) {
   .container,
   .container-sm,
@@ -3678,6 +3705,10 @@ form fieldset .link-elem input {
 
   .page-home .posts > div > div {
     margin-bottom: 16px;
+  }
+
+  .sidebar-card {
+    margin-top: 36px;
   }
 }
 
