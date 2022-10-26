@@ -5,10 +5,10 @@ import {
 } from "react-router-dom"
 import API from '../assets/axios'
 import PopUp from '../assets/PopUp'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faFacebookF } from "@fortawesome/free-brands-svg-icons"
 import { getHungarianDateFormat } from '../assets/dateFormats'
 import StoreContext from '../../StoreContext'
+import SocialIconBtnFb from '../../img/social-fb-btn.svg'
+import SidebarCard from '../common/SidebarCard'
 
 export default function Post() {
   const context = useContext(StoreContext)
@@ -80,7 +80,7 @@ export default function Post() {
 
       <div className="container">
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-12 col-lg-8">
             {error ? <Error message={error} /> : null}
 
             {rawContent ? <>
@@ -94,13 +94,25 @@ export default function Post() {
               <div className="prop-single-share">
                 <div className="prop-info-title">Megosztás</div>
                 <div className="prop-info-content">
-                  <PopUp url={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} title="Megosztom a cikket a Facebookon">
-                    <span className="fa-layers fa-lg">
-                      <FontAwesomeIcon icon={faFacebookF} size='xs' style={{ marginLeft: 10 }} />
-                    </span>
+                  <PopUp url={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} title="Megosztom az ötletet Facebookon">
+                    <img src={SocialIconBtnFb} alt="Facebook logo" />
                   </PopUp>
                 </div>
               </div>
+            </> : null}
+          </div>
+
+          <div className="col-md-12 col-lg-4">
+            {rawContent ? <>
+              <SidebarCard>
+                <div className="light section-newsletter">
+                  <h2>Iratkozz fel hírlevelünkre!</h2>
+
+                  <p>Érdekli, hogy mi történik Budapesten?<br />Értesüljön első kézből Budapest ügyeiről, fővárosi programokról, pályázati támogatásokról és egyéb lehetőségekről.</p>
+
+                  <a href="https://hirlevel.budapest.hu/subscribe.php?cid=SwvzKoa0x" target="_blank" rel="noopener noreferrer nofollow" className="btn btn-primary">Kattints ide a feliratkozáshoz</a>
+                </div>
+              </SidebarCard>
             </> : null}
           </div>
         </div>

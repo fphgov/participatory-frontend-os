@@ -1,4 +1,7 @@
 import React, { useContext } from "react"
+import {
+  Link,
+} from "react-router-dom"
 import StoreContext from '../../StoreContext'
 import PopUp from '../assets/PopUp'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -150,7 +153,7 @@ export default function ProjectWrapper({ project, showVoteButton, disableVoteBut
                   </div>
                 </div>
 
-                {/* <div className="prop-single-side-section prop-single-ideas">
+                <div className="prop-single-side-section prop-single-ideas">
                   <div className="prop-info-title">Kapcsolódó ötletek</div>
                   <div className="prop-info-content">
                     {project.ideas.length === 0 ? <>Nincs kapcsolódó ötlet</> : null}
@@ -160,7 +163,7 @@ export default function ProjectWrapper({ project, showVoteButton, disableVoteBut
                       </div>)
                     })}
                   </div>
-                </div> */}
+                </div>
 
                 {project.submitter ? (
                   <div className="prop-single-wrapper">
