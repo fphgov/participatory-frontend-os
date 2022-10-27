@@ -108,9 +108,9 @@ export default function Post() {
                 <div className="light section-newsletter">
                   <h2>Iratkozz fel hírlevelünkre!</h2>
 
-                  <p>Érdekli, hogy mi történik Budapesten?<br />Értesüljön első kézből Budapest ügyeiről, fővárosi programokról, pályázati támogatásokról és egyéb lehetőségekről.</p>
+                  <p>Ne maradj le a közösségi költségvetéssel kapcsolatos legfontosabb hírekről és eseményekről, iratkozz fel hírlevelünkre!</p>
 
-                  <a href="https://hirlevel.budapest.hu/subscribe.php?cid=SwvzKoa0x" target="_blank" rel="noopener noreferrer nofollow" className="btn btn-primary">Kattints ide a feliratkozáshoz</a>
+                  <a className="btn btn-primary" href="https://hirlevel.budapest.hu/subscribe.php?cid=aSQV5beZ_" target="_blank" rel="noopener noreferrer">Feliratkozás</a>
                 </div>
               </SidebarCard>
             </> : null}
