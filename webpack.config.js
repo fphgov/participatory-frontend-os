@@ -47,8 +47,8 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
+          test: /\.modernizrrc\.js$/,
           loader: "webpack-modernizr-loader",
-          test: /\.modernizrrc\.js$/
         },
         {
           test: /\.css$/i,
@@ -116,6 +116,10 @@ module.exports = (env, argv) => {
           resolve: {
             fullySpecified: false
           }
+        },
+        {
+          resourceQuery: /raw/,
+          type: 'asset/source',
         }
       ]
     },

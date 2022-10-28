@@ -5,18 +5,15 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import StoreContext from '../../StoreContext'
 import axios from '../assets/axios'
 import ImplementationElem from './ImplementationElem'
-import { Editor } from 'react-draft-wysiwyg'
-import { createEditorStateWithText } from 'draft-js-plugins-editor'
-import { stateToHTML } from 'draft-js-export-html'
-import { draftExportOptions } from '../assets/draftExportOptions'
+import RichTextEditor from '../common/RichTextEditor'
 
 export default function Implementation({ projectId }) {
   const context = useContext(StoreContext)
 
   const mediaRef = useRef(null)
+  const editorRef = useRef(null)
 
   const [error, setError] = useState('')
-  const [newEditorState, setNewEditorState] = useState(createEditorStateWithText(''))
   const [implementations, setImplementations] = useState([])
   const [medias, setMedias] = useState([])
 
@@ -44,7 +41,7 @@ export default function Implementation({ projectId }) {
 
   const resetImplementationForm = () => {
     setMedias([])
-    setNewEditorState(createEditorStateWithText(''))
+    editorRef.current.setContent('')
     mediaRef.current.value = null
   }
 
@@ -90,7 +87,7 @@ export default function Implementation({ projectId }) {
     let formData = new FormData()
 
     formData.append('project', projectId)
-    formData.append('content', stateToHTML(newEditorState.getCurrentContent(), draftExportOptions).replace('<p><br></p>', ''))
+    formData.append('content', editorRef.current.getContent().replace('<p><br></p>', ''))
 
     Array.from(medias).forEach((file, i) => {
       if (file instanceof File) {
@@ -144,12 +141,11 @@ export default function Implementation({ projectId }) {
             <h4>Új megvalósítás</h4>
           </summary>
 
-          <Editor
-            editorState={newEditorState}
-            toolbarClassName="toolbarClassName"
-            wrapperClassName="wrapperClassName"
-            editorClassName="editorClassName"
-            onEditorStateChange={setNewEditorState}
+          <RichTextEditor
+            onInit={(evt, editor) => editorRef.current = editor}
+            init={{
+              height: 500,
+            }}
           />
 
           <h4>Megvalósítási média feltöltés</h4>

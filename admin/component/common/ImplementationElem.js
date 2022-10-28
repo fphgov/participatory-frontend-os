@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useContext, useRef } from "react"
 import { toast } from 'react-toastify'
 import axios from '../assets/axios'
 import StoreContext from '../../StoreContext'
@@ -6,16 +6,13 @@ import { getHungarianDateFormat } from '../assets/dateFormats'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFilePdf, faCalendarDay, faTrash, faPen } from "@fortawesome/free-solid-svg-icons"
 import Gallery from "./Gallery"
-import { EditorState } from 'draft-js'
-import { Editor } from 'react-draft-wysiwyg'
-import { createEditorStateWithText } from 'draft-js-plugins-editor'
-import { stateFromHTML } from 'draft-js-import-html'
-import { stateToHTML } from 'draft-js-export-html'
-import { draftExportOptions } from '../assets/draftExportOptions'
 import { getImages, getDocuments } from '../assets/helperFunctions'
+import RichTextEditor from '../common/RichTextEditor'
 
 export default function ImplementationElem({ implementation, onChangeElem }) {
   const context = useContext(StoreContext)
+
+  const editorRef = useRef(null)
 
   const [error, setError] = useState('')
 
@@ -44,7 +41,7 @@ export default function ImplementationElem({ implementation, onChangeElem }) {
 
     let formData = new FormData()
 
-    formData.append('content', stateToHTML(editorState.getCurrentContent(), draftExportOptions).replace('<p><br></p>', ''))
+    formData.append('content', editorRef.current.getContent().replace('<p><br></p>', ''))
 
     Array.from(media).forEach((file, i) => {
       if (file instanceof File) {
@@ -115,12 +112,6 @@ export default function ImplementationElem({ implementation, onChangeElem }) {
       })
   }
 
-  const [ editorState, setEditorState ] = useState(createEditorStateWithText(''))
-
-  useEffect(() => {
-    setEditorState(EditorState.createWithContent(stateFromHTML(implementation.content)))
-  }, [implementation])
-
   return (
     <>
       <details>
@@ -137,13 +128,13 @@ export default function ImplementationElem({ implementation, onChangeElem }) {
 
         {(typeof error === 'string' && error !== '') ? <Error message={error} /> : null}
 
-        <Editor
-          editorState={editorState}
-          toolbarClassName="toolbarClassName"
-          wrapperClassName="wrapperClassName"
-          editorClassName="editorClassName"
-          onEditorStateChange={setEditorState}
-        />
+          <RichTextEditor
+            initialValue={implementation.content}
+            onInit={(evt, editor) => editorRef.current = editor}
+            init={{
+              height: 500,
+            }}
+          />
 
         <div className="implementation-attachments">
           {images.length > 0 ? (
