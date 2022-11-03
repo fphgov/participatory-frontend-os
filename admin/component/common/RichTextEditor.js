@@ -25,7 +25,6 @@ import 'tinymce/plugins/nonbreaking'
 import 'tinymce/plugins/table'
 import 'tinymce/plugins/template'
 import 'tinymce/plugins/paste'
-import 'tinymce/plugins/visualblocks'
 import 'tinymce/plugins/preview'
 
 /* eslint import/no-webpack-loader-syntax: off */
@@ -51,7 +50,7 @@ const image_upload_handler = (blobInfo, success, failure, progress) => {
   .post(process.env.REACT_APP_API_ADMIN_UPLOAD, formData, config)
   .then(response => {
     if (response.data && response.data.data && response.data.data.filename) {
-      const url = 'http:' + process.env.REACT_APP_SERVER_FILE + '/' + response.data.data.filename
+      const url = 'https:' + process.env.REACT_APP_SERVER_FILE + '/' + response.data.data.filename
 
       success(url)
     }
@@ -73,7 +72,7 @@ export default function RichTextEditor(props) {
     automatic_uploads: true,
     plugins: [
       'advlist autolink lists link image charmap preview anchor',
-      'visualblocks code insertdatetime media table paste code'
+      'code insertdatetime media table paste code'
     ],
     toolbar: 'undo redo | formatselect | ' +
       'bold italic backcolor | alignleft aligncenter ' +
