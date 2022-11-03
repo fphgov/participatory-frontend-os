@@ -22,7 +22,6 @@ export default function IdeaBasic({ nextStepTo, handleAddElem, changeRaw, handle
 
   return (
     <>
-
       <div className="form-group location">
         <div className="row">
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -44,7 +43,7 @@ export default function IdeaBasic({ nextStepTo, handleAddElem, changeRaw, handle
             <hr />
 
             <TextareaLengthValidator
-              title="Ötleted leírása  *"
+              title="Ötleted leírása *"
               name="description"
               tipp="Írd le az ötleted, vagyis azt, hogy javaslatod szerint mit valósítson meg a Főváros a közösségi költségvetés keretében."
               value={values.description}
@@ -56,7 +55,7 @@ export default function IdeaBasic({ nextStepTo, handleAddElem, changeRaw, handle
             <hr />
 
             <TextareaLengthValidator
-              title="Milyen problémát old meg az ötleted?  *"
+              title="Milyen problémát old meg az ötleted? *"
               name="solution"
               tipp="Írd le röviden, hogy miért van szükség erre a fejlesztésre. Kinek milyen helyzetre, problémára ad választ, megoldást?"
               value={values.solution}
