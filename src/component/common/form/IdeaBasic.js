@@ -13,6 +13,13 @@ export default function IdeaBasic({ nextStepTo, handleAddElem, changeRaw, handle
   const [ errorLink, setErrorLink ] = useState('')
   const [ tempLink, setTempLink ] = useState('')
 
+  const addTempLink = () => {
+    if (matchUrl(tempLink) && tempLink.length !== 0) {
+      handleAddElem('links', tempLink)
+      setTempLink('')
+    }
+  }
+
   return (
     <>
 
@@ -110,16 +117,13 @@ export default function IdeaBasic({ nextStepTo, handleAddElem, changeRaw, handle
                     invalid={errorLink}
                     onBlur={() => {
                       setErrorLink(tempLink.length === 0 || matchUrl(tempLink) ? '' : 'Hibás URL cím')
+
+                      addTempLink()
                     }}
                     onChange={({ target: { value } }) => {
                       setTempLink(rmEmojis(value))
                     }}
-                    onAdd={() => {
-                      if (matchUrl(tempLink) && tempLink.length !== 0) {
-                        handleAddElem('links', tempLink)
-                        setTempLink('')
-                      }
-                    }}
+                    onAdd={addTempLink}
                   />
                 </> : null
               }
