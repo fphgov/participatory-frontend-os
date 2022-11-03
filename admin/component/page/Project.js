@@ -9,7 +9,6 @@ import { dateConverter } from '../assets/helperFunctions'
 import Implementation from "../common/Implementation"
 import Gallery from "../common/Gallery"
 import { getImages, getDocuments } from '../assets/helperFunctions'
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 export default function Project() {
   const context = useContext(StoreContext)

@@ -1,23 +1,18 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, useRef } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import { useParams, Redirect } from 'react-router-dom'
 import slugify from 'slugify'
 import StoreContext from '../../StoreContext'
 import axios from '../assets/axios'
 import { getDateLocalFormat } from '../assets/dateFormats'
-import { Editor } from 'react-draft-wysiwyg'
-import { EditorState } from 'draft-js'
-import { createEditorStateWithText } from 'draft-js-plugins-editor'
-import { stateFromHTML } from 'draft-js-import-html'
-import { stateToHTML } from 'draft-js-export-html'
-import { draftExportOptions } from '../assets/draftExportOptions'
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+import RichTextEditor from '../common/RichTextEditor'
 
 export default function Post() {
   const context = useContext(StoreContext)
   const { id } = useParams()
 
-  const [editorState, setEditorState] = useState(createEditorStateWithText(''))
+  const editorRef = useRef(null)
+
   const [error, setError] = useState('')
   const [redirect, setRedirect] = useState(false)
   const [file, setFile] = useState(null)
@@ -109,10 +104,6 @@ export default function Post() {
           data.createdAt = getDateLocalFormat(data.createdAt)
 
           setPost(data)
-
-          let contentState = stateFromHTML(data.content)
-
-          setEditorState(EditorState.createWithContent(contentState))
         } else {
           notify('⛔️ Sikertelen adat lekérés')
         }
@@ -147,7 +138,7 @@ export default function Post() {
     formData.append('title', post.title)
     formData.append('slug', post.slug)
     formData.append('description', post.description)
-    formData.append('content', stateToHTML(editorState.getCurrentContent(), draftExportOptions))
+    formData.append('content', editorRef.current.getContent())
     formData.append('category', typeof post.category.code === 'undefined' ? post.category : post.category.code)
     formData.append('status', typeof post.status.code === 'undefined' ? post.status : post.status.code)
     formData.append('file', file)
@@ -365,12 +356,12 @@ export default function Post() {
                   <div className="col-sm-12 col-md-12">
                     <div className="input-wrapper">
                       <label htmlFor="content">Tartalom</label>
-                      <Editor
-                        editorState={editorState}
-                        toolbarClassName="toolbarClassName"
-                        wrapperClassName="wrapperClassName"
-                        editorClassName="editorClassName"
-                        onEditorStateChange={setEditorState}
+                      <RichTextEditor
+                        initialValue={post.content}
+                        onInit={(evt, editor) => editorRef.current = editor}
+                        init={{
+                          height: 500,
+                        }}
                       />
 
                       {error && error.content ? Object.values(error.content).map((err, i) => {

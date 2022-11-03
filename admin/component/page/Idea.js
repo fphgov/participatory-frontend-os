@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useState, useContext, useEffect, useRef } from "react"
 import { ToastContainer, toast } from 'react-toastify'
 import { useParams } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -8,16 +8,13 @@ import axios from '../assets/axios'
 import { dateConverter } from '../assets/helperFunctions'
 import Gallery from "../common/Gallery"
 import { getImages, getDocuments } from '../assets/helperFunctions'
-import { Editor } from 'react-draft-wysiwyg'
-import { EditorState } from 'draft-js'
-import { createEditorStateWithText } from 'draft-js-plugins-editor'
-import { stateFromHTML } from 'draft-js-import-html'
-import { stateToHTML } from 'draft-js-export-html'
-import { draftExportOptions } from '../assets/draftExportOptions'
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+import RichTextEditor from '../common/RichTextEditor'
 
 export default function Idea() {
   const context = useContext(StoreContext)
+
+  const editorRef = useRef(null)
+
   const { id } = useParams()
 
   let formData = new FormData()
@@ -28,7 +25,6 @@ export default function Idea() {
   const [workflowStateExtraOptions, setWorkflowStateExtraOptions] = useState(null)
   const [idea, setIdea] = useState(null)
   const [originalWorkflowState, setOriginalWorkflowState] = useState(null)
-  const [editorState, setEditorState] = useState(createEditorStateWithText(''))
 
   const notify = (message) => toast.dark(message, {
     position: "bottom-right",
@@ -109,10 +105,6 @@ export default function Idea() {
         if (response.data && response.data.workflowState) {
           setIdea(response.data)
           setOriginalWorkflowState(response.data.workflowState)
-
-          let contentState = stateFromHTML(response.data.answer)
-
-          setEditorState(EditorState.createWithContent(contentState))
         } else {
           notify('⛔️ Sikertelen adat lekérés')
         }
@@ -155,7 +147,7 @@ export default function Idea() {
     formData.append('description', idea.description)
     formData.append('cost', idea.cost ? idea.cost : null)
     formData.append('locationDescription', idea.locationDescription)
-    formData.append('answer', stateToHTML(editorState.getCurrentContent(), draftExportOptions).replace('<p><br></p>', ''))
+    formData.append('answer', editorRef.current.getContent())
     formData.append('workflowState', typeof idea.workflowState.code === 'undefined' ? idea.workflowState : idea.workflowState.code)
     formData.append('workflowStateExtra', idea.workflowStateExtra === null || typeof idea.workflowStateExtra.code === 'undefined' ? idea.workflowStateExtra : idea.workflowStateExtra.code)
     formData.append('theme', idea.campaignTheme.id)
@@ -361,12 +353,12 @@ export default function Idea() {
                   <div className="col-sm-12 col-md-12">
                     <div className="input-wrapper">
                       <label htmlFor="answer">Hivatal visszajelzése</label>
-                      <Editor
-                        editorState={editorState}
-                        toolbarClassName="toolbarClassName"
-                        wrapperClassName="wrapperClassName"
-                        editorClassName="editorClassName"
-                        onEditorStateChange={setEditorState}
+                      <RichTextEditor
+                        initialValue={idea.answer}
+                        onInit={(evt, editor) => editorRef.current = editor}
+                        init={{
+                          height: 500,
+                        }}
                       />
 
                       {error && error.answer ? Object.values(error.answer).map((err, i) => {

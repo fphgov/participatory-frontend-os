@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, useRef } from 'react'
 import {
   Redirect,
 } from "react-router-dom"
@@ -6,16 +6,13 @@ import { ToastContainer, toast } from 'react-toastify'
 import slugify from 'slugify'
 import StoreContext from '../../StoreContext'
 import axios from '../assets/axios'
-import { Editor } from 'react-draft-wysiwyg'
-import { createEditorStateWithText } from 'draft-js-plugins-editor'
-import { stateToHTML } from 'draft-js-export-html'
-import { draftExportOptions } from '../assets/draftExportOptions'
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+import RichTextEditor from '../common/RichTextEditor'
 
 export default function PostNew() {
   const context = useContext(StoreContext)
 
-  const [editorState, setEditorState] = useState(createEditorStateWithText(''))
+  const editorRef = useRef(null)
+
   const [redirect, setRedirect] = useState(false)
   const [error, setError] = useState('')
   const [file, setFile] = useState(null)
@@ -117,7 +114,7 @@ export default function PostNew() {
     formData.append('title', post.title)
     formData.append('slug', post.slug)
     formData.append('description', post.description)
-    formData.append('content', stateToHTML(editorState.getCurrentContent(), draftExportOptions))
+    formData.append('content', editorRef.current.getContent())
     formData.append('category', typeof post.category.code === 'undefined' ? post.category : post.category.code)
     formData.append('status', typeof post.status.code === 'undefined' ? post.status : post.status.code)
     formData.append('file', file)
@@ -306,12 +303,11 @@ export default function PostNew() {
                   <div className="col-sm-12 col-md-12">
                     <div className="input-wrapper">
                       <label htmlFor="content">Tartalom</label>
-                      <Editor
-                        editorState={editorState}
-                        toolbarClassName="toolbarClassName"
-                        wrapperClassName="wrapperClassName"
-                        editorClassName="editorClassName"
-                        onEditorStateChange={setEditorState}
+                      <RichTextEditor
+                        onInit={(evt, editor) => editorRef.current = editor}
+                        init={{
+                          height: 500,
+                        }}
                       />
 
                       {error && error.content ? Object.values(error.content).map((err, i) => {

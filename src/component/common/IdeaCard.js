@@ -4,7 +4,7 @@ import {
 } from "react-router-dom"
 import CategoryIcon from './CategoryIcon'
 
-export default function IdeaCard({ idea, ideaPreLink, handleClick = () => {}, tags = null, isBuilding = false, tagClick = null }) {
+export default function IdeaCard({ idea, ideaPreLink, handleClick = () => {}, tags = null, showStatus = true, tagClick = null }) {
   if (idea == null) {
     return null
   }
@@ -37,7 +37,7 @@ export default function IdeaCard({ idea, ideaPreLink, handleClick = () => {}, ta
             </h2>
 
             <div className="prop-description">{shortDescription}</div>
-            { isBuilding ? <div className="prop-build">Megvalósítás alatt áll</div> : null }
+            { showStatus ? <div className="prop-build">{idea.status?.title}</div> : null }
           </div>
 
           <hr />
