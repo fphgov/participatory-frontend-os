@@ -93,7 +93,7 @@ export default function Home() {
           </div>
 
           <div className="row">
-            {Array.isArray(ideas) && ideas.map((idea, i) => <div key={i} className="col-md-6 col-lg-4"><IdeaCard idea={idea} ideaPreLink={'/projektek'} isBuilding={true} /></div>)}
+            {Array.isArray(ideas) && ideas.map((idea, i) => <div key={i} className="col-md-6 col-lg-4"><IdeaCard idea={idea} ideaPreLink={'/projektek'} /></div>)}
           </div>
 
           <div className="mobile-only" style={{ textAlign: 'center' }}>

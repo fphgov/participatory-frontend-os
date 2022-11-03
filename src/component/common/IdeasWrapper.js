@@ -1,10 +1,10 @@
 import React from "react"
 import IdeaCard from './IdeaCard'
 
-export default function IdeasWrapper({ idea, ideaPreLink, tags, handleClick, isBuilding = false, tagClick = null }) {
+export default function IdeasWrapper({ idea, ideaPreLink, tags, handleClick, showStatus = true, tagClick = null }) {
   return (
     <div className="col-sm-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
-      <IdeaCard idea={idea} ideaPreLink={ideaPreLink} tags={tags} handleClick={handleClick} isBuilding={isBuilding} tagClick={tagClick} />
+      <IdeaCard idea={idea} ideaPreLink={ideaPreLink} tags={tags} handleClick={handleClick} showStatus={showStatus} tagClick={tagClick} />
     </div>
   )
 }
