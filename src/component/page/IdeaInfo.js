@@ -155,7 +155,7 @@ export default function IdeaInfo() {
                   <img src={IconAccept} alt="Accept" aria-hidden={true} />
                 </div>
                 <div className="info-box-title">
-                  Informálódj a beküldésről!
+                  Küldd be az ötleted!
                 </div>
                 <div className="info-box-content">
                   Nyomj a lenti "Beküldöm az ötletem" gombra, lépj be a fiókodba és töltsd ki az űrlapot.
