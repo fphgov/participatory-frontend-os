@@ -14,6 +14,7 @@ import TimelineIcon1 from '../../img/timeline-icon-1.svg'
 import TimelineIcon2 from '../../img/timeline-icon-2.svg'
 import TimelineIcon3 from '../../img/timeline-icon-3.svg'
 import TimelineIcon4 from '../../img/timeline-icon-4.svg'
+import TimelineIcon5 from '../../img/timeline-icon-5.svg'
 import generateRandomValue from '../assets/generateRandomValue'
 
 export default function Home() {
@@ -115,7 +116,7 @@ export default function Home() {
                 <TimeLineItem icon={TimelineIcon2} date="2023. első negyedév" description="Szakmai jóváhagyás" />
                 <TimeLineItem icon={TimelineIcon3} date="2023. tavasz" description="Ötletfejlesztés" />
                 <TimeLineItem icon={TimelineIcon4} date="2023. nyár" description="Szavazás" />
-                <TimeLineItem icon={TimelineIcon4} date="2023. ősztől" description="Megvalósítás" />
+                <TimeLineItem icon={TimelineIcon5} date="2023. ősztől" description="Megvalósítás" />
               </div>
             </div>
           </div>

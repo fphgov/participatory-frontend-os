@@ -69,6 +69,9 @@ export default function RichTextEditor(props) {
     menubar: false,
     statusbar: false,
     images_upload_handler: image_upload_handler,
+    convert_urls: true,
+    relative_urls: false,
+    remove_script_host: true,
     automatic_uploads: true,
     plugins: [
       'advlist autolink lists link image charmap preview anchor',
