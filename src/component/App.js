@@ -103,8 +103,8 @@ export default function App() {
           <Route exact path="/oldal/:slug" render={() => <Layout><SimplePage /></Layout>} />
           <Route exact path="/hirek" render={() => <Layout><Posts /></Layout>} />
           <Route exact path="/hirek/:slug" render={() => <Layout><Post /></Layout>} />
-          <Route exact path="/statisztika" render={() => <Layout><Statistics /></Layout>} />
-          <Route exact path="/statisztika/:id" render={() => <Layout><Statistics /></Layout>} />
+          {/* <Route exact path="/statisztika" render={() => <Layout><Statistics /></Layout>} /> */}
+          {/* <Route exact path="/statisztika/:id" render={() => <Layout><Statistics /></Layout>} /> */}
           <Route exact path="/otletek" render={() => <Layout><Ideas /></Layout>} />
           <Route exact path="/otletek/:id" render={() => <Layout><Idea /></Layout>} />
           <Route exact path="/tervek" render={() => <Layout><Plans /></Layout>} />
