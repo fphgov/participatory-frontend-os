@@ -2532,6 +2532,11 @@ h1.post-full-title {
   display: inline-block;
 }
 
+.page-post-section p img {
+  width: 100%;
+  height: auto;
+}
+
 time.post-full-meta-date {
   font-weight: bold;
   font-size: 14px;
