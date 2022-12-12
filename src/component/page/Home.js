@@ -72,7 +72,7 @@ export default function Home() {
               <div className="col-md-12">
                 <h2>Adj egy jó ötletet!</h2>
 
-                <p>A Fővárosi Önkormányzat 2023-ban harmadik alkalommal indítja el közösségi költségvetését. A budapestiek ötletei alapján ismét 1 milliárd forint felhasználásáról dönthetnek majd a város lakói.</p>
+                <p>A Fővárosi Önkormányzat 2022-ben harmadik alkalommal indítja el közösségi költségvetését. A budapestiek ötletei alapján ismét 1 milliárd forint felhasználásáról dönthetnek majd a város lakói.</p>
 
                 <Link className="btn btn-primary btn-headline btn-next" to="/bekuldesi-informacio">Ötletbeküldés</Link>
               </div>
