@@ -89,7 +89,7 @@ export default function Home() {
             </div>
 
             <div className="col-md-9" style={{ textAlign: 'right' }}>
-              <Link to="/projektek?status=under_construction" className="btn btn-primary desktop-only">További nyertes ötletek</Link>
+              <Link to="/projektek" className="btn btn-primary desktop-only">További nyertes ötletek</Link>
             </div>
           </div>
 
@@ -98,7 +98,7 @@ export default function Home() {
           </div>
 
           <div className="mobile-only" style={{ textAlign: 'center' }}>
-              <Link to="/projektek?status=under_construction" className="btn btn-primary">További nyertes ötletek</Link>
+              <Link to="/projektek" className="btn btn-primary">További nyertes ötletek</Link>
           </div>
         </div>
       </div>
