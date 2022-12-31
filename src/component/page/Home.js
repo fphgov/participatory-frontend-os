@@ -70,11 +70,13 @@ export default function Home() {
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <h2>Adj egy jó ötletet!</h2>
+                <h2>Köszönjük a közel 600 ötletet!</h2>
 
-                <p>A Fővárosi Önkormányzat 2022-ben harmadik alkalommal indítja el közösségi költségvetését. A budapestiek ötletei alapján ismét 1 milliárd forint felhasználásáról dönthetnek majd a város lakói.</p>
+                <p>2022. december 31-én lezárult az ötletbeadás.</p>
 
-                <Link className="btn btn-primary btn-headline btn-next" to="/bekuldesi-informacio">Ötletbeküldés</Link>
+                <p>A Főpolgármesteri Hivatal most feldolgozza a beérkezett ötleteket, idén nyáron nyilvánosan szavazhatunk róluk!</p>
+
+                <Link className="btn btn-primary btn-headline btn-next" to="/hirek/kozel-600-otletet-adtak-be-a-budapestiek-a-3-fovarosi-kozossegi-koltsegvetes-otletgyujtesen">Mi történik most?</Link>
               </div>
             </div>
           </div>
