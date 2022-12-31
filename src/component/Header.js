@@ -99,7 +99,7 @@ export default function Header({ children }) {
     { title: "Bejelentkezés", href: "/bejelentkezes", highlight: false, onHideLoggedIn: true, onHideLoggedOut: false },
     { title: "Fiók", href: "/profil", highlight: false, onHideLoggedIn: false, onHideLoggedOut: true, outside: false, profile: false },
     // { title: "Szavazás", href: "/szavazas", outside: false, highlight: true },
-    { title: "Ötletbeküldés", href: "/bekuldesi-informacio", outside: false, highlight: true },
+    // { title: "Ötletbeküldés", href: "/bekuldesi-informacio", outside: false, highlight: true },
   ]
 
   const toggleMenu = () => {
