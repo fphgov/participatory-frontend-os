@@ -83,24 +83,26 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="dark-section win-feed">
+      <div className="medium-section news-feed">
         <div className="container">
-          <div className="row flex-center">
-            <div className="col-md-3">
-              <h2>Korábbi évek nyertes ötletei</h2>
-            </div>
-
-            <div className="col-md-9" style={{ textAlign: 'right' }}>
-              <Link to="/projektek" className="btn btn-primary desktop-only">További nyertes ötletek</Link>
-            </div>
-          </div>
-
           <div className="row">
-            {Array.isArray(ideas) && ideas.map((idea, i) => <div key={i} className="col-md-6 col-lg-4"><IdeaCard idea={idea} ideaPreLink={'/projektek'} /></div>)}
+            <div className="col-md-3">
+              <h2>Kiemelt híreink</h2>
+
+              <Link to='/hirek' className="btn btn-primary btn-next desktop-only">További híreink</Link>
+            </div>
+
+            <div className="col-md-9">
+              <div className="posts">
+                <div className="row">
+                  {Array.isArray(posts) && posts.map((post, i) => <div key={i} className="col-md-12 col-lg-4"><ArticleCard post={post} /></div>)}
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="mobile-only" style={{ textAlign: 'center' }}>
-              <Link to="/projektek" className="btn btn-primary">További nyertes ötletek</Link>
+            <Link to="/hirek" className="btn btn-primary">További híreink</Link>
           </div>
         </div>
       </div>
@@ -125,26 +127,24 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="medium-section news-feed">
+      <div className="dark-section win-feed">
         <div className="container">
-          <div className="row">
+          <div className="row flex-center">
             <div className="col-md-3">
-              <h2>Kiemelt híreink</h2>
-
-              <Link to='/hirek' className="btn btn-primary btn-next desktop-only">További híreink</Link>
+              <h2>Korábbi évek nyertes ötletei</h2>
             </div>
 
-            <div className="col-md-9">
-              <div className="posts">
-                <div className="row">
-                  {Array.isArray(posts) && posts.map((post, i) => <div key={i} className="col-md-12 col-lg-4"><ArticleCard post={post} /></div>)}
-                </div>
-              </div>
+            <div className="col-md-9" style={{ textAlign: 'right' }}>
+              <Link to="/projektek" className="btn btn-primary desktop-only">További nyertes ötletek</Link>
             </div>
           </div>
 
+          <div className="row">
+            {Array.isArray(ideas) && ideas.map((idea, i) => <div key={i} className="col-md-6 col-lg-4"><IdeaCard idea={idea} ideaPreLink={'/projektek'} /></div>)}
+          </div>
+
           <div className="mobile-only" style={{ textAlign: 'center' }}>
-              <Link to="/hirek" className="btn btn-primary">További híreink</Link>
+            <Link to="/projektek" className="btn btn-primary">További nyertes ötletek</Link>
           </div>
         </div>
       </div>
