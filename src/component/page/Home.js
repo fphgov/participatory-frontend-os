@@ -127,7 +127,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="dark-section win-feed">
+      <div className="light-section win-feed">
         <div className="container">
           <div className="row flex-center">
             <div className="col-md-3">
