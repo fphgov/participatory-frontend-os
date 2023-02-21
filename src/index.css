@@ -492,7 +492,7 @@ footer.post-card-meta {
 }
 
 .win-feed {
-  background-color: #12326E;
+  background-color: #fff;
 }
 
 .win-feed .ideas {
@@ -3676,6 +3676,11 @@ form fieldset .link-elem input {
   height: 200px;
   margin: 0;
   z-index: 0;
+}
+
+.medium-section.news-feed {
+  background-color: #12326E;
+  color: #fff;
 }
 
 @media screen and (min-width: 1440px) {
