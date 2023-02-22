@@ -1,8 +1,8 @@
 import React from "react"
 
-export default function InfoZigZag({ children, image, imageAlt, bgColor, orient = 'left' }) {
+export default function InfoZigZag({ id, children, image, imageAlt, bgColor, orient = 'left' }) {
   return (
-    <div className={`info-zig-zag info-zig-zag-bg-${bgColor}`}>
+    <div id={id} className={`info-zig-zag info-zig-zag-bg-${bgColor}`}>
       <div className="info-zig-zag-content">
         <div className="container">
           <div className="row flex-center">
