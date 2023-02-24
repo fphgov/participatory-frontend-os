@@ -102,7 +102,7 @@ export default function WhatPage() {
 
         <p>Végül az Önkormányzat főpolgármesteri döntést hoz a feldolgozott ötletek szavazólapra kerüléséről. Ekkor a főpolgármesteri kabinet és a főpolgármester-helyettesi irodák megkapják a szavazólapra kerülő, és az elutasított ötleteket is.</p>
 
-        <Link to="/otletek" className="btn btn-primary">Megnézem az ötleteket!</Link>
+        <Link to="/otletek?campaign=3" className="btn btn-primary">Megnézem az ötleteket!</Link>
       </InfoZigZag>
 
       <NewsletterArea />
