@@ -76,31 +76,9 @@ export default function Home() {
 
                 <p>A Főpolgármesteri Hivatal most feldolgozza a beérkezett ötleteket, idén nyáron nyilvánosan szavazhatunk róluk!</p>
 
-                <Link className="btn btn-primary btn-headline btn-next" to="/hirek/kozel-600-otletet-adtak-be-a-budapestiek-a-3-fovarosi-kozossegi-koltsegvetes-otletgyujtesen">Mi történik most?</Link>
+                <Link className="btn btn-primary btn-headline btn-next" to="/oldal/bovebben-a-kozossegi-koltsegvetesrol">Mi történik most?</Link>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="dark-section win-feed">
-        <div className="container">
-          <div className="row flex-center">
-            <div className="col-md-3">
-              <h2>Korábbi évek nyertes ötletei</h2>
-            </div>
-
-            <div className="col-md-9" style={{ textAlign: 'right' }}>
-              <Link to="/projektek" className="btn btn-primary desktop-only">További nyertes ötletek</Link>
-            </div>
-          </div>
-
-          <div className="row">
-            {Array.isArray(ideas) && ideas.map((idea, i) => <div key={i} className="col-md-6 col-lg-4"><IdeaCard idea={idea} ideaPreLink={'/projektek'} /></div>)}
-          </div>
-
-          <div className="mobile-only" style={{ textAlign: 'center' }}>
-              <Link to="/projektek" className="btn btn-primary">További nyertes ötletek</Link>
           </div>
         </div>
       </div>
@@ -131,7 +109,7 @@ export default function Home() {
             <div className="col-md-3">
               <h2>Kiemelt híreink</h2>
 
-              <Link to='/hirek' className="btn btn-primary btn-next desktop-only">További híreink</Link>
+              <Link to='/hirek' className="btn btn-primary btn-headline btn-next desktop-only">További híreink</Link>
             </div>
 
             <div className="col-md-9">
@@ -144,7 +122,29 @@ export default function Home() {
           </div>
 
           <div className="mobile-only" style={{ textAlign: 'center' }}>
-              <Link to="/hirek" className="btn btn-primary">További híreink</Link>
+            <Link to="/hirek" className="btn btn-primary">További híreink</Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="light-section win-feed">
+        <div className="container">
+          <div className="row flex-center">
+            <div className="col-md-3">
+              <h2>Korábbi évek nyertes ötletei</h2>
+            </div>
+
+            <div className="col-md-9" style={{ textAlign: 'right' }}>
+              <Link to="/projektek" className="btn post-more desktop-only">További nyertes ötletek</Link>
+            </div>
+          </div>
+
+          <div className="row">
+            {Array.isArray(ideas) && ideas.map((idea, i) => <div key={i} className="col-md-6 col-lg-4"><IdeaCard idea={idea} ideaPreLink={'/projektek'} /></div>)}
+          </div>
+
+          <div className="mobile-only" style={{ textAlign: 'center' }}>
+            <Link to="/projektek" className="btn post-more">További nyertes ötletek</Link>
           </div>
         </div>
       </div>
