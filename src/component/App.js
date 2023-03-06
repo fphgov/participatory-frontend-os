@@ -101,7 +101,7 @@ export default function App() {
           <Route path="/bekuldes/sikeres" render={() => <Layout><IdeaSuccess /></Layout>} />
           <Route path="/bekuldes" render={() => <Layout><IdeaSubmission /></Layout>} />
           <Route exact path="/szavazas" render={() => <VoteLayout><VotePage /></VoteLayout>} />
-          <Route exact path="/oldal/bovebben-a-kozossegi-koltsegvetesrol" render={() => <Layout><WhatPage /></Layout>} />
+          <Route exact path="/oldal/mi-tortenik-most" render={() => <Layout><WhatPage /></Layout>} />
           <Route exact path="/oldal/:slug" render={() => <Layout><SimplePage /></Layout>} />
           <Route exact path="/hirek" render={() => <Layout><Posts /></Layout>} />
           <Route exact path="/hirek/:slug" render={() => <Layout><Post /></Layout>} />
