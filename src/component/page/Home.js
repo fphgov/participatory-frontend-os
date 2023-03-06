@@ -76,7 +76,7 @@ export default function Home() {
 
                 <p>A Főpolgármesteri Hivatal most feldolgozza a beérkezett ötleteket, idén nyáron nyilvánosan szavazhatunk róluk!</p>
 
-                <Link className="btn btn-primary btn-headline btn-next" to="/oldal/bovebben-a-kozossegi-koltsegvetesrol">Mi történik most?</Link>
+                <Link className="btn btn-primary btn-headline btn-next" to="/oldal/mi-tortenik-most">Mi történik most?</Link>
               </div>
             </div>
           </div>
