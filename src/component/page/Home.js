@@ -74,7 +74,7 @@ export default function Home() {
 
                 <p>2022. december 31-én lezárult az ötletbeadás.</p>
 
-                <p>A Főpolgármesteri Hivatal most feldolgozza a beérkezett ötleteket, idén nyáron nyilvánosan szavazhatunk róluk!</p>
+                <p>A Főpolgármesteri Hivatal most feldolgozza a beérkezett ötleteket, ezután ti szavazhattok majd arról, hogy mi valósuljon meg.</p>
 
                 <Link className="btn btn-primary btn-headline btn-next" to="/oldal/mi-tortenik-most">Mi történik most?</Link>
               </div>
@@ -95,7 +95,7 @@ export default function Home() {
                 <TimeLineItem icon={TimelineIcon1} date="2022.10.15. - 12.31." description="Ötletek beküldése" />
                 <TimeLineItem icon={TimelineIcon2} date="2023. első negyedév" description="Szakmai jóváhagyás" />
                 <TimeLineItem icon={TimelineIcon3} date="2023. tavasz" description="Ötletfejlesztés" />
-                <TimeLineItem icon={TimelineIcon4} date="2023. nyár" description="Szavazás" />
+                <TimeLineItem icon={TimelineIcon4} date="2023. ősz" description="Szavazás" />
                 <TimeLineItem icon={TimelineIcon5} date="2023. ősztől" description="Megvalósítás" />
               </div>
             </div>
