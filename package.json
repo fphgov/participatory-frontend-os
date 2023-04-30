@@ -54,6 +54,7 @@
     "axios": "^0.21.4",
     "babel-polyfill": "^6.26.0",
     "bootstrap-4-grid": "^3.4.0",
+    "caniuse-lite": "^1.0.30001481",
     "core-js": "^3.20.3",
     "jwt-decode": "^3.1.2",
     "lodash.clonedeep": "^4.5.0",
@@ -74,6 +75,6 @@
     "store": "^2.0.12",
     "tinymce": "^5.10.7",
     "url-polyfill": "^1.1.12",
-    "webpack-pwa-manifest": "^4.3.0"
+    "webpack-pwa-manifest": "^4.0.0"
   }
 }
