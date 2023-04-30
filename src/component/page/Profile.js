@@ -7,8 +7,9 @@ import { ToastContainer, toast } from 'react-toastify'
 import axios from "../assets/axios"
 import StoreContext from '../../StoreContext'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTrash, faKey, faSave, faSignOutAlt, faIdCardAlt, faLightbulb } from "@fortawesome/free-solid-svg-icons"
+import { faIdCardAlt, faLightbulb } from "@fortawesome/free-solid-svg-icons"
 import IdeasWrapper from "../common/IdeasWrapper"
+import HeroPage from '../common/HeroPage'
 import CardPlaceholder from "../common/CardPlaceholder"
 import tokenParser from '../assets/tokenParser'
 
@@ -266,76 +267,88 @@ export default function Profile() {
       {redirectLogin ? <Redirect to='/bejelentkezes' /> : null}
       {redirectLogout ? <Redirect to='/kijelentkezes' /> : null}
 
+      <HeroPage title="Profilom" content="" />
+
       <div className="container">
         <div className="row">
-          <div className="col-md-12">
-            {(typeof error === 'string' && error !== '') ? <Error message={error} /> : null}
+          <div className="offset-xl-2 col-lg-12 col-xl-8">
 
-            <div className="section">
+            <div className="section section-block">
+              {(typeof error === 'string' && error !== '') ? <Error message={error} /> : null}
+
               <h2><FontAwesomeIcon icon={faIdCardAlt} /> Fiók információk</h2>
 
               {profile ? <ProfileBox profile={profile} /> : null}
 
-              <div className="btn-wrapper btn-wrapper-flex">
-                <Link className="btn btn-primary" to="/kijelentkezes"><FontAwesomeIcon icon={faSignOutAlt} /> Kijelentkezés</Link>
-
-                <button className="btn btn-danger btn-danger-2" onClick={deleteAccount}><FontAwesomeIcon icon={faTrash} /> Fiók törlése</button>
-              </div>
-            </div>
-
-            <div className="section">
-              <h2><FontAwesomeIcon icon={faKey} /> Jelszó változtatás</h2>
+              <hr />
 
               <form onSubmit={submitPassword}>
                 <fieldset>
                   <div className="form-wrapper">
-                    <div className="input-wrapper">
-                      <label htmlFor="password">Új jelszó</label>
-                      <input type="password" name="password" id="password" value={credential.password} onChange={handleChangeInput} />
 
-                      {error && error.password ? Object.values(error.password).map((err, i) => {
-                        return <ErrorMini key={i} error={err} increment={`password-${i}`} />
-                      }) : null}
+                    <div className="input-inline-wrapper">
+                      <div className="input-wrapper">
+                        <label htmlFor="password">Új jelszó</label>
+                        <input type="password" name="password" id="password" value={credential.password} onChange={handleChangeInput} />
+
+                        {error && error.password ? Object.values(error.password).map((err, i) => {
+                          return <ErrorMini key={i} error={err} increment={`password-${i}`} />
+                        }) : null}
+                      </div>
+
+                      <div className="input-wrapper">
+                        <label htmlFor="password_again">Új jelszó ismét</label>
+                        <input type="password" name="password_again" id="password_again" value={credential.password_again} onChange={handleChangeInput} />
+
+                        {error && error.password_again ? Object.values(error.password_again).map((err, i) => {
+                          return <ErrorMini key={i} error={err} increment={`password_again-${i}`} />
+                        }) : null}
+                      </div>
                     </div>
 
-                    <div className="input-wrapper">
-                      <label htmlFor="password_again">Új jelszó ismét</label>
-                      <input type="password" name="password_again" id="password_again" value={credential.password_again} onChange={handleChangeInput} />
-
-                      {error && error.password_again ? Object.values(error.password_again).map((err, i) => {
-                        return <ErrorMini key={i} error={err} increment={`password_again-${i}`} />
-                      }) : null}
-                    </div>
-
-                    <div className="btn-wrapper btn-wrapper-flex">
-                      <button type="submit" className="btn btn-primary"><FontAwesomeIcon icon={faSave} /> Mentés</button>
+                    <div className="btn-wrapper" style={{ marginTop: 24 }}>
+                      <button type="submit" className="btn btn-gray">Módosítás</button>
                     </div>
                   </div>
                 </fieldset>
               </form>
+
+              <div className="btn-wrapper btn-wrapper-flex">
+                <button className="btn btn-danger-solid" onClick={deleteAccount}>Fiók törlése</button>
+
+                <Link className="btn btn-primary-solid" to="/kijelentkezes">Kijelentkezés</Link>
+              </div>
             </div>
 
             <div className="section">
               <h2><FontAwesomeIcon icon={faLightbulb} /> Beküldött ötletek ({ideas.length})</h2>
 
               <div className="row">
-                {ideas.length > 0 && !loadIdeas && ideas.map((idea, i) => <IdeasWrapper ideaPreLink="/otletek" handleClick={() => {}} key={i} idea={idea} />)}
+                {ideas.length > 0 && !loadIdeas && ideas.map((idea, i) => (
+                  <IdeasWrapper
+                    key={i}
+                    ideaPreLink="/otletek"
+                    handleClick={() => {}}
+                    className="col-sm-12 col-sm-12 col-md-12 col-lg-6 col-xl-6"
+                    idea={idea}
+                  />)
+                 )}
 
                 {ideas.length == 0 && loadIdeas && <>
-                  <div className="col-sm-12 col-md-6 col-lg-4">
+                  <div className="col-sm-12 col-md-12 col-lg-6">
                     <CardPlaceholder />
                   </div>
 
-                  <div className="col-sm-12 col-md-6 col-lg-4">
+                  <div className="col-sm-12 col-md-12 col-lg-6">
                     <CardPlaceholder />
                   </div>
 
-                  <div className="col-sm-12 col-md-6 col-lg-4">
+                  <div className="col-sm-12 col-md-12 col-lg-6">
                     <CardPlaceholder />
                   </div>
                 </>}
 
-                {ideas.length == 0 && !loadIdeas && <div className="col-sm-12 col-md-6 col-lg-4">
+                {ideas.length == 0 && !loadIdeas && <div className="col-sm-12 col-md-12 col-lg-6">
                   <p>Nincs beküldött ötlet</p>
                 </div>}
               </div>
