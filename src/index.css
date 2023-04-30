@@ -370,6 +370,30 @@ header .logo-wrapper img {
   color: #fff !important;
 }
 
+.btn.btn-primary-solid {
+  color: #222222;
+  font-weight: bold;
+  background: none;
+  font-size: 16px;
+  padding: 0;
+}
+
+.btn.btn-danger-solid {
+  color: #E5332A;
+  font-weight: bold;
+  background: none;
+  font-size: 16px;
+  padding: 0;
+}
+
+.btn.btn-gray {
+  background-color: rgba(18, 50, 110, 0.12);
+  color: #12326E;
+  display: block;
+  width: 100%;
+  padding: 12px 24px;
+}
+
 .btn-next {
   padding: 12px 18px 12px 24px;
 }
@@ -408,7 +432,7 @@ header .logo-wrapper img {
 .btn-wrapper-flex {
   display: flex;
   justify-content: space-between;
-  margin: 32px 0;
+  margin-top: 36px;
 }
 
 .btn.btn-vote {
@@ -2790,11 +2814,40 @@ select:focus,
 }
 
 .profile-item {
-  margin-bottom: 12px;
+  display: inline-block;
+  margin-right: 36px;
+}
+
+.page-profile-single-section .form-wrapper {
+  width: 100%;
 }
 
 .profile-item-name {
+  color: #12326E;
   font-weight: bold;
+}
+
+.profile-item-value {
+  color: #777777;
+}
+
+.input-inline-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.input-inline-wrapper > div {
+  display: inline-block;
+  margin: 0 12px;
+  width: 100%;
+}
+
+.input-inline-wrapper > div:first-of-type {
+  margin-left: 0;
+}
+
+.input-inline-wrapper > div:last-of-type {
+  margin-right: 0;
 }
 
 .placeholder-item {
@@ -3593,8 +3646,24 @@ form fieldset .link-elem input {
   padding-right: 46px !important;
 }
 
-.page-profile-single-section {
-  padding-top: 32px;
+.section.section-block {
+  margin: 48px 0;
+  border: 1px solid #DDDDDD;
+  border-radius: 4px;
+  padding: 24px;
+}
+
+.page-profile .section h2 > svg {
+  color: #21A7CC;
+}
+
+.section.section-block h2::after {
+  content: '';
+  height: 1px;
+  background: #EEEEEE;
+  width: 100%;
+  display: block;
+  margin-top: 18px;
 }
 
 .sidebar-card {
@@ -4023,6 +4092,19 @@ form fieldset .link-elem input {
     top: calc(100% + 24px);
     margin: auto;
     left: 0;
+  }
+
+  .input-inline-wrapper {
+    display: block;
+  }
+
+  .input-inline-wrapper > div {
+    margin: 12px 0;
+  }
+
+  .profile-item {
+    display: block;
+    margin: 12px 0;
   }
 }
 
