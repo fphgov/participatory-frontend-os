@@ -47,11 +47,11 @@ export default function ProjectWrapper({ project, showVoteButton, disableVoteBut
                     </div>
                   </> : null}
 
-                  {project.locationDescription ? <>
+                  {project.location ? <>
                     <div className="prop-single-section">
                       <h3>Helyszín</h3>
 
-                      <div className="prop-single-location-description" dangerouslySetInnerHTML={{ __html: project.locationDescription }} />
+                      <div className="prop-single-location-description" dangerouslySetInnerHTML={{ __html: project.location }} />
                     </div>
                   </> : null}
 
