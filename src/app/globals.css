@@ -161,7 +161,7 @@ nav.main-navigation ul li.open ul.submenu > li > a {
 }
 
 .mobile-menu li.highlight {
-  padding: 18px 0;
+  padding: 8px 0;
 }
 
 .main-navigation li.highlight a,
@@ -170,6 +170,7 @@ nav.main-navigation ul li.open ul.submenu > li > a {
   padding: 4px 12px;
   border-radius: 999px;
   border: 1px solid #12326E;
+  display: inline-block;
 }
 
 .main-navigation a,
@@ -1119,7 +1120,7 @@ input[type="submit"] {
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: normal;
-  line-height: 20px;
+  line-height: 24px;
   width: 100%;
   color: rgba(34, 34, 34, 0.7);
   flex: 1;
@@ -2754,6 +2755,10 @@ time.post-full-meta-date::before {
   line-height: 42px;
 }
 
+.hero-page h1 + p {
+  margin-top: 18px;
+}
+
 .hero-page p {
   margin: 0;
 }
@@ -3874,6 +3879,33 @@ p.subinfo {
   color: #777;
 }
 
+.vote-start-section {
+  padding: 60px 0;
+}
+
+.vote-start-section h3 {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 30px;
+  letter-spacing: 0.24px;
+  margin: 0 0 36px 0;
+  text-align: center;
+}
+
+.vote-start-section .prop-theme {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 30px;
+  letter-spacing: 0.24px;
+  color: #222;
+}
+
+.vote-start-section hr {
+  margin-top: 18px;
+}
+
 @media screen and (min-width: 1440px) {
   .container,
   .container-sm,
@@ -3906,7 +3938,7 @@ p.subinfo {
 
 @media screen and (max-width: 991px) {
   .desktop-menu {
-    display: none;
+    display: none !important;
   }
 
   .hamburger-menu-wrapper {

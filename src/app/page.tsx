@@ -20,7 +20,7 @@ export default function Home() {
                 <div className="offset-lg-3 col-lg-6">
                   <p>A közösségi költségvetés keretében idén is budapestiek ötleteire lehet szavazni. A legtöbb szavazatot szerző ötleteket 1 milliárd forint összértékben valósítja meg a Fővárosi Önkormányzat. A KK szabályairól bővebben <Link href="/szavazasi-informacio">itt olvashatsz</Link>.</p>
 
-                  <Link className="btn btn-primary btn-headline btn-next" href="/szavazas-inditas">Elindítom a szavazást</Link>
+                  <Link className="btn btn-primary btn-headline btn-next" href="/szavazas-inditasa">Elindítom a szavazást</Link>
                 </div>
               </div>
             </div>

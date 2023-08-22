@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <HeroPage title="Hogyan tudsz szavazatot leadni?">
           <VoteInfoSection />
 
-          <Link href="/szavazas-inditas" className="btn btn-primary btn-headline btn-next">Tovább a szavazásra</Link>
+          <Link href="/szavazas-inditasa" className="btn btn-primary btn-headline btn-next">Tovább a szavazásra</Link>
         </HeroPage>
 
         {children}
