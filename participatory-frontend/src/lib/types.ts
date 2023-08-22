@@ -1,0 +1,79 @@
+import { IArticle } from "@/models/article.model"
+import { IIdea } from "@/models/idea.model"
+import { IPage } from "@/models/page.model"
+import { IProject } from "@/models/project.model"
+import { IPlan } from "@/models/plan.model"
+import { IUser } from "@/models/user.model"
+
+export interface PageResponse {
+  data: IPage
+}
+
+export interface ProfileResponse {
+  message: string
+}
+
+export interface UserResponse {
+  data: IUser
+}
+
+export interface ArticleResponse {
+  data: IArticle
+}
+
+export interface IdeaResponse extends IIdea {
+}
+
+export interface ProjectResponse extends IProject {
+}
+
+export interface PlanResponse extends IPlan {
+}
+
+export interface UserLoginResponse {
+  token: string
+}
+
+export interface ListLinks {
+  self?: { href: string }
+  prev?: { href: string }
+  next?: { href: string }
+  first?: { href: string }
+  last?: { href: string }
+}
+
+export interface ListResponse {
+  _total_items: number
+  _page: number
+  _page_count: number
+  _links: ListLinks
+}
+
+export interface IdeaListResponse extends ListResponse {
+  _embedded: {
+    ideas: IIdea[]
+  }
+}
+
+export interface ProjectListResponse extends ListResponse {
+  _embedded: {
+    projects: IProject[]
+  }
+}
+
+export interface PlanListResponse extends ListResponse {
+  _embedded: {
+    projects: IPlan[]
+  }
+}
+
+export interface ArticleListResponse extends ListResponse {
+  data: IArticle[]
+}
+
+export interface FilterResponse {
+  theme: { code: string, name: string }[]
+  location: { code: string, name: string }[]
+  campaign: { id: number, name: string }[]
+  status: { code: string, name: string }[]
+}
