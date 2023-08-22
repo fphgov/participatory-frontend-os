@@ -27,7 +27,7 @@ export default function IdeaCard({ idea, ideaPreLink, tags, handleClick, showSta
       <div className={`prop-inner prop-status-${statusCode}`}>
         <div className="prop-content-wrapper">
           <div className="prop-content">
-            <div className="prop-category desktop-only">
+            <div className="prop-category">
               <div className="prop-theme"><CategoryIcon name={themeName} color="blue" />{themeName}</div>
             </div>
 
@@ -40,10 +40,6 @@ export default function IdeaCard({ idea, ideaPreLink, tags, handleClick, showSta
                 })}</div>
               </div>
             </> : null}
-
-            <div className="prop-category mobile-only">
-              <div className="prop-theme"><CategoryIcon name={themeName} />{themeName}</div>
-            </div>
 
             <h2 className="prop-title">
               <Link href={`${ideaPreLink}/${idea.id}`}>{idea.title}</Link>

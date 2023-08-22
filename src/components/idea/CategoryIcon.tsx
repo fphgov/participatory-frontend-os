@@ -20,10 +20,12 @@ export default function CategoryIcon({ name, color = "white", size = 18 }: Categ
       break;
 
     case 'Helyi - kis':
+    case 'Helyi kis ötlet':
       filename += 'local-small'
       break;
 
     case 'Helyi - nagy':
+    case 'Helyi nagy ötlet':
       filename += 'local-big'
       break;
 
