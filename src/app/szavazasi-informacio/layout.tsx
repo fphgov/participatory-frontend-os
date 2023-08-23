@@ -34,22 +34,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </Details>
 
                 <Details className="section-more" summary={<div><CategoryIcon color="blue" size={24} name="Helyi - nagy" />Helyi nagy ötletek</div>}>
-                  <p>Olyan ötletek, amelyeket jellemzően egy, esetenként több konkrét helyszínre javasolt beadójuk, és megvalósításuk költsége nem haladja meg az 50 millió forintot.</p>
+                  <p>Olyan ötletek, amelyeket jellemzően egy, esetenként több konkrét helyszínre javasolt beadójuk, és megvalósításuk költsége 51 és 120 millió forint közé esik.</p>
                 </Details>
 
                 <Details className="section-more" summary={<div><CategoryIcon color="blue" size={24} name="Zöld Budapest" />Zöld Budapest</div>}>
-                  <p><b>Zöldebb utcák, üdébb parkok, mindenki számára elérhető, környezettudatos megoldások. Budapest reagál a klímaváltozásra.</b></p>
-                  <p>A Zöld Budapest kategória azt képviseli, hogy a Fővárosi Önkormányzat szerepet vállal abban, hogy városunk zöldebbé váljon és segíti a budapestieket, hogy környezettudatosan éljenek, közlekedjenek. Közös célunk, hogy a főváros alkalmazkodjon a 21. század egyik legnagyobb kihívásához, a klímaváltozáshoz.</p>
+                  <p>Zöldebb utcák, üdébb parkok, mindenki számára elérhető, környezettudatos megoldások. Budapest reagál a klímaváltozásra.</p>
                 </Details>
 
                 <Details className="section-more" summary={<div><CategoryIcon color="blue" size={24} name="Esélyteremtő Budapest" />Esélyteremtő Budapest</div>}>
-                  <p><b>A cél a társadalmi különbségek csökkentése, hátrányos helyzetű közösségek életét támogató ötletekkel.</b></p>
-                  <p>Az Esélyteremtő Budapest kategóriába benyújtott ötletek révén az önkormányzat csökkenti a társadalmi különbségeket, segíti a hátrányos helyzetű közösségek életét. Ide soroljuk az akadálymentes közlekedést megkönnyítő, illetve az idősek, fogyatékosok, rászorulók, vagy más társadalmi hátrányt elszenvedők gondjait orvosló ötleteket.</p>
+                  <p>A cél a társadalmi különbségek csökkentése, hátrányos helyzetű közösségek életét támogató ötletekkel.</p>
                 </Details>
 
                 <Details className="section-more" summary={<div><CategoryIcon color="blue" size={24} name="Nyitott Budapest" />Nyitott Budapest</div>}>
-                  <p><b>Egy nyitott város a szívügyed? Együttműködések, kísérleti megoldások, digitális fejlesztések, közösségépítő ötletek.</b></p>
-                  <p>A Nyitott Budapest kategória célja a kísérletezés és az együttműködés fejlesztése a város közösségeiben, illetve a budapestiek és a főváros, valamint intézményei között. Ennek megvalósítása érdekében keresünk praktikus, kísérleti megoldásokat, mindenki által könnyen elérhető digitális fejlesztéseket és közösségépítő ötleteket.</p>
+                  <p>Egy nyitott város a szívügyed? Együttműködések, kísérleti megoldások, digitális fejlesztések, közösségépítő ötletek.</p>
                 </Details>
               </div>
             </div>
