@@ -3999,7 +3999,7 @@ p.subinfo {
 }
 
 .list-wrapper {
-  margin-bottom: 48px;
+  margin-bottom: 36px;
 }
 
 .vote-search-wrapper hr {
@@ -4009,6 +4009,10 @@ p.subinfo {
 
 .vote-category-order {
   margin-bottom: 24px;
+}
+
+.vote-category-pagination {
+  margin-bottom: 60px;
 }
 
 .vote-search-tags {
@@ -4058,6 +4062,42 @@ p.subinfo {
 
 .pagination-mini li:first-of-type {
   margin-right: 8px;
+}
+
+.vote-search-input-wrapper {
+  border: 1px solid #DDDDDD;
+  padding: 3px 3px 3px 14px;
+  border-radius: 4px;
+}
+
+.vote-search-input-wrapper input {
+  margin: 0;
+  border: 0;
+}
+
+.vote-search-input-wrapper input[type="text"] {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 125% */
+  letter-spacing: 0.16px;
+}
+
+.vote-search-input-wrapper input[type="submit"] {
+  background-image: url('../../public/images/icon-search-blue.svg');
+  background-repeat: no-repeat;
+  background-color: #F5CF68;
+  background-position: center center;
+  padding: 9px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 0 0 14px;
+  height: 42px;
+  width: 42px;
+}
+
+.vote-search-input-wrapper input::placeholder {
+  color: #777777;
 }
 
 @media screen and (min-width: 1440px) {

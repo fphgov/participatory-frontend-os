@@ -5,7 +5,7 @@ export const verifyJWT = async <T>(token: string): Promise<T> => {
     return (
       await jwtVerify(
         token,
-        new TextEncoder().encode(process.env.APP_JWT_SECRET_KEY)
+        new TextEncoder().encode(process.env.JWT_SECRET_KEY)
       )
     ).payload as T
   } catch (error) {

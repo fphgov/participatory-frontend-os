@@ -1,11 +1,12 @@
 import { IMedia } from '@/models/media.model'
 import { documentMimes } from '@/utilities/mimeTypes'
+import endpoints from '@/lib/endpoints'
 
 export function getImages(medias: IMedia[]): string[]|undefined {
   if (!Array.isArray(medias)) return
 
   return medias.filter(media => documentMimes.indexOf(media.type) === -1).map((item) => {
-    const link = process.env.NEXT_PUBLIC_URL + (process.env.NEXT_PUBLIC_API_REQ_MEDIA || '').toString().replace(':id', item.id)
+    const link = process.env.NEXT_PUBLIC_URL + (endpoints.API_REQ_MEDIA || '').toString().replace(':id', item.id)
 
     return link
   })
@@ -15,7 +16,7 @@ export function getDocuments(medias: IMedia[]): { original: string }[]|undefined
   if (!Array.isArray(medias)) return
 
   return medias.filter(media => documentMimes.indexOf(media.type) > -1).map((item) => {
-    const link = process.env.NEXT_PUBLIC_URL + (process.env.NEXT_PUBLIC_API_REQ_MEDIA_DOWNLOAD || '').toString().replace(':id', item.id)
+    const link = process.env.NEXT_PUBLIC_URL + (endpoints.API_REQ_MEDIA_DOWNLOAD || '').toString().replace(':id', item.id)
 
     return { original: link }
   })

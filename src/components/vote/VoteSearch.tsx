@@ -1,10 +1,13 @@
 import React from "react"
+import VoteSearchInput from "@/components/vote/VoteSearchInput"
 
 type VoteSearchProps = {
   title: string
+  baseUrl: string
+  searchParams: Record<string, string>
 }
 
-export default function VoteSearch({ title }: VoteSearchProps): JSX.Element {
+export default function VoteSearch({ title, baseUrl, searchParams }: VoteSearchProps): JSX.Element {
   return (
     <div className="vote-search-wrapper">
       <div className="container">
@@ -14,7 +17,7 @@ export default function VoteSearch({ title }: VoteSearchProps): JSX.Element {
           </div>
           <div className="col-lg-6">
             <div className="vote-search-input">
-              kereső
+              <VoteSearchInput baseUrl={baseUrl} searchParams={searchParams} />
             </div>
           </div>
         </div>
