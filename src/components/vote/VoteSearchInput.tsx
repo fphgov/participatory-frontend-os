@@ -13,16 +13,14 @@ export default function VoteSearchInput({ baseUrl, searchParams }: VoteSearchInp
   const submitForm = (e: any) => {
     e.preventDefault()
 
-    const urlSearchParams = new URLSearchParams(searchParams)
-
-    urlSearchParams.append('query', query)
+    const urlSearchParams = new URLSearchParams({ ...searchParams, query })
 
     window.location.href = baseUrl + '?' + urlSearchParams.toString()
   }
 
   return (
     <div className="vote-search-input-wrapper">
-      <form onClick={submitForm}>
+      <form onSubmit={submitForm}>
         <input type="text" name="search" placeholder="Keresés..." value={query} onChange={(e) => { setQuery(e.target.value) }} />
         <input type="submit" value=" " />
       </form>
