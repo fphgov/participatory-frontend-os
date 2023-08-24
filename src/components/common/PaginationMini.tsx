@@ -45,7 +45,7 @@ export default function PaginationMini({ baseUrl, links, size, pageSize, totalIt
 
   return (
     <div className="pagination-mini-wrapper">
-      {paginationShow && (
+      {paginationShow ? (
         <>
           <span>{from}-{to}, összesen: {totalItems}</span>
           <nav role="navigation" aria-label="Lapozási navigáció" className="pagination pagination-mini">
@@ -68,7 +68,7 @@ export default function PaginationMini({ baseUrl, links, size, pageSize, totalIt
             </ul>
           </nav>
         </>
-      )}
+      ): null}
     </div>
   )
 }
