@@ -28,12 +28,9 @@ export default function ProfileDeleteButton({ profile }: ProfileDeleteProps): JS
     }
 
     try {
-      const response = await apiProfileDelete(profile.username)
+      const response = await apiProfileDelete()
 
-      console.log(response)
-
-      notify("siker :)")
-      // notify(response.data.message)
+      notify(response?.message)
     } catch (e: any) {
       if (e.response && e.response.data && e.response.data.errors) {
         setError(e.response.data.errors)

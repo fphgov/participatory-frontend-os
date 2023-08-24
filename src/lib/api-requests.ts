@@ -2,7 +2,21 @@
 
 import { redirect } from 'next/navigation'
 import { saveToken, getToken } from "@/lib/actions"
-import { ArticleListResponse, ArticleResponse, FilterResponse, IdeaListResponse, IdeaResponse, IssueResponse, PageResponse, PlanListResponse, PlanResponse, ProfileResponse, ProjectListResponse, ProjectResponse, UserLoginResponse, UserResponse, VoteListResponse } from "@/lib/types"
+import {
+  ArticleListResponse,
+  ArticleResponse,
+  FilterResponse,
+  IdeaListResponse,
+  IdeaResponse,
+  PageResponse,
+  PlanListResponse,
+  PlanResponse,
+  MessageResponse,
+  ProjectListResponse,
+  ProjectResponse,
+  UserLoginResponse,
+  UserResponse
+} from "@/lib/types"
 import { IUser } from "@/models/user.model"
 import { IIdea } from '@/models/idea.model'
 import { IProject } from "@/models/project.model"
@@ -119,24 +133,55 @@ export async function apiProfileIdeaData(data: Record<string, string>): Promise<
   return handleResponse<IdeaListResponse>(response).then(data => data._embedded.ideas)
 }
 
-export async function apiProfileDelete(username: string): Promise<string> {
-  var urlencoded = new URLSearchParams()
+export async function apiProfileDelete(): Promise<MessageResponse> {
+  const token = (await getToken())?.value
 
-  urlencoded.append("username", username)
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  }
+
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`
+  }
 
   const url = backendUrl(endpoints.API_REQ_PROFILE_DELETE)
 
   const response = await fetch(url, {
+    method: "DELETE",
+    credentials: "include",
+    headers
+  })
+
+  return await handleResponse<MessageResponse>(response).then(data => data)
+}
+
+export async function apiProfileChangePassword(credentials: { password: string, password_again: string }): Promise<MessageResponse> {
+  const token = (await getToken())?.value
+
+  const headers: Record<string, string> = {
+    "Content": "application/json",
+    'Content-Type': "application/x-www-form-urlencoded",
+  }
+
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`
+  }
+
+  var urlencoded = new URLSearchParams()
+
+  urlencoded.append("password", credentials.password)
+  urlencoded.append("password_again", credentials.password_again)
+
+  const url = backendUrl(endpoints.API_REQ_PASSWORD)
+
+  const response = await fetch(url, {
     method: "POST",
     credentials: "include",
-    headers: {
-      'Content': "application/json",
-      'Content-Type': "application/x-www-form-urlencoded",
-    },
+    headers,
     body: urlencoded,
   })
 
-  return await handleResponse<ProfileResponse>(response).then(data => data.message)
+  return handleResponse<MessageResponse>(response).then(data => data)
 }
 
 export async function apiRegistration(data: Record<string, string>): Promise<Record<string, string>> {
@@ -271,7 +316,7 @@ export async function apiProfileActivate(hash: string): Promise<string> {
     },
   })
 
-  return handleResponse<ProfileResponse>(response).then(data => data.message)
+  return handleResponse<MessageResponse>(response).then(data => data.message)
 }
 
 export async function apiIdeasData(data: Record<string, string>): Promise<IdeaListResponse> {
