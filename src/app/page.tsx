@@ -1,9 +1,9 @@
 import TimeLineItem from '@/components/common/TimeLineItem'
-import NewsletterArea from '@/components/home/NesletterArea'
 import NewsFeed from '@/components/home/NewsFeed'
 // import ProjectsFeed from '@/components/home/ProjectsFeed'
 import Link from 'next/link'
 import VoteInfoSection from '@/components/home/VoteInfoSection'
+import NewsletterArea from '@/components/home/NesletterArea'
 
 export default function Home() {
   return (

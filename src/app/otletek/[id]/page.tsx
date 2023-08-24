@@ -5,6 +5,7 @@ import { apiIdeaData } from '@/lib/api-requests'
 import HeroPage from '@/components/common/HeroPage'
 import IdeaWrapper from '@/components/idea/IdeaWrapper'
 import Link from 'next/link'
+import NewsletterArea from '@/components/home/NesletterArea'
 
 type Props = {
   params: { id: string }
@@ -41,6 +42,8 @@ export default async function SimplePage({ params }: Props) {
           {pageData ? <IdeaWrapper idea={pageData} /> : null}
         </div>
       </div>
+
+      <NewsletterArea />
     </main>
   )
 }

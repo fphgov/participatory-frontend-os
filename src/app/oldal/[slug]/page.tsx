@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import Error from '@/components/common/Error'
 import HeroPage from "@/components/common/HeroPage"
 import { apiPageData } from '@/lib/api-requests'
+import NewsletterArea from '@/components/home/NesletterArea'
 
 type Props = {
   params: { slug: string }
@@ -48,6 +49,8 @@ export default async function SimplePage({ params }: Props) {
           </div>
         </div>
       </div>
+
+      <NewsletterArea />
     </main>
   )
 }

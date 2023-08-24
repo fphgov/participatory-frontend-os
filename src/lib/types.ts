@@ -4,6 +4,7 @@ import { IPage } from "@/models/page.model"
 import { IProject } from "@/models/project.model"
 import { IPlan } from "@/models/plan.model"
 import { IUser } from "@/models/user.model"
+import { IVoteableProject } from "@/models/voteableProject.model"
 
 export interface PageResponse {
   data: IPage
@@ -76,4 +77,13 @@ export interface FilterResponse {
   location: { code: string, name: string }[]
   campaign: { id: number, name: string }[]
   status: { code: string, name: string }[]
+}
+
+export interface VoteListResponse {
+  data: IVoteableProject[]
+}
+
+export interface IssueResponse {
+  message: string
+  code: string
 }

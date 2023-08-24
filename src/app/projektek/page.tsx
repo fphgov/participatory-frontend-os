@@ -1,5 +1,6 @@
 import Pagination from '@/components/common/Pagination';
 import SearchArea from '@/components/common/SearchArea';
+import NewsletterArea from '@/components/home/NesletterArea';
 import IdeasWrapper from '@/components/idea/IdeasWrapper';
 import { apiProjectsData, apiProjectsFilter } from '@/lib/api-requests'
 import { NextPage } from "next";
@@ -58,6 +59,8 @@ const Ideas: NextPage<IProps> = async ({ searchParams }) => {
           </div>
         </div>
       </div>
+
+      <NewsletterArea />
     </main>
   )
 }

@@ -3,9 +3,10 @@ import Link from "next/link"
 import CategoryIcon from "@/components/idea/CategoryIcon"
 import { IIdea } from "@/models/idea.model"
 import { IProject } from "@/models/project.model"
+import { IPlan } from "@/models/plan.model"
 
 type IdeaCardProps = {
-  idea: IIdea|IProject
+  idea: IIdea|IProject|IPlan
   ideaPreLink: string
   tags?: ITag[],
   handleClick?: () => void|undefined
@@ -13,7 +14,14 @@ type IdeaCardProps = {
   tagClick?: (tag: ITag) => {}|undefined
 }
 
-export default function IdeaCard({ idea, ideaPreLink, tags, handleClick, showStatus = true, tagClick = undefined }: IdeaCardProps): JSX.Element|null {
+export default function IdeaCard({
+  idea,
+  ideaPreLink,
+  tags,
+  handleClick,
+  showStatus = true,
+  tagClick = undefined
+}: IdeaCardProps): JSX.Element|null {
   if (idea == null) {
     return null
   }

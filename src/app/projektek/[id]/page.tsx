@@ -5,6 +5,7 @@ import { apiProjectData } from '@/lib/api-requests'
 import HeroPage from '@/components/common/HeroPage'
 import Link from 'next/link'
 import ProjectWrapper from '@/components/idea/ProjectWrapper'
+import NewsletterArea from '@/components/home/NesletterArea'
 
 type Props = {
   params: { id: string }
@@ -48,6 +49,8 @@ export default async function SimplePage({ params }: Props) {
           />
         </div>
       </div>
+
+      <NewsletterArea />
     </main>
   )
 }

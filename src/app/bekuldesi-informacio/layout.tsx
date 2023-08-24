@@ -1,5 +1,4 @@
 import HeroPage from "@/components/common/HeroPage"
-import NewsletterArea from '@/components/home/NesletterArea'
 import ScrollButton from '@/components/common/ScrollButton'
 import Image from 'next/image'
 import Details from '@/components/common/Details'
@@ -113,8 +112,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
 
         {children}
-
-        <NewsletterArea />
       </div>
     </main>
   )

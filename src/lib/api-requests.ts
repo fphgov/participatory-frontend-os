@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation'
 import { saveToken, getToken } from "@/lib/actions"
-import { ArticleListResponse, ArticleResponse, FilterResponse, IdeaListResponse, IdeaResponse, PageResponse, PlanListResponse, PlanResponse, ProfileResponse, ProjectListResponse, ProjectResponse, UserLoginResponse, UserResponse } from "@/lib/types"
+import { ArticleListResponse, ArticleResponse, FilterResponse, IdeaListResponse, IdeaResponse, IssueResponse, PageResponse, PlanListResponse, PlanResponse, ProfileResponse, ProjectListResponse, ProjectResponse, UserLoginResponse, UserResponse, VoteListResponse } from "@/lib/types"
 import { IUser } from "@/models/user.model"
 import { IIdea } from '@/models/idea.model'
 import { IProject } from "@/models/project.model"
@@ -302,7 +302,7 @@ export async function apiProjectsData(data: Record<string, string>|Record<string
 }
 
 export async function apiPlansData(data: Record<string, string>): Promise<PlanListResponse> {
-  const url = backendUrl(process.env.NEXT_PUBLIC_API_REQ_PROJECTS + '?' + new URLSearchParams(data).toString())
+  const url = backendUrl(process.env.NEXT_PUBLIC_API_REQ_PLANS + '?' + new URLSearchParams(data).toString())
 
   const response = await fetch(url, {
     method: "GET",
@@ -376,3 +376,16 @@ export async function apiProfileSaving(hash: string, data: Record<string, string
   return await handleResponse<any>(response).then(data => data)
 }
 
+// export async function apiVoteList(data: Record<string, string>): Promise<VoteListResponse|IssueResponse> {
+//   const url = backendUrl(process.env.NEXT_PUBLIC_API_REQ_VOTE_LIST + '?' + new URLSearchParams(data).toString())
+
+//   const response = await fetch(url, {
+//     method: "GET",
+//     credentials: "include",
+//     headers: {
+//       'Content': "application/json",
+//     },
+//   })
+
+//   return handleResponse<VoteListResponse|IssueResponse>(response).then(data => data)
+// }

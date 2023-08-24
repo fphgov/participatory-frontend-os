@@ -1,8 +1,9 @@
-import Pagination from '@/components/common/Pagination';
-import SearchArea from '@/components/common/SearchArea';
-import IdeasWrapper from '@/components/idea/IdeasWrapper';
+import Pagination from '@/components/common/Pagination'
+import SearchArea from '@/components/common/SearchArea'
+import NewsletterArea from '@/components/home/NesletterArea'
+import IdeasWrapper from '@/components/idea/IdeasWrapper'
 import { apiIdeasData, apiIdeasFilter } from '@/lib/api-requests'
-import { NextPage } from "next";
+import { NextPage } from "next"
 
 interface IProps {
   searchParams: Record<string, string>
@@ -58,6 +59,8 @@ const Ideas: NextPage<IProps> = async ({ searchParams }) => {
           </div>
         </div>
       </div>
+
+      <NewsletterArea />
     </main>
   )
 }

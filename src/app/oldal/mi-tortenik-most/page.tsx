@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import HeroPage from "@/components/common/HeroPage"
-import NewsletterArea from '@/components/home/NesletterArea'
 import InfoZigZag from '@/components/common/InfoZigZag'
 import Link from 'next/link'
 import ScrollButton from '@/components/common/ScrollButton'
+import NewsletterArea from '@/components/home/NesletterArea'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -71,9 +71,9 @@ export default async function WhatPage() {
 
           <Link href="/otletek?campaign=3" className="btn btn-primary">Megnézem az ötleteket!</Link>
         </InfoZigZag>
-
-        <NewsletterArea />
       </div>
+
+      <NewsletterArea />
     </main>
   )
 }

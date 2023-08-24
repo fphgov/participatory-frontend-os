@@ -3,7 +3,8 @@ import HeroPage from '@/components/common/HeroPage'
 import { apiArticlesData } from '@/lib/api-requests'
 import Error from '@/components/common/Error'
 import Tabs from '@/components/article/Tabs'
-import { NextPage } from "next";
+import { NextPage } from "next"
+import NewsletterArea from '@/components/home/NesletterArea'
 
 interface IProps {
   searchParams: Record<string, string>
@@ -57,6 +58,8 @@ const Articles: NextPage<IProps> = async ({ searchParams }) => {
           </div>
         </div>
       </div>
+
+      <NewsletterArea />
     </main>
   )
 }
