@@ -10,7 +10,7 @@ export interface PageResponse {
   data: IPage
 }
 
-export interface ProfileResponse {
+export interface MessageResponse {
   message: string
 }
 

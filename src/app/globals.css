@@ -391,12 +391,20 @@ header .logo-wrapper img {
   padding: 0;
 }
 
+.btn.btn-primary-solid:hover {
+  text-decoration: underline;
+}
+
 .btn.btn-danger-solid {
   color: #E5332A;
   font-weight: bold;
   background: none;
   font-size: 16px;
   padding: 0;
+}
+
+.btn.btn-danger-solid:hover {
+  text-decoration: underline;
 }
 
 .btn.btn-gray {
@@ -1414,7 +1422,7 @@ form fieldset textarea,
   color: #222;
   background-color: #fff;
   background-image: none;
-  border: 2px solid #CCCCCC;
+  border: 1px solid #CCC;
   border-radius: 4px !important;
   -webkit-box-shadow: none;
   box-shadow: none;

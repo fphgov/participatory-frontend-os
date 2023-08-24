@@ -5,17 +5,21 @@ import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import Link from "next/link"
 import Error from "@/components/common/Error"
 import { apiLoginUser } from "@/lib/api-requests"
+import ErrorMini from "@/components/common/ErrorMini"
 
 export default function LoginForm(): JSX.Element {
   const [recaptcha, setRecaptcha] = useState<ReCaptcha>()
   const [recaptchaToken, setRecaptchaToken] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [errorObject, setErrorObject] = useState<Record<string, string>|undefined>(undefined)
   const [error, setError] = useState('')
-  const [ignored, forceUpdate] = useReducer(x => x + 1, 0)
 
   async function submitLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    setError('')
+    setErrorObject(undefined)
 
     const data = {
       email,
@@ -25,10 +29,16 @@ export default function LoginForm(): JSX.Element {
 
     try {
       await apiLoginUser(data)
+    } catch (e: any) {
+      try {
+        const jsonError = JSON.parse(e.message)
 
-      forceUpdate()
-    } catch (e) {
-
+        setErrorObject(jsonError)
+      } catch (jError: any) {
+        if (typeof e?.message === "string") {
+          setError(e.message)
+        }
+      }
     }
 
     recaptcha?.execute()
@@ -56,11 +66,19 @@ export default function LoginForm(): JSX.Element {
           <div className="input-wrapper">
             <label htmlFor="email">E-mail cím</label>
             <input type="text" autoCorrect="off" autoCapitalize="none" placeholder="E-mail cím" name="email" id="email" value={email} onChange={(e) => {setEmail(e.target.value)}} />
+
+            {errorObject && errorObject.password ? Object.values(errorObject.password).map((err, i) => {
+              return <ErrorMini key={i} error={err} increment={`password-${i}`} />
+            }) : null}
           </div>
 
           <div className="input-wrapper">
             <label htmlFor="password">Jelszó</label>
             <input type="password" placeholder="Jelszó" name="password" id="password" value={password} onChange={(e) => { setPassword(e.target.value) }} />
+
+            {errorObject && errorObject.password ? Object.values(errorObject.password).map((err, i) => {
+              return <ErrorMini key={i} error={err} increment={`password-${i}`} />
+            }) : null}
           </div>
 
           <ReCaptcha
