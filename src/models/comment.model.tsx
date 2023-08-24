@@ -5,6 +5,6 @@ export type IComment = {
   submitter: ISubmitter
   idea: null
   content: string
-  parentComment: null
+  parentComment: IComment|null
   createdAt: string
 }

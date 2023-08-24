@@ -87,7 +87,7 @@ export default function SearchArea({ title, tipp, tipp2, baseUrl, filterParams, 
     if (! shallowEqual(filterData, originalFilterData)) {
       window.location.href = getUrl()
     }
-  }, [filterData])
+  }, [filterData, originalFilterData])
 
   return (
     <div className="search-area">

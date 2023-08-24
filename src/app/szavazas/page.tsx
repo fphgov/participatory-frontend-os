@@ -79,7 +79,7 @@ export default async function VotePage({ searchParams }: IProps) {
             <VoteCategoryFilterItem theme="GREEN" ready={false} currentTheme={theme} href={getUrl('GREEN')} />
           </VoteCategoryFilter>
 
-          <VoteSearch title={categoryResolver(theme)} themeId={theme} searchParams={searchParams} baseUrl={baseUrl} />
+          <VoteSearch title={categoryResolver(theme)} searchParams={searchParams} baseUrl={baseUrl} />
 
           <div className="vote-category-order">
             <div className="container">

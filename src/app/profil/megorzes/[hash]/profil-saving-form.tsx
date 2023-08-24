@@ -11,7 +11,7 @@ export default function ProfilSavingForm(): JSX.Element {
   const params = useParams()
   const router = useRouter()
 
-  const [ recaptcha, setRecaptcha ] = useState<any>(null)
+  const [ recaptcha, setRecaptcha ] = useState<ReCaptcha>()
   const [ recaptchaToken, setRecaptchaToken ] = useState('')
   const [ error, setError ] = useState('')
   const [ errorObject, setErrorObject ] = useState<Record<string, string>>()
@@ -22,7 +22,7 @@ export default function ProfilSavingForm(): JSX.Element {
     'privacy': false,
   })
 
-  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
 
     setFilterData({ ...filterData, [e.target.name]: value })
@@ -40,7 +40,7 @@ export default function ProfilSavingForm(): JSX.Element {
     }
 
     try {
-      await apiProfileSaving(params?.hash, data)
+      await apiProfileSaving((params?.hash as string || ''), data)
 
       router.push("/profil/megorzes/sikeres")
     } catch (e: any) {
@@ -54,11 +54,12 @@ export default function ProfilSavingForm(): JSX.Element {
         }
       }
 
-      recaptcha.execute()
+      recaptcha?.execute()
     }
   }
 
   useEffect(() => {
+    // @ts-ignore
     loadReCaptcha(process.env.NEXT_PUBLIC_SITE_KEY, (recaptchaToken: string) => {
       setRecaptchaToken(recaptchaToken)
     })
@@ -117,7 +118,7 @@ export default function ProfilSavingForm(): JSX.Element {
 
         <ReCaptcha
           ref={(ref: any) => setRecaptcha(ref)}
-          sitekey={process.env.NEXT_PUBLIC_SITE_KEY}
+          sitekey={process.env.NEXT_PUBLIC_SITE_KEY || ''}
           action='submit'
           verifyCallback={(recaptchaToken: string) => {
             setRecaptchaToken(recaptchaToken)

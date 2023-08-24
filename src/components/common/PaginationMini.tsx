@@ -14,9 +14,9 @@ export default function PaginationMini({ baseUrl, links, size, pageSize, totalIt
   const pageRegex = new RegExp("page=(\\d+)")
 
   const paginationShow = size > 1
-  const selfPageNum: number = (links && links.self && pageRegex.test(links.self.href)) ? links.self.href.match(pageRegex)[1] - 0 : 1
-  const prevPageNum = (links && links.prev && pageRegex.test(links.prev.href)) ? links.prev.href.match(pageRegex)[1] - 0 : false
-  const nextPageNum = (links && links.next && pageRegex.test(links.next.href)) ? links.next.href.match(pageRegex)[1] - 0 : false
+  const selfPageNum: number = (links && links.self && pageRegex.test(links.self.href)) ? parseInt(links.self.href.match(pageRegex)?.[1] || '') : 1
+  const prevPageNum = (links && links.prev && pageRegex.test(links.prev.href)) ? parseInt(links.prev.href.match(pageRegex)?.[1] || '') : false
+  const nextPageNum = (links && links.next && pageRegex.test(links.next.href)) ? parseInt(links.next.href.match(pageRegex)?.[1] || '') : false
 
   let length = 0
 

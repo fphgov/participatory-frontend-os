@@ -1,6 +1,7 @@
 import { IArticle } from '@/models/article.model'
 import { getDateFormat, getHungarianDateFormat } from '@/utilities/dateFormats'
 import Link from 'next/link'
+import Image from 'next/image'
 
 type ArticleCardProps = {
   article: IArticle
@@ -10,7 +11,7 @@ export default function ArticleCard({ article }: ArticleCardProps): JSX.Element|
   return (
     <article className="post-card">
       <Link className="post-card-image-link" href={`/hirek/${article.slug}`}>
-        <div className="post-image">{article.featuredImage ? <img src={`${process.env.NEXT_PUBLIC_FILES_PATH}/${article.featuredImage.filename}`} /> : null}</div>
+        <div className="post-image">{article.featuredImage ? <Image src={`${process.env.NEXT_PUBLIC_FILES_PATH}/${article.featuredImage.filename}`} alt=" " /> : null}</div>
       </Link>
 
       <div className="post-card-content">

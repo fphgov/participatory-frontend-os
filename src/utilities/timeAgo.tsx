@@ -32,7 +32,6 @@ const ta = new TimeAgo({
   'h': 'h',
   'd': 'd',
   'w': 'w',
-  'm': 'm',
   'y': 'y',
 
   'second': 'másodperce',

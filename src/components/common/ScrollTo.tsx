@@ -1,17 +1,24 @@
 "use client"
 
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 
-export default function ScrollTo(props: any): JSX.Element|null {
+type ScrollToProps = {
+  element: number
+  children?: React.ReactNode
+}
+
+export default function ScrollTo({ element, children }: ScrollToProps): JSX.Element|null {
   useEffect(() => {
     window.scrollTo({
-      top: props.element,
+      top: element,
       left: 0,
       behavior: 'smooth'
     })
-  }, [])
+  }, [element])
 
-  return (
-    props.children ? props.children : null
-  )
+  if (children) {
+    return <>{children}</>
+  }
+
+  return null
 }

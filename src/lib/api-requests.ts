@@ -108,7 +108,7 @@ export async function apiProfileIdeaData(data: Record<string, string>): Promise<
     headers["Authorization"] = `Bearer ${token}`
   }
 
-  const url = backendUrl(endpoints.API_REQ_IDEAS + '?' + new URLSearchParams(data).toString())
+  const url = backendUrl(endpoints.API_REQ_IDEAS + '?' + new URLSearchParams(data as Record<string, string>).toString())
 
   const response = await fetch(url, {
     method: "GET",
@@ -140,7 +140,7 @@ export async function apiProfileDelete(username: string): Promise<string> {
 }
 
 export async function apiRegistration(data: Record<string, string>): Promise<Record<string, string>> {
-  var urlencoded = new URLSearchParams(data)
+  var urlencoded = new URLSearchParams(data as Record<string, string>)
 
   const url = backendUrl(endpoints.API_REQ_REGISTRATION)
 
@@ -158,7 +158,7 @@ export async function apiRegistration(data: Record<string, string>): Promise<Rec
 }
 
 export async function apiLostPassword(data: Record<string, string>): Promise<Record<string, string>> {
-  var urlencoded = new URLSearchParams(data)
+  var urlencoded = new URLSearchParams(data as Record<string, string>)
 
   const url = backendUrl(endpoints.API_REQ_PROFILE_FORGOT_PASSWORD)
 
@@ -177,7 +177,7 @@ export async function apiLostPassword(data: Record<string, string>): Promise<Rec
 }
 
 export async function apiArticlesData(data: Record<string, string>|Record<string, any>): Promise<IArticle[]> {
-  const url = backendUrl(endpoints.API_REQ_POSTS + '?' + new URLSearchParams(data).toString())
+  const url = backendUrl(endpoints.API_REQ_POSTS + '?' + new URLSearchParams(data as Record<string, string>).toString())
 
   const response = await fetch(url, {
     method: "GET",
@@ -275,7 +275,7 @@ export async function apiProfileActivate(hash: string): Promise<string> {
 }
 
 export async function apiIdeasData(data: Record<string, string>): Promise<IdeaListResponse> {
-  const url = backendUrl(endpoints.API_REQ_IDEAS + '?' + new URLSearchParams(data).toString())
+  const url = backendUrl(endpoints.API_REQ_IDEAS + '?' + new URLSearchParams(data as Record<string, string>).toString())
 
   const response = await fetch(url, {
     method: "GET",
@@ -289,7 +289,7 @@ export async function apiIdeasData(data: Record<string, string>): Promise<IdeaLi
 }
 
 export async function apiProjectsData(data: Record<string, string>|Record<string, any>): Promise<ProjectListResponse> {
-  const url = backendUrl(endpoints.API_REQ_PROJECTS+ '?' + new URLSearchParams(data).toString())
+  const url = backendUrl(endpoints.API_REQ_PROJECTS+ '?' + new URLSearchParams(data as Record<string, string>).toString())
 
   const response = await fetch(url, {
     method: "GET",
@@ -303,7 +303,7 @@ export async function apiProjectsData(data: Record<string, string>|Record<string
 }
 
 export async function apiPlansData(data: Record<string, string>): Promise<PlanListResponse> {
-  const url = backendUrl(endpoints.API_REQ_PLANS + '?' + new URLSearchParams(data).toString())
+  const url = backendUrl(endpoints.API_REQ_PLANS + '?' + new URLSearchParams(data as Record<string, string>).toString())
 
   const response = await fetch(url, {
     method: "GET",
@@ -317,7 +317,7 @@ export async function apiPlansData(data: Record<string, string>): Promise<PlanLi
 }
 
 export async function apiIdeasFilter(data: Record<string, string>): Promise<FilterResponse> {
-  const url = backendUrl(endpoints.API_REQ_FILTER_IDEAS + '?' + new URLSearchParams(data).toString())
+  const url = backendUrl(endpoints.API_REQ_FILTER_IDEAS + '?' + new URLSearchParams(data as Record<string, string>).toString())
 
   const response = await fetch(url, {
     method: "GET",
@@ -331,7 +331,7 @@ export async function apiIdeasFilter(data: Record<string, string>): Promise<Filt
 }
 
 export async function apiProjectsFilter(data: Record<string, string>): Promise<FilterResponse> {
-  const url = backendUrl(endpoints.API_REQ_FILTER_PROJECTS+ '?' + new URLSearchParams(data).toString())
+  const url = backendUrl(endpoints.API_REQ_FILTER_PROJECTS+ '?' + new URLSearchParams(data as Record<string, string>).toString())
 
   const response = await fetch(url, {
     method: "GET",
@@ -345,7 +345,7 @@ export async function apiProjectsFilter(data: Record<string, string>): Promise<F
 }
 
 export async function apiPlansFilter(data: Record<string, string>): Promise<FilterResponse> {
-  const url = backendUrl(endpoints.API_REQ_FILTER_PLANS + '?' + new URLSearchParams(data).toString())
+  const url = backendUrl(endpoints.API_REQ_FILTER_PLANS + '?' + new URLSearchParams(data as Record<string, string>).toString())
 
   const response = await fetch(url, {
     method: "GET",
@@ -358,8 +358,8 @@ export async function apiPlansFilter(data: Record<string, string>): Promise<Filt
   return handleResponse<FilterResponse>(response).then(data => data)
 }
 
-export async function apiProfileSaving(hash: string, data: Record<string, string>): Promise<Record<string, string>> {
-  var urlencoded = new URLSearchParams(data)
+export async function apiProfileSaving(hash: string, data: Record<string, string|boolean>): Promise<Record<string, string>> {
+  var urlencoded = new URLSearchParams(data as Record<string, string>)
 
   const url = backendUrl((endpoints.API_REQ_PROFILE_CONFIRMATION || '').toString().replace(':hash', hash))
 

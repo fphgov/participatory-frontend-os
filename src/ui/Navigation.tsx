@@ -4,8 +4,6 @@ import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import randomId from 'random-id'
 import { usePathname } from 'next/navigation'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
 import NavigationIcon from '@/components/common/NavigationIcon'
 
 export type MenuProps = {

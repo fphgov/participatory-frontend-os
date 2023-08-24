@@ -14,11 +14,11 @@ export default function Pagination({ baseUrl, links, size, searchParams }: Pagin
   const pageRegex = new RegExp("page=(\\d+)")
 
   const paginationShow = size > 1
-  const selfPageNum: number = (links && links.self && pageRegex.test(links.self.href)) ? links.self.href.match(pageRegex)[1] - 0 : 1
-  const prevPageNum = (links && links.prev && pageRegex.test(links.prev.href)) ? links.prev.href.match(pageRegex)[1] - 0 : false
-  const nextPageNum = (links && links.next && pageRegex.test(links.next.href)) ? links.next.href.match(pageRegex)[1] - 0 : false
-  const firstPageNum = (links && links.first && pageRegex.test(links.first.href)) ? links.first.href.match(pageRegex)[1] - 0 : false
-  const lastPageNum = (links && links.last && pageRegex.test(links.last.href)) ? links.last.href.match(pageRegex)[1] - 0 : false
+  const selfPageNum: number = (links && links.self && pageRegex.test(links.self.href)) ? parseInt(links.self.href.match(pageRegex)?.[1] || '') : 1
+  const prevPageNum = (links && links.prev && pageRegex.test(links.prev.href)) ? parseInt(links.prev.href.match(pageRegex)?.[1] || '') : false
+  const nextPageNum = (links && links.next && pageRegex.test(links.next.href)) ? parseInt(links.next.href.match(pageRegex)?.[1] || '') : false
+  const firstPageNum = (links && links.first && pageRegex.test(links.first.href)) ? parseInt(links.first.href.match(pageRegex)?.[1] || '') : false
+  const lastPageNum = (links && links.last && pageRegex.test(links.last.href)) ? parseInt(links.last.href.match(pageRegex)?.[1] || '') : false
 
   const renderPages = (cPage: number) => {
     if (cPage === selfPageNum || size < cPage || cPage < 1) {
