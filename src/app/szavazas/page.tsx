@@ -27,6 +27,7 @@ export default async function VotePage({ searchParams }: IProps) {
   const theme = searchParams?.theme?.toString().toUpperCase() || 'LOCAL-SMALL'
   const rand = searchParams?.rand?.toString() || generateRandomValue().toString()
   const page = searchParams?.page || "1"
+  const query = searchParams?.query || ''
 
   const getUrl = (themeId: string) => {
     const searchParams = new URLSearchParams({
@@ -43,7 +44,8 @@ export default async function VotePage({ searchParams }: IProps) {
       theme,
       status: 'VOTING_LIST',
       rand,
-      page
+      page,
+      query
     }
 
     return apiPlansData(data)
@@ -62,62 +64,68 @@ export default async function VotePage({ searchParams }: IProps) {
   }
 
   return (
-    <main className="page page-vote">
-      <div className="page-vote-single-section">
-        <HeroPage title="Szavazás" content="Itt találod azokat az ötleteket, amikre szavazhatsz. Öt kategória van, minden kategóriában egy szavazatot adhatsz le." />
+    <>
+      <main className="page page-vote">
+        <div className="page-vote-single-section">
+          <HeroPage title="Szavazás" content="Itt találod azokat az ötleteket, amikre szavazhatsz. Öt kategória van, minden kategóriában egy szavazatot adhatsz le." />
 
-        {(typeof error === 'string' && error !== '') ? <Error message={error} /> : null}
+          {(typeof error === 'string' && error !== '') ? <Error message={error} /> : null}
 
-        <VoteCategoryFilter>
-          <VoteCategoryFilterItem theme="LOCAL-SMALL" ready={false} currentTheme={theme} href={getUrl('LOCAL-SMALL')} />
-          <VoteCategoryFilterItem theme="LOCAL-BIG" ready={false} currentTheme={theme} href={getUrl('LOCAL-BIG')} />
-          <VoteCategoryFilterItem theme="CARE" ready={false} currentTheme={theme} href={getUrl('CARE')} />
-          <VoteCategoryFilterItem theme="OPEN" ready={false} currentTheme={theme} href={getUrl('OPEN')} />
-          <VoteCategoryFilterItem theme="GREEN" ready={false} currentTheme={theme} href={getUrl('GREEN')} />
-        </VoteCategoryFilter>
+          <VoteCategoryFilter>
+            <VoteCategoryFilterItem theme="LOCAL-SMALL" ready={false} currentTheme={theme} href={getUrl('LOCAL-SMALL')} />
+            <VoteCategoryFilterItem theme="LOCAL-BIG" ready={false} currentTheme={theme} href={getUrl('LOCAL-BIG')} />
+            <VoteCategoryFilterItem theme="CARE" ready={false} currentTheme={theme} href={getUrl('CARE')} />
+            <VoteCategoryFilterItem theme="OPEN" ready={false} currentTheme={theme} href={getUrl('OPEN')} />
+            <VoteCategoryFilterItem theme="GREEN" ready={false} currentTheme={theme} href={getUrl('GREEN')} />
+          </VoteCategoryFilter>
 
-        <VoteSearch title={categoryResolver(theme)} themeId={theme} searchParams={searchParams} baseUrl={baseUrl} />
+          <VoteSearch title={categoryResolver(theme)} themeId={theme} searchParams={searchParams} baseUrl={baseUrl} />
 
-        <div className="vote-category-order">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6">
-                Rendezés
+          <div className="vote-category-order">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-6">
+                  Rendezés
+                </div>
+
+                <div className="col-md-6">
+                  {projectList?._links && projectList._page_count ? (
+                    <PaginationMini links={projectList._links} size={projectList._page_count} pageSize={21} totalItems={projectList._total_items} searchParams={searchParams} baseUrl={baseUrl} />
+                  ): null}
+                </div>
               </div>
+            </div>
+          </div>
 
-              <div className="col-md-6">
-                {projectList?._links && projectList._page_count && (
-                  <PaginationMini links={projectList._links} size={projectList._page_count} pageSize={21} totalItems={projectList._total_items} searchParams={searchParams} baseUrl={baseUrl} />
-                )}
+          <div className="list-wrapper">
+            <div className="container">
+              <div className="row">
+                {projectList?._embedded?.projects.map((project, i) => <IdeasWrapper ideaPreLink="/projektek" key={i} idea={project} showStatus={false} />)}
+
+                <div className="col-md-12">
+                  {projectList?._embedded?.projects && projectList?._embedded?.projects.length === 0 ? <p>Nincs találat a megadott feltételek alapján, próbálj meg más kategóriában vagy kevesebb/más feltétel szerint szűrni.</p> : ''}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="vote-category-pagination">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-6"></div>
+
+                <div className="col-md-6">
+                  {projectList?._links && projectList._page_count ? (
+                    <PaginationMini links={projectList._links} size={projectList._page_count} pageSize={21} totalItems={projectList._total_items} searchParams={searchParams} baseUrl={baseUrl} />
+                  ): null}
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="list-wrapper">
-          <div className="container">
-            <div className="row">
-              {projectList?._embedded?.projects.map((project, i) => <IdeasWrapper ideaPreLink="/projektek" key={i} idea={project} showStatus={false} />)}
-            </div>
-          </div>
-        </div>
-
-        <div className="vote-category-pagination">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6"></div>
-
-              <div className="col-md-6">
-                {projectList?._links && projectList._page_count && (
-                  <PaginationMini links={projectList._links} size={projectList._page_count} pageSize={21} totalItems={projectList._total_items} searchParams={searchParams} baseUrl={baseUrl} />
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </main>
 
       <NewsletterArea />
-    </main>
+    </>
   )
 }

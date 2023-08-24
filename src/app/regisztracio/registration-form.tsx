@@ -232,6 +232,17 @@ export default function RegistrationForm(): JSX.Element {
                 }) : null}
               </div>
 
+              <div className="form-group">
+                <label htmlFor="prize" className="form-group-label">
+                  <input className="form-control" type="checkbox" id="prize" name="prize" value={filterData.prize} onChange={handleChangeInput} />
+                  Szeretnék részt venni a nyereményjátékon és az ehhez szükséges adataim kezeléséhez hozzájárulok.
+                </label>
+
+                {errorObject?.prize ? Object.values(errorObject.prize).map((err, i) => {
+                  return <ErrorMini key={i} error={err} increment={`prize-${i}`} />
+                }) : null}
+              </div>
+
               <ReCaptcha
                 ref={(ref: any) => setRecaptcha(ref)}
                 sitekey={process.env.NEXT_PUBLIC_SITE_KEY}
