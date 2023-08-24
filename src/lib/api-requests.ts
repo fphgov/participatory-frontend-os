@@ -9,6 +9,7 @@ import { IProject } from "@/models/project.model"
 import { IArticle } from "@/models/article.model"
 import { IPage } from "@/models/page.model"
 import { IPlan } from '@/models/plan.model'
+import endpoints from '@/lib/endpoints'
 
 type ApiLoginUserProps = {
   email: string
@@ -20,7 +21,7 @@ const isObject = (obj: any): boolean => {
   return Object.prototype.toString.call(obj) === '[object Object]'
 }
 
-const backendUrl = (url: string|undefined): string => `${process.env.APP_API_SERVER}/app${url}`
+const backendUrl = (url: string|undefined): string => `${process.env.BACKEND_URL}/app${url}`
 
 async function handleResponse<T>(response: Response): Promise<T> {
   const contentType = response.headers.get("Content-Type") || ""
@@ -53,7 +54,7 @@ export async function apiLoginUser(credentials: ApiLoginUserProps): Promise<stri
   urlencoded.append("password", credentials.password)
   urlencoded.append("g-recaptcha-response", credentials.recaptchaToken)
 
-  const url = backendUrl(process.env.NEXT_PUBLIC_API_REQ_LOGIN)
+  const url = backendUrl(endpoints.API_REQ_LOGIN)
 
   const response = await fetch(url, {
     method: "POST",
@@ -85,7 +86,7 @@ export async function apiProfileData(): Promise<IUser> {
     headers["Authorization"] = `Bearer ${token}`
   }
 
-  const url = backendUrl(process.env.NEXT_PUBLIC_API_REQ_PROFILE)
+  const url = backendUrl(endpoints.API_REQ_PROFILE)
 
   const response = await fetch(url, {
     method: "GET",
@@ -107,7 +108,7 @@ export async function apiProfileIdeaData(data: Record<string, string>): Promise<
     headers["Authorization"] = `Bearer ${token}`
   }
 
-  const url = backendUrl(process.env.NEXT_PUBLIC_API_REQ_IDEAS + '?' + new URLSearchParams(data).toString())
+  const url = backendUrl(endpoints.API_REQ_IDEAS + '?' + new URLSearchParams(data).toString())
 
   const response = await fetch(url, {
     method: "GET",
@@ -123,7 +124,7 @@ export async function apiProfileDelete(username: string): Promise<string> {
 
   urlencoded.append("username", username)
 
-  const url = backendUrl(process.env.NEXT_PUBLIC_API_REQ_PROFILE_DELETE)
+  const url = backendUrl(endpoints.API_REQ_PROFILE_DELETE)
 
   const response = await fetch(url, {
     method: "POST",
@@ -141,7 +142,7 @@ export async function apiProfileDelete(username: string): Promise<string> {
 export async function apiRegistration(data: Record<string, string>): Promise<Record<string, string>> {
   var urlencoded = new URLSearchParams(data)
 
-  const url = backendUrl(process.env.NEXT_PUBLIC_API_REQ_REGISTRATION)
+  const url = backendUrl(endpoints.API_REQ_REGISTRATION)
 
   const response = await fetch(url, {
     method: "POST",
@@ -159,7 +160,7 @@ export async function apiRegistration(data: Record<string, string>): Promise<Rec
 export async function apiLostPassword(data: Record<string, string>): Promise<Record<string, string>> {
   var urlencoded = new URLSearchParams(data)
 
-  const url = backendUrl(process.env.NEXT_PUBLIC_API_REQ_PROFILE_FORGOT_PASSWORD)
+  const url = backendUrl(endpoints.API_REQ_PROFILE_FORGOT_PASSWORD)
 
   const response = await fetch(url, {
     cache: "no-store",
@@ -176,7 +177,7 @@ export async function apiLostPassword(data: Record<string, string>): Promise<Rec
 }
 
 export async function apiArticlesData(data: Record<string, string>|Record<string, any>): Promise<IArticle[]> {
-  const url = backendUrl(process.env.NEXT_PUBLIC_API_REQ_POSTS + '?' + new URLSearchParams(data).toString())
+  const url = backendUrl(endpoints.API_REQ_POSTS + '?' + new URLSearchParams(data).toString())
 
   const response = await fetch(url, {
     method: "GET",
@@ -190,7 +191,7 @@ export async function apiArticlesData(data: Record<string, string>|Record<string
 }
 
 export async function apiArticleData(slug: string): Promise<IArticle> {
-  const url = backendUrl((process.env.NEXT_PUBLIC_API_REQ_POST || '').toString().replace(':slug', slug))
+  const url = backendUrl((endpoints.API_REQ_POST || '').toString().replace(':slug', slug))
 
   const response = await fetch(url, {
     method: "GET",
@@ -204,7 +205,7 @@ export async function apiArticleData(slug: string): Promise<IArticle> {
 }
 
 export async function apiPageData(slug: string): Promise<IPage> {
-  const url = backendUrl((process.env.NEXT_PUBLIC_API_REQ_PAGE || '').toString().replace(':slug', slug))
+  const url = backendUrl((endpoints.API_REQ_PAGE || '').toString().replace(':slug', slug))
 
   const response = await fetch(url, {
     method: "GET",
@@ -218,7 +219,7 @@ export async function apiPageData(slug: string): Promise<IPage> {
 }
 
 export async function apiIdeaData(id: number|string): Promise<IIdea> {
-  const url = backendUrl((process.env.NEXT_PUBLIC_API_REQ_IDEA || '').toString().replace(':id', id.toString()))
+  const url = backendUrl((endpoints.API_REQ_IDEA || '').toString().replace(':id', id.toString()))
 
   const response = await fetch(url, {
     method: "GET",
@@ -232,7 +233,7 @@ export async function apiIdeaData(id: number|string): Promise<IIdea> {
 }
 
 export async function apiProjectData(id: number|string): Promise<IProject> {
-  const url = backendUrl((process.env.NEXT_PUBLIC_API_REQ_PROJECT || '').toString().replace(':id', id.toString()))
+  const url = backendUrl((endpoints.API_REQ_PROJECT || '').toString().replace(':id', id.toString()))
 
   const response = await fetch(url, {
     method: "GET",
@@ -246,7 +247,7 @@ export async function apiProjectData(id: number|string): Promise<IProject> {
 }
 
 export async function apiPlanData(id: number|string): Promise<IPlan> {
-  const url = backendUrl((process.env.NEXT_PUBLIC_API_REQ_PLAN || '').toString().replace(':id', id.toString()))
+  const url = backendUrl((endpoints.API_REQ_PLAN || '').toString().replace(':id', id.toString()))
 
   const response = await fetch(url, {
     method: "GET",
@@ -260,7 +261,7 @@ export async function apiPlanData(id: number|string): Promise<IPlan> {
 }
 
 export async function apiProfileActivate(hash: string): Promise<string> {
-  const url = backendUrl((process.env.NEXT_PUBLIC_API_REQ_PROFILE_ACTIVATE || '').toString().replace(':hash', hash))
+  const url = backendUrl((endpoints.API_REQ_PROFILE_ACTIVATE || '').toString().replace(':hash', hash))
 
   const response = await fetch(url, {
     method: "GET",
@@ -274,7 +275,7 @@ export async function apiProfileActivate(hash: string): Promise<string> {
 }
 
 export async function apiIdeasData(data: Record<string, string>): Promise<IdeaListResponse> {
-  const url = backendUrl(process.env.NEXT_PUBLIC_API_REQ_IDEAS + '?' + new URLSearchParams(data).toString())
+  const url = backendUrl(endpoints.API_REQ_IDEAS + '?' + new URLSearchParams(data).toString())
 
   const response = await fetch(url, {
     method: "GET",
@@ -288,7 +289,7 @@ export async function apiIdeasData(data: Record<string, string>): Promise<IdeaLi
 }
 
 export async function apiProjectsData(data: Record<string, string>|Record<string, any>): Promise<ProjectListResponse> {
-  const url = backendUrl(process.env.NEXT_PUBLIC_API_REQ_PROJECTS + '?' + new URLSearchParams(data).toString())
+  const url = backendUrl(endpoints.API_REQ_PROJECTS+ '?' + new URLSearchParams(data).toString())
 
   const response = await fetch(url, {
     method: "GET",
@@ -302,7 +303,7 @@ export async function apiProjectsData(data: Record<string, string>|Record<string
 }
 
 export async function apiPlansData(data: Record<string, string>): Promise<PlanListResponse> {
-  const url = backendUrl(process.env.NEXT_PUBLIC_API_REQ_PLANS + '?' + new URLSearchParams(data).toString())
+  const url = backendUrl(endpoints.API_REQ_PLANS + '?' + new URLSearchParams(data).toString())
 
   const response = await fetch(url, {
     method: "GET",
@@ -316,7 +317,7 @@ export async function apiPlansData(data: Record<string, string>): Promise<PlanLi
 }
 
 export async function apiIdeasFilter(data: Record<string, string>): Promise<FilterResponse> {
-  const url = backendUrl(process.env.NEXT_PUBLIC_API_REQ_FILTER_IDEAS + '?' + new URLSearchParams(data).toString())
+  const url = backendUrl(endpoints.API_REQ_FILTER_IDEAS + '?' + new URLSearchParams(data).toString())
 
   const response = await fetch(url, {
     method: "GET",
@@ -330,7 +331,7 @@ export async function apiIdeasFilter(data: Record<string, string>): Promise<Filt
 }
 
 export async function apiProjectsFilter(data: Record<string, string>): Promise<FilterResponse> {
-  const url = backendUrl(process.env.NEXT_PUBLIC_API_REQ_FILTER_PROJECTS + '?' + new URLSearchParams(data).toString())
+  const url = backendUrl(endpoints.API_REQ_FILTER_PROJECTS+ '?' + new URLSearchParams(data).toString())
 
   const response = await fetch(url, {
     method: "GET",
@@ -344,7 +345,7 @@ export async function apiProjectsFilter(data: Record<string, string>): Promise<F
 }
 
 export async function apiPlansFilter(data: Record<string, string>): Promise<FilterResponse> {
-  const url = backendUrl(process.env.NEXT_PUBLIC_API_REQ_FILTER_PLANS + '?' + new URLSearchParams(data).toString())
+  const url = backendUrl(endpoints.API_REQ_FILTER_PLANS + '?' + new URLSearchParams(data).toString())
 
   const response = await fetch(url, {
     method: "GET",
@@ -360,7 +361,7 @@ export async function apiPlansFilter(data: Record<string, string>): Promise<Filt
 export async function apiProfileSaving(hash: string, data: Record<string, string>): Promise<Record<string, string>> {
   var urlencoded = new URLSearchParams(data)
 
-  const url = backendUrl((process.env.NEXT_PUBLIC_API_REQ_PROFILE_CONFIRMATION || '').toString().replace(':hash', hash))
+  const url = backendUrl((endpoints.API_REQ_PROFILE_CONFIRMATION || '').toString().replace(':hash', hash))
 
   const response = await fetch(url, {
     cache: "no-store",
@@ -377,7 +378,7 @@ export async function apiProfileSaving(hash: string, data: Record<string, string
 }
 
 // export async function apiVoteList(data: Record<string, string>): Promise<VoteListResponse|IssueResponse> {
-//   const url = backendUrl(process.env.NEXT_PUBLIC_API_REQ_VOTE_LIST + '?' + new URLSearchParams(data).toString())
+//   const url = backendUrl(endpoints.API_REQ_VOTE_LIST + '?' + new URLSearchParams(data).toString())
 
 //   const response = await fetch(url, {
 //     method: "GET",

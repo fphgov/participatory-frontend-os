@@ -7,7 +7,7 @@ module.exports = async (phase, { defaultConfig }) => {
       return [
         {
           source: "/api/:path*",
-          destination: `${process.env.APP_API_SERVER}/app/api/:path*`,
+          destination: `${process.env.BACKEND_URL}/app/api/:path*`,
         },
       ];
     },

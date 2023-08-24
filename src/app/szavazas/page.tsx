@@ -76,7 +76,7 @@ export default async function VotePage({ searchParams }: IProps) {
           <VoteCategoryFilterItem theme="GREEN" ready={false} currentTheme={theme} href={getUrl('GREEN')} />
         </VoteCategoryFilter>
 
-        <VoteSearch title={categoryResolver(theme)} themeId={theme} />
+        <VoteSearch title={categoryResolver(theme)} themeId={theme} searchParams={searchParams} baseUrl={baseUrl} />
 
         <div className="vote-category-order">
           <div className="container">
@@ -98,6 +98,20 @@ export default async function VotePage({ searchParams }: IProps) {
           <div className="container">
             <div className="row">
               {projectList?._embedded?.projects.map((project, i) => <IdeasWrapper ideaPreLink="/projektek" key={i} idea={project} showStatus={false} />)}
+            </div>
+          </div>
+        </div>
+
+        <div className="vote-category-pagination">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6"></div>
+
+              <div className="col-md-6">
+                {projectList?._links && projectList._page_count && (
+                  <PaginationMini links={projectList._links} size={projectList._page_count} pageSize={21} totalItems={projectList._total_items} searchParams={searchParams} baseUrl={baseUrl} />
+                )}
+              </div>
             </div>
           </div>
         </div>
