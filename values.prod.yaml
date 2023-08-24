@@ -1,0 +1,64 @@
+replicaCount: 0
+
+image:
+  repository: registry.prod.intra.fph.hu/docker/participatory-client
+  pullPolicy: Always
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 80
+
+app:
+  nodeEnv: "production"
+  port: "3000"
+
+ingress:
+  enabled: false
+  className: "public"
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/preserve-trailing-slash: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.org/client-max-body-size: "50m"
+    nginx.org/proxy-connect-timeout: "120s"
+    nginx.org/proxy-read-timeout: "120s"
+  hosts:
+    - host: otlet.budapest.hu
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: wildcard-budapest-hu-tls
+      hosts:
+        - otlet.budapest.hu
+
+
+resources:
+  limits:
+    memory: 2Gi
+    cpu: 2000m
+  requests:
+    memory: 200Mi
+    cpu: 100m
+
+
+autoscaling:
+  enabled: true
+  minReplicas: 5
+  maxReplicas: 12
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+healtCheck:
+  path: /
+  startup:
+    initialDelaySeconds: 120
+    periodSeconds: 10
+  liveness:
+    failureThreshold: 30
+    periodSeconds: 10
