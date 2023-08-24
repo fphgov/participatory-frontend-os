@@ -1,4 +1,4 @@
-export default {
+const endpoints = {
   API_REQ_PING: '/api/ping',
   API_REQ_LOGIN: '/api/login',
   API_REQ_CONFIG: '/api/options',
@@ -33,3 +33,5 @@ export default {
   API_REQ_VOTE_CHECK: '/api/vote/check',
   API_REQ_PHASE_CHECK: '/api/phase/check'
 }
+
+export default endpoints

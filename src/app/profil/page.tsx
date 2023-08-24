@@ -12,6 +12,7 @@ import { IUser } from '@/models/user.model'
 import { IIdea } from '@/models/idea.model'
 import ProfileIdeaList from '@/components/profile/ProfileIdeaList'
 import ProfileDeleteButton from '@/components/profile/ProfileDeleteButton'
+import { notFound } from 'next/navigation'
 
 type ProfilePageData = {
   profile: IUser|null
@@ -44,6 +45,10 @@ export default async function ProfilePage() {
   //   password: '',
   //   password_again: '',
   // })
+
+  if (! (profile && ideas)) {
+    return notFound()
+  }
 
   return (
     <main className="page">

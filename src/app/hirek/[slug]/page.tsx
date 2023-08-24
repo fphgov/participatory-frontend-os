@@ -5,6 +5,7 @@ import { apiArticleData } from '@/lib/api-requests'
 import { getHungarianDateFormat } from '@/utilities/dateFormats'
 import SidebarCard from '@/components/article/SidebarCard'
 import ShareBox from '@/components/common/ShareBox'
+import Image from 'next/image'
 
 type Props = {
   params: { slug: string }
@@ -43,7 +44,7 @@ export default async function SimplePage({ params }: Props) {
               <h1>{pageData.title}</h1>
 
               {pageData.createdAt ? <span className="time">{getHungarianDateFormat(pageData.createdAt)}</span> : null}<span>• {pageData.category.name}</span>
-              {pageData.featuredImage ? <div className="featured-image"><img src={`${process.env.NEXT_PUBLIC_FILES_PATH}/${pageData.featuredImage.filename}`} /></div> : null}
+              {pageData.featuredImage ? <div className="featured-image"><Image src={`${process.env.NEXT_PUBLIC_FILES_PATH}/${pageData.featuredImage.filename}`} alt=" " /></div> : null}
               {pageData.description ? <div className="description" dangerouslySetInnerHTML={{ __html: pageData.description }} /> : null}
               {pageData.content ? <div dangerouslySetInnerHTML={{ __html: pageData.content }} /> : null}
 

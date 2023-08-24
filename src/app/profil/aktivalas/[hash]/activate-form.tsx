@@ -17,7 +17,7 @@ export default function ActivateForm(): JSX.Element {
     setError('')
 
     try {
-      await apiProfileActivate(params?.hash)
+      await apiProfileActivate((params?.hash as string || ''))
 
       router.push("/profil/aktivalas/sikeres")
     } catch (e: any) {

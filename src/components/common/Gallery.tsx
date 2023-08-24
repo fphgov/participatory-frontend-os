@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Lightbox from "react-image-lightbox"
 import "react-image-lightbox/style.css"
+import Image from 'next/image'
 
 export type GalleryProps = {
   items: any[]
@@ -13,7 +14,7 @@ export default function Gallery({ items, showThumbnails = true }: GalleryProps) 
   const [ photoIndex, setPhotoIndex ] = useState(0)
   const [ isOpen, setIsOpen ] = useState(false)
 
-  const onThumbnail = (index) => {
+  const onThumbnail = (index: number) => {
     setPhotoIndex(index)
     setIsOpen(true)
   }
@@ -36,7 +37,7 @@ export default function Gallery({ items, showThumbnails = true }: GalleryProps) 
               onThumbnail(index)
             }
           }}>
-          <img className="gallery-thumbnail-image" src={item} />
+          <Image className="gallery-thumbnail-image" src={item} alt=" " />
         </div>
       ))}
 

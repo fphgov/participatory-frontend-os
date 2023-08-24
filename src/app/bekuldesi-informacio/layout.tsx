@@ -64,7 +64,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     Küldd be az ötleted!
                   </div>
                   <div className="info-box-content">
-                    Nyomj a lenti "Beküldöm az ötletem" gombra, lépj be a fiókodba és töltsd ki az űrlapot.
+                    Nyomj a lenti &quot;Beküldöm az ötletem&quot; gombra, lépj be a fiókodba és töltsd ki az űrlapot.
                   </div>
                 </div>
               </div>

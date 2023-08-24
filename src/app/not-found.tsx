@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import styles from './not-found.style.css'
+import styles from './not-found.module.css'
 
 export default function NotFoundPage(): JSX.Element {
   return (

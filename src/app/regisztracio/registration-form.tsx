@@ -13,7 +13,7 @@ export default function RegistrationForm(): JSX.Element {
   const [ errorObject, setErrorObject ] = useState<Record<string, string>>()
   const [ success, setSuccess ] = useState(false)
   const [ scroll, setScroll ] = useState(false)
-  const [ recaptcha, setRecaptcha ] = useState<any>(null)
+  const [ recaptcha, setRecaptcha ] = useState<ReCaptcha>()
   const [ recaptchaToken, setRecaptchaToken ] = useState('')
   const [ filterData, setFilterData ] = useState({
     'email': '',
@@ -31,7 +31,7 @@ export default function RegistrationForm(): JSX.Element {
   })
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.type === 'checkbox' ? e.target.checked : rmAllCharForName(e.target.value)
+    const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : rmAllCharForName(e.target.value)
 
     setFilterData({ ...filterData, [e.target.name]: value })
   }
@@ -88,11 +88,12 @@ export default function RegistrationForm(): JSX.Element {
 
       setScroll(true)
 
-      recaptcha.execute()
+      recaptcha?.execute()
     }
   }
 
   useEffect(() => {
+    // @ts-ignore
     loadReCaptcha(process.env.NEXT_PUBLIC_SITE_KEY, (recaptchaToken: string) => {
       setRecaptchaToken(recaptchaToken)
     })
@@ -100,7 +101,7 @@ export default function RegistrationForm(): JSX.Element {
 
   return (
     <>
-      {scroll && document.querySelector('.error-message-inline') ? <ScrollTo element={document.querySelector('.error-message-inline').offsetTop} /> : null}
+      {scroll && document.querySelector('.error-message-inline') ? <ScrollTo element={(document?.querySelector('.error-message-inline') as HTMLElement)?.offsetTop || 0} /> : null}
 
       <form className="form-horizontal" onSubmit={submitRegistration}>
         <fieldset>
@@ -245,7 +246,7 @@ export default function RegistrationForm(): JSX.Element {
 
               <ReCaptcha
                 ref={(ref: any) => setRecaptcha(ref)}
-                sitekey={process.env.NEXT_PUBLIC_SITE_KEY}
+                sitekey={process.env.NEXT_PUBLIC_SITE_KEY || ''}
                 action='submit'
                 verifyCallback={(recaptchaToken: string) => {
                   setRecaptchaToken(recaptchaToken)

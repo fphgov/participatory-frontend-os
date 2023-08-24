@@ -7,7 +7,7 @@ import Error from "@/components/common/Error"
 import { apiLoginUser } from "@/lib/api-requests"
 
 export default function LoginForm(): JSX.Element {
-  const [recaptcha, setRecaptcha] = useState(null)
+  const [recaptcha, setRecaptcha] = useState<ReCaptcha>()
   const [recaptchaToken, setRecaptchaToken] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -24,26 +24,18 @@ export default function LoginForm(): JSX.Element {
     }
 
     try {
-      const token = await apiLoginUser(data)
-
-      console.log(token)
+      await apiLoginUser(data)
 
       forceUpdate()
-
-      // setTimeout(() => {
-      //   setRedirect(true)
-      // }, 1000)
     } catch (e) {
 
     }
 
-    if (recaptcha) {
-      recaptcha.execute()
-    }
-
+    recaptcha?.execute()
   }
 
   useEffect(() => {
+    // @ts-ignore
     loadReCaptcha(process.env.NEXT_PUBLIC_SITE_KEY, (recaptchaToken: string) => {
       setRecaptchaToken(recaptchaToken)
     })
@@ -73,7 +65,7 @@ export default function LoginForm(): JSX.Element {
 
           <ReCaptcha
             ref={(ref: any) => setRecaptcha(ref)}
-            sitekey={process.env.NEXT_PUBLIC_SITE_KEY}
+            sitekey={process.env.NEXT_PUBLIC_SITE_KEY || ''}
             action='submit'
             verifyCallback={(recaptchaToken: SetStateAction<string>) => {
               setRecaptchaToken(recaptchaToken)
