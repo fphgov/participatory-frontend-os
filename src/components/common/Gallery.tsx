@@ -37,7 +37,7 @@ export default function Gallery({ items, showThumbnails = true }: GalleryProps) 
               onThumbnail(index)
             }
           }}>
-          <Image className="gallery-thumbnail-image" src={item} alt=" " />
+          <Image className="gallery-thumbnail-image" src={item} alt=" " width={119} height={89} />
         </div>
       ))}
 

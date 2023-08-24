@@ -11,7 +11,7 @@ export default function ArticleCard({ article }: ArticleCardProps): JSX.Element|
   return (
     <article className="post-card">
       <Link className="post-card-image-link" href={`/hirek/${article.slug}`}>
-        <div className="post-image">{article.featuredImage ? <Image src={`${process.env.NEXT_PUBLIC_FILES_PATH}/${article.featuredImage.filename}`} alt=" " /> : null}</div>
+        <div className="post-image">{article.featuredImage ? <Image src={`${process.env.NEXT_PUBLIC_FILES_PATH}/${article.featuredImage.filename}`} alt=" " width={300} height={300} /> : null}</div>
       </Link>
 
       <div className="post-card-content">
