@@ -82,6 +82,14 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/profil", req.url))
   }
 
+  if (req.url.includes("/kijelentkezes") && authUser) {
+    const response = NextResponse.redirect(new URL("/", req.url))
+
+    response.cookies.set("token", "", { expires: new Date(Date.now()) });
+
+    return response
+  }
+
   return NextResponse.next({
     request: {
       headers: requestHeaders,
@@ -90,5 +98,10 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/api/:path*', "/profil", "/bejelentkezes"],
+  matcher: [
+    '/api/:path*',
+    "/profil",
+    "/bejelentkezes",
+    "/kijelentkezes",
+  ],
 }
