@@ -69,8 +69,8 @@ export function Navigation({ menuItems, onClick = () => {}, rand, loggedIn }: Me
   return (<>
     {menuItems?.map((menuItem: MenuItem, i: number) => {
       if (
-        menuItem?.onHideLoggedIn === true && loggedIn !== null ||
-        menuItem?.onHideLoggedOut === true && loggedIn === null
+        menuItem?.onHideLoggedIn === true && loggedIn === true ||
+        menuItem?.onHideLoggedOut === true && loggedIn === false
       ) return
 
       if (menuItem?.outside) {

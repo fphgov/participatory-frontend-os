@@ -17,7 +17,7 @@ export default function Header({ loggedIn }: IHeader): JSX.Element {
       { title: "Megvalósuló", href: "/projektek", outside: false },
     ] },
     { title: "Szavazás", href: "/szavazas-inditasa", outside: false, highlight: true },
-    { title: "Bejelentkezés", href: "/bejelentkezes", highlight: false, onHideLoggedIn: true, onHideLoggedOut: false },
+    { title: "Bejelentkezés", href: "/bejelentkezes", highlight: false, onHideLoggedIn: true, onHideLoggedOut: false, icon: 'account' },
     { title: "Fiókom", href: "/profil", highlight: false, onHideLoggedIn: false, onHideLoggedOut: true, outside: false, profile: false, icon: 'account' },
     // { title: "Ötletbeküldés", href: "/bekuldesi-informacio", outside: false, highlight: true },
   ]

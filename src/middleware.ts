@@ -83,7 +83,7 @@ export async function middleware(req: NextRequest) {
   }
 
   if (req.url.includes("/kijelentkezes") && authUser) {
-    const response = NextResponse.redirect(new URL("/", req.url))
+    const response = NextResponse.redirect(new URL("/force-redirect", req.url))
 
     response.cookies.set("token", "", { expires: new Date(Date.now()) });
 
