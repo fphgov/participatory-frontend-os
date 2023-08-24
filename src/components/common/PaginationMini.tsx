@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons"
 import { ListLinks } from "@/lib/types"
 import Link from "next/link"
 
@@ -47,23 +45,24 @@ export default function PaginationMini({ baseUrl, links, size, pageSize, totalIt
     <div className="pagination-mini-wrapper">
       {paginationShow ? (
         <>
-          <span>{from}-{to}, összesen: {totalItems}</span>
+          <div className="pagination-mini-label">{from}-{to} <span>elem</span>, összesen: {totalItems}</div>
+
           <nav role="navigation" aria-label="Lapozási navigáció" className="pagination pagination-mini">
             <ul>
               <li>
                 {prevPageNum && (prevPageNum) ? (
                   <Link href={getUrl(prevPageNum)} aria-label={`Előző oldal ${prevPageNum}`} title={`Előző oldal ${prevPageNum}`}>
-                    <FontAwesomeIcon icon={faAngleLeft} aria-hidden="true" />
+                    <div className="icon-arrow icon-arrow-left active" aria-hidden="true"></div>
                   </Link>
-                ) : <button><FontAwesomeIcon icon={faAngleLeft} aria-hidden="true" /></button>}
+                ) : <button><div className="icon-arrow icon-arrow-left" aria-hidden="true"></div></button>}
               </li>
 
               <li>
                 {nextPageNum && (nextPageNum) ? (
                   <Link href={getUrl(nextPageNum)} aria-label={`Következő oldal ${nextPageNum}`} title={`Következő oldal ${nextPageNum}`}>
-                    <FontAwesomeIcon icon={faAngleRight} aria-hidden="true" />
+                    <div className="icon-arrow icon-arrow-right active" aria-hidden="true"></div>
                   </Link>
-                ) : <button><FontAwesomeIcon icon={faAngleRight} aria-hidden="true" /></button>}
+                ) : <button><div className="icon-arrow icon-arrow-right" aria-hidden="true"></div></button>}
               </li>
             </ul>
           </nav>
