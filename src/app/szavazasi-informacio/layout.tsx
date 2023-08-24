@@ -1,9 +1,9 @@
 import HeroPage from "@/components/common/HeroPage"
-import NewsletterArea from '@/components/home/NesletterArea'
 import Details from '@/components/common/Details'
 import CategoryIcon from '@/components/idea/CategoryIcon'
 import VoteInfoSection from "@/components/home/VoteInfoSection"
 import Link from "next/link"
+import NewsletterArea from "@/components/home/NesletterArea"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -52,9 +52,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
           </div>
         </div>
-
-        <NewsletterArea />
       </div>
+
+      <NewsletterArea />
     </main>
   )
 }
