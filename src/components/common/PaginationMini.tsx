@@ -4,16 +4,14 @@ import Link from "next/link"
 type PaginationMiniProps = {
   baseUrl: string
   links: ListLinks
-  size: number
   pageSize: number
   totalItems: number
   searchParams: Record<string, string>
 }
 
-export default function PaginationMini({ baseUrl, links, size, pageSize, totalItems, searchParams }: PaginationMiniProps): JSX.Element|null {
+export default function PaginationMini({ baseUrl, links, pageSize, totalItems, searchParams }: PaginationMiniProps): JSX.Element|null {
   const pageRegex = new RegExp("page=(\\d+)")
 
-  const paginationShow = size > 1
   const selfPageNum: number = (links && links.self && pageRegex.test(links.self.href)) ? parseInt(links.self.href.match(pageRegex)?.[1] || '') : 1
   const prevPageNum = (links && links.prev && pageRegex.test(links.prev.href)) ? parseInt(links.prev.href.match(pageRegex)?.[1] || '') : false
   const nextPageNum = (links && links.next && pageRegex.test(links.next.href)) ? parseInt(links.next.href.match(pageRegex)?.[1] || '') : false
@@ -43,31 +41,29 @@ export default function PaginationMini({ baseUrl, links, size, pageSize, totalIt
 
   return (
     <div className="pagination-mini-wrapper">
-      {paginationShow ? (
-        <>
-          <div className="pagination-mini-label">{from}-{to} <span>elem</span>, összesen: {totalItems}</div>
+      <>
+        <div className="pagination-mini-label">{from}-{to} <span>elem</span>, összesen: {totalItems}</div>
 
-          <nav role="navigation" aria-label="Lapozási navigáció" className="pagination pagination-mini">
-            <ul>
-              <li>
-                {prevPageNum && (prevPageNum) ? (
-                  <Link href={getUrl(prevPageNum)} aria-label={`Előző oldal ${prevPageNum}`} title={`Előző oldal ${prevPageNum}`}>
-                    <div className="icon-arrow icon-arrow-left active" aria-hidden="true"></div>
-                  </Link>
-                ) : <button><div className="icon-arrow icon-arrow-left" aria-hidden="true"></div></button>}
-              </li>
+        <nav role="navigation" aria-label="Lapozási navigáció" className="pagination pagination-mini">
+          <ul>
+            <li>
+              {prevPageNum && (prevPageNum) ? (
+                <Link href={getUrl(prevPageNum)} aria-label={`Előző oldal ${prevPageNum}`} title={`Előző oldal ${prevPageNum}`}>
+                  <div className="icon-arrow icon-arrow-left active" aria-hidden="true"></div>
+                </Link>
+              ) : <button><div className="icon-arrow icon-arrow-left" aria-hidden="true"></div></button>}
+            </li>
 
-              <li>
-                {nextPageNum && (nextPageNum) ? (
-                  <Link href={getUrl(nextPageNum)} aria-label={`Következő oldal ${nextPageNum}`} title={`Következő oldal ${nextPageNum}`}>
-                    <div className="icon-arrow icon-arrow-right active" aria-hidden="true"></div>
-                  </Link>
-                ) : <button><div className="icon-arrow icon-arrow-right" aria-hidden="true"></div></button>}
-              </li>
-            </ul>
-          </nav>
-        </>
-      ): null}
+            <li>
+              {nextPageNum && (nextPageNum) ? (
+                <Link href={getUrl(nextPageNum)} aria-label={`Következő oldal ${nextPageNum}`} title={`Következő oldal ${nextPageNum}`}>
+                  <div className="icon-arrow icon-arrow-right active" aria-hidden="true"></div>
+                </Link>
+              ) : <button><div className="icon-arrow icon-arrow-right" aria-hidden="true"></div></button>}
+            </li>
+          </ul>
+        </nav>
+      </>
     </div>
   )
 }

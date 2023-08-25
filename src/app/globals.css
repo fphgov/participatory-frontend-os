@@ -4135,6 +4135,20 @@ p.subinfo {
   background-image: url('../../public/images/arrow-expand-right-active.svg');
 }
 
+.vote-counter {
+  color: #12326E;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  letter-spacing: 0.18px;
+  display: flex;
+}
+
+.vote-counter img {
+  margin-right: 6px;
+}
+
 @media screen and (min-width: 1440px) {
   .container,
   .container-sm,

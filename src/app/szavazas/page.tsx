@@ -2,7 +2,7 @@ import HeroPage from '@/components/common/HeroPage'
 import VoteCategoryFilter from '@/components/vote/VoteCategoryFilter'
 import VoteCategoryFilterItem from '@/components/vote/VoteCategoryFilterItem'
 import VoteSearch from '@/components/vote/VoteSearch'
-import { apiPlansData } from '@/lib/api-requests'
+import { apiVoteablePlansData } from '@/lib/api-requests'
 import Error from '@/components/common/Error'
 import type { Metadata } from 'next'
 import IdeasWrapper from '@/components/idea/IdeasWrapper'
@@ -33,7 +33,6 @@ export default async function VotePage({ searchParams }: IProps) {
     const searchParams = new URLSearchParams({
       theme: themeId.toUpperCase(),
       rand,
-      page
     })
 
     return baseUrl + '?' + searchParams.toString()
@@ -48,7 +47,7 @@ export default async function VotePage({ searchParams }: IProps) {
       query
     }
 
-    return apiPlansData(data)
+    return apiVoteablePlansData(data)
   }
 
   let projectList, error
@@ -90,7 +89,7 @@ export default async function VotePage({ searchParams }: IProps) {
 
                 <div className="col-md-6">
                   {projectList?._links && projectList._page_count ? (
-                    <PaginationMini links={projectList._links} size={projectList._page_count} pageSize={21} totalItems={projectList._total_items} searchParams={searchParams} baseUrl={baseUrl} />
+                    <PaginationMini links={projectList._links} pageSize={12} totalItems={projectList._total_items} searchParams={searchParams} baseUrl={baseUrl} />
                   ): null}
                 </div>
               </div>
@@ -100,7 +99,7 @@ export default async function VotePage({ searchParams }: IProps) {
           <div className="list-wrapper">
             <div className="container">
               <div className="row">
-                {projectList?._embedded?.projects.map((project, i) => <IdeasWrapper ideaPreLink="/projektek" key={i} idea={project} showStatus={false} />)}
+                {projectList?._embedded?.projects.map((project, i) => <IdeasWrapper ideaPreLink="/projektek" key={i} idea={project} showStatus={false} showVoted={true} />)}
 
                 <div className="col-md-12">
                   {projectList?._embedded?.projects && projectList?._embedded?.projects.length === 0 ? <p>Nincs találat a megadott feltételek alapján, próbálj meg más kategóriában vagy kevesebb/más feltétel szerint szűrni.</p> : ''}
@@ -116,7 +115,7 @@ export default async function VotePage({ searchParams }: IProps) {
 
                 <div className="col-md-6">
                   {projectList?._links && projectList._page_count ? (
-                    <PaginationMini links={projectList._links} size={projectList._page_count} pageSize={21} totalItems={projectList._total_items} searchParams={searchParams} baseUrl={baseUrl} />
+                    <PaginationMini links={projectList._links} pageSize={12} totalItems={projectList._total_items} searchParams={searchParams} baseUrl={baseUrl} />
                   ): null}
                 </div>
               </div>

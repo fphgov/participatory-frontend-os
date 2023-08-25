@@ -4,6 +4,7 @@ import CategoryIcon from "@/components/idea/CategoryIcon"
 import { IIdea } from "@/models/idea.model"
 import { IProject } from "@/models/project.model"
 import { IPlan } from "@/models/plan.model"
+import VoteCounter from "@/components/vote/VoteCounter"
 
 type IdeaCardProps = {
   idea: IIdea|IProject|IPlan
@@ -11,6 +12,7 @@ type IdeaCardProps = {
   tags?: ITag[],
   handleClick?: () => void|undefined
   showStatus?: boolean
+  showVoted?: boolean
   tagClick?: (tag: ITag) => {}|undefined
 }
 
@@ -20,6 +22,7 @@ export default function IdeaCard({
   tags,
   handleClick,
   showStatus = true,
+  showVoted = false,
   tagClick = undefined
 }: IdeaCardProps): JSX.Element|null {
   if (idea == null) {
@@ -60,7 +63,7 @@ export default function IdeaCard({
           <hr />
 
           <footer className="post-card-meta">
-            <div></div>
+            <div>{showVoted && idea?.voted !== null ? <VoteCounter count={idea?.voted || 0} /> : null}</div>
             <div className="post-more-wrapper">
               <Link href={`${ideaPreLink}/${idea.id}`} className="btn post-more" onClick={handleClick}>Bővebben</Link>
             </div>
