@@ -7,7 +7,7 @@ export default function NewsletterArea(): JSX.Element|null {
         <div className="row flex-center">
           <div className="col-md-5">
             <Image
-              src='/images/hirlevel.png'
+              src='/images/newsletter.svg'
               width={60}
               height={60}
               alt={'Értesüljön egy helyen a fővárosi ügyekről promóciós kép'}

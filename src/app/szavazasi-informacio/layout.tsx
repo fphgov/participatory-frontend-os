@@ -25,7 +25,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <h2>Tematikus kategóriák</h2>
                 <p>Ebben az öt kategóriában tudsz szavazni.</p>
 
-                <Link href="/szavazas" className="btn btn-primary btn-headline btn-next">Tovább a szavazásra</Link>
+                <Link href="/szavazas-inditasa" className="btn btn-primary btn-headline btn-next">Tovább a szavazásra</Link>
               </div>
 
               <div className="col-md-8">

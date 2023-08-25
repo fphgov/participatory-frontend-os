@@ -93,7 +93,7 @@ export default function SideTabs({ contentName, children }: SideTabs) {
         </div>
 
         <div className="send-idea">
-          <Link href="/szavazas" className="btn btn-primary btn-headline btn-next">Tovább a szavazásra</Link>
+          <Link href="/szavazas-inditasa" className="btn btn-primary btn-headline btn-next">Tovább a szavazásra</Link>
         </div>
       </div>
     </div>
