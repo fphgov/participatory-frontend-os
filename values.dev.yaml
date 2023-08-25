@@ -33,7 +33,7 @@ ingress:
         - path: /
           pathType: Prefix
   tls:
-   - secretName: wildcard-dev-intra-fph-hu-tls
+   - secretName: wildcard-budapest-hu-tls
      hosts:
        - reszveteli.budapest.hu
 
