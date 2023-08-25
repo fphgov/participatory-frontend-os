@@ -1286,35 +1286,50 @@ input[type="submit"] {
 }
 
 .idea a,
-.tag a {
-  color: #21A7CC;
+.tag a,
+.tag button {
+  color: #0EA6CE;
   background-color: #fff;
-  padding: 4px 8px;
+  padding: 8px 12px;
   text-align: center;
   display: inline-block;
   text-decoration: none;
   border-radius: 8px;
   border: 1px solid #C5E9F5;
   font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.14px;
+  cursor: pointer;
 }
 
 .idea a:hover,
-.tag a:hover {
-  opacity: 0.9;
+.tag a:hover,
+.tag button:hover {
+  background: #E7F5FE;
 }
 
-/* .hero-tags .tag a {
-  background-color: #FFFFFF;
-  color: #12326E;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 20px;
-  padding: 8px 12px;
+.hero-tags > span {
+  margin-right: 12px;
 }
 
-.hero-tags > .tag + .tag {
-  margin-left: 16px;
-} */
+.tag.tag-active a,
+.tag.tag-active button {
+  background-color: #E7F5FE;
+  color: #0EA6CE;
+  display: flex;
+  align-items: center;
+}
+
+.tag.tag-active a::after,
+.tag.tag-active button::after {
+  content: '';
+  background-image: url('../../public/images/icon-close.svg');
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  margin-left: 8px;
+}
 
 .copyright-wrapper {
   display: flex;

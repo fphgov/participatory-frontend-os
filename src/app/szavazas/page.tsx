@@ -28,11 +28,13 @@ export default async function VotePage({ searchParams }: IProps) {
   const rand = searchParams?.rand?.toString() || generateRandomValue().toString()
   const page = searchParams?.page || "1"
   const query = searchParams?.query || ''
+  const tag = searchParams?.tag || ''
 
   const getUrl = (themeId: string) => {
     const searchParams = new URLSearchParams({
       theme: themeId.toUpperCase(),
       rand,
+      tag,
     })
 
     return baseUrl + '?' + searchParams.toString()
@@ -44,6 +46,7 @@ export default async function VotePage({ searchParams }: IProps) {
       status: 'VOTING_LIST',
       rand,
       page,
+      tag,
       query
     }
 
