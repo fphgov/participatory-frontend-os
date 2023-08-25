@@ -40,4 +40,5 @@ export type IIdea = {
   links?: string[]
   workflowState?: IWorkflowState
   workflowStateExtra?: IWorkflowStateExtra
+  voted?: number
 }

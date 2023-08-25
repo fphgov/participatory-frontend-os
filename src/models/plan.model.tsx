@@ -18,4 +18,5 @@ export type IPlan = {
   video?: string|null
   location?: string|null|undefined
   _links: ListLinks
+  voted?: number
 }

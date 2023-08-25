@@ -375,6 +375,20 @@ export async function apiIdeasFilter(data: Record<string, string>): Promise<Filt
   return handleResponse<FilterResponse>(response).then(data => data)
 }
 
+export async function apiVoteablePlansData(data: Record<string, string>): Promise<PlanListResponse> {
+  const url = backendUrl(endpoints.API_REQ_VOTE_LIST + '?' + new URLSearchParams(data as Record<string, string>).toString())
+
+  const response = await fetch(url, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      'Content': "application/json",
+    },
+  })
+
+  return handleResponse<PlanListResponse>(response).then(data => data)
+}
+
 export async function apiProjectsFilter(data: Record<string, string>): Promise<FilterResponse> {
   const url = backendUrl(endpoints.API_REQ_FILTER_PROJECTS+ '?' + new URLSearchParams(data as Record<string, string>).toString())
 
