@@ -11,6 +11,7 @@ import { categoryResolver } from '@/utilities/categoryResolver'
 import { generateRandomValue } from '@/utilities/generateRandomValue'
 import PaginationMini from '@/components/common/PaginationMini'
 import { notFound } from 'next/navigation'
+import VoteOrderFilter from '@/components/vote/VoteOrderFilter'
 
 interface IProps {
   searchParams: Record<string, string>
@@ -29,12 +30,14 @@ export default async function VotePage({ searchParams }: IProps) {
   const page = searchParams?.page || "1"
   const query = searchParams?.query || ''
   const tag = searchParams?.tag || ''
+  const orderBy = searchParams?.orderBy || ''
 
   const getUrl = (themeId: string) => {
     const searchParams = new URLSearchParams({
       theme: themeId.toUpperCase(),
       rand,
       tag,
+      orderBy,
     })
 
     return baseUrl + '?' + searchParams.toString()
@@ -47,6 +50,7 @@ export default async function VotePage({ searchParams }: IProps) {
       rand,
       page,
       tag,
+      orderBy,
       query
     }
 
@@ -87,7 +91,7 @@ export default async function VotePage({ searchParams }: IProps) {
             <div className="container">
               <div className="row">
                 <div className="col-md-6">
-                  Rendezés
+                  <VoteOrderFilter searchParams={searchParams} baseUrl={baseUrl} />
                 </div>
 
                 <div className="col-md-6">
