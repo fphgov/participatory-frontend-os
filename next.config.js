@@ -3,8 +3,12 @@ module.exports = async (phase, { defaultConfig }) => {
    * @type {import('next').NextConfig}
    */
   const nextConfig = {
-    rewrites: () => {
+    rewrites: async () => {
       return [
+        {
+          source: "/files/:path*",
+          destination: `${process.env.BACKEND_URL}/app/api/files?filename=:path*`,
+        },
         {
           source: "/api/:path*",
           destination: `${process.env.BACKEND_URL}/app/api/:path*`,
