@@ -70,13 +70,8 @@ export default function Home() {
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <h2>Köszönjük a közel 600 ötletet!</h2>
-
-                <p>2022. december 31-én lezárult az ötletbeadás.</p>
-
-                <p>A Főpolgármesteri Hivatal most feldolgozza a beérkezett ötleteket, ezután ti szavazhattok majd arról, hogy mi valósuljon meg.</p>
-
-                <Link className="btn btn-primary btn-headline btn-next" to="/oldal/mi-tortenik-most">Mi történik most?</Link>
+                <h2>Hamarosan indul a szavazás!</h2>
+                <p>Ha szeretnél értesítést kérni a szavazás elindulásáról, iratkozz fel hírlevelünkre!</p>
               </div>
             </div>
           </div>
