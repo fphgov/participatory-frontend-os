@@ -28,6 +28,7 @@ export default function RegistrationForm(): JSX.Element {
     'privacy': '',
     'prize': '',
     'newsletter': '',
+    'reminder_email': '',
   })
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>) => {
@@ -68,6 +69,7 @@ export default function RegistrationForm(): JSX.Element {
       privacy: filterData.privacy,
       prize: filterData.prize,
       newsletter: filterData.newsletter,
+      reminder_email: filterData.reminder_email,
       'g-recaptcha-response': recaptchaToken,
     }
 
@@ -225,11 +227,22 @@ export default function RegistrationForm(): JSX.Element {
               <div className="form-group">
                 <label htmlFor="newsletter" className="form-group-label">
                   <input className="form-control" type="checkbox" id="newsletter" name="newsletter" value={filterData.newsletter} onChange={handleChangeInput} />
-                  Szeretnék értesülni a közösségi költségvetés híreiről, feliratkozom a hírlevélre
+                  Szeretnék értesülni a közösségi költségvetés híreiről, feliratkozom a hírlevélre.
                 </label>
 
                 {errorObject?.newsletter ? Object.values(errorObject.newsletter).map((err, i) => {
                   return <ErrorMini key={i} error={err} increment={`newsletter-${i}`} />
+                }) : null}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="reminder_email" className="form-group-label">
+                  <input className="form-control" type="checkbox" id="reminder_email" name="reminder_email" value={filterData.reminder_email} onChange={handleChangeInput} />
+                  Szeretnék emlékeztető emailt kapni (legfeljebb 2 alkalommal) arról, ha még nem merítettem ki a rendelkezésemre álló összes szavazatot és az ehhez szükséges adataim kezeléséhez hozzájárulok.
+                </label>
+
+                {errorObject?.reminder_email ? Object.values(errorObject.reminder_email).map((err, i) => {
+                  return <ErrorMini key={i} error={err} increment={`reminder_email-${i}`} />
                 }) : null}
               </div>
 
