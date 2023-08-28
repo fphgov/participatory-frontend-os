@@ -24,6 +24,10 @@ module.exports = async (phase, { defaultConfig }) => {
       serverActions: true,
       forceSwcTransforms: true,
     },
+    publicRuntimeConfig: {
+      matomoUrl: process.env.MATOMO_URL,
+      matomoSiteId: process.env.MATOMO_SITE_ID,
+    },
     trailingSlash: false,
     webpack: (
       config,
