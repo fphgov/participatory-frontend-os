@@ -4165,6 +4165,33 @@ p.subinfo {
   margin-right: 6px;
 }
 
+#cc--main #cm {
+  width: 80%;
+  max-width: 500px;
+}
+
+#cc--main #c-txt p,
+#cc--main .desc p {
+  margin-bottom: 15px;
+  line-height: 18px;
+}
+
+span.cc_underline,
+span.cc_underline:hover {
+  text-decoration: underline;
+}
+
+span.cc_bold,
+span.cc_bold:hover {
+  font-weight: 600;
+}
+
+span.cc_highlight,
+span.cc_highlight:hover {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
 @media screen and (min-width: 1440px) {
   .container,
   .container-sm,
@@ -4537,6 +4564,11 @@ p.subinfo {
     display: block;
     margin: 12px 0;
   }
+
+  #cc--main #cm {
+    max-height: calc(100vh - 130px);
+    overflow: scroll;
+  }
 }
 
 @media screen and (max-width: 576px) {
@@ -4554,5 +4586,12 @@ p.subinfo {
 
   .btn-next {
     padding: 12px 12px 12px 18px;
+  }
+
+  #cc--main #cm {
+    width: 90%;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
   }
 }
