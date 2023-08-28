@@ -11,10 +11,16 @@ type Props = {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const pageData = await apiPageData(params.slug)
+  let pageData
+
+  try {
+    pageData = await apiPageData(params.slug)
+  } catch (e: any) {
+    return {}
+  }
 
   return {
-    title: pageData.title,
+    title: pageData?.title,
   }
 }
 
