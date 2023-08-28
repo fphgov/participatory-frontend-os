@@ -116,6 +116,20 @@ export default function ProjectWrapper({ project, voteable, disableVoteButton, o
 
                 <VoteButton showVoteButton={voteable} disableVoteButton={disableVoteButton} onClickVote={onClickVote} />
               </div>
+
+              {project.implementations && project.implementations.length > 0 ? <>
+                <div className={`prop-single-history ${isProject ? 'prop-single-history-project' : 'prop-single-history-idea'}`}>
+                  <div className="prop-single-inner">
+                    <div className="prop-single-content">
+                      <h3>
+                        {isProject ? 'Hol tartunk a megvalósítással?' : 'Hivatal visszajelzése'}
+                      </h3>
+
+                      <Implementation implementations={project.implementations} />
+                    </div>
+                  </div>
+                </div>
+              </> : null}
             </div>
           </div>
 
@@ -225,21 +239,6 @@ export default function ProjectWrapper({ project, voteable, disableVoteButton, o
             </div>
           </div>
         </div>
-
-        {project.implementations && project.implementations.length > 0 ? <>
-          <div className="prop-single-history">
-            <div className="prop-single-inner">
-              <div className="prop-single-content">
-                <h3>
-                  {isProject ? 'Hol tartunk a megvalósítással?' : 'Hivatal visszajelzése'}
-                </h3>
-
-                <Implementation implementations={project.implementations} />
-              </div>
-            </div>
-          </div>
-        </> : null}
-
       </div>
     </div>
   )

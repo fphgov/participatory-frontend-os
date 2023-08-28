@@ -97,6 +97,30 @@ export default function IdeaWrapper({ idea }: IdeasWrapperProps): JSX.Element {
 
                 </div>
               </div>
+
+              {idea.answer ? <>
+                <div className="prop-single-history prop-single-history-idea">
+                  <div className="prop-single-inner">
+                    <div className="prop-single-content">
+                      <h3>Hivatal visszajelzése</h3>
+
+                      <div className="prop-single-answer" dangerouslySetInnerHTML={{ __html: idea.answer }} />
+                    </div>
+                  </div>
+                </div>
+              </> : null}
+
+              {idea.comments && idea.comments.length > 0 ? <>
+                <div className="prop-single-history">
+                  <div className="prop-single-inner">
+                    <div className="prop-single-content">
+                      <h3>Megjegyzések</h3>
+
+                      <Comment comments={idea.comments} />
+                    </div>
+                  </div>
+                </div>
+              </> : null}
             </div>
           </div>
 
@@ -184,31 +208,6 @@ export default function IdeaWrapper({ idea }: IdeasWrapperProps): JSX.Element {
             </div>
           </div>
         </div>
-
-        {idea.answer ? <>
-          <div className="prop-single-history">
-            <div className="prop-single-inner">
-              <div className="prop-single-content">
-                <h3>Hivatal visszajelzése</h3>
-
-                <div className="prop-single-answer" dangerouslySetInnerHTML={{ __html: idea.answer }} />
-              </div>
-            </div>
-          </div>
-        </> : null}
-
-        {idea.comments && idea.comments.length > 0 ? <>
-          <div className="prop-single-history">
-            <div className="prop-single-inner">
-              <div className="prop-single-content">
-                <h3>Megjegyzések</h3>
-
-                <Comment comments={idea.comments} />
-              </div>
-            </div>
-          </div>
-        </> : null}
-
       </div>
     </div>
   )
