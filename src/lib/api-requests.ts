@@ -15,7 +15,10 @@ import {
   ProjectListResponse,
   ProjectResponse,
   UserLoginResponse,
-  UserResponse
+  UserResponse,
+  PhaseStatusResponse,
+  IssueResponse,
+  OkResponse
 } from "@/lib/types"
 import { IUser } from "@/models/user.model"
 import { IIdea } from '@/models/idea.model'
@@ -24,6 +27,7 @@ import { IArticle } from "@/models/article.model"
 import { IPage } from "@/models/page.model"
 import { IPlan } from '@/models/plan.model'
 import endpoints from '@/lib/endpoints'
+import { IPhaseStatus } from '@/models/phaseStatus.model'
 
 type ApiLoginUserProps = {
   email: string
@@ -304,6 +308,74 @@ export async function apiPlanData(id: number|string): Promise<IPlan> {
 
   return handleResponse<PlanResponse>(response).then(data => data)
 }
+
+export async function apiCheckPhase(): Promise<IPhaseStatus> {
+  const url = backendUrl(endpoints.API_REQ_PHASE_CHECK)
+
+  const response = await fetch(url, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      'Content': "application/json",
+    },
+  })
+
+  return handleResponse<PhaseStatusResponse>(response).then(data => data.data)
+}
+
+export async function apiVote(projectId: number|string): Promise<IssueResponse|OkResponse> {
+  const token = (await getToken())?.value
+
+  const headers: Record<string, string> = {
+    "Content": "application/json",
+    'Content-Type': "application/x-www-form-urlencoded",
+  }
+
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`
+  }
+
+  const url = backendUrl(endpoints.API_REQ_PROFILE_VOTE)
+
+  const urlencoded = new URLSearchParams()
+
+  urlencoded.append("projects[0]", projectId.toString())
+
+  const response = await fetch(url, {
+    method: "POST",
+    credentials: "include",
+    body: urlencoded,
+    headers,
+  })
+
+  return handleResponse<IssueResponse|OkResponse>(response).then(data => data)
+}
+
+export async function apiCheckVote(id: number|string|undefined): Promise<IssueResponse|MessageResponse> {
+  const token = (await getToken())?.value
+
+  const headers: Record<string, string> = {
+    "Content": "application/json",
+    'Content-Type': "application/x-www-form-urlencoded",
+  }
+
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`
+  }
+
+  const projectId = id === undefined ? '' : id.toString()
+
+  const url = backendUrl((endpoints.API_REQ_VOTE_CHECK || '').toString().replace(':id', projectId))
+
+  const response = await fetch(url, {
+    method: "GET",
+    credentials: "include",
+    headers,
+  })
+
+  return handleResponse<IssueResponse|MessageResponse>(response).then(data => data)
+}
+
 
 export async function apiProfileActivate(hash: string): Promise<string> {
   const url = backendUrl((endpoints.API_REQ_PROFILE_ACTIVATE || '').toString().replace(':hash', hash))

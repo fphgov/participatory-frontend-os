@@ -1,7 +1,11 @@
+"use server"
+
 import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
+import { getToken } from "@/lib/actions"
 import { notFound } from 'next/navigation'
 import Error from '@/components/common/Error'
-import { apiProjectData } from '@/lib/api-requests'
+import { apiProjectData, apiCheckPhase, apiCheckVote } from '@/lib/api-requests'
 import HeroPage from '@/components/common/HeroPage'
 import Link from 'next/link'
 import ProjectWrapper from '@/components/idea/ProjectWrapper'
@@ -26,13 +30,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function SimplePage({ params }: Props) {
-  let pageData, error
+  let pageData, phaseStatus, voteable, error, errorVoteable
 
   try {
     pageData = await apiProjectData(params.id)
+    phaseStatus = await apiCheckPhase()
   } catch (e: any) {
     error = e.message
   }
+
+  const token = (await getToken())?.value
+
+  if (token && phaseStatus?.code === "VOTE") {
+    try {
+      voteable = await apiCheckVote(params.id)
+    } catch (e: any) {
+      errorVoteable = e.message
+    }
+  }
+
+  const enabledVoteButton = (
+    token === undefined ||
+    (token !== undefined && voteable?.data?.code === "OK")
+  )
 
   if (!pageData) {
     return notFound()
@@ -48,10 +68,10 @@ export default async function SimplePage({ params }: Props) {
 
           <ProjectWrapper
             project={pageData}
-            onClickVote={undefined}
-            disableVoteButton={true}
-            voteable={true}
-            onTipClick={undefined}
+            token={token}
+            disableVoteButton={! enabledVoteButton}
+            voteable={phaseStatus?.code === "VOTE"}
+            errorVoteable={errorVoteable}
           />
         </div>
       </div>

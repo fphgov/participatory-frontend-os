@@ -5,6 +5,7 @@ import { IProject } from "@/models/project.model"
 import { IPlan } from "@/models/plan.model"
 import { IUser } from "@/models/user.model"
 import { IVoteableProject } from "@/models/voteableProject.model"
+import { IPhaseStatus } from "@/models/phaseStatus.model"
 
 export interface PageResponse {
   data: IPage
@@ -20,6 +21,10 @@ export interface UserResponse {
 
 export interface ArticleResponse {
   data: IArticle
+}
+
+export interface PhaseStatusResponse {
+  data: IPhaseStatus
 }
 
 export interface IdeaResponse extends IIdea {
@@ -86,4 +91,10 @@ export interface VoteListResponse {
 export interface IssueResponse {
   message: string
   code: string
+}
+
+export interface OkResponse {
+  data: {
+    code: string
+  }
 }

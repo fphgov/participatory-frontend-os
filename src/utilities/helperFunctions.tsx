@@ -27,7 +27,7 @@ export function getWafInfo(htmlContent: string): { url: string, attackId: string
 
   el.innerHTML = htmlContent
 
-  if (el.getElementsByTagName('p') && el.getElementsByTagName('p')[ 1 ]) {
+  if (el.getElementsByTagName('p') && el.getElementsByTagName('p')[1]) {
     const infos = el.getElementsByTagName('p')[1].innerText.match(/^URL: (.*)Client IP: (.*)Attack ID: (.*)Message ID: (.*)$/)
 
     return {
