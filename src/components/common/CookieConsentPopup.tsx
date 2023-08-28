@@ -39,11 +39,9 @@ function CookieConsentPopup({}): JSX.Element {
       languages: {
         'hu': {
           consent_modal: {
-            title: 'Tisztelt Látogatónk!',
+            title: 'Kedves Látogató!',
             description: `
-            <p><span class="cc_bold">Adatainak védelme fontos számunkra.</span></p>
-            <p>Az otlet.budapest.hu által használt alapvető sütik a weboldal megfelelő működését biztosítják, ahhoz elengedhetetlenek. Ezen kívül a felhasználói élmény javításához szükséges sütiket <span class="cc_bold">csak az ön hozzájárulása esetén állítjuk be</span>, ezek közül a lenti linken választhat.</p>
-            <p>A hozzájáruláshoz kötött sütik használatának elfogadásával Ön kijelenti, hogy az <a href="">adatkezelési tájékoztató</a>ban foglaltakat megismerte, és az ott írtakat tudomásul véve hozzájárul az adott cookie-k használatával járó adatkezeléshez.</p>
+            <p>Tájékoztatunk, hogy a honlap felhasználói élmény fokozásának érdekében sütiket alkalmazunk. A honlapunk használatával a tájékoztatásunkat tudomásul veszed.</p>
             <button type="button" data-cc="c-settings" class="cc-link">Választok a sütik közül</button>`,
             primary_btn: {
               text: 'Elfogadom mindet',
@@ -70,28 +68,19 @@ function CookieConsentPopup({}): JSX.Element {
             blocks: [
               {
                 title: 'Sütik kezelése',
-                description: `<p>Tisztelt Látogatónk!</p>
-                  <p>Az alábbi tájékoztatás az otlet.budapest.hu weboldalon alkalmazott sütikről szól.</p>
-                  <p>Ezen kívül a felhasználói élmény javításához szükséges sütiket <span class="cc_bold">csak az ön hozzájárulása esetén állítjuk be</span>. Ezen hozzájáruláshoz kötött sütik vonatkozásában az alábbi választási lehetőségekkel élhet:</p>
+                description: `<p>Kedves Látogató!</p>
+                  <p>Az alábbi tájékoztatás a budapest.hu weboldalon alkalmazott sütikről szól. Amennyiben nem kapcsolod ki a sütik használatát, és a felugró ablakban megjelenő ELUTASÍTOM MINDET gombra kattintva folytatod a böngészést, akkor elfogadod azok weboldalunkon történő alkalmazását. Felhívjuk figyelmed, hogy a sütik használatát bármikor letilthatod.</p>
 
-                  <p><span class="cc_bold">ELUTASÍTOM MINDET</span> - a felhasználói élmény javításához szükséges sütik alkalmazását nem engedélyezi.</p>
-                  <p><span class="cc_bold">ELFOGADOM MINDET</span> - hozzájárulását adja a felhasználói élmény javításához szükséges sütik alkalmazásához.</p>
-                  <p><span class="cc_bold">VÁLASZTOK A SÜTIKATEGÓRIÁK KÖZÜL</span> - kiválaszthatja mely sütik alkalmazásához adja hozzájárulását az alábbi linkre kattintva.</p>
+                  <p><span class="cc_bold">ELUTASÍTOM MINDET</span> - a felhasználói élmény javításához szükséges sütik alkalmazását nem engedélyezed.</p>
+                  <p><span class="cc_bold">ELFOGADOM MINDET</span> - hozzájárulásod adod a felhasználói élmény javításához szükséges sütik alkalmazásához.</p>
+                  <p><span class="cc_bold">VÁLASZTOK A SÜTIKATEGÓRIÁK KÖZÜL</span> - kiválaszthatod mely sütik alkalmazásához adod hozzájárulásod az alábbi linkre kattintva.</p>
 
-                  <p>A hozzájáruláshoz kötött sütik használatának elfogadásával Ön kijelenti, hogy az <a href="">adatkezelési tájékoztatóban</a> foglaltakat megismerte, és az ott írtakat tudomásul véve hozzájárul az adott cookie-k használatával járó adatkezeléshez.</p>
                   <p><span class="cc_bold">Mi az a süti?</span><br />
-                  A felhasználók számítógépére mentett kis fájl, amely megkönnyíti a meglátogatott webhelyeken alkalmazott beállítások és egyéb információk tárolását. A süti általában tartalmazza annak a webhelynek a nevét, ahonnan érkezett, a süti értékét, azaz egy véletlenszerűen generált egyedi számot, valamint a süti élettartamát, vagyis hogy mennyi ideig tárolódik az eszközön. A süti a felhasználó eszközének háttértárjában egy fájlban tárolódik.</p>
-                  <p><span class="cc_bold">Milyen sütiket és mire használunk?</span><br>
-                  A weboldal működéséhez <span class="cc_highlight">elengedhetetlenül szükséges sütik</span>, amelyek elhelyezéséhez nincs szükség a felhasználó hozzájárulására.<br>
-                  <span class="cc_highlight">Előzetes felhasználói hozzájárulást igénylő sütik</span>, amelyek a felhasználói élmény javításához, vagy a kommunikációs tevékenység optimalizálása érdekében szükségesek. Amennyiben a felhasználó nem járul hozzá ezen sütik elhelyezéséhez, úgy elfogadja, hogy hozzájárulásának hiányában a honlap működése nem minden tekintetben lesz szándékainknak megfelelően biztosított. A felhasználóknak azonban a későbbiekben lehetőségük van bármikor a hozzájárulást igénylő sütik elhelyezésére vonatkozó korábbi döntésük megváltoztatására. Hozzájárulását a láblécen folyamatosan elérhető “Sütibeállítások” menüpontban később is megadhatja.<br>
-                  <p><span class="cc_bold">Elsődleges süti</span><br>
-                  Az elsődleges sütiket az otlet.budapest.hu oldal helyezi el a felhasználó eszközén annak érdekében, hogy a weboldal használatához kapcsolódó információkat tárolja benne.</p>
-                  <p><span class="cc_bold">Harmadik féltől származó sütik</span><br>
-                  A harmadik féltől származó sütiket más webhelyek hozzák létre és helyezik el a felhasználó eszközén, amelynek segítségével információkat szerezhetnek a felhasználó által meglátogatott weboldalon végzett böngészésekről. Ez esetben a sütiben tárolt és a süti által közvetített információkhoz a sütit elhelyező harmadik fél fér csak hozzá.
-                  </p>
-                  <p><span class="cc_bold">Hogyan tudja törölni a sütiket?</span><br>
-                  A sütik kezelésével kapcsolatos beállításait bármikor megváltoztathatja. Amennyiben az otlet.budapest.hu oldal látogatása során az <span class="cc_bold">ELFOGADOM MINDET</span> vagy a <span class="cc_bold">VÁLASZTOK A SÜTIKATEGÓRIÁK KÖZÜL</span> gombra kattintva elfogadta a sütik alkalmazását és ezen változtatni szeretne azt egyszerűen a böngészőjében a böngészési előzmények törlésével teheti meg.<br>
-                  A leggyakoribb böngészőkben (Chrome, Edge, Safari, Firefox, Internet Explorer) ezt az alábbiak szerint tudja megtenni:</p>
+                  Olyan adatfájl, amelyet böngésződ továbbít a szerverünkre a weboldalunkkal történő kommunikációja során.</p>
+                  
+                  <p><span class="cc_bold">Hogyan tudod törölni a sütiket?</span><br>
+                  A sütik kezelésével kapcsolatos beállításokat bármikor megváltoztathatod. Amennyiben az otlet.budapest.hu oldal látogatása során az <span class="cc_bold">ELFOGADOM MINDET</span> vagy a <span class="cc_bold">VÁLASZTOK A SÜTIKATEGÓRIÁK KÖZÜL</span> gombra kattintva elfogadtad a sütik alkalmazását és ezen változtatni szeretnél, azt egyszerűen a böngésződben a böngészési előzmények törlésével teheted meg.<br>
+                  A leggyakoribb böngészőkben (Chrome, Edge, Safari, Firefox, Internet Explorer) ezt az alábbiak szerint tudod megtenni:</p>
                   <p>- <a href="https://support.google.com/accounts/answer/61416?hl=hu" target="_blank">Google Chrome</a><br>
                   -	<a href="https://support.microsoft.com/hu-hu/windows/a-microsoft-edge-a-b%C3%B6ng%C3%A9sz%C3%A9si-adatok-%C3%A9s-az-adatv%C3%A9delem-bb8174ba-9d73-dcf2-9b4a-c582b4e640dd" target="_blank">Microsoft Edge</a><br>
                   -	<a href="https://support.apple.com/hu-hu/guide/safari/sfri11471/mac" target="_blank">Safari</a><br>
@@ -100,7 +89,7 @@ function CookieConsentPopup({}): JSX.Element {
                   `
               }, {
                 title: 'A weboldal működéséhez elengedhetetlenül szükséges sütik',
-                description: 'Olyan sütik, amelyek a weboldal technikai működőképességéhez elengedhetetlenül szükségesek, vagy amelyek az ön által igényelt szolgáltatást nyújtják. A honlap ezen sütik nélkül nem tud megfelelően működni, így ezek elhelyezéséhez nincs szükség a felhasználó beleegyezésére. Például a sütik engedélyezésével kapcsolatban megtett felhasználói beállítások megjegyzése.',
+                description: 'Olyan sütik, amelyek a weboldal technikai működőképességéhez elengedhetetlenül szükségesek, vagy amelyek az általad igényelt szolgáltatást nyújtják. A honlap ezen sütik nélkül nem tud megfelelően működni, így ezek elhelyezéséhez nincs szükség a felhasználó beleegyezésére. Például a sütik engedélyezésével kapcsolatban megtett felhasználói beállítások megjegyzése.',
                 toggle: {
                   value: 'necessary',
                   enabled: true,
