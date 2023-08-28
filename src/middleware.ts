@@ -58,16 +58,20 @@ export async function middleware(req: NextRequest) {
 
       (req as AuthenticatedRequest).user = jwt?.user
     }
-  } catch (error) {
+  } catch (error: any) {
     redirectToLogin = true
 
     if (req.nextUrl.pathname.startsWith("/api")) {
       return getErrorResponse(401, "Token is invalid or user doesn't exists")
     }
+  }
 
-    return NextResponse.redirect(
-      new URL('/bejelentkezes', req.url)
-    )
+  if (redirectToLogin) {
+    const response = NextResponse.redirect(new URL(`/bejelentkezes`, req.url))
+
+    response.cookies.set("token", "", { expires: new Date(Date.now()) })
+
+    return response
   }
 
   const authUser = (req as AuthenticatedRequest).user
@@ -85,7 +89,7 @@ export async function middleware(req: NextRequest) {
   if (req.url.includes("/kijelentkezes") && authUser) {
     const response = NextResponse.redirect(new URL("/force-redirect", req.url))
 
-    response.cookies.set("token", "", { expires: new Date(Date.now()) });
+    response.cookies.set("token", "", { expires: new Date(Date.now()) })
 
     return response
   }
