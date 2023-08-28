@@ -3332,6 +3332,31 @@ details {
   margin: 16px 0;
 }
 
+.vote-button-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.vote-button-info-label {
+  margin-left: 12px;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  letter-spacing: 0.18px;
+  display: flex;
+}
+
+.vote-button-info-label::before {
+  content: '';
+  display: inline-block;
+  background-image: url('../../public/images/icon-info-24.svg');
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  margin: auto 8px auto auto;
+}
+
 .vote-flow h2 {
   text-align: center;
   margin-bottom: 42px;

@@ -8,32 +8,18 @@ import CategoryIcon from "@/components/idea/CategoryIcon"
 import nFormatter from "@/utilities/nFormatter"
 import Share from "@/components/common/Share"
 import Implementation from "@/components/idea/Implementation"
+import VoteButton from "@/components/vote/VoteButton"
+import Gallery from "@/components/common/Gallery"
 
 type IdeasWrapperProps = {
   project: IProject
   voteable: boolean
   disableVoteButton: boolean
-  onClickVote?: () => void
-  onTipClick?: () => void
+  errorVoteable: string
+  token: string,
 }
 
-type VoteButtonProps = {
-  showVoteButton: boolean,
-  disableVoteButton: boolean,
-  onClickVote?: () => void
-}
-
-const VoteButton = ({ showVoteButton, disableVoteButton, onClickVote }: VoteButtonProps) => {
-  return (
-    <>
-      {showVoteButton ? <>
-        <button className={`btn btn-primary btn-headline btn-next btn-vote ${disableVoteButton ? 'btn-disable' : ''}`} onClick={onClickVote}>Szavazok erre az ötletre</button>
-      </> : null}
-    </>
-  )
-}
-
-export default function ProjectWrapper({ project, voteable, disableVoteButton, onClickVote, onTipClick }: IdeasWrapperProps): JSX.Element {
+export default function ProjectWrapper({ project, voteable, token, errorVoteable, disableVoteButton }: IdeasWrapperProps): JSX.Element {
   const theme = project?.campaignTheme
 
   const isProject = [140, 200].indexOf(project?.workflowState?.id) !== -1
@@ -48,7 +34,7 @@ export default function ProjectWrapper({ project, voteable, disableVoteButton, o
           <div className="offset-lg-1 col-lg-7">
             <div className="prop-single-wrapper prop-single-body">
               <div className="prop-single-inner">
-                <VoteButton showVoteButton={voteable} disableVoteButton={disableVoteButton} onClickVote={onClickVote} />
+                <VoteButton showVoteButton={voteable} disableVoteButton={disableVoteButton} projectId={project.id} token={token} errorVoteable={errorVoteable} />
 
                 <div className="prop-single-content">
                   {project.description ? <>
@@ -90,7 +76,7 @@ export default function ProjectWrapper({ project, voteable, disableVoteButton, o
                       {project.medias && project.medias.length > 0 ? (
                         <>
                           <div className="media-sep">
-                            {/* <Gallery items={images} showThumbnails={true} /> */}
+                            {images && images.length > 0 ? <Gallery items={images} showThumbnails={true} /> : null}
                           </div>
                         </>
                       ) : null}
@@ -99,13 +85,13 @@ export default function ProjectWrapper({ project, voteable, disableVoteButton, o
                         <>
                           <div className="media-sep">
                             <div className="documents">
-                              {documents && documents.length > 0 && documents.map((document, i) => (
+                              {documents && documents.length > 0 ? documents.map((document, i) => (
                                 <a key={i} href={document.original} target="_blank" rel="noopener noreferrer">
                                   <div key={i} className="document">
                                     <FontAwesomeIcon icon={faFilePdf} />
                                   </div>
                                 </a>
-                              ))}
+                              )) : null}
                             </div>
                           </div>
                         </>
@@ -114,7 +100,7 @@ export default function ProjectWrapper({ project, voteable, disableVoteButton, o
                   </>) : null}
                 </div>
 
-                <VoteButton showVoteButton={voteable} disableVoteButton={disableVoteButton} onClickVote={onClickVote} />
+                <VoteButton showVoteButton={voteable} disableVoteButton={disableVoteButton} projectId={project.id} token={token} errorVoteable={errorVoteable} />
               </div>
 
               {project.implementations && project.implementations.length > 0 ? <>
