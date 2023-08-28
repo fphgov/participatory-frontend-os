@@ -66,7 +66,19 @@ export default async function VotePage({ searchParams }: IProps) {
   }
 
   if (! projectList) {
-    notFound()
+    return (
+      <main className="page page-vote">
+        <div className="page-vote-single-section">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                {(typeof error === 'string' && error !== '') ? <Error message={error} /> : null}
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    )
   }
 
   return (
