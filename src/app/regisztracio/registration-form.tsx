@@ -205,7 +205,7 @@ export default function RegistrationForm(): JSX.Element {
               <div className="form-group">
                 <label htmlFor="privacy" className="form-group-label">
                   <input className="form-control" type="checkbox" id="privacy" name="privacy" value={filterData.privacy} onChange={handleChangeInput} />
-                  Elolvastam és elfogadom az <a href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatvedelmi_tajekozato.pdf`} target="_blank" rel="noopener noreferrer">adatkezelési tájékoztatót</a> *
+                  Elolvastam és elfogadom az <a href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatkezelesi_tajekoztato.pdf`} target="_blank" rel="noopener noreferrer">adatkezelési tájékoztatót</a> *
                 </label>
 
                 {errorObject?.privacy ? Object.values(errorObject.privacy).map((err, i) => {

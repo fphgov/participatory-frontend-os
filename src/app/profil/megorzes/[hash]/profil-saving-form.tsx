@@ -108,7 +108,7 @@ export default function ProfilSavingForm(): JSX.Element {
         <div className="form-group">
           <label htmlFor="privacy" className="form-group-label">
             <input className="form-control" type="checkbox" id="privacy" name="privacy" defaultChecked={filterData.privacy} onChange={handleChangeInput} />
-            Elfogadom az <a href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatvedelmi_tajekozato.pdf`} target="_blank" rel="noopener noreferrer">adatvédelmi tájékoztatót</a> *
+            Elfogadom az <a href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatkezelesi_tajekoztato.pdf`} target="_blank" rel="noopener noreferrer">adatkezelési tájékoztatót</a> *
           </label>
 
           {errorObject && errorObject.privacy ? Object.values(errorObject.privacy).map((err, i) => {
