@@ -4,13 +4,11 @@ import React, { useEffect, useState } from 'react'
 import 'vanilla-cookieconsent'
 import 'vanilla-cookieconsent/dist/cookieconsent.css'
 import { init } from '@socialgouv/matomo-next'
-import getConfig from 'next/config'
 import { useRouter } from 'next/navigation'
 
 function CookieConsentPopup({}): JSX.Element {
   const router = useRouter()
   const [popup, setPopup] = useState<HTMLElement | null>(null)
-  const { publicRuntimeConfig } = getConfig()  
 
   useEffect(() => {
     const cc = initCookieConsent()
@@ -28,8 +26,8 @@ function CookieConsentPopup({}): JSX.Element {
       onAccept: function (){
         if (cc.allowedCategory('analytics')) {
           init({
-            url: publicRuntimeConfig?.matomoUrl || process.env.MATOMO_URL,
-            siteId: publicRuntimeConfig?.siteId || process.env.MATOMO_SITE_ID
+            url: process.env.MATOMO_URL,
+            siteId: process.env.MATOMO_SITE_ID
           })
         }
       },
