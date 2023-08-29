@@ -8,7 +8,11 @@ import { useEffect, useState } from "react"
 import ScrollTo from "@/components/common/ScrollTo"
 import { registrationFom } from "@/app/actions"
 
-export default function RegistrationForm(): JSX.Element {
+type RegistrationFormProps = {
+  searchParams: Record<string, string>
+}
+
+export default function RegistrationForm({ searchParams }: RegistrationFormProps): JSX.Element {
   const [ error, setError ] = useState('')
   const [ errorObject, setErrorObject ] = useState<Record<string, string>>()
   const [ success, setSuccess ] = useState(false)
