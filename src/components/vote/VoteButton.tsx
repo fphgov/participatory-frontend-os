@@ -26,7 +26,7 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
     try {
       await apiVote(projectId)
 
-      window.location.reload()
+      window.location.href = '/szavazas-sikeres'
     } catch (e: any) {
       if (typeof e?.message === "string") {
         setError(e.message)

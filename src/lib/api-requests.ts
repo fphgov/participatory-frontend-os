@@ -18,7 +18,8 @@ import {
   UserResponse,
   PhaseStatusResponse,
   IssueResponse,
-  OkResponse
+  OkResponse,
+  VoteStatusResponse
 } from "@/lib/types"
 import { IUser } from "@/models/user.model"
 import { IIdea } from '@/models/idea.model'
@@ -376,6 +377,28 @@ export async function apiCheckVote(id: number|string|undefined): Promise<IssueRe
   return handleResponse<IssueResponse|MessageResponse>(response).then(data => data)
 }
 
+export async function apiVoteStatus(): Promise<VoteStatusResponse> {
+  const token = (await getToken())?.value
+
+  const headers: Record<string, string> = {
+    "Content": "application/json",
+    'Content-Type': "application/x-www-form-urlencoded",
+  }
+
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`
+  }
+
+  const url = backendUrl(endpoints.API_REQ_VOTE_STATUS)
+
+  const response = await fetch(url, {
+    method: "GET",
+    credentials: "include",
+    headers,
+  })
+
+  return handleResponse<VoteStatusResponse>(response).then(data => data)
+}
 
 export async function apiProfileActivate(hash: string): Promise<string> {
   const url = backendUrl((endpoints.API_REQ_PROFILE_ACTIVATE || '').toString().replace(':hash', hash))

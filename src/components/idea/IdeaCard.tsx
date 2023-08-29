@@ -13,6 +13,7 @@ type IdeaCardProps = {
   handleClick?: () => void|undefined
   showStatus?: boolean
   showVoted?: boolean
+  showMore?: boolean
   tagClick?: (tag: ITag) => {}|undefined
 }
 
@@ -23,15 +24,16 @@ export default function IdeaCard({
   handleClick,
   showStatus = true,
   showVoted = false,
+  showMore = true,
   tagClick = undefined
 }: IdeaCardProps): JSX.Element|null {
   if (idea == null) {
     return null
   }
 
-  const themeName = idea?.campaign_theme?.name || ''
+  const themeName = idea?.campaign_theme?.name || idea?.campaignTheme?.name || ''
   const shortDescription = idea.description
-  const statusCode = idea.status.code.toLowerCase()
+  const statusCode = idea?.status?.code?.toLowerCase()
 
   return (
     <div className="prop-wrapper">
@@ -60,14 +62,18 @@ export default function IdeaCard({
             { showStatus ? <div className="prop-build">{idea.status?.title}</div> : null }
           </div>
 
-          <hr />
+          {showMore ?
+            <>
+              <hr />
 
-          <footer className="post-card-meta">
-            <div>{showVoted && idea?.voted !== null ? <VoteCounter count={idea?.voted || 0} /> : null}</div>
-            <div className="post-more-wrapper">
-              <Link href={`${ideaPreLink}/${idea.id}`} className="btn post-more" onClick={handleClick}>Bővebben</Link>
-            </div>
-          </footer>
+              <footer className="post-card-meta">
+                <div>{showVoted && idea?.voted !== null ? <VoteCounter count={idea?.voted || 0} /> : null}</div>
+                <div className="post-more-wrapper">
+                  <Link href={`${ideaPreLink}/${idea.id}`} className="btn post-more" onClick={handleClick}>Bővebben</Link>
+                </div>
+              </footer>
+            </>
+           : null}
         </div>
       </div>
     </div>
