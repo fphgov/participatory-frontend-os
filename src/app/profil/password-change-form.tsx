@@ -5,6 +5,7 @@ import { useState } from "react"
 import { apiProfileChangePassword } from "@/lib/api-requests"
 import Error from "@/components/common/Error"
 import ErrorMini from '@/components/common/ErrorMini'
+import { profileChangePasswordForm } from '@/app/actions'
 
 export default function PasswordChangeForm(): JSX.Element {
   const defaultCredential = {
@@ -32,35 +33,28 @@ export default function PasswordChangeForm(): JSX.Element {
     setCredential({ ...credential, [e.target.name]: value })
   }
 
-  async function submitLogin(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-
+  async function onChangePassword() {
     setError('')
     setErrorObject(undefined)
 
-    try {
-      const response = await apiProfileChangePassword(credential)
+    const res = await profileChangePasswordForm(credential)
 
+    if (res.success) {
       setCredential(defaultCredential)
 
-      notify(response?.message)
-    } catch (e: any) {
-      try {
-        const jsonError = JSON.parse(e.message)
-
-        setErrorObject(jsonError)
-      } catch (jError: any) {
-        if (typeof e?.message === "string") {
-          setError(e.message)
-        }
+      if (res.successMessage) {
+        notify(res.successMessage)
       }
+    } else {
+      setErrorObject(res.jsonError)
+      setError(res.error)
 
       notify('⛔️ Sikertelen jelszó módosítás')
     }
   }
 
   return <>
-    <form className="form-horizontal" onSubmit={submitLogin}>
+    <form className="form-horizontal" action={onChangePassword}>
       <fieldset>
         {error ? <Error message={error} /> : null}
 

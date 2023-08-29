@@ -1,10 +1,6 @@
 'use server'
 
-import { apiLoginUser, apiLostPassword, apiResetPasswordChange, apiRegistration } from "@/lib/api-requests"
-
-function getFormData(formData: FormData, name: string): string {
-  return formData.get(name)?.toString() || ''
-}
+import { apiLoginUser, apiLostPassword, apiResetPasswordChange, apiRegistration, apiProfileChangePassword } from "@/lib/api-requests"
 
 export async function loginFom(formData: FormData) {
   let jsonError, error, success = false
@@ -114,12 +110,12 @@ export async function passwordResetForm(data: any) {
   }
 }
 
-export async function passwordChangeForm(data: any) {
+export async function profileChangePasswordForm(data: any) {
   let jsonError, error, success = false, successMessage = ''
 
   try {
     try {
-      const response = await apiResetPasswordChange(data)
+      const response = await apiProfileChangePassword(data)
 
       if (response.message) {
         success = true
