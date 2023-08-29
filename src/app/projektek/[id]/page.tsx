@@ -58,10 +58,12 @@ export default async function SimplePage({ params }: Props) {
     return notFound()
   }
 
+  const backHref = phaseStatus?.code === "VOTE" ? `/szavazas${pageData?.campaignTheme?.code ? `?theme=${pageData?.campaignTheme?.code}` : ''}` : "/projektek"
+
   return (
     <main className="page page-idea">
       <div className="prop">
-        <HeroPage title={pageData.title} link={<Link className="link-back" href="/projektek">Vissza</Link>} />
+        <HeroPage title={pageData.title} link={<Link className="link-back" href={backHref}>Vissza</Link>} />
 
         <div className="container">
           {error ? <Error message={error} /> : null}

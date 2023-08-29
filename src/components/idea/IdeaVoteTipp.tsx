@@ -8,7 +8,7 @@ type IdeaVoteTippProps = {
 }
 
 export default function IdeaVoteTipp({ content }: IdeaVoteTippProps): JSX.Element {
-  const { openModal, setOpenModal, setDataModal } = useModalContext()
+  const { setOpenModal, setDataModal } = useModalContext()
 
   useEffect(() => {
     setDataModal({
@@ -17,8 +17,11 @@ export default function IdeaVoteTipp({ content }: IdeaVoteTippProps): JSX.Elemen
   }, [])
 
   return (
-    <div onClick={() => { setOpenModal(true) }}>
-      <p className="subinfo">{content}</p>
+    <div className="subinfo-wrapper">
+      <p className="subinfo">
+        {content}
+      </p>
+      <div className="subinfo-icon" onClick={() => { setOpenModal(true) }} />
     </div>
   )
 }
