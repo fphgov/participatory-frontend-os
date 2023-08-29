@@ -1,6 +1,6 @@
 'use server'
 
-import { apiLoginUser, apiLostPassword, apiRegistration } from "@/lib/api-requests"
+import { apiLoginUser, apiLostPassword, apiPasswordChange, apiRegistration } from "@/lib/api-requests"
 
 function getFormData(formData: FormData, name: string): string {
   return formData.get(name)?.toString() || ''
@@ -32,7 +32,7 @@ export async function loginFom(formData: FormData) {
 
     return { jsonError, error, success }
   } catch (e) {
-    return { message: 'There was an error.' }
+    return { message: 'Váratlan hiba történt, kérünk próbáld később' }
   }
 }
 
@@ -56,7 +56,7 @@ export async function registrationFom(data: any) {
 
     return { jsonError, error, success }
   } catch (e) {
-    return { message: 'There was an error.' }
+    return { message: 'Váratlan hiba történt, kérünk próbáld később' }
   }
 }
 
@@ -83,6 +83,33 @@ export async function forgotPasswordForm(data: any) {
 
     return { jsonError, error, success, successMessage }
   } catch (e) {
-    return { message: 'There was an error.' }
+    return { message: 'Váratlan hiba történt, kérünk próbáld később' }
+  }
+}
+
+export async function passwordChangeForm(data: any) {
+  let jsonError, error, success = false, successMessage = ''
+
+  try {
+    try {
+      const response = await apiPasswordChange(data)
+
+      if (response.message) {
+        success = true
+        successMessage = response.message
+      }
+    } catch (e: any) {
+      try {
+        jsonError = JSON.parse(e.message)
+      } catch (jError: any) {
+        if (typeof e?.message === "string") {
+          error = e.message
+        }
+      }
+    }
+
+    return { jsonError, error, success, successMessage }
+  } catch (e) {
+    return { message: 'Váratlan hiba történt, kérünk próbáld később' }
   }
 }

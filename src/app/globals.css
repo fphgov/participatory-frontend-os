@@ -715,9 +715,6 @@ footer .fa-inverse {
   overflow: hidden;
 }
 
-.input-wrapper:last-of-type {
-  margin-bottom: 0;
-}
 
 .input-wrapper > label {
   display: block;
