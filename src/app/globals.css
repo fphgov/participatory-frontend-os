@@ -4138,6 +4138,44 @@ p.subinfo {
   letter-spacing: 0.14px;
 }
 
+.vote-order-filter-wrapper label,
+.vote-order-filter-wrapper select,
+.vote-order-filter-wrapper option {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.vote-order-filter-wrapper {
+  position: relative;
+}
+
+.vote-order-filter-wrapper label {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  z-index: 4;
+  color: #777;
+}
+
+.vote-order-filter-wrapper select {
+  position: relative;
+  width: 317px;
+  max-width: 317px;
+  padding: 14px 12px;
+  text-indent: 75px;
+  border-radius: 4px;
+  border: 1px solid #DDD;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-size: 24px 24px;
+  background-image: url('../../public/images/chevron.svg');
+  background-repeat: no-repeat;
+  background-position: calc(100% - 12px) 12px
+}
+
 .pagination-mini {
   padding: 0;
 }
