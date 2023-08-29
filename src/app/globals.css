@@ -88,6 +88,10 @@ body {
   padding: 48px 0;
 }
 
+.page-content img {
+  max-width: 100%;
+}
+
 .app > .page > div.home,
 .app > .page > div.page-home-section,
 .app > .page > div.ideas {
@@ -884,10 +888,10 @@ input[type="submit"] {
   bottom: 0;
   left: 0;
   right: 0;
-  background-image: url('../../public/images/city-dark-blue.svg');
+  background-image: url('../../public/images/hero-pattern.svg');
   background-repeat: repeat-x;
   width: 100%;
-  height: 207px;
+  height: 188px;
   margin: 0;
 }
 
