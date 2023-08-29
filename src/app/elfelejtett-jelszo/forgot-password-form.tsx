@@ -8,6 +8,7 @@ import { rmAllCharForEmail } from "@/utilities/removeSpecialCharacters"
 import { useEffect, useState } from "react"
 import ScrollTo from "@/components/common/ScrollTo"
 import ForgotPasswordSuccess from "@/app/elfelejtett-jelszo/forgot-password-success"
+import { forgotPasswordForm } from "@/app/actions"
 
 export default function ForgotPasswordForm(): JSX.Element {
   const [ error, setError ] = useState('')
@@ -24,9 +25,7 @@ export default function ForgotPasswordForm(): JSX.Element {
     setFilterData({ ...filterData, [e.target.name]: rmAllCharForEmail(e.target.value) })
   }
 
-  const postForgotPassword = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
+  async function onForgotPassword() {
     setScroll(false)
     setErrorObject(undefined)
     setError('')
@@ -36,25 +35,18 @@ export default function ForgotPasswordForm(): JSX.Element {
       'g-recaptcha-response': recaptchaToken,
     }
 
-    try {
-      const response = await apiLostPassword(data)
+    const res = await forgotPasswordForm(data)
 
-      if (response.message) {
-        setSuccessMessage(response.message)
-      }
-    } catch (e: any) {
-      if (typeof e.message === "string") {
-        setError(e.message)
-      } else {
-        const jsonError = JSON.parse(e.message)
-
-        setErrorObject(jsonError)
-      }
-
-      setScroll(true)
-
-      recaptcha?.execute()
+    if (res.successMessage) {
+      setSuccessMessage(res.successMessage)
+    } else {
+      setErrorObject(res.jsonError)
+      setError(res.error)
     }
+
+    setScroll(true)
+
+    recaptcha?.execute()
   }
 
   useEffect(() => {
@@ -72,7 +64,7 @@ export default function ForgotPasswordForm(): JSX.Element {
     <>
       {scroll && document.querySelector('.error-message-inline') ? <ScrollTo element={(document?.querySelector('.error-message-inline') as HTMLElement)?.offsetTop || 0} /> : null}
 
-      <form className="form-horizontal" onSubmit={postForgotPassword}>
+      <form className="form-horizontal" action={onForgotPassword}>
         <fieldset>
           {(typeof error === 'string' && error !== '') ? <Error message={error} /> : null}
 
