@@ -531,17 +531,3 @@ export async function apiProfileSaving(hash: string, data: Record<string, string
 
   return handleResponse<any>(response).then(data => data)
 }
-
-// export async function apiVoteList(data: Record<string, string>): Promise<VoteListResponse|IssueResponse> {
-//   const url = backendUrl(endpoints.API_REQ_VOTE_LIST + '?' + new URLSearchParams(data).toString())
-
-//   const response = await fetch(url, {
-//     method: "GET",
-//     credentials: "include",
-//     headers: {
-//       'Content': "application/json",
-//     },
-//   })
-
-//   return handleResponse<VoteListResponse|IssueResponse>(response).then(data => data)
-// }
