@@ -13,7 +13,7 @@ export default function LoginForm(): JSX.Element {
   const [errorObject, setErrorObject] = useState<Record<string, string>|undefined>(undefined)
   const [error, setError] = useState('')
 
-  async function onCreate(formData: FormData) {
+  async function onLogin(formData: FormData) {
     setError('')
     setErrorObject(undefined)
 
@@ -37,7 +37,7 @@ export default function LoginForm(): JSX.Element {
   }, [])
 
   return <>
-    <form className="form-horizontal" action={onCreate}>
+    <form className="form-horizontal" action={onLogin}>
       <fieldset>
         {error ? <Error message={error} /> : null}
 
