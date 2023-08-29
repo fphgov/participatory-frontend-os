@@ -81,6 +81,7 @@ body {
 
 .app > .page > div {
   margin: auto;
+  z-index: 2;
 }
 
 .page-content {
