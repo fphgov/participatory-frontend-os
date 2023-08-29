@@ -14,7 +14,7 @@ service:
   port: 80
 
 app:
-  nodeEnv: "production"
+  nodeEnv: "development"
   port: "8081"
 
 ingress:
