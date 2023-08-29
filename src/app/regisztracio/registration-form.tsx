@@ -3,10 +3,10 @@
 import Error from "@/components/common/Error"
 import ErrorMini from "@/components/common/ErrorMini"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
-import { apiRegistration } from "@/lib/api-requests"
 import { rmAllCharForEmail, rmAllCharForName, rmForNumber } from "@/utilities/removeSpecialCharacters"
 import { useEffect, useState } from "react"
 import ScrollTo from "@/components/common/ScrollTo"
+import { registrationFom } from "@/app/actions"
 
 export default function RegistrationForm(): JSX.Element {
   const [ error, setError ] = useState('')
@@ -49,9 +49,7 @@ export default function RegistrationForm(): JSX.Element {
     setFilterData({ ...filterData, [e.target.name]: e.target.value })
   }
 
-  const submitRegistration = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
+  async function onRegistration() {
     setScroll(false)
     setErrorObject(undefined)
     setError('')
@@ -73,25 +71,18 @@ export default function RegistrationForm(): JSX.Element {
       'g-recaptcha-response': recaptchaToken,
     }
 
-    try {
-      const response = await apiRegistration(data)
+    const res = await registrationFom(data)
 
-      if (response.data) {
-        setSuccess(true)
-      }
-    } catch (error: any) {
-      if (typeof error.message === "string") {
-        setError(error.message)
-      } else {
-        const jsonError = JSON.parse(error.message)
-
-        setErrorObject(jsonError)
-      }
-
-      setScroll(true)
-
-      recaptcha?.execute()
+    if (res.success) {
+      setSuccess(true)
+    } else {
+      setErrorObject(res.jsonError)
+      setError(res.error)
     }
+
+    setScroll(true)
+
+    recaptcha?.execute()
   }
 
   useEffect(() => {
@@ -105,7 +96,7 @@ export default function RegistrationForm(): JSX.Element {
     <>
       {scroll && document.querySelector('.error-message-inline') ? <ScrollTo element={(document?.querySelector('.error-message-inline') as HTMLElement)?.offsetTop || 0} /> : null}
 
-      <form className="form-horizontal" onSubmit={submitRegistration}>
+      <form className="form-horizontal" action={onRegistration}>
         <fieldset>
           {(typeof error === 'string' && error !== '') ? <Error message={error} /> : null}
 
@@ -275,8 +266,8 @@ export default function RegistrationForm(): JSX.Element {
       </form>
 
       {success ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
-          <h2>Köszönjük regisztrációd!</h2>
-          <p>A végelesítéshez kérjük kattints az általunk küldött megerősítő e-mail-ben található linkre, amit ide küldtünk: {filterData.email}</p>
+          <h2>Köszönjük regisztrációdat!</h2>
+          <p>A(z) {filterData.email} e-mail címre küldtünk egy linket, amire kattintva meg kell erősítened a szavazatodat.</p>
       </div> : null}
     </>
   )
