@@ -27,7 +27,7 @@ export default function Header({ loggedIn }: IHeader): JSX.Element {
       <nav className="main-navigation">
         <div className="container-fluid">
           <div className="row flex-center">
-            <div className="col-xs-6 col-sm-6 col-md-2">
+            <div className="col-6 col-xs-6 col-sm-6 col-md-2">
               <div className="logo-wrapper">
                 <a href="/" rel="noopener noreferrer">
                   <Image
@@ -40,7 +40,7 @@ export default function Header({ loggedIn }: IHeader): JSX.Element {
               </div>
             </div>
 
-            <div className="col-xs-6 col-sm-6 col-md-10">
+            <div className="col-6 col-xs-6 col-sm-6 col-md-10">
               <ul className="desktop-menu">
                 <Navigation menuItems={menu} rand={randomId(30, 'aA0')} loggedIn={loggedIn} />
               </ul>

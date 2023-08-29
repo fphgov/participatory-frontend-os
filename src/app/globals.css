@@ -3956,6 +3956,17 @@ p.subinfo {
   line-height: 20px;
   font-weight: 600;
   color: #777;
+  display: inline;
+}
+
+.subinfo-icon {
+  width: 24px;
+  height: 24px;
+  background: url('../../public/images/icon-info.svg');
+  background-repeat: no-repeat;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 6px;
 }
 
 .vote-start-section {
@@ -4494,6 +4505,10 @@ span.cc_highlight:hover {
     display: flex;
     margin: 60px auto;
     max-width: 440px;
+  }
+
+  .prop-single-wrapper.prop-single-sidebar:first-of-type {
+    margin-top: 24px;
   }
 }
 

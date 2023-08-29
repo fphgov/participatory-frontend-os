@@ -2,7 +2,6 @@
 
 import { createContext, useContext, useState } from "react"
 
-
 type ModalContextProviderProps = {
   children: React.ReactNode
 }
