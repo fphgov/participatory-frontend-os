@@ -32,11 +32,11 @@ export default function VoteOrderFilter({ baseUrl, searchParams }: VoteOrderFilt
 
   return (
     <div className="vote-order-filter-wrapper">
-      Rendezés
+      <label htmlFor="order">Rendezés:</label>
 
-      <select name="order" onChange={changeHandler} value={orderBy}>
-        <option value="random">Véletlenszerűen</option>
-        <option value="vote">Szavazás szerint</option>
+      <select id="order" name="order" onChange={changeHandler} value={orderBy}>
+        <option value="random"><span>Véletlenszerűen</span></option>
+        <option value="vote"><span>Szavazás szerint</span></option>
       </select>
     </div>
   )
