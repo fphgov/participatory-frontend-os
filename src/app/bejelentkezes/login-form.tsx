@@ -7,7 +7,11 @@ import Error from "@/components/common/Error"
 import ErrorMini from "@/components/common/ErrorMini"
 import { loginFom } from "@/app/actions"
 
-export default function LoginForm(): JSX.Element {
+type LoginFormProps = {
+  searchParams: Record<string, string>
+}
+
+export default function LoginForm({ searchParams } : LoginFormProps): JSX.Element {
   const [recaptcha, setRecaptcha] = useState<ReCaptcha>()
   const [recaptchaToken, setRecaptchaToken] = useState('')
   const [errorObject, setErrorObject] = useState<Record<string, string>|undefined>(undefined)
@@ -20,7 +24,11 @@ export default function LoginForm(): JSX.Element {
     const res = await loginFom(formData)
 
     if (res.success) {
-      window.location.href = '/profil'
+      if (searchParams?.project) {
+        window.location.href = '/projektek/' + searchParams?.project
+      } else {
+        window.location.href = '/profil'
+      }
     } else {
       setErrorObject(res.jsonError)
       setError(res.error)

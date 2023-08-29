@@ -18,7 +18,7 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
 
   const sendVoteHandler = async () => {
     if (! token) {
-      window.location.href = '/bejelentkezes'
+      window.location.href = '/bejelentkezes?project=' + projectId
     }
 
     setError('')
@@ -44,7 +44,6 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
 
           {errorVoteable ? <div className="vote-button-info-label">{errorVoteable}</div> : ''}
         </div>
-
       </> : null}
     </>
   )
