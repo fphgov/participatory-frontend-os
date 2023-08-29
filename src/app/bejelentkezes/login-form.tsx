@@ -14,7 +14,6 @@ export default function LoginForm(): JSX.Element {
   const [password, setPassword] = useState('')
   const [errorObject, setErrorObject] = useState<Record<string, string>|undefined>(undefined)
   const [error, setError] = useState('')
-  const [ignored, forceUpdate] = useReducer(x => x + 1, 0)
 
   async function submitLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -30,8 +29,6 @@ export default function LoginForm(): JSX.Element {
 
     try {
       await apiLoginUser(data)
-
-      forceUpdate()
 
       window.location.href = '/profil'
     } catch (e: any) {
