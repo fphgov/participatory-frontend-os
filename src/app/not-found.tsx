@@ -1,19 +1,15 @@
-import Image from 'next/image'
+import Link from 'next/link'
 import styles from './not-found.module.css'
 
 export default function NotFoundPage(): JSX.Element {
   return (
-    <main className="page">
+    <main className="page page-full-dark page-center">
       <div className={styles.page}>
-        <Image
-          src="/images/kozossegi_koltsegvetes.svg"
-          width={240}
-          height={140}
-          alt="Budapest Közösségi Költségvetés"
-          aria-hidden={true}
-        />
+        <h1>404</h1>
 
-        <p>404 - Az oldal nem található</p>
+        <p>Sajnáljuk, a keresett oldal nem található</p>
+
+        <Link className="btn btn-headline" href="/">Főoldal</Link>
       </div>
     </main>
   )

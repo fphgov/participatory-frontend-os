@@ -89,6 +89,13 @@ body {
   z-index: 2;
 }
 
+.page-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .page-content {
   padding: 48px 0;
 }
