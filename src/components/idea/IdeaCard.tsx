@@ -11,6 +11,7 @@ type IdeaCardProps = {
   ideaPreLink: string
   tags?: ITag[],
   handleClick?: () => void|undefined
+  autoHeight?: boolean
   showStatus?: boolean
   showVoted?: boolean
   showMore?: boolean
@@ -22,6 +23,7 @@ export default function IdeaCard({
   ideaPreLink,
   tags,
   handleClick,
+  autoHeight = false,
   showStatus = true,
   showVoted = false,
   showMore = true,
@@ -36,7 +38,7 @@ export default function IdeaCard({
   const statusCode = idea?.status?.code?.toLowerCase()
 
   return (
-    <div className="prop-wrapper">
+    <div className={`prop-wrapper ${autoHeight ? 'prop-wrapper-auto' : ''}`}>
       <div className={`prop-inner prop-status-${statusCode}`}>
         <div className="prop-content-wrapper">
           <div className="prop-content">

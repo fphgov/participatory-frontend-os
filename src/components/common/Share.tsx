@@ -5,13 +5,18 @@ import PopUp from '@/components/common/PopUp'
 import { useEffect, useState } from 'react'
 
 type ShareProps = {
+  directHref?: string
 }
 
-export default function Share({}: ShareProps): JSX.Element|null {
+export default function Share({ directHref }: ShareProps): JSX.Element|null {
   const [href, setHref] = useState('')
 
   useEffect(() => {
-    setHref(encodeURIComponent(window.location.href))
+    if (directHref) {
+      setHref(encodeURIComponent(window.location.origin + directHref))
+    } else {
+      setHref(encodeURIComponent(window.location.href))
+    }
   }, [])
 
   return (

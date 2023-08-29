@@ -2,6 +2,7 @@
 
 import HeroPage from '@/components/common/HeroPage'
 import ScrollButton from '@/components/common/ScrollButton'
+import Share from '@/components/common/Share'
 import IdeaCard from '@/components/idea/IdeaCard'
 import VoteStartSection from '@/components/vote/VoteStartSection'
 import { apiVoteStatus } from '@/lib/api-requests'
@@ -49,7 +50,14 @@ export default async function VoteStartPage() {
             <div className="container">
               <div className="row">
                 <div className="offset-md-2 col-md-8">
-                  <IdeaCard idea={pageData?.data.projects[0]} ideaPreLink={'/projektek'} showStatus={false} showMore={false} />
+                  <IdeaCard idea={pageData?.data.projects[0]} ideaPreLink={'/projektek'} showStatus={false} showMore={false} autoHeight={true} />
+
+                  <div className="page-vote-success-share">
+                    <div className="page-vote-success-share-title">Oszd meg másokkal is!</div>
+                    <div className="page-vote-success-share-content">
+                      <Share directHref={`/projektek/${pageData?.data.projects[0].id}`} />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
