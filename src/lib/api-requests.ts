@@ -29,6 +29,7 @@ import { IPage } from "@/models/page.model"
 import { IPlan } from '@/models/plan.model'
 import endpoints from '@/lib/endpoints'
 import { IPhaseStatus } from '@/models/phaseStatus.model'
+import { ApiError } from 'next/dist/server/api-utils';
 
 type ApiLoginUserProps = {
   email: string
@@ -48,19 +49,19 @@ async function handleResponse<T>(response: Response): Promise<T> {
   const data = isJson ? await response.json() : await response.text()
 
   if (response.status === 403) {
-    throw new Error('Google reCapcha ellenőrzés sikertelen')
+    throw new ApiError(403, 'Google reCapcha ellenőrzés sikertelen')
   }
 
   if (!response.ok) {
     if (isJson && isObject(data.errors)) {
-      throw new Error(JSON.stringify(data.errors))
+      throw new ApiError(response.status, JSON.stringify(data.errors))
     }
 
     if (response.statusText === "Unauthorized") {
       redirect('/bejelentkezes')
     }
 
-    throw new Error(data.message || response.statusText)
+    throw new ApiError(response.status, data.message || response.statusText)
   }
 
   return data as T
