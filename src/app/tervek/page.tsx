@@ -1,4 +1,4 @@
-import Pagination from '@/components/common/Pagination';
+import PaginationMini from '@/components/common/PaginationMini';
 import SearchArea from '@/components/common/SearchArea';
 import NewsletterArea from '@/components/home/NesletterArea';
 import IdeasWrapper from '@/components/idea/IdeasWrapper';
@@ -39,9 +39,17 @@ const Ideas: NextPage<IProps> = async ({ searchParams }) => {
           error={error}
         />
 
-        <div className="container">
-          <div className="search-result mt-3">
-            {plansList._total_items} találat
+        <div className="idea-pagination">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6"></div>
+
+              <div className="col-md-6">
+                {plansList?._links && plansList._page_count ? (
+                  <PaginationMini links={plansList._links} pageSize={21} totalItems={plansList._total_items} searchParams={searchParams} baseUrl={baseUrl} />
+                ): null}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -51,10 +59,16 @@ const Ideas: NextPage<IProps> = async ({ searchParams }) => {
           </div>
         </div>
 
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <Pagination links={plansList._links} size={plansList._page_count} searchParams={searchParams} baseUrl={baseUrl} />
+        <div className="idea-pagination">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6"></div>
+
+              <div className="col-md-6">
+                {plansList?._links && plansList._page_count ? (
+                  <PaginationMini links={plansList._links} pageSize={21} totalItems={plansList._total_items} searchParams={searchParams} baseUrl={baseUrl} />
+                ): null}
+              </div>
             </div>
           </div>
         </div>
