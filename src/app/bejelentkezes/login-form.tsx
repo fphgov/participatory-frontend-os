@@ -4,43 +4,26 @@ import { SetStateAction, useEffect, useState } from "react"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import Link from "next/link"
 import Error from "@/components/common/Error"
-import { apiLoginUser } from "@/lib/api-requests"
 import ErrorMini from "@/components/common/ErrorMini"
+import { loginFom } from "@/app/actions"
 
 export default function LoginForm(): JSX.Element {
   const [recaptcha, setRecaptcha] = useState<ReCaptcha>()
   const [recaptchaToken, setRecaptchaToken] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const [errorObject, setErrorObject] = useState<Record<string, string>|undefined>(undefined)
   const [error, setError] = useState('')
 
-  async function submitLogin(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
+  async function onCreate(formData: FormData) {
     setError('')
     setErrorObject(undefined)
 
-    const data = {
-      email,
-      password,
-      recaptchaToken,
-    }
+    const res = await loginFom(formData)
 
-    try {
-      await apiLoginUser(data)
-
+    if (res.success) {
       window.location.href = '/profil'
-    } catch (e: any) {
-      try {
-        const jsonError = JSON.parse(e.message)
-
-        setErrorObject(jsonError)
-      } catch (jError: any) {
-        if (typeof e?.message === "string") {
-          setError(e.message)
-        }
-      }
+    } else {
+      setErrorObject(res.jsonError)
+      setError(res.error)
     }
 
     recaptcha?.execute()
@@ -54,7 +37,7 @@ export default function LoginForm(): JSX.Element {
   }, [])
 
   return <>
-    <form className="form-horizontal" onSubmit={submitLogin}>
+    <form className="form-horizontal" action={onCreate}>
       <fieldset>
         {error ? <Error message={error} /> : null}
 
@@ -67,7 +50,7 @@ export default function LoginForm(): JSX.Element {
         <div className="form-wrapper">
           <div className="input-wrapper">
             <label htmlFor="email">E-mail cím</label>
-            <input type="text" autoCorrect="off" autoCapitalize="none" placeholder="E-mail cím" name="email" id="email" value={email} onChange={(e) => {setEmail(e.target.value)}} />
+            <input type="text" autoCorrect="off" autoCapitalize="none" placeholder="E-mail cím" name="email" id="email" />
 
             {errorObject && errorObject.password ? Object.values(errorObject.password).map((err, i) => {
               return <ErrorMini key={i} error={err} increment={`password-${i}`} />
@@ -76,7 +59,7 @@ export default function LoginForm(): JSX.Element {
 
           <div className="input-wrapper">
             <label htmlFor="password">Jelszó</label>
-            <input type="password" placeholder="Jelszó" name="password" id="password" value={password} onChange={(e) => { setPassword(e.target.value) }} />
+            <input type="password" placeholder="Jelszó" name="password" id="password" />
 
             {errorObject && errorObject.password ? Object.values(errorObject.password).map((err, i) => {
               return <ErrorMini key={i} error={err} increment={`password-${i}`} />
