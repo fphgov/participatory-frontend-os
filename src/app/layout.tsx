@@ -13,7 +13,8 @@ import ScrollContent from '@/components/common/ScrollContent'
 import { config } from "@fortawesome/fontawesome-svg-core"
 import { cookies } from 'next/headers'
 import CookieConsentPopup from '@/components/common/CookieConsentPopup'
-import Script from 'next/script'
+import Modal from '@/components/common/Modal'
+import { ModalContextProvider } from '@/context/modal'
 
 config.autoAddCss = false
 
@@ -73,15 +74,19 @@ export default function RootLayout({
         </> : null}
       </head>
 
-      <body className={`app ${font.className}`}>
-        <Header loggedIn={typeof cookieStore.get('token')?.value === 'string'} />
+      <ModalContextProvider>
+        <body className={`app ${font.className}`}>
+          <Modal />
 
-        {children}
+          <Header loggedIn={typeof cookieStore.get('token')?.value === 'string'} />
 
-        <Footer />
+          {children}
 
-        <ScrollContent />
-      </body>
+          <Footer />
+
+          <ScrollContent />
+        </body>
+      </ModalContextProvider>
     </html>
   )
 }

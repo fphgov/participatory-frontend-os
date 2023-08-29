@@ -10,6 +10,7 @@ import Share from "@/components/common/Share"
 import Implementation from "@/components/idea/Implementation"
 import VoteButton from "@/components/vote/VoteButton"
 import Gallery from "@/components/common/Gallery"
+import IdeaVoteTipp from "@/components/idea/IdeaVoteTipp"
 
 type IdeasWrapperProps = {
   project: IProject
@@ -135,7 +136,7 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
                     {project.voted} szavazat
                   </div>
 
-                  <p className="subinfo">Az ötlet megvalósítása 1000 szavazat felett lehetséges.</p>
+                  <IdeaVoteTipp content="Az ötlet megvalósítása 1000 szavazat felett lehetséges." />
                 </div>
               </div>
             ) : null}
