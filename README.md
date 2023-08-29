@@ -2,10 +2,10 @@
 
 Build docker image
 ```
-docker build --tag participatory-frontend:latest .
+docker-composer up -d
 ```
 
 Run docker image with console
 ```
-docker run -it --rm -v $(pwd):/app -p 8081:8081 participatory-frontend:latest sh
+docker exec -it participatory-frontend-frontend-1 sh
 ```
