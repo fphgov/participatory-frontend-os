@@ -1,6 +1,6 @@
 'use server'
 
-import { apiLoginUser, apiLostPassword, apiPasswordChange, apiRegistration } from "@/lib/api-requests"
+import { apiLoginUser, apiLostPassword, apiResetPasswordChange, apiRegistration } from "@/lib/api-requests"
 
 function getFormData(formData: FormData, name: string): string {
   return formData.get(name)?.toString() || ''
@@ -87,12 +87,39 @@ export async function forgotPasswordForm(data: any) {
   }
 }
 
+export async function passwordResetForm(data: any) {
+  let jsonError, error, success = false, successMessage = ''
+
+  try {
+    try {
+      const response = await apiResetPasswordChange(data)
+
+      if (response.message) {
+        success = true
+        successMessage = response.message
+      }
+    } catch (e: any) {
+      try {
+        jsonError = JSON.parse(e.message)
+      } catch (jError: any) {
+        if (typeof e?.message === "string") {
+          error = e.message
+        }
+      }
+    }
+
+    return { jsonError, error, success, successMessage }
+  } catch (e) {
+    return { message: 'Váratlan hiba történt, kérünk próbáld később' }
+  }
+}
+
 export async function passwordChangeForm(data: any) {
   let jsonError, error, success = false, successMessage = ''
 
   try {
     try {
-      const response = await apiPasswordChange(data)
+      const response = await apiResetPasswordChange(data)
 
       if (response.message) {
         success = true
