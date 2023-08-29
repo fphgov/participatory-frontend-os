@@ -532,7 +532,7 @@ export async function apiProfileSaving(hash: string, data: Record<string, string
   return handleResponse<any>(response).then(data => data)
 }
 
-export async function apiPasswordChange(data: Record<string, string>): Promise<MessageResponse> {
+export async function apiResetPasswordChange(data: Record<string, string>): Promise<MessageResponse> {
   var urlencoded = new URLSearchParams(data)
 
   const url = backendUrl(endpoints.API_REQ_PROFILE_RESET_PASSWORD)

@@ -4,14 +4,14 @@ import { useEffect, useState } from 'react'
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import Error from "@/components/common/Error"
 import ErrorMini from '@/components/common/ErrorMini'
-import { passwordChangeForm } from '@/app/actions'
+import { passwordResetForm } from '@/app/actions'
 import ScrollTo from '@/components/common/ScrollTo'
 
-type PasswordChangeFormProps = {
+type PasswordResetFormProps = {
   params: { hash: string }
 }
 
-export default function PasswordChangeForm({ params }: PasswordChangeFormProps): JSX.Element {
+export default function PasswordResetForm({ params }: PasswordResetFormProps): JSX.Element {
   const [ recaptcha, setRecaptcha ] = useState<ReCaptcha>()
   const [ recaptchaToken, setRecaptchaToken ] = useState('')
   const [ scroll, setScroll ] = useState(false)
@@ -30,7 +30,7 @@ export default function PasswordChangeForm({ params }: PasswordChangeFormProps):
       'g-recaptcha-response': recaptchaToken,
     }
 
-    const res = await passwordChangeForm(data)
+    const res = await passwordResetForm(data)
 
     if (res.success) {
       window.location.href = '/bejelentkezes'
