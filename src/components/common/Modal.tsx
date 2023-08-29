@@ -1,28 +1,27 @@
 "use client"
 
 import { useModalContext } from '@/context/modal'
-import React from 'react';
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 const useOutsideClick = (callback: () => void) => {
-  const ref = React.useRef();
+  const ref = useRef<HTMLDivElement>(null)
 
-  React.useEffect(() => {
-    const handleClick = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
-        callback();
+  useEffect(() => {
+    const handleClick = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        callback()
       }
-    };
+    }
 
-    document.addEventListener('click', handleClick, true);
+    document.addEventListener('click', handleClick, true)
 
     return () => {
-      document.removeEventListener('click', handleClick, true);
-    };
-  }, [ref]);
+      document.removeEventListener('click', handleClick, true)
+    }
+  }, [ref])
 
-  return ref;
-};
+  return ref
+}
 
 export default function Modal(): JSX.Element {
   const { openModal, setOpenModal, dataModal } = useModalContext()
@@ -31,7 +30,7 @@ export default function Modal(): JSX.Element {
     setOpenModal(false)
   }
 
-  const ref = useOutsideClick(closeModal);
+  const ref = useOutsideClick(closeModal)
 
   useEffect(() => {
     if (openModal) {
