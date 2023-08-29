@@ -454,6 +454,32 @@ header .logo-wrapper img {
   background-image: url('../../public/images/btn-next-white.svg');
 }
 
+.btn-back {
+  background-color: rgba(231, 245, 254, 1);
+  color: rgba(18, 50, 110, 1);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0.16px;
+}
+
+.btn-back:hover {
+  text-decoration: underline;
+}
+
+.btn-back::before {
+  content: '';
+  background-image: url('../../public/images/btn-prev-blue.svg');
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  margin: auto;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 6px;
+}
+
 .input-wrapper input:focus,
 .input-wrapper textarea:focus,
 .input-wrapper select:focus {
@@ -2820,6 +2846,10 @@ a.link-back {
   text-decoration: none;
 }
 
+a.link-back:hover {
+  text-decoration: underline;
+}
+
 a.link-back::before {
   content: '';
   background-image: url('../../public/images/arrow-backspace.svg');
@@ -4022,8 +4052,8 @@ p.subinfo {
   width: 36px;
   height: 36px;
   display: block;
-  margin: auto;
   margin-right: 8px;
+  background-size: contain;
 }
 
 .vote-project-wrapper {
@@ -4401,6 +4431,12 @@ span.cc_highlight:hover {
   margin: 0;
 }
 
+hr.project-hr {
+  border: 1px solid #DDD;
+  margin-top: 48px;
+  margin-bottom: 24px;
+}
+
 @media screen and (min-width: 1440px) {
   .container,
   .container-sm,
@@ -4530,6 +4566,11 @@ span.cc_highlight:hover {
 
   .prop-single-wrapper.prop-single-sidebar:first-of-type {
     margin-top: 24px;
+  }
+
+  .vote-search-input {
+    justify-content: left;
+    margin: 24px 0;
   }
 }
 

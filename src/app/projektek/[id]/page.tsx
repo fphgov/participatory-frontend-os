@@ -74,6 +74,7 @@ export default async function SimplePage({ params }: Props) {
             disableVoteButton={! enabledVoteButton}
             voteable={phaseStatus?.code === "VOTE"}
             errorVoteable={errorVoteable}
+            backHref={backHref}
           />
         </div>
       </div>

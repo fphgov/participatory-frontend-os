@@ -12,7 +12,7 @@ export default function HeroPage({ title, content, link = null, children }: Hero
     <div className="hero-page">
       <div className="container">
         <div className="row">
-          <div className="offset-lg-1 offset-md-1 col-lg-10 col-md-10">
+          <div className="offset-lg-1 col-lg-10 col-md-12">
             {link}
 
             <h1>{title}</h1>

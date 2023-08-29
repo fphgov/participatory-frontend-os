@@ -108,7 +108,7 @@ export default async function VotePage({ searchParams }: IProps) {
 
           <div className="vote-category-order">
             <div className="container">
-              <div className="row">
+              <div className="row flex-center">
                 <div className="col-md-6">
                   <VoteOrderFilter searchParams={searchParams} baseUrl={baseUrl} />
                 </div>
