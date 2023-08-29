@@ -26,7 +26,6 @@ export default function RegistrationForm(): JSX.Element {
     'hear_about': '',
     'live_in_city': '',
     'privacy': '',
-    'prize': '',
     'newsletter': '',
     'reminder_email': '',
   })
@@ -65,7 +64,6 @@ export default function RegistrationForm(): JSX.Element {
       hear_about: filterData.hear_about,
       live_in_city: filterData.live_in_city,
       privacy: filterData.privacy,
-      prize: filterData.prize,
       newsletter: filterData.newsletter,
       reminder_email: filterData.reminder_email,
       'g-recaptcha-response': recaptchaToken,
@@ -234,17 +232,6 @@ export default function RegistrationForm(): JSX.Element {
 
                 {errorObject?.reminder_email ? Object.values(errorObject.reminder_email).map((err, i) => {
                   return <ErrorMini key={i} error={err} increment={`reminder_email-${i}`} />
-                }) : null}
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="prize" className="form-group-label">
-                  <input className="form-control" type="checkbox" id="prize" name="prize" value={filterData.prize} onChange={handleChangeInput} />
-                  Szeretnék részt venni a nyereményjátékon és az ehhez szükséges adataim kezeléséhez hozzájárulok.
-                </label>
-
-                {errorObject?.prize ? Object.values(errorObject.prize).map((err, i) => {
-                  return <ErrorMini key={i} error={err} increment={`prize-${i}`} />
                 }) : null}
               </div>
 
