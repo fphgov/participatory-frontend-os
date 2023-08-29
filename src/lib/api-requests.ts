@@ -88,7 +88,7 @@ export async function apiLoginUser(credentials: ApiLoginUserProps): Promise<stri
   const { token } = await handleResponse<UserLoginResponse>(response)
 
   if (token) {
-    saveToken(token)
+    await saveToken(token)
   }
 
   return token

@@ -54,9 +54,9 @@ export async function middleware(req: NextRequest) {
     if (token) {
       const jwt = await verifyJWT<{ user: User }>(token)
 
-      requestHeaders.set('X-USERNAME', jwt?.user?.username);
+      // requestHeaders.set('X-USERNAME', jwt?.user?.username);
 
-      (req as AuthenticatedRequest).user = jwt?.user
+      // (req as AuthenticatedRequest).user = jwt?.user
     }
   } catch (error: any) {
     redirectToLogin = true
@@ -76,19 +76,21 @@ export async function middleware(req: NextRequest) {
     return response
   }
 
-  const authUser = (req as AuthenticatedRequest).user
+  // const authUser = (req as AuthenticatedRequest).user
 
-  if (!authUser) {
-    return NextResponse.redirect(
-      new URL('/bejelentkezes', req.url)
-    )
-  }
+  // console.log('authUser', authUser)
 
-  if (req.url.includes("/bejelentkezes") && authUser) {
+  // if (!authUser) {
+  //   return NextResponse.redirect(
+  //     new URL('/bejelentkezes', req.url)
+  //   )
+  // }
+
+  if (req.url.includes("/bejelentkezes")) {
     return NextResponse.redirect(new URL("/profil", req.url))
   }
 
-  if (req.url.includes("/kijelentkezes") && authUser) {
+  if (req.url.includes("/kijelentkezes")) {
     const response = NextResponse.redirect(new URL("/force-redirect", req.url))
 
     response.cookies.set("token", "", { expires: new Date(Date.now()) })
