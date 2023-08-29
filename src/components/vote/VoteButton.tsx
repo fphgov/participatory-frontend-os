@@ -24,9 +24,11 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
     setError('')
 
     try {
-      await apiVote(projectId)
+      const response = await apiVote(projectId)
 
-      window.location.href = '/szavazas-sikeres'
+      if (response.message) {
+        window.location.href = '/szavazas-sikeres'
+      }
     } catch (e: any) {
       if (typeof e?.message === "string") {
         setError(e.message)
