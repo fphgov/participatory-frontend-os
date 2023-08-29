@@ -2,7 +2,7 @@ import HeroPage from '@/components/common/HeroPage'
 import VoteCategoryFilter from '@/components/vote/VoteCategoryFilter'
 import VoteCategoryFilterItem from '@/components/vote/VoteCategoryFilterItem'
 import VoteSearch from '@/components/vote/VoteSearch'
-import { apiVoteablePlansData } from '@/lib/api-requests'
+import { apiVoteStatus, apiVoteablePlansData } from '@/lib/api-requests'
 import Error from '@/components/common/Error'
 import type { Metadata } from 'next'
 import IdeasWrapper from '@/components/idea/IdeasWrapper'
@@ -12,6 +12,7 @@ import { generateRandomValue } from '@/utilities/generateRandomValue'
 import PaginationMini from '@/components/common/PaginationMini'
 import { notFound } from 'next/navigation'
 import VoteOrderFilter from '@/components/vote/VoteOrderFilter'
+import { getToken } from '@/lib/actions'
 
 interface IProps {
   searchParams: Record<string, string>
@@ -57,10 +58,16 @@ export default async function VotePage({ searchParams }: IProps) {
     return apiVoteablePlansData(data)
   }
 
-  let projectList, error
+  let projectList, voteStatus, error
 
   try {
     projectList = await getPageData()
+
+    const token = (await getToken())?.value
+
+    if (token) {
+      voteStatus = await apiVoteStatus()
+    }
   } catch (e: any) {
     error = e.message
   }
@@ -81,6 +88,8 @@ export default async function VotePage({ searchParams }: IProps) {
     )
   }
 
+  const votedThemes = voteStatus?.data?.projects?.map(project => project.campaignTheme?.code)
+
   return (
     <>
       <main className="page page-vote">
@@ -90,11 +99,9 @@ export default async function VotePage({ searchParams }: IProps) {
           {(typeof error === 'string' && error !== '') ? <Error message={error} /> : null}
 
           <VoteCategoryFilter>
-            <VoteCategoryFilterItem theme="LOCAL-SMALL" ready={false} currentTheme={theme} href={getUrl('LOCAL-SMALL')} />
-            <VoteCategoryFilterItem theme="LOCAL-BIG" ready={false} currentTheme={theme} href={getUrl('LOCAL-BIG')} />
-            <VoteCategoryFilterItem theme="CARE" ready={false} currentTheme={theme} href={getUrl('CARE')} />
-            <VoteCategoryFilterItem theme="OPEN" ready={false} currentTheme={theme} href={getUrl('OPEN')} />
-            <VoteCategoryFilterItem theme="GREEN" ready={false} currentTheme={theme} href={getUrl('GREEN')} />
+            {["LOCAL-SMALL", "LOCAL-BIG", "CARE", "OPEN", "GREEN"].map((themeName) => (
+              <VoteCategoryFilterItem key={themeName} theme={themeName} ready={votedThemes?.includes(themeName)} currentTheme={theme} href={getUrl(themeName)} />
+            ))}
           </VoteCategoryFilter>
 
           <VoteSearch title={categoryResolver(theme)} searchParams={searchParams} baseUrl={baseUrl} />
