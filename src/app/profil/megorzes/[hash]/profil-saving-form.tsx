@@ -6,6 +6,8 @@ import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import Error from "@/components/common/Error"
 import ErrorMini from '@/components/common/ErrorMini'
 import { apiProfileSaving } from "@/lib/api-requests"
+import { profileSavingForm } from '@/app/actions'
+import ScrollTo from '@/components/common/ScrollTo'
 
 export default function ProfilSavingForm(): JSX.Element {
   const params = useParams()
@@ -13,6 +15,7 @@ export default function ProfilSavingForm(): JSX.Element {
 
   const [ recaptcha, setRecaptcha ] = useState<ReCaptcha>()
   const [ recaptchaToken, setRecaptchaToken ] = useState('')
+  const [ scroll, setScroll ] = useState(false)
   const [ error, setError ] = useState('')
   const [ errorObject, setErrorObject ] = useState<Record<string, string>>()
   const [ filterData, setFilterData ] = useState({
@@ -28,34 +31,28 @@ export default function ProfilSavingForm(): JSX.Element {
     setFilterData({ ...filterData, [e.target.name]: value })
   }
 
-  async function submitProfileSaving(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-
-    setErrorObject(undefined)
+  async function onSavingProfile() {
+    setScroll(false)
     setError('')
+    setErrorObject(undefined)
 
     const data = {
       ...filterData,
       'g-recaptcha-response': recaptchaToken,
     }
 
-    try {
-      await apiProfileSaving((params?.hash as string || ''), data)
+    const res = await profileSavingForm((params?.hash as string || ''), data)
 
+    if (res.success) {
       router.push("/profil/megorzes/sikeres")
-    } catch (e: any) {
-      try {
-        const jsonError = JSON.parse(e.message)
-
-        setErrorObject(jsonError)
-      } catch (jError: any) {
-        if (typeof e?.message === "string") {
-          setError(e.message)
-        }
-      }
-
-      recaptcha?.execute()
+    } else {
+      setErrorObject(res.jsonError)
+      setError(res.error)
     }
+
+    setScroll(true)
+
+    recaptcha?.execute()
   }
 
   useEffect(() => {
@@ -66,7 +63,9 @@ export default function ProfilSavingForm(): JSX.Element {
   }, [])
 
   return <>
-    <form className="form-horizontal" onSubmit={submitProfileSaving}>
+    {scroll && document.querySelector('.error-message-inline') ? <ScrollTo element={(document?.querySelector('.error-message-inline') as HTMLElement)?.offsetTop || 0} /> : null}
+
+    <form className="form-horizontal" action={onSavingProfile}>
       <fieldset>
         {error ? <Error message={error} /> : null}
 
@@ -125,7 +124,7 @@ export default function ProfilSavingForm(): JSX.Element {
           }}
         />
 
-        <input type="submit" value="Aktiválom" className="btn btn-primary" />
+        <input type="submit" value="Megerősítem" className="btn btn-primary" />
       </fieldset>
     </form>
   </>
