@@ -27,6 +27,13 @@ export interface PhaseStatusResponse {
   data: IPhaseStatus
 }
 
+export interface VoteStatusResponse {
+  data: {
+    voteables_count: number,
+    projects: IProject[],
+  }
+}
+
 export interface IdeaResponse extends IIdea {
 }
 

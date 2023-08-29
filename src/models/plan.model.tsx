@@ -11,7 +11,8 @@ export type IPlanStatus = {
 export type IPlan = {
   id: string|number
   status: IPlanStatus
-  campaign_theme: ICampaignTheme
+  campaign_theme?: ICampaignTheme
+  campaignTheme?: ICampaignTheme
   tags: ITag
   title: string
   description: string

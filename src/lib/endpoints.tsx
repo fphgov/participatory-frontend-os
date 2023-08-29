@@ -31,6 +31,7 @@ const endpoints = {
   API_REQ_FILTER_PLANS: '/api/plans/filter',
   API_REQ_VOTE_LIST: '/api/vote/list',
   API_REQ_VOTE_CHECK: '/api/vote/check/:id',
+  API_REQ_VOTE_STATUS: '/api/vote/status',
   API_REQ_PHASE_CHECK: '/api/phase/check'
 }
 
