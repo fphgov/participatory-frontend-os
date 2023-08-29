@@ -401,7 +401,7 @@ export async function apiVoteStatus(): Promise<VoteStatusResponse> {
   return handleResponse<VoteStatusResponse>(response).then(data => data)
 }
 
-export async function apiProfileActivate(hash: string): Promise<string> {
+export async function apiProfileActivate(hash: string): Promise<MessageResponse> {
   const url = backendUrl((endpoints.API_REQ_PROFILE_ACTIVATE || '').toString().replace(':hash', hash))
 
   const response = await fetch(url, {
@@ -412,7 +412,7 @@ export async function apiProfileActivate(hash: string): Promise<string> {
     },
   })
 
-  return handleResponse<MessageResponse>(response).then(data => data.message)
+  return handleResponse<MessageResponse>(response).then(data => data)
 }
 
 export async function apiIdeasData(data: Record<string, string>): Promise<IdeaListResponse> {

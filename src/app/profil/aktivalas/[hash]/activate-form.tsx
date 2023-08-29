@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Error from "@/components/common/Error"
-import { apiProfileActivate } from "@/lib/api-requests"
+import { profileActivateForm } from '@/app/actions'
 
 export default function ActivateForm(): JSX.Element {
   const params = useParams()
@@ -11,24 +11,20 @@ export default function ActivateForm(): JSX.Element {
 
   const [error, setError] = useState('')
 
-  async function submitLogin(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-
+  async function onChangePassword() {
     setError('')
 
-    try {
-      await apiProfileActivate((params?.hash as string || ''))
+    const res = await profileActivateForm((params?.hash as string || ''))
 
+    if (res.success) {
       router.push("/profil/aktivalas/sikeres")
-    } catch (e: any) {
-      if (typeof e.message === "string") {
-        setError(e.message)
-      }
+    } else {
+      setError(res.error)
     }
   }
 
   return <>
-    <form onSubmit={submitLogin}>
+    <form action={onChangePassword}>
       <fieldset>
         {error ? <Error message={error} /> : null}
 
