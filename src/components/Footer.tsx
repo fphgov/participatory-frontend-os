@@ -36,7 +36,7 @@ export default function Footer(): JSX.Element {
             <div className="copyright">© 2023 Budapest Főváros Önkormányzata | Minden jog fenntartva</div>
 
             <ul>
-              <li className="nav"><a href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatvedelmi_tajekozato.pdf`} target="_blank" rel="noopener noreferrer">Adatvédelmi tájékoztató</a></li>
+              <li className="nav"><a href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatkezelesi_tajekoztato.pdf`} target="_blank" rel="noopener noreferrer">Adatkezelési tájékoztató</a></li>
               <li className="nav"><Link href="/oldal/dokumentumok">Dokumentumok</Link></li>
               <li className="nav"><Link href="/oldal/kapcsolat">Kapcsolat</Link></li>
               <li className="nav"><a href={`${process.env.NEXT_PUBLIC_FILES_PATH}/participatory-budgeting-in-budapest.pdf`} target="_blank" rel="noopener noreferrer">Information in English</a></li>
