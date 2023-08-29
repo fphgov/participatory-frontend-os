@@ -26,8 +26,8 @@ function CookieConsentPopup({}): JSX.Element {
       onAccept: function (){
         if (cc.allowedCategory('analytics')) {
           init({
-            url: process.env.MATOMO_URL,
-            siteId: process.env.MATOMO_SITE_ID
+            url: (process.env.MATOMO_URL || '').toString(),
+            siteId: (process.env.MATOMO_SITE_ID || '').toString()
           })
         }
       },
@@ -75,7 +75,7 @@ function CookieConsentPopup({}): JSX.Element {
 
                   <p><span class="cc_bold">Mi az a süti?</span><br />
                   Olyan adatfájl, amelyet böngésződ továbbít a szerverünkre a weboldalunkkal történő kommunikációja során.</p>
-                  
+
                   <p><span class="cc_bold">Hogyan tudod törölni a sütiket?</span><br>
                   A sütik kezelésével kapcsolatos beállításokat bármikor megváltoztathatod. Amennyiben az otlet.budapest.hu oldal látogatása során az <span class="cc_bold">ELFOGADOM MINDET</span> vagy a <span class="cc_bold">VÁLASZTOK A SÜTIKATEGÓRIÁK KÖZÜL</span> gombra kattintva elfogadtad a sütik alkalmazását és ezen változtatni szeretnél, azt egyszerűen a böngésződben a böngészési előzmények törlésével teheted meg.<br>
                   A leggyakoribb böngészőkben (Chrome, Edge, Safari, Firefox, Internet Explorer) ezt az alábbiak szerint tudod megtenni:</p>
@@ -97,15 +97,22 @@ function CookieConsentPopup({}): JSX.Element {
                   {
                     col1: 'cc_cookie',
                     col2: 'A cookie beállításra kerül amikor a felhasználó elfogadja a cookie-k használatát. Kezelt adatok köre: Felhasználó sütibeállításainak tárolása',
-                    col3: '.budapest.hu',
+                    col3: '.otlet.budapest.hu',
                     col4: '6 hónap',
                     col5: 'HTTP'
                   },
                   {
                     col1: 'cookiesession1',
                     col2: 'Az oldal védelmére szolgáló tűzfal által létrehozott cookie.<br><br>Kezelt adatok köre: A munkamenet-cookie lehetővé teszi a böngésző számára, hogy újra azonosítsa magát azon egyetlen, egyedi szerveren, amelyre az ügyfél korábban hitelesített.',
-                    col3: '.budapest.hu',
+                    col3: '.otlet.budapest.hu',
                     col4: 'Munkamenet (kilépés után)',
+                    col5: 'HTTP'
+                  },
+                  {
+                    col1: 'token',
+                    col2: 'Az oldalon a bejelentkezési funkcióhoz nélkülözhetetlen cookie.<br><br>Kezelt adatok köre: Felhasználó és a szerver közötti kommunikációs során létrehozott egyedi kulcs, amely segítségével hitelesíthető a két fél kommunikációja.',
+                    col3: `.otlet.budapest.hu`,
+                    col4: '1 óra',
                     col5: 'HTTP'
                   },
                 ]
@@ -125,28 +132,28 @@ function CookieConsentPopup({}): JSX.Element {
                   {
                     col1: '_pk_id',
                     col2: 'Matomo Analytics  cookie-k melyek segítenek adatokat gyűjteni arról, hogy a látogató milyen módon használja a webhelye Kezelt adatok köre: Felhasználói egyedi azonosító a felhasználók egymástól való megkülönböztetésére, de nem azonosítására.',
-                    col3: 'budapest.hu',
+                    col3: 'otlet.budapest.hu',
                     col4: '13 hónap',
                     col5: 'HTTP'
                   },
                   {
                     col1: '_pk_ses,<br>_pk_cvar,<br>_pk_hsr',
                     col2: 'Matomo Analytics  cookie-k melyek segítenek adatokat gyűjteni arról, hogy a látogató milyen módon használja a webhelyet. Kezelt adatok köre: Felhasználó munkamenetazonosító',
-                    col3: 'budapest.hu',
+                    col3: 'otlet.budapest.hu',
                     col4: '30 perc',
                     col5: 'HTTP'
                   },
                   {
                     col1: '_pk_ref',
                     col2: 'Matomo Analytics  cookie-k melyek segítenek adatokat gyűjteni arról, hogy a látogató milyen módon használja a webhelyet. Kezelt adatok köre: Munkamenetek összekapcsolása',
-                    col3: 'budapest.hu',
+                    col3: 'otlet.budapest.hu',
                     col4: '6 hónap',
                     col5: 'HTTP'
                   },
                   {
                     col1: '_pk_testcookie',
                     col2: 'Matomo Analytics süti létrehozhatóság tesztelésére szolgál.',
-                    col3: 'budapest.hu',
+                    col3: 'otlet.budapest.hu',
                     col4: 'Azonnal',
                     col5: 'HTTP'
                   }
@@ -172,19 +179,19 @@ function CookieConsentPopup({}): JSX.Element {
                   {
                     col1: '_fbp',
                     col2: 'A Facebook használja különböző hirdetési termékeinek biztosításához, például valós idejű ajánlatok harmadik féltől származó hirdetőktől. Kezelt adatok köre: látogatás ténye, oldalon eltöltött idő',
-                    col3: '.budapest.hu',
+                    col3: '.otlet.budapest.hu',
                     col4: '3 hónap',
                     col5: 'HTTP'
                   }, {
                     col1: 'fr',
                     col2: 'A Facebook használja különböző hirdetési termékeinek biztosításához, például valós idejű ajánlatok harmadik féltől származó hirdetőktől. Kezelt adatok köre: látogatás ténye, oldalon eltöltött idő',
-                    col3: '.budapest.hu',
+                    col3: '.otlet.budapest.hu',
                     col4: '3 hónap',
                     col5: 'HTTP'
                   }, {
                     col1: 'tr',
                     col2: 'A Facebook használja különböző hirdetési termékeinek biztosításához, például valós idejű ajánlatok harmadik féltől származó hirdetőktől. Kezelt adatok köre: látogatás ténye, oldalon eltöltött idő',
-                    col3: '.budapest.hu',
+                    col3: '.otlet.budapest.hu',
                     col4: 'Munkamenet',
                     col5: 'HTTP'
                   }
