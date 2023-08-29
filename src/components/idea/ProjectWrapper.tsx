@@ -17,10 +17,11 @@ type IdeasWrapperProps = {
   voteable: boolean
   disableVoteButton: boolean
   errorVoteable: string
-  token: string,
+  token: string
+  backHref?: string
 }
 
-export default function ProjectWrapper({ project, voteable, token, errorVoteable, disableVoteButton }: IdeasWrapperProps): JSX.Element {
+export default function ProjectWrapper({ project, voteable, token, errorVoteable, disableVoteButton, backHref }: IdeasWrapperProps): JSX.Element {
   const theme = project?.campaignTheme
 
   const isProject = [140, 200].indexOf(project?.workflowState?.id) !== -1
@@ -205,9 +206,9 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
                 </div>
 
                 <div className="prop-single-side-section prop-single-cost">
-                  <div className="prop-info-title">Becsült költség</div>
+                  <div className="prop-info-title">Tervezett költség</div>
                   <div className="prop-info-content">
-                    {!project.cost ? <>Nincs becsült költség</> : <>{nFormatter(project.cost)}</>}
+                    {!project.cost ? <>Nincs tervezett költség</> : <>{nFormatter(project.cost)}</>}
                   </div>
                 </div>
 
@@ -224,6 +225,14 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="offset-lg-1 col-lg-10">
+            {backHref ? <>
+              <hr className="project-hr" />
+
+              <Link className="btn btn-back" href={backHref}>Vissza a többi ötlethez</Link>
+            </>: null}
           </div>
         </div>
       </div>
