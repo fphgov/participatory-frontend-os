@@ -35,7 +35,8 @@ RUN npm run build
 
 FROM node:20-alpine AS production
 
-ENV NODE_ENV=production
+# ENV NODE_ENV=production
+ENV NODE_ENV=development
 ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN apk add --no-cache tini
