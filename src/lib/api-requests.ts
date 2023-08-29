@@ -205,7 +205,7 @@ export async function apiRegistration(data: Record<string, string>): Promise<Rec
     body: urlencoded,
   })
 
-  return await handleResponse<any>(response).then(data => data)
+  return handleResponse<any>(response).then(data => data)
 }
 
 export async function apiLostPassword(data: Record<string, string>): Promise<Record<string, string>> {
@@ -224,7 +224,7 @@ export async function apiLostPassword(data: Record<string, string>): Promise<Rec
     body: urlencoded,
   })
 
-  return await handleResponse<any>(response).then(data => data)
+  return handleResponse<any>(response).then(data => data)
 }
 
 export async function apiArticlesData(data: Record<string, string>|Record<string, any>): Promise<IArticle[]> {
@@ -529,7 +529,7 @@ export async function apiProfileSaving(hash: string, data: Record<string, string
     body: urlencoded,
   })
 
-  return await handleResponse<any>(response).then(data => data)
+  return handleResponse<any>(response).then(data => data)
 }
 
 // export async function apiVoteList(data: Record<string, string>): Promise<VoteListResponse|IssueResponse> {
