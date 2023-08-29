@@ -10,6 +10,7 @@ import HeroPage from '@/components/common/HeroPage'
 import Link from 'next/link'
 import ProjectWrapper from '@/components/idea/ProjectWrapper'
 import NewsletterArea from '@/components/home/NesletterArea'
+import { OkResponse } from '@/lib/types'
 
 type Props = {
   params: { id: string }
@@ -51,7 +52,7 @@ export default async function SimplePage({ params }: Props) {
 
   const enabledVoteButton = (
     token === undefined ||
-    (token !== undefined && voteable?.data?.code === "OK")
+    (token !== undefined && (voteable as OkResponse)?.data?.code === "OK")
   )
 
   if (!pageData) {
