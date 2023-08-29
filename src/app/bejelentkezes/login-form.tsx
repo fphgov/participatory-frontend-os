@@ -1,6 +1,6 @@
 'use client'
 
-import { SetStateAction, useEffect, useReducer, useState } from "react"
+import { SetStateAction, useEffect, useState } from "react"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import Link from "next/link"
 import Error from "@/components/common/Error"
