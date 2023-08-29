@@ -324,7 +324,7 @@ export async function apiCheckPhase(): Promise<IPhaseStatus> {
   return handleResponse<PhaseStatusResponse>(response).then(data => data.data)
 }
 
-export async function apiVote(projectId: number|string): Promise<IssueResponse|OkResponse> {
+export async function apiVote(projectId: number|string): Promise<IssueResponse|MessageResponse> {
   const token = (await getToken())?.value
 
   const headers: Record<string, string> = {
@@ -349,10 +349,10 @@ export async function apiVote(projectId: number|string): Promise<IssueResponse|O
     headers,
   })
 
-  return handleResponse<IssueResponse|OkResponse>(response).then(data => data)
+  return handleResponse<IssueResponse|MessageResponse>(response).then(data => data)
 }
 
-export async function apiCheckVote(id: number|string|undefined): Promise<IssueResponse|MessageResponse> {
+export async function apiCheckVote(id: number|string|undefined): Promise<IssueResponse|OkResponse> {
   const token = (await getToken())?.value
 
   const headers: Record<string, string> = {
@@ -374,7 +374,7 @@ export async function apiCheckVote(id: number|string|undefined): Promise<IssueRe
     headers,
   })
 
-  return handleResponse<IssueResponse|MessageResponse>(response).then(data => data)
+  return handleResponse<IssueResponse|OkResponse>(response).then(data => data)
 }
 
 export async function apiVoteStatus(): Promise<VoteStatusResponse> {
