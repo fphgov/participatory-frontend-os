@@ -1,7 +1,6 @@
 "use server"
 
 import type { Metadata } from 'next'
-import { redirect } from 'next/navigation'
 import { getToken } from "@/lib/actions"
 import { notFound } from 'next/navigation'
 import Error from '@/components/common/Error'
