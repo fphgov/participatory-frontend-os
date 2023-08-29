@@ -136,7 +136,7 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
                     {project.voted} szavazat
                   </div>
 
-                  <IdeaVoteTipp content="Az ötlet megvalósítása 1000 szavazat felett lehetséges." />
+                  <IdeaVoteTipp theme={theme} />
                 </div>
               </div>
             ) : null}
