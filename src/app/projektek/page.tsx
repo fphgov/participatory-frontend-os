@@ -26,56 +26,59 @@ const Ideas: NextPage<IProps> = async ({ searchParams }) => {
   }
 
   return (
-    <main className="page page-projects">
-      <div className="projects">
-        <SearchArea
-          title="Megvalósuló ötletek"
-          tipp="Itt láthatod a nyertes ötleteket, vagyis azokat az egyes években legtöbb szavazatot kapott javaslatokat, amelyeket a Főpolgármesteri Hivatal megvalósít. A megvalósulás állapotáról a projektek adatlapján tájékoztatást adunk."
-          tipp2=""
-          type="project"
-          baseUrl={baseUrl}
-          searchParams={searchParams}
-          filterParams={projectsFilter}
-          error={error}
-        />
+    <>
+      <main className="page page-projects">
+        <div className="projects">
+          <SearchArea
+            title="Megvalósuló ötletek"
+            tipp="Itt láthatod a nyertes ötleteket, vagyis azokat az egyes években legtöbb szavazatot kapott javaslatokat, amelyeket a Főpolgármesteri Hivatal megvalósít. A megvalósulás állapotáról a projektek adatlapján tájékoztatást adunk."
+            tipp2=""
+            type="project"
+            baseUrl={baseUrl}
+            searchParams={searchParams}
+            filterParams={projectsFilter}
+            error={error}
+          />
 
-        <div className="idea-pagination">
+          <div className="idea-pagination">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-6"></div>
+
+                <div className="col-md-6">
+                  {projectsList?._links && projectsList._page_count ? (
+                    <PaginationMini links={projectsList._links} pageSize={21} totalItems={projectsList._total_items} searchParams={searchParams} baseUrl={baseUrl} />
+                  ): null}
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="container">
             <div className="row">
-              <div className="col-md-6"></div>
+              {projectsList._embedded?.projects.map((project, i) => <IdeasWrapper ideaPreLink={baseUrl} key={i} idea={project} />)}
+            </div>
+          </div>
 
-              <div className="col-md-6">
-                {projectsList?._links && projectsList._page_count ? (
-                  <PaginationMini links={projectsList._links} pageSize={21} totalItems={projectsList._total_items} searchParams={searchParams} baseUrl={baseUrl} />
-                ): null}
+          <div className="idea-pagination">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-6"></div>
+
+                <div className="col-md-6">
+                  {projectsList?._links && projectsList._page_count ? (
+                    <PaginationMini links={projectsList._links} pageSize={21} totalItems={projectsList._total_items} searchParams={searchParams} baseUrl={baseUrl} />
+                  ): null}
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="container">
-          <div className="row">
-            {projectsList._embedded?.projects.map((project, i) => <IdeasWrapper ideaPreLink={baseUrl} key={i} idea={project} />)}
-          </div>
-        </div>
-
-        <div className="idea-pagination">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6"></div>
-
-              <div className="col-md-6">
-                {projectsList?._links && projectsList._page_count ? (
-                  <PaginationMini links={projectsList._links} pageSize={21} totalItems={projectsList._total_items} searchParams={searchParams} baseUrl={baseUrl} />
-                ): null}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </main>
 
       <NewsletterArea />
-    </main>
+    </>
   )
 }
 

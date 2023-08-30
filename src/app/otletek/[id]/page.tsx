@@ -39,17 +39,20 @@ export default async function SimplePage({ params }: Props) {
   }
 
   return (
-    <main className="page page-idea">
-      <div className="prop">
-        <HeroPage title={pageData.title} link={<Link className="link-back" href="/otletek">Vissza</Link>} />
+    <>
+      <main className="page page-idea">
+        <div className="prop">
+          <HeroPage title={pageData.title} link={<Link className="link-back" href="/otletek">Vissza</Link>} />
 
-        <div className="container">
-          {error ? <Error message={error} /> : null}
-          {pageData ? <IdeaWrapper idea={pageData} /> : null}
+          <div className="container">
+            {error ? <Error message={error} /> : null}
+            {pageData ? <IdeaWrapper idea={pageData} /> : null}
+          </div>
         </div>
-      </div>
+
+      </main>
 
       <NewsletterArea />
-    </main>
+    </>
   )
 }

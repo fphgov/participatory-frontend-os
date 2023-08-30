@@ -32,35 +32,37 @@ const Articles: NextPage<IProps> = async ({ searchParams }) => {
   }
 
   return (
-    <main className="page page-posts">
-      <div className="page-posts-section">
+    <>
+      <main className="page page-posts">
+        <div className="page-posts-section">
 
-        <HeroPage title="Hírek, rendezvények" content="A közösség költségvetéssel kapcsolatos legfrissebb hírek és tudnivalók." />
+          <HeroPage title="Hírek, rendezvények" content="A közösség költségvetéssel kapcsolatos legfrissebb hírek és tudnivalók." />
 
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              {(typeof error === 'string' && error !== '') ? <Error message={error} /> : null}
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                {(typeof error === 'string' && error !== '') ? <Error message={error} /> : null}
 
-              <Tabs currentTab={currentTab} />
+                <Tabs currentTab={currentTab} />
 
-              <div className="posts">
-                <div className="row">
-                  {Array.isArray(articles) && articles.map((article, i) => (
-                    <div key={i} className="col-lg-3 col-md-6 col-sm-6 col-12 article-wrapper">
-                      <ArticleCard article={article} />
-                    </div>
-                  ))}
+                <div className="posts">
+                  <div className="row">
+                    {Array.isArray(articles) && articles.map((article, i) => (
+                      <div key={i} className="col-lg-3 col-md-6 col-sm-6 col-12 article-wrapper">
+                        <ArticleCard article={article} />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </main>
 
       <NewsletterArea />
-    </main>
+    </>
   )
 }
 
