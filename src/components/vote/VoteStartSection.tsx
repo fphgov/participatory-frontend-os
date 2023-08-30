@@ -1,5 +1,6 @@
 import React from "react"
 import CategoryCard from "@/components/idea/CategoryCard"
+import Link from "next/link"
 
 type VoteStartSectionProps = {
   title: string
@@ -17,26 +18,40 @@ export default function VoteStartSection({ title, votedList = [], isContinue = f
   ]
 
   return (
-    <div className={`vote-start-section${isContinue ? ' vote-continue-section' : ''}`}>
-      <div className="container">
-        <div className="row">
-          <div className="offset-lg-2 col-lg-8">
-            <h3>{title}</h3>
+    <>
+      <div className={`vote-start-section${isContinue ? ' vote-continue-section' : ''}`}>
+        <div className="container">
+          <div className="row">
+            <div className="offset-lg-2 col-lg-8">
+              <h3>{title}</h3>
+            </div>
           </div>
-        </div>
 
-        <div className="row">
-          <div className="offset-lg-2 col-lg-8">
-            <div className="row">
-              {categories.map(category => (
-                <div key={category.code} className="col-md-6">
-                  <CategoryCard themeName={category.name} href={`/szavazas?theme=${category.code}`} description={category.description} voted={votedList.includes(category.code)} />
-                </div>
-              ))}
+          <div className="row">
+            <div className="offset-lg-2 col-lg-8">
+              <div className="row">
+                {categories.map(category => (
+                  <div key={category.code} className="col-md-6">
+                    <CategoryCard themeName={category.name} href={`/szavazas?theme=${category.code}`} description={category.description} voted={votedList.includes(category.code)} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+
+      {votedList?.length === categories.length ? <>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="button-wrapper button-wrapper-center">
+                <Link className="btn btn-headline btn-next" href="/szavazas?theme=LOCAL-SMALL">Vissza az ötletekhez</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </> : null}
+    </>
   )
 }
