@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { verifyJWT } from "./lib/token"
 import { getErrorResponse } from "./lib/helpers"
 
-type User = {
+export type User = {
   username: string
   firstname: string
   lastname: string
@@ -105,9 +105,6 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    '/api/:path*',
-    "/profil",
-    "/bejelentkezes",
-    "/kijelentkezes",
+    '/((?!api|_next/static|_next/image|favicon.ico|images|manifest).*)',
   ],
 }
