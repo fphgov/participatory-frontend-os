@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function SimplePage({ params }: Props) {
+export default async function ProjectPage({ params }: Props) {
   let pageData, phaseStatus, voteable, error, errorVoteable
 
   try {
