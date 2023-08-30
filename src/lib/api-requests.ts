@@ -221,7 +221,6 @@ export async function apiLostPassword(data: Record<string, string>): Promise<Rec
 
   const response = await fetch(url, {
     cache: "no-store",
-    cache: "no-store",
     method: "POST",
     credentials: "include",
     headers: {
