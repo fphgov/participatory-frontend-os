@@ -57,7 +57,7 @@ export default async function ProfilePage() {
                 <div className="btn-wrapper btn-wrapper-flex">
                   <ProfileDeleteButton profile={profile} />
 
-                  <Link className="btn btn-primary-solid" href="/kijelentkezes">Kijelentkezés</Link>
+                  <Link className="btn btn-primary-solid" href="/kijelentkezes" prefetch={false}>Kijelentkezés</Link>
                 </div>
               </div>
 
