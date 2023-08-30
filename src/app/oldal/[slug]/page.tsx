@@ -38,25 +38,27 @@ export default async function SimplePage({ params }: Props) {
   }
 
   return (
-    <main className="page page-page">
-      <div className="page-profile-single-section">
+    <>
+      <main className="page page-page">
+        <div className="page-profile-single-section">
 
-        <HeroPage title={pageData.title} />
+          <HeroPage title={pageData.title} />
 
-        <div className="page-content">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12">
-                {error ? <Error message={error} /> : null}
+          <div className="page-content">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-12">
+                  {error ? <Error message={error} /> : null}
 
-                <div dangerouslySetInnerHTML={{ __html: pageData.content }} />
+                  <div dangerouslySetInnerHTML={{ __html: pageData.content }} />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </main>
 
       <NewsletterArea />
-    </main>
+    </>
   )
 }
