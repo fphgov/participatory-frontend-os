@@ -16,8 +16,6 @@ interface AuthenticatedRequest extends NextRequest {
 
 let redirectToLogin = false
 export async function middleware(req: NextRequest) {
-  console.log('MIDDLEWARE: ', req.nextUrl.pathname)
-
   if (
     req.nextUrl.pathname.startsWith("/api/login") ||
     req.nextUrl.pathname.startsWith("/api/media")
@@ -51,8 +49,6 @@ export async function middleware(req: NextRequest) {
   }
 
   const requestHeaders = new Headers(req.headers)
-
-  console.log('cookies', requestHeaders.get('cookie'))
 
   try {
     if (token) {
@@ -109,10 +105,6 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    // '/api/:path*',
-    // "/profil",
-    // "/bejelentkezes",
-    // "/kijelentkezes",
-    '/((?!_next/static|_next/image|favicon.ico|images|manifest).*)',
+    '/((?!_next/static|_next/image|favicon.ico|images|files|manifest).*)',
   ],
 }
