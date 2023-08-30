@@ -52,6 +52,8 @@ export async function middleware(req: NextRequest) {
 
   const requestHeaders = new Headers(req.headers)
 
+  console.log('cookies', requestHeaders.get('cookie'))
+
   try {
     if (token) {
       const jwt = await verifyJWT<{ user: User }>(token)
