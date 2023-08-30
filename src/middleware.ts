@@ -76,13 +76,13 @@ export async function middleware(req: NextRequest) {
     return response
   }
 
-  const authUser = (req as AuthenticatedRequest).user
+  // const authUser = (req as AuthenticatedRequest).user
 
-  if (!authUser) {
-    return NextResponse.redirect(
-      new URL('/bejelentkezes', req.url)
-    )
-  }
+  // if (!authUser) {
+  //   return NextResponse.redirect(
+  //     new URL('/bejelentkezes', req.url)
+  //   )
+  // }
 
   if (req.url.includes("/bejelentkezes")) {
     return NextResponse.redirect(new URL("/profil", req.url))
@@ -105,10 +105,10 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    '/api/:path*',
-    "/profil",
-    "/bejelentkezes",
-    "/kijelentkezes",
-    // '/((?!_next/static|_next/image|favicon.ico|images|manifest).*)',
+    // '/api/:path*',
+    // "/profil",
+    // "/bejelentkezes",
+    // "/kijelentkezes",
+    '/((?!_next/static|_next/image|favicon.ico|images|manifest).*)',
   ],
 }
