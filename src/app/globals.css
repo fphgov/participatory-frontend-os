@@ -681,6 +681,12 @@ body.open-menu .mobile-menu {
   text-decoration: none;
   border: 0;
   background: none;
+  font-size: 16px;
+}
+
+.mobile-menu ul>li>a > div {
+  display: flex;
+  align-items: center;
 }
 
 footer {
@@ -4797,6 +4803,23 @@ hr.project-hr {
   .form-status li a {
     text-align: left;
     min-width: 190px;
+  }
+
+  .pagination-mini-wrapper {
+    margin: 24px 0;
+  }
+
+  .page-vote .prop-wrapper .post-more-wrapper,
+  .page-vote .prop-wrapper .post-more-wrapper .post-more {
+    width: auto;
+  }
+
+  .vote-category-pagination {
+    margin-bottom: 36px;
+  }
+
+  .page-vote .list-wrapper {
+    margin: 0;
   }
 }
 
