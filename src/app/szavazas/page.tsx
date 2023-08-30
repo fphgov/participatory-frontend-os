@@ -10,7 +10,6 @@ import NewsletterArea from '@/components/home/NesletterArea'
 import { categoryResolver } from '@/utilities/categoryResolver'
 import { generateRandomValue } from '@/utilities/generateRandomValue'
 import PaginationMini from '@/components/common/PaginationMini'
-import { notFound } from 'next/navigation'
 import VoteOrderFilter from '@/components/vote/VoteOrderFilter'
 import { getToken } from '@/lib/actions'
 
@@ -104,7 +103,7 @@ export default async function VotePage({ searchParams }: IProps) {
             ))}
           </VoteCategoryFilter>
 
-          <VoteSearch title={categoryResolver(theme)} searchParams={searchParams} baseUrl={baseUrl} />
+          <VoteSearch title={categoryResolver(theme)} searchParams={searchParams} baseUrl={baseUrl} ready={votedThemes?.includes(theme)} />
 
           <div className="vote-category-order">
             <div className="container">
