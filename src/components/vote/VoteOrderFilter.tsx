@@ -36,7 +36,7 @@ export default function VoteOrderFilter({ baseUrl, searchParams }: VoteOrderFilt
 
       <select id="order" name="order" onChange={changeHandler} value={orderBy}>
         <option value="random">Véletlenszerűen</option>
-        <option value="vote">Szavazás szerint</option>
+        <option value="vote">Szavazatok száma szerint</option>
       </select>
     </div>
   )
