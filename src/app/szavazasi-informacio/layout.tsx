@@ -30,11 +30,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </div>
 
                 <div className="col-md-8">
-                  <Details className="section-more" summary={<div><CategoryIcon color="blue" size={24} name="Helyi - kis" />Helyi kis ötletek</div>} startOpen={true}>
+                  <Details className="section-more" summary={<div><CategoryIcon color="blue" size={24} name="Helyi - kis ötlet" />Helyi kis ötletek</div>} startOpen={true}>
                     <p>Olyan ötletek, amelyeket jellemzően egy, esetenként több konkrét helyszínre javasolt beadójuk, és megvalósításuk költsége nem haladja meg az 50 millió forintot.</p>
                   </Details>
 
-                  <Details className="section-more" summary={<div><CategoryIcon color="blue" size={24} name="Helyi - nagy" />Helyi nagy ötletek</div>}>
+                  <Details className="section-more" summary={<div><CategoryIcon color="blue" size={24} name="Helyi - nagy ötlet" />Helyi nagy ötletek</div>}>
                     <p>Olyan ötletek, amelyeket jellemzően egy, esetenként több konkrét helyszínre javasolt beadójuk, és megvalósításuk költsége 51 és 120 millió forint közé esik.</p>
                   </Details>
 
