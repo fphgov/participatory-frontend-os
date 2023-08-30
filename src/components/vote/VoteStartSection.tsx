@@ -41,7 +41,7 @@ export default function VoteStartSection({ title, votedList = [], isContinue = f
         </div>
       </div>
 
-      {votedList?.length === categories.length ? <>
+      {!isContinue && votedList?.length === categories.length ? <>
         <div className="container">
           <div className="row">
             <div className="col-md-12">

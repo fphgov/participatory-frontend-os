@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function NewsletterArea(): JSX.Element|null {
   return (
-    <div className="light-section newsletter">
+    <div id="hirlevel" className="light-section newsletter">
       <div className="container">
         <div className="row flex-center">
           <div className="col-md-5">
