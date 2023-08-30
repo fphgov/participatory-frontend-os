@@ -20,7 +20,7 @@ function CookieConsentPopup({}): JSX.Element {
     cc.run({
       autorun: true,
       current_lang: 'hu',
-      autoclear_cookies: true,
+      autoclear_cookies: false,
       page_scripts: true,
 
       onAccept: function (){
