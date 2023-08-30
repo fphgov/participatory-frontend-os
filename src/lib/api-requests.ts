@@ -77,6 +77,7 @@ export async function apiLoginUser(credentials: ApiLoginUserProps): Promise<stri
   const url = backendUrl(endpoints.API_REQ_LOGIN)
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "POST",
     credentials: "include",
     headers: {
@@ -109,6 +110,7 @@ export async function apiProfileData(): Promise<IUser> {
   const url = backendUrl(endpoints.API_REQ_PROFILE)
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     credentials: "include",
     headers,
@@ -131,6 +133,7 @@ export async function apiProfileIdeaData(data: Record<string, string>): Promise<
   const url = backendUrl(endpoints.API_REQ_IDEAS + '?' + new URLSearchParams(data as Record<string, string>).toString())
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     credentials: "include",
     headers,
@@ -153,6 +156,7 @@ export async function apiProfileDelete(): Promise<MessageResponse> {
   const url = backendUrl(endpoints.API_REQ_PROFILE_DELETE)
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "DELETE",
     credentials: "include",
     headers
@@ -181,6 +185,7 @@ export async function apiProfileChangePassword(credentials: { password: string, 
   const url = backendUrl(endpoints.API_REQ_PASSWORD)
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "POST",
     credentials: "include",
     headers,
@@ -196,6 +201,7 @@ export async function apiRegistration(data: Record<string, string>): Promise<Rec
   const url = backendUrl(endpoints.API_REQ_REGISTRATION)
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "POST",
     credentials: "include",
     headers: {
@@ -215,6 +221,7 @@ export async function apiLostPassword(data: Record<string, string>): Promise<Rec
 
   const response = await fetch(url, {
     cache: "no-store",
+    cache: "no-store",
     method: "POST",
     credentials: "include",
     headers: {
@@ -231,6 +238,7 @@ export async function apiArticlesData(data: Record<string, string>|Record<string
   const url = backendUrl(endpoints.API_REQ_POSTS + '?' + new URLSearchParams(data as Record<string, string>).toString())
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     credentials: "include",
     headers: {
@@ -245,6 +253,7 @@ export async function apiArticleData(slug: string): Promise<IArticle> {
   const url = backendUrl((endpoints.API_REQ_POST || '').toString().replace(':slug', slug))
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     credentials: "include",
     headers: {
@@ -259,6 +268,7 @@ export async function apiPageData(slug: string): Promise<IPage> {
   const url = backendUrl((endpoints.API_REQ_PAGE || '').toString().replace(':slug', slug))
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     credentials: "include",
     headers: {
@@ -273,6 +283,7 @@ export async function apiIdeaData(id: number|string): Promise<IIdea> {
   const url = backendUrl((endpoints.API_REQ_IDEA || '').toString().replace(':id', id.toString()))
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     credentials: "include",
     headers: {
@@ -287,6 +298,7 @@ export async function apiProjectData(id: number|string): Promise<IProject> {
   const url = backendUrl((endpoints.API_REQ_PROJECT || '').toString().replace(':id', id.toString()))
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     credentials: "include",
     headers: {
@@ -301,6 +313,7 @@ export async function apiPlanData(id: number|string): Promise<IPlan> {
   const url = backendUrl((endpoints.API_REQ_PLAN || '').toString().replace(':id', id.toString()))
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     credentials: "include",
     headers: {
@@ -315,6 +328,7 @@ export async function apiCheckPhase(): Promise<IPhaseStatus> {
   const url = backendUrl(endpoints.API_REQ_PHASE_CHECK)
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     credentials: "include",
     headers: {
@@ -344,6 +358,7 @@ export async function apiVote(projectId: number|string): Promise<IssueResponse|M
   urlencoded.append("projects[0]", projectId.toString())
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "POST",
     credentials: "include",
     body: urlencoded,
@@ -370,6 +385,7 @@ export async function apiCheckVote(id: number|string|undefined): Promise<IssueRe
   const url = backendUrl((endpoints.API_REQ_VOTE_CHECK || '').toString().replace(':id', projectId))
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     credentials: "include",
     headers,
@@ -393,6 +409,7 @@ export async function apiVoteStatus(): Promise<VoteStatusResponse> {
   const url = backendUrl(endpoints.API_REQ_VOTE_STATUS)
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     credentials: "include",
     headers,
@@ -405,6 +422,7 @@ export async function apiProfileActivate(hash: string): Promise<MessageResponse>
   const url = backendUrl((endpoints.API_REQ_PROFILE_ACTIVATE || '').toString().replace(':hash', hash))
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     credentials: "include",
     headers: {
@@ -419,6 +437,7 @@ export async function apiIdeasData(data: Record<string, string>): Promise<IdeaLi
   const url = backendUrl(endpoints.API_REQ_IDEAS + '?' + new URLSearchParams(data as Record<string, string>).toString())
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     credentials: "include",
     headers: {
@@ -433,6 +452,7 @@ export async function apiProjectsData(data: Record<string, string>|Record<string
   const url = backendUrl(endpoints.API_REQ_PROJECTS+ '?' + new URLSearchParams(data as Record<string, string>).toString())
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     credentials: "include",
     headers: {
@@ -447,6 +467,7 @@ export async function apiPlansData(data: Record<string, string>): Promise<PlanLi
   const url = backendUrl(endpoints.API_REQ_PLANS + '?' + new URLSearchParams(data as Record<string, string>).toString())
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     credentials: "include",
     headers: {
@@ -461,6 +482,7 @@ export async function apiIdeasFilter(data: Record<string, string>): Promise<Filt
   const url = backendUrl(endpoints.API_REQ_FILTER_IDEAS + '?' + new URLSearchParams(data as Record<string, string>).toString())
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     credentials: "include",
     headers: {
@@ -475,6 +497,7 @@ export async function apiVoteablePlansData(data: Record<string, string>): Promis
   const url = backendUrl(endpoints.API_REQ_VOTE_LIST + '?' + new URLSearchParams(data as Record<string, string>).toString())
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     credentials: "include",
     headers: {
@@ -489,6 +512,7 @@ export async function apiProjectsFilter(data: Record<string, string>): Promise<F
   const url = backendUrl(endpoints.API_REQ_FILTER_PROJECTS+ '?' + new URLSearchParams(data as Record<string, string>).toString())
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     credentials: "include",
     headers: {
@@ -503,6 +527,7 @@ export async function apiPlansFilter(data: Record<string, string>): Promise<Filt
   const url = backendUrl(endpoints.API_REQ_FILTER_PLANS + '?' + new URLSearchParams(data as Record<string, string>).toString())
 
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     credentials: "include",
     headers: {
