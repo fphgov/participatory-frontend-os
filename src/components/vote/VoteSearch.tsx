@@ -5,10 +5,11 @@ import HeroTags from "@/components/idea/HeroTags"
 type VoteSearchProps = {
   title: string
   baseUrl: string
+  ready?: boolean
   searchParams: Record<string, string>
 }
 
-export default function VoteSearch({ title, baseUrl, searchParams }: VoteSearchProps): JSX.Element {
+export default function VoteSearch({ title, baseUrl, searchParams, ready = false }: VoteSearchProps): JSX.Element {
   const tags = [
     { id: 175, name: '#hulladék / köztisztaság / wc' },
     { id: 173, name: '#közlekedés' },
@@ -22,7 +23,10 @@ export default function VoteSearch({ title, baseUrl, searchParams }: VoteSearchP
       <div className="container">
         <div className="row">
           <div className="col-lg-6">
-            <h4>{title}</h4>
+            <div className="vote-search-title">
+              <h4>{title}</h4>
+              {ready ? <div className="vote-status" title="Ebben a kategóriában már szavaztál!" /> : null}
+            </div>
           </div>
           <div className="col-lg-6">
             <div className="vote-search-input">

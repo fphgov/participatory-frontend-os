@@ -4149,6 +4149,21 @@ p.subinfo {
   background-image: url('../../public/images/icon-circle-accept-white.svg');
 }
 
+.vote-search-title {
+  display: flex;
+  align-items: center;
+}
+
+.vote-status {
+  background-image: url('../../public/images/icon-circle-accept-green_36.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  margin-left: 6px;
+}
+
 .vote-search-wrapper h4 {
   font-size: 32px;
   font-style: normal;
