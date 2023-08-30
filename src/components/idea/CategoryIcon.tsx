@@ -11,6 +11,7 @@ export default function CategoryIcon({ name, color = "white", size = 18 }: Categ
 
   switch (name) {
     case 'Egész Budapest':
+    case 'Zöld Budapest':
       filename += 'green'
       break;
 
