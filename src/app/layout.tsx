@@ -12,7 +12,7 @@ import Header from '../components/Header'
 import ScrollContent from '@/components/common/ScrollContent'
 import { config } from "@fortawesome/fontawesome-svg-core"
 import { cookies } from 'next/headers'
-import CookieConsentPopup from '@/components/common/CookieConsentPopup'
+// import CookieConsentPopup from '@/components/common/CookieConsentPopup'
 import Modal from '@/components/common/Modal'
 import { ModalContextProvider } from '@/context/modal'
 
@@ -55,7 +55,7 @@ export default function RootLayout({
         <meta httpEquiv="Cache-control" content="no-cache, no-store, must-revalidate" />
         <meta httpEquiv="Pragma" content="no-cache" />
 
-        <CookieConsentPopup />
+        {/* <CookieConsentPopup /> */}
 
         {process.env.FACEBOOK_PIXEL ? <>
           <script type="text/plain" data-cookiecategory="marketing" defer dangerouslySetInnerHTML={{ __html: `!function(f,b,e,v,n,t,s)
