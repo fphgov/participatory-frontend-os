@@ -4134,7 +4134,7 @@ p.subinfo {
   background-image: url('../../public/images/icon-circle-accept-green.svg');
 }
 
-.vote-filter-item.vote-filter-item-status-unavailable.active .vote-filter-item-status-unavailable-name::after,
+.vote-filter-item.vote-filter-item-status-unavailable.active .vote-filter-item-name::after,
 .vote-filter-item.vote-filter-item-status-unavailable:hover .vote-filter-item-name::after {
   background-image: url('../../public/images/icon-circle-accept-white.svg');
 }
