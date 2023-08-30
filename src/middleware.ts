@@ -16,6 +16,8 @@ interface AuthenticatedRequest extends NextRequest {
 
 let redirectToLogin = false
 export async function middleware(req: NextRequest) {
+  console.log('MIDDLEWARE: ', req.nextUrl.pathname)
+
   if (
     req.nextUrl.pathname.startsWith("/api/login") ||
     req.nextUrl.pathname.startsWith("/api/media")
