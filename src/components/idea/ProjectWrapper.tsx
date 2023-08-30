@@ -182,7 +182,7 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
                     <div className="prop-info-content">
                       {project.tags.map((tag, i) => {
                         return (<div className="tag" key={i}>
-                          <Link href={`/projektek?tag=${tag.id}`}>#{tag.name}</Link>
+                          {backHref ? <Link href={`${backHref}&tag=${tag.id}`}>#{tag.name}</Link> : <Link href={`/projektek?tag=${tag.id}`}>#{tag.name}</Link>}
                         </div>)
                       })}
                     </div>
