@@ -21,6 +21,7 @@ config.autoAddCss = false
 const font = Source_Sans_3({ subsets: ['latin-ext'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_URL || ''),
   title: {
     template: '%s | Közösségi költségvetés',
     default: 'Közösségi költségvetés',
@@ -39,11 +40,14 @@ export const metadata: Metadata = {
   },
   manifest: '/manifest/site.webmanifest',
   openGraph: {
-    type: "website",
+    type: 'website',
+    locale: 'hu_HU',
     title: {
       template: '%s | Közösségi költségvetés',
       default: 'Közösségi költségvetés',
     },
+    url: process.env.NEXT_PUBLIC_URL || '',
+    siteName: 'Közösségi költségvetés',
     description: 'Mire költsön 1 milliárd forintot Budapest?',
   }
 }
