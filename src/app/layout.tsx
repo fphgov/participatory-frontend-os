@@ -37,7 +37,15 @@ export const metadata: Metadata = {
       '/manifest/apple-touch-icon.png'
     ],
   },
-  manifest: '/manifest/site.webmanifest'
+  manifest: '/manifest/site.webmanifest',
+  openGraph: {
+    type: "website",
+    title: {
+      template: '%s | Közösségi költségvetés',
+      default: 'Közösségi költségvetés',
+    },
+    description: 'Mire költsön 1 milliárd forintot Budapest?',
+  }
 }
 
 export default function RootLayout({
@@ -57,7 +65,7 @@ export default function RootLayout({
 
         <CookieConsentPopup />
 
-        {process.env.FACEBOOK_PIXEL ? <>
+        {process.env.NEXT_PUBLIC_FACEBOOK_PIXEL ? <>
           <script type="text/plain" data-cookiecategory="marketing" defer dangerouslySetInnerHTML={{ __html: `!function(f,b,e,v,n,t,s)
             { if(f.fbq)return;n=f.fbq=function(){n.callMethod?
             n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -66,11 +74,11 @@ export default function RootLayout({
             t.src=v;s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '${process.env.FACEBOOK_PIXEL}');
+            fbq('init', '${process.env.NEXT_PUBLIC_FACEBOOK_PIXEL}');
             fbq('track', 'PageView');` }}>
           </script>
 
-          <noscript><img height="1" width="1" style={{ display: 'none' }} src={`https://www.facebook.com/tr?id=${process.env.FACEBOOK_PIXEL}&ev=PageView&noscript=1`}/></noscript>
+          <noscript><img height="1" width="1" style={{ display: 'none' }} src={`https://www.facebook.com/tr?id=${process.env.NEXT_PUBLIC_FACEBOOK_PIXEL}&ev=PageView&noscript=1`}/></noscript>
         </> : null}
       </head>
 

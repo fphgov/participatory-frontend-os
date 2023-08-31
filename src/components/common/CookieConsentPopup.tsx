@@ -26,8 +26,8 @@ function CookieConsentPopup({}): JSX.Element {
       onAccept: function (){
         if (cc.allowedCategory('analytics')) {
           init({
-            url: (process.env.MATOMO_URL || '').toString(),
-            siteId: (process.env.MATOMO_SITE_ID || '').toString()
+            url: (process.env.NEXT_PUBLIC_MATOMO_URL || '').toString(),
+            siteId: (process.env.NEXT_PUBLIC_MATOMO_SITE_ID || '').toString()
           })
         }
       },
