@@ -21,7 +21,7 @@ config.autoAddCss = false
 const font = Source_Sans_3({ subsets: ['latin-ext'] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://otlet.budapest.hu'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_URL || ''),
   title: {
     template: '%s | Közösségi költségvetés',
     default: 'Közösségi költségvetés',
