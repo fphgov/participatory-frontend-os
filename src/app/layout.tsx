@@ -37,7 +37,15 @@ export const metadata: Metadata = {
       '/manifest/apple-touch-icon.png'
     ],
   },
-  manifest: '/manifest/site.webmanifest'
+  manifest: '/manifest/site.webmanifest',
+  openGraph: {
+    type: "website",
+    title: {
+      template: '%s | Közösségi költségvetés',
+      default: 'Közösségi költségvetés',
+    },
+    description: 'Mire költsön 1 milliárd forintot Budapest?',
+  }
 }
 
 export default function RootLayout({
