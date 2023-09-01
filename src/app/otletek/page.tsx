@@ -64,7 +64,7 @@ const Ideas: NextPage<IProps> = async ({ searchParams }) => {
 
           <div className="container">
             <div className="row">
-              {ideasList._embedded?.ideas.map((idea, i) => <IdeasWrapper ideaPreLink={baseUrl} key={i} idea={idea} />)}
+              {ideasList._embedded?.ideas.map((idea, i) => <IdeasWrapper ideaPreLink={baseUrl} key={i} idea={idea} rand={rand} />)}
             </div>
           </div>
 

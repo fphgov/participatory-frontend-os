@@ -13,6 +13,7 @@ type IdeasWrapperProps = {
   showVoted?: boolean
   tagClick?: (tag: ITag) => {}|undefined
   className?: string|null
+  rand?: string
 }
 
 export default function IdeasWrapper({
@@ -23,7 +24,8 @@ export default function IdeasWrapper({
   className = null,
   showStatus = true,
   showVoted = false,
-  tagClick = undefined
+  tagClick = undefined,
+  rand = undefined
 }: IdeasWrapperProps): JSX.Element {
   return (
     <div className={`${className ? className : 'col-sm-12 col-sm-12 col-md-6 col-lg-6 col-xl-4'}`}>
@@ -35,6 +37,7 @@ export default function IdeasWrapper({
         showStatus={showStatus}
         showVoted={showVoted}
         tagClick={tagClick}
+        rand={rand}
       />
     </div>
   )

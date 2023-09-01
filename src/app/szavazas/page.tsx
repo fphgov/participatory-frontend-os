@@ -130,7 +130,7 @@ export default async function VotePage({ searchParams }: IProps) {
           <div className="list-wrapper">
             <div className="container">
               <div className="row">
-                {projectList?._embedded?.projects.map((project, i) => <IdeasWrapper ideaPreLink="/projektek" key={i} idea={project} showStatus={false} showVoted={true} />)}
+                {projectList?._embedded?.projects.map((project, i) => <IdeasWrapper ideaPreLink="/projektek" key={i} idea={project} showStatus={false} showVoted={true} rand={rand} />)}
 
                 <div className="col-md-12">
                   {projectList?._embedded?.projects && projectList?._embedded?.projects.length === 0 ? <p>Nincs találat a megadott feltételek alapján, próbálj meg más kategóriában vagy kevesebb/más feltétel szerint szűrni.</p> : ''}
