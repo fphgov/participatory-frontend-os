@@ -25,7 +25,7 @@ export default function VoteInfoSection({ title, hasContainerClass = false }: Vo
               />
             </div>
             <div className="info-box-title">
-              Válassz kategóriát, majd öltetet
+              Válassz kategóriát, majd ötletet
             </div>
             <div className="info-box-content">
             5 kategóriában szavazhatsz az ötletekre.
