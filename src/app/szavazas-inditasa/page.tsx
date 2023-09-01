@@ -8,6 +8,9 @@ import { generateRandomValue } from '@/utilities/generateRandomValue'
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: 'Szavazás indítása',
+    openGraph: {
+      title: 'Szavazás indítása',
+    }
   }
 }
 
@@ -33,7 +36,10 @@ export default async function VoteStartPage({ searchParams }: IProps) {
   return (
     <main className="page page-vote-start">
       <div className="page-vote-start-section">
-        <HeroPage title="Szavazás" content="Itt találod azokat az ötleteket, amikre szavazhatsz. Öt kategória van, minden kategóriában egy szavazatot adhatsz le." />
+        <HeroPage title="Szavazás">
+          <p>Itt találod azokat az ötleteket, amikre szavazhatsz. Öt kategória van, minden kategóriában egy szavazatot adhatsz le.</p>
+          <p>Ügyelj arra, hogy egyszer szavazhatsz, és szavazatod végleges, azt nem változtathatod meg!</p>
+        </HeroPage>
 
         <VoteStartSection title="Válassz egy kategóriát és szavazz a kedvenc ötletedre!" rand={searchParams?.rand || generateRandomValue().toString()} votedList={themes} />
       </div>

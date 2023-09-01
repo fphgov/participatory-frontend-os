@@ -1,4 +1,14 @@
+import type { Metadata } from 'next'
 import RegistrationForm from "@/app/elfelejtett-jelszo/forgot-password-form"
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Elfelejtett jelszó',
+    openGraph: {
+      title: 'Elfelejtett jelszó',
+    }
+  }
+}
 
 export default function ForgotPassword() {
   return (

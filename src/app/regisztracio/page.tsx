@@ -1,6 +1,16 @@
+import type { Metadata } from 'next'
 import HeroPage from "@/components/common/HeroPage"
 import Link from "next/link"
 import RegistrationForm from "@/app/regisztracio/registration-form"
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Regisztráció',
+    openGraph: {
+      title: 'Regisztráció',
+    }
+  }
+}
 
 export default function RegistrationPage() {
   return (

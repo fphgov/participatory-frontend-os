@@ -1,3 +1,4 @@
+import { Metadata } from "next"
 import { apiProfileData, apiProfileIdeaData } from "@/lib/api-requests"
 import HeroPage from '@/components/common/HeroPage'
 import ProfileBox from '@/components/profile/ProfileBox'
@@ -14,6 +15,15 @@ import PasswordChangeForm from './password-change-form'
 type ProfilePageData = {
   profile: IUser|null
   ideas: IIdea[]
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Profil',
+    openGraph: {
+      title: 'Profil',
+    }
+  }
 }
 
 async function getData(): Promise<ProfilePageData> {

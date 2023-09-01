@@ -1,7 +1,17 @@
+import type { Metadata } from 'next'
 import LoginForm from "./login-form"
 
 type LoginPageProps = {
   searchParams: Record<string, string>
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Bejelentkezés',
+    openGraph: {
+      title: 'Bejelentkezés',
+    }
+  }
 }
 
 export default function LoginPage({ searchParams } : LoginPageProps) {

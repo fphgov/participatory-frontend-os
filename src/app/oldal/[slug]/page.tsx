@@ -21,6 +21,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: pageData?.title,
+    openGraph: {
+      title: pageData?.title,
+    }
   }
 }
 

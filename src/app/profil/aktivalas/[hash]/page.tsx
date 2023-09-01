@@ -4,6 +4,9 @@ import ActivateForm from './activate-form'
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: 'Aktíválás',
+    openGraph: {
+      title: 'Aktíválás',
+    }
   }
 }
 

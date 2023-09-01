@@ -4,6 +4,9 @@ import ProfilSavingForm from './profil-saving-form'
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: 'Profil megőrzés',
+    openGraph: {
+      title: 'Profil megőrzés',
+    }
   }
 }
 

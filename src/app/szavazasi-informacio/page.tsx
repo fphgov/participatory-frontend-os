@@ -4,7 +4,10 @@ import { WhoAndHow } from '@/app/szavazasi-informacio/content'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Hogyan tudsz szavazatot leadni?",
+    title: 'Hogyan tudsz szavazatot leadni?',
+    openGraph: {
+      title: 'Hogyan tudsz szavazatot leadni?',
+    }
   }
 }
 

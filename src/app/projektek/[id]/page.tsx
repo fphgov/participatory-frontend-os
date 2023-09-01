@@ -28,6 +28,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: pageData?.title,
+    description: pageData?.description,
+    openGraph: {
+      title: pageData?.title,
+      description: pageData?.description,
+    }
   }
 }
 
