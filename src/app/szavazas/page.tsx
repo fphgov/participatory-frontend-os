@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation'
 import HeroPage from '@/components/common/HeroPage'
 import VoteCategoryFilter from '@/components/vote/VoteCategoryFilter'
 import VoteCategoryFilterItem from '@/components/vote/VoteCategoryFilterItem'
@@ -12,6 +13,7 @@ import { generateRandomValue } from '@/utilities/generateRandomValue'
 import PaginationMini from '@/components/common/PaginationMini'
 import VoteOrderFilter from '@/components/vote/VoteOrderFilter'
 import { getToken } from '@/lib/actions'
+import { getNewUrlSearchParams } from '@/utilities/getNewUrlSearchParams'
 
 interface IProps {
   searchParams: Record<string, string>
@@ -32,15 +34,19 @@ export default async function VotePage({ searchParams }: IProps) {
   const tag = searchParams?.tag || ''
   const orderBy = searchParams?.orderBy || ''
 
-  const getUrl = (themeId: string) => {
-    const searchParams = new URLSearchParams({
-      theme: themeId.toUpperCase(),
+  const getUrl = (themeId?: string) => {
+    const urlSearchParams = {
+      theme: themeId ? themeId.toUpperCase() : '',
       rand,
       tag,
       orderBy,
-    })
+    }
 
-    return baseUrl + '?' + searchParams.toString()
+    return baseUrl + '?' + getNewUrlSearchParams(urlSearchParams)
+  }
+
+  if (! searchParams?.rand) {
+    redirect(getUrl(theme))
   }
 
   const getPageData = async () => {
@@ -124,7 +130,7 @@ export default async function VotePage({ searchParams }: IProps) {
           <div className="list-wrapper">
             <div className="container">
               <div className="row">
-                {projectList?._embedded?.projects.map((project, i) => <IdeasWrapper ideaPreLink="/projektek" key={i} idea={project} showStatus={false} showVoted={true} />)}
+                {projectList?._embedded?.projects.map((project, i) => <IdeasWrapper ideaPreLink="/projektek" key={i} idea={project} showStatus={false} showVoted={true} rand={rand} />)}
 
                 <div className="col-md-12">
                   {projectList?._embedded?.projects && projectList?._embedded?.projects.length === 0 ? <p>Nincs találat a megadott feltételek alapján, próbálj meg más kategóriában vagy kevesebb/más feltétel szerint szűrni.</p> : ''}

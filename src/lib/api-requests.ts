@@ -30,12 +30,21 @@ import { IPlan } from '@/models/plan.model'
 import endpoints from '@/lib/endpoints'
 import { IPhaseStatus } from '@/models/phaseStatus.model'
 import { ApiError } from 'next/dist/server/api-utils';
+import { Agent, setGlobalDispatcher } from 'undici'
 
 type ApiLoginUserProps = {
   email: string
   password: string
   recaptchaToken: string
 }
+
+const agent = new Agent({
+  connect: {
+    rejectUnauthorized: false
+  }
+})
+
+setGlobalDispatcher(agent)
 
 const isObject = (obj: any): boolean => {
   return Object.prototype.toString.call(obj) === '[object Object]'

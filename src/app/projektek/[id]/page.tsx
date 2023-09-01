@@ -10,9 +10,11 @@ import Link from 'next/link'
 import ProjectWrapper from '@/components/idea/ProjectWrapper'
 import NewsletterArea from '@/components/home/NesletterArea'
 import { OkResponse } from '@/lib/types'
+import { generateRandomValue } from '@/utilities/generateRandomValue'
 
 type Props = {
   params: { id: string }
+  searchParams: Record<string, string>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -29,7 +31,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function ProjectPage({ params }: Props) {
+export default async function ProjectPage({ params, searchParams }: Props) {
+  const rand = searchParams?.rand?.toString() || generateRandomValue().toString()
+
   let pageData, phaseStatus, voteable, error, errorVoteable
 
   try {
@@ -59,7 +63,7 @@ export default async function ProjectPage({ params }: Props) {
   }
 
   const projectVoteable = phaseStatus?.code === "VOTE" && pageData?.campaign?.id === phaseStatus?.campaign && pageData?.workflowState?.code === 'VOTING_LIST'
-  const backHref = phaseStatus?.code === "VOTE" ? `/szavazas${pageData?.campaignTheme?.code ? `?theme=${pageData?.campaignTheme?.code}` : ''}` : "/projektek"
+  const backHref = phaseStatus?.code === "VOTE" ? `/szavazas${pageData?.campaignTheme?.code ? `?theme=${pageData?.campaignTheme?.code}&rand=${rand}` : `?rand=${rand}`}` : `/projektek?rand=${rand}`
 
   return (
     <>

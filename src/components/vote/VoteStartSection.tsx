@@ -1,14 +1,16 @@
 import React from "react"
 import CategoryCard from "@/components/idea/CategoryCard"
 import Link from "next/link"
+import { generateRandomValue } from "@/utilities/generateRandomValue"
 
 type VoteStartSectionProps = {
   title: string
+  rand?: string
   votedList?: string[]
   isContinue?: boolean
 }
 
-export default function VoteStartSection({ title, votedList = [], isContinue = false }: VoteStartSectionProps): JSX.Element {
+export default function VoteStartSection({ title, rand = undefined, votedList = [], isContinue = false }: VoteStartSectionProps): JSX.Element {
   const categories = [
     { code: 'LOCAL-SMALL', name: 'Helyi kis ötlet', description: 'Olyan ötletek, amelyeket jellemzően egy, esetenként több konkrét helyszínre javasolt beadójuk, és megvalósításuk költsége nem haladja meg az 50 millió forintot.' },
     { code: 'LOCAL-BIG', name: 'Helyi nagy ötlet', description: 'Olyan ötletek, amelyeket jellemzően egy, esetenként több konkrét helyszínre javasolt beadójuk, és megvalósításuk költsége 51 és 120 millió forint közé esik.' },
@@ -16,6 +18,8 @@ export default function VoteStartSection({ title, votedList = [], isContinue = f
     { code: 'OPEN', name: 'Nyitott Budapest', description: 'Egy nyitott város a szívügyed? Együttműködések, kísérleti megoldások, digitális fejlesztések, közösségépítő ötletek.' },
     { code: 'GREEN', name: 'Zöld Budapest', description: 'Zöldebb utcák, üdébb parkok, mindenki számára elérhető, környezettudatos megoldások. Budapest reagál a klímaváltozásra.' },
   ]
+
+  const randParam = rand ? rand : generateRandomValue().toString()
 
   return (
     <>
@@ -32,7 +36,7 @@ export default function VoteStartSection({ title, votedList = [], isContinue = f
               <div className="row">
                 {categories.map(category => (
                   <div key={category.code} className="col-md-6">
-                    <CategoryCard themeName={category.name} href={`/szavazas?theme=${category.code}`} description={category.description} voted={votedList.includes(category.code)} />
+                    <CategoryCard themeName={category.name} href={`/szavazas?theme=${category.code}&rand=${randParam}`} description={category.description} voted={votedList.includes(category.code)} />
                   </div>
                 ))}
               </div>
@@ -46,7 +50,7 @@ export default function VoteStartSection({ title, votedList = [], isContinue = f
           <div className="row">
             <div className="col-md-12">
               <div className="button-wrapper button-wrapper-center">
-                <Link className="btn btn-headline btn-next" href="/szavazas?theme=LOCAL-SMALL">Vissza az ötletekhez</Link>
+                <Link className="btn btn-headline btn-next" href={`/szavazas?theme=LOCAL-SMALL&rand=${randParam}`}>Vissza az ötletekhez</Link>
               </div>
             </div>
           </div>

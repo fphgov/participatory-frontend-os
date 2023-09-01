@@ -7,6 +7,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { generateRandomValue } from '@/utilities/generateRandomValue'
 import { FilterResponse } from '@/lib/types'
 import shallowEqual from '@/utilities/shallowEquals'
+import { getNewUrlSearchParams } from '@/utilities/getNewUrlSearchParams'
 
 interface SearchAreaProps {
   title: string
@@ -20,6 +21,7 @@ interface SearchAreaProps {
 }
 
 export default function SearchArea({ title, tipp, tipp2, baseUrl, filterParams, searchParams, type, error }: SearchAreaProps): JSX.Element|null {
+  const rand = searchParams?.rand || generateRandomValue().toString()
   const campaigns = filterParams.campaign || []
   const themes = filterParams.theme || []
   const locations = filterParams.location || []
@@ -32,8 +34,8 @@ export default function SearchArea({ title, tipp, tipp2, baseUrl, filterParams, 
     'status': '',
     'query': '',
     'page': '',
-    'rand': generateRandomValue().toString(),
     'tag': '',
+    rand,
   }
 
   const originalFilterData = Object.assign({
@@ -43,14 +45,8 @@ export default function SearchArea({ title, tipp, tipp2, baseUrl, filterParams, 
   const [filterData, setFilterData] = useState(originalFilterData)
   const [query, setQuery] = useState(originalFilterData.query)
 
-  const getNewUrlSearchParams = () => {
-    const filteredParams = Object.entries(filterData).filter(([key, value]) => value !== '')
-
-    return new URLSearchParams(filteredParams)
-  }
-
   const getUrl = () => {
-    return baseUrl + '?' + getNewUrlSearchParams().toString()
+    return baseUrl + '?' + getNewUrlSearchParams(filterData).toString()
   }
 
   const hasQueryFilter = () => {
@@ -84,7 +80,7 @@ export default function SearchArea({ title, tipp, tipp2, baseUrl, filterParams, 
   }
 
   useEffect(() => {
-    if (! shallowEqual(filterData, originalFilterData)) {
+    if (! shallowEqual(filterData, originalFilterData, ['page'])) {
       window.location.href = getUrl()
     }
   }, [filterData, originalFilterData])
