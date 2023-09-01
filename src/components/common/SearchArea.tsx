@@ -21,6 +21,7 @@ interface SearchAreaProps {
 }
 
 export default function SearchArea({ title, tipp, tipp2, baseUrl, filterParams, searchParams, type, error }: SearchAreaProps): JSX.Element|null {
+  const rand = searchParams?.rand || generateRandomValue().toString()
   const campaigns = filterParams.campaign || []
   const themes = filterParams.theme || []
   const locations = filterParams.location || []
@@ -33,8 +34,8 @@ export default function SearchArea({ title, tipp, tipp2, baseUrl, filterParams, 
     'status': '',
     'query': '',
     'page': '',
-    'rand': generateRandomValue().toString(),
     'tag': '',
+    rand,
   }
 
   const originalFilterData = Object.assign({
@@ -79,7 +80,7 @@ export default function SearchArea({ title, tipp, tipp2, baseUrl, filterParams, 
   }
 
   useEffect(() => {
-    if (! shallowEqual(filterData, originalFilterData)) {
+    if (! shallowEqual(filterData, originalFilterData, ['page'])) {
       window.location.href = getUrl()
     }
   }, [filterData, originalFilterData])

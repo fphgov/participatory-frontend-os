@@ -2,19 +2,22 @@ import randomId from 'random-id'
 import Image from 'next/image'
 import { MobileNavigation, Navigation } from '@/ui/Navigation'
 import HamburgerMenu from './common/HamburgerMenu'
+import { generateRandomValue } from '@/utilities/generateRandomValue'
 
 type IHeader = {
   loggedIn: boolean
 }
 
 export default function Header({ loggedIn }: IHeader): JSX.Element {
+  const rand = generateRandomValue().toString()
+
   const menu = [
     { title: "Mi ez?", href: "/oldal/bovebben-a-kozossegi-koltsegvetesrol", outside: false },
     { title: "Hírek, rendezvények", href: "/hirek", outside: false },
     { title: "Ötletek", href: "#", outside: false, submenuItems: [
-      { title: "Beküldött", href: "/otletek?campaign=3", outside: true },
-      { title: "Feldolgozott", href: "/tervek", outside: false },
-      { title: "Megvalósuló", href: "/projektek", outside: false },
+      { title: "Beküldött", href: `/otletek?campaign=3&rand=${rand}`, outside: true },
+      { title: "Feldolgozott", href: `/tervek?rand=${rand}`, outside: false },
+      { title: "Megvalósuló", href: `/projektek?rand=${rand}`, outside: false },
     ] },
     { title: "Szavazás", href: "/szavazas-inditasa", outside: false, highlight: true },
     { title: "Bejelentkezés", href: "/bejelentkezes", highlight: false, onHideLoggedIn: true, onHideLoggedOut: false, icon: 'account' },
