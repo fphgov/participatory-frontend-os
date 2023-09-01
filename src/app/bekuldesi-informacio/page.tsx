@@ -3,7 +3,10 @@ import SideTabs from '@/app/bekuldesi-informacio/SideTabs'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Mi történik most?",
+    title: 'Mi történik most?',
+    openGraph: {
+      title: 'Mi történik most?',
+    }
   }
 }
 

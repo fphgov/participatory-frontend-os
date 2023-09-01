@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import PaginationMini from '@/components/common/PaginationMini'
 import SearchArea from '@/components/common/SearchArea'
 import NewsletterArea from '@/components/home/NesletterArea'
@@ -10,6 +11,15 @@ import { redirect } from 'next/navigation'
 
 interface IProps {
   searchParams: Record<string, string>
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Feldolgozott ötletek',
+    openGraph: {
+      title: 'Feldolgozott ötletek',
+    }
+  }
 }
 
 const Ideas: NextPage<IProps> = async ({ searchParams }) => {

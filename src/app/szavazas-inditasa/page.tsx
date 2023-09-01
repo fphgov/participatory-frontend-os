@@ -8,6 +8,9 @@ import { generateRandomValue } from '@/utilities/generateRandomValue'
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: 'Szavazás indítása',
+    openGraph: {
+      title: 'Szavazás indítása',
+    }
   }
 }
 

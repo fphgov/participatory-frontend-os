@@ -4,6 +4,9 @@ import PasswordResetForm from './password-reset-form'
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: 'Jelszó módosítás',
+    openGraph: {
+      title: 'Jelszó módosítás',
+    }
   }
 }
 

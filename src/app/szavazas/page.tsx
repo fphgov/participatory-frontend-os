@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import HeroPage from '@/components/common/HeroPage'
 import VoteCategoryFilter from '@/components/vote/VoteCategoryFilter'
@@ -5,7 +6,6 @@ import VoteCategoryFilterItem from '@/components/vote/VoteCategoryFilterItem'
 import VoteSearch from '@/components/vote/VoteSearch'
 import { apiVoteStatus, apiVoteablePlansData } from '@/lib/api-requests'
 import Error from '@/components/common/Error'
-import type { Metadata } from 'next'
 import IdeasWrapper from '@/components/idea/IdeasWrapper'
 import NewsletterArea from '@/components/home/NesletterArea'
 import { categoryResolver } from '@/utilities/categoryResolver'
@@ -22,6 +22,9 @@ interface IProps {
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: 'Szavazás',
+    openGraph: {
+      title: 'Szavazás',
+    }
   }
 }
 

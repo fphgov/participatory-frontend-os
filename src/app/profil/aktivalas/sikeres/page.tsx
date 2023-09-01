@@ -1,4 +1,11 @@
+import { Metadata } from 'next'
 import Link from 'next/link'
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Profil aktíválás sikeres',
+  }
+}
 
 export default async function ProfileActivateSuccessPage() {
   return (
