@@ -7,6 +7,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { generateRandomValue } from '@/utilities/generateRandomValue'
 import { FilterResponse } from '@/lib/types'
 import shallowEqual from '@/utilities/shallowEquals'
+import { getNewUrlSearchParams } from '@/utilities/getNewUrlSearchParams'
 
 interface SearchAreaProps {
   title: string
@@ -43,14 +44,8 @@ export default function SearchArea({ title, tipp, tipp2, baseUrl, filterParams, 
   const [filterData, setFilterData] = useState(originalFilterData)
   const [query, setQuery] = useState(originalFilterData.query)
 
-  const getNewUrlSearchParams = () => {
-    const filteredParams = Object.entries(filterData).filter(([key, value]) => value !== '')
-
-    return new URLSearchParams(filteredParams)
-  }
-
   const getUrl = () => {
-    return baseUrl + '?' + getNewUrlSearchParams().toString()
+    return baseUrl + '?' + getNewUrlSearchParams(filterData).toString()
   }
 
   const hasQueryFilter = () => {
