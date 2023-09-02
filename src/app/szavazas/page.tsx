@@ -36,6 +36,7 @@ export default async function VotePage({ searchParams }: IProps) {
   const query = searchParams?.query || ''
   const tag = searchParams?.tag || ''
   const orderBy = searchParams?.orderBy || ''
+  const location = ["LOCAL-SMALL", "LOCAL-BIG"].includes(theme) ? searchParams?.location || '' : ''
 
   const getUrl = (themeId?: string) => {
     const urlSearchParams = {
@@ -60,6 +61,7 @@ export default async function VotePage({ searchParams }: IProps) {
       page,
       tag,
       orderBy,
+      location,
       query
     }
 
