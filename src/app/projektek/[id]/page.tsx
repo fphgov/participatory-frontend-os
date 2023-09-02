@@ -14,7 +14,6 @@ import { generateRandomValue } from '@/utilities/generateRandomValue'
 
 type Props = {
   params: { id: string }
-  searchParams: Record<string, string>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -36,8 +35,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function ProjectPage({ params, searchParams }: Props) {
-  const rand = searchParams?.rand?.toString() || generateRandomValue().toString()
+export default async function ProjectPage({ params }: Props) {
+  const rand = generateRandomValue().toString()
 
   let pageData, phaseStatus, voteable, error, errorVoteable
 
