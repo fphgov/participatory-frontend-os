@@ -10,6 +10,9 @@ export async function generateMetadata(): Promise<Metadata> {
     title: 'Szavazás indítása',
     openGraph: {
       title: 'Szavazás indítása',
+      type: 'website',
+      locale: 'hu_HU',
+      images: ['/opengraph-image.png'],
     }
   }
 }

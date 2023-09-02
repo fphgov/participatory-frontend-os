@@ -5,6 +5,9 @@ export async function generateMetadata(): Promise<Metadata> {
     title: 'Beküldés',
     openGraph: {
       title: 'Beküldés',
+      type: 'website',
+      locale: 'hu_HU',
+      images: ['/opengraph-image.png'],
     }
   }
 }

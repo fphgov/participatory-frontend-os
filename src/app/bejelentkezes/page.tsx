@@ -10,6 +10,9 @@ export async function generateMetadata(): Promise<Metadata> {
     title: 'Bejelentkezés',
     openGraph: {
       title: 'Bejelentkezés',
+      type: 'website',
+      locale: 'hu_HU',
+      images: ['/opengraph-image.png'],
     }
   }
 }
