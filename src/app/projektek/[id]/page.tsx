@@ -67,7 +67,7 @@ export default async function ProjectPage({ params }: Props) {
   }
 
   const projectVoteable = phaseStatus?.code === "VOTE" && pageData?.campaign?.id === phaseStatus?.campaign && pageData?.workflowState?.code === 'VOTING_LIST'
-  const backHref = phaseStatus?.code === "VOTE" ? `/szavazas${pageData?.campaignTheme?.code ? `?theme=${pageData?.campaignTheme?.code}&rand=${rand}` : `?rand=${rand}`}` : `/projektek?rand=${rand}`
+  const backHref = projectVoteable ? `/szavazas${pageData?.campaignTheme?.code ? `?theme=${pageData?.campaignTheme?.code}&rand=${rand}` : `?rand=${rand}`}` : `/projektek?rand=${rand}`
 
   return (
     <>
