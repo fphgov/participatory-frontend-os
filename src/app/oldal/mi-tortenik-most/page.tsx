@@ -10,6 +10,9 @@ export async function generateMetadata(): Promise<Metadata> {
     title: 'Mi történik most?',
     openGraph: {
       title: 'Mi történik most?',
+      type: 'website',
+      locale: 'hu_HU',
+      images: ['/opengraph-image.png'],
     }
   }
 }

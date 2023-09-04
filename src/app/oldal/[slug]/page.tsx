@@ -23,6 +23,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: pageData?.title,
     openGraph: {
       title: pageData?.title,
+      type: 'website',
+      locale: 'hu_HU',
+      images: ['/opengraph-image.png'],
     }
   }
 }

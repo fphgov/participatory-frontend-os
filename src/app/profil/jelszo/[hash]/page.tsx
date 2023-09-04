@@ -6,6 +6,9 @@ export async function generateMetadata(): Promise<Metadata> {
     title: 'Jelszó módosítás',
     openGraph: {
       title: 'Jelszó módosítás',
+      type: 'website',
+      locale: 'hu_HU',
+      images: ['/opengraph-image.png'],
     }
   }
 }

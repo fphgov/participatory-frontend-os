@@ -16,7 +16,6 @@ type IdeaCardProps = {
   showVoted?: boolean
   showMore?: boolean
   tagClick?: (tag: ITag) => {}|undefined
-  rand?: string
 }
 
 export default function IdeaCard({
@@ -29,7 +28,6 @@ export default function IdeaCard({
   showVoted = false,
   showMore = true,
   tagClick = undefined,
-  rand = undefined
 }: IdeaCardProps): JSX.Element|null {
   if (idea == null) {
     return null
@@ -59,7 +57,7 @@ export default function IdeaCard({
             </> : null}
 
             <h2 className="prop-title">
-              <Link href={`${ideaPreLink}/${idea.id}${rand ? `?rand=${rand}` : ''}`}>{idea.title}</Link>
+              <Link href={`${ideaPreLink}/${idea.id}`}>{idea.title}</Link>
             </h2>
 
             <div className="prop-description">{shortDescription}</div>
@@ -73,7 +71,7 @@ export default function IdeaCard({
               <footer className="post-card-meta">
                 <div>{showVoted && idea?.voted !== null ? <VoteCounter count={idea?.voted || 0} /> : null}</div>
                 <div className="post-more-wrapper">
-                  <Link href={`${ideaPreLink}/${idea.id}${rand ? `?rand=${rand}` : ''}`} className="btn post-more" onClick={handleClick}>Bővebben</Link>
+                  <Link href={`${ideaPreLink}/${idea.id}`} className="btn post-more" onClick={handleClick}>Bővebben</Link>
                 </div>
               </footer>
             </>

@@ -18,6 +18,9 @@ export async function generateMetadata(): Promise<Metadata> {
     title: 'Megvalósuló ötletek',
     openGraph: {
       title: 'Megvalósuló ötletek',
+      type: 'website',
+      locale: 'hu_HU',
+      images: ['/opengraph-image.png'],
     }
   }
 }
@@ -74,7 +77,7 @@ const Ideas: NextPage<IProps> = async ({ searchParams }) => {
 
           <div className="container">
             <div className="row">
-              {projectsList._embedded?.projects.map((project, i) => <IdeasWrapper ideaPreLink={baseUrl} key={i} idea={project} rand={rand} />)}
+              {projectsList._embedded?.projects.map((project, i) => <IdeasWrapper ideaPreLink={baseUrl} key={i} idea={project} />)}
             </div>
           </div>
 

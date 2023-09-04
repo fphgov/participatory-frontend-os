@@ -31,7 +31,7 @@ export default function VoteOrderFilter({ baseUrl, searchParams }: VoteOrderFilt
   }, [searchParams])
 
   return (
-    <div className="vote-order-filter-wrapper">
+    <div className="custom-select-wrapper vote-order-filter-wrapper">
       <label htmlFor="order">Rendezés:</label>
 
       <select id="order" name="order" onChange={changeHandler} value={orderBy}>

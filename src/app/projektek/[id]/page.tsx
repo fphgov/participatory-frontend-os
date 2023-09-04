@@ -14,7 +14,6 @@ import { generateRandomValue } from '@/utilities/generateRandomValue'
 
 type Props = {
   params: { id: string }
-  searchParams: Record<string, string>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -32,12 +31,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: pageData?.title,
       description: pageData?.description,
+      type: 'website',
+      locale: 'hu_HU',
+      images: ['/opengraph-image.png'],
     }
   }
 }
 
-export default async function ProjectPage({ params, searchParams }: Props) {
-  const rand = searchParams?.rand?.toString() || generateRandomValue().toString()
+export default async function ProjectPage({ params }: Props) {
+  const rand = generateRandomValue().toString()
 
   let pageData, phaseStatus, voteable, error, errorVoteable
 
@@ -68,7 +70,7 @@ export default async function ProjectPage({ params, searchParams }: Props) {
   }
 
   const projectVoteable = phaseStatus?.code === "VOTE" && pageData?.campaign?.id === phaseStatus?.campaign && pageData?.workflowState?.code === 'VOTING_LIST'
-  const backHref = phaseStatus?.code === "VOTE" ? `/szavazas${pageData?.campaignTheme?.code ? `?theme=${pageData?.campaignTheme?.code}&rand=${rand}` : `?rand=${rand}`}` : `/projektek?rand=${rand}`
+  const backHref = projectVoteable ? `/szavazas${pageData?.campaignTheme?.code ? `?theme=${pageData?.campaignTheme?.code}&rand=${rand}` : `?rand=${rand}`}` : `/projektek?rand=${rand}`
 
   return (
     <>

@@ -24,6 +24,9 @@ export async function generateMetadata(): Promise<Metadata> {
     title: 'Szavazás',
     openGraph: {
       title: 'Szavazás',
+      type: 'website',
+      locale: 'hu_HU',
+      images: ['/opengraph-image.png'],
     }
   }
 }
@@ -36,6 +39,7 @@ export default async function VotePage({ searchParams }: IProps) {
   const query = searchParams?.query || ''
   const tag = searchParams?.tag || ''
   const orderBy = searchParams?.orderBy || ''
+  const location = ["LOCAL-SMALL", "LOCAL-BIG"].includes(theme) ? searchParams?.location || '' : ''
 
   const getUrl = (themeId?: string) => {
     const urlSearchParams = {
@@ -60,6 +64,7 @@ export default async function VotePage({ searchParams }: IProps) {
       page,
       tag,
       orderBy,
+      location,
       query
     }
 
@@ -133,7 +138,7 @@ export default async function VotePage({ searchParams }: IProps) {
           <div className="list-wrapper">
             <div className="container">
               <div className="row">
-                {projectList?._embedded?.projects.map((project, i) => <IdeasWrapper ideaPreLink="/projektek" key={i} idea={project} showStatus={false} showVoted={true} rand={rand} />)}
+                {projectList?._embedded?.projects.map((project, i) => <IdeasWrapper ideaPreLink="/projektek" key={i} idea={project} showStatus={false} showVoted={true} />)}
 
                 <div className="col-md-12">
                   {projectList?._embedded?.projects && projectList?._embedded?.projects.length === 0 ? <p>Nincs találat a megadott feltételek alapján, próbálj meg más kategóriában vagy kevesebb/más feltétel szerint szűrni.</p> : ''}

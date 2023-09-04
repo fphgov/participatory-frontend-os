@@ -22,6 +22,9 @@ export async function generateMetadata(): Promise<Metadata> {
     title: 'Profil',
     openGraph: {
       title: 'Profil',
+      type: 'website',
+      locale: 'hu_HU',
+      images: ['/opengraph-image.png'],
     }
   }
 }

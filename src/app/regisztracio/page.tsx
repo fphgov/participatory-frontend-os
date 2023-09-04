@@ -8,6 +8,9 @@ export async function generateMetadata(): Promise<Metadata> {
     title: 'Regisztráció',
     openGraph: {
       title: 'Regisztráció',
+      type: 'website',
+      locale: 'hu_HU',
+      images: ['/opengraph-image.png'],
     }
   }
 }
