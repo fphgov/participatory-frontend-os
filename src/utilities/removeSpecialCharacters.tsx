@@ -17,7 +17,7 @@ export const rmAllChar = (text: string) => {
 }
 
 export const rmAllCharForEmail = (text: string) => {
-  return rmEmojis(text.replace(/[`~!#$%^&*()|+\=?;:'",<>\{\}\[\]\\\/]/gi, ''))
+  return rmEmojis(text.replace(/[`~!#$%^&*()|\=?;:'",<>\{\}\[\]\\\/]/gi, ''))
 }
 
 export const rmAllCharForName = (text: string) => {
