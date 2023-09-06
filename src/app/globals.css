@@ -1373,8 +1373,13 @@ input[type="submit"] {
   background: #E7F5FE;
 }
 
-.hero-tags > span {
+.hero-tags > span,
+.hero-tags > div > span {
   margin-right: 12px;
+}
+
+.hero-tags > div {
+  display: inline-block;
 }
 
 .tag.tag-active a,

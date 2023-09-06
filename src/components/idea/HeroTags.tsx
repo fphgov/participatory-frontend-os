@@ -1,5 +1,8 @@
+"use client"
+
 import { ITag } from "@/models/tag.model"
 import Tag from "@/components/idea/Tag"
+import { addUniqParam } from "@/utilities/urlParams"
 
 type HeroTagsProps = {
   tags: ITag[],
@@ -8,20 +11,17 @@ type HeroTagsProps = {
 }
 
 export default function HeroTags({ tags, baseUrl, searchParams }: HeroTagsProps): JSX.Element|null {
-  const getUrl = (tag: string, active: boolean): string => {
+  const changeTagFilter = (tag: string): void => {
     const newSearchParams = { ...searchParams }
 
     delete newSearchParams['page']
 
-    const params : { [x: string]: string } = { ...newSearchParams, tag }
+    const urlSearchParams = new URLSearchParams({
+      ...newSearchParams,
+      tag: addUniqParam(searchParams, 'tag', tag)
+    })
 
-    if (active) {
-      delete params['tag']
-    }
-
-    const urlSearchParams = new URLSearchParams(params)
-
-    return baseUrl + '?' + urlSearchParams.toString()
+    window.location.href = baseUrl + '?' + urlSearchParams.toString()
   }
 
   return (
@@ -29,15 +29,12 @@ export default function HeroTags({ tags, baseUrl, searchParams }: HeroTagsProps)
       <span>Címkék:</span>
 
       {tags?.map(tag => {
-        const active = searchParams?.tag?.toString() === tag.id.toString()
+        const active = searchParams?.tag?.split(',')?.includes(tag.id.toString())
 
         return (
-          <Tag
-            key={tag.id}
-            tag={tag}
-            href={getUrl(tag.id.toString(), active)}
-            active={active}
-          />
+          <div key={tag.id} onClick={() => { changeTagFilter(tag.id.toString()) }}>
+            <Tag tag={tag} active={active} />
+          </div>
         )
       })}
     </div>
