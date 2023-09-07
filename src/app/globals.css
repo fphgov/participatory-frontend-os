@@ -4018,6 +4018,7 @@ p.subinfo {
   display: inline-block;
   vertical-align: middle;
   margin-left: 6px;
+  cursor: pointer;
 }
 
 .page-vote-start-section .button-wrapper-center {
