@@ -13,6 +13,10 @@ module.exports = async (phase, { defaultConfig }) => {
           source: "/api/:path*",
           destination: `${process.env.BACKEND_URL}/app/api/:path*`,
         },
+        {
+          source: "/admin/:path*",
+          destination: `${process.env.BACKEND_URL}/admin/api/:path*`,
+        },
       ];
     },
     reactStrictMode: false,
