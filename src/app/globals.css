@@ -4257,9 +4257,24 @@ p.subinfo {
   -webkit-appearance: none;
   appearance: none;
   background-size: 24px 24px;
+  background-color: #fff;
   background-image: url('../../public/images/chevron.svg');
   background-repeat: no-repeat;
   background-position: calc(100% - 12px) 12px
+}
+
+.vote-search-input .custom-select-wrapper select {
+  text-indent: 60px
+}
+
+@-moz-document url-prefix() {
+  .custom-select-wrapper select {
+    text-indent: 40px;
+  }
+
+  .vote-search-input .custom-select-wrapper select {
+    text-indent: 30px;
+  }
 }
 
 .pagination-mini {
