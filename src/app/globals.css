@@ -2688,9 +2688,9 @@ h1.post-full-title {
 }
 
 .post-more {
-  background-color: #E7F5FE;
+  background-color: rgba(14, 166, 206, 1);
   text-align: center;
-  color: #12326E;
+  color: #FFF;
   text-decoration: none;
   padding: 6px 18px;
   border-radius: 999px;
