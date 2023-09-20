@@ -4,11 +4,12 @@ import CategoryIcon from "./CategoryIcon"
 type CategoryCardProps = {
   themeName: string
   href: string
+  info?: string
   description: string
   voted?: boolean
 }
 
-export default function CategoryCard({ themeName, href, description, voted = false }: CategoryCardProps): JSX.Element {
+export default function CategoryCard({ themeName, href, info, description, voted = false }: CategoryCardProps): JSX.Element {
   return (
     <div className={`prop-wrapper${voted ? ' prop-wrapper-voted' : ''}`}>
       <div className="prop-inner">
@@ -18,10 +19,11 @@ export default function CategoryCard({ themeName, href, description, voted = fal
               <div className="prop-theme"><CategoryIcon name={themeName} color="blue" size={36} />{themeName}</div>
             </div>
 
+            <hr />
+
+            {info ? <div className="prop-info">{info}</div> : null}
             <div className="prop-description">{description}</div>
           </div>
-
-          <hr />
 
           <footer className="post-card-meta">
             <div className="post-more-wrapper">

@@ -23,15 +23,19 @@ export default function LoginForm({ searchParams } : LoginFormProps): JSX.Elemen
 
     const res = await loginFom(formData)
 
-    if (res.success) {
+    if (res?.success) {
       if (searchParams?.project) {
         window.location.href = '/projektek/' + searchParams?.project
       } else {
         window.location.href = '/profil'
       }
     } else {
-      setErrorObject(res.jsonError)
-      setError(res.error)
+      if (res?.message) {
+        setError(res.message)
+      } else {
+        setErrorObject(res.jsonError)
+        setError(res.error)
+      }
     }
 
     recaptcha?.execute()

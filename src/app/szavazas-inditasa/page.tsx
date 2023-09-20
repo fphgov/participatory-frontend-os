@@ -44,7 +44,7 @@ export default async function VoteStartPage({ searchParams }: IProps) {
           <p>Ügyelj arra, hogy egyszer szavazhatsz, és szavazatod végleges, azt nem változtathatod meg!</p>
         </HeroPage>
 
-        <VoteStartSection title="Válassz egy kategóriát és szavazz a kedvenc ötletedre!" rand={searchParams?.rand || generateRandomValue().toString()} votedList={themes} />
+        <VoteStartSection title="Válassz egy kategóriát és szavazz a kedvenc ötletedre!" subtitle="Több ötlet is megvalósulhat!" rand={searchParams?.rand || generateRandomValue().toString()} votedList={themes} />
       </div>
     </main>
   )

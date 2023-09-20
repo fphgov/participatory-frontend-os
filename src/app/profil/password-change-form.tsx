@@ -2,7 +2,6 @@
 
 import { ToastContainer, toast } from 'react-toastify'
 import { useState } from "react"
-import { apiProfileChangePassword } from "@/lib/api-requests"
 import Error from "@/components/common/Error"
 import ErrorMini from '@/components/common/ErrorMini'
 import { profileChangePasswordForm } from '@/app/actions'
@@ -39,15 +38,19 @@ export default function PasswordChangeForm(): JSX.Element {
 
     const res = await profileChangePasswordForm(credential)
 
-    if (res.success) {
+    if (res?.success) {
       setCredential(defaultCredential)
 
-      if (res.successMessage) {
+      if (res?.successMessage) {
         notify(res.successMessage)
       }
     } else {
-      setErrorObject(res.jsonError)
-      setError(res.error)
+      if (res?.message) {
+        setError(res.message)
+      } else {
+        setErrorObject(res.jsonError)
+        setError(res.error)
+      }
 
       notify('⛔️ Sikertelen jelszó módosítás')
     }
