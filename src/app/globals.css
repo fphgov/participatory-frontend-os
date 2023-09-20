@@ -4056,9 +4056,10 @@ p.subinfo {
 
 .vote-start-section hr {
   margin-top: 0;
-  border: 1px solid rgba(14, 166, 206, 0.30);
-  background: none;
   margin-bottom: 18px;
+  border: none;
+  background-color: rgba(14,166,206,.3) !important;
+  height: 1px;
 }
 
 .vote-start-section .prop-wrapper {
