@@ -5,13 +5,13 @@ import { generateRandomValue } from "@/utilities/generateRandomValue"
 
 type VoteStartSectionProps = {
   title: string
-  subtitle: string
+  subtitle?: string
   rand?: string
   votedList?: string[]
   isContinue?: boolean
 }
 
-export default function VoteStartSection({ title, subtitle, rand = undefined, votedList = [], isContinue = false }: VoteStartSectionProps): JSX.Element {
+export default function VoteStartSection({ title, subtitle = undefined, rand = undefined, votedList = [], isContinue = false }: VoteStartSectionProps): JSX.Element {
   const categories = [
     { code: 'LOCAL-SMALL', name: 'Helyi kis ötlet', info: 'Keretösszeg: 400 millió Ft', description: 'Olyan ötletek, amelyeket jellemzően egy, esetenként több konkrét helyszínre javasolt beadójuk, és megvalósításuk költsége nem haladja meg az 50 millió forintot.' },
     { code: 'LOCAL-BIG', name: 'Helyi nagy ötlet', info: 'Keretösszeg: 240 millió Ft', description: 'Olyan ötletek, amelyeket jellemzően egy, esetenként több konkrét helyszínre javasolt beadójuk, és megvalósításuk költsége 51 és 120 millió forint közé esik.' },
@@ -28,7 +28,7 @@ export default function VoteStartSection({ title, subtitle, rand = undefined, vo
         <div className="container">
           <div className="row">
             <div className="offset-lg-2 col-lg-8">
-              <h3>{title}<br />{subtitle}</h3>
+              <h3>{title}{subtitle ? <><br />{subtitle}</> : null}</h3>
             </div>
           </div>
 
