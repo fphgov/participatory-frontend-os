@@ -11,6 +11,7 @@ import Implementation from "@/components/idea/Implementation"
 import VoteButton from "@/components/vote/VoteButton"
 import Gallery from "@/components/common/Gallery"
 import IdeaVoteTipp from "@/components/idea/IdeaVoteTipp"
+import IdeaRelationTipp from "@/components/idea/IdeaRelationTipp"
 
 type IdeasWrapperProps = {
   project: IProject
@@ -213,7 +214,7 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
                 </div>
 
                 <div className="prop-single-side-section prop-single-ideas">
-                  <div className="prop-info-title">Kapcsolódó ötletek</div>
+                  <div className="prop-info-title">Kapcsolódó ötletek <IdeaRelationTipp /></div>
                   <div className="prop-info-content">
                     {project.ideas.length === 0 ? <>Nincs kapcsolódó ötlet</> : null}
                     {project.ideas.map((idea, i) => {

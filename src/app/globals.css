@@ -4426,7 +4426,7 @@ span.cc_highlight:hover {
 
 .modal-background {
   background: rgba(0, 0, 0, 0.50);
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   z-index: 999;

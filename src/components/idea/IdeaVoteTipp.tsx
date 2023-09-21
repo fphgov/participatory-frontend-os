@@ -2,7 +2,6 @@
 
 import { useModalContext } from '@/context/modal'
 import { ICampaignTheme } from '@/models/campaignTheme.model'
-import { useEffect } from 'react'
 
 type IdeaVoteTippProps = {
   theme: ICampaignTheme|undefined
@@ -18,18 +17,20 @@ export default function IdeaVoteTipp({ theme }: IdeaVoteTippProps): JSX.Element 
 
   const content = contents.find(c => c.code === theme?.code) || contents[1]
 
-  useEffect(() => {
+  function handleOpenModal() {
     setDataModal({
       content: content?.full || ''
     })
-  }, [])
+
+    setOpenModal(true)
+  }
 
   return (
     <div className="subinfo-wrapper">
       <p className="subinfo">
         {content?.tipp}
       </p>
-      <div className="subinfo-icon" onClick={() => { setOpenModal(true) }} />
+      <div className="subinfo-icon" onClick={() => { handleOpenModal() }} />
     </div>
   )
 }
