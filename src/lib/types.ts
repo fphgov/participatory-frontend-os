@@ -80,6 +80,10 @@ export interface PlanListResponse extends ListResponse {
   }
 }
 
+export interface VotedProjectListResponse {
+  data: IProject[]
+}
+
 export interface ArticleListResponse extends ListResponse {
   data: IArticle[]
 }

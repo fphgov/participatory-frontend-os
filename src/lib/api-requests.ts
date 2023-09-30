@@ -19,7 +19,8 @@ import {
   PhaseStatusResponse,
   IssueResponse,
   OkResponse,
-  VoteStatusResponse
+  VoteStatusResponse,
+  VotedProjectListResponse
 } from "@/lib/types"
 import { IUser } from "@/models/user.model"
 import { IIdea } from '@/models/idea.model'
@@ -149,6 +150,29 @@ export async function apiProfileIdeaData(data: Record<string, string>): Promise<
   })
 
   return handleResponse<IdeaListResponse>(response).then(data => data._embedded.ideas)
+}
+
+export async function apiProfileVotesData(): Promise<IProject[]> {
+  const token = (await getToken())?.value
+
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  }
+
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`
+  }
+
+  const url = backendUrl(endpoints.API_REQ_PROFILE_VOTE)
+
+  const response = await fetch(url, {
+    cache: "no-store",
+    method: "GET",
+    credentials: "include",
+    headers,
+  })
+
+  return handleResponse<VotedProjectListResponse>(response).then(data => data.data)
 }
 
 export async function apiProfileDelete(): Promise<MessageResponse> {

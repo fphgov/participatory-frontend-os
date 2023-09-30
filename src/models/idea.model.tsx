@@ -23,7 +23,7 @@ export type IIdea = {
   campaign_theme?: ICampaignTheme
   campaignTheme?: ICampaignTheme
   campaignLocation?: ICampaignLocation
-  _links: ListLinks
+  _links?: ListLinks
   project?: IProject
   featuredImage?: IFeaturedImage
   title: string

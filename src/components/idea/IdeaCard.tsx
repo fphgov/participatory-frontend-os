@@ -14,6 +14,7 @@ type IdeaCardProps = {
   autoHeight?: boolean
   showStatus?: boolean
   showVoted?: boolean
+  showCampaign?: boolean
   showMore?: boolean
   tagClick?: (tag: ITag) => {}|undefined
 }
@@ -26,6 +27,7 @@ export default function IdeaCard({
   autoHeight = false,
   showStatus = true,
   showVoted = false,
+  showCampaign = false,
   showMore = true,
   tagClick = undefined,
 }: IdeaCardProps): JSX.Element|null {
@@ -69,7 +71,10 @@ export default function IdeaCard({
               <hr />
 
               <footer className="post-card-meta">
-                <div>{showVoted && idea?.voted !== null ? <VoteCounter count={idea?.voted || 0} /> : null}</div>
+                <div>
+                  {showVoted && idea?.voted !== null ? <VoteCounter count={idea?.voted || 0} /> : null}
+                  {showCampaign ? <span className="campaign-name">{idea?.campaign?.shortTitle}</span> : null}
+                </div>
                 <div className="post-more-wrapper">
                   <Link href={`${ideaPreLink}/${idea.id}`} className="btn post-more" onClick={handleClick}>Bővebben</Link>
                 </div>
