@@ -19,7 +19,7 @@ export default function Home() {
                   </div>
 
                   <div className="offset-lg-3 col-lg-6">
-                    <p>Köszönjük, hogy közel xx.xxx-en szavaztatok. Hamarosan eredményt hirdetünk.</p>
+                    <p>Köszönjük, hogy több mint 25 500-an szavaztatok. Hamarosan eredményt hirdetünk.</p>
 
                     <Link className="btn btn-primary btn-headline btn-next" href="/hirek/lezarult-a-2023-as-szavazas">Mi történik most?</Link>
                   </div>
