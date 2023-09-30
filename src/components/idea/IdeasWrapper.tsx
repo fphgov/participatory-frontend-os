@@ -10,6 +10,7 @@ type IdeasWrapperProps = {
   tags?: ITag[],
   handleClick?: () => void|undefined
   showStatus?: boolean
+  showCampaign?: boolean
   showVoted?: boolean
   tagClick?: (tag: ITag) => {}|undefined
   className?: string|null
@@ -22,6 +23,7 @@ export default function IdeasWrapper({
   handleClick,
   className = null,
   showStatus = true,
+  showCampaign = false,
   showVoted = false,
   tagClick = undefined,
 }: IdeasWrapperProps): JSX.Element {
@@ -34,6 +36,7 @@ export default function IdeasWrapper({
         handleClick={handleClick}
         showStatus={showStatus}
         showVoted={showVoted}
+        showCampaign={showCampaign}
         tagClick={tagClick}
       />
     </div>

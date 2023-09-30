@@ -1,20 +1,23 @@
 import { Metadata } from "next"
-import { apiProfileData, apiProfileIdeaData } from "@/lib/api-requests"
+import { apiProfileData, apiProfileIdeaData, apiProfileVotesData } from "@/lib/api-requests"
 import HeroPage from '@/components/common/HeroPage'
 import ProfileBox from '@/components/profile/ProfileBox'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faIdCardAlt, faLightbulb } from "@fortawesome/free-solid-svg-icons"
+import { faIdCardAlt, faLightbulb, faUserCheck } from "@fortawesome/free-solid-svg-icons"
 import Link from 'next/link'
 import { IUser } from '@/models/user.model'
 import { IIdea } from '@/models/idea.model'
+import { IProject } from "@/models/project.model"
 import ProfileIdeaList from '@/components/profile/ProfileIdeaList'
 import ProfileDeleteButton from '@/components/profile/ProfileDeleteButton'
+import ProfileVoteList from "@/components/profile/ProfileVoteList"
 import { notFound } from 'next/navigation'
 import PasswordChangeForm from './password-change-form'
 
 type ProfilePageData = {
   profile: IUser|null
   ideas: IIdea[]
+  votedProjects: IProject[]
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -34,17 +37,19 @@ async function getData(): Promise<ProfilePageData> {
   const ideas = await apiProfileIdeaData({
     'username': profile.username
   })
+  const votedProjects = await apiProfileVotesData()
 
   return {
     profile,
-    ideas
+    ideas,
+    votedProjects
   }
 }
 
 export default async function ProfilePage() {
-  const { profile, ideas } = await getData()
+  const { profile, ideas, votedProjects } = await getData()
 
-  if (! (profile && ideas)) {
+  if (! (profile && ideas && votedProjects)) {
     return notFound()
   }
 
@@ -78,6 +83,12 @@ export default async function ProfilePage() {
                 <h2><FontAwesomeIcon icon={faLightbulb} /> Beküldött ötletek ({ideas.length})</h2>
 
                 <ProfileIdeaList ideas={ideas} />
+              </div>
+
+              <div className="section">
+                <h2><FontAwesomeIcon icon={faUserCheck} /> Ezekre az ötletekre szavaztál ({votedProjects.length})</h2>
+
+                <ProfileVoteList projects={votedProjects} />
               </div>
             </div>
           </div>
