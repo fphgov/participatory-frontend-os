@@ -8,6 +8,7 @@ import CategoryIcon from "@/components/idea/CategoryIcon"
 import Comment from "@/components/idea/Comment"
 import nFormatter from "@/utilities/nFormatter"
 import Share from "@/components/common/Share"
+import Gallery from "../common/Gallery"
 
 type IdeasWrapperProps = {
   idea: IIdea
@@ -58,7 +59,7 @@ export default function IdeaWrapper({ idea }: IdeasWrapperProps): JSX.Element {
                       {idea.medias && idea.medias.length > 0 ? (
                         <>
                           <div className="media-sep">
-                            {/* <Gallery items={images} showThumbnails={true} /> */}
+                            {images && images.length > 0 ? <Gallery items={images} showThumbnails={true} /> : null}
                           </div>
                         </>
                       ) : null}

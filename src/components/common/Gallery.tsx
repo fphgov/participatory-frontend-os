@@ -6,7 +6,7 @@ import "react-image-lightbox/style.css"
 import Image from 'next/image'
 
 export type GalleryProps = {
-  items: any[]
+  items: string[]|undefined
   showThumbnails: boolean
 }
 
@@ -19,7 +19,7 @@ export default function Gallery({ items, showThumbnails = true }: GalleryProps) 
     setIsOpen(true)
   }
 
-  if (items && items.length === 0) {
+  if (typeof items === 'undefined' || items && items.length === 0) {
     return null
   }
 
