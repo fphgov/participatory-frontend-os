@@ -30,7 +30,7 @@ export default function Implementation({ implementations }: ImplementationProps)
             <>
               <h4>Galéria:</h4>
               <div className="media-sep">
-                <Gallery items={images} showThumbnails={true} />
+                {images && images.length > 0 ? <Gallery items={images} showThumbnails={true} /> : null}
               </div>
             </>
           ) : null}
