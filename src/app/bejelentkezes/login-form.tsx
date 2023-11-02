@@ -27,7 +27,8 @@ export default function LoginForm({ searchParams } : LoginFormProps): JSX.Elemen
       if (searchParams?.project) {
         window.location.href = '/projektek/' + searchParams?.project
       } else {
-        window.location.href = '/szavazas-inditasa'
+        // window.location.href = '/szavazas-inditasa'
+        window.location.href = '/profil'
       }
     } else {
       if (res?.message) {
