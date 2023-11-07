@@ -574,11 +574,20 @@ footer.post-card-meta {
 }
 
 .win-feed {
-  background-color: #fff;
+  background: linear-gradient(90deg, #12326E 0%, #03194D 100%);
+}
+
+.win-feed.fix-section h3 {
+  text-align: left;
 }
 
 .win-feed .ideas {
   padding: 0;
+}
+
+.win-feed .prop-theme > img {
+  width: 18px;
+  height: auto;
 }
 
 .dark-section .btn.btn-primary {
@@ -2849,6 +2858,7 @@ time.post-full-meta-date::before {
   margin: 0;
   font-size: 36px;
   line-height: 42px;
+  font-weight: 700;
 }
 
 .hero-page h1 + p {
