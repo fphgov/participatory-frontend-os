@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import TimeLineItem from '@/components/common/TimeLineItem'
 import NewsFeed from '@/components/home/NewsFeed'
-// import ProjectsFeed from '@/components/home/ProjectsFeed'
 // import VoteInfoSection from '@/components/home/VoteInfoSection'
 import NewsletterArea from '@/components/home/NesletterArea'
 import ProjectsFeed from '../components/home/ProjectsFeed'
@@ -22,7 +21,7 @@ export default function Home() {
                   <div className="offset-lg-3 col-lg-6">
                     <p>Köszönjük, ha te is adsz egy jó ötletet, hogy mire fordítson Budapest X ft-ot.<br />Most még ne kezdd el írni: fontosabb, hogy <b>alaposan olvasd el a következő oldalt</b>.</p>
 
-                    <Link className="btn btn-primary btn-headline btn-next" href="/hirek/lezarult-a-2023-as-szavazas">Mire figyelj?</Link>
+                    <Link className="btn btn-primary btn-headline btn-next" href="/bekuldesi-informacio">Mire figyelj?</Link>
                   </div>
                 </div>
               </div>
