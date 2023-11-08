@@ -13,6 +13,7 @@ import InputLengthValidator from "@/components/common/form-element/InputLengthVa
 import TextareaLengthValidator from "@/components/common/form-element/TextareaLengthValidator"
 import FileArea from "@/components/common/form-element/FileArea"
 import { getToken } from "@/lib/actions"
+import Toggle from "@/components/common/form-element/Toogle"
 
 export default function IdeaSubmissionForm(): JSX.Element {
   const [ error, setError ] = useState('')
@@ -25,6 +26,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
     'location': '',
     'locationDescription': '',
     'locationDistrict': '',
+    'cost': '',
     'title': '',
     'description': '',
     'solution': '',
@@ -52,6 +54,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
 
     const ideaFormData = new FormData()
 
+    ideaFormData.append('cost', filterData.cost)
     ideaFormData.append('title', filterData.title)
     ideaFormData.append('solution', filterData.solution)
     ideaFormData.append('description', filterData.description)
@@ -200,7 +203,9 @@ export default function IdeaSubmissionForm(): JSX.Element {
             <div className="form-wrapper">
               <div className="input-wrapper">
                 <h6>Becsüld meg az ötleted megvalósításához szükséges összeget!</h6>
-                <input type="checkbox"  />
+
+                {/* <Toggle id="cost" name="cost" title="" value={filterData.cost} /> */}
+
                 <p>Megértettem, hogy ötletem csak úgy kerülhet szavazólistára, ha tervezett megvalósítási költsége nem több 120 millió forintnál.</p>
               </div>
             </div>
