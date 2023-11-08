@@ -66,21 +66,17 @@ export default function IdeaCard({
             { showStatus ? <div className="prop-build">{idea.status?.title}</div> : null }
           </div>
 
-          {showMore ?
-            <>
-              <hr />
+          <hr />
 
-              <footer className="post-card-meta">
-                <div>
-                  {showVoted && idea?.voted !== null ? <VoteCounter count={idea?.voted || 0} /> : null}
-                  {showCampaign ? <span className="campaign-name">{idea?.campaign?.shortTitle}</span> : null}
-                </div>
-                <div className="post-more-wrapper">
-                  <Link href={`${ideaPreLink}/${idea.id}`} className="btn post-more" onClick={handleClick}>Bővebben</Link>
-                </div>
-              </footer>
-            </>
-           : null}
+          <footer className="post-card-meta">
+            <div>
+              {/* showVoted && idea?.voted !== null ? <VoteCounter count={idea?.voted || 0} /> : null */}
+              {/* showCampaign ? <span className="campaign-name">{idea?.campaign?.shortTitle}</span> : null */}
+            </div>
+            <div className="post-more-wrapper">
+              <Link href={`${ideaPreLink}/${idea.id}`} className="btn post-more" onClick={handleClick}>Bővebben</Link>
+            </div>
+          </footer>
         </div>
       </div>
     </div>

@@ -22,15 +22,15 @@ export default async function ProjectsFeed({ title, more }: ProjectsFeedProps): 
   const ideasResponse = await getPageData()
 
   return (
-    <div className="light-section win-feed">
+    <div className="dark-section fix-section win-feed">
       <div className="container">
         <div className="row flex-center">
-          <div className="col-md-3">
-            <h2>{title}</h2>
+          <div className="col-md-5">
+            <h3>{title}</h3>
           </div>
 
-          <div className="col-md-9" style={{ textAlign: 'right' }}>
-            <Link href="/projektek" className="btn post-more desktop-only">{more}</Link>
+          <div className="col-md-7" style={{ textAlign: 'right', marginBottom: '36px' }}>
+            <Link href="/projektek" className="btn btn-headline btn-next desktop-only">{more}</Link>
           </div>
         </div>
 
