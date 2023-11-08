@@ -4,7 +4,7 @@ RUN apk update && apk add git autoconf make automake pkgconfig libtool g++ libjp
 
 RUN npm install -g \
     npm-check-updates \
-    npm@9.8.1
+    npm@10
 
 WORKDIR /app
 
