@@ -26,7 +26,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
     'location': '',
     'locationDescription': '',
     'locationDistrict': '',
-    'cost': '',
+    'cost': false,
     'title': '',
     'description': '',
     'solution': '',
@@ -54,7 +54,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
 
     const ideaFormData = new FormData()
 
-    ideaFormData.append('cost', filterData.cost)
+    ideaFormData.append('cost', filterData.cost.toString())
     ideaFormData.append('title', filterData.title)
     ideaFormData.append('solution', filterData.solution)
     ideaFormData.append('description', filterData.description)
@@ -202,11 +202,15 @@ export default function IdeaSubmissionForm(): JSX.Element {
 
             <div className="form-wrapper">
               <div className="input-wrapper">
-                <h6>Becsüld meg az ötleted megvalósításához szükséges összeget!</h6>
+                <h6><label htmlFor="cost">Becsüld meg az ötleted megvalósításához szükséges összeget!</label></h6>
 
-                {/* <Toggle id="cost" name="cost" title="" value={filterData.cost} /> */}
-
-                <p>Megértettem, hogy ötletem csak úgy kerülhet szavazólistára, ha tervezett megvalósítási költsége nem több 120 millió forintnál.</p>
+                <Toggle
+                  id="cost"
+                  name="cost"
+                  value={filterData.cost}
+                  handleChange={handleChangeInput}
+                  tipp={"Megértettem, hogy ötletem csak úgy kerülhet szavazólistára, ha tervezett megvalósítási költsége nem több 120 millió forintnál."}
+                />
               </div>
             </div>
 
