@@ -212,10 +212,11 @@ nav.main-navigation ul li.open ul.submenu > li > a {
 
 .main-navigation li.highlight a,
 .mobile-menu li.highlight a {
-  color: #12326E;
+  color: #fff;
   padding: 4px 12px;
   border-radius: 999px;
   border: 1px solid #12326E;
+  background: #12326E;
   display: inline-block;
 }
 
