@@ -120,6 +120,11 @@ body {
   margin: 0 0 18px;
 }
 
+.page-idea-info img {
+  width: 100%;
+  height: auto;
+}
+
 .page-idea-info .help p {
   font-size: 24px;
   line-height: 30px;
@@ -207,10 +212,11 @@ nav.main-navigation ul li.open ul.submenu > li > a {
 
 .main-navigation li.highlight a,
 .mobile-menu li.highlight a {
-  color: #12326E;
+  color: #fff;
   padding: 4px 12px;
   border-radius: 999px;
   border: 1px solid #12326E;
+  background: #12326E;
   display: inline-block;
 }
 
@@ -888,6 +894,43 @@ textarea {
 
 input[type="submit"] {
   margin-top: 30px;
+}
+
+.formatted-checkbox {
+  margin-bottom: 36px;
+}
+
+.formatted-checkbox label {
+  position: relative;
+}
+
+.formatted-checkbox span {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: -36px;
+  transform: translateY(-50%);
+  border: 1px solid rgba(34, 34, 34, 0.24);
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.formatted-checkbox input[type="checkbox"] {
+  width: 23px;
+  height: 23px;
+  position: absolute;
+  border: 0;
+  left: -36px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 4px;
+}
+
+.formatted-checkbox input:checked ~ span {
+  background: #21A7CC url('../../public/images/icon-tick.svg') no-repeat center center;
+  border: 1px solid #21A7CC;
 }
 
 .info {

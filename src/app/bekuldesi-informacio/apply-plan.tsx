@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 export default function AppyPlan() {
   const [disabled, setDisabled] = useState(true)
@@ -14,9 +14,10 @@ export default function AppyPlan() {
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <div className="guide-check">
+            <div className="formatted-checkbox">
               <label>
                 <input type="checkbox" id="guide" name="guide" onChange={handleChangeInput}/>
+                <span className="tick"></span>
                 Elolvastam és megértettem, hogy milyen ötletekkel lehet pályázni.
               </label>
             </div>
