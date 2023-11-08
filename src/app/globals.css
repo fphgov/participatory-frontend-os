@@ -38,6 +38,25 @@ h3.single {
   font-weight: normal;
 }
 
+h5 {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px; /* 125% */
+  letter-spacing: 0.24px;
+  margin: 0 0 36px 0;
+}
+
+h6 {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px; /* 144.444% */
+  letter-spacing: 0.18px;
+  color: #12326E;
+  margin: 0;
+}
+
 .dark h1,
 .dark h2,
 .dark h3,
@@ -363,6 +382,7 @@ header .logo-wrapper img {
   padding: 12px 18px;
   width: 100%;
   text-align: center;
+  border-radius: 999px !important;
 }
 
 .btn.btn-tertiary,
@@ -839,12 +859,12 @@ input[type="submit"] {
 }
 
 .info {
-  color: #21A7CC;
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
   display: flex;
   align-items: center;
+  margin: 6px 0 24px 0;
 }
 
 .info::before {
@@ -1476,7 +1496,7 @@ legend {
 fieldset label {
   display: inline-block;
   max-width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   font-weight: bold;
   color: #12326E !important;
 }
@@ -2333,6 +2353,11 @@ textarea[aria-invalid="true"] {
 
 span.info-text {
   color: #078437;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.14px;
 }
 
 span.info-text.info-text-empty {
@@ -2468,18 +2493,23 @@ input[type="file"] {
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   position: relative;
   user-select: none;
 }
 
 .form-status li {
   display: inline-block;
+  margin: 0 24px;
 }
 
 .form-status li a {
   text-decoration: none;
   display: block;
+}
+
+.form-status li a:hover .description {
+  text-decoration: underline;
 }
 
 .form-status span {
@@ -4227,6 +4257,10 @@ p.subinfo {
 
 .idea-pagination {
   margin: 36px 0;
+}
+
+.idea-submission-form {
+  margin: 48px 0;
 }
 
 .vote-search-tags {

@@ -228,6 +228,33 @@ export async function apiProfileChangePassword(credentials: { password: string, 
   return handleResponse<MessageResponse>(response).then(data => data)
 }
 
+export async function apiIdeaSubmission(formData: FormData): Promise<Record<string, string>> {
+  const token = (await getToken())?.value
+
+  const url = backendUrl(endpoints.API_REQ_PROFILE_IDEA)
+
+  const headers: Record<string, string> = {
+    'Accept': 'application/json',
+    'Content-Type': 'multipart/form-data'
+  }
+
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`
+  }
+
+  const response = await fetch(url, {
+    cache: "no-store",
+    method: "POST",
+    credentials: "include",
+    headers,
+    body: formData,
+  })
+
+  console.log(response) // 401 - nincs token, nincs bejelentkezve
+
+  return handleResponse<any>(response).then(data => data)
+}
+
 export async function apiRegistration(data: Record<string, string>): Promise<Record<string, string>> {
   var urlencoded = new URLSearchParams(data as Record<string, string>)
 

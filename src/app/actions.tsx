@@ -1,6 +1,6 @@
 'use server'
 
-import { apiLoginUser, apiLostPassword, apiResetPasswordChange, apiRegistration, apiProfileChangePassword, apiProfileActivate, apiProfileSaving } from "@/lib/api-requests"
+import { apiLoginUser, apiLostPassword, apiResetPasswordChange, apiRegistration, apiProfileChangePassword, apiProfileActivate, apiProfileSaving, apiIdeaSubmission } from "@/lib/api-requests"
 
 export async function loginFom(formData: FormData) {
   let jsonError, error, success = false
@@ -38,6 +38,30 @@ export async function registrationFom(data: any) {
   try {
     try {
       await apiRegistration(data)
+
+      success = true
+    } catch (e: any) {
+      try {
+        jsonError = JSON.parse(e.message)
+      } catch (jError: any) {
+        if (typeof e?.message === "string") {
+          error = e.message
+        }
+      }
+    }
+
+    return { jsonError, error, success }
+  } catch (e) {
+    return { message: 'Váratlan hiba történt, kérünk próbáld később' }
+  }
+}
+
+export async function ideaSubmissionForm(formData: FormData) {
+  let jsonError, error, success = false
+
+  try {
+    try {
+      await apiIdeaSubmission(formData)
 
       success = true
     } catch (e: any) {

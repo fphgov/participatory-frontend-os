@@ -30,7 +30,7 @@ ENV NEXT_PUBLIC_FACEBOOK_PIXEL=$ARG_NEXT_PUBLIC_FACEBOOK_PIXEL
 
 WORKDIR "/app"
 
-RUN npm install -g npm@9.6.6
+RUN npm install -g npm@10
 
 RUN printenv > .env
 RUN chown node:node .env
