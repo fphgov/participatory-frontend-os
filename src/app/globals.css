@@ -1311,21 +1311,24 @@ input[type="submit"] {
 }
 
 .prop-build {
-  color: #078437;
-  font-size: 14px;
+  color: #222222;
+  font-size: 18px;
   font-weight: bold;
-  margin: 24px 0 0 0;
+  position: relative;
+  padding-left: 45px;
+  /*margin: 24px 0 0 0;*/
 }
 
 .prop-build::before {
   content: '';
-  margin-right: 6px;
-  background-image: url('../../public/images/icon-done.svg');
-  background-repeat: no-repeat;
-  width: 18px;
-  height: 18px;
-  display: inline-block;
-  vertical-align: top;
+  background: #29CE95 url('../../public/images/icon-tick.svg') no-repeat center center;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .prop-more {
