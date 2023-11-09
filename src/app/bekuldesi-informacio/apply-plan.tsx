@@ -1,12 +1,13 @@
 'use client'
 
 import { useState } from "react"
+import Checkbox from "@/components/common/form-element/Checkbox"
 
 export default function AppyPlan() {
-  const [disabled, setDisabled] = useState(true)
+  const [checked, setChecked] = useState(false)
 
-  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDisabled(!disabled)
+  const handleChangeInput = () => {
+    setChecked(!checked)
   }
 
   return (
@@ -14,15 +15,15 @@ export default function AppyPlan() {
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <div className="formatted-checkbox">
-              <label>
-                <input type="checkbox" id="guide" name="guide" onChange={handleChangeInput}/>
-                <span className="tick"></span>
-                Elolvastam és megértettem, hogy milyen ötletekkel lehet pályázni.
-              </label>
-            </div>
+            <Checkbox
+              id="guide"
+              name="guide"
+              label="Elolvastam és megértettem, hogy milyen ötletekkel lehet pályázni."
+              handleChange={handleChangeInput}
+              value={checked}
+            />
 
-            <a className={`btn btn-tertiary btn-big ${disabled && 'disabled'}`} href="/bekuldes">Beadok egy ötletet</a>
+            <a className={`btn btn-tertiary btn-big ${!checked && 'disabled'}`} href="/bekuldes">Beadok egy ötletet</a>
           </div>
         </div>
       </div>
