@@ -567,6 +567,19 @@ input.btn[disabled]:hover {
   margin-right: 6px;
 }
 
+.btn.btn-overview-edit {
+  width: 36px;
+  height: 36px;
+  background-image: url('../../public/images/btn-edit-blue.svg');
+  background-repeat: no-repeat;
+  background-color: #E7F5FE;
+  border-radius: 8px;
+  background-position: center center;
+  background-size: 24px 24px;
+  padding: 0;
+  margin: 0;
+}
+
 .input-wrapper input:focus,
 .input-wrapper textarea:focus,
 .input-wrapper select:focus {
@@ -2403,6 +2416,12 @@ div:not(.radio-inline-block) > .radio-inline + .radio-inline {
   -webkit-box-orient: vertical;
 }
 
+.input-wrapper-overview-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .link-elem {
   margin-bottom: 8px;
   display: block;
@@ -2576,6 +2595,11 @@ input[type="file"] {
   display: flex;
   flex-flow: column;
   overflow: hidden;
+}
+
+.file-list-view {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .file-list + .file-list-separator {

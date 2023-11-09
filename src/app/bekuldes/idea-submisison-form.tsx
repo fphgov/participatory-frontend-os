@@ -13,6 +13,7 @@ import 'intl-tel-input/build/css/intlTelInput.css';
 import PhonenumberInput, { PhonenumberValue } from "@/components/common/form-element/PhonenumberInput"
 import Link from "next/link"
 import { useIdeaContext } from "./idea-store"
+import { districtDataList } from "@/models/district.model"
 
 export default function IdeaSubmissionForm(): JSX.Element {
   const { setIdeaFormContextData } = useIdeaContext()
@@ -110,33 +111,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
                         title="Kerület"
                         name="locationDistrict"
                         value={formData.locationDistrict}
-                        dataList={[
-                          { name: 'Válassz egy kerületet', value: '0'},
-                          { name: 'I. kerület', value: 'AREA1'},
-                          { name: 'II. kerület', value: 'AREA2'},
-                          { name: 'III. kerület', value: 'AREA3'},
-                          { name: 'IV. kerület', value: 'AREA4'},
-                          { name: 'V. kerület', value: 'AREA5'},
-                          { name: 'VI. kerület', value: 'AREA6'},
-                          { name: 'VII. kerület', value: 'AREA7'},
-                          { name: 'VIII. kerület', value: 'AREA8'},
-                          { name: 'IX. kerület', value: 'AREA9'},
-                          { name: 'X. kerület', value: 'AREA10'},
-                          { name: 'XI. kerület', value: 'AREA11'},
-                          { name: 'XII. kerület', value: 'AREA12'},
-                          { name: 'XIII. kerület', value: 'AREA13'},
-                          { name: 'XIV. kerület', value: 'AREA14'},
-                          { name: 'XV. kerület', value: 'AREA15'},
-                          { name: 'XVI. kerület', value: 'AREA16'},
-                          { name: 'XVII. kerület', value: 'AREA17'},
-                          { name: 'XVIII. kerület', value: 'AREA18'},
-                          { name: 'XIX. kerület', value: 'AREA19'},
-                          { name: 'XX. kerület', value: 'AREA20'},
-                          { name: 'XXI. kerület', value: 'AREA21'},
-                          { name: 'XXII. kerület', value: 'AREA22'},
-                          { name: 'XXIII. kerület', value: 'AREA23'},
-                          { name: 'Margit sziget', value: 'AREA24'},
-                        ]}
+                        dataList={districtDataList}
                         handleChange={handleChangeInput}
                       />
                     </div>

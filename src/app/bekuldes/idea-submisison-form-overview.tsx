@@ -18,6 +18,8 @@ import Checkbox from "@/components/common/form-element/Checkbox"
 import 'intl-tel-input/build/css/intlTelInput.css';
 import PhonenumberInput, { PhonenumberValue } from "@/components/common/form-element/PhonenumberInput"
 import { useIdeaContext } from "./idea-store"
+import { districtDataList } from "@/models/district.model"
+import MediaList from "@/components/common/form-element/MediaList"
 
 export default function IdeaSubmissionFormOverview(): JSX.Element {
   const { ideaFormContextData } = useIdeaContext()
@@ -25,6 +27,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
   const [ canBeSubmit, setCanBeSubmit ] = useState(false)
   const [ error, setError ] = useState('')
   const [ errorObject, setErrorObject ] = useState<Record<string, string>>()
+  const [ inputComponentEdit, setInputComponentEdit ] = useState('')
   const [ success, setSuccess ] = useState(false)
   const [ scroll, setScroll ] = useState(false)
   const [ recaptcha, setRecaptcha ] = useState<ReCaptcha>()
@@ -124,6 +127,14 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
     }
   }, [formData])
 
+  const setInputComponent = (inputName: string) => {
+    if (inputComponentEdit !== inputName) {
+      setInputComponentEdit(inputName)
+    } else {
+      setInputComponentEdit('')
+    }
+  }
+
   return (
     <div className="idea-submission-form">
       {scroll && document.querySelector('.error-message-inline') ? <ScrollTo element={(document?.querySelector('.error-message-inline') as HTMLElement)?.offsetTop || 0} /> : null}
@@ -138,163 +149,213 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
 
           <div className="form-wrapper">
             <div className="input-wrapper">
-              <h6>Add meg, hol képzeled el az ötleted!</h6>
-              <p className="info">Kérjük, válassz, hogy ötleted konkrét helyszínhez kötött vagy Budapest egészére vonatkozik!</p>
+              <div className="input-wrapper-overview">
+                <div className="input-wrapper-overview-title">
+                  <h6><label htmlFor="location">Add meg, hol képzeled el az ötleted!</label></h6>
 
-              <div className="row">
-                <div className="col-12 col-xl-12">
+                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => { setInputComponent('location') }} />
+                </div>
 
-                  <div className="form-group">
-                    <div className="input-wrapper card-radio-wrapper">
-                      <div className="row">
-                        <div className="col-md-6">
-                          <SimpleRadio
-                            id="specific"
-                            name="location"
-                            value="1"
-                            radioValue={formData.location}
-                            title="Konkrét helyszínhez kötődik"
-                            tipp="Pl. konkrét utca, tér"
-                            handleChange={handleChangeInput}
-                          />
+                {inputComponentEdit === "location" ? <>
+                  <div className="input-wrapper-content">
+                    <p className="info">Kérjük, válassz, hogy ötleted konkrét helyszínhez kötött vagy Budapest egészére vonatkozik!</p>
+
+                    <div className="row">
+                      <div className="col-12 col-xl-12">
+
+                        <div className="form-group">
+                          <div className="input-wrapper card-radio-wrapper">
+                            <div className="row">
+                              <div className="col-md-6">
+                                <SimpleRadio
+                                  id="specific"
+                                  name="location"
+                                  value="1"
+                                  radioValue={formData.location}
+                                  title="Konkrét helyszínhez kötődik"
+                                  tipp="Pl. konkrét utca, tér"
+                                  handleChange={handleChangeInput}
+                                />
+                              </div>
+                              <div className="col-md-6">
+                                <SimpleRadio
+                                  id="unspecific"
+                                  name="location"
+                                  value="0"
+                                  radioValue={formData.location}
+                                  title="Nem kötődik konkrét helyszínhez"
+                                  handleChange={handleChangeInput}
+                                />
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <div className="col-md-6">
-                          <SimpleRadio
-                            id="unspecific"
-                            name="location"
-                            value="0"
-                            radioValue={formData.location}
-                            title="Nem kötődik konkrét helyszínhez"
-                            handleChange={handleChangeInput}
+
+                        {formData.location === "1" ? <>
+                          <InputLengthValidator
+                            title="Helyszín megnevezése"
+                            name="locationDescription"
+                            value={formData.locationDescription}
+                            options={{ min: 0, max: 200 }}
+                            onChange={handleChangeInput}
                           />
-                        </div>
+
+                          <div style={{ marginTop: 18 }}>
+                            <Select
+                              title="Kerület"
+                              name="locationDistrict"
+                              value={formData.locationDistrict}
+                              dataList={districtDataList}
+                              handleChange={handleChangeInput}
+                            />
+                          </div>
+                        </> : null}
                       </div>
                     </div>
                   </div>
+                </> : <>
+                  {formData.location === "" ? <p>Nem választottál a helyszínt!</p> : <>
+                    {formData.location === "0" ? <p>Nem kötődik konkrét helyszínhez</p> : <p>
+                      {formData.locationDistrict ? <>{`${districtDataList.filter(district => district.value === formData.locationDistrict)[0]?.name}, `}</> : null}
+                      {formData.locationDescription ? <>{formData.locationDescription}</> : null}
+                    </p>
+                    }
+                  </>}
+                </>}
 
-                  {formData.location === "1" ? <>
+                {errorObject?.location ? Object.values(errorObject.location).map((err, i) => {
+                  return <ErrorMini key={i} error={err} increment={`location-${i}`} />
+                }) : null}
+              </div>
+            </div>
+
+            <hr />
+
+            <div className="input-wrapper">
+              <div className="input-wrapper-overview">
+                <div className="input-wrapper-overview-title">
+                  <h6><label htmlFor="cost">Becsüld meg az ötleted megvalósításához szükséges összeget!</label></h6>
+
+                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => { setInputComponent('cost') }} />
+                </div>
+
+                {inputComponentEdit === "cost" ? <>
+                  <div className="input-wrapper-content">
+                    <Toggle
+                      id="cost"
+                      name="cost"
+                      value={formData.cost}
+                      handleChange={handleChangeInput}
+                      tipp={"Megértettem, hogy ötletem csak úgy kerülhet szavazólistára, ha tervezett megvalósítási költsége nem több 120 millió forintnál."}
+                    />
+                  </div>
+                </> : <>
+                  {formData.cost === true ? <p>Elfogadtad a feltételeket az ötletbeküldés összegére vonatkozóan.</p> : <p>Nem fogadtad el a feltételeket az ötletbeküldés összegére vonatkozóan. Ha azért nem fogadtad el, mert azt érzed, hogy az ötleted nem fér bele a 120 millió Ft-os keretbe, érdemes átgondolni az ötleted.</p>}
+                </>}
+
+                {errorObject?.cost ? Object.values(errorObject.cost).map((err, i) => {
+                  return <ErrorMini key={i} error={err} increment={`cost-${i}`} />
+                }) : null}
+              </div>
+            </div>
+
+            <hr />
+
+            <div className="input-wrapper">
+              <div className="input-wrapper-overview">
+                <div className="input-wrapper-overview-title">
+                  <h6><label htmlFor="title">Nevezd el az ötleted!</label></h6>
+
+                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => { setInputComponent('title') }} />
+                </div>
+
+                {inputComponentEdit === "title" ? <>
+                  <div className="input-wrapper-content">
+                    <p className="info">Adj ötletednek olyan címet, ami tömör, lényegretörő, kiderül, mit javasolsz. Az előző évben, már megvalósítás alatt álló ötletek listáját itt éred el, segítséget nyújthat a könnyebb kitöltésben.</p>
+
                     <InputLengthValidator
-                      title="Helyszín megnevezése"
-                      name="locationDescription"
-                      value={formData.locationDescription}
-                      options={{ min: 0, max: 200 }}
+                        title="Ötleted címe"
+                        name="title"
+                        value={formData.title}
+                        showLabel={false}
+                        options={{ min: 4, max: 100 }}
+                        onChange={handleChangeInput}
+                    />
+                  </div>
+                </> : <>
+                  {formData.title === "" ? <p>Nem nevezted el az ötleted!</p> : <p>{formData.title}</p>}
+                </>}
+
+                {errorObject?.title ? Object.values(errorObject.title).map((err, i) => {
+                  return <ErrorMini key={i} error={err} increment={`title-${i}`} />
+                }) : null}
+              </div>
+            </div>
+
+            <hr />
+
+            <div className="input-wrapper">
+              <div className="input-wrapper-overview">
+                <div className="input-wrapper-overview-title">
+                  <h6><label htmlFor="description">Mit valósítson meg a főváros?</label></h6>
+
+                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => { setInputComponent('description') }} />
+                </div>
+
+                {inputComponentEdit === "description" ? <>
+                  <div className="input-wrapper-content">
+                    <p className="info">Itt azt írd le, hogy mi a fejlesztés tartalma, mit valósítson meg az önkormányzat! Nem ide kell leírnod, hogy az ötleted miért jó ötlet.</p>
+
+                    <TextareaLengthValidator
+                      title="Mit valósítson meg a főváros?"
+                      name="description"
+                      value={formData.description}
+                      showLabel={false}
+                      options={{ min: 200, max: 1000 }}
                       onChange={handleChangeInput}
                     />
+                  </div>
+                </> : <>
+                  {formData.description === "" ? <p>Nem adtál meg fejlesztési leírást az ötletednek!</p> : <p>{formData.description}</p>}
+                </>}
 
-                    <div style={{ marginTop: 18 }}>
-                      <Select
-                        title="Kerület"
-                        name="locationDistrict"
-                        value={formData.locationDistrict}
-                        dataList={[
-                          { name: 'Válassz egy kerületet', value: '0'},
-                          { name: 'I. kerület', value: 'AREA1'},
-                          { name: 'II. kerület', value: 'AREA2'},
-                          { name: 'III. kerület', value: 'AREA3'},
-                          { name: 'IV. kerület', value: 'AREA4'},
-                          { name: 'V. kerület', value: 'AREA5'},
-                          { name: 'VI. kerület', value: 'AREA6'},
-                          { name: 'VII. kerület', value: 'AREA7'},
-                          { name: 'VIII. kerület', value: 'AREA8'},
-                          { name: 'IX. kerület', value: 'AREA9'},
-                          { name: 'X. kerület', value: 'AREA10'},
-                          { name: 'XI. kerület', value: 'AREA11'},
-                          { name: 'XII. kerület', value: 'AREA12'},
-                          { name: 'XIII. kerület', value: 'AREA13'},
-                          { name: 'XIV. kerület', value: 'AREA14'},
-                          { name: 'XV. kerület', value: 'AREA15'},
-                          { name: 'XVI. kerület', value: 'AREA16'},
-                          { name: 'XVII. kerület', value: 'AREA17'},
-                          { name: 'XVIII. kerület', value: 'AREA18'},
-                          { name: 'XIX. kerület', value: 'AREA19'},
-                          { name: 'XX. kerület', value: 'AREA20'},
-                          { name: 'XXI. kerület', value: 'AREA21'},
-                          { name: 'XXII. kerület', value: 'AREA22'},
-                          { name: 'XXIII. kerület', value: 'AREA23'},
-                          { name: 'Margit sziget', value: 'AREA24'},
-                        ]}
-                        handleChange={handleChangeInput}
-                      />
-                    </div>
-                  </> : null}
+                {errorObject?.description ? Object.values(errorObject.description).map((err, i) => {
+                  return <ErrorMini key={i} error={err} increment={`description-${i}`} />
+                }) : null}
+              </div>
+            </div>
+
+            <hr />
+
+            <div className="input-wrapper">
+              <div className="input-wrapper-overview">
+                <div className="input-wrapper-overview-title">
+                  <h6><label htmlFor="solution">Miért jó, ha megvalósul ötleted?</label></h6>
+
+                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => { setInputComponent('solution') }} />
                 </div>
+
+                {inputComponentEdit === "solution" ? <>
+                  <div className="input-wrapper-content">
+                    <p className="info">Írd le, hogy milyen problémát old meg. Kiknek, és miben segít, ha megvalósul az ötleted?</p>
+
+                    <TextareaLengthValidator
+                      title="Mire megoldás?"
+                      name="solution"
+                      value={formData.solution}
+                      showLabel={false}
+                      options={{ min: 20, max: 250 }}
+                      onChange={handleChangeInput}
+                    />
+                  </div>
+                </> : <>
+                  {formData.solution === "" ? <p>Nem adtad meg, hogy milyen problémát old meg az ötleted!</p> : <p>{formData.solution}</p>}
+                </>}
+
+                {errorObject?.solution ? Object.values(errorObject.solution).map((err, i) => {
+                  return <ErrorMini key={i} error={err} increment={`solution-${i}`} />
+                }) : null}
               </div>
-            </div>
-
-            <hr />
-
-            <div className="form-wrapper">
-              <div className="input-wrapper">
-                <h6><label htmlFor="cost">Becsüld meg az ötleted megvalósításához szükséges összeget!</label></h6>
-
-                <Toggle
-                  id="cost"
-                  name="cost"
-                  value={formData.cost}
-                  handleChange={handleChangeInput}
-                  tipp={"Megértettem, hogy ötletem csak úgy kerülhet szavazólistára, ha tervezett megvalósítási költsége nem több 120 millió forintnál."}
-                />
-              </div>
-            </div>
-
-            <hr />
-
-            <div className="input-wrapper">
-              <h6><label htmlFor="title">Nevezd el az ötleted!</label></h6>
-              <p className="info">Adj ötletednek olyan címet, ami tömör, lényegretörő, kiderül, mit javasolsz. Az előző évben, már megvalósítás alatt álló ötletek listáját itt éred el, segítséget nyújthat a könnyebb kitöltésben.</p>
-
-              <InputLengthValidator
-                  title="Ötleted címe"
-                  name="title"
-                  value={formData.title}
-                  showLabel={false}
-                  options={{ min: 4, max: 100 }}
-                  onChange={handleChangeInput}
-              />
-
-              {errorObject?.title ? Object.values(errorObject.title).map((err, i) => {
-                return <ErrorMini key={i} error={err} increment={`title-${i}`} />
-              }) : null}
-            </div>
-
-            <hr />
-
-            <div className="input-wrapper">
-              <h6><label htmlFor="description">Mit valósítson meg a főváros?</label></h6>
-              <p className="info">Itt azt írd le, hogy mi a fejlesztés tartalma, mit valósítson meg az önkormányzat! Nem ide kell leírnod, hogy az ötleted miért jó ötlet.</p>
-
-              <TextareaLengthValidator
-                title="Mit valósítson meg a főváros?"
-                name="description"
-                value={formData.description}
-                showLabel={false}
-                options={{ min: 200, max: 1000 }}
-                onChange={handleChangeInput}
-              />
-
-              {errorObject?.description ? Object.values(errorObject.description).map((err, i) => {
-                return <ErrorMini key={i} error={err} increment={`description-${i}`} />
-              }) : null}
-            </div>
-
-            <hr />
-
-            <div className="input-wrapper">
-              <h6><label htmlFor="solution">Miért jó, ha megvalósul ötleted?</label></h6>
-              <p className="info">Írd le, hogy milyen problémát old meg. Kiknek, és miben segít, ha megvalósul az ötleted?</p>
-
-              <TextareaLengthValidator
-                title="Mire megoldás?"
-                name="solution"
-                value={formData.solution}
-                showLabel={false}
-                options={{ min: 20, max: 250 }}
-                onChange={handleChangeInput}
-              />
-
-              {errorObject?.solution ? Object.values(errorObject.solution).map((err, i) => {
-                return <ErrorMini key={i} error={err} increment={`solution-${i}`} />
-              }) : null}
             </div>
 
             <hr />
@@ -302,23 +363,55 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
             <h5>Kiegészítő információk</h5>
 
             <div className="input-wrapper">
-              <h6><label htmlFor="phone">Telefonszám:</label></h6>
-              <p className="info">Azért szeretnénk, ha megadnád telefonos elérhetőségedet, mert sokkal gördülékenyebben tudnánk kommunikálni veled az ötleted kapcsán.</p>
+              <div className="input-wrapper-overview">
+                <div className="input-wrapper-overview-title">
+                  <h6><label htmlFor="phone">Telefonszám:</label></h6>
 
-              <PhonenumberInput id="phone" name="phone" value={formData.phone} handleChange={handlePhonenumberInput} />
+                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => { setInputComponent('phone') }} />
+                </div>
 
-              {errorObject?.phone ? Object.values(errorObject.phone).map((err, i) => {
-                return <ErrorMini key={i} error={err} increment={`phone-${i}`} />
-              }) : null}
+                {inputComponentEdit === "phone" ? <>
+                  <div className="input-wrapper-content">
+                    <p className="info">Azért szeretnénk, ha megadnád telefonos elérhetőségedet, mert sokkal gördülékenyebben tudnánk kommunikálni veled az ötleted kapcsán.</p>
+
+                    <PhonenumberInput id="phone" name="phone" value={formData.phone} handleChange={handlePhonenumberInput} />
+                  </div>
+                </> : <>
+                  {formData.phone.phone === "" ? <p>Nem adtál meg telefonszámot. (Nem kötelező)</p> : <p>{formData.phone.dialCode + formData.phone.phone}</p>}
+                </>}
+
+                {errorObject?.phone ? Object.values(errorObject.phone).map((err, i) => {
+                  return <ErrorMini key={i} error={err} increment={`phone-${i}`} />
+                }) : null}
+              </div>
             </div>
 
             <hr />
 
             <div className="input-wrapper">
-              <label htmlFor="medias">Képek, dokumentumok feltöltése</label>
-              <div className="tipp">Itt tudsz képeket vagy egyéb dokumentumokat feltölteni, amikről úgy gondolod, segítik az ötleted megértését, kapcsolódnak hozzá. Max. 5 darab fájl tölthető fel!</div>
+              <div className="input-wrapper-overview">
+                <div className="input-wrapper-overview-title">
+                  <label htmlFor="medias">Képek, dokumentumok feltöltése</label>
 
-              <FileArea changeRaw={handleChangeFileRaw} originalMedias={formData.medias} />
+                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => { setInputComponent('medias') }} />
+                </div>
+
+                {inputComponentEdit === "medias" ? <>
+                  <div className="input-wrapper-content">
+                    <div className="tipp">Itt tudsz képeket vagy egyéb dokumentumokat feltölteni, amikről úgy gondolod, segítik az ötleted megértését, kapcsolódnak hozzá. Max. 5 darab fájl tölthető fel!</div>
+
+                    <FileArea changeRaw={handleChangeFileRaw} originalMedias={formData.medias} />
+                  </div>
+                </> : <>
+                  {formData.medias.length === 0 ? <p>Nem töltöttél fel csatolmányt. (Nem kötelező)</p> : <>
+                    <MediaList originalMedias={formData.medias} />
+                  </>}
+                </>}
+
+                {errorObject?.medias ? Object.values(errorObject.medias).map((err, i) => {
+                  return <ErrorMini key={i} error={err} increment={`medias-${i}`} />
+                }) : null}
+              </div>
             </div>
 
             <hr />
