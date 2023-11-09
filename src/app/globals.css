@@ -157,6 +157,10 @@ body {
   color: #0EA6CE;
 }
 
+.page-idea-info .help a:hover {
+  text-decoration: underline;
+}
+
 .page-idea-info .apply-plan {
   text-align: center;
 }
