@@ -1095,6 +1095,7 @@ fieldset .formatted-checkbox label {
   color: #fff;
 }
 
+.page.page-center,
 .page.page-forgot-password,
 .page.page-reset-password,
 .page.page-profile-activate,
@@ -1659,7 +1660,6 @@ form fieldset textarea,
   background-color: #fff;
   background-image: none;
   border: 1px solid #CCC;
-  border-radius: 4px !important;
   -webkit-box-shadow: none;
   box-shadow: none;
   -webkit-transition: none;

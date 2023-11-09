@@ -99,7 +99,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
       const res = await ideaSubmissionForm(ideaFormData)
 
       if (res.success) {
-        redirect('/bekuldes/sikeres')
+        redirect('/bekuldes-sikeres')
       } else {
         setErrorObject(res.jsonError)
         setError(res.error)
