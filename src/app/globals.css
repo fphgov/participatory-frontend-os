@@ -391,6 +391,13 @@ header .logo-wrapper img {
   line-height: normal;
 }
 
+input.btn[disabled],
+input.btn[disabled]:hover {
+  background-color: #EEEEEE !important;
+  color: #CCCCCC !important;
+  cursor: not-allowed;
+}
+
 .btn.btn-primary {
   background-color: #12326E;
   color: #fff;

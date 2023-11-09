@@ -22,6 +22,7 @@ import { useIdeaContext } from "./idea-store"
 export default function IdeaSubmissionFormOverview(): JSX.Element {
   const { ideaFormContextData } = useIdeaContext()
 
+  const [ canBeSubmit, setCanBeSubmit ] = useState(false)
   const [ error, setError ] = useState('')
   const [ errorObject, setErrorObject ] = useState<Record<string, string>>()
   const [ success, setSuccess ] = useState(false)
@@ -115,13 +116,21 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
     })
   }, [])
 
+  useEffect(() => {
+    setCanBeSubmit(false)
+
+    if (formData.rule_1 && formData.rule_2 && formData.rule_3) {
+      setCanBeSubmit(true)
+    }
+  }, [formData])
+
   return (
     <div className="idea-submission-form">
       {scroll && document.querySelector('.error-message-inline') ? <ScrollTo element={(document?.querySelector('.error-message-inline') as HTMLElement)?.offsetTop || 0} /> : null}
 
-      <h2>Kötelezően kitöltendő mezők</h2>
+      <h2>Áttekintés</h2>
 
-      <p>Minden fontos információt itt tudsz megadni az ötleteddel kapcsolatban, minden mező kitöltése kötelező.</p>
+      <p>Így néz ki az ötleted. Ha szeretnéd a “Beküdöm az ötletem” gombra kattintva véglegesítheted vagy a ceruza ikonra kattintva módosíthatsz még rajta!</p>
 
       <form className="form-horizontal" action={onIdeaSubmission}>
         <fieldset>
@@ -365,7 +374,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
               }}
             />
 
-            <input type="submit" className="btn btn-primary btn-headline next-step" value="Következő lépés" />
+            <input type="submit" className="btn btn-primary btn-headline next-step" disabled={!canBeSubmit} value="Beküldöm az ötletem" />
           </div>
         </fieldset>
       </form>

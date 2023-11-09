@@ -229,38 +229,6 @@ export default function IdeaSubmissionForm(): JSX.Element {
               <FileArea changeRaw={handleChangeFileRaw} originalMedias={formData.medias} />
             </div>
 
-            <hr />
-
-            <div className="form-group">
-              <Checkbox
-                id="rule_1"
-                name="rule_1"
-                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára ha az a Főváros hatáskörében megvalósítható és nem szabályozási kérdés."
-                handleChange={handleChangeInput}
-                value={formData.rule_1}
-              />
-            </div>
-
-            <div className="form-group">
-              <Checkbox
-                id="rule_2"
-                name="rule_2"
-                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha az nem érint magán vagy állami területet, pl. iskolák, kórházak, MÁV, HÉV területek. Segítséget itt találsz."
-                handleChange={handleChangeInput}
-                value={formData.rule_2}
-              />
-            </div>
-
-            <div className="form-group">
-              <Checkbox
-                id="rule_3"
-                name="rule_3"
-                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha tervezett megvalósítási költsége nem több 120 millió forintnál."
-                handleChange={handleChangeInput}
-                value={formData.rule_3}
-              />
-            </div>
-
             <Link href="/bekuldes/attekintes" className="btn btn-primary btn-headline next-step">Következő lépés</Link>
           </div>
         </fieldset>
