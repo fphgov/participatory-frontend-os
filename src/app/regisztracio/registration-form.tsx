@@ -205,7 +205,7 @@ export default function RegistrationForm(): JSX.Element {
               <div className="form-group">
                 <label htmlFor="live_in_city" className="form-group-label">
                   <input className="form-control" type="checkbox" id="live_in_city" name="live_in_city" value={filterData.live_in_city} onChange={handleChangeInput} />
-                  Kijelentem, hogy elmúltam 16 éves és budapesti lakos vagyok, vagy Budapesten dolgozom, vagy Budapesten tanulok. *
+                  Kijelentem, hogy elmúltam 14 éves és budapesti lakos vagyok, vagy Budapesten dolgozom, vagy Budapesten tanulok. *
                 </label>
 
                 {errorObject?.live_in_city ? Object.values(errorObject.live_in_city).map((err, i) => {

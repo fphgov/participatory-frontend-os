@@ -1,22 +1,33 @@
 'use client'
 
+import Error from "@/components/common/Error"
+import ErrorMini from "@/components/common/ErrorMini"
+import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import { rmAllCharForName } from "@/utilities/removeSpecialCharacters"
 import { useEffect, useState } from "react"
+import ScrollTo from "@/components/common/ScrollTo"
+import { ideaSubmissionForm } from "@/app/actions"
 import SimpleRadio from "@/components/common/form-element/SimpleRadio"
 import Select from "@/components/common/form-element/Select"
 import InputLengthValidator from "@/components/common/form-element/InputLengthValidator"
 import TextareaLengthValidator from "@/components/common/form-element/TextareaLengthValidator"
 import FileArea from "@/components/common/form-element/FileArea"
+import { getToken } from "@/lib/actions"
 import Toggle from "@/components/common/form-element/Toogle"
 import Checkbox from "@/components/common/form-element/Checkbox"
 import 'intl-tel-input/build/css/intlTelInput.css';
 import PhonenumberInput, { PhonenumberValue } from "@/components/common/form-element/PhonenumberInput"
-import Link from "next/link"
 import { useIdeaContext } from "./idea-store"
 
-export default function IdeaSubmissionForm(): JSX.Element {
-  const { setIdeaFormContextData } = useIdeaContext()
+export default function IdeaSubmissionFormOverview(): JSX.Element {
+  const { ideaFormContextData } = useIdeaContext()
 
+  const [ error, setError ] = useState('')
+  const [ errorObject, setErrorObject ] = useState<Record<string, string>>()
+  const [ success, setSuccess ] = useState(false)
+  const [ scroll, setScroll ] = useState(false)
+  const [ recaptcha, setRecaptcha ] = useState<ReCaptcha>()
+  const [ recaptchaToken, setRecaptchaToken ] = useState('')
   const [ formData, setFormData ] = useState({
     'location': '',
     'locationDescription': '',
@@ -46,20 +57,76 @@ export default function IdeaSubmissionForm(): JSX.Element {
     setFormData({ ...formData, [name]: value })
   }
 
-  useEffect(() => {
-    setIdeaFormContextData(formData)
+  async function onIdeaSubmission() {
+    setScroll(false)
+    setErrorObject(undefined)
+    setError('')
 
-    localStorage.setItem('idea', JSON.stringify(formData))
-  }, [formData])
+    const ideaFormData = new FormData()
+
+    ideaFormData.append('cost', formData.cost.toString())
+    ideaFormData.append('title', formData.title)
+    ideaFormData.append('solution', formData.solution)
+    ideaFormData.append('description', formData.description)
+    ideaFormData.append('location_description', formData.locationDescription)
+    ideaFormData.append('location_district', formData.locationDistrict)
+    ideaFormData.append('phone', formData.phone.dialCode + formData.phone.phone)
+    ideaFormData.append('rule_1', formData.rule_1.toString())
+    ideaFormData.append('rule_2', formData.rule_2.toString())
+    ideaFormData.append('rule_3', formData.rule_3.toString())
+    ideaFormData.append('g-recaptcha-response', recaptchaToken)
+
+    if (typeof formData['location'] === 'object') {
+      ideaFormData.append('location', new URLSearchParams(formData['location']).toString())
+    } else {
+      ideaFormData.append('location', formData.location)
+    }
+
+    Array.from(formData.medias).forEach((file: File|undefined, i) => {
+      if (file instanceof File) {
+        ideaFormData.append(`medias[${i}]`, file)
+      }
+    })
+
+    const token = (await getToken())?.value
+
+    if (token) {
+      const res = await ideaSubmissionForm(ideaFormData)
+
+      if (res.success) {
+        setSuccess(true)
+      } else {
+        setErrorObject(res.jsonError)
+        setError(res.error)
+      }
+
+      setScroll(true)
+
+      recaptcha?.execute()
+    }
+  }
+
+  useEffect(() => {
+    setFormData({ ...formData, ...ideaFormContextData })
+
+    // @ts-ignore
+    loadReCaptcha(process.env.NEXT_PUBLIC_SITE_KEY, (recaptchaToken: string) => {
+      setRecaptchaToken(recaptchaToken)
+    })
+  }, [])
 
   return (
     <div className="idea-submission-form">
+      {scroll && document.querySelector('.error-message-inline') ? <ScrollTo element={(document?.querySelector('.error-message-inline') as HTMLElement)?.offsetTop || 0} /> : null}
+
       <h2>Kötelezően kitöltendő mezők</h2>
 
       <p>Minden fontos információt itt tudsz megadni az ötleteddel kapcsolatban, minden mező kitöltése kötelező.</p>
 
-      <form className="form-horizontal">
+      <form className="form-horizontal" action={onIdeaSubmission}>
         <fieldset>
+          {(typeof error === 'string' && error !== '') ? <Error message={error} /> : null}
+
           <div className="form-wrapper">
             <div className="input-wrapper">
               <h6>Add meg, hol képzeled el az ötleted!</h6>
@@ -175,6 +242,10 @@ export default function IdeaSubmissionForm(): JSX.Element {
                   options={{ min: 4, max: 100 }}
                   onChange={handleChangeInput}
               />
+
+              {errorObject?.title ? Object.values(errorObject.title).map((err, i) => {
+                return <ErrorMini key={i} error={err} increment={`title-${i}`} />
+              }) : null}
             </div>
 
             <hr />
@@ -191,6 +262,10 @@ export default function IdeaSubmissionForm(): JSX.Element {
                 options={{ min: 200, max: 1000 }}
                 onChange={handleChangeInput}
               />
+
+              {errorObject?.description ? Object.values(errorObject.description).map((err, i) => {
+                return <ErrorMini key={i} error={err} increment={`description-${i}`} />
+              }) : null}
             </div>
 
             <hr />
@@ -207,6 +282,10 @@ export default function IdeaSubmissionForm(): JSX.Element {
                 options={{ min: 20, max: 250 }}
                 onChange={handleChangeInput}
               />
+
+              {errorObject?.solution ? Object.values(errorObject.solution).map((err, i) => {
+                return <ErrorMini key={i} error={err} increment={`solution-${i}`} />
+              }) : null}
             </div>
 
             <hr />
@@ -218,6 +297,10 @@ export default function IdeaSubmissionForm(): JSX.Element {
               <p className="info">Azért szeretnénk, ha megadnád telefonos elérhetőségedet, mert sokkal gördülékenyebben tudnánk kommunikálni veled az ötleted kapcsán.</p>
 
               <PhonenumberInput id="phone" name="phone" value={formData.phone} handleChange={handlePhonenumberInput} />
+
+              {errorObject?.phone ? Object.values(errorObject.phone).map((err, i) => {
+                return <ErrorMini key={i} error={err} increment={`phone-${i}`} />
+              }) : null}
             </div>
 
             <hr />
@@ -239,6 +322,10 @@ export default function IdeaSubmissionForm(): JSX.Element {
                 handleChange={handleChangeInput}
                 value={formData.rule_1}
               />
+
+              {errorObject?.rule_1 ? Object.values(errorObject.rule_1).map((err, i) => {
+                return <ErrorMini key={i} error={err} increment={`rule_1-${i}`} />
+              }) : null}
             </div>
 
             <div className="form-group">
@@ -249,6 +336,10 @@ export default function IdeaSubmissionForm(): JSX.Element {
                 handleChange={handleChangeInput}
                 value={formData.rule_2}
               />
+
+              {errorObject?.rule_2 ? Object.values(errorObject.rule_2).map((err, i) => {
+                return <ErrorMini key={i} error={err} increment={`rule_2-${i}`} />
+              }) : null}
             </div>
 
             <div className="form-group">
@@ -259,9 +350,22 @@ export default function IdeaSubmissionForm(): JSX.Element {
                 handleChange={handleChangeInput}
                 value={formData.rule_3}
               />
+
+              {errorObject?.rule_3 ? Object.values(errorObject.rule_3).map((err, i) => {
+                return <ErrorMini key={i} error={err} increment={`rule_3-${i}`} />
+              }) : null}
             </div>
 
-            <Link href="/bekuldes/attekintes" className="btn btn-primary btn-headline next-step">Következő lépés</Link>
+            <ReCaptcha
+              ref={(ref: any) => setRecaptcha(ref)}
+              sitekey={process.env.NEXT_PUBLIC_SITE_KEY || ''}
+              action='submit'
+              verifyCallback={(recaptchaToken: string) => {
+                setRecaptchaToken(recaptchaToken)
+              }}
+            />
+
+            <input type="submit" className="btn btn-primary btn-headline next-step" value="Következő lépés" />
           </div>
         </fieldset>
       </form>

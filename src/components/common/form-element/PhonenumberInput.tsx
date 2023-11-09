@@ -14,7 +14,7 @@ type PhonenumberInputProps = {
   value: PhonenumberValue
   label?: string|React.ReactNode
   tipp?: string
-  handleChange: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => void
+  handleChange: (phoneObject: PhonenumberValue) => void
 }
 
 export default function PhonenumberInput({ id, name, value, label, tipp,  handleChange }: PhonenumberInputProps) {
@@ -35,6 +35,7 @@ export default function PhonenumberInput({ id, name, value, label, tipp,  handle
         </label> : null}
 
         <ReactIntlTelInput
+          id={id}
           inputProps={inputProps}
           intlTelOpts={intlTelOpts}
           value={value}
