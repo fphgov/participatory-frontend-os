@@ -1,4 +1,5 @@
 import React from 'react'
+// @ts-ignore
 import ReactIntlTelInput from 'react-intl-tel-input-v2';
 import 'intl-tel-input/build/css/intlTelInput.css';
 

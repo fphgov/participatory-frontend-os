@@ -4,7 +4,7 @@ import Error from "@/components/common/Error"
 import ErrorMini from "@/components/common/ErrorMini"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import { rmAllCharForName } from "@/utilities/removeSpecialCharacters"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import ScrollTo from "@/components/common/ScrollTo"
 import { ideaSubmissionForm } from "@/app/actions"
 import SimpleRadio from "@/components/common/form-element/SimpleRadio"
@@ -43,7 +43,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
     'medias': [],
   })
 
-  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : rmAllCharForName(e.target.value)
 
     setFormData({ ...formData, [e.target.name]: value })

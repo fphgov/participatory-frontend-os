@@ -11,7 +11,7 @@ type SimpleRadioProps = {
 }
 
 export default function SimpleRadio({ id, name, value, radioValue, title, tipp, handleChange }: SimpleRadioProps) {
-  const radioRef = useRef(null)
+  const radioRef = useRef<HTMLInputElement>(null)
 
   return (
     <div className={`radio-inline ${radioValue === value ? "active" : ""}`} onClick={() => { if (radioRef && radioRef.current) radioRef.current.click() }}>

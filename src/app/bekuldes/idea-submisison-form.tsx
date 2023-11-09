@@ -32,7 +32,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
     'medias': [],
   })
 
-  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : rmAllCharForName(e.target.value)
 
     setFormData({ ...formData, [e.target.name]: value })
@@ -50,7 +50,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
     setIdeaFormContextData(formData)
 
     localStorage.setItem('idea', JSON.stringify(formData))
-  }, [formData])
+  }, [formData, setIdeaFormContextData])
 
   return (
     <div className="idea-submission-form">
