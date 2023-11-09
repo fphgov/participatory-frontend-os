@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState } from 'react'
 import DragAndDrop from './DragAndDrop'
 import clonedeep from 'lodash.clonedeep'

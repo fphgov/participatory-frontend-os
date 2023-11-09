@@ -15,6 +15,8 @@ import FileArea from "@/components/common/form-element/FileArea"
 import { getToken } from "@/lib/actions"
 import Toggle from "@/components/common/form-element/Toogle"
 import Checkbox from "@/components/common/form-element/Checkbox"
+import 'intl-tel-input/build/css/intlTelInput.css';
+import PhonenumberInput, { PhonenumberValue } from "@/components/common/form-element/PhonenumberInput"
 
 export default function IdeaSubmissionForm(): JSX.Element {
   const [ error, setError ] = useState('')
@@ -31,7 +33,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
     'title': '',
     'description': '',
     'solution': '',
-    'phone': '',
+    'phone':  { iso2: 'hu', dialCode: '36', phone: '' },
     'rule_1': false,
     'rule_2': false,
     'rule_3': false,
@@ -46,6 +48,10 @@ export default function IdeaSubmissionForm(): JSX.Element {
 
   const handleChangeRaw = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handlePhonenumberInput = (phoneObject: PhonenumberValue) => {
+    setFormData({ ...formData, phone: phoneObject })
   }
 
   const handleChangeFileRaw = (name: string, value: any) => {
@@ -65,7 +71,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
     ideaFormData.append('description', formData.description)
     ideaFormData.append('location_description', formData.locationDescription)
     ideaFormData.append('location_district', formData.locationDistrict)
-    ideaFormData.append('phone', formData.phone)
+    ideaFormData.append('phone', formData.phone.dialCode + formData.phone.phone)
     ideaFormData.append('rule_1', formData.rule_1.toString())
     ideaFormData.append('rule_2', formData.rule_2.toString())
     ideaFormData.append('rule_3', formData.rule_3.toString())
@@ -289,14 +295,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
               <h6><label htmlFor="phone">Telefonszám:</label></h6>
               <p className="info">Azért szeretnénk, ha megadnád telefonos elérhetőségedet, mert sokkal gördülékenyebben tudnánk kommunikálni veled az ötleted kapcsán.</p>
 
-              <InputLengthValidator
-                title="Telefonszám"
-                name="phone"
-                value={formData.phone}
-                showLabel={false}
-                options={{ min: 4, max: 100 }}
-                onChange={handleChangeInput}
-              />
+              <PhonenumberInput id="phone" name="phone" value={formData.phone} handleChange={handlePhonenumberInput} />
 
               {errorObject?.phone ? Object.values(errorObject.phone).map((err, i) => {
                 return <ErrorMini key={i} error={err} increment={`phone-${i}`} />
@@ -365,7 +364,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
               }}
             />
 
-            <input type="submit" className="btn btn-primary btn-headline next-step" value="Beküldöm az ötletem" />
+            <input type="submit" className="btn btn-primary btn-headline next-step" value="Következő lépés" />
           </div>
         </fieldset>
       </form>
