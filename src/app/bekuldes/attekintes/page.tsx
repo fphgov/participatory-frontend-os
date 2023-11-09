@@ -24,7 +24,7 @@ export default async function IdeaSubmissionOverviewPage() {
           <div className="row">
             <div className="col-12">
               <ul className="form-status">
-                <li><Link href={`${baseUrl}`}><span>1</span> <div className="description">Részletek megadása</div></Link></li>
+                <li><Link href={`${baseUrl}`}><span className="active">1</span> <div className="description">Részletek megadása</div></Link></li>
                 <li><Link href={`${baseUrl}/attekintes`}><span className="active">2</span> <div className="description">Áttekintés és beküldés</div></Link></li>
               </ul>
             </div>

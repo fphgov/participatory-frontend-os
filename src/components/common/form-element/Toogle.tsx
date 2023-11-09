@@ -28,7 +28,7 @@ export default function Toggle({ id, name, value, tipp, handleChange }: TogglePr
       </div>
 
       <div className="toggle-inline-content">
-        {tipp ? <p>{tipp}</p> : null}
+        {tipp ? <>{tipp}</> : null}
       </div>
     </div>
   )
