@@ -250,8 +250,6 @@ export async function apiIdeaSubmission(formData: FormData): Promise<Record<stri
     body: formData,
   })
 
-  console.log(response) // 401 - nincs token, nincs bejelentkezve
-
   return handleResponse<any>(response).then(data => data)
 }
 

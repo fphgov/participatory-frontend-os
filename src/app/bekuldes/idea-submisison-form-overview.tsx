@@ -20,6 +20,8 @@ import PhonenumberInput, { PhonenumberValue } from "@/components/common/form-ele
 import { useIdeaContext } from "./idea-store"
 import { districtDataList } from "@/models/district.model"
 import MediaList from "@/components/common/form-element/MediaList"
+import { redirect } from "next/navigation"
+
 
 export default function IdeaSubmissionFormOverview(): JSX.Element {
   const { ideaFormContextData } = useIdeaContext()
@@ -28,7 +30,6 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
   const [ error, setError ] = useState('')
   const [ errorObject, setErrorObject ] = useState<Record<string, string>>()
   const [ inputComponentEdit, setInputComponentEdit ] = useState('')
-  const [ success, setSuccess ] = useState(false)
   const [ scroll, setScroll ] = useState(false)
   const [ recaptcha, setRecaptcha ] = useState<ReCaptcha>()
   const [ recaptchaToken, setRecaptchaToken ] = useState('')
@@ -98,7 +99,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
       const res = await ideaSubmissionForm(ideaFormData)
 
       if (res.success) {
-        setSuccess(true)
+        redirect('/bekuldes/sikeres')
       } else {
         setErrorObject(res.jsonError)
         setError(res.error)
@@ -216,8 +217,10 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                 </> : <>
                   {formData.location === "" ? <p>Nem választottál a helyszínt!</p> : <>
                     {formData.location === "0" ? <p>Nem kötődik konkrét helyszínhez</p> : <p>
-                      {formData.locationDistrict ? <>{`${districtDataList.filter(district => district.value === formData.locationDistrict)[0]?.name}, `}</> : null}
-                      {formData.locationDescription ? <>{formData.locationDescription}</> : null}
+                      {formData.locationDistrict === "" && formData.locationDescription === "" ? <>Konkrét helyszínhez kötödik, de nem választottál helyszínt!</> : <>
+                        {formData.locationDistrict ? <>{`${districtDataList.filter(district => district.value === formData.locationDistrict)[0]?.name}, `}</> : null}
+                        {formData.locationDescription ? <>{formData.locationDescription}</> : null}
+                      </>}
                     </p>
                     }
                   </>}
