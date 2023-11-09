@@ -14,6 +14,7 @@ import TextareaLengthValidator from "@/components/common/form-element/TextareaLe
 import FileArea from "@/components/common/form-element/FileArea"
 import { getToken } from "@/lib/actions"
 import Toggle from "@/components/common/form-element/Toogle"
+import Checkbox from "@/components/common/form-element/Checkbox"
 
 export default function IdeaSubmissionForm(): JSX.Element {
   const [ error, setError ] = useState('')
@@ -31,9 +32,9 @@ export default function IdeaSubmissionForm(): JSX.Element {
     'description': '',
     'solution': '',
     'phone': '',
-    'rule_1': '',
-    'rule_2': '',
-    'rule_3': '',
+    'rule_1': false,
+    'rule_2': false,
+    'rule_3': false,
     'medias': [],
   })
 
@@ -61,9 +62,9 @@ export default function IdeaSubmissionForm(): JSX.Element {
     ideaFormData.append('location_description', filterData.locationDescription)
     ideaFormData.append('location_district', filterData.locationDistrict)
     ideaFormData.append('phone', filterData.phone)
-    ideaFormData.append('rule_1', filterData.rule_1)
-    ideaFormData.append('rule_2', filterData.rule_2)
-    ideaFormData.append('rule_3', filterData.rule_3)
+    ideaFormData.append('rule_1', filterData.rule_1.toString())
+    ideaFormData.append('rule_2', filterData.rule_2.toString())
+    ideaFormData.append('rule_3', filterData.rule_3.toString())
     ideaFormData.append('g-recaptcha-response', recaptchaToken)
 
     if (typeof filterData['location'] === 'object') {
@@ -308,10 +309,13 @@ export default function IdeaSubmissionForm(): JSX.Element {
             <hr />
 
             <div className="form-group">
-              <label htmlFor="rule_1" className="form-group-label">
-                <input className="form-control" type="checkbox" id="rule_1" name="rule_1" value={filterData.rule_1} onChange={handleChangeInput} />
-                Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára ha az a Főváros hatáskörében megvalósítható és nem szabályozási kérdés.
-              </label>
+              <Checkbox
+                id="rule_1"
+                name="rule_1"
+                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára ha az a Főváros hatáskörében megvalósítható és nem szabályozási kérdés."
+                handleChange={handleChangeInput}
+                value={filterData.rule_1}
+              />
 
               {errorObject?.rule_1 ? Object.values(errorObject.rule_1).map((err, i) => {
                 return <ErrorMini key={i} error={err} increment={`rule_1-${i}`} />
@@ -319,10 +323,13 @@ export default function IdeaSubmissionForm(): JSX.Element {
             </div>
 
             <div className="form-group">
-              <label htmlFor="rule_2" className="form-group-label">
-                <input className="form-control" type="checkbox" id="rule_2" name="rule_2" value={filterData.rule_2} onChange={handleChangeInput} />
-                Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha az nem érint magán vagy állami területet, pl. iskolák, kórházak, MÁV, HÉV területek. Segítséget itt találsz.
-              </label>
+              <Checkbox
+                id="rule_2"
+                name="rule_2"
+                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha az nem érint magán vagy állami területet, pl. iskolák, kórházak, MÁV, HÉV területek. Segítséget itt találsz."
+                handleChange={handleChangeInput}
+                value={filterData.rule_2}
+              />
 
               {errorObject?.rule_2 ? Object.values(errorObject.rule_2).map((err, i) => {
                 return <ErrorMini key={i} error={err} increment={`rule_2-${i}`} />
@@ -330,10 +337,13 @@ export default function IdeaSubmissionForm(): JSX.Element {
             </div>
 
             <div className="form-group">
-              <label htmlFor="rule_3" className="form-group-label">
-                <input className="form-control" type="checkbox" id="rule_3" name="rule_3" value={filterData.rule_3} onChange={handleChangeInput} />
-                Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha tervezett megvalósítási költsége nem több 120 millió forintnál.
-              </label>
+              <Checkbox
+                id="rule_3"
+                name="rule_3"
+                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha tervezett megvalósítási költsége nem több 120 millió forintnál."
+                handleChange={handleChangeInput}
+                value={filterData.rule_3}
+              />
 
               {errorObject?.rule_3 ? Object.values(errorObject.rule_3).map((err, i) => {
                 return <ErrorMini key={i} error={err} increment={`rule_3-${i}`} />
