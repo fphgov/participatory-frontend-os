@@ -37,7 +37,7 @@ export default async function ProjectsFeed({ title, more }: ProjectsFeedProps): 
         <div className="row">
           {Array.isArray(ideasResponse?._embedded?.projects) && ideasResponse._embedded.projects.map((project, i) => (
             <div key={i} className="col-md-6 col-lg-4">
-              <IdeaCard idea={project} ideaPreLink={'/projektek'} />
+              <IdeaCard idea={project} ideaPreLink={'/projektek'} showMore={true} showStatus={true} />
             </div>
           ))}
         </div>

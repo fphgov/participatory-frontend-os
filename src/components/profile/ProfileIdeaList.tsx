@@ -20,6 +20,7 @@ export default function ProfileIdeaList({ ideas }: ProfileIdeaList): JSX.Element
         <IdeasWrapper
           key={idea.id}
           ideaPreLink="/otletek"
+          showStatus={false}
           className="col-sm-12 col-sm-12 col-md-12 col-lg-6 col-xl-6"
           idea={idea}
         />
