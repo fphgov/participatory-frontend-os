@@ -2508,6 +2508,10 @@ button > svg {
   margin-left: 24px;
 }
 
+.drag-area {
+  position: relative;
+}
+
 .drag-area label {
   cursor: pointer;
 }

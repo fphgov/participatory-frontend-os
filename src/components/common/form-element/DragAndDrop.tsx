@@ -1,13 +1,15 @@
 'use client'
 
-import React, { createRef, useState, useEffect } from 'react'
+import React, { createRef, useState, useEffect, RefObject } from 'react'
 
 type DragAndDropaProps = {
   children: React.ReactNode
   onHandleDrop: (files: FileList) => void
+  onChangeDrag: (drag: boolean | ((prevState: boolean) => boolean)) => void
+  onOverlayClick: () => void
 }
 
-export default function DragAndDrop({ children, onHandleDrop }: DragAndDropaProps) {
+export default function DragAndDrop({ children, onHandleDrop, onChangeDrag, onOverlayClick }: DragAndDropaProps) {
   const dropRef = createRef<HTMLDivElement>()
   const [ drag, setDrag ] = useState(false)
   const [ dragCounter, setDragCounter ] = useState(0)
@@ -57,7 +59,7 @@ export default function DragAndDrop({ children, onHandleDrop }: DragAndDropaProp
     setDragCounter(0)
   }
 
-  const clear = (e) => {
+  const clear = (e: React.DragEvent<HTMLDivElement>) => {
     if (e.dataTransfer.items) {
       e.dataTransfer.items.clear()
     }
@@ -66,6 +68,10 @@ export default function DragAndDrop({ children, onHandleDrop }: DragAndDropaProp
       e.dataTransfer.clearData()
     }
   }
+
+  useEffect(() => {
+    onChangeDrag(drag)
+  }, [drag])
 
   useEffect(() => {
     if (dropRef.current) {
@@ -87,6 +93,7 @@ export default function DragAndDrop({ children, onHandleDrop }: DragAndDropaProp
 
   return (
     <div className={`drag-area ${drag ? 'drag-active': ''}`} ref={dropRef}>
+      <div className="drag-area-overlay" onClick={() => { onOverlayClick() }}></div>
       {children}
     </div>
   )

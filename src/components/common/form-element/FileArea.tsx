@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { createRef, useState } from 'react'
 import DragAndDrop from './DragAndDrop'
 import clonedeep from 'lodash.clonedeep'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -13,6 +13,7 @@ type FileAreaProps = {
 }
 
 export default function FileArea({ changeRaw, originalMedias }: FileAreaProps) {
+  const inputRef = createRef<HTMLInputElement>()
   const [ dragged, setDragged ] = useState(false)
 
   const maxFiles = 5
@@ -59,9 +60,10 @@ export default function FileArea({ changeRaw, originalMedias }: FileAreaProps) {
       <DragAndDrop
         onHandleDrop={handleDrop}
         onChangeDrag={(drag: boolean | ((prevState: boolean) => boolean)) => { setDragged(drag) }}
+        onOverlayClick={() => { inputRef.current?.click() }}
       >
         <div className={`input-file-wrapper ${dragged ? 'dragged' : ''}`}>
-          <input id="file" name="file" type="file" multiple onChange={onFileChange} />
+          <input id="file" name="file" type="file" multiple onChange={onFileChange} ref={inputRef} />
 
           {originalMedias.length > 0 ? <>
             <div className="file-list">
