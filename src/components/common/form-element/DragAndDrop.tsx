@@ -2,19 +2,24 @@
 
 import React, { createRef, useState, useEffect } from 'react'
 
-export default function DragAndDrop({ children, onHandleDrop }) {
-  const dropRef = createRef()
+type DragAndDropaProps = {
+  children: React.ReactNode
+  onHandleDrop: (files: FileList) => void
+}
+
+export default function DragAndDrop({ children, onHandleDrop }: DragAndDropaProps) {
+  const dropRef = createRef<HTMLDivElement>()
   const [ drag, setDrag ] = useState(false)
   const [ dragCounter, setDragCounter ] = useState(0)
 
-  const handleDrag = (e) => {
+  const handleDrag = (e: React.DragEvent<HTMLDivElement>): void => {
     e.preventDefault()
     e.stopPropagation()
 
     e.dataTransfer.dropEffect = "move"
   }
 
-  const handleDragIn = (e) => {
+  const handleDragIn = (e: React.DragEvent<HTMLDivElement>): void => {
     e.preventDefault()
     e.stopPropagation()
 
@@ -25,7 +30,7 @@ export default function DragAndDrop({ children, onHandleDrop }) {
     }
   }
 
-  const handleDragOut = (e) => {
+  const handleDragOut = (e: React.DragEvent<HTMLDivElement>): void => {
     e.preventDefault()
     e.stopPropagation()
 
@@ -36,7 +41,7 @@ export default function DragAndDrop({ children, onHandleDrop }) {
     }
   }
 
-  const handleDrop = (e) => {
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>): void => {
     e.preventDefault()
     e.stopPropagation()
 
@@ -63,17 +68,19 @@ export default function DragAndDrop({ children, onHandleDrop }) {
   }
 
   useEffect(() => {
-    dropRef.current.addEventListener('dragenter', handleDragIn)
-    dropRef.current.addEventListener('dragleave', handleDragOut)
-    dropRef.current.addEventListener('dragover', handleDrag)
-    dropRef.current.addEventListener('drop', handleDrop)
+    if (dropRef.current) {
+      dropRef.current.addEventListener('dragenter', handleDragIn as unknown as EventListener)
+      dropRef.current.addEventListener('dragleave', handleDragOut as unknown as EventListener)
+      dropRef.current.addEventListener('dragover', handleDrag as unknown as EventListener)
+      dropRef.current.addEventListener('drop', handleDrop as unknown as EventListener)
+    }
 
     return () => {
       if (dropRef.current) {
-        dropRef.current.removeEventListener('dragenter', handleDragIn)
-        dropRef.current.removeEventListener('dragleave', handleDragOut)
-        dropRef.current.removeEventListener('dragover', handleDrag)
-        dropRef.current.removeEventListener('drop', handleDrop)
+        dropRef.current.removeEventListener('dragenter', handleDragIn as unknown as EventListener)
+        dropRef.current.removeEventListener('dragleave', handleDragOut as unknown as EventListener)
+        dropRef.current.removeEventListener('dragover', handleDrag as unknown as EventListener)
+        dropRef.current.removeEventListener('drop', handleDrop as unknown as EventListener)
       }
     }
   }, [])
