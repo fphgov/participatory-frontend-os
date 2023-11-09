@@ -204,7 +204,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
               <FileArea changeRaw={handleChangeFileRaw} originalMedias={formData.medias} />
             </div>
 
-            <Link href="/bekuldes/attekintes" className="btn btn-primary btn-headline next-step">Következő lépés</Link>
+            <Link href="/bekuldes/attekintes" className="btn btn-primary btn-headline next-step" style={{ marginTop: 36 }}>Következő lépés</Link>
           </div>
         </fieldset>
       </form>
