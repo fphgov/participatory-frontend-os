@@ -6,10 +6,6 @@ type IdeaContextProviderProps = {
   children: React.ReactNode
 }
 
-interface IData {
-  [key: string]: any;
-}
-
 export type IdeaContextContent = {
   ideaFormContextData: Record<string, any>
   setIdeaFormContextData: (ideaFormContextData: Record<string, any>) => void

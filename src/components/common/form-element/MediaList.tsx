@@ -8,7 +8,7 @@ type MediaListProps = {
 
 export default function MediaList({ originalMedias }: MediaListProps) {
   return (<>
-    {originalMedias.length > 0 ? <>
+    {originalMedias?.length > 0 ? <>
       <div className="file-list file-list-view">
         {originalMedias.map((file: File, i: number) => {
           return (

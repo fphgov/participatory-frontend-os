@@ -22,7 +22,7 @@ import MediaList from "@/components/common/form-element/MediaList"
 import { redirect } from "next/navigation"
 
 export default function IdeaSubmissionFormOverview(): JSX.Element {
-  const { ideaFormContextData } = useIdeaContext()
+  const { ideaFormContextData, setIdeaFormContextData } = useIdeaContext()
 
   const [ canBeSubmit, setCanBeSubmit ] = useState(false)
   const [ error, setError ] = useState('')
@@ -31,39 +31,25 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
   const [ scroll, setScroll ] = useState(false)
   const [ recaptcha, setRecaptcha ] = useState<ReCaptcha>()
   const [ recaptchaToken, setRecaptchaToken ] = useState('')
-  const [ formData, setFormData ] = useState({
-    'location': '',
-    'locationDescription': '',
-    'locationDistrict': '',
-    'cost': false,
-    'title': '',
-    'description': '',
-    'solution': '',
-    'phone':  { iso2: 'hu', dialCode: '36', phone: '' },
-    'rule_1': false,
-    'rule_2': false,
-    'rule_3': false,
-    'medias': [],
-  })
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : rmAllCharForName(e.target.value)
 
-    setFormData({ ...formData, [e.target.name]: value })
+    setIdeaFormContextData({ ...ideaFormContextData, [e.target.name]: value })
   }
 
   const handleChangeInputTitle = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : rmAllCharForTitle(e.target.value)
 
-    setFormData({ ...formData, [e.target.name]: value })
+    setIdeaFormContextData({ ...ideaFormContextData, [e.target.name]: value })
   }
 
   const handlePhonenumberInput = (phoneObject: PhonenumberValue) => {
-    setFormData({ ...formData, phone: phoneObject })
+    setIdeaFormContextData({ ...ideaFormContextData, phone: phoneObject })
   }
 
   const handleChangeFileRaw = (name: string, value: any) => {
-    setFormData({ ...formData, [name]: value })
+    setIdeaFormContextData({ ...ideaFormContextData, [name]: value })
   }
 
   async function onIdeaSubmission() {
@@ -73,31 +59,29 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
 
     const ideaFormData = new FormData()
 
-    ideaFormData.append('cost', formData.cost.toString())
-    ideaFormData.append('title', formData.title)
-    ideaFormData.append('solution', formData.solution)
-    ideaFormData.append('description', formData.description)
-    ideaFormData.append('location_description', formData.locationDescription)
-    ideaFormData.append('location_district', formData.locationDistrict)
-    ideaFormData.append('phone', formData.phone.dialCode + formData.phone.phone)
-    ideaFormData.append('rule_1', formData.rule_1.toString())
-    ideaFormData.append('rule_2', formData.rule_2.toString())
-    ideaFormData.append('rule_3', formData.rule_3.toString())
+    ideaFormData.append('cost', ideaFormContextData.cost.toString())
+    ideaFormData.append('title', ideaFormContextData.title)
+    ideaFormData.append('solution', ideaFormContextData.solution)
+    ideaFormData.append('description', ideaFormContextData.description)
+    ideaFormData.append('location_description', ideaFormContextData.locationDescription)
+    ideaFormData.append('location_district', ideaFormContextData.locationDistrict)
+    ideaFormData.append('phone', ideaFormContextData.phone.dialCode + ideaFormContextData.phone.phone)
+    ideaFormData.append('rule_1', ideaFormContextData.rule_1.toString())
+    ideaFormData.append('rule_2', ideaFormContextData.rule_2.toString())
+    ideaFormData.append('rule_3', ideaFormContextData.rule_3.toString())
     ideaFormData.append('g-recaptcha-response', recaptchaToken)
 
-    if (typeof formData['location'] === 'object') {
-      ideaFormData.append('location', new URLSearchParams(formData['location']).toString())
+    if (typeof ideaFormContextData['location'] === 'object') {
+      ideaFormData.append('location', new URLSearchParams(ideaFormContextData['location']).toString())
     } else {
-      ideaFormData.append('location', formData.location)
+      ideaFormData.append('location', ideaFormContextData.location)
     }
 
-    Array.from(formData.medias).forEach((file: File|undefined, i) => {
+    Array.from(ideaFormContextData?.medias as FileList).forEach((file: File|undefined, i: number) => {
       if (file instanceof File) {
         ideaFormData.append(`medias[${i}]`, file)
       }
     })
-
-    console.log(ideaFormData)
 
     const res = await ideaSubmissionForm(ideaFormData)
 
@@ -118,17 +102,15 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
     loadReCaptcha(process.env.NEXT_PUBLIC_SITE_KEY, (recaptchaToken: string) => {
       setRecaptchaToken(recaptchaToken)
     })
-
-    setFormData({ ...formData, ...ideaFormContextData })
   }, [])
 
   useEffect(() => {
     setCanBeSubmit(false)
 
-    if (formData.rule_1 && formData.rule_2 && formData.rule_3) {
+    if (ideaFormContextData.rule_1 && ideaFormContextData.rule_2 && ideaFormContextData.rule_3) {
       setCanBeSubmit(true)
     }
-  }, [formData])
+  }, [ideaFormContextData])
 
   const setInputComponent = (inputName: string) => {
     if (inputComponentEdit !== inputName) {
@@ -174,7 +156,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                                   id="specific"
                                   name="location"
                                   value="1"
-                                  radioValue={formData.location}
+                                  radioValue={ideaFormContextData.location}
                                   title="Konkrét helyszínhez kötődik"
                                   tipp="Pl. konkrét utca, tér"
                                   handleChange={handleChangeInput}
@@ -185,7 +167,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                                   id="unspecific"
                                   name="location"
                                   value="0"
-                                  radioValue={formData.location}
+                                  radioValue={ideaFormContextData.location}
                                   title="Nem kötődik konkrét helyszínhez"
                                   handleChange={handleChangeInput}
                                 />
@@ -194,11 +176,11 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                           </div>
                         </div>
 
-                        {formData.location === "1" ? <>
+                        {ideaFormContextData.location === "1" ? <>
                           <InputLengthValidator
                             title="Helyszín megnevezése"
                             name="locationDescription"
-                            value={formData.locationDescription}
+                            value={ideaFormContextData.locationDescription}
                             options={{ min: 0, max: 200 }}
                             onChange={handleChangeInput}
                           />
@@ -207,7 +189,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                             <Select
                               title="Kerület"
                               name="locationDistrict"
-                              value={formData.locationDistrict}
+                              value={ideaFormContextData.locationDistrict}
                               dataList={districtDataList}
                               handleChange={handleChangeInput}
                             />
@@ -217,11 +199,11 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                     </div>
                   </div>
                 </> : <>
-                  {formData.location === "" ? <p>Nem választottál a helyszínt!</p> : <>
-                    {formData.location === "0" ? <p>Nem kötődik konkrét helyszínhez</p> : <p>
-                      {formData.locationDistrict === "" && formData.locationDescription === "" ? <>Konkrét helyszínhez kötödik, de nem választottál helyszínt!</> : <>
-                        {formData.locationDistrict ? <>{`${districtDataList.filter(district => district.value === formData.locationDistrict)[0]?.name}, `}</> : null}
-                        {formData.locationDescription ? <>{formData.locationDescription}</> : null}
+                  {ideaFormContextData.location === "" || ideaFormContextData.location === undefined ? <p>Nem választottál a helyszínt!</p> : <>
+                    {ideaFormContextData.location === "0" ? <p>Nem kötődik konkrét helyszínhez</p> : <p>
+                      {ideaFormContextData.locationDistrict === "" && ideaFormContextData.locationDescription === "" ? <>Konkrét helyszínhez kötödik, de nem választottál helyszínt!</> : <>
+                        {ideaFormContextData.locationDistrict ? <>{`${districtDataList.filter(district => district.value === ideaFormContextData.locationDistrict)[0]?.name}, `}</> : null}
+                        {ideaFormContextData.locationDescription ? <>{ideaFormContextData.locationDescription}</> : null}
                       </>}
                     </p>
                     }
@@ -249,13 +231,13 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                     <Toggle
                       id="cost"
                       name="cost"
-                      value={formData.cost}
+                      value={ideaFormContextData.cost}
                       handleChange={handleChangeInput}
                       tipp={"Megértettem, hogy ötletem csak úgy kerülhet szavazólistára, ha tervezett megvalósítási költsége nem több 120 millió forintnál."}
                     />
                   </div>
                 </> : <>
-                  {formData.cost === true ? <p>Elfogadtad a feltételeket az ötletbeküldés összegére vonatkozóan.</p> : <p>Nem fogadtad el a feltételeket az ötletbeküldés összegére vonatkozóan. Ha azért nem fogadtad el, mert azt érzed, hogy az ötleted nem fér bele a 120 millió Ft-os keretbe, érdemes átgondolni az ötleted.</p>}
+                  {ideaFormContextData.cost === true ? <p>Elfogadtad a feltételeket az ötletbeküldés összegére vonatkozóan.</p> : <p>Nem fogadtad el a feltételeket az ötletbeküldés összegére vonatkozóan. Ha azért nem fogadtad el, mert azt érzed, hogy az ötleted nem fér bele a 120 millió Ft-os keretbe, érdemes átgondolni az ötleted.</p>}
                 </>}
 
                 {errorObject?.cost ? Object.values(errorObject.cost).map((err, i) => {
@@ -281,14 +263,14 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                     <InputLengthValidator
                         title="Ötleted címe"
                         name="title"
-                        value={formData.title}
+                        value={ideaFormContextData.title}
                         showLabel={false}
                         options={{ min: 4, max: 100 }}
                         onChange={handleChangeInput}
                     />
                   </div>
                 </> : <>
-                  {formData.title === "" ? <p>Nem nevezted el az ötleted!</p> : <p>{formData.title}</p>}
+                  {ideaFormContextData.title === "" || ideaFormContextData.title === undefined ? <p>Nem nevezted el az ötleted!</p> : <p>{ideaFormContextData.title}</p>}
                 </>}
 
                 {errorObject?.title ? Object.values(errorObject.title).map((err, i) => {
@@ -314,14 +296,14 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                     <TextareaLengthValidator
                       title="Mit valósítson meg a főváros?"
                       name="description"
-                      value={formData.description}
+                      value={ideaFormContextData.description}
                       showLabel={false}
                       options={{ min: 200, max: 1000 }}
                       onChange={handleChangeInputTitle}
                     />
                   </div>
                 </> : <>
-                  {formData.description === "" ? <p>Nem adtál meg fejlesztési leírást az ötletednek!</p> : <p>{formData.description}</p>}
+                  {ideaFormContextData.description === "" || ideaFormContextData.description === undefined ? <p>Nem adtál meg fejlesztési leírást az ötletednek!</p> : <p>{ideaFormContextData.description}</p>}
                 </>}
 
                 {errorObject?.description ? Object.values(errorObject.description).map((err, i) => {
@@ -347,14 +329,14 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                     <TextareaLengthValidator
                       title="Mire megoldás?"
                       name="solution"
-                      value={formData.solution}
+                      value={ideaFormContextData.solution}
                       showLabel={false}
                       options={{ min: 20, max: 250 }}
                       onChange={handleChangeInputTitle}
                     />
                   </div>
                 </> : <>
-                  {formData.solution === "" ? <p>Nem adtad meg, hogy milyen problémát old meg az ötleted!</p> : <p>{formData.solution}</p>}
+                  {ideaFormContextData.solution === "" || ideaFormContextData.solution === undefined ? <p>Nem adtad meg, hogy milyen problémát old meg az ötleted!</p> : <p>{ideaFormContextData.solution}</p>}
                 </>}
 
                 {errorObject?.solution ? Object.values(errorObject.solution).map((err, i) => {
@@ -379,10 +361,10 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                   <div className="input-wrapper-content">
                     <p className="info">Azért szeretnénk, ha megadnád telefonos elérhetőségedet, mert sokkal gördülékenyebben tudnánk kommunikálni veled az ötleted kapcsán.</p>
 
-                    <PhonenumberInput id="phone" name="phone" value={formData.phone} handleChange={handlePhonenumberInput} />
+                    <PhonenumberInput id="phone" name="phone" value={ideaFormContextData.phone} handleChange={handlePhonenumberInput} />
                   </div>
                 </> : <>
-                  {formData.phone.phone === "" ? <p>Nem adtál meg telefonszámot. (Nem kötelező)</p> : <p>+{formData.phone.dialCode + formData.phone.phone}</p>}
+                  {ideaFormContextData.phone?.phone === "" || ideaFormContextData.phone === undefined ? <p>Nem adtál meg telefonszámot. (Nem kötelező)</p> : <p>+{ideaFormContextData.phone?.dialCode + ideaFormContextData.phone?.phone}</p>}
                 </>}
 
                 {errorObject?.phone ? Object.values(errorObject.phone).map((err, i) => {
@@ -405,11 +387,11 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                   <div className="input-wrapper-content">
                     <div className="tipp">Itt tudsz képeket vagy egyéb dokumentumokat feltölteni, amikről úgy gondolod, segítik az ötleted megértését, kapcsolódnak hozzá. Max. 5 darab fájl tölthető fel!</div>
 
-                    <FileArea changeRaw={handleChangeFileRaw} originalMedias={formData.medias} />
+                    <FileArea changeRaw={handleChangeFileRaw} originalMedias={ideaFormContextData.medias} />
                   </div>
                 </> : <>
-                  {formData.medias.length === 0 ? <p>Nem töltöttél fel csatolmányt. (Nem kötelező)</p> : <>
-                    <MediaList originalMedias={formData.medias} />
+                  {ideaFormContextData.medias?.length === 0 || ideaFormContextData.medias === undefined ? <p>Nem töltöttél fel csatolmányt. (Nem kötelező)</p> : <>
+                    <MediaList originalMedias={ideaFormContextData.medias} />
                   </>}
                 </>}
 
@@ -427,7 +409,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                 name="rule_1"
                 label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára ha az a Főváros hatáskörében megvalósítható és nem szabályozási kérdés."
                 handleChange={handleChangeInput}
-                value={formData.rule_1}
+                value={ideaFormContextData.rule_1}
               />
 
               {errorObject?.rule_1 ? Object.values(errorObject.rule_1).map((err, i) => {
@@ -441,7 +423,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                 name="rule_2"
                 label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha az nem érint magán vagy állami területet, pl. iskolák, kórházak, MÁV, HÉV területek. Segítséget itt találsz."
                 handleChange={handleChangeInput}
-                value={formData.rule_2}
+                value={ideaFormContextData.rule_2}
               />
 
               {errorObject?.rule_2 ? Object.values(errorObject.rule_2).map((err, i) => {
@@ -455,7 +437,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                 name="rule_3"
                 label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha tervezett megvalósítási költsége nem több 120 millió forintnál."
                 handleChange={handleChangeInput}
-                value={formData.rule_3}
+                value={ideaFormContextData.rule_3}
               />
 
               {errorObject?.rule_3 ? Object.values(errorObject.rule_3).map((err, i) => {

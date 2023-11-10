@@ -10,7 +10,7 @@ type CheckboxProps = {
 }
 
 export default function Checkbox({ id, name, value, label, tipp, handleChange }: CheckboxProps) {
-  const isChecked = value.toString() === "true"
+  const isChecked = value?.toString() === "true"
 
   return (
     <div className={`checkbox-inline`}>
@@ -20,7 +20,7 @@ export default function Checkbox({ id, name, value, label, tipp, handleChange }:
             type="checkbox"
             id={id}
             name={name}
-            value={value.toString()}
+            value={value?.toString()}
             checked={isChecked}
             onChange={handleChange}
           />
