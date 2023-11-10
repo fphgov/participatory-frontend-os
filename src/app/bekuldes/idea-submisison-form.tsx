@@ -1,6 +1,6 @@
 'use client'
 
-import { rmAllCharForName } from "@/utilities/removeSpecialCharacters"
+import { rmAllCharForName, rmAllCharForTitle } from "@/utilities/removeSpecialCharacters"
 import { useEffect, useState } from "react"
 import SimpleRadio from "@/components/common/form-element/SimpleRadio"
 import Select from "@/components/common/form-element/Select"
@@ -8,7 +8,6 @@ import InputLengthValidator from "@/components/common/form-element/InputLengthVa
 import TextareaLengthValidator from "@/components/common/form-element/TextareaLengthValidator"
 import FileArea from "@/components/common/form-element/FileArea"
 import Toggle from "@/components/common/form-element/Toogle"
-import Checkbox from "@/components/common/form-element/Checkbox"
 import 'intl-tel-input/build/css/intlTelInput.css';
 import PhonenumberInput, { PhonenumberValue } from "@/components/common/form-element/PhonenumberInput"
 import Link from "next/link"
@@ -35,6 +34,12 @@ export default function IdeaSubmissionForm(): JSX.Element {
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : rmAllCharForName(e.target.value)
+
+    setFormData({ ...formData, [e.target.name]: value })
+  }
+
+  const handleChangeInputTitle = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : rmAllCharForTitle(e.target.value)
 
     setFormData({ ...formData, [e.target.name]: value })
   }
@@ -164,7 +169,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
                 value={formData.description}
                 showLabel={false}
                 options={{ min: 200, max: 1000 }}
-                onChange={handleChangeInput}
+                onChange={handleChangeInputTitle}
               />
             </div>
 
@@ -180,7 +185,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
                 value={formData.solution}
                 showLabel={false}
                 options={{ min: 20, max: 250 }}
-                onChange={handleChangeInput}
+                onChange={handleChangeInputTitle}
               />
             </div>
 

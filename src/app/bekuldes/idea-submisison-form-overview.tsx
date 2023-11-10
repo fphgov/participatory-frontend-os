@@ -3,7 +3,7 @@
 import Error from "@/components/common/Error"
 import ErrorMini from "@/components/common/ErrorMini"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
-import { rmAllCharForName } from "@/utilities/removeSpecialCharacters"
+import { rmAllCharForName, rmAllCharForTitle } from "@/utilities/removeSpecialCharacters"
 import React, { useEffect, useState } from "react"
 import ScrollTo from "@/components/common/ScrollTo"
 import { ideaSubmissionForm } from "@/app/actions"
@@ -12,7 +12,6 @@ import Select from "@/components/common/form-element/Select"
 import InputLengthValidator from "@/components/common/form-element/InputLengthValidator"
 import TextareaLengthValidator from "@/components/common/form-element/TextareaLengthValidator"
 import FileArea from "@/components/common/form-element/FileArea"
-import { getToken } from "@/lib/actions"
 import Toggle from "@/components/common/form-element/Toogle"
 import Checkbox from "@/components/common/form-element/Checkbox"
 import 'intl-tel-input/build/css/intlTelInput.css';
@@ -21,7 +20,6 @@ import { useIdeaContext } from "./idea-store"
 import { districtDataList } from "@/models/district.model"
 import MediaList from "@/components/common/form-element/MediaList"
 import { redirect } from "next/navigation"
-
 
 export default function IdeaSubmissionFormOverview(): JSX.Element {
   const { ideaFormContextData } = useIdeaContext()
@@ -50,6 +48,12 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : rmAllCharForName(e.target.value)
+
+    setFormData({ ...formData, [e.target.name]: value })
+  }
+
+  const handleChangeInputTitle = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : rmAllCharForTitle(e.target.value)
 
     setFormData({ ...formData, [e.target.name]: value })
   }
@@ -93,31 +97,29 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
       }
     })
 
-    const token = (await getToken())?.value
+    console.log(ideaFormData)
 
-    if (token) {
-      const res = await ideaSubmissionForm(ideaFormData)
+    const res = await ideaSubmissionForm(ideaFormData)
 
-      if (res.success) {
-        redirect('/bekuldes-sikeres')
-      } else {
-        setErrorObject(res.jsonError)
-        setError(res.error)
-      }
-
-      setScroll(true)
-
-      recaptcha?.execute()
+    if (res.success) {
+      redirect('/bekuldes-sikeres')
+    } else {
+      setErrorObject(res.jsonError)
+      setError(res.error)
     }
+
+    setScroll(true)
+
+    recaptcha?.execute()
   }
 
   useEffect(() => {
-    setFormData({ ...formData, ...ideaFormContextData })
-
     // @ts-ignore
     loadReCaptcha(process.env.NEXT_PUBLIC_SITE_KEY, (recaptchaToken: string) => {
       setRecaptchaToken(recaptchaToken)
     })
+
+    setFormData({ ...formData, ...ideaFormContextData })
   }, [])
 
   useEffect(() => {
@@ -315,7 +317,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                       value={formData.description}
                       showLabel={false}
                       options={{ min: 200, max: 1000 }}
-                      onChange={handleChangeInput}
+                      onChange={handleChangeInputTitle}
                     />
                   </div>
                 </> : <>
@@ -348,7 +350,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                       value={formData.solution}
                       showLabel={false}
                       options={{ min: 20, max: 250 }}
-                      onChange={handleChangeInput}
+                      onChange={handleChangeInputTitle}
                     />
                   </div>
                 </> : <>
@@ -380,7 +382,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                     <PhonenumberInput id="phone" name="phone" value={formData.phone} handleChange={handlePhonenumberInput} />
                   </div>
                 </> : <>
-                  {formData.phone.phone === "" ? <p>Nem adtál meg telefonszámot. (Nem kötelező)</p> : <p>{formData.phone.dialCode + formData.phone.phone}</p>}
+                  {formData.phone.phone === "" ? <p>Nem adtál meg telefonszámot. (Nem kötelező)</p> : <p>+{formData.phone.dialCode + formData.phone.phone}</p>}
                 </>}
 
                 {errorObject?.phone ? Object.values(errorObject.phone).map((err, i) => {
