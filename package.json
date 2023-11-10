@@ -51,6 +51,7 @@
     "undici": "^5.27.2",
     "url-polyfill": "^1.1.12",
     "vanilla-cookieconsent": "^2.9.2",
+    "zod": "^3.22.4",
     "zustand": "^4.4.1"
   },
   "devDependencies": {
