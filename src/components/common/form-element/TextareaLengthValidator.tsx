@@ -18,7 +18,7 @@ type TextareaLengthValidatorProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLTextAreaElement>) => void
 }
 
-export default function TextareaLengthValidator({ title, tipp, name, value, onChange, info, showLabel = true, options }: TextareaLengthValidatorProps) {
+export default function TextareaLengthValidator({ title, tipp, name, value = '', onChange, info, showLabel = true, options }: TextareaLengthValidatorProps) {
   const titleIsInvalid = value.length !== 0 && (options.min > value.length || value.length > options.max)
 
   return (

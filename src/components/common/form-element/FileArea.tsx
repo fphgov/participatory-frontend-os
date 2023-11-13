@@ -12,7 +12,7 @@ type FileAreaProps = {
   originalMedias: File[]
 }
 
-export default function FileArea({ changeRaw, originalMedias }: FileAreaProps) {
+export default function FileArea({ changeRaw, originalMedias = [] }: FileAreaProps) {
   const inputRef = createRef<HTMLInputElement>()
   const [ dragged, setDragged ] = useState(false)
 

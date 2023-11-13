@@ -8,7 +8,7 @@ type ToggleProps = {
   handleChange: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => void
 }
 
-export default function Toggle({ id, name, value, tipp, handleChange }: ToggleProps) {
+export default function Toggle({ id, name, value = false, tipp, handleChange }: ToggleProps) {
   const isToggled = value.toString() === "true"
 
   return (

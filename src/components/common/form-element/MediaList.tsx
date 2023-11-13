@@ -6,7 +6,7 @@ type MediaListProps = {
   originalMedias: File[]
 }
 
-export default function MediaList({ originalMedias }: MediaListProps) {
+export default function MediaList({ originalMedias = [] }: MediaListProps) {
   return (<>
     {originalMedias?.length > 0 ? <>
       <div className="file-list file-list-view">
