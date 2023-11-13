@@ -73,7 +73,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
             <div className="input-wrapper">
               <h6>Add meg, hol képzeled el az ötleted!</h6>
               <p className="info">
-                <span>Kérjük, válassz, hogy ötleted konkrét helyszínhez kötött vagy Budapest egészére vonatkozik!</span>
+                <span>Kérjük, válassz, hogy az ötleted konkrét helyszínre vonatkozik vagy nem!</span>
               </p>
 
               <div className="row">
@@ -150,7 +150,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
 
             <div className="input-wrapper">
               <h6><label htmlFor="title">Nevezd el az ötleted!</label></h6>
-              <p className="info"><span>Adj ötletednek olyan címet, ami tömör, lényegretörő, kiderül, mit javasolsz. Az előző évben, már megvalósítás alatt álló ötletek listáját <Link href={`/tervek?rand=${rand}`} target="_blank">itt éred el</Link>, segítséget nyújthat a könnyebb kitöltésben.</span></p>
+              <p className="info"><span>Adj az ötletednek olyan címet, ami tömör, lényegretörő, kiderül, mit javasolsz. Így többen szavaznak rá! Az előző években nyertes, már megvalósítás alatt álló ötletek listáját <Link href={`/tervek?rand=${rand}`} target="_blank">itt éred el</Link>, ez segítséget nyújthat a kitöltésben.</span></p>
 
               <InputLengthValidator
                   title="Ötleted címe"
