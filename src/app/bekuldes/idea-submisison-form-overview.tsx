@@ -130,7 +130,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
 
       <h2>Áttekintés</h2>
 
-      <p>Így néz ki az ötleted. Ha szeretnéd a “Beküdöm az ötletem” gombra kattintva véglegesítheted vagy a ceruza ikonra kattintva módosíthatsz még rajta!</p>
+      <p>Így néz ki az ötleted. Az oldal alján a “Beküdöm az ötletem” gombra kattintva véglegesítheted, vagy bármelyik ceruza ikonra kattintva módosíthatsz még rajta!</p>
 
       <form className="form-horizontal" action={onIdeaSubmission}>
         <fieldset>
@@ -421,7 +421,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
               <Checkbox
                 id="rule_1"
                 name="rule_1"
-                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára ha az a Főváros hatáskörében megvalósítható és nem szabályozási kérdés."
+                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha az a főváros hatáskörében megvalósítható és nem szabályozási kérdés."
                 handleChange={handleChangeInput}
                 value={ideaFormContextData.rule_1}
               />
@@ -435,7 +435,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
               <Checkbox
                 id="rule_2"
                 name="rule_2"
-                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha az nem érint magán vagy állami területet, pl. iskolák, kórházak, MÁV, HÉV területek. Segítséget itt találsz."
+                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha az nem érint állami vagy magántulajdonú területet, pl. iskolák, kórházak, MÁV, HÉV területek. Segítséget itt találsz."
                 handleChange={handleChangeInput}
                 value={ideaFormContextData.rule_2}
               />
