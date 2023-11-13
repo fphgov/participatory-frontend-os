@@ -114,7 +114,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
                       name="locationDescription"
                       value={ideaFormContextData.locationDescription}
                       options={{ min: 0, max: 200 }}
-                      onChange={handleChangeInput}
+                      onChange={handleChangeInputTitle}
                     />
 
                     <div style={{ marginTop: 18 }}>
@@ -123,7 +123,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
                         name="locationDistrict"
                         value={ideaFormContextData.locationDistrict}
                         dataList={districtDataList}
-                        handleChange={handleChangeInput}
+                        handleChange={handleChangeInputTitle}
                       />
                     </div>
                   </> : null}

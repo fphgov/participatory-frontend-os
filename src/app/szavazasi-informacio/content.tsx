@@ -1,11 +1,11 @@
 export const WhoAndHow = () => <>
-  <p>Szavazni minden Budapesten élő vagy dolgozó/tanuló, 16. életévét betöltött magánszemély tud, aki regisztrált az <a href="https://otlet.budapest.hu">otlet.budapest.hu</a> oldalon vagy felkeresi valamelyik személyes szavazópontot.</p>
+  <p>Szavazni minden Budapesten élő vagy dolgozó/tanuló, 14. életévét betöltött magánszemély tud, aki regisztrált az <a href="https://otlet.budapest.hu">otlet.budapest.hu</a> oldalon vagy felkeresi valamelyik személyes szavazópontot.</p>
   <p>Személyesen a Fővárosi Szabó Ervin könyvtárakban, a Főpolgármesteri Hivatal Központi Ügyfélszolgálati Irodájában, az Idősek Információs Pontján, és utcai kitelepüléseink alkalmával lehet szavazni.</p>
   <p>Szavazatot öt kategóriában lehet leadni, kategóriánként egyet. Nem kötelező minden kategóriában szavazatot leadni.</p>
 </>
 
 export const HowIsItDescided = () => <>
-  <p>Az online és offline beérkezett szavazatok összesítését követően kategóriánként a legtöbb szavazatot kapott ötletek valósulhatnak meg a rendelkezésre álló keretösszeg erejéig. Ha a legmagasabb pontszámú ötletek nem töltik ki pontosan a keretösszeget, úgy a maradék összegek összevonva is felhasználhatók a kategóriák soron következő két-két ötletének valamelyikére a főpolgármester döntése alapján.</p>
+  <p>Az online és offline beérkezett szavazatok összesítését követően kategóriánként a legtöbb szavazatot kapott ötletek valósulhatnak meg a rendelkezésre álló keretösszeg erejéig.</p>
 
   <p>Egy ötlet akkor valósulhat meg, ha az arra beérkezett szavazatok száma eléri vagy meghaladja az 1000 szavazatot. Helyi kis ötletek kategóriában a megvalósításhoz szükséges minimum szavazatszám 500.</p>
 </>
