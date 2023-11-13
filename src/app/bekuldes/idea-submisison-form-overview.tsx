@@ -20,6 +20,8 @@ import { useIdeaContext } from "./idea-store"
 import { districtDataList } from "@/models/district.model"
 import MediaList from "@/components/common/form-element/MediaList"
 import { redirect } from "next/navigation"
+import Link from "next/link"
+import { generateRandomValue } from "@/utilities/generateRandomValue"
 
 export default function IdeaSubmissionFormOverview(): JSX.Element {
   const { ideaFormContextData, setIdeaFormContextData } = useIdeaContext()
@@ -31,6 +33,8 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
   const [ scroll, setScroll ] = useState(false)
   const [ recaptcha, setRecaptcha ] = useState<ReCaptcha>()
   const [ recaptchaToken, setRecaptchaToken ] = useState('')
+
+  const rand = generateRandomValue().toString()
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : rmAllCharForName(e.target.value)
@@ -143,7 +147,9 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
 
                 {inputComponentEdit === "location" ? <>
                   <div className="input-wrapper-content">
-                    <p className="info">Kérjük, válassz, hogy ötleted konkrét helyszínhez kötött vagy Budapest egészére vonatkozik!</p>
+                    <p className="info">
+                      <span>Kérjük, válassz, hogy ötleted konkrét helyszínhez kötött vagy Budapest egészére vonatkozik!</span>
+                    </p>
 
                     <div className="row">
                       <div className="col-12 col-xl-12">
@@ -258,7 +264,9 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
 
                 {inputComponentEdit === "title" ? <>
                   <div className="input-wrapper-content">
-                    <p className="info">Adj ötletednek olyan címet, ami tömör, lényegretörő, kiderül, mit javasolsz. Az előző évben, már megvalósítás alatt álló ötletek listáját itt éred el, segítséget nyújthat a könnyebb kitöltésben.</p>
+                    <p className="info">
+                      <span>Adj ötletednek olyan címet, ami tömör, lényegretörő, kiderül, mit javasolsz. Az előző évben, már megvalósítás alatt álló ötletek listáját <Link href={`/tervek?rand=${rand}`} target="_blank">itt éred el</Link>, segítséget nyújthat a könnyebb kitöltésben.</span>
+                    </p>
 
                     <InputLengthValidator
                         title="Ötleted címe"
@@ -291,7 +299,9 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
 
                 {inputComponentEdit === "description" ? <>
                   <div className="input-wrapper-content">
-                    <p className="info">Itt azt írd le, hogy mi a fejlesztés tartalma, mit valósítson meg az önkormányzat! Nem ide kell leírnod, hogy az ötleted miért jó ötlet.</p>
+                    <p className="info">
+                      <span>Itt azt írd le, hogy mi a fejlesztés tartalma, mit valósítson meg az önkormányzat! Nem ide kell leírnod, hogy az ötleted miért jó ötlet.</span>
+                    </p>
 
                     <TextareaLengthValidator
                       title="Mit valósítson meg a főváros?"
@@ -324,7 +334,9 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
 
                 {inputComponentEdit === "solution" ? <>
                   <div className="input-wrapper-content">
-                    <p className="info">Írd le, hogy milyen problémát old meg. Kiknek, és miben segít, ha megvalósul az ötleted?</p>
+                    <p className="info">
+                      <span>Írd le, hogy milyen problémát old meg. Kiknek, és miben segít, ha megvalósul az ötleted?</span>
+                    </p>
 
                     <TextareaLengthValidator
                       title="Mire megoldás?"
@@ -359,7 +371,9 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
 
                 {inputComponentEdit === "phone" ? <>
                   <div className="input-wrapper-content">
-                    <p className="info">Azért szeretnénk, ha megadnád telefonos elérhetőségedet, mert sokkal gördülékenyebben tudnánk kommunikálni veled az ötleted kapcsán.</p>
+                    <p className="info">
+                      <span>Azért szeretnénk, ha megadnád telefonos elérhetőségedet, mert sokkal gördülékenyebben tudnánk kommunikálni veled az ötleted kapcsán.</span>
+                    </p>
 
                     <PhonenumberInput id="phone" name="phone" value={ideaFormContextData.phone} handleChange={handlePhonenumberInput} />
                   </div>

@@ -72,7 +72,7 @@ export default function ForgotPasswordForm(): JSX.Element {
             <legend>Elfelejtett jelszó</legend>
           </div>
 
-          <p className="info">Kérünk, add meg az e-mail címed. Az aktiváló linket e-mailben kapod meg.</p>
+          <p className="info"><span>Kérünk, add meg az e-mail címed. Az aktiváló linket e-mailben kapod meg.</span></p>
 
           <div className="form-wrapper" style={{ width: '100%' }}>
             <div className="input-wrapper">

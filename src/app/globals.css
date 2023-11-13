@@ -383,7 +383,7 @@ header .logo-wrapper img {
   cursor: pointer;
   border: 0;
   outline: none;
-  text-decoration: none;
+  text-decoration: none !important;
   border-radius: 999px;
   position: relative;
   -webkit-transition: color .14s ease-out, background-color .14s ease-out;
@@ -998,10 +998,14 @@ fieldset .formatted-checkbox label {
   display: inline-block;
   background-image: url('../../public/images/icon-info.svg');
   background-repeat: no-repeat;
-  width: 30px;
+  width: 18px;
   height: 18px;
   margin-right: 8px;
   align-self: baseline;
+}
+
+p.info span {
+  flex: 1;
 }
 
 .cookie-notice {

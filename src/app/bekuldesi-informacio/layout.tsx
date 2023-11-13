@@ -1,11 +1,11 @@
 import HeroPage from "@/components/common/HeroPage"
-//import ScrollButton from '@/components/common/ScrollButton'
 import Image from 'next/image'
+import Link from "next/link"
 import Details from '@/components/common/Details'
 import { generateRandomValue } from "../../utilities/generateRandomValue"
 import AppyPlan from "./apply-plan"
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout() {
   const rand = generateRandomValue().toString()
 
   return (
@@ -21,7 +21,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="row">
               <div className="col-md-12">
                 <h4>Az ötleted legyen megvalósítható 120 millió forintból!</h4>
-                <p>Biztosan nem lehet 120 millió forintból új aluljárót építeni vagy meghosszabbítani egy villamosvonalat, nem lehet új járműveket venni a közösségi közlekedés számára, nem lehet minden játszótérre kérni valamit. Viszonyítási alapként böngéssz az <a href={`/tervek?campaign=3&rand=${rand}`}>korábbi nyertes ötletek</a> között.</p>
+                <p>Biztosan nem lehet 120 millió forintból új aluljárót építeni vagy meghosszabbítani egy villamosvonalat, nem lehet új járműveket venni a közösségi közlekedés számára, nem lehet minden játszótérre kérni valamit. Viszonyítási alapként böngéssz az <Link href={`/tervek?rand=${rand}`}>korábbi nyertes ötletek</Link> között.</p>
               </div>
             </div>
 
@@ -192,15 +192,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <p>Ha úgy érzed, hogy annyi a szabály, hogy szinte lehetetlen megfelelni mindegyiknek, <a href={`/tervek?campaign=3&rand=${rand}`}>itt tudsz böngészni</a> a korábbi években elfogadott, és szavazásra került ötletek között.</p>
+                <p>Ha úgy érzed, hogy annyi a szabály, hogy szinte lehetetlen megfelelni mindegyiknek, <Link href={`/tervek?rand=${rand}`}>itt tudsz böngészni</Link> a korábbi években elfogadott, és szavazásra került ötletek között.</p>
               </div>
             </div>
           </div>
         </div>
 
         <AppyPlan />
-
-        {/* children */}
       </div>
     </main>
   )
