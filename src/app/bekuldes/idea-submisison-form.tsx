@@ -16,50 +16,51 @@ import { districtDataList } from "@/models/district.model"
 import { generateRandomValue } from "@/utilities/generateRandomValue"
 
 export default function IdeaSubmissionForm(): JSX.Element {
-  const { setIdeaFormContextData } = useIdeaContext()
+  const { ideaFormContextData, setIdeaFormContextData } = useIdeaContext()
 
   const rand = generateRandomValue().toString()
-
-  const [ formData, setFormData ] = useState({
-    'location': '',
-    'locationDescription': '',
-    'locationDistrict': '',
-    'cost': false,
-    'title': '',
-    'description': '',
-    'solution': '',
-    'phone':  { iso2: 'hu', dialCode: '36', phone: '' },
-    'rule_1': false,
-    'rule_2': false,
-    'rule_3': false,
-    'medias': [],
-  })
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : rmAllCharForName(e.target.value)
 
-    setFormData({ ...formData, [e.target.name]: value })
+    setIdeaFormContextData({ ...ideaFormContextData, [e.target.name]: value })
   }
 
   const handleChangeInputTitle = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : rmAllCharForTitle(e.target.value)
 
-    setFormData({ ...formData, [e.target.name]: value })
+    setIdeaFormContextData({ ...ideaFormContextData, [e.target.name]: value })
   }
 
   const handlePhonenumberInput = (phoneObject: PhonenumberValue) => {
-    setFormData({ ...formData, phone: phoneObject })
+    setIdeaFormContextData({ ...ideaFormContextData, phone: phoneObject })
   }
 
   const handleChangeFileRaw = (name: string, value: any) => {
-    setFormData({ ...formData, [name]: value })
+    setIdeaFormContextData({ ...ideaFormContextData, [name]: value })
   }
 
   useEffect(() => {
-    setIdeaFormContextData(formData)
+    if (ideaFormContextData?.first) {
+      setIdeaFormContextData({
+        'first': false,
+        'location': '',
+        'locationDescription': '',
+        'locationDistrict': '',
+        'cost': false,
+        'title': '',
+        'description': '',
+        'solution': '',
+        'phone':  { iso2: 'hu', dialCode: '36', phone: '' },
+        'rule_1': false,
+        'rule_2': false,
+        'rule_3': false,
+        'medias': [],
+      })
+    }
 
-    localStorage.setItem('idea', JSON.stringify(formData))
-  }, [formData, setIdeaFormContextData])
+    localStorage.setItem('idea', JSON.stringify(ideaFormContextData))
+  }, [setIdeaFormContextData])
 
   return (
     <div className="idea-submission-form">
@@ -87,7 +88,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
                             id="specific"
                             name="location"
                             value="1"
-                            radioValue={formData.location}
+                            radioValue={ideaFormContextData.location}
                             title="Konkrét helyszínhez kötődik"
                             tipp="Pl. konkrét utca, tér"
                             handleChange={handleChangeInput}
@@ -98,7 +99,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
                             id="unspecific"
                             name="location"
                             value="0"
-                            radioValue={formData.location}
+                            radioValue={ideaFormContextData.location}
                             title="Nem kötődik konkrét helyszínhez"
                             handleChange={handleChangeInput}
                           />
@@ -107,11 +108,11 @@ export default function IdeaSubmissionForm(): JSX.Element {
                     </div>
                   </div>
 
-                  {formData.location === "1" ? <>
+                  {ideaFormContextData.location === "1" ? <>
                     <InputLengthValidator
                       title="Helyszín megnevezése"
                       name="locationDescription"
-                      value={formData.locationDescription}
+                      value={ideaFormContextData.locationDescription}
                       options={{ min: 0, max: 200 }}
                       onChange={handleChangeInput}
                     />
@@ -120,7 +121,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
                       <Select
                         title="Kerület"
                         name="locationDistrict"
-                        value={formData.locationDistrict}
+                        value={ideaFormContextData.locationDistrict}
                         dataList={districtDataList}
                         handleChange={handleChangeInput}
                       />
@@ -139,7 +140,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
                 <Toggle
                   id="cost"
                   name="cost"
-                  value={formData.cost}
+                  value={ideaFormContextData.cost}
                   handleChange={handleChangeInput}
                   tipp={"Megértettem, hogy ötletem csak úgy kerülhet szavazólistára, ha tervezett megvalósítási költsége nem több 120 millió forintnál."}
                 />
@@ -155,7 +156,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
               <InputLengthValidator
                   title="Ötleted címe"
                   name="title"
-                  value={formData.title}
+                  value={ideaFormContextData.title}
                   showLabel={false}
                   options={{ min: 4, max: 100 }}
                   onChange={handleChangeInput}
@@ -171,7 +172,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
               <TextareaLengthValidator
                 title="Mit valósítson meg a főváros?"
                 name="description"
-                value={formData.description}
+                value={ideaFormContextData.description}
                 showLabel={false}
                 options={{ min: 200, max: 1000 }}
                 onChange={handleChangeInputTitle}
@@ -187,7 +188,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
               <TextareaLengthValidator
                 title="Mire megoldás?"
                 name="solution"
-                value={formData.solution}
+                value={ideaFormContextData.solution}
                 showLabel={false}
                 options={{ min: 20, max: 250 }}
                 onChange={handleChangeInputTitle}
@@ -202,7 +203,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
               <h6><label htmlFor="phone">Telefonszám:</label></h6>
               <p className="info"><span>Azért szeretnénk, ha megadnád telefonos elérhetőségedet, mert sokkal gördülékenyebben tudnánk kommunikálni veled az ötleted kapcsán.</span></p>
 
-              <PhonenumberInput id="phone" name="phone" value={formData.phone} handleChange={handlePhonenumberInput} />
+              <PhonenumberInput id="phone" name="phone" value={ideaFormContextData.phone} handleChange={handlePhonenumberInput} />
             </div>
 
             <hr />
@@ -211,7 +212,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
               <label htmlFor="medias">Képek, dokumentumok feltöltése</label>
               <div className="tipp">Itt tudsz képeket vagy egyéb dokumentumokat feltölteni, amikről úgy gondolod, segítik az ötleted megértését, kapcsolódnak hozzá. Max. 5 darab fájl tölthető fel!</div>
 
-              <FileArea changeRaw={handleChangeFileRaw} originalMedias={formData.medias} />
+              <FileArea changeRaw={handleChangeFileRaw} originalMedias={ideaFormContextData.medias} />
             </div>
 
             <Link href="/bekuldes/attekintes" className="btn btn-primary btn-headline next-step" style={{ marginTop: 36 }}>Következő lépés</Link>
