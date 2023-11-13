@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="page-profile-single-section">
 
         <HeroPage title="Mire figyelj az ötleted beadásakor?">
-          <p>Korábban sajnos sok olyan ötlet érkezett, amik ugyan jók és előremutatóak voltak, de nem feleltek meg a szabályoknak, ezért végül szavazni se lehetett rájuk. Azt szeretnénk, hogy úgy ötletelj, hogy energiád és munkád később hasznosulni tudjon! Ezért kérünk, hogy <b>figyelmesen olvasd át, hogy milyen ötleteket tudunk elfogadni</b>.</p>
+          <p>Azt szeretnénk, hogy úgy ötletelj, hogy energiád és munkád később hasznosulni tudjon! Ezért kérünk, hogy figyelmesen olvasd át, hogy milyen ötleteket tudunk elfogadni.</p>
         </HeroPage>
 
         <div id="megvalosithato-otlet" className="light-section">
@@ -21,7 +21,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="row">
               <div className="col-md-12">
                 <h4>Az ötleted legyen megvalósítható 120 millió forintból!</h4>
-                <p>Ez elsőre soknak tűnhet, de városi léptékkel nézve valójában csak kisebb fejlesztésekre elég. Biztosan nem lehet belőle új hidat, új metrót építeni, nem lehet új járműveket venni a közösségi közlekedés számára.</p>
+                <p>Biztosan nem lehet 120 millió forintból új aluljárót építeni vagy meghosszabbítani egy villamosvonalat, nem lehet új járműveket venni a közösségi közlekedés számára, nem lehet minden játszótérre kérni valamit. Viszonyítási alapként böngéssz az <a href={`/tervek?campaign=3&rand=${rand}`}>korábbi nyertes ötletek</a> között.</p>
               </div>
             </div>
 
@@ -35,7 +35,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   <p>Ha túl sok fejlesztést írsz bele egy ötletbe, még ha azonos helyszínre szól is, nagyobb az esély, hogy nem fog beleférni a keretbe.</p>
                 </Details>
 
-                <Details className="section-more" summary={<div>Gondolj az üzemeltetési költségre is.</div>}>
+                <Details className="section-more" summary={<div>Gondolj az üzemeltetési költségre is!</div>}>
                   <p>A maximum 120 millió forintnak elégnek kell lennie 5 évi fenntartásra (ha rövidebb életű projekt, akkor a projekt egészére).</p>
                 </Details>
               </div>
@@ -58,14 +58,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="row">
               <div className="col-md-6">
                 <Details className="section-more" summary={<div>Felújításra, karbantartásra ne tégy javaslatot!</div>}>
-                  <p>A közösségi költségvetés keretösszege nem fordítható olyan karbantartási, fenntartási, köztisztasági feladatokra, amely egyébként is a Fővárosi Önkormányzat feladata. Nem elromlott dolgok megjavítása a cél, hanem új funkciók, új dolgok létrehozása.</p>
+                  <p>A közösségi költségvetés keretösszege nem fordítható olyan karbantartási, fenntartási, köztisztasági feladatokra, amelyek egyébként is a Fővárosi Önkormányzat feladatai. Nem elromlott dolgok megjavítása a cél, hanem új funkciók, új dolgok létrehozása.</p>
                 </Details>
 
                 <Details className="section-more" summary={<div>Ne szabályozásra vonatkozzon az ötlet!</div>}>
-                  <p>Ha túl sok fejlesztést írsz bele egy ötletbe, még ha azonos helyszínre szól is, nagyobb az esély, hogy nem fog beleférni a keretbe.</p>
+                  <p>Nem áll módunkban olyan ötletet elfogadni, amely valamilyen tevékenységnek vagy szolgáltatásnak a szabályozására, újraszabályozására, tiltására irányul. Ezen belül a forgalomszabályozási feladatot tartalmazó ötletek közül is csak azok lehetnek megvalósíthatók, amelyek révén új funkció jön létre.</p>
                 </Details>
 
-                <Details className="section-more" summary={<div>Ha fel akarod hívni a figyelmet valamire, azt is valamilyen fejlesztésen keresztül tedd</div>}>
+                <Details className="section-more" summary={<div>Ha fel akarod hívni a figyelmet valamire, azt is valamilyen fejlesztésen keresztül tedd!</div>}>
                   <p>Szemléletformáló kampány helyett javasolj olyan kisebb fejlesztést, amivel gazdagodik a város, ami létrehoz valami újat, és ezen keresztül világít rá egy problémára, hiányra.</p>
                 </Details>
               </div>
@@ -81,7 +81,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="row">
               <div className="col-md-12">
                 <h4>Az ötletedet önkormányzati tulajdonú helyszínen tudjuk megvalósítani</h4>
-                <p>A helyszín lehet a főváros vagy valamelyik kerület tulajdona, tehát olyan terület, amelyre általában közterületként gondolunk. Állami és magántulajdonon (beleértve privát cégek tulajdonát) a szabályok szerint nem végezhető fejlesztés.</p>
+                <p>A helyszín lehet a főváros vagy valamelyik kerület tulajdona, tehát sok olyan terület, amelyre általában közterületként gondolunk. Állami és magántulajdonon (beleértve magáncégek tulajdonát) a szabályok szerint nem végezhető fejlesztés.</p>
               </div>
             </div>
 
@@ -92,7 +92,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </Details>
 
                 <Details className="section-more" summary={<div>Nem fejleszthetünk magántulajdont a főváros forrásából.</div>}>
-                  <p>Társasházak, privát cégek tulajdonában lévő területekre vagy építményekre, épületekre nem vonatkozhatnak a javaslatok.</p>
+                  <p>Társasházak, magáncégek tulajdonában lévő területekre vagy építményekre, épületekre nem vonatkozhatnak a javaslatok.</p>
                 </Details>
 
                 <Details className="section-more" summary={<div>Valószínűleg nem lesz jó a helyszín, ha ott már zajlik egy fejlesztés.</div>}>
@@ -111,21 +111,21 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="row">
               <div className="col-md-12">
                 <h4>Legyen fővárosi feladat</h4>
-                <p>A főváros alapvetően olyan tevékenységeket végezhet, amelyeket jogszabályok a feladatkörébe utalnak. Emellett lehetnek önként vállalt feladatai is, de csak korlátozott mértékben, illetve nem végezhet olyan feladatot, amely más - például az állam - hatáskörébe tartozik.</p>
+                <p>A főváros alapvetően olyan tevékenységeket végezhet, amelyeket jogszabályok a feladatkörébe utalnak, de nem végezhet olyan feladatot, amely más – például az állam – hatáskörébe tartozik.</p>
               </div>
             </div>
 
             <div className="row">
               <div className="col-md-6">
-                <Details className="section-more" summary={<div>Az iskolai oktatás, oktatásügy állami feladat</div>}>
+                <Details className="section-more" summary={<div>Az iskolai oktatás, oktatásügy állami feladat.</div>}>
                   <p>A korhatár leszállításával is bátorítjuk, hogy középiskolások is részt vegyenek a közösségi költségvetésben, ugyanakkor az oktatásügy állami feladat, így a budapesti iskolákban nem tudunk fejlesztéseket megvalósítani.</p>
                 </Details>
 
-                <Details className="section-more" summary={<div>Az egészségügy sem fővárosi feladat</div>}>
+                <Details className="section-more" summary={<div>Az egészségügy sem fővárosi feladat.</div>}>
                   <p>Az államhoz és a kerületekhez van rendelve az egészségügy, a főváros azzal közvetlenül nem foglalkozik.</p>
                 </Details>
 
-                <Details className="section-more" summary={<div>A hulladékkezelés állami feladat, de a hulladékképződést megelőzhetjük</div>}>
+                <Details className="section-more" summary={<div>A hulladékkezelés állami feladat, de a hulladékképződést megelőzhetjük.</div>}>
                   <p>A hulladék kezelése már nem fővárosi feladat, az ötlet azonban vonatkozhat tárgyak újrahasználására vagy javítására, ezzel megakadályozva, hogy hulladékká váljanak.</p>
                 </Details>
               </div>
@@ -148,7 +148,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="row">
               <div className="col-md-6">
                 <Details className="section-more" summary={<div>Ne kérj konkrét szobrot vagy emlékművet!</div>}>
-                  <p>Nagyon sok embernek van ötlete újabb köztéri szobrokra, vagy arra, hogy mely személyeknek vagy eseményeknek kellene még emléket állítani. A főváros azonban fontosnak tartja, hogy tervszerűen, a “<a href="elve ez: https://budapest.hu/Documents/kultura/budapest%20fovaros%20kozteri%20muveszeti%20koncepcioja.pdf">szoborstratégia</a>” alapján végezzen ilyen fejlesztéseket. A közösségi költségvetésben ezért állandó jellegű konkrét művészeti alkotások, szobrok állítására tett javaslatokat nem tudunk támogatni.</p>
+                  <p>Nagyon sok embernek van ötlete újabb köztéri szobrokra, vagy arra, hogy mely személyeknek vagy eseményeknek kellene még emléket állítani. A főváros azonban fontosnak tartja, hogy tervszerűen, a “<a href="https://budapest.hu/Documents/kultura/budapest%20fovaros%20kozteri%20muveszeti%20koncepcioja.pdf">szoborstratégia</a>” alapján végezzen ilyen fejlesztéseket. A közösségi költségvetésben ezért állandó jellegű konkrét művészeti alkotások, szobrok állítására tett javaslatokat nem tudunk támogatni.</p>
                 </Details>
 
                 <Details className="section-more" summary={<div>Ne akard saját műalkotásodat, művészeti tevékenységedet finanszírozni!</div>}>
@@ -173,7 +173,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
             <div className="row">
               <div className="col-md-6">
-                <Details className="section-more" summary={<div>A helyszín sokat számít</div>}>
+                <Details className="section-more" summary={<div>A helyszín sokat számít.</div>}>
                   <p>A helyszín alapvetően meghatározza, hogy hány embert érint a javaslat. Minél több ember érintett, annál nagyobb eséllyel nyerhet az ötleted.</p>
                 </Details>
 
@@ -192,7 +192,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <p>Ha úgy érzed, hogy annyi a szabály, hogy szinte lehetetlen megfelelni mindegyiknek, <a href={`/otletek?campaign=3&rand=${rand}`}>itt tudsz böngészni</a> a korábbi években elfogadott, és szavazásra került ötletek között.</p>
+                <p>Ha úgy érzed, hogy annyi a szabály, hogy szinte lehetetlen megfelelni mindegyiknek, <a href={`/tervek?campaign=3&rand=${rand}`}>itt tudsz böngészni</a> a korábbi években elfogadott, és szavazásra került ötletek között.</p>
               </div>
             </div>
           </div>

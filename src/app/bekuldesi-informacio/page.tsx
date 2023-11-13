@@ -3,9 +3,9 @@ import SideTabs from '@/app/bekuldesi-informacio/SideTabs'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Mi történik most?',
+    title: 'Mire figyelj az ötleted beadásakor?',
     openGraph: {
-      title: 'Mi történik most?',
+      title: 'Mire figyelj az ötleted beadásakor?',
       type: 'website',
       locale: 'hu_HU',
       images: ['/opengraph-image.png'],
