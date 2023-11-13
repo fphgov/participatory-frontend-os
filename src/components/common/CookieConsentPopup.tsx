@@ -40,7 +40,7 @@ function CookieConsentPopup({}): JSX.Element {
             title: 'Kedves Látogató!',
             description: `<p><span class="cc_bold">Adataid védelme fontos számunkra.</span></p>
             <p>A(z) otlet.budapest.hu által használt alapvető sütik a weboldal megfelelő működését biztosítják, ahhoz elengedhetetlenek. Ezen kívül a felhasználói élmény javításához szükséges sütiket <span class="cc_bold">csak a Te hozzájárulásod esetén állítjuk be</span>, ezek közül a lenti linken választhatsz.</p>
-            <p>A hozzájáruláshoz kötött sütik használatának elfogadásával kijelented, hogy az <a href="/files/adatkezelesi_tajekoztato.pdf">adatkezelési tájékoztató</a>ban foglaltakat megismerted, és az ott írtakat tudomásul véve hozzájárulsz az adott cookie-k használatával járó adatkezeléshez.</p>
+            <p>A hozzájáruláshoz kötött sütik használatának elfogadásával kijelented, hogy az <a href="/files/sutitajekoztato.pdf">adatkezelési tájékoztató</a>ban foglaltakat megismerted, és az ott írtakat tudomásul véve hozzájárulsz az adott cookie-k használatával járó adatkezeléshez.</p>
               <button type="button" data-cc="c-settings" class="cc-link">Választok a sütik közül</button>`,
             primary_btn: {
               text: 'Elfogadom mindet',
@@ -77,7 +77,7 @@ function CookieConsentPopup({}): JSX.Element {
                 <p><span class="cc_bold">ELFOGADOM MINDET</span> - hozzájárulásod adod a felhasználói élmény javításához szükséges sütik alkalmazásához.</p>
                 <p><span class="cc_bold">VÁLASZTOK A SÜTIKATEGÓRIÁK KÖZÜL</span> - az alábbi választási lehetőségek közül választva eldöntheted, hogy mely sütik alkalmazásához adod hozzájárulásod.</p>
 
-                <p>A hozzájáruláshoz kötött sütik használatának elfogadásával kijelented, hogy az <a href="/files/adatkezelesi_tajekoztato.pdf">adatkezelési tájékoztatóban</a> foglaltakat megismerted, és az ott írtakat tudomásul véve hozzájárulsz az adott cookie-k használatával járó adatkezeléshez.</p>
+                <p>A hozzájáruláshoz kötött sütik használatának elfogadásával kijelented, hogy az <a href="/files/sutitajekoztato.pdf">adatkezelési tájékoztatóban</a> foglaltakat megismerted, és az ott írtakat tudomásul véve hozzájárulsz az adott cookie-k használatával járó adatkezeléshez.</p>
                 <p><span class="cc_bold">Mi az a süti?</span><br />
                 A felhasználók számítógépére mentett kis fájl, amely megkönnyíti a meglátogatott webhelyeken alkalmazott beállítások és egyéb információk tárolását. A süti általában tartalmazza annak a webhelynek a nevét, ahonnan érkezett, a süti értékét, azaz egy véletlenszerűen generált egyedi számot, valamint a süti élettartamát, vagyis hogy mennyi ideig tárolódik az eszközön. A süti a felhasználó eszközének háttértárjában egy fájlban tárolódik.</p>
                 <p><span class="cc_bold">Milyen sütiket és mire használunk?</span><br>
