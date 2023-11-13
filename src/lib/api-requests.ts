@@ -235,7 +235,6 @@ export async function apiIdeaSubmission(formData: FormData): Promise<Record<stri
 
   const headers: Record<string, string> = {
     'Accept': 'application/json',
-    'Content-Type': 'multipart/form-data'
   }
 
   if (token) {
