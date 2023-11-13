@@ -20,7 +20,7 @@ type PhonenumberInputProps = {
 
 export default function PhonenumberInput({ id, name, value, label, tipp,  handleChange }: PhonenumberInputProps) {
   const inputProps = {
-    placeholder: '0011112222',
+    placeholder: '00 111 2222',
   };
 
   const intlTelOpts = {

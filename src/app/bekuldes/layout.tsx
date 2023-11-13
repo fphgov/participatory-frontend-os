@@ -8,7 +8,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
   const token = (await getToken())?.value
 
   if (!token) {
-    redirect('/bejelentkezes', RedirectType.replace)
+    redirect('/bejelentkezes?from=bekuldes', RedirectType.replace)
   }
 
   return (

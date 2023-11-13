@@ -1,7 +1,7 @@
 'use client'
 
 import { rmAllCharForName, rmAllCharForTitle } from "@/utilities/removeSpecialCharacters"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import SimpleRadio from "@/components/common/form-element/SimpleRadio"
 import Select from "@/components/common/form-element/Select"
 import InputLengthValidator from "@/components/common/form-element/InputLengthValidator"
@@ -41,7 +41,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
   }
 
   useEffect(() => {
-    if (ideaFormContextData?.first) {
+    if (ideaFormContextData?.first === undefined) {
       setIdeaFormContextData({
         'first': false,
         'location': '',
