@@ -21,14 +21,14 @@ export default function Layout() {
             <div className="row">
               <div className="col-md-12">
                 <h4>Az ötleted legyen megvalósítható 120 millió forintból!</h4>
-                <p>Biztosan nem lehet 120 millió forintból új aluljárót építeni vagy meghosszabbítani egy villamosvonalat, nem lehet új járműveket venni a közösségi közlekedés számára, nem lehet minden játszótérre kérni valamit. Viszonyítási alapként böngéssz az <Link href={`/tervek?rand=${rand}`}>korábbi nyertes ötletek</Link> között.</p>
+                <p>Biztosan nem lehet 120 millió forintból új aluljárót építeni vagy meghosszabbítani egy villamosvonalat, nem lehet új járműveket venni a közösségi közlekedés számára, nem lehet minden játszótérre kérni valamit. Viszonyítási alapként böngéssz a <Link href={`/tervek?rand=${rand}`}>korábbi nyertes ötletek</Link> között.</p>
               </div>
             </div>
 
             <div className="row">
               <div className="col-md-6">
                 <Details className="section-more" summary={<div>Az ötletek megvalósítási költségét a hivatal fogja megbecsülni.</div>}>
-                  <p>Ettől függetlenül jó, ha tudod,hogy egy automata üzemű közvécé telepítése mintegy 60 millió forint, de akár egyetlen fa elültetése is több tízmillióba kerülhet, ha burkolatot kell hozzá feltörni, ki kell alakítani olyan talajszerkezetet, amelyben a fa hosszú ideig tud fejlődni, esetleg közműveket kell kiváltani.</p>
+                  <p>Ettől függetlenül jó, ha tudod, hogy egy automata üzemű közvécé telepítése mintegy 60 millió forint, de akár egyetlen fa elültetése is több tízmillióba kerülhet, ha burkolatot kell hozzá feltörni, ki kell alakítani olyan talajszerkezetet, amelyben a fa hosszú ideig tud fejlődni, esetleg közműveket kell kiváltani.</p>
                 </Details>
 
                 <Details className="section-more" summary={<div>Ne legyen túl bonyolult, összetett az ötleted!</div>}>

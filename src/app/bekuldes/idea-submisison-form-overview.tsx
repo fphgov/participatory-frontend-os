@@ -435,7 +435,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
               <Checkbox
                 id="rule_2"
                 name="rule_2"
-                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha az nem érint állami vagy magántulajdonú területet, pl. iskolák, kórházak, MÁV, HÉV területek. Segítséget itt találsz."
+                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha az nem érint állami vagy magántulajdonú területet, pl. iskolák, kórházak, MÁV, HÉV területek."
                 handleChange={handleChangeInput}
                 value={ideaFormContextData.rule_2}
               />

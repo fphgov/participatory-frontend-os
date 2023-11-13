@@ -144,7 +144,7 @@ function CookieConsentPopup({}): JSX.Element {
                 cookie_table: [
                   {
                     col1: '_pk_id',
-                    col2: 'Matomo Analytics  cookie-k melyek segítenek adatokat gyűjteni arról, hogy a látogató milyen módon használja a webhelye Kezelt adatok köre: Felhasználói egyedi azonosító a felhasználók egymástól való megkülönböztetésére, de nem azonosítására.',
+                    col2: 'Matomo Analytics  cookie-k melyek segítenek adatokat gyűjteni arról, hogy a látogató milyen módon használja a webhelyet. Kezelt adatok köre: Felhasználói egyedi azonosító a felhasználók egymástól való megkülönböztetésére, de nem azonosítására.',
                     col3: 'otlet.budapest.hu',
                     col4: '13 hónap',
                     col5: 'HTTP'
