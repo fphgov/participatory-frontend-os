@@ -158,7 +158,7 @@ export default function RegistrationForm(): JSX.Element {
 
               <div className="input-wrapper">
                 <label htmlFor="postal_code">Irányítószám *</label>
-                <p className="tipp">Ahol élsz, vagy ha ez nem budapesti, akkor ahol dolgozol/tanulsz.</p>
+                <p className="tipp">Ahol élsz, vagy ha ez nem Budapest, akkor a budapesti munkahelyed/iskolád irányítószáma.</p>
                 <input type="text" placeholder="Irányítószám" name="postal_code" id="postal_code" maxLength={4} value={filterData.postal_code} onChange={handleChangeNumberInput} />
 
                 {errorObject?.postal_code ? Object.values(errorObject.postal_code).map((err, i) => {
@@ -179,7 +179,7 @@ export default function RegistrationForm(): JSX.Element {
                     <option value="street">Utcai plakátról</option>
                     <option value="news">Híroldalon olvastam</option>
                     <option value="news_ads">Híroldalon hirdetésből</option>
-                    <option value="transport">Buszon/villamoson láttam</option>
+                    <option value="transport">Közösségi közlekedési eszközön láttam</option>
                     <option value="facebook_municipatory">Budapest Városháza Facebook oldalról</option>
                     <option value="facebook_im_in_budapest">Énbudapestem Facebook oldalról</option>
                     <option value="facebook">Facebook csoportból</option>
@@ -254,7 +254,7 @@ export default function RegistrationForm(): JSX.Element {
 
       {success ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
           <h2>Köszönjük regisztrációdat!</h2>
-          <p>A(z) {filterData.email} e-mail címre küldtünk egy linket, amire kattintva meg kell erősítened a szavazatodat.</p>
+          <p>A(z) {filterData.email} e-mail címre küldtünk egy linket, amire kattintva meg kell erősítened a regisztrációdat.</p>
       </div> : null}
     </>
   )

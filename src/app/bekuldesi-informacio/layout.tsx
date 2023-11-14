@@ -13,7 +13,7 @@ export default function Layout() {
       <div className="page-profile-single-section">
 
         <HeroPage title="Mire figyelj az ötleted beadásakor?">
-          <p>Azt szeretnénk, hogy úgy ötletelj, hogy energiád és munkád később hasznosulni tudjon! Ezért kérünk, hogy figyelmesen olvasd át, hogy milyen ötleteket tudunk elfogadni.</p>
+          <p>Azt szeretnénk, hogy úgy ötletelj, hogy energiád és munkád később hasznosulni tudjon! Ezért kérünk, figyelmesen olvasd át, hogy milyen ötleteket tudunk elfogadni.</p>
         </HeroPage>
 
         <div id="megvalosithato-otlet" className="light-section">
@@ -61,8 +61,8 @@ export default function Layout() {
                   <p>A közösségi költségvetés keretösszege nem fordítható olyan karbantartási, fenntartási, köztisztasági feladatokra, amelyek egyébként is a Fővárosi Önkormányzat feladatai. Nem elromlott dolgok megjavítása a cél, hanem új funkciók, új dolgok létrehozása.</p>
                 </Details>
 
-                <Details className="section-more" summary={<div>Ne szabályozásra vonatkozzon az ötlet!</div>}>
-                  <p>Nem áll módunkban olyan ötletet elfogadni, amely valamilyen tevékenységnek vagy szolgáltatásnak a szabályozására, újraszabályozására, tiltására irányul. Ezen belül a forgalomszabályozási feladatot tartalmazó ötletek közül is csak azok lehetnek megvalósíthatók, amelyek révén új funkció jön létre.</p>
+                <Details className="section-more" summary={<div>Ne kizárólag szabályozásra vonatkozzon az ötlet!</div>}>
+                  <p>Kizárólag valamely tevékenység szabályozására nem lehet ötletet beadni, ezért például forgalomszabályozási feladatot javaslatot tartalmazó ötletek közül is csak azok lehetnek megvalósíthatók, amelyek révén új funkció (például sétálóutca, iskolautca, zebra) jön létre.</p>
                 </Details>
 
                 <Details className="section-more" summary={<div>Ha fel akarod hívni a figyelmet valamire, azt is valamilyen fejlesztésen keresztül tedd!</div>}>
@@ -151,7 +151,7 @@ export default function Layout() {
                   <p>Nagyon sok embernek van ötlete újabb köztéri szobrokra, vagy arra, hogy mely személyeknek vagy eseményeknek kellene még emléket állítani. A főváros azonban fontosnak tartja, hogy tervszerűen, a “<a href="https://budapest.hu/Documents/kultura/budapest%20fovaros%20kozteri%20muveszeti%20koncepcioja.pdf">szoborstratégia</a>” alapján végezzen ilyen fejlesztéseket. A közösségi költségvetésben ezért állandó jellegű konkrét művészeti alkotások, szobrok állítására tett javaslatokat nem tudunk támogatni.</p>
                 </Details>
 
-                <Details className="section-more" summary={<div>Ne akard saját műalkotásodat, művészeti tevékenységedet finanszírozni!</div>}>
+                <Details className="section-more" summary={<div>Saját műalkotásodat, művészeti tevékenységedet nem tudjuk a közösségi költségvetésből finanszírozni!</div>}>
                   <p>A közösségi költségvetés nyertes ötleteit a főváros valósítja meg. Ha a beszerzés szabályait betartva be is von külső megvalósítót, az ötletgazda ugyanolyan esélyekkel indul, mint bárki más.</p>
                 </Details>
               </div>
@@ -192,7 +192,7 @@ export default function Layout() {
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <p>Ha úgy érzed, hogy annyi a szabály, hogy szinte lehetetlen megfelelni mindegyiknek, <Link href={`/tervek?rand=${rand}`}>itt tudsz böngészni</Link> a korábbi években elfogadott, és szavazásra került ötletek között.</p>
+                <p>Ha úgy érzed, hogy annyi a szabály, hogy szinte lehetetlen megfelelni mindegyiknek, <Link href={`/tervek?rand=${rand}`}>itt tudsz böngészni</Link> a korábbi években elfogadott, és szavazásra bocsátott ötletek között.</p>
               </div>
             </div>
           </div>

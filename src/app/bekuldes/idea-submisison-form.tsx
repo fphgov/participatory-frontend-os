@@ -133,7 +133,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
 
             <div className="input-wrapper">
               <h6><label htmlFor="title">Nevezd el az ötleted!</label></h6>
-              <p className="info"><span>Adj az ötletednek olyan címet, ami tömör, lényegretörő, kiderül, mit javasolsz. Így többen szavaznak rá! Az előző években nyertes, már megvalósítás alatt álló ötletek listáját <Link href={`/tervek?rand=${rand}`} target="_blank">itt éred el</Link>, ez segítséget nyújthat a kitöltésben.</span></p>
+              <p className="info"><span>Adj az ötletednek olyan címet, ami tömör, lényegretörő, kiderül, mit javasolsz. Így többen szavaznak rá! Az előző években nyertes, már megvalósítás alatt álló ötletek listáját <Link href={`/projektek?rand=${rand}`} target="_blank">itt éred el</Link>, ez segítséget nyújthat a kitöltésben.</span></p>
 
               <InputLengthValidator
                   title="Ötleted címe"
@@ -156,7 +156,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
                 name="description"
                 value={ideaFormContextData.description}
                 showLabel={false}
-                options={{ min: 200, max: 1000 }}
+                options={{ min: 100, max: 1000 }}
                 onChange={handleChangeInputTitle}
               />
             </div>
@@ -183,7 +183,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
 
             <div className="input-wrapper">
               <h6><label htmlFor="phone">Telefonszám:</label></h6>
-              <p className="info"><span>Azért szeretnénk, ha megadnád telefonos elérhetőségedet, mert sokkal gördülékenyebben tudnánk kommunikálni veled az ötleted kapcsán.</span></p>
+              <p className="info"><span>Telefonos elérhetőség megadása nem kötelező. Ha megadod, gördülékenyebben tudunk kommunikálni veled az ötleted kapcsán.</span></p>
 
               <PhonenumberInput id="phone" name="phone" value={ideaFormContextData.phone} handleChange={handlePhonenumberInput} />
             </div>

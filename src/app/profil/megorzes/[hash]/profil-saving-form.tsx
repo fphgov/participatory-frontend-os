@@ -86,7 +86,7 @@ export default function ProfilSavingForm(): JSX.Element {
             <input className="form-control"  type="checkbox" id="newsletter" name="newsletter" defaultChecked={filterData.newsletter} onChange={handleChangeInput} />
             Feliratkozom a közösségi költségvetés hírlevelére
           </label>
-          <p className="tipp">Ne maradj le a közösségi költségvetéssel kapcsolatos legfontosabb hírekről és eseményekről, iratkozz fel hírlevelünkre! A hírlevelet körülbelül havonta egyszer küldjük ki, abban kizárólag a közösségi költségvetéssel kapcsolatban adunk információt, tájékoztatást, és a jövőben bármikor leiratkozhatsz róla.</p>
+          <p className="tipp">Ne maradj le a közösségi költségvetéssel kapcsolatos legfontosabb hírekről és eseményekről! Iratkozz fel hírlevelünkre! A hírlevelet körülbelül havonta egyszer küldjük ki, abban kizárólag a közösségi költségvetéssel kapcsolatban adunk információt, tájékoztatást, és a jövőben bármikor leiratkozhatsz róla.</p>
 
           {errorObject && errorObject.newsletter ? Object.values(errorObject.newsletter).map((err, i) => {
             return <ErrorMini key={i} error={err} increment={`newsletter-${i}`} />
