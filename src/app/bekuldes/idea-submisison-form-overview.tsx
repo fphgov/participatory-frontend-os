@@ -81,11 +81,13 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
       ideaFormData.append('location', ideaFormContextData.location)
     }
 
-    Array.from(ideaFormContextData?.medias as FileList).forEach((file: File|undefined, i: number) => {
-      if (file instanceof File) {
-        ideaFormData.append(`medias[${i}]`, file)
-      }
-    })
+    if (ideaFormContextData?.medias && (Array.isArray(ideaFormContextData.medias) || ideaFormContextData.medias instanceof FileList)) {
+      Array.from(ideaFormContextData.medias as FileList).forEach((file: File|undefined, i: number) => {
+        if (file instanceof File) {
+          ideaFormData.append(`medias[${i}]`, file)
+        }
+      })
+    }
 
     const res = await ideaSubmissionForm(ideaFormData)
 
