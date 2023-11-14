@@ -282,7 +282,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                         value={ideaFormContextData.title}
                         showLabel={false}
                         options={{ min: 4, max: 100 }}
-                        onChange={handleChangeInput}
+                        onChange={handleChangeInputTitle}
                     />
                   </div>
                 </> : <>
