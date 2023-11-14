@@ -60,11 +60,8 @@ export default function FileArea({ changeRaw, originalMedias = [] }: FileAreaPro
       <DragAndDrop
         onHandleDrop={handleDrop}
         onChangeDrag={(drag: boolean | ((prevState: boolean) => boolean)) => { setDragged(drag) }}
-        onOverlayClick={() => { inputRef.current?.click() }}
       >
         <div className={`input-file-wrapper ${dragged ? 'dragged' : ''}`}>
-          <input id="file" name="file" type="file" multiple onChange={onFileChange} ref={inputRef} />
-
           {originalMedias.length > 0 ? <>
             <div className="file-list">
               {originalMedias.map((file: File, i: number) => {
@@ -83,6 +80,10 @@ export default function FileArea({ changeRaw, originalMedias = [] }: FileAreaPro
           {originalMedias.length > 0 && originalMedias.length < maxFiles ? <>
             <div className="file-list-separator"></div>
           </> : null}
+
+          <div className="drag-area-overlay-wrapper">
+            <input id="file" name="file" type="file" multiple onChange={onFileChange} ref={inputRef} />
+          </div>
 
           {originalMedias.length < maxFiles ? <>
             <label htmlFor="file" className="input-file-content">

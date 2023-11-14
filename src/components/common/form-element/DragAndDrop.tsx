@@ -1,15 +1,14 @@
 'use client'
 
-import React, { createRef, useState, useEffect, RefObject } from 'react'
+import React, { createRef, useState, useEffect } from 'react'
 
 type DragAndDropaProps = {
   children: React.ReactNode
   onHandleDrop: (files: FileList) => void
   onChangeDrag: (drag: boolean | ((prevState: boolean) => boolean)) => void
-  onOverlayClick: () => void
 }
 
-export default function DragAndDrop({ children, onHandleDrop, onChangeDrag, onOverlayClick }: DragAndDropaProps) {
+export default function DragAndDrop({ children, onHandleDrop, onChangeDrag }: DragAndDropaProps) {
   const dropRef = createRef<HTMLDivElement>()
   const [ drag, setDrag ] = useState(false)
   const [ dragCounter, setDragCounter ] = useState(0)
@@ -93,7 +92,6 @@ export default function DragAndDrop({ children, onHandleDrop, onChangeDrag, onOv
 
   return (
     <div className={`drag-area ${drag ? 'drag-active': ''}`} ref={dropRef}>
-      <div className="drag-area-overlay" onClick={() => { onOverlayClick() }}></div>
       {children}
     </div>
   )

@@ -2573,6 +2573,10 @@ button > svg {
   background-color: #f5f5f5;
 }
 
+.drag-area-overlay-wrapper {
+  position: relative;
+}
+
 .input-file-wrapper > label {
   width: 100%;
   flex: 1;
