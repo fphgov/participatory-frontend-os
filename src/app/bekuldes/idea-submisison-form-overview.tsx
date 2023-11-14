@@ -94,7 +94,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
     if (res.success) {
       redirect('/bekuldes-sikeres')
     } else {
-      setErrorObject(res.jsonError)
+      setErrorObject(res?.jsonError)
       setError(res.error)
     }
 
@@ -137,6 +137,10 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
       <form className="form-horizontal" action={onIdeaSubmission}>
         <fieldset>
           {(typeof error === 'string' && error !== '') ? <Error message={error} /> : null}
+
+          {errorObject?.form ? Object.values(errorObject.form).map((err, i) => {
+            return <Error key={i} message={err} />
+          }) : null}
 
           <div className="form-wrapper">
             <div className="input-wrapper">
