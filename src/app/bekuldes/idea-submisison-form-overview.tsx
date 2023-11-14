@@ -93,8 +93,6 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
     const res = await ideaSubmissionForm(ideaFormData)
 
     if (res.success) {
-      localStorage.removeItem('idea')
-
       window.location.href = '/bekuldes-sikeres'
     } else {
       setErrorObject(res?.jsonError)
@@ -107,18 +105,6 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
   }
 
   useEffect(() => {
-    const idea = localStorage.getItem('idea')
-
-    if (idea) {
-      try {
-        const ideaObject = JSON.parse(idea)
-
-        setIdeaFormContextData(ideaObject)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
     // @ts-ignore
     loadReCaptcha(process.env.NEXT_PUBLIC_SITE_KEY, (recaptchaToken: string) => {
       setRecaptchaToken(recaptchaToken)

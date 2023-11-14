@@ -40,24 +40,6 @@ export default function IdeaSubmissionForm(): JSX.Element {
     setIdeaFormContextData({ ...ideaFormContextData, [name]: value })
   }
 
-  useEffect(() => {
-    const idea = localStorage.getItem('idea')
-
-    if (idea) {
-      try {
-        const ideaObject = JSON.parse(idea)
-
-        setIdeaFormContextData(ideaObject)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-  }, [])
-
-  useEffect(() => {
-    localStorage.setItem('idea', JSON.stringify(ideaFormContextData))
-  }, [ideaFormContextData])
-
   return (
     <div className="idea-submission-form">
       <h2>Kötelezően kitöltendő mezők</h2>
