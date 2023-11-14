@@ -41,8 +41,22 @@ export default function IdeaSubmissionForm(): JSX.Element {
   }
 
   useEffect(() => {
+    const idea = localStorage.getItem('idea')
+
+    if (idea) {
+      try {
+        const ideaObject = JSON.parse(idea)
+
+        setIdeaFormContextData(ideaObject)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }, [])
+
+  useEffect(() => {
     localStorage.setItem('idea', JSON.stringify(ideaFormContextData))
-  }, [setIdeaFormContextData])
+  }, [ideaFormContextData])
 
   return (
     <div className="idea-submission-form">
