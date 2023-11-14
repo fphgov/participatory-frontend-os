@@ -64,7 +64,7 @@ export async function ideaSubmissionForm(formData: FormData) {
     try {
       const serverFormData = new ServerFormData()
 
-      for(var formRecord of formData.entries()) {
+      for(const formRecord of formData.entries()) {
         const key   = formRecord[0]
         const value = formRecord[1]
 

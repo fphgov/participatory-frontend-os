@@ -78,7 +78,7 @@ async function handleResponse<T>(response: Response): Promise<T> {
 }
 
 export async function apiLoginUser(credentials: ApiLoginUserProps): Promise<string> {
-  var urlencoded = new URLSearchParams()
+  const urlencoded = new URLSearchParams()
 
   urlencoded.append("email", credentials.email)
   urlencoded.append("password", credentials.password)
@@ -210,7 +210,7 @@ export async function apiProfileChangePassword(credentials: { password: string, 
     headers["Authorization"] = `Bearer ${token}`
   }
 
-  var urlencoded = new URLSearchParams()
+  const urlencoded = new URLSearchParams()
 
   urlencoded.append("password", credentials.password)
   urlencoded.append("password_again", credentials.password_again)
@@ -251,7 +251,7 @@ export async function apiIdeaSubmission(formData: any): Promise<Record<string, s
 }
 
 export async function apiRegistration(data: Record<string, string>): Promise<Record<string, string>> {
-  var urlencoded = new URLSearchParams(data as Record<string, string>)
+  const urlencoded = new URLSearchParams(data as Record<string, string>)
 
   const url = backendUrl(endpoints.API_REQ_REGISTRATION)
 
@@ -270,7 +270,7 @@ export async function apiRegistration(data: Record<string, string>): Promise<Rec
 }
 
 export async function apiLostPassword(data: Record<string, string>): Promise<Record<string, string>> {
-  var urlencoded = new URLSearchParams(data as Record<string, string>)
+  const urlencoded = new URLSearchParams(data as Record<string, string>)
 
   const url = backendUrl(endpoints.API_REQ_PROFILE_FORGOT_PASSWORD)
 
@@ -593,7 +593,7 @@ export async function apiPlansFilter(data: Record<string, string>): Promise<Filt
 }
 
 export async function apiProfileSaving(hash: string, data: Record<string, string|boolean>): Promise<Record<string, string>> {
-  var urlencoded = new URLSearchParams(data as Record<string, string>)
+  const urlencoded = new URLSearchParams(data as Record<string, string>)
 
   const url = backendUrl((endpoints.API_REQ_PROFILE_CONFIRMATION || '').toString().replace(':hash', hash))
 
@@ -612,7 +612,7 @@ export async function apiProfileSaving(hash: string, data: Record<string, string
 }
 
 export async function apiResetPasswordChange(data: Record<string, string>): Promise<MessageResponse> {
-  var urlencoded = new URLSearchParams(data)
+  const urlencoded = new URLSearchParams(data)
 
   const url = backendUrl(endpoints.API_REQ_PROFILE_RESET_PASSWORD)
 
