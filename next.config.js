@@ -25,8 +25,6 @@ module.exports = async (phase, { defaultConfig }) => {
       unoptimized: true,
     },
     experimental: {
-      serverActions: true,
-      serverActionsBodySizeLimit: '2048mb',
       forceSwcTransforms: true,
     },
     trailingSlash: false,

@@ -1,6 +1,7 @@
 'use server'
 
 import { apiLoginUser, apiLostPassword, apiResetPasswordChange, apiRegistration, apiProfileChangePassword, apiProfileActivate, apiProfileSaving, apiIdeaSubmission } from "@/lib/api-requests"
+import ServerFormData from 'form-data'
 
 export async function loginFom(formData: FormData) {
   let jsonError, error, success = false
@@ -61,7 +62,23 @@ export async function ideaSubmissionForm(formData: FormData) {
 
   try {
     try {
-      await apiIdeaSubmission(formData)
+      const serverFormData = new ServerFormData()
+
+      for(var formRecord of formData.entries()) {
+        const key   = formRecord[0]
+        const value = formRecord[1]
+
+        if (value instanceof File) {
+          const data = await value.arrayBuffer()
+          const buffer = Buffer.from(data)
+
+          serverFormData.append(key, buffer, value.name);
+        } else {
+          serverFormData.append(key, value)
+        }
+      }
+
+      await apiIdeaSubmission(serverFormData)
 
       success = true
     } catch (e: any) {
@@ -213,4 +230,17 @@ export async function profileSavingForm(hash: string, data: Record<string, strin
   } catch (e) {
     return { message: 'Váratlan hiba történt, kérünk próbáld később' }
   }
+}
+
+async function stream2buffer(stream: Stream): Promise<Buffer> {
+
+  return new Promise < Buffer > ((resolve, reject) => {
+
+      const _buf = Array < any > ();
+
+      stream.on("data", chunk => _buf.push(chunk));
+      stream.on("end", () => resolve(Buffer.concat(_buf)));
+      stream.on("error", err => reject(`error converting stream - ${err}`));
+
+  });
 }

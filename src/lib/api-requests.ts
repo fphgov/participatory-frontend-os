@@ -228,7 +228,7 @@ export async function apiProfileChangePassword(credentials: { password: string, 
   return handleResponse<MessageResponse>(response).then(data => data)
 }
 
-export async function apiIdeaSubmission(formData: FormData): Promise<Record<string, string>> {
+export async function apiIdeaSubmission(formData: any): Promise<Record<string, string>> {
   const token = (await getToken())?.value
 
   const url = backendUrl(endpoints.API_REQ_PROFILE_IDEA)
@@ -242,11 +242,9 @@ export async function apiIdeaSubmission(formData: FormData): Promise<Record<stri
   }
 
   const response = await fetch(url, {
-    cache: "no-store",
     method: "POST",
-    credentials: "include",
-    headers,
-    body: formData,
+    headers: { ...headers, ...formData.getHeaders()},
+    body: formData.getBuffer(),
   })
 
   return handleResponse<any>(response).then(data => data)

@@ -4,7 +4,7 @@ import Error from "@/components/common/Error"
 import ErrorMini from "@/components/common/ErrorMini"
 import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 import { rmAllCharForName, rmAllCharForTitle } from "@/utilities/removeSpecialCharacters"
-import React, { useEffect, useState } from "react"
+import React, { FormEvent, useEffect, useState } from "react"
 import ScrollTo from "@/components/common/ScrollTo"
 import { ideaSubmissionForm } from "@/app/actions"
 import SimpleRadio from "@/components/common/form-element/SimpleRadio"
@@ -56,7 +56,9 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
     setIdeaFormContextData({ ...ideaFormContextData, [name]: value })
   }
 
-  async function onIdeaSubmission() {
+  async function onIdeaSubmission(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+
     setScroll(false)
     setErrorObject(undefined)
     setError('')
@@ -82,7 +84,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
     }
 
     if (ideaFormContextData?.medias && (Array.isArray(ideaFormContextData.medias) || ideaFormContextData.medias instanceof FileList)) {
-      Array.from(ideaFormContextData.medias as FileList).forEach((file: File|undefined, i: number) => {
+      Array.from(ideaFormContextData.medias).forEach(async (file: File|undefined, i: number) => {
         if (file instanceof File) {
           ideaFormData.append(`medias[${i}]`, file)
         }
@@ -92,7 +94,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
     const res = await ideaSubmissionForm(ideaFormData)
 
     if (res.success) {
-      redirect('/bekuldes-sikeres')
+      window.location.href = '/bekuldes-sikeres'
     } else {
       setErrorObject(res?.jsonError)
       setError(res.error)
@@ -134,7 +136,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
 
       <p>Így néz ki az ötleted. Az oldal alján a “Beküldöm az ötletem” gombra kattintva véglegesítheted, vagy bármelyik ceruza ikonra kattintva módosíthatsz még rajta!</p>
 
-      <form className="form-horizontal" action={onIdeaSubmission}>
+      <form className="form-horizontal" onSubmit={onIdeaSubmission}>
         <fieldset>
           {(typeof error === 'string' && error !== '') ? <Error message={error} /> : null}
 
