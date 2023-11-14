@@ -41,24 +41,6 @@ export default function IdeaSubmissionForm(): JSX.Element {
   }
 
   useEffect(() => {
-    if (ideaFormContextData?.first === undefined) {
-      setIdeaFormContextData({
-        'first': false,
-        'location': '',
-        'locationDescription': '',
-        'locationDistrict': '',
-        'cost': false,
-        'title': '',
-        'description': '',
-        'solution': '',
-        'phone':  { iso2: 'hu', dialCode: '36', phone: '' },
-        'rule_1': false,
-        'rule_2': false,
-        'rule_3': false,
-        'medias': [],
-      })
-    }
-
     localStorage.setItem('idea', JSON.stringify(ideaFormContextData))
   }, [setIdeaFormContextData])
 
