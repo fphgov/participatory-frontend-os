@@ -21,7 +21,7 @@ export default function Layout() {
             <div className="row">
               <div className="col-md-12">
                 <h4>Az ötleted legyen megvalósítható 120 millió forintból!</h4>
-                <p>Biztosan nem lehet 120 millió forintból új aluljárót építeni vagy meghosszabbítani egy villamosvonalat, nem lehet új járműveket venni a közösségi közlekedés számára, nem lehet minden játszótérre kérni valamit. Viszonyítási alapként böngéssz a <Link href={`/tervek?rand=${rand}`}>korábbi nyertes ötletek</Link> között.</p>
+                <p>Biztosan nem lehet 120 millió forintból új aluljárót építeni vagy meghosszabbítani egy villamosvonalat, nem lehet új járműveket venni a közösségi közlekedés számára, nem lehet minden játszótérre kérni valamit. Viszonyítási alapként böngéssz a <Link href={`/tervek?rand=${rand}`}>korábban szakmailag jóváhagyott ötletek</Link> között.</p>
               </div>
             </div>
 
