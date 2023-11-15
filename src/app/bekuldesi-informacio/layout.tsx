@@ -1,117 +1,204 @@
 import HeroPage from "@/components/common/HeroPage"
-import ScrollButton from '@/components/common/ScrollButton'
 import Image from 'next/image'
+import Link from "next/link"
 import Details from '@/components/common/Details'
-import CategoryIcon from '@/components/idea/CategoryIcon'
+import { generateRandomValue } from "../../utilities/generateRandomValue"
+import AppyPlan from "./apply-plan"
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout() {
+  const rand = generateRandomValue().toString()
+
   return (
     <main className="page page-idea-info">
       <div className="page-profile-single-section">
 
-        <HeroPage title="Hogyan tudsz ötletet beküldeni?">
-          <div className="row">
-            <div className="col-lg-1"></div>
-            <div className="col-lg-10">
-              <div className="info-box-wrapper">
-                <div className="info-box">
-                  <div className="info-box-icon">
-                    <Image
-                      src="/images/icon-lamp.svg"
-                      width={60}
-                      height={60}
-                      alt="Lamp"
-                      aria-hidden={true}
-                    />
-                  </div>
-                  <div className="info-box-title">
-                    Informálódj a beküldésről!
-                  </div>
-                  <div className="info-box-content">
-                    Olvasd el ezen az oldalon a beküldési folyamattal kapcsolatos részleteket.
-                  </div>
-                </div>
-
-                <div className="info-box">
-                  <div className="info-box-icon">
-                    <Image
-                      src="/images/icon-allow.svg"
-                      width={60}
-                      height={60}
-                      alt="Allow"
-                      aria-hidden={true}
-                    />
-                  </div>
-                  <div className="info-box-title">
-                    Találj ki egy ötletet!
-                  </div>
-                  <div className="info-box-content">
-                    A beküldés előtt készítsd elő az ötleted.
-                  </div>
-                </div>
-
-                <div className="info-box">
-                  <div className="info-box-icon">
-                    <Image
-                      src="/images/icon-accept.svg"
-                      width={60}
-                      height={60}
-                      alt="Accept"
-                      aria-hidden={true}
-                    />
-                  </div>
-                  <div className="info-box-title">
-                    Küldd be az ötleted!
-                  </div>
-                  <div className="info-box-content">
-                    Nyomj a lenti &quot;Beküldöm az ötletem&quot; gombra, lépj be a fiókodba és töltsd ki az űrlapot.
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-1"></div>
-          </div>
-
-          <ScrollButton to="#tematikus-kategoriak" className="btn btn-primary btn-headline btn-next">
-            Szeretnék ötletelni!
-          </ScrollButton>
+        <HeroPage title="Mire figyelj az ötleted beadásakor?">
+          <p>Azt szeretnénk, hogy úgy ötletelj, hogy energiád és munkád később hasznosulni tudjon! Ezért kérünk, figyelmesen olvasd át, hogy milyen ötleteket tudunk elfogadni.</p>
         </HeroPage>
 
-        <div id="tematikus-kategoriak" className="light-section">
+        <div id="megvalosithato-otlet" className="light-section">
           <div className="container">
             <div className="row">
-              <div className="col-md-4">
-                <h2>Tematikus kategóriák</h2>
-                <p>Ebben a három kategóriában várjuk az ötleteket.</p>
-
-                <ScrollButton to="#fontos-tudnivalok" className="btn btn-primary btn-headline btn-next">
-                  Fontos tudnivalók
-                </ScrollButton>
+              <div className="col-md-12">
+                <h4>Az ötleted legyen megvalósítható 120 millió forintból!</h4>
+                <p>Biztosan nem lehet 120 millió forintból új aluljárót építeni vagy meghosszabbítani egy villamosvonalat, nem lehet új járműveket venni a közösségi közlekedés számára, nem lehet minden játszótérre kérni valamit. Viszonyítási alapként böngéssz a <Link href={`/tervek?rand=${rand}`}>korábban szakmailag jóváhagyott ötletek</Link> között.</p>
               </div>
+            </div>
 
-              <div className="col-md-8">
-                <Details className="section-more" summary={<div><CategoryIcon color="blue" size={24} name="Zöld Budapest" />Zöld Budapest</div>} startOpen={true}>
-                  <p><b>Zöldebb utcák, üdébb parkok, mindenki számára elérhető, környezettudatos megoldások. Budapest reagál a klímaváltozásra.</b></p>
-                  <p>A Zöld Budapest kategória azt képviseli, hogy a Fővárosi Önkormányzat szerepet vállal abban, hogy városunk zöldebbé váljon és segíti a budapestieket, hogy környezettudatosan éljenek, közlekedjenek. Közös célunk, hogy a főváros alkalmazkodjon a 21. század egyik legnagyobb kihívásához, a klímaváltozáshoz.</p>
+            <div className="row">
+              <div className="col-md-6">
+                <Details className="section-more" summary={<div>Az ötletek megvalósítási költségét a hivatal fogja megbecsülni.</div>}>
+                  <p>Ettől függetlenül jó, ha tudod, hogy egy automata üzemű közvécé telepítése mintegy 60 millió forint, de akár egyetlen fa elültetése is több tízmillióba kerülhet, ha burkolatot kell hozzá feltörni, ki kell alakítani olyan talajszerkezetet, amelyben a fa hosszú ideig tud fejlődni, esetleg közműveket kell kiváltani.</p>
                 </Details>
 
-                <Details className="section-more" summary={<div><CategoryIcon color="blue" size={24} name="Esélyteremtő Budapest" />Esélyteremtő Budapest</div>}>
-                  <p><b>A cél a társadalmi különbségek csökkentése, hátrányos helyzetű közösségek életét támogató ötletekkel.</b></p>
-                  <p>Az Esélyteremtő Budapest kategóriába benyújtott ötletek révén az önkormányzat csökkenti a társadalmi különbségeket, segíti a hátrányos helyzetű közösségek életét. Ide soroljuk az akadálymentes közlekedést megkönnyítő, illetve az idősek, fogyatékosok, rászorulók, vagy más társadalmi hátrányt elszenvedők gondjait orvosló ötleteket.</p>
+                <Details className="section-more" summary={<div>Ne legyen túl bonyolult, összetett az ötleted!</div>}>
+                  <p>Ha túl sok fejlesztést írsz bele egy ötletbe, még ha azonos helyszínre szól is, nagyobb az esély, hogy nem fog beleférni a keretbe.</p>
                 </Details>
 
-                <Details className="section-more" summary={<div><CategoryIcon color="blue" size={24} name="Nyitott Budapest" />Nyitott Budapest</div>}>
-                  <p><b>Egy nyitott város a szívügyed? Együttműködések, kísérleti megoldások, digitális fejlesztések, közösségépítő ötletek.</b></p>
-                  <p>A Nyitott Budapest kategória célja a kísérletezés és az együttműködés fejlesztése a város közösségeiben, illetve a budapestiek és a főváros, valamint intézményei között. Ennek megvalósítása érdekében keresünk praktikus, kísérleti megoldásokat, mindenki által könnyen elérhető digitális fejlesztéseket és közösségépítő ötleteket.</p>
+                <Details className="section-more" summary={<div>Gondolj az üzemeltetési költségre is!</div>}>
+                  <p>A maximum 120 millió forintnak elégnek kell lennie 5 évi fenntartásra (ha rövidebb életű projekt, akkor a projekt egészére).</p>
                 </Details>
-
-                <p>Vannak ötletek, amelyek esetleg több kategória céljaihoz is illeszkednek. Ezeknek a besorolásáról a Főpolgármesteri Hivatal dönt.</p>
+              </div>
+              <div className="col-md-6 justify-self-end align-self-center p-5">
+                <Image src={`/images/pic_megvalosithato-otlet.svg`} width={570} height={345} alt="Az ötleted legyen megvalósítható 120 millió forintból!" aria-hidden={true} />
               </div>
             </div>
           </div>
         </div>
 
-        {children}
+        <div id="valami-uj" className="light-section info-zig-zag-bg-yellow">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                <h4>Az ötleted alapján jöjjön létre valami új!</h4>
+                <p>Olyan ötletet adj, ami valamit hozzátesz a városhoz, ami eddig nem volt. Ez lehet fizikai beavatkozás, például építés, ültetés, de akár valamilyen szolgáltatás vagy online fejlesztés is.</p>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-md-6">
+                <Details className="section-more" summary={<div>Felújításra, karbantartásra ne tégy javaslatot!</div>}>
+                  <p>A közösségi költségvetés keretösszege nem fordítható olyan karbantartási, fenntartási, köztisztasági feladatokra, amelyek egyébként is a Fővárosi Önkormányzat feladatai. Nem elromlott dolgok megjavítása a cél, hanem új funkciók, új dolgok létrehozása.</p>
+                </Details>
+
+                <Details className="section-more" summary={<div>Ne kizárólag szabályozásra vonatkozzon az ötlet!</div>}>
+                  <p>Kizárólag valamely tevékenység szabályozására nem lehet ötletet beadni, ezért például forgalomszabályozási feladatot javaslatot tartalmazó ötletek közül is csak azok lehetnek megvalósíthatók, amelyek révén új funkció (például sétálóutca, iskolautca, zebra) jön létre.</p>
+                </Details>
+
+                <Details className="section-more" summary={<div>Ha fel akarod hívni a figyelmet valamire, azt is valamilyen fejlesztésen keresztül tedd!</div>}>
+                  <p>Szemléletformáló kampány helyett javasolj olyan kisebb fejlesztést, amivel gazdagodik a város, ami létrehoz valami újat, és ezen keresztül világít rá egy problémára, hiányra.</p>
+                </Details>
+              </div>
+              <div className="col-md-6 justify-self-end align-self-center p-5">
+                <Image src={`/images/pic_valami-uj.svg`} width={570} height={345} alt="Az ötleted alapján jöjjön létre valami új!" aria-hidden={true} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="megvalositas-helyszine" className="light-section">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                <h4>Az ötletedet önkormányzati tulajdonú helyszínen tudjuk megvalósítani</h4>
+                <p>A helyszín lehet a főváros vagy valamelyik kerület tulajdona, tehát sok olyan terület, amelyre általában közterületként gondolunk. Állami és magántulajdonon (beleértve magáncégek tulajdonát) a szabályok szerint nem végezhető fejlesztés.</p>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-md-6">
+                <Details className="section-more" summary={<div>Ne tervezz a HÉV, vasút, iskolák, vagy kórházak területére, mert ezek az állam tulajdonában, kezelésében vannak!</div>}>
+                  <p>Mivel a HÉV, a vasút, az iskolák és a kórházak területe nem fővárosi vagy kerületi tulajdonban van, nem tudjuk garantálni, hogy a tulajdonos hozzájárul az ötlet megvalósításához.</p>
+                </Details>
+
+                <Details className="section-more" summary={<div>Nem fejleszthetünk magántulajdont a főváros forrásából.</div>}>
+                  <p>Társasházak, magáncégek tulajdonában lévő területekre vagy építményekre, épületekre nem vonatkozhatnak a javaslatok.</p>
+                </Details>
+
+                <Details className="section-more" summary={<div>Valószínűleg nem lesz jó a helyszín, ha ott már zajlik egy fejlesztés.</div>}>
+                  <p>Vannak olyan fővárosi helyszínek, amelyek fejlesztésére hamarosan sor kerül, esetleg már rendelkezésre állnak tervek és a megvalósítás forrásai. Ilyen esetben valószínűleg nem tudjuk befogadni az ötletet, vagy csak akkor, ha összhangban van a tervekkel.</p>
+                </Details>
+              </div>
+              <div className="col-md-6 justify-self-end align-self-center p-5">
+                <Image src={`/images/pic_megvalositas-helyszine.svg`} width={570} height={345} alt="Az ötletedet önkormányzati tulajdonú helyszínen tudjuk megvalósítani" aria-hidden={true} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="fovarosi-feladat" className="light-section info-zig-zag-bg-blue">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                <h4>Legyen fővárosi feladat</h4>
+                <p>A főváros alapvetően olyan tevékenységeket végezhet, amelyeket jogszabályok a feladatkörébe utalnak, de nem végezhet olyan feladatot, amely más – például az állam – hatáskörébe tartozik.</p>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-md-6">
+                <Details className="section-more" summary={<div>Az iskolai oktatás, oktatásügy állami feladat.</div>}>
+                  <p>A korhatár leszállításával is bátorítjuk, hogy középiskolások is részt vegyenek a közösségi költségvetésben, ugyanakkor az oktatásügy állami feladat, így a budapesti iskolákban nem tudunk fejlesztéseket megvalósítani.</p>
+                </Details>
+
+                <Details className="section-more" summary={<div>Az egészségügy sem fővárosi feladat.</div>}>
+                  <p>Az államhoz és a kerületekhez van rendelve az egészségügy, a főváros azzal közvetlenül nem foglalkozik.</p>
+                </Details>
+
+                <Details className="section-more" summary={<div>A hulladékkezelés állami feladat, de a hulladékképződést megelőzhetjük.</div>}>
+                  <p>A hulladék kezelése már nem fővárosi feladat, az ötlet azonban vonatkozhat tárgyak újrahasználására vagy javítására, ezzel megakadályozva, hogy hulladékká váljanak.</p>
+                </Details>
+              </div>
+              <div className="col-md-6 justify-self-end align-self-center p-5">
+                <Image src={`/images/pic_fovarosi-feladat.svg`} width={570} height={345} alt="Legyen fővárosi feladat" aria-hidden={true} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="muveszet" className="light-section">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                <h4>Művészet az utcán</h4>
+                <p>Olyan projekteket várunk, ahol a városlakók élhetik ki a kreativitásukat, vagy ahol az ötlet előre nem határozza meg, hogy milyen konkrét művészeti alkotás készül.</p>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-md-6">
+                <Details className="section-more" summary={<div>Ne kérj konkrét szobrot vagy emlékművet!</div>}>
+                  <p>Nagyon sok embernek van ötlete újabb köztéri szobrokra, vagy arra, hogy mely személyeknek vagy eseményeknek kellene még emléket állítani. A főváros azonban fontosnak tartja, hogy tervszerűen, a “<a href="https://budapest.hu/Documents/kultura/budapest%20fovaros%20kozteri%20muveszeti%20koncepcioja.pdf">szoborstratégia</a>” alapján végezzen ilyen fejlesztéseket. A közösségi költségvetésben ezért állandó jellegű konkrét művészeti alkotások, szobrok állítására tett javaslatokat nem tudunk támogatni.</p>
+                </Details>
+
+                <Details className="section-more" summary={<div>Saját műalkotásodat, művészeti tevékenységedet nem tudjuk a közösségi költségvetésből finanszírozni!</div>}>
+                  <p>A közösségi költségvetés nyertes ötleteit a főváros valósítja meg. Ha a beszerzés szabályait betartva be is von külső megvalósítót, az ötletgazda ugyanolyan esélyekkel indul, mint bárki más.</p>
+                </Details>
+              </div>
+              <div className="col-md-6 justify-self-end align-self-center p-5">
+                <Image src={`/images/pic_muveszet.svg`} width={570} height={345} alt="Művészet az utcán" aria-hidden={true} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="eselyek" className="light-section info-zig-zag-bg-yellow">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                <h4>Milyen ötleteknek van esélye a szavazáson?</h4>
+                <p>Az ötletekre a budapestiek fognak szavazni, a főváros pedig a legnépszerűbb ötleteket valósítja meg. Mit mérlegelhetsz, mire érdemes figyelned?</p>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-md-6">
+                <Details className="section-more" summary={<div>A helyszín sokat számít.</div>}>
+                  <p>A helyszín alapvetően meghatározza, hogy hány embert érint a javaslat. Minél több ember érintett, annál nagyobb eséllyel nyerhet az ötleted.</p>
+                </Details>
+
+                <Details className="section-more" summary={<div>Ki fog kampányolni az ötleted mellett?</div>}>
+                  <p>Lehet egy ötletnek annyira népszerű a témája, felvetése, hogy az minden támogatás, kampányolás nélkül is nagyon sok embert szavazásra késztet, de ha fejlesztési ötletedet annak helyszíne vagy témája miatt felkarolhat egy nagy eléréssel - például bejáratott közösségi média platformmal - rendelkező szervezet vagy közösség, az jelentősen megnöveli az esélyeit. </p>
+                </Details>
+              </div>
+              <div className="col-md-6 justify-self-end align-self-center p-5">
+                <Image src={`/images/pic_eselyek.svg`} width={570} height={345} alt="Milyen ötleteknek van esélye a szavazáson?" aria-hidden={true} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="light-section help">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                <p>Ha úgy érzed, hogy annyi a szabály, hogy szinte lehetetlen megfelelni mindegyiknek, <Link href={`/tervek?rand=${rand}`}>itt tudsz böngészni</Link> a korábbi években elfogadott, és szavazásra bocsátott ötletek között.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <AppyPlan />
       </div>
     </main>
   )

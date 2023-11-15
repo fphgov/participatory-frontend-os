@@ -16,3 +16,17 @@ declare module "@icetee/time-ago" {
 
   export = TimeAgo;
 }
+
+// declare module "react-intl-tel-input-v2" {
+//   import React from 'react';
+
+//   export interface ReactIntlTelInputProps {
+//     id?: string|number;
+//     inputProps?: any;
+//     intlTelOpts?: any;
+//     value?: any;
+//     onChange?: any;
+//   }
+
+//   export const ReactIntlTelInput: React.FC<ReactIntlTelInputProps> = (props : ReactIntlTelInputProps): JSX.Element => ();
+// }

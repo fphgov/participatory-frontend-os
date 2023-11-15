@@ -16,7 +16,7 @@ export default function NewsletterArea(): JSX.Element|null {
           </div>
 
           <div className="col-md-7">
-            <h2>Ne maradj le a közösségi költségvetéssel kapcsolatos legfontosabb hírekről és eseményekről, iratkozz fel hírlevelünkre!</h2>
+            <h2>Ne maradj le a közösségi költségvetéssel kapcsolatos legfontosabb hírekről és eseményekről! Iratkozz fel hírlevelünkre!</h2>
 
             <p>A hírlevelet körülbelül havonta egyszer küldjük ki, abban kizárólag a közösségi költségvetéssel kapcsolatban adunk információt, tájékoztatást, és a jövőben bármikor leiratkozhatsz róla.</p>
 

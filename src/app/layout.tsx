@@ -82,6 +82,7 @@ export default function RootLayout({
             fbq('track', 'PageView');` }}>
           </script>
 
+          {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
           <noscript><img height="1" width="1" style={{ display: 'none' }} src={`https://www.facebook.com/tr?id=${process.env.NEXT_PUBLIC_FACEBOOK_PIXEL}&ev=PageView&noscript=1`}/></noscript>
         </> : null}
       </head>

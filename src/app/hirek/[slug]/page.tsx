@@ -70,7 +70,7 @@ export default async function SimplePage({ params }: Props) {
                 <div className="light section-newsletter">
                   <h2>Iratkozz fel hírlevelünkre!</h2>
 
-                  <p>Ne maradj le a közösségi költségvetéssel kapcsolatos legfontosabb hírekről és eseményekről, iratkozz fel hírlevelünkre!</p>
+                  <p>Ne maradj le a közösségi költségvetéssel kapcsolatos legfontosabb hírekről és eseményekről! Iratkozz fel hírlevelünkre!</p>
 
                   <a className="btn btn-primary" href="https://hirlevel.budapest.hu/subscribe.php?cid=aSQV5beZ_" target="_blank" rel="noopener noreferrer">Feliratkozás</a>
                 </div>

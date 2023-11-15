@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import IdeaSubmissionForm from '../idea-submisison-form'
+import IdeaSubmissionFormOverview from '../idea-submisison-form-overview'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default async function IdeaSubmissionPage() {
+export default async function IdeaSubmissionOverviewPage() {
   const baseUrl = "/bekuldes"
 
   return (
@@ -24,7 +24,7 @@ export default async function IdeaSubmissionPage() {
           <div className="row">
             <div className="col-12">
               <ul className="form-status">
-                <li><Link href={`${baseUrl}`}><span>1</span> <div className="description">Részletek megadása</div></Link></li>
+                <li><Link href={`${baseUrl}`}><span className="active">1</span> <div className="description">Részletek megadása</div></Link></li>
                 <li><Link href={`${baseUrl}/attekintes`}><span className="active">2</span> <div className="description">Áttekintés és beküldés</div></Link></li>
               </ul>
             </div>
@@ -35,7 +35,7 @@ export default async function IdeaSubmissionPage() {
       <div className="container">
         <div className="row">
           <div className="col-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-            <IdeaSubmissionForm />
+            <IdeaSubmissionFormOverview />
           </div>
         </div>
       </div>

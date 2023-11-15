@@ -2,12 +2,13 @@ import HeroPage from "@/components/common/HeroPage"
 import { getToken } from "@/lib/actions"
 import { RedirectType } from "next/dist/client/components/redirect"
 import { redirect } from "next/navigation"
+import { IdeaContextProvider } from "./idea-store"
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
   const token = (await getToken())?.value
 
   if (!token) {
-    redirect('/bejelentkezes', RedirectType.replace)
+    redirect('/bejelentkezes?from=bekuldes', RedirectType.replace)
   }
 
   return (
@@ -17,7 +18,9 @@ export default async function Layout({ children }: { children: React.ReactNode }
           <p>Köszönjük, hogy megosztod velünk ötleted! A kitöltési folyamat nem szakítható meg!</p>
         </HeroPage>
 
-        {children}
+        <IdeaContextProvider>
+          {children}
+        </IdeaContextProvider>
       </div>
     </main>
   )

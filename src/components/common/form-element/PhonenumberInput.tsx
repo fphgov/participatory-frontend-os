@@ -1,0 +1,52 @@
+import React from 'react'
+// @ts-ignore
+import ReactIntlTelInput from 'react-intl-tel-input-v2';
+import 'intl-tel-input/build/css/intlTelInput.css';
+
+export type PhonenumberValue = {
+  iso2: string
+  dialCode: string
+  phone: string
+}
+
+type PhonenumberInputProps = {
+  id: string
+  name: string
+  value: PhonenumberValue
+  label?: string|React.ReactNode
+  tipp?: string
+  handleChange: (phoneObject: PhonenumberValue) => void
+}
+
+export default function PhonenumberInput({ id, name, value, label, tipp,  handleChange }: PhonenumberInputProps) {
+  const inputProps = {
+    placeholder: '00 111 2222',
+  };
+
+  const intlTelOpts = {
+    preferredCountries: ['hu'],
+    autoPlaceholder: "aggressive"
+  };
+
+  return (
+    <div className={`phone-inline`}>
+      <div className="phone-inline-symbol formatted-phone">
+        {label ? <label htmlFor={name} className="phone-switch">
+          {label}
+        </label> : null}
+
+        <ReactIntlTelInput
+          id={id}
+          inputProps={inputProps}
+          intlTelOpts={intlTelOpts}
+          value={value}
+          onChange={handleChange}
+        />
+      </div>
+
+      <div className="phone-inline-content">
+        {tipp ? <p>{tipp}</p> : null}
+      </div>
+    </div>
+  )
+}

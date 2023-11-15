@@ -1,11 +1,19 @@
-import React, { useState } from 'react'
+'use client'
+
+import React, { createRef, useState } from 'react'
 import DragAndDrop from './DragAndDrop'
 import clonedeep from 'lodash.clonedeep'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash, faFileUpload, faFile } from "@fortawesome/free-solid-svg-icons"
 import fileSize from '@/utilities/fileSize'
 
-export default function FileArea({ changeRaw, originalMedias }) {
+type FileAreaProps = {
+  changeRaw: (name: string, files: any[]) => void
+  originalMedias: File[]
+}
+
+export default function FileArea({ changeRaw, originalMedias = [] }: FileAreaProps) {
+  const inputRef = createRef<HTMLInputElement>()
   const [ dragged, setDragged ] = useState(false)
 
   const maxFiles = 5
@@ -39,7 +47,7 @@ export default function FileArea({ changeRaw, originalMedias }) {
     changeRaw('medias', [ ...removedMedias ])
   }
 
-  const onFileChange = (e) => {
+  const onFileChange = (e: any) => {
     addTempMedia(e.target.files)
   }
 
@@ -54,11 +62,9 @@ export default function FileArea({ changeRaw, originalMedias }) {
         onChangeDrag={(drag: boolean | ((prevState: boolean) => boolean)) => { setDragged(drag) }}
       >
         <div className={`input-file-wrapper ${dragged ? 'dragged' : ''}`}>
-          <input id="file" name="file" type="file" multiple onChange={onFileChange} />
-
           {originalMedias.length > 0 ? <>
             <div className="file-list">
-              {originalMedias.map((file, i) => {
+              {originalMedias.map((file: File, i: number) => {
                 return (
                   <div key={`file-${i}`} className="file-elem">
                     <div className="file-elem-remove" onClick={() => { removeTempMedia(file) }}><FontAwesomeIcon icon={faTrash} size="1x" /></div>
@@ -75,11 +81,15 @@ export default function FileArea({ changeRaw, originalMedias }) {
             <div className="file-list-separator"></div>
           </> : null}
 
+          <div className="drag-area-overlay-wrapper">
+            <input id="file" name="file" type="file" multiple onChange={onFileChange} ref={inputRef} />
+          </div>
+
           {originalMedias.length < maxFiles ? <>
             <label htmlFor="file" className="input-file-content">
               <FontAwesomeIcon icon={faFileUpload} size="3x" />
 
-              <p>Tallózd be, vagy húzd a kijelölt mezőbe a kapcsolódó anyagokat!</p>
+              <p>Tallózd be, vagy húzd ide fájlt a feltöltéshez</p>
             </label>
           </> : null}
         </div>

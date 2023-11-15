@@ -18,7 +18,7 @@ type SelectProps = {
   handleChange: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => void
 }
 
-export default function Select({ id, name, value, title, tipp, defaultValue = '0', showLabel = true, dataList, handleChange }: SelectProps) {
+export default function Select({ id, name, value = '', title, tipp, defaultValue = '0', showLabel = true, dataList, handleChange }: SelectProps) {
   return (
     <div className="input-wrapper">
       {showLabel ? <label htmlFor={name}>{title}</label> : null}

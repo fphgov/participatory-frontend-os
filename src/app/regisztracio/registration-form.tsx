@@ -7,6 +7,7 @@ import { rmAllCharForEmail, rmAllCharForName, rmForNumber } from "@/utilities/re
 import { useEffect, useState } from "react"
 import ScrollTo from "@/components/common/ScrollTo"
 import { registrationFom } from "@/app/actions"
+import SimpleRadio from "@/components/common/form-element/SimpleRadio"
 
 export default function RegistrationForm(): JSX.Element {
   const [ error, setError ] = useState('')
@@ -22,6 +23,7 @@ export default function RegistrationForm(): JSX.Element {
     'lastname': '',
     'firstname': '',
     'postal_code': '',
+    'postal_code_type': '',
     'birthyear': '',
     'hear_about': '',
     'live_in_city': '',
@@ -60,6 +62,7 @@ export default function RegistrationForm(): JSX.Element {
       lastname: filterData.lastname,
       firstname: filterData.firstname,
       postal_code: filterData.postal_code,
+      postal_code_type: filterData.postal_code_type,
       birthyear: filterData.birthyear,
       hear_about: filterData.hear_about,
       live_in_city: filterData.live_in_city,
@@ -158,11 +161,65 @@ export default function RegistrationForm(): JSX.Element {
 
               <div className="input-wrapper">
                 <label htmlFor="postal_code">Irányítószám *</label>
-                <p className="tipp">Ahol élsz, vagy ha ez nem budapesti, akkor ahol dolgozol/tanulsz.</p>
+                <p className="tipp">Lakóhelyed irányítószáma, vagy, ha ez nem budapesti, akkor budapesti munkahelyed/iskolád címéhez tartozó irányítószám.</p>
                 <input type="text" placeholder="Irányítószám" name="postal_code" id="postal_code" maxLength={4} value={filterData.postal_code} onChange={handleChangeNumberInput} />
 
                 {errorObject?.postal_code ? Object.values(errorObject.postal_code).map((err, i) => {
                   return <ErrorMini key={i} error={err} increment={`postal_code-${i}`} />
+                }) : null}
+              </div>
+
+              <div className="input-wrapper">
+                <label htmlFor="postal_code_type">Irányítószám típusa *</label>
+                <p className="tipp">Válassz, hogy a megadott irányítószám mire vonatkozik.</p>
+
+                <div className="form-group">
+                  <div className="input-wrapper card-radio-wrapper">
+                    <div className="row">
+                      <div className="col-md-12">
+                        <div className="card-radio-simple">
+                          <SimpleRadio
+                            id="postal_code_live"
+                            name="postal_code_type"
+                            value="1"
+                            radioValue={filterData.postal_code_type}
+                            title="A megadott irányítószámon élek."
+                            handleChange={handleChangeInput}
+                          />
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="card-radio-simple">
+                          <SimpleRadio
+                            id="postal_code_learn"
+                            name="postal_code_type"
+                            value="2"
+                            radioValue={filterData.postal_code_type}
+                            title="A megadott irányítószámon tanulok."
+                            handleChange={handleChangeInput}
+                          />
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="card-radio-simple">
+                          <SimpleRadio
+                            id="postal_code_work"
+                            name="postal_code_type"
+                            value="3"
+                            radioValue={filterData.postal_code_type}
+                            title="A megadott irányítószámon dolgozok."
+                            handleChange={handleChangeInput}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* <input type="text" placeholder="Irányítószám" name="postal_code_type" id="postal_code_type" maxLength={4} value={filterData.postal_code_type} onChange={handleChangeNumberInput} /> */}
+
+                {errorObject?.postal_code_type ? Object.values(errorObject.postal_code_type).map((err, i) => {
+                  return <ErrorMini key={i} error={err} increment={`postal_code_type-${i}`} />
                 }) : null}
               </div>
 
@@ -179,7 +236,7 @@ export default function RegistrationForm(): JSX.Element {
                     <option value="street">Utcai plakátról</option>
                     <option value="news">Híroldalon olvastam</option>
                     <option value="news_ads">Híroldalon hirdetésből</option>
-                    <option value="transport">Buszon/villamoson láttam</option>
+                    <option value="transport">Közösségi közlekedési eszközön láttam</option>
                     <option value="facebook_municipatory">Budapest Városháza Facebook oldalról</option>
                     <option value="facebook_im_in_budapest">Énbudapestem Facebook oldalról</option>
                     <option value="facebook">Facebook csoportból</option>
@@ -205,7 +262,7 @@ export default function RegistrationForm(): JSX.Element {
               <div className="form-group">
                 <label htmlFor="live_in_city" className="form-group-label">
                   <input className="form-control" type="checkbox" id="live_in_city" name="live_in_city" value={filterData.live_in_city} onChange={handleChangeInput} />
-                  Kijelentem, hogy elmúltam 16 éves és budapesti lakos vagyok, vagy Budapesten dolgozom, vagy Budapesten tanulok. *
+                  Kijelentem, hogy elmúltam 14 éves és budapesti lakos vagyok, vagy Budapesten dolgozom, vagy Budapesten tanulok. *
                 </label>
 
                 {errorObject?.live_in_city ? Object.values(errorObject.live_in_city).map((err, i) => {
@@ -254,7 +311,7 @@ export default function RegistrationForm(): JSX.Element {
 
       {success ? <div style={{ padding: '0.35em 0.75em 0.625em' }}>
           <h2>Köszönjük regisztrációdat!</h2>
-          <p>A(z) {filterData.email} e-mail címre küldtünk egy linket, amire kattintva meg kell erősítened a szavazatodat.</p>
+          <p>A(z) {filterData.email} e-mail címre küldtünk egy linket, amire kattintva meg kell erősítened a regisztrációdat.</p>
       </div> : null}
     </>
   )

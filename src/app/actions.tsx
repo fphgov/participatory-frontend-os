@@ -1,6 +1,7 @@
 'use server'
 
 import { apiLoginUser, apiLostPassword, apiResetPasswordChange, apiRegistration, apiProfileChangePassword, apiProfileActivate, apiProfileSaving, apiIdeaSubmission } from "@/lib/api-requests"
+import ServerFormData from 'form-data'
 
 export async function loginFom(formData: FormData) {
   let jsonError, error, success = false
@@ -61,7 +62,23 @@ export async function ideaSubmissionForm(formData: FormData) {
 
   try {
     try {
-      await apiIdeaSubmission(formData)
+      const serverFormData = new ServerFormData()
+
+      for(const formRecord of formData.entries()) {
+        const key   = formRecord[0]
+        const value = formRecord[1]
+
+        if (value instanceof File) {
+          const data = await value.arrayBuffer()
+          const buffer = Buffer.from(data)
+
+          serverFormData.append(key, buffer, value.name);
+        } else {
+          serverFormData.append(key, value)
+        }
+      }
+
+      await apiIdeaSubmission(serverFormData)
 
       success = true
     } catch (e: any) {

@@ -40,7 +40,7 @@ function CookieConsentPopup({}): JSX.Element {
             title: 'Kedves Látogató!',
             description: `<p><span class="cc_bold">Adataid védelme fontos számunkra.</span></p>
             <p>A(z) otlet.budapest.hu által használt alapvető sütik a weboldal megfelelő működését biztosítják, ahhoz elengedhetetlenek. Ezen kívül a felhasználói élmény javításához szükséges sütiket <span class="cc_bold">csak a Te hozzájárulásod esetén állítjuk be</span>, ezek közül a lenti linken választhatsz.</p>
-            <p>A hozzájáruláshoz kötött sütik használatának elfogadásával kijelented, hogy az <a href="/files/adatkezelesi_tajekoztato.pdf">adatkezelési tájékoztató</a>ban foglaltakat megismerted, és az ott írtakat tudomásul véve hozzájárulsz az adott cookie-k használatával járó adatkezeléshez.</p>
+            <p>A hozzájáruláshoz kötött sütik használatának elfogadásával kijelented, hogy az <a href="/files/sutitajekoztato.pdf">adatkezelési tájékoztató</a>ban foglaltakat megismerted, és az ott írtakat tudomásul véve hozzájárulsz az adott sütik használatával járó adatkezeléshez.</p>
               <button type="button" data-cc="c-settings" class="cc-link">Választok a sütik közül</button>`,
             primary_btn: {
               text: 'Elfogadom mindet',
@@ -77,7 +77,7 @@ function CookieConsentPopup({}): JSX.Element {
                 <p><span class="cc_bold">ELFOGADOM MINDET</span> - hozzájárulásod adod a felhasználói élmény javításához szükséges sütik alkalmazásához.</p>
                 <p><span class="cc_bold">VÁLASZTOK A SÜTIKATEGÓRIÁK KÖZÜL</span> - az alábbi választási lehetőségek közül választva eldöntheted, hogy mely sütik alkalmazásához adod hozzájárulásod.</p>
 
-                <p>A hozzájáruláshoz kötött sütik használatának elfogadásával kijelented, hogy az <a href="/files/adatkezelesi_tajekoztato.pdf">adatkezelési tájékoztatóban</a> foglaltakat megismerted, és az ott írtakat tudomásul véve hozzájárulsz az adott cookie-k használatával járó adatkezeléshez.</p>
+                <p>A hozzájáruláshoz kötött sütik használatának elfogadásával kijelented, hogy az <a href="/files/sutitajekoztato.pdf">adatkezelési tájékoztatóban</a> foglaltakat megismerted, és az ott írtakat tudomásul véve hozzájárulsz az adott sütik használatával járó adatkezeléshez.</p>
                 <p><span class="cc_bold">Mi az a süti?</span><br />
                 A felhasználók számítógépére mentett kis fájl, amely megkönnyíti a meglátogatott webhelyeken alkalmazott beállítások és egyéb információk tárolását. A süti általában tartalmazza annak a webhelynek a nevét, ahonnan érkezett, a süti értékét, azaz egy véletlenszerűen generált egyedi számot, valamint a süti élettartamát, vagyis hogy mennyi ideig tárolódik az eszközön. A süti a felhasználó eszközének háttértárjában egy fájlban tárolódik.</p>
                 <p><span class="cc_bold">Milyen sütiket és mire használunk?</span><br>
@@ -89,7 +89,7 @@ function CookieConsentPopup({}): JSX.Element {
                 A harmadik féltől származó sütiket más webhelyek hozzák létre és helyezik el a felhasználó eszközén, amelynek segítségével információkat szerezhetnek a felhasználó által meglátogatott weboldalon végzett böngészésekről. Ez esetben a sütiben tárolt és a süti által közvetített információkhoz a sütit elhelyező harmadik fél fér csak hozzá.
                 </p>
                 <p><span class="cc_bold">Hogyan tudod törölni a sütiket?</span><br>
-                A sütik kezelésével kapcsolatos beállításait bármikor megváltoztathatod. Amennyiben az otlet.budapest.hu oldal látogatása során az <span class="cc_bold">ELFOGADOM MINDET</span> vagy a <span class="cc_bold">VÁLASZTOK A SÜTIKATEGÓRIÁK KÖZÜL</span> gombra kattintva elfogadtad a sütik alkalmazását és ezen változtatni szeretnél, azt egyszerűen a böngésződben, a böngészési előzmények törlésével teheted meg.<br>
+                A sütik kezelésével kapcsolatos beállításokat bármikor megváltoztathatod. Amennyiben az otlet.budapest.hu oldal látogatása során az <span class="cc_bold">ELFOGADOM MINDET</span> vagy a <span class="cc_bold">VÁLASZTOK A SÜTIKATEGÓRIÁK KÖZÜL</span> gombra kattintva elfogadtad a sütik alkalmazását és ezen változtatni szeretnél, azt egyszerűen a böngésződben, a böngészési előzmények törlésével teheted meg.<br>
                 A leggyakoribb böngészőkben (Chrome, Edge, Safari, Firefox, Internet Explorer) ezt az alábbiak szerint tudod megtenni:</p>
                 <p>- <a href="https://support.google.com/accounts/answer/61416?hl=hu" target="_blank">Google Chrome</a><br>
                 -	<a href="https://support.microsoft.com/hu-hu/windows/a-microsoft-edge-a-b%C3%B6ng%C3%A9sz%C3%A9si-adatok-%C3%A9s-az-adatv%C3%A9delem-bb8174ba-9d73-dcf2-9b4a-c582b4e640dd" target="_blank">Microsoft Edge</a><br>
@@ -144,7 +144,7 @@ function CookieConsentPopup({}): JSX.Element {
                 cookie_table: [
                   {
                     col1: '_pk_id',
-                    col2: 'Matomo Analytics  cookie-k melyek segítenek adatokat gyűjteni arról, hogy a látogató milyen módon használja a webhelye Kezelt adatok köre: Felhasználói egyedi azonosító a felhasználók egymástól való megkülönböztetésére, de nem azonosítására.',
+                    col2: 'Matomo Analytics  cookie-k melyek segítenek adatokat gyűjteni arról, hogy a látogató milyen módon használja a webhelyet. Kezelt adatok köre: Felhasználói egyedi azonosító a felhasználók egymástól való megkülönböztetésére, de nem azonosítására.',
                     col3: 'otlet.budapest.hu',
                     col4: '13 hónap',
                     col5: 'HTTP'

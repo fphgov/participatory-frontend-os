@@ -18,7 +18,7 @@ type InputLengthValidatorProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => void
 }
 
-export default function InputLengthValidator({ title, tipp, name, value, onChange, info, showLabel = true, options }: InputLengthValidatorProps) {
+export default function InputLengthValidator({ title, tipp, name, value = '', onChange, info, showLabel = true, options }: InputLengthValidatorProps) {
   const titleIsInvalid = value.length !== 0 && (options.min > value.length || value.length > options.max)
 
   return (

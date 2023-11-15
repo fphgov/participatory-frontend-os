@@ -25,7 +25,6 @@ module.exports = async (phase, { defaultConfig }) => {
       unoptimized: true,
     },
     experimental: {
-      serverActions: true,
       forceSwcTransforms: true,
     },
     trailingSlash: false,
