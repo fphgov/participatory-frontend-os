@@ -46,6 +46,8 @@ export default function IdeaSubmissionForm(): JSX.Element {
 
       <p>Minden fontos információt itt tudsz megadni az ötleteddel kapcsolatban, minden mező kitöltése kötelező.</p>
 
+      <p>A kitöltési folyamat nem szakítható meg. Ha sokáig szerkesztenéd az ötleted, azt javasoljuk máshol (pl. Wordben) dolgozd ki az ötleted.</p>
+
       <form className="form-horizontal">
         <fieldset>
           <div className="form-wrapper">
