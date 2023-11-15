@@ -4288,6 +4288,10 @@ p.subinfo {
   border-color: rgba(14, 166, 206, 0.3);
 }
 
+.card-radio-simple {
+  margin-bottom: 12px;
+}
+
 .card-voted-text {
   font-size: 18px;
   font-style: normal;
