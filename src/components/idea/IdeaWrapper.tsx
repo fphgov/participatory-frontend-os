@@ -190,12 +190,12 @@ export default function IdeaWrapper({ idea }: IdeasWrapperProps): JSX.Element {
                   </div>
                 </div>
 
-                <div className="prop-single-side-section prop-single-cost">
+                {idea.cost ? <div className="prop-single-side-section prop-single-cost">
                   <div className="prop-info-title">Becsült költség</div>
                   <div className="prop-info-content">
-                    {!idea.cost ? <>A költségeket nem becsülték meg</> : <>{nFormatter(idea.cost)}</>}
+                    {nFormatter(idea.cost)}
                   </div>
-                </div>
+                </div> : null}
 
                 {idea.submitter ? (
                   <div className="prop-single-side-section prop-single-elem">
