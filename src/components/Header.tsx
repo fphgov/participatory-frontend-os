@@ -15,7 +15,7 @@ export default function Header({ loggedIn }: IHeader): JSX.Element {
     { title: "Mi ez?", href: "/oldal/bovebben-a-kozossegi-koltsegvetesrol", outside: false },
     { title: "Hírek, rendezvények", href: "/hirek", outside: false },
     { title: "Ötletek", href: "#", outside: false, submenuItems: [
-      { title: "Beküldött", href: `/otletek?campaign=3&rand=${rand}`, outside: true },
+      { title: "Beküldött", href: `/otletek?campaign=4&rand=${rand}`, outside: true },
       { title: "Feldolgozott", href: `/tervek?rand=${rand}`, outside: false },
       { title: "Megvalósuló", href: `/projektek?rand=${rand}`, outside: false },
     ] },
