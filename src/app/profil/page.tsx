@@ -10,7 +10,6 @@ import { IIdea } from '@/models/idea.model'
 import { IProject } from "@/models/project.model"
 import ProfileIdeaList from '@/components/profile/ProfileIdeaList'
 import ProfileDeleteButton from '@/components/profile/ProfileDeleteButton'
-import ProfileVoteList from "@/components/profile/ProfileVoteList"
 import { notFound } from 'next/navigation'
 import PasswordChangeForm from './password-change-form'
 
@@ -83,12 +82,6 @@ export default async function ProfilePage() {
                 <h2><FontAwesomeIcon icon={faLightbulb} /> Beküldött ötletek ({ideas.length})</h2>
 
                 <ProfileIdeaList ideas={ideas} />
-              </div>
-
-              <div className="section">
-                <h2><FontAwesomeIcon icon={faUserCheck} /> Ezekre az ötletekre szavaztál ({votedProjects.length})</h2>
-
-                <ProfileVoteList projects={votedProjects} />
               </div>
             </div>
           </div>
