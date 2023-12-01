@@ -156,7 +156,7 @@ export default function IdeaWrapper({ idea }: IdeasWrapperProps): JSX.Element {
 
                 {theme && theme.name ? (
                   <div className="prop-single-side-section prop-single-elem">
-                    <div className="prop-info-title">Kategória</div>
+                    <div className="prop-info-title">{idea?.workflowState?.id && idea.workflowState.id < 120 ? 'Előzetes kategória' : 'Kategória'}</div>
                     <div className="prop-info-content">
                       <div className="prop-category">
                         <div className="prop-theme"><CategoryIcon name={theme.name} color="blue" />{theme.name}</div>
