@@ -15,13 +15,13 @@ export default function Home() {
               <div className="container">
                 <div className="row">
                   <div className="offset-lg-2 col-lg-8">
-                    <h3>Küldd be ötleted 2024. január 5-ig!</h3>
+                    <h3>Döntsünk közösen! Szavazz szeptember 30-ig!</h3>
                   </div>
 
                   <div className="offset-lg-3 col-lg-6">
-                    <p>Köszönjük, ha te is adsz egy jó ötletet, hogy mire fordítson Budapest 1 milliárd Ft-ot. Most még ne kezdd el írni: fontosabb, hogy <b>alaposan olvasd el a következő oldalt</b>!</p>
+                    <p>A közösségi költségvetés keretében idén is budapestiek ötleteire lehet szavazni. A legtöbb szavazatot szerző ötleteket 1 milliárd forint összértékben valósítja meg a Fővárosi Önkormányzat. A KK szabályairól bővebben ITT olvashatsz.</p>
 
-                    <Link className="btn btn-primary btn-headline btn-next" href="/bekuldesi-informacio">Beadok egy ötletet</Link>
+                    <Link className="btn btn-primary btn-headline btn-next" href="/szavazas-inditasa">Elindítom a szavazást</Link>
                   </div>
                 </div>
               </div>
