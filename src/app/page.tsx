@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import TimeLineItem from '@/components/common/TimeLineItem'
 import NewsFeed from '@/components/home/NewsFeed'
-// import VoteInfoSection from '@/components/home/VoteInfoSection'
+import VoteInfoSection from '@/components/home/VoteInfoSection'
 import NewsletterArea from '@/components/home/NesletterArea'
 import ProjectsFeed from '@/components/home/ProjectsFeed'
 
@@ -28,7 +28,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* <VoteInfoSection title="A szavazás menete" hasContainerClass={true} /> */}
+          <VoteInfoSection title="A szavazás menete" hasContainerClass={true} />
 
           <NewsFeed title="Híreink" more="További híreink" />
 
