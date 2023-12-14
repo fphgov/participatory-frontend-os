@@ -38,7 +38,11 @@ export default function IdeaWrapper({ idea }: IdeasWrapperProps): JSX.Element {
 
                   {idea.solution ? <>
                     <div className="prop-single-section">
-                      <h3>Min szeretnél változtatni?</h3>
+                      {idea.campaign.shortTitle === '2023/24' ? (
+                        <h3>Miért jó, ha megvalósul az ötleted?</h3>
+                      ) : (
+                        <h3>Min szeretnél változtatni?</h3>
+                      )}
 
                       <div className="prop-single-solution" dangerouslySetInnerHTML={{ __html: idea.solution }} />
                     </div>
