@@ -38,7 +38,7 @@ export default function IdeaWrapper({ idea }: IdeasWrapperProps): JSX.Element {
 
                   {idea.solution ? <>
                     <div className="prop-single-section">
-                      {idea.campaign.shortTitle === '2023/24' ? (
+                      {idea.campaign.id >= 4 ? (
                         <h3>Miért jó, ha megvalósul az ötleted?</h3>
                       ) : (
                         <h3>Min szeretnél változtatni?</h3>
