@@ -50,7 +50,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: Build image
-        uses: aevea/action-kaniko@master
+        uses: fphgov/action-kaniko@master
         with:
           image: ${{ env.DOCKER_IMAGE }}
           build_file: ${{ env.DOCKER_BUILD_FILE }}
