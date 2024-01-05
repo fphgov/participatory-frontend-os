@@ -15,7 +15,7 @@ export default function Home() {
               <div className="container">
                 <div className="row">
                   <div className="offset-lg-2 col-lg-8">
-                    <h3>Köszönjük a közel 600 ötletet!</h3>
+                    <h3>Köszönjük a közel 700 ötletet!</h3>
                   </div>
 
                   <div className="offset-lg-3 col-lg-6">
