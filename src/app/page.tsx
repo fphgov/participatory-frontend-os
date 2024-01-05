@@ -15,13 +15,13 @@ export default function Home() {
               <div className="container">
                 <div className="row">
                   <div className="offset-lg-2 col-lg-8">
-                    <h3>Köszönjük a … ötletet!</h3>
+                    <h3>Köszönjük a közel 600 ötletet!</h3>
                   </div>
 
                   <div className="offset-lg-3 col-lg-6">
                     <p>A 2023/24-es fővárosi közösségi költségvetés ötletbeadási időszaka 2024. január 5-én lezárult. Jelenleg az ötletek szakmai értékelése zajlik, aminek eredményéről minden ötletgazdát emailben értesítünk. A jóváhagyott ötletekre várhatóan 2024 szeptemberében lehet majd szavazni. </p>
 
-                    <Link className="btn btn-primary btn-headline btn-next" href="/szavazas-inditasa">Mi történik most?</Link>
+                    <Link className="btn btn-primary btn-headline btn-next" href="/hirek/koszonjuk-hogy-otletet-kuldtetek-be-iden-mi-tortenik-most" target="_blank">Mi történik most?</Link>
                   </div>
                 </div>
               </div>
