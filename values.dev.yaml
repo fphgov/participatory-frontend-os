@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: registry.dev.intra.fph.hu/docker/participatory-client
+  repository: harbor.dev.intra.fph.hu/docker/participatory-client
   pullPolicy: Always
   tag: "latest"
 
