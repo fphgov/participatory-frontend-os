@@ -5,7 +5,6 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: "/bp-admin",
     },
     sitemap: `https://otlet.budapest.hu/sitemap.xml`,
   }
