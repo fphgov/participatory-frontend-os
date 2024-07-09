@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import TimeLineItem from '@/components/common/TimeLineItem'
 import NewsFeed from '@/components/home/NewsFeed'
-import VoteInfoSection from '@/components/home/VoteInfoSection'
+//import VoteInfoSection from '@/components/home/VoteInfoSection'
 import NewsletterArea from '@/components/home/NesletterArea'
 import ProjectsFeed from '@/components/home/ProjectsFeed'
 
@@ -15,20 +15,20 @@ export default function Home() {
               <div className="container">
                 <div className="row">
                   <div className="offset-lg-2 col-lg-8">
-                    <h3>Döntsünk közösen! Szavazz szeptember 30-ig!</h3>
+                    <h3>Köszönjük a közel 700 ötletet!</h3>
                   </div>
 
                   <div className="offset-lg-3 col-lg-6">
-                    <p>A közösségi költségvetés keretében idén is budapestiek ötleteire lehet szavazni. A legtöbb szavazatot szerző ötleteket 1 milliárd forint összértékben valósítja meg a Fővárosi Önkormányzat. A KK szabályairól bővebben <Link href="/oldal/bovebben-a-kozossegi-koltsegvetesrol">ITT</Link> olvashatsz.</p>
+                    <p>A 2023/24-es fővárosi közösségi költségvetés ötletbeadási időszaka 2024. január 5-én lezárult. Jelenleg az ötletek szakmai értékelése zajlik, aminek eredményéről minden ötletgazdát emailben értesítünk. A jóváhagyott ötletekre várhatóan 2024 szeptemberében lehet majd szavazni. </p>
 
-                    <Link className="btn btn-primary btn-headline btn-next" href="/szavazas-inditasa">Elindítom a szavazást</Link>
+                    <Link className="btn btn-primary btn-headline btn-next" href="/hirek/koszonjuk-hogy-otletet-kuldtetek-be-iden-mi-tortenik-most" target="_blank">Mi történik most?</Link>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <VoteInfoSection title="A szavazás menete" hasContainerClass={true} />
+          {/*<VoteInfoSection title="A szavazás menete" hasContainerClass={true} />*/}
 
           <NewsFeed title="Híreink" more="További híreink" />
 
