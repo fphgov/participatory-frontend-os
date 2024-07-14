@@ -1,3 +1,7 @@
 #! /bin/sh
 
-while true; do sleep 30; done;
+if [ ! -d "./node_modules" ]; then
+    npm install
+fi
+
+npm run dev

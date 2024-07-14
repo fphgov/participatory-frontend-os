@@ -10,7 +10,7 @@ services:
     networks:
       - participatory
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8081" ]
+      test: curl --fail http://localhost:8081 || exit 1
       interval: 1m30s
       timeout: 10s
       retries: 3
