@@ -1,5 +1,3 @@
-version: '3.4'
-
 services:
   frontend:
     build:
@@ -11,6 +9,11 @@ services:
       - ./:/app
     networks:
       - participatory
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8081" ]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
 
 networks:
   participatory:

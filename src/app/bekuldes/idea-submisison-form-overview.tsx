@@ -2,7 +2,7 @@
 
 import Error from "@/components/common/Error"
 import ErrorMini from "@/components/common/ErrorMini"
-import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
+import { ReCaptcha, loadReCaptcha } from "@icetee/react-recaptcha-v3"
 import { rmAllCharForName, rmAllCharForTitle } from "@/utilities/removeSpecialCharacters"
 import React, { FormEvent, useEffect, useState } from "react"
 import ScrollTo from "@/components/common/ScrollTo"

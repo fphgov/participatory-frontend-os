@@ -1,7 +1,7 @@
 'use client'
 
 import { SetStateAction, useEffect, useState } from "react"
-import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
+import { ReCaptcha, loadReCaptcha } from "@icetee/react-recaptcha-v3"
 import Link from "next/link"
 import Error from "@/components/common/Error"
 import ErrorMini from "@/components/common/ErrorMini"

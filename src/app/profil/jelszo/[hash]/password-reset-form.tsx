@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
+import { useEffect, useState } from "react"
+import { ReCaptcha, loadReCaptcha } from "@icetee/react-recaptcha-v3"
 import Error from "@/components/common/Error"
 import ErrorMini from '@/components/common/ErrorMini'
 import { passwordResetForm } from '@/app/actions'
