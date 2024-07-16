@@ -2933,7 +2933,7 @@ h1.post-full-title {
 }
 
 .post-more {
-  background-color: rgba(14, 166, 206, 1);
+  background-color: #12326E;
   text-align: center;
   color: #FFF;
   text-decoration: none;
@@ -4385,38 +4385,28 @@ p.subinfo {
 }
 
 .vote-start-section {
-  padding: 60px 0;
+  padding: 36px 0;
 }
 
 .vote-start-section h3 {
-  font-size: 24px;
+  font-size: 18px;
   font-style: normal;
-  font-weight: 600;
-  line-height: 30px;
-  letter-spacing: 0.24px;
-  margin: 0 0 36px 0;
-  text-align: center;
+  font-weight: 700;
+  line-height: 24px;
+  margin: 0;
 }
 
 .vote-start-section .prop-theme {
-  font-size: 24px;
+  font-size: 18px;
   font-style: normal;
-  font-weight: 600;
-  line-height: 30px;
+  font-weight: 700;
+  line-height: normal;
   letter-spacing: 0.24px;
   color: #222;
 }
 
-.vote-start-section hr {
-  margin-top: 0;
-  margin-bottom: 18px;
-  border: none;
-  background-color: rgba(14,166,206,.3) !important;
-  height: 1px;
-}
-
 .vote-start-section .prop-wrapper {
-  border: 1px solid rgba(14, 166, 206, 0.30);
+  border: 1px solid #DDDDDD;
 }
 
 .vote-continue-section {
@@ -5505,5 +5495,11 @@ input[type="tel"] {
 @media screen and (max-width: 426px) {
   .info-section-sec .info-box-wrapper::before {
     height: 74%;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .info-section-sec {
+    padding: 36px 0 24px 0;
   }
 }

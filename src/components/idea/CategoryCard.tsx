@@ -16,12 +16,9 @@ export default function CategoryCard({ themeName, href, info, description, voted
         <div className="prop-content-wrapper">
           <div className="prop-content">
             <div className="prop-category">
-              <div className="prop-theme"><CategoryIcon name={themeName} color="blue" size={36} />{themeName}</div>
+              <div className="prop-theme"><CategoryIcon name={themeName} color="blue" size={24} />{themeName}</div>
             </div>
 
-            <hr />
-
-            {info ? <div className="prop-info">{info}</div> : null}
             <div className="prop-description">{description}</div>
           </div>
 

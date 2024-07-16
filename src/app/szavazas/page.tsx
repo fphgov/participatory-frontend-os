@@ -107,7 +107,7 @@ export default async function VotePage({ searchParams }: IProps) {
     <>
       <main className="page page-vote">
         <div className="page-vote-single-section">
-          <HeroPage title="Szavazás" content="Itt találod azokat az ötleteket, amikre szavazhatsz. Öt kategória van, minden kategóriában egy szavazatot adhatsz le." />
+          <HeroPage title="Szavazás" content="Válassz egy kategóriát és szavazz a kedvenc ötleteidre! Kategóriánként több ötlet is megvalósulhat." />
 
           {(typeof error === 'string' && error !== '') ? <Error message={error} /> : null}
 

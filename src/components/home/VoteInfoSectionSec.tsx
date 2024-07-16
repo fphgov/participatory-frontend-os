@@ -55,7 +55,7 @@ export default function VoteInfoSectionSec({ title, hasContainerClass = false }:
 
         <div className="info-box-more">
           <Link className="btn btn-primary btn-headline btn-next" href="/szavazas-inditasa">Elindítom a szavazást</Link>
-          <Link className="link-info" href="/szavazas-inditasa">Szavazás feltételei</Link>
+          <Link className="link-info" href="/tudnivalok-a-szavazasrol">Szavazás feltételei</Link>
         </div>
 
       </div>
