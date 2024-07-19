@@ -1,8 +1,5 @@
-// import TimeLineWrapper from '@/components/home/TimeLineWrapper'
-// import NewsFeed from '@/components/home/NewsFeed'
 import VoteInfoSectionSec from '@/components/home/VoteInfoSectionSec'
 import NewsletterArea from '@/components/home/NesletterArea'
-// import ProjectsFeed from '@/components/home/ProjectsFeed'
 
 export default function Home() {
   return (
@@ -14,11 +11,11 @@ export default function Home() {
               <div className="container">
                 <div className="row">
                   <div className="col-12">
-                    <h3>Döntsünk közösen! Szavazz október 10-ig!</h3>
+                    <h3>Tele vagyunk ötletekkel. Szavazz október 7-ig!</h3>
                   </div>
 
                   <div className="col-12">
-                    <p>A legtöbb szavazatot szerző ötleteket 1 milliárd forint összértékben valósítja meg a Fővárosi Önkormányzat.</p>
+                    <p>Döntsünk közösen, mire fordítson Budapest egymilliárd forintot!</p>
                   </div>
                 </div>
               </div>
@@ -26,12 +23,6 @@ export default function Home() {
           </div>
 
           <VoteInfoSectionSec title="A szavazás menete" hasContainerClass={true} />
-
-          {/* <NewsFeed title="Híreink" more="További híreink" /> */}
-
-          {/* <ProjectsFeed title="Korábbi évek nyertes ötletei" more="További nyertes ötletek" /> */}
-
-          {/* <TimeLineWrapper title="Közösségi költségvetés menete" /> */}
         </div>
       </main>
 
