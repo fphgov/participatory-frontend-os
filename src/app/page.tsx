@@ -1,5 +1,5 @@
 import VoteInfoSectionSec from '@/components/home/VoteInfoSectionSec'
-import NewsletterArea from '@/components/home/NesletterArea'
+import BannerArea from '@/components/home/BannerArea'
 
 export default function Home() {
   return (
@@ -26,7 +26,7 @@ export default function Home() {
         </div>
       </main>
 
-      <NewsletterArea />
+      <BannerArea />
     </>
   )
 }

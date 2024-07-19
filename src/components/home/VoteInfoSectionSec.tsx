@@ -34,7 +34,7 @@ export default function VoteInfoSectionSec({ title, hasContainerClass = false }:
                 Add le a szavazatod
               </div>
               <div className="info-box-content">
-                Minden kategóriában 5 szavazatod van.
+                Minden kategóriában 3 szavazatod van.
               </div>
             </div>
           </div>
