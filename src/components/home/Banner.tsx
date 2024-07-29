@@ -16,7 +16,7 @@ export default function Banner({ id, image, imageWidth, imageHeight, children, c
   return (
     <div id={id} className={`banner banner-${id}`}>
       <div className="container">
-        <div className="row flex-center">
+        <div className="row">
           <div className={`col-md-12 col-lg-${col}`}>
             <div className="banner-image">
               <Image

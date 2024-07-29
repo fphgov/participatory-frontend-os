@@ -8,7 +8,7 @@ export default function BannerArea(): JSX.Element|null {
           <div className="col-12">
             <div className="banner-wrapper">
               <div className="banner-item">
-                <Banner id="nyeremenyjatok" image="prize" imageWidth={48} imageHeight={48} col={4}>
+                <Banner id="nyeremenyjatok" image="prize" imageWidth={72} imageHeight={72} col={2}>
                   <h2>Szavazz és nyerj értékes ajándékokat!</h2>
 
                   <div>
@@ -18,7 +18,7 @@ export default function BannerArea(): JSX.Element|null {
               </div>
 
               <div className="banner-item">
-                <Banner id="hirlevel" image="newsletter" imageWidth={108} imageHeight={60} imageFit={true}>
+                <Banner id="hirlevel" image="newsletter" imageWidth={108} imageHeight={60} col={4} imageFit={true}>
                   <h2>Ne maradj le a közösségi költségvetés legfrissebb híreiről!</h2>
 
                   <div>
