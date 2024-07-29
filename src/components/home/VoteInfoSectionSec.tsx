@@ -67,11 +67,13 @@ export default function VoteInfoSectionSec({ title, hasContainerClass = false }:
   }
 
   return (
-    <div className="info-section-sec-wrapper row">
-      <div className="info-section-sec-content offset-1 col-10">
-        <div className="info-section-sec">
-          <div className="container">
-            {content}
+    <div className="container">
+      <div className="info-section-sec-wrapper row">
+        <div className="info-section-sec-content col-12">
+          <div className="info-section-sec">
+            <div className="container">
+              {content}
+            </div>
           </div>
         </div>
       </div>
