@@ -228,6 +228,36 @@ export async function apiProfileChangePassword(credentials: { password: string, 
   return handleResponse<MessageResponse>(response).then(data => data)
 }
 
+export async function apiProfilePersonalData(credentials: { year: string, zip: string }): Promise<MessageResponse> {
+  const token = (await getToken())?.value
+
+  const headers: Record<string, string> = {
+    "Content": "application/json",
+    'Content-Type': "application/x-www-form-urlencoded",
+  }
+
+  if (token) {
+    headers[ "Authorization" ] = `Bearer ${token}`
+  }
+
+  const urlencoded = new URLSearchParams()
+
+  urlencoded.append("year", credentials.year)
+  urlencoded.append("zip", credentials.zip)
+
+  const url = backendUrl(endpoints.API_REQ_PASSWORD)
+
+  const response = await fetch(url, {
+    cache: "no-store",
+    method: "POST",
+    credentials: "include",
+    headers,
+    body: urlencoded,
+  })
+
+  return handleResponse<MessageResponse>(response).then(data => data)
+}
+
 export async function apiIdeaSubmission(formData: any): Promise<Record<string, string>> {
   const token = (await getToken())?.value
 

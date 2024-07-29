@@ -4,17 +4,17 @@ import { ToastContainer, toast } from 'react-toastify'
 import { useState } from "react"
 import Error from "@/components/common/Error"
 import ErrorMini from '@/components/common/ErrorMini'
-import { profileChangePasswordForm } from '@/app/actions'
+import { profilePersonalForm } from '@/app/actions'
 
-export default function PasswordChangeForm(): JSX.Element {
-  const defaultCredential = {
-    password: '',
-    password_again: '',
+export default function PersonalDataForm(): JSX.Element {
+  const defaultFormData = {
+    year: '',
+    zip: '',
   }
 
   const [error, setError] = useState('')
   const [errorObject, setErrorObject] = useState<Record<string, string>|undefined>(undefined)
-  const [credential, setCredential] = useState(defaultCredential)
+  const [formData, setFormData] = useState(defaultFormData)
 
   const notify = (message: string) => toast.dark(message, {
     position: "bottom-right",
@@ -29,17 +29,17 @@ export default function PasswordChangeForm(): JSX.Element {
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
 
-    setCredential({ ...credential, [e.target.name]: value })
+    setFormData({ ...formData, [e.target.name]: value })
   }
 
   async function onChangePassword() {
     setError('')
     setErrorObject(undefined)
 
-    const res = await profileChangePasswordForm(credential)
+    const res = await profilePersonalForm(formData)
 
     if (res?.success) {
-      setCredential(defaultCredential)
+      setFormData(defaultFormData)
 
       if (res?.successMessage) {
         notify(res.successMessage)
@@ -52,7 +52,7 @@ export default function PasswordChangeForm(): JSX.Element {
         setError(res.error)
       }
 
-      notify('⛔️ Sikertelen jelszó módosítás')
+      notify('⛔️ Sikertelen módosítás')
     }
   }
 
@@ -64,20 +64,20 @@ export default function PasswordChangeForm(): JSX.Element {
         <div className="form-wrapper">
           <div className="input-inline-wrapper">
             <div className="input-wrapper">
-              <label htmlFor="password">Új jelszó:</label>
-              <input type="password" name="password" id="password" value={credential.password} onChange={handleChangeInput} />
+              <label htmlFor="year">Születési év:</label>
+              <input type="text" name="year" id="year" value={formData.year} onChange={handleChangeInput} />
 
-              {errorObject && errorObject.password ? Object.values(errorObject.password).map((err, i) => {
-                return <ErrorMini key={i} error={err} increment={`password-${i}`} />
+              {errorObject && errorObject.year ? Object.values(errorObject.year).map((err, i) => {
+                return <ErrorMini key={i} error={err} increment={`year-${i}`} />
               }) : null}
             </div>
 
             <div className="input-wrapper">
-              <label htmlFor="password_again">Új jelszó ismét:</label>
-              <input type="password" name="password_again" id="password_again" value={credential.password_again} onChange={handleChangeInput} />
+              <label htmlFor="zip">Irányítószám:</label>
+              <input type="text" name="zip" id="zip" value={formData.zip} onChange={handleChangeInput} />
 
-              {errorObject && errorObject.password_again ? Object.values(errorObject.password_again).map((err, i) => {
-                return <ErrorMini key={i} error={err} increment={`password_again-${i}`} />
+              {errorObject && errorObject.zip ? Object.values(errorObject.zip).map((err, i) => {
+                return <ErrorMini key={i} error={err} increment={`zip-${i}`} />
               }) : null}
             </div>
           </div>

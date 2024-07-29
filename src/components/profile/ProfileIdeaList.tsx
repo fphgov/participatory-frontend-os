@@ -23,6 +23,7 @@ export default function ProfileIdeaList({ ideas }: ProfileIdeaList): JSX.Element
           showStatus={false}
           className="col-sm-12 col-sm-12 col-md-12 col-lg-6 col-xl-6"
           idea={idea}
+          showDescription={true}
         />
       ))}
     </div>

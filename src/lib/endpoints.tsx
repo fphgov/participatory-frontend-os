@@ -17,6 +17,7 @@ const endpoints = {
   API_REQ_PROFILE_IDEA: '/api/user/idea',
   API_REQ_PROFILE_DELETE: '/api/user/delete',
   API_REQ_PASSWORD: '/api/user/password',
+  API_REQ_PERSONAL: '/api/user/personal',
   API_REQ_IDEA: '/api/ideas/:id',
   API_REQ_IDEAS: '/api/ideas',
   API_REQ_PROJECT: '/api/projects/:id',

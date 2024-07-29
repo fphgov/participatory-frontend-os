@@ -1,6 +1,6 @@
 'use server'
 
-import { apiLoginUser, apiLostPassword, apiResetPasswordChange, apiRegistration, apiProfileChangePassword, apiProfileActivate, apiProfileSaving, apiIdeaSubmission } from "@/lib/api-requests"
+import { apiLoginUser, apiLostPassword, apiResetPasswordChange, apiRegistration, apiProfileChangePassword, apiProfileActivate, apiProfileSaving, apiIdeaSubmission, apiProfilePersonalData } from "@/lib/api-requests"
 import ServerFormData from 'form-data'
 
 export async function loginFom(formData: FormData) {
@@ -157,6 +157,33 @@ export async function profileChangePasswordForm(data: any) {
   try {
     try {
       const response = await apiProfileChangePassword(data)
+
+      if (response.message) {
+        success = true
+        successMessage = response.message
+      }
+    } catch (e: any) {
+      try {
+        jsonError = JSON.parse(e.message)
+      } catch (jError: any) {
+        if (typeof e?.message === "string") {
+          error = e.message
+        }
+      }
+    }
+
+    return { jsonError, error, success, successMessage }
+  } catch (e) {
+    return { message: 'Váratlan hiba történt, kérünk próbáld később' }
+  }
+}
+
+export async function profilePersonalForm(data: any) {
+  let jsonError, error, success = false, successMessage = ''
+
+  try {
+    try {
+      const response = await apiProfilePersonalData(data)
 
       if (response.message) {
         success = true

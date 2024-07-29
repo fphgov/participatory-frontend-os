@@ -12,6 +12,9 @@ import ProfileIdeaList from '@/components/profile/ProfileIdeaList'
 import ProfileDeleteButton from '@/components/profile/ProfileDeleteButton'
 import { notFound } from 'next/navigation'
 import PasswordChangeForm from './password-change-form'
+import SectionBox from "@/components/profile/SectionBox"
+import SectionBoxDetails from "@/components/profile/SectionBoxDetails"
+import PersonalDataForm from "./personal-data-form"
 
 type ProfilePageData = {
   profile: IUser|null
@@ -62,20 +65,45 @@ export default async function ProfilePage() {
           <div className="row">
             <div className="offset-xl-2 col-lg-12 col-xl-8">
 
-              <div className="section section-block">
-                <h2><FontAwesomeIcon icon={faIdCardAlt} /> Fiók információk</h2>
+              <SectionBox footer={<div className="section-newsletter"><input id="newsletter" type="checkbox" /> <label htmlFor="newsletter"> Szeretnék feliratkozni a hírlevélre</label></div>}>
+                <ProfileBox profile={profile} />
+              </SectionBox>
 
-                {profile ? <ProfileBox profile={profile} /> : null}
+              <SectionBoxDetails summary="Ötlet beadásához szükséges adatok">
+                <div className="box-profile">
+                  <div className="profile-item">
+                    <div className="profile-item-name">Név</div>
+                    <div className="profile-item-value">{profile.lastname + ' ' + profile.firstname}</div>
+                  </div>
+                </div>
+              </SectionBoxDetails>
 
-                <hr />
+              <SectionBoxDetails summary="Jelszó beállítás">
+                <p>Állíts be jelszót a profilodhoz, így a későbbiekben azzal is be tudsz lépni. Nem kötelező.</p>
 
                 <PasswordChangeForm />
+              </SectionBoxDetails>
 
-                <div className="btn-wrapper btn-wrapper-flex">
-                  <ProfileDeleteButton profile={profile} />
+              <SectionBoxDetails summary="Személyes adatok">
+                <PersonalDataForm />
+              </SectionBoxDetails>
 
-                  <Link className="btn btn-primary-solid" href="/kijelentkezes" prefetch={false}>Kijelentkezés</Link>
-                </div>
+              <SectionBoxDetails summary="Honnét hallottál rólunk?">
+                {''}
+              </SectionBoxDetails>
+
+              <SectionBoxDetails summary="Adatvédelem">
+                {''}
+              </SectionBoxDetails>
+
+              <SectionBoxDetails summary="Fiók törlés">
+                <p>Kérheted a fiókod törlését, 5 napos türelmi idő után automatikusan töröljük. A türelmi idő alatt meggondolhatod magad. A beadott ötleteid változatlan formában megmaradnak.</p>
+
+                <ProfileDeleteButton profile={profile} />
+              </SectionBoxDetails>
+
+              <div style={{ margin: '24px 0' }}>
+                <Link className="btn btn-primary-solid btn-solid-underline" href="/kijelentkezes" prefetch={false}>Kijelentkezés</Link>
               </div>
 
               <div className="section">

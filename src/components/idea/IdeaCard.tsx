@@ -16,6 +16,7 @@ type IdeaCardProps = {
   showVoted?: boolean
   showCampaign?: boolean
   showMore?: boolean
+  showDescription?: boolean
   tagClick?: (tag: ITag) => {}|undefined
 }
 
@@ -29,6 +30,7 @@ export default function IdeaCard({
   showVoted = false,
   showCampaign = false,
   showMore = true,
+  showDescription = true,
   tagClick = undefined,
 }: IdeaCardProps): JSX.Element|null {
   if (idea == null) {
@@ -62,7 +64,7 @@ export default function IdeaCard({
               <Link href={`${ideaPreLink}/${idea.id}`}>{idea.title}</Link>
             </h2>
 
-            <div className="prop-description">{shortDescription}</div>
+            {showDescription ? <div className="prop-description">{shortDescription}</div> : null}
           </div>
 
           {showMore ?

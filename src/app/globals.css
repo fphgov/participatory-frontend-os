@@ -524,6 +524,14 @@ input.btn[disabled]:hover {
   padding: 0;
 }
 
+.btn.btn-solid-underline {
+  text-decoration: underline !important;
+}
+
+.btn.btn-solid-underline:hover {
+  text-decoration: none !important;
+}
+
 .btn.btn-primary-solid:hover {
   text-decoration: underline;
 }
@@ -1736,7 +1744,7 @@ form fieldset textarea,
 .page-forgot-password-section input:not(.btn) {
   display: block;
   width: 100%;
-  min-height: 34px;
+  /* min-height: 34px; */
   padding: 12px 14px !important;
   font-size: 16px;
   line-height: 20px;
@@ -3307,20 +3315,20 @@ summary:focus-visible,
 .input-inline-wrapper {
   display: flex;
   width: 100%;
+  gap: 18px;
 }
 
 .input-inline-wrapper > div {
-  display: inline-block;
-  margin: 0 12px;
   width: 100%;
 }
 
-.input-inline-wrapper > div:first-of-type {
-  margin-left: 0;
+.form-wrapper .btn-wrapper {
+  display: flex;
 }
 
-.input-inline-wrapper > div:last-of-type {
-  margin-right: 0;
+form fieldset .input-inline-wrapper input[type="text"],
+form fieldset .input-inline-wrapper input[type="password"] {
+  width: calc(100% - 28px);
 }
 
 .placeholder-item {
@@ -3986,6 +3994,50 @@ details.section-more .detail-content > p:first-of-type {
   margin-top: 0;
 }
 
+details.section-more-2 {
+  margin: 0;
+}
+
+details.section-more-2 summary {
+  background-color: #fff;
+  color: #12326E;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  border-radius: 4px;
+  list-style: none;
+}
+
+details.section-more-2 > summary::-webkit-details-marker {
+  display: none !important;
+}
+
+details.section-more-2 summary::after {
+  content: '';
+  background: url('../../public/images/icon-expand.svg');
+  background-repeat: no-repeat;
+  width: 36px;
+  height: 36px;
+  display: inline-block;
+  vertical-align: middle;
+  position: absolute;
+  right: 18px;
+}
+
+details.section-more-2[open] summary::after {
+  background: url('../../public/images/icon-more.svg');
+  background-repeat: no-repeat;
+}
+
+details.section-more-2[open] .section-content {
+  padding-top: 0;
+}
+
+details.section-more-2[open] .section-content > p:first-of-type {
+  margin-top: 0;
+}
+
 .information-section {
   color: #fff;
   position: relative;
@@ -4163,6 +4215,10 @@ form.form-horizontal {
   margin: 48px 0;
 }
 
+.section-content form.form-horizontal {
+  margin: 0;
+}
+
 .send-idea {
   padding-bottom: 36px;
   text-align: center;
@@ -4205,10 +4261,21 @@ form fieldset .link-elem input {
 }
 
 .section.section-block {
-  margin: 48px 0;
-  border: 1px solid #DDDDDD;
+  margin: 12px 0;
+  background-color: #FFF;
   border-radius: 4px;
-  padding: 24px;
+}
+
+.section.section-block .section-content {
+  padding: 18px;
+}
+
+.section .section-newsletter {
+  background: #E7F5FE;
+  color: #222222;
+  padding: 12px 18px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .page-profile .section h2 > svg {
@@ -5060,6 +5127,10 @@ input[type="tel"] {
   flex: 1;
 }
 
+.page-profile-single-section {
+  background: #f6d05f;
+}
+
 @media screen and (min-width: 1440px) {
   .container,
   .container-sm,
@@ -5256,6 +5327,10 @@ input[type="tel"] {
   .banner img {
     max-height: 60px;
     margin-bottom: 6px;
+  }
+
+  .page-profile-single-section > .hero-page {
+    display: none;
   }
 }
 

@@ -41,6 +41,6 @@ export default function ProfileDeleteButton({ profile }: ProfileDeleteProps): JS
   }
 
   return (
-    <button className="btn btn-danger-solid" onClick={deleteAccount}>Fiók törlése</button>
+    <button className="btn btn-danger" onClick={deleteAccount}>Kérem a fiókom törlését</button>
   )
 }
