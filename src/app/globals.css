@@ -230,7 +230,22 @@ nav.main-navigation ul li.open ul.submenu > li > a {
 }
 
 .mobile-menu li.highlight {
-  padding: 8px 0;
+  padding: 18px 0;
+  padding-top: 36px;
+  padding-bottom: 36px;
+}
+
+.mobile-menu li.highlight + li.highlight {
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.mobile-menu li.highlight-second {
+  padding: 12px 0;
+}
+
+.mobile-menu ul li a img {
+  margin-right: 6px;
 }
 
 .main-navigation li.highlight a,
@@ -241,6 +256,22 @@ nav.main-navigation ul li.open ul.submenu > li > a {
   border: 1px solid #12326E;
   background: #12326E;
   display: inline-block;
+}
+
+.mobile-menu li.highlight a {
+  width: 100%;
+  text-align: center;
+  padding: 12px 24px;
+}
+
+.mobile-menu li.highlight-second a {
+  color: #12326E;
+  background: #FFF;
+  border: 1px solid #FFF;
+  padding: 12px 24px;
+  border-radius: 999px;
+  display: block;
+  text-align: center;
 }
 
 .main-navigation a,
@@ -760,6 +791,7 @@ header.post-full-header {
   background-color: #12326E;
   height: 4px;
   margin-bottom: 4px;
+  border-radius: 4px;
 }
 
 .hamburger-menu-wrapper {
@@ -768,7 +800,7 @@ header.post-full-header {
 }
 
 .mobile-menu {
-  padding: 20px 0;
+  padding: 4px 0 24px 0;
   background-color: #f6d05f;
   display: none;
 }
@@ -795,13 +827,14 @@ body.open-menu .mobile-menu {
 .mobile-menu ul>li>button,
 .mobile-menu ul>li>a {
   display: block;
-  padding: 8px 0;
+  padding: 18px 0;
   font-weight: bold;
   color: #12326E;
   text-decoration: none;
   border: 0;
   background: none;
   font-size: 16px;
+  border-bottom: 1px solid #FFF;
 }
 
 .mobile-menu ul>li>a > div {

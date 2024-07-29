@@ -11,6 +11,7 @@ export type MenuProps = {
   onClick?: () => void
   rand?: string
   loggedIn: boolean
+  isMobile?: boolean
 }
 
 export type MenuItem = {
@@ -19,9 +20,12 @@ export type MenuItem = {
   roles?: []
   submenuItems?: MenuItem[]
   highlight?: boolean
+  secondHighlight?: boolean
   outside?: boolean
   onHideLoggedIn?: boolean
   onHideLoggedOut?: boolean
+  onHideMobile?: boolean
+  onHideDesktop?: boolean
   icon?: string
 }
 
@@ -50,7 +54,7 @@ export function MobileNavigation({ menuItems, loggedIn }: MenuProps): JSX.Elemen
         <div className="row">
           <div className="col-md-12">
             <ul>
-              <Navigation menuItems={menuItems} rand={randomId(30, 'aA0')} loggedIn={loggedIn} />
+              <Navigation menuItems={menuItems} rand={randomId(30, 'aA0')} loggedIn={loggedIn} isMobile={true} />
             </ul>
           </div>
         </div>
@@ -59,18 +63,25 @@ export function MobileNavigation({ menuItems, loggedIn }: MenuProps): JSX.Elemen
   )
 }
 
-export function Navigation({ menuItems, onClick = () => {}, rand, loggedIn }: MenuProps): JSX.Element {
+export function Navigation({ menuItems, onClick = () => {}, rand, loggedIn, isMobile = false }: MenuProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false)
+  const [isOpenMenu, setIsOpenMenu] = useState(false)
   const submenuRef = useRef(null)
   const pathname = usePathname()
 
   useOutside(submenuRef, () => { setIsOpen(false) })
 
+  const removeOpenMenuClass = () => {
+    document.body.classList.remove('open-menu')
+  }
+
   return (<>
     {menuItems?.map((menuItem: MenuItem, i: number) => {
       if (
         menuItem?.onHideLoggedIn === true && loggedIn === true ||
-        menuItem?.onHideLoggedOut === true && loggedIn === false
+        menuItem?.onHideLoggedOut === true && loggedIn === false ||
+        menuItem?.onHideMobile === true && isMobile === true ||
+        menuItem?.onHideDesktop === true && isMobile === false
       ) return
 
       if (menuItem?.outside) {
@@ -81,33 +92,33 @@ export function Navigation({ menuItems, onClick = () => {}, rand, loggedIn }: Me
         )
       }
 
-    if (menuItem?.submenuItems) {
+      if (menuItem?.submenuItems) {
+        return (
+          <li key={`${rand}-${i}`} className={isOpen ? 'open' : ''} ref={submenuRef}>
+            <button type="button" aria-expanded={isOpen} onClick={() => { setIsOpen(! isOpen) }}>{menuItem.title}<span className="caret"></span></button>
+
+            <ul className="submenu">
+              <Navigation
+                menuItems={menuItem.submenuItems}
+                onClick={() => { setIsOpen(! isOpen); onClick() }}
+                rand={randomId(30, 'aA0')}
+                loggedIn={loggedIn}
+              />
+            </ul>
+          </li>
+        )
+      }
+
       return (
-        <li key={`${rand}-${i}`} className={isOpen ? 'open' : ''} ref={submenuRef}>
-          <button type="button" aria-expanded={isOpen} onClick={() => { setIsOpen(! isOpen) }}>{menuItem.title}<span className="caret"></span></button>
-
-          <ul className="submenu">
-            <Navigation
-              menuItems={menuItem.submenuItems}
-              onClick={() => { setIsOpen(! isOpen); onClick() }}
-              rand={randomId(30, 'aA0')}
-              loggedIn={loggedIn}
-            />
-          </ul>
-        </li>
-      )
-    }
-
-    return (
-        <li key={`${rand}-${i}`} className={menuItem?.highlight ? 'highlight' : ''}>
-          <Link href={menuItem.href} className={menuItem.href.split("?")[0] === pathname ? 'active' : ''} onClick={onClick}>
-            {menuItem?.icon ? <div>
-              <NavigationIcon icon={menuItem?.icon} />
-              {menuItem.title}
-            </div> : menuItem.title}
-          </Link>
-        </li>
-      )
-    })}
+          <li key={`${rand}-${i}`} className={menuItem?.highlight ? 'highlight' : '' || menuItem?.secondHighlight ? 'highlight-second' : ''}>
+            <Link href={menuItem.href} className={menuItem.href.split("?")[0] === pathname ? 'active' : ''} onClick={() => { removeOpenMenuClass(); onClick() }}>
+              {menuItem?.icon ? <div>
+                <NavigationIcon icon={menuItem?.icon} />
+                {menuItem.title}
+              </div> : menuItem.title}
+            </Link>
+          </li>
+        )
+      })}
   </>)
 }
