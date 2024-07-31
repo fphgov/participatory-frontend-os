@@ -5,16 +5,16 @@ import { useState } from "react"
 import Error from "@/components/common/Error"
 import ErrorMini from '@/components/common/ErrorMini'
 import { profilePersonalForm } from '@/app/actions'
+import { IUserPreference } from '@/models/userPreference.model'
 
-export default function PersonalDataForm(): JSX.Element {
-  const defaultFormData = {
-    birthyear: '',
-    postal_code: '',
-  }
+type PersonalDataFormProps = {
+  profilePreference: IUserPreference
+}
 
+export default function PersonalDataForm({ profilePreference }: PersonalDataFormProps): JSX.Element {
   const [error, setError] = useState('')
   const [errorObject, setErrorObject] = useState<Record<string, string>|undefined>(undefined)
-  const [formData, setFormData] = useState(defaultFormData)
+  const [formData, setFormData] = useState(profilePreference)
 
   const notify = (message: string) => toast.dark(message, {
     position: "bottom-right",
@@ -33,18 +33,12 @@ export default function PersonalDataForm(): JSX.Element {
   }
 
   async function onChangePersonalData(e: any) {
-    console.log(e)
-
     setError('')
     setErrorObject(undefined)
 
     const res = await profilePersonalForm(formData)
 
-    console.log(res)
-
     if (res?.success) {
-      setFormData(defaultFormData)
-
       if (res?.successMessage) {
         notify(res.successMessage)
       }
@@ -77,11 +71,11 @@ export default function PersonalDataForm(): JSX.Element {
             </div>
 
             <div className="input-wrapper">
-              <label htmlFor="postal_code">Irányítószám:</label>
-              <input type="text" name="postal_code" id="postal_code" value={formData.postal_code} onChange={handleChangeInput} />
+              <label htmlFor="postalCode">Irányítószám:</label>
+              <input type="text" name="postalCode" id="postalCode" value={formData.postalCode} onChange={handleChangeInput} />
 
-              {errorObject && errorObject.postal_code ? Object.values(errorObject.postal_code).map((err, i) => {
-                return <ErrorMini key={i} error={err} increment={`postal_code-${i}`} />
+              {errorObject && errorObject.postalCode ? Object.values(errorObject.postalCode).map((err, i) => {
+                return <ErrorMini key={i} error={err} increment={`postalCode-${i}`} />
               }) : null}
             </div>
           </div>

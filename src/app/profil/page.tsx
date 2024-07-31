@@ -1,9 +1,9 @@
 import { Metadata } from "next"
-import { apiProfileData, apiProfileIdeaData, apiProfileVotesData } from "@/lib/api-requests"
+import { apiProfileData, apiProfileIdeaData, apiProfilePreferenceData, apiProfileVotesData } from "@/lib/api-requests"
 import HeroPage from '@/components/common/HeroPage'
 import ProfileBox from '@/components/profile/ProfileBox'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faIdCardAlt, faLightbulb, faUserCheck } from "@fortawesome/free-solid-svg-icons"
+import { faLightbulb } from "@fortawesome/free-solid-svg-icons"
 import Link from 'next/link'
 import { IUser } from '@/models/user.model'
 import { IIdea } from '@/models/idea.model'
@@ -15,9 +15,11 @@ import PasswordChangeForm from './password-change-form'
 import SectionBox from "@/components/profile/SectionBox"
 import SectionBoxDetails from "@/components/profile/SectionBoxDetails"
 import PersonalDataForm from "./personal-data-form"
+import { IUserPreference } from "@/models/userPreference.model"
 
 type ProfilePageData = {
   profile: IUser|null
+  profilePreference: IUserPreference|null
   ideas: IIdea[]
   votedProjects: IProject[]
 }
@@ -36,6 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 async function getData(): Promise<ProfilePageData> {
   const profile = await apiProfileData()
+  const profilePreference = await apiProfilePreferenceData()
   const ideas = await apiProfileIdeaData({
     'username': profile.username
   })
@@ -43,15 +46,16 @@ async function getData(): Promise<ProfilePageData> {
 
   return {
     profile,
+    profilePreference,
     ideas,
     votedProjects
   }
 }
 
 export default async function ProfilePage() {
-  const { profile, ideas, votedProjects } = await getData()
+  const { profile, profilePreference, ideas, votedProjects } = await getData()
 
-  if (! (profile && ideas && votedProjects)) {
+  if (! (profile && profilePreference && ideas && votedProjects)) {
     return notFound()
   }
 
@@ -85,7 +89,7 @@ export default async function ProfilePage() {
               </SectionBoxDetails>
 
               <SectionBoxDetails summary="Személyes adatok">
-                <PersonalDataForm />
+                <PersonalDataForm profilePreference={profilePreference} />
               </SectionBoxDetails>
 
               <SectionBoxDetails summary="Honnét hallottál rólunk?">

@@ -20,7 +20,8 @@ import {
   IssueResponse,
   OkResponse,
   VoteStatusResponse,
-  VotedProjectListResponse
+  VotedProjectListResponse,
+  UserPreferenceResponse
 } from "@/lib/types"
 import { IUser } from "@/models/user.model"
 import { IIdea } from '@/models/idea.model'
@@ -32,6 +33,7 @@ import endpoints from '@/lib/endpoints'
 import { IPhaseStatus } from '@/models/phaseStatus.model'
 import { ApiError } from 'next/dist/server/api-utils';
 import { Agent, setGlobalDispatcher } from 'undici'
+import { IUserPreference } from '@/models/userPreference.model'
 
 type ApiLoginUserProps = {
   email: string
@@ -127,6 +129,29 @@ export async function apiProfileData(): Promise<IUser> {
   })
 
   return handleResponse<UserResponse>(response).then(data => data.data)
+}
+
+export async function apiProfilePreferenceData(): Promise<IUserPreference> {
+  const token = (await getToken())?.value
+
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  }
+
+  if (token) {
+    headers[ "Authorization" ] = `Bearer ${token}`
+  }
+
+  const url = backendUrl(endpoints.API_REQ_PROFILE_PREFERENCE)
+
+  const response = await fetch(url, {
+    cache: "no-store",
+    method: "GET",
+    credentials: "include",
+    headers,
+  })
+
+  return handleResponse<UserPreferenceResponse>(response).then(data => data.data)
 }
 
 export async function apiProfileIdeaData(data: Record<string, string>): Promise<IIdea[]> {
@@ -228,7 +253,7 @@ export async function apiProfileChangePassword(credentials: { password: string, 
   return handleResponse<MessageResponse>(response).then(data => data)
 }
 
-export async function apiProfilePersonalData(credentials: { birthyear: string, postal_code: string }): Promise<MessageResponse> {
+export async function apiProfilePersonalData(credentials: { birthyear: string, postalCode: string }): Promise<MessageResponse> {
   const token = (await getToken())?.value
 
   const headers: Record<string, string> = {
@@ -243,7 +268,7 @@ export async function apiProfilePersonalData(credentials: { birthyear: string, p
   const urlencoded = new URLSearchParams()
 
   urlencoded.append("birthyear", credentials.birthyear)
-  urlencoded.append("postal_code", credentials.postal_code)
+  urlencoded.append("postal_code", credentials.postalCode)
 
   const url = backendUrl(endpoints.API_REQ_PERSONAL)
 

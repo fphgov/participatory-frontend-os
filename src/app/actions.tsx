@@ -185,8 +185,6 @@ export async function profilePersonalForm(data: any) {
     try {
       const response = await apiProfilePersonalData(data)
 
-      console.log(response)
-
       if (response.message) {
         success = true
         successMessage = response.message

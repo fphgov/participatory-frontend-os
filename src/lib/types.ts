@@ -6,6 +6,7 @@ import { IPlan } from "@/models/plan.model"
 import { IUser } from "@/models/user.model"
 import { IVoteableProject } from "@/models/voteableProject.model"
 import { IPhaseStatus } from "@/models/phaseStatus.model"
+import { IUserPreference } from "@/models/userPreference.model"
 
 export interface PageResponse {
   data: IPage
@@ -17,6 +18,10 @@ export interface MessageResponse {
 
 export interface UserResponse {
   data: IUser
+}
+
+export interface UserPreferenceResponse {
+  data: IUserPreference
 }
 
 export interface ArticleResponse {
