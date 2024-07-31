@@ -903,14 +903,14 @@ footer .fa-inverse {
 
 .form-wrapper select {
   width: 100%;
-  border: 2px solid #dcdcdc;
+  border: 1px solid #dcdcdc;
   border-radius: 4px;
   color: #555;
   background-color: #fff;
 }
 
 .form-wrapper select:focus {
-  border: 2px solid #19506E;
+  border: 1px solid #19506E;
 }
 
 .form-wrapper-idea {
@@ -949,8 +949,8 @@ footer .fa-inverse {
 .input-wrapper select {
   display: block;
   width: 100%;
-  min-height: 34px;
-  padding: 11px 14px !important;
+  min-height: 24px;
+  padding: 12px 14px !important;
   font-size: 16px;
   line-height: 20px;
   color: #222;
@@ -1745,7 +1745,7 @@ form fieldset textarea,
 .page-forgot-password-section input:not(.btn) {
   display: block;
   width: 100%;
-  /* min-height: 34px; */
+  min-height: 25px;
   padding: 12px 14px !important;
   font-size: 16px;
   line-height: 20px;
@@ -3328,7 +3328,8 @@ summary:focus-visible,
 }
 
 form fieldset .input-inline-wrapper input[type="text"],
-form fieldset .input-inline-wrapper input[type="password"] {
+form fieldset .input-inline-wrapper input[type="password"],
+form fieldset .input-inline-wrapper select {
   width: calc(100% - 28px);
 }
 
@@ -4217,6 +4218,11 @@ form.form-horizontal {
 }
 
 .section-content form.form-horizontal {
+  margin: 0;
+}
+
+.section-content .form-group,
+.section-content .input-wrapper {
   margin: 0;
 }
 

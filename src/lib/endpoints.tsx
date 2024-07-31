@@ -8,6 +8,7 @@ const endpoints = {
   API_REQ_POST: '/api/post/:slug',
   API_REQ_PROFILE: '/api/user',
   API_REQ_PROFILE_PREFERENCE: '/api/user-preference',
+  API_REQ_PROFILE_HEAR_ABOUT: '/api/user/about',
   API_REQ_PROFILE_ACTIVATE: '/api/user/activate/:hash',
   API_REQ_PROFILE_CONFIRMATION: '/api/user/confirmation/:hash',
   API_REQ_PROFILE_PRIZE: '/api/user/prize/:hash',

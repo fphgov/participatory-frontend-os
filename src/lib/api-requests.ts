@@ -283,6 +283,35 @@ export async function apiProfilePersonalData(credentials: { birthyear: string, p
   return handleResponse<MessageResponse>(response).then(data => data)
 }
 
+export async function apiProfileHearAbout(credentials: { hearAbout: string }): Promise<MessageResponse> {
+  const token = (await getToken())?.value
+
+  const headers: Record<string, string> = {
+    "Content": "application/json",
+    'Content-Type': "application/x-www-form-urlencoded",
+  }
+
+  if (token) {
+    headers[ "Authorization" ] = `Bearer ${token}`
+  }
+
+  const urlencoded = new URLSearchParams()
+
+  urlencoded.append("hear_about", credentials.hearAbout)
+
+  const url = backendUrl(endpoints.API_REQ_PROFILE_HEAR_ABOUT)
+
+  const response = await fetch(url, {
+    cache: "no-store",
+    method: "POST",
+    credentials: "include",
+    headers,
+    body: urlencoded,
+  })
+
+  return handleResponse<MessageResponse>(response).then(data => data)
+}
+
 export async function apiIdeaSubmission(formData: any): Promise<Record<string, string>> {
   const token = (await getToken())?.value
 

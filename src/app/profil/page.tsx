@@ -11,6 +11,7 @@ import SectionBox from "@/components/profile/SectionBox"
 import SectionBoxDetails from "@/components/profile/SectionBoxDetails"
 import PersonalDataForm from "./personal-data-form"
 import { IUserPreference } from "@/models/userPreference.model"
+import HearAboutForm from "./hear-about-form"
 
 type ProfilePageData = {
   profile: IUser|null
@@ -80,7 +81,7 @@ export default async function ProfilePage() {
               </SectionBoxDetails>
 
               <SectionBoxDetails summary="Honnét hallottál rólunk?">
-                {''}
+                <HearAboutForm profilePreference={profilePreference}/>
               </SectionBoxDetails>
 
               <SectionBoxDetails summary="Adatvédelem">
