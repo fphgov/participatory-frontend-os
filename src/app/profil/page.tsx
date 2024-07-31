@@ -1,13 +1,9 @@
 import { Metadata } from "next"
-import { apiProfileData, apiProfileIdeaData, apiProfilePreferenceData } from "@/lib/api-requests"
+import { apiProfileData, apiProfilePreferenceData } from "@/lib/api-requests"
 import HeroPage from '@/components/common/HeroPage'
 import ProfileBox from '@/components/profile/ProfileBox'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLightbulb } from "@fortawesome/free-solid-svg-icons"
 import Link from 'next/link'
 import { IUser } from '@/models/user.model'
-import { IIdea } from '@/models/idea.model'
-import ProfileIdeaList from '@/components/profile/ProfileIdeaList'
 import ProfileDeleteButton from '@/components/profile/ProfileDeleteButton'
 import { notFound } from 'next/navigation'
 import PasswordChangeForm from './password-change-form'
@@ -19,7 +15,6 @@ import { IUserPreference } from "@/models/userPreference.model"
 type ProfilePageData = {
   profile: IUser|null
   profilePreference: IUserPreference|null
-  ideas: IIdea[]
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -37,21 +32,17 @@ export async function generateMetadata(): Promise<Metadata> {
 async function getData(): Promise<ProfilePageData> {
   const profile = await apiProfileData()
   const profilePreference = await apiProfilePreferenceData()
-  const ideas = await apiProfileIdeaData({
-    'username': profile.username
-  })
 
   return {
     profile,
     profilePreference,
-    ideas,
   }
 }
 
 export default async function ProfilePage() {
-  const { profile, profilePreference, ideas } = await getData()
+  const { profile, profilePreference } = await getData()
 
-  if (! (profile && profilePreference && ideas)) {
+  if (! (profile && profilePreference)) {
     return notFound()
   }
 
@@ -104,12 +95,6 @@ export default async function ProfilePage() {
 
               <div style={{ margin: '24px 0' }}>
                 <Link className="btn btn-primary-solid btn-solid-underline" href="/kijelentkezes" prefetch={false}>Kijelentkezés</Link>
-              </div>
-
-              <div className="section">
-                <h2><FontAwesomeIcon icon={faLightbulb} /> Beküldött ötletek ({ideas.length})</h2>
-
-                <ProfileIdeaList ideas={ideas} />
               </div>
             </div>
           </div>
