@@ -1,15 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { IUser } from "@/models/user.model";
 import { toast } from "react-toastify";
 import { apiProfileDelete } from "@/lib/api-requests";
 
-type ProfileDeleteProps = {
-  profile: IUser
-}
-
-export default function ProfileDeleteButton({ profile }: ProfileDeleteProps): JSX.Element {
+export default function ProfileDeleteButton(): JSX.Element {
   const [ error, setError ] = useState()
 
   const notify = (message: string) => toast.dark(message, {

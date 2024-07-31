@@ -85,13 +85,13 @@ export default async function ProfilePage() {
               </SectionBoxDetails>
 
               <SectionBoxDetails summary="Adatvédelem">
-                {''}
+                <Link className="btn btn-primary-solid btn-solid-underline btn-pdf" href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatkezelesi_tajekoztato.pdf`} prefetch={false} download={true} target="_blank">Adatkezelési tájékoztató letöltése</Link>
               </SectionBoxDetails>
 
               <SectionBoxDetails summary="Fiók törlés">
                 <p>Kérheted a fiókod törlését, 5 napos türelmi idő után automatikusan töröljük. A türelmi idő alatt meggondolhatod magad. A beadott ötleteid változatlan formában megmaradnak.</p>
 
-                <ProfileDeleteButton profile={profile} />
+                <ProfileDeleteButton />
               </SectionBoxDetails>
 
               <div style={{ margin: '24px 0' }}>

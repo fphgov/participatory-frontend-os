@@ -537,6 +537,22 @@ input.btn[disabled]:hover {
   text-decoration: underline;
 }
 
+.btn.btn-pdf {
+  display: flex;
+  color: #12326E;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.btn.btn-pdf::before {
+  content: '';
+  background: url('../../public/images/icon-pdf.svg');
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
 .btn.btn-danger-solid {
   color: #E5332A;
   font-weight: bold;
