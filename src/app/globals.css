@@ -5131,6 +5131,28 @@ input[type="tel"] {
   background: #f6d05f;
 }
 
+.side-bar .banner-area .banner-wrapper {
+  flex-direction: column;
+}
+
+.side-bar .banner-area .banner-wrapper .row > div {
+  width: 100%;
+  max-width: 100% !important;
+  flex: 0 0 100%;
+}
+
+.side-bar .banner-area .banner-image > img {
+  max-width: 130px;
+}
+
+.side-bar .banner-content {
+  text-align: center;
+}
+
+.side-bar .banner h2 {
+  margin-top: 6px;
+}
+
 @media screen and (min-width: 1440px) {
   .container,
   .container-sm,

@@ -13,7 +13,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
 
   return (
     <main className="page page-page">
-      <div className="page-profile-single-section">
+      <div className="page-idea-single-section">
         <HeroPage title="Ötlet beküldése">
           <p>Köszönjük, hogy megosztod velünk ötleted! A kitöltési folyamat nem szakítható meg!</p>
         </HeroPage>

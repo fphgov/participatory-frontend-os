@@ -26,7 +26,9 @@ export default function Home() {
         </div>
       </main>
 
-      <BannerArea />
+      <div className="container">
+        <BannerArea />
+      </div>
     </>
   )
 }

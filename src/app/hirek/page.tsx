@@ -4,7 +4,7 @@ import { apiArticlesData } from '@/lib/api-requests'
 import Error from '@/components/common/Error'
 import Tabs from '@/components/article/Tabs'
 import { NextPage } from "next"
-import NewsletterArea from '@/components/home/NesletterArea'
+import BannerArea from '@/components/home/BannerArea'
 
 interface IProps {
   searchParams: Record<string, string>
@@ -61,7 +61,9 @@ const Articles: NextPage<IProps> = async ({ searchParams }) => {
         </div>
       </main>
 
-      <NewsletterArea />
+      <div className="container">
+        <BannerArea />
+      </div>
     </>
   )
 }

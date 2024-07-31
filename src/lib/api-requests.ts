@@ -228,7 +228,7 @@ export async function apiProfileChangePassword(credentials: { password: string, 
   return handleResponse<MessageResponse>(response).then(data => data)
 }
 
-export async function apiProfilePersonalData(credentials: { year: string, zip: string }): Promise<MessageResponse> {
+export async function apiProfilePersonalData(credentials: { birthyear: string, postal_code: string }): Promise<MessageResponse> {
   const token = (await getToken())?.value
 
   const headers: Record<string, string> = {
@@ -242,10 +242,10 @@ export async function apiProfilePersonalData(credentials: { year: string, zip: s
 
   const urlencoded = new URLSearchParams()
 
-  urlencoded.append("year", credentials.year)
-  urlencoded.append("zip", credentials.zip)
+  urlencoded.append("birthyear", credentials.birthyear)
+  urlencoded.append("postal_code", credentials.postal_code)
 
-  const url = backendUrl(endpoints.API_REQ_PASSWORD)
+  const url = backendUrl(endpoints.API_REQ_PERSONAL)
 
   const response = await fetch(url, {
     cache: "no-store",

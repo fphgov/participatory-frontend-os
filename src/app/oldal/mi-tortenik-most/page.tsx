@@ -3,7 +3,7 @@ import HeroPage from "@/components/common/HeroPage"
 import InfoZigZag from '@/components/common/InfoZigZag'
 import Link from 'next/link'
 import ScrollButton from '@/components/common/ScrollButton'
-import NewsletterArea from '@/components/home/NesletterArea'
+import BannerArea from '@/components/home/BannerArea'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -21,7 +21,7 @@ export default async function WhatPage() {
   return (
     <>
       <main className="page page-page">
-        <div className="page-profile-single-section">
+        <div className="page-single-section">
 
           <HeroPage title="Mi történik most?" />
 
@@ -81,7 +81,9 @@ export default async function WhatPage() {
         </div>
       </main>
 
-      <NewsletterArea />
+      <div className="container">
+        <BannerArea />
+      </div>
     </>
   )
 }

@@ -7,13 +7,13 @@ import VoteSearch from '@/components/vote/VoteSearch'
 import { apiVoteStatus, apiVoteablePlansData } from '@/lib/api-requests'
 import Error from '@/components/common/Error'
 import IdeasWrapper from '@/components/idea/IdeasWrapper'
-import NewsletterArea from '@/components/home/NesletterArea'
 import { categoryResolver } from '@/utilities/categoryResolver'
 import { generateRandomValue } from '@/utilities/generateRandomValue'
 import PaginationMini from '@/components/common/PaginationMini'
 import VoteOrderFilter from '@/components/vote/VoteOrderFilter'
 import { getToken } from '@/lib/actions'
 import { getNewUrlSearchParams } from '@/utilities/getNewUrlSearchParams'
+import BannerArea from '@/components/home/BannerArea'
 
 interface IProps {
   searchParams: Record<string, string>
@@ -163,7 +163,9 @@ export default async function VotePage({ searchParams }: IProps) {
         </div>
       </main>
 
-      <NewsletterArea />
+      <div className="container">
+        <BannerArea />
+      </div>
     </>
   )
 }

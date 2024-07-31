@@ -3,7 +3,7 @@
 import HeroPage from '@/components/common/HeroPage'
 import ScrollButton from '@/components/common/ScrollButton'
 import Share from '@/components/common/Share'
-import NewsletterArea from '@/components/home/NesletterArea'
+import BannerArea from '@/components/home/BannerArea'
 import IdeaCard from '@/components/idea/IdeaCard'
 import VoteStartSection from '@/components/vote/VoteStartSection'
 import { apiVoteStatus } from '@/lib/api-requests'
@@ -87,7 +87,9 @@ export default async function VoteStartPage() {
         </div>
       </main>
 
-      <NewsletterArea />
+      <div className="container">
+        <BannerArea />
+      </div>
     </>
   )
 }

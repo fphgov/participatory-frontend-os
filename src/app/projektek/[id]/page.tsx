@@ -8,9 +8,9 @@ import { apiProjectData, apiCheckPhase, apiCheckVote } from '@/lib/api-requests'
 import HeroPage from '@/components/common/HeroPage'
 import Link from 'next/link'
 import ProjectWrapper from '@/components/idea/ProjectWrapper'
-import NewsletterArea from '@/components/home/NesletterArea'
 import { OkResponse } from '@/lib/types'
 import { generateRandomValue } from '@/utilities/generateRandomValue'
+import BannerArea from '@/components/home/BannerArea'
 
 type Props = {
   params: { id: string }
@@ -93,7 +93,9 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       </main>
 
-      <NewsletterArea />
+      <div className="container">
+        <BannerArea />
+      </div>
     </>
   )
 }

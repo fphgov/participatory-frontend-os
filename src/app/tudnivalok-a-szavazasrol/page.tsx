@@ -18,7 +18,7 @@ export default async function IdeaInfoPage() {
   return (
     <>
       <main className="page page-idea-info">
-        <div className="page-profile-single-section">
+        <div className="page-info-single-section">
 
           <HeroPage title="Tudnivalók a szavazásról">
           </HeroPage>

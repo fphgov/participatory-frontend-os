@@ -2,12 +2,12 @@ import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import PaginationMini from '@/components/common/PaginationMini'
 import SearchArea from '@/components/common/SearchArea'
-import NewsletterArea from '@/components/home/NesletterArea'
 import IdeasWrapper from '@/components/idea/IdeasWrapper'
 import { apiIdeasData, apiIdeasFilter } from '@/lib/api-requests'
 import { NextPage } from "next"
 import { generateRandomValue } from '@/utilities/generateRandomValue'
 import { getNewUrlSearchParams } from '@/utilities/getNewUrlSearchParams'
+import BannerArea from '@/components/home/BannerArea'
 
 interface IProps {
   searchParams: Record<string, string>
@@ -97,7 +97,9 @@ const Ideas: NextPage<IProps> = async ({ searchParams }) => {
         </div>
       </main>
 
-      <NewsletterArea />
+      <div className="container">
+        <BannerArea />
+      </div>
     </>
   )
 }

@@ -8,8 +8,8 @@ import { profilePersonalForm } from '@/app/actions'
 
 export default function PersonalDataForm(): JSX.Element {
   const defaultFormData = {
-    year: '',
-    zip: '',
+    birthyear: '',
+    postal_code: '',
   }
 
   const [error, setError] = useState('')
@@ -32,11 +32,15 @@ export default function PersonalDataForm(): JSX.Element {
     setFormData({ ...formData, [e.target.name]: value })
   }
 
-  async function onChangePassword() {
+  async function onChangePersonalData(e: any) {
+    console.log(e)
+
     setError('')
     setErrorObject(undefined)
 
     const res = await profilePersonalForm(formData)
+
+    console.log(res)
 
     if (res?.success) {
       setFormData(defaultFormData)
@@ -57,27 +61,27 @@ export default function PersonalDataForm(): JSX.Element {
   }
 
   return <>
-    <form className="form-horizontal" action={onChangePassword}>
+    <form className="form-horizontal" action={onChangePersonalData}>
       <fieldset>
         {error ? <Error message={error} /> : null}
 
         <div className="form-wrapper">
           <div className="input-inline-wrapper">
             <div className="input-wrapper">
-              <label htmlFor="year">Születési év:</label>
-              <input type="text" name="year" id="year" value={formData.year} onChange={handleChangeInput} />
+              <label htmlFor="birthyear">Születési év:</label>
+              <input type="text" name="birthyear" id="birthyear" value={formData.birthyear} onChange={handleChangeInput} />
 
-              {errorObject && errorObject.year ? Object.values(errorObject.year).map((err, i) => {
-                return <ErrorMini key={i} error={err} increment={`year-${i}`} />
+              {errorObject && errorObject.birthyear ? Object.values(errorObject.birthyear).map((err, i) => {
+                return <ErrorMini key={i} error={err} increment={`birthyear-${i}`} />
               }) : null}
             </div>
 
             <div className="input-wrapper">
-              <label htmlFor="zip">Irányítószám:</label>
-              <input type="text" name="zip" id="zip" value={formData.zip} onChange={handleChangeInput} />
+              <label htmlFor="postal_code">Irányítószám:</label>
+              <input type="text" name="postal_code" id="postal_code" value={formData.postal_code} onChange={handleChangeInput} />
 
-              {errorObject && errorObject.zip ? Object.values(errorObject.zip).map((err, i) => {
-                return <ErrorMini key={i} error={err} increment={`zip-${i}`} />
+              {errorObject && errorObject.postal_code ? Object.values(errorObject.postal_code).map((err, i) => {
+                return <ErrorMini key={i} error={err} increment={`postal_code-${i}`} />
               }) : null}
             </div>
           </div>
