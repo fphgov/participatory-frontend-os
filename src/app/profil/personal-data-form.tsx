@@ -63,7 +63,7 @@ export default function PersonalDataForm({ profilePreference }: PersonalDataForm
           <div className="input-inline-wrapper">
             <div className="input-wrapper">
               <label htmlFor="birthyear">Születési év:</label>
-              <input type="text" name="birthyear" id="birthyear" value={formData.birthyear} onChange={handleChangeInput} />
+              <input type="text" name="birthyear" id="birthyear" placeholder="ÉÉÉÉ" value={formData.birthyear} onChange={handleChangeInput} />
 
               {errorObject && errorObject.birthyear ? Object.values(errorObject.birthyear).map((err, i) => {
                 return <ErrorMini key={i} error={err} increment={`birthyear-${i}`} />
@@ -72,7 +72,7 @@ export default function PersonalDataForm({ profilePreference }: PersonalDataForm
 
             <div className="input-wrapper">
               <label htmlFor="postalCode">Irányítószám:</label>
-              <input type="text" name="postalCode" id="postalCode" value={formData.postalCode} onChange={handleChangeInput} />
+              <input type="text" name="postalCode" id="postalCode" placeholder="Pl.: 1234" value={formData.postalCode} onChange={handleChangeInput} />
 
               {errorObject && errorObject.postalCode ? Object.values(errorObject.postalCode).map((err, i) => {
                 return <ErrorMini key={i} error={err} increment={`postalCode-${i}`} />
