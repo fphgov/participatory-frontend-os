@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import { apiProfileData, apiProfileIdeaData, apiProfilePreferenceData, apiProfileVotesData } from "@/lib/api-requests"
+import { apiProfileData, apiProfileIdeaData, apiProfilePreferenceData } from "@/lib/api-requests"
 import HeroPage from '@/components/common/HeroPage'
 import ProfileBox from '@/components/profile/ProfileBox'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,7 +7,6 @@ import { faLightbulb } from "@fortawesome/free-solid-svg-icons"
 import Link from 'next/link'
 import { IUser } from '@/models/user.model'
 import { IIdea } from '@/models/idea.model'
-import { IProject } from "@/models/project.model"
 import ProfileIdeaList from '@/components/profile/ProfileIdeaList'
 import ProfileDeleteButton from '@/components/profile/ProfileDeleteButton'
 import { notFound } from 'next/navigation'
@@ -21,7 +20,6 @@ type ProfilePageData = {
   profile: IUser|null
   profilePreference: IUserPreference|null
   ideas: IIdea[]
-  votedProjects: IProject[]
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -42,20 +40,18 @@ async function getData(): Promise<ProfilePageData> {
   const ideas = await apiProfileIdeaData({
     'username': profile.username
   })
-  const votedProjects = await apiProfileVotesData()
 
   return {
     profile,
     profilePreference,
     ideas,
-    votedProjects
   }
 }
 
 export default async function ProfilePage() {
-  const { profile, profilePreference, ideas, votedProjects } = await getData()
+  const { profile, profilePreference, ideas } = await getData()
 
-  if (! (profile && profilePreference && ideas && votedProjects)) {
+  if (! (profile && profilePreference && ideas)) {
     return notFound()
   }
 
