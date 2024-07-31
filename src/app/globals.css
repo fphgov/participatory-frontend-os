@@ -102,10 +102,11 @@ body {
 .app > .page {
   flex: 1 0 auto;
   position: relative;
+  display: flex;
 }
 
 .app > .page > div {
-  margin: auto;
+  width: 100%;
   z-index: 2;
 }
 

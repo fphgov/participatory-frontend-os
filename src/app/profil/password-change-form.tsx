@@ -83,7 +83,7 @@ export default function PasswordChangeForm(): JSX.Element {
           </div>
 
           <div className="btn-wrapper" style={{ marginTop: 24 }}>
-            <button type="submit" className="btn btn-gray">Módosítás</button>
+            <button type="submit" className="btn btn-primary">Módosítás</button>
           </div>
         </div>
 
