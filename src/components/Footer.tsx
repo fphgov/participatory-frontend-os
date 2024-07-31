@@ -33,16 +33,18 @@ export default function Footer(): JSX.Element {
 
           <div className="line-two">
             <div className="logo-secondary-wrapper">
-              <Image
-                src="/images/bp_logo_white.svg"
-                width={201}
-                height={40}
-                alt="logo"
-                className="logo"
-              />
+              <a href="https://budapest.hu" target="_blank" title="Kövess minket Facebookon" rel="noopener noreferrer">
+                <Image
+                  src="/images/bp_logo_white.svg"
+                  width={201}
+                  height={40}
+                  alt="logo"
+                  className="logo"
+                  />
+              </a>
 
               <div className="sharing sharing-mobile">
-                <a href="https://www.facebook.com/budapestmindenkie" title="Kövess minket Facebookon" rel="noopener noreferrer">
+                <a href="https://www.facebook.com/budapestmindenkie" target="_blank" title="Kövess minket Facebookon" rel="noopener noreferrer">
                 <Image
                   src="/images/social-fb.svg"
                   width={36}
@@ -59,7 +61,7 @@ export default function Footer(): JSX.Element {
               <div className="copyright">© 2024 Budapest Főváros Önkormányzata. Minden jog fenntartva</div>
 
               <div className="sharing sharing-desktop">
-                <a href="https://www.facebook.com/budapestmindenkie" title="Kövess minket Facebookon" rel="noopener noreferrer">
+                <a href="https://www.facebook.com/budapestmindenkie" target="_blank" title="Kövess minket Facebookon" rel="noopener noreferrer">
                 <Image
                   src="/images/social-fb.svg"
                   width={36}

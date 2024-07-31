@@ -4025,6 +4025,8 @@ details.section-more-2 summary {
   line-height: normal;
   border-radius: 4px;
   list-style: none;
+  position: relative;
+  padding-right: 42px;
 }
 
 details.section-more-2 > summary::-webkit-details-marker {
@@ -4035,11 +4037,12 @@ details.section-more-2 summary::after {
   content: '';
   background: url('../../public/images/icon-expand.svg');
   background-repeat: no-repeat;
-  width: 36px;
-  height: 36px;
+  width: 24px;
+  height: 24px;
   display: inline-block;
   vertical-align: middle;
   position: absolute;
+  top: 18px;
   right: 18px;
 }
 
