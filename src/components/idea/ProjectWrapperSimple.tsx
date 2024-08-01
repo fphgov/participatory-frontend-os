@@ -1,16 +1,13 @@
 import Link from "next/link"
-import Image from "next/image"
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { IProject } from "@/models/project.model"
 import { getDocuments, getImages } from "@/utilities/helperFunctions"
 import CategoryIcon from "@/components/idea/CategoryIcon"
-import nFormatter from "@/utilities/nFormatter"
 import ShareInfo from "@/components/common/ShareInfo"
 import Implementation from "@/components/idea/Implementation"
 import VoteButton from "@/components/vote/VoteButton"
 import Gallery from "@/components/common/Gallery"
-import IdeaVoteTipp from "@/components/idea/IdeaVoteTipp"
 import IdeaRelationTipp from "@/components/idea/IdeaRelationTipp"
 
 type IdeasWrapperProps = {
@@ -22,7 +19,7 @@ type IdeasWrapperProps = {
   backHref?: string
 }
 
-export default function ProjectWrapper({ project, voteable, token, errorVoteable, disableVoteButton, backHref }: IdeasWrapperProps): JSX.Element {
+export default function ProjectWrapperSimple({ project, voteable, token, errorVoteable, disableVoteButton, backHref }: IdeasWrapperProps): JSX.Element {
   const theme = project?.campaignTheme
 
   const isProject = [140, 200].indexOf(project?.workflowState?.id) !== -1
@@ -37,9 +34,15 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
           <div className="offset-xl-1 offset-lg-1 col-xl-7 col-lg-7">
             <div className="prop-single-wrapper prop-single-body">
               <div className="prop-single-inner">
-                <VoteButton showVoteButton={voteable} disableVoteButton={disableVoteButton} projectId={project.id} token={token} errorVoteable={errorVoteable} />
-
                 <div className="prop-single-content">
+                  {project.location ? <>
+                    <div className="prop-single-section">
+                      <h3>Helyszín</h3>
+
+                      <div className="prop-single-location-description" dangerouslySetInnerHTML={{ __html: project.location }} />
+                    </div>
+                  </> : null}
+
                   {project.description ? <>
                     <div className="prop-single-section">
                       <h3>Leírás</h3>
@@ -53,14 +56,6 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
                       <h3>Mire megoldás?</h3>
 
                       <div className="prop-single-solution" dangerouslySetInnerHTML={{ __html: project.solution }} />
-                    </div>
-                  </> : null}
-
-                  {project.location ? <>
-                    <div className="prop-single-section">
-                      <h3>Helyszín</h3>
-
-                      <div className="prop-single-location-description" dangerouslySetInnerHTML={{ __html: project.location }} />
                     </div>
                   </> : null}
 
@@ -102,8 +97,6 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
                     </div>
                   </>) : null}
                 </div>
-
-                <VoteButton showVoteButton={voteable} disableVoteButton={disableVoteButton} projectId={project.id} token={token} errorVoteable={errorVoteable} />
               </div>
 
               {project.implementations && project.implementations.length > 0 ? <>
@@ -123,39 +116,6 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
           </div>
 
           <div className="col-xl-3 col-lg-4">
-            {typeof project.voted !== "undefined" && voteable ? (
-              <div className="prop-single-wrapper prop-single-sidebar prop-single-sidebar-info">
-                <div className="prop-single-content">
-                  <div className="prop-info-title">Szavazás állása</div>
-                  <div className="prop-info-content prop-info-vote">
-                    <Image
-                      src="/images/icon-vote.svg"
-                      width={24}
-                      height={24}
-                      alt="Szavazás ikon"
-                      aria-hidden={true}
-                    />
-                    {project.voted} szavazat
-                  </div>
-
-                  <IdeaVoteTipp theme={theme} />
-                </div>
-              </div>
-            ) : null}
-
-            {project.voted && !voteable ? (
-              <div className="prop-single-wrapper prop-single-sidebar prop-single-sidebar-info">
-                <div className="prop-single-content">
-                  <div className="prop-info-title">Beérkezett szavazatok</div>
-                  <div className="prop-info-content prop-info-vote">
-                    {project.voted} szavazat
-                  </div>
-                </div>
-              </div>
-            ) : null}
-
-            <ShareInfo type="sidebar" />
-
             <div className="prop-single-wrapper prop-single-sidebar">
               <div className="prop-single-content">
                 {theme?.name ? (
@@ -182,29 +142,6 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
                   </div>
                 ) : null}
 
-                {project.campaign ? (
-                  <div className="prop-single-side-section">
-                    <div className="prop-info-title">Időszak</div>
-                    <div className="prop-info-content">
-                      {project.campaign.shortTitle}
-                    </div>
-                  </div>
-                ) : null}
-
-                <div className="prop-single-side-section">
-                  <div className="prop-info-title">Állapot</div>
-                  <div className="prop-info-content">
-                    {project.workflowState.title}
-                  </div>
-                </div>
-
-                <div className="prop-single-side-section prop-single-cost">
-                  <div className="prop-info-title">Tervezett költség</div>
-                  <div className="prop-info-content">
-                    {!project.cost ? <>Nincs tervezett költség</> : <>{nFormatter(project.cost)}</>}
-                  </div>
-                </div>
-
                 <div className="prop-single-side-section prop-single-ideas">
                   <div className="prop-info-title">Kapcsolódó ötletek <IdeaRelationTipp /></div>
                   <div className="prop-info-content">
@@ -218,14 +155,17 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="offset-lg-1 col-lg-10">
-            {backHref ? <>
-              <hr className="project-hr" />
+            <ShareInfo type="simple" />
 
-              <Link className="btn btn-back" href={backHref}>Vissza a többi ötlethez</Link>
-            </>: null}
+            <VoteButton
+              style="background"
+              showVoteButton={voteable}
+              disableVoteButton={disableVoteButton}
+              projectId={project.id}
+              token={token}
+              errorVoteable={errorVoteable}
+            />
           </div>
         </div>
       </div>

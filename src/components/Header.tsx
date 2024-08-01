@@ -31,7 +31,7 @@ export default function Header({ loggedIn }: IHeader): JSX.Element {
   return (
     <header>
       <nav className="main-navigation">
-        <div className="container-fluid">
+        <div className="container">
           <div className="row flex-center">
             <div className="col-6 col-xs-6 col-sm-6 col-md-2">
               <div className="logo-wrapper">

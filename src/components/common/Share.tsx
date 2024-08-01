@@ -6,9 +6,10 @@ import { useEffect, useState } from 'react'
 
 type ShareProps = {
   directHref?: string
+  iconColor?: '' | 'blue' | null | undefined
 }
 
-export default function Share({ directHref }: ShareProps): JSX.Element|null {
+export default function Share({ directHref, iconColor }: ShareProps): JSX.Element|null {
   const [href, setHref] = useState('')
 
   useEffect(() => {
@@ -23,7 +24,7 @@ export default function Share({ directHref }: ShareProps): JSX.Element|null {
     <div className="share-wrapper">
       <PopUp url={`https://www.facebook.com/sharer/sharer.php?u=${href}`} title="Megosztom az ötletet Facebookon">
         <Image
-          src="/images/social-fb-btn.svg"
+          src={`/images/social-fb-btn${iconColor ? '-' + iconColor : ''}.svg`}
           width={36}
           height={36}
           alt="Facebook logo"
@@ -32,7 +33,7 @@ export default function Share({ directHref }: ShareProps): JSX.Element|null {
 
       <PopUp url={`https://www.linkedin.com/sharing/share-offsite/?url=${href}`} title="Megosztom az ötletet a LinkedIn-en">
         <Image
-          src="/images/social-linkedin-btn.svg"
+          src={`/images/social-linkedin-btn${iconColor ? '-' + iconColor : ''}.svg`}
           width={36}
           height={36}
           alt="LinkedIn logo"

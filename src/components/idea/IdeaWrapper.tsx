@@ -7,7 +7,7 @@ import { getHungarianDateFormat } from "@/utilities/dateFormats"
 import CategoryIcon from "@/components/idea/CategoryIcon"
 import Comment from "@/components/idea/Comment"
 import nFormatter from "@/utilities/nFormatter"
-import Share from "@/components/common/Share"
+import ShareInfo from "@/components/common/ShareInfo"
 import Gallery from "../common/Gallery"
 
 type IdeasWrapperProps = {
@@ -24,7 +24,7 @@ export default function IdeaWrapper({ idea }: IdeasWrapperProps): JSX.Element {
     <div className="prop-inner-wrapper">
       <div className="prop-inner-content">
         <div className="row">
-          <div className="offset-lg-1 col-lg-7">
+          <div className="offset-xl-1 offset-lg-1 col-xl-7 col-lg-7">
             <div className="prop-single-wrapper prop-single-body">
               <div className="prop-single-inner">
                 <div className="prop-single-content">
@@ -129,7 +129,7 @@ export default function IdeaWrapper({ idea }: IdeasWrapperProps): JSX.Element {
             </div>
           </div>
 
-          <div className="col-lg-3">
+          <div className="col-xl-3 col-lg-4">
             {idea.project ? (
               <div className="prop-single-wrapper prop-single-sidebar prop-single-sidebar-info">
                 <div className="prop-single-content">
@@ -140,16 +140,6 @@ export default function IdeaWrapper({ idea }: IdeasWrapperProps): JSX.Element {
                 </div>
               </div>
             ) : null}
-
-            <div className="prop-single-wrapper prop-single-sidebar prop-single-sidebar-info">
-              <div className="prop-single-content">
-                <h6>Oszd meg másokkal is!</h6>
-
-                <div className="prop-info-content prop-info-share">
-                  <Share />
-                </div>
-              </div>
-            </div>
 
             <div className="prop-single-wrapper prop-single-sidebar">
               <div className="prop-single-content">
@@ -211,6 +201,8 @@ export default function IdeaWrapper({ idea }: IdeasWrapperProps): JSX.Element {
                 ) : null}
               </div>
             </div>
+
+            <ShareInfo type="simple" />
           </div>
         </div>
       </div>

@@ -10,10 +10,11 @@ type VoteButtonProps = {
   errorVoteable: string
   token: string
   projectId: number|string
+  style?: 'default' | 'background' | 'hero'
   onClickVote?: () => void
 }
 
-export default function VoteButton({ showVoteButton, disableVoteButton, token, errorVoteable, projectId }: VoteButtonProps): JSX.Element {
+export default function VoteButton({ showVoteButton, disableVoteButton, token, errorVoteable, projectId, style = 'default' }: VoteButtonProps): JSX.Element {
   const [error, setError] = useState('')
 
   const sendVoteHandler = async (_token: string) => {
@@ -41,8 +42,8 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
       {showVoteButton ? <>
         {error ? <Error message={error} /> : null}
 
-        <div className="vote-button-wrapper">
-          <button className={`btn btn-primary btn-headline btn-next btn-vote ${disableVoteButton ? 'btn-disable' : ''}`} onClick={() => { if (!disableVoteButton) sendVoteHandler(token) }}>Szavazok erre az ötletre</button>
+        <div className={`vote-button-wrapper vote-wrapper-style-${style}`}>
+          <button className={`btn btn-primary btn-headline btn-next btn-vote ${disableVoteButton ? 'btn-disable' : ''}`} onClick={() => { if (!disableVoteButton) sendVoteHandler(token) }}>Szavazok</button>
 
           {errorVoteable ? <div className="vote-button-info-label">{errorVoteable}</div> : ''}
         </div>

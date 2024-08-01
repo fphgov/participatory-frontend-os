@@ -6,11 +6,11 @@ import { notFound } from 'next/navigation'
 import Error from '@/components/common/Error'
 import { apiProjectData, apiCheckPhase, apiCheckVote } from '@/lib/api-requests'
 import HeroPage from '@/components/common/HeroPage'
-import Link from 'next/link'
-import ProjectWrapper from '@/components/idea/ProjectWrapper'
+import ProjectWrapperSimple from '@/components/idea/ProjectWrapperSimple'
 import { OkResponse } from '@/lib/types'
 import { generateRandomValue } from '@/utilities/generateRandomValue'
 import BannerArea from '@/components/home/BannerArea'
+import VoteButton from '@/components/vote/VoteButton'
 
 type Props = {
   params: { id: string }
@@ -74,14 +74,23 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <>
-      <main className="page page-idea">
+      <main className="page page-idea page-project">
         <div className="prop">
-          <HeroPage title={pageData.title} link={<Link className="link-back" href={backHref}>Vissza</Link>} />
+          <HeroPage title={pageData.title} link={null}>
+            <VoteButton
+              style="hero"
+              showVoteButton={projectVoteable}
+              disableVoteButton={! enabledVoteButton}
+              projectId={pageData.id}
+              token={token}
+              errorVoteable={errorVoteable}
+            />
+          </HeroPage>
 
           <div className="container">
             {error ? <Error message={error} /> : null}
 
-            <ProjectWrapper
+            <ProjectWrapperSimple
               project={pageData}
               token={token}
               disableVoteButton={! enabledVoteButton}
