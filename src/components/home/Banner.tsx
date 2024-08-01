@@ -17,7 +17,7 @@ export default function Banner({ id, image, imageWidth, imageHeight, children, c
     <div id={id} className={`banner banner-${id}`}>
       <div className="container">
         <div className="row">
-          <div className={`col-md-12 col-lg-${col}`}>
+          <div className={`col-md-12 col-lg-${col + 1} col-xl-${col}`}>
             <div className="banner-image">
               <Image
                 src={`/images/${image}.svg`}
@@ -30,7 +30,7 @@ export default function Banner({ id, image, imageWidth, imageHeight, children, c
             </div>
           </div>
 
-          <div className={`col-md-12 col-lg-${12 - col}`}>
+          <div className={`col-md-12 col-lg-${12 - col + 1} col-xl-${12 - col}`}>
             <div className="banner-content">
               {children}
             </div>

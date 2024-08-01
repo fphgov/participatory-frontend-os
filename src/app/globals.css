@@ -3776,6 +3776,10 @@ details {
   display: none;
 }
 
+.vote-wrapper-disable button {
+  display: none;
+}
+
 .vote-button-wrapper.vote-wrapper-style-background {
   background-color: #12326E;
   align-items: center;
@@ -3788,6 +3792,23 @@ details {
   width: 100%;
 }
 
+.vote-wrapper-style-background .vote-button-info-label {
+  color: #fff;
+  margin: 0;
+  padding-left: 32px;
+  display: block;
+}
+
+.vote-wrapper-style-hero .vote-button-info-label {
+  margin: 36px 0 0 0;
+}
+
+.vote-wrapper-style-background .vote-button-info-label::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .voteable .prop-single-simple-info {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
@@ -3795,18 +3816,19 @@ details {
 
 .vote-button-info-label {
   margin-left: 12px;
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: 26px;
   letter-spacing: 0.18px;
   display: flex;
+  position: relative;
 }
 
 .vote-button-info-label::before {
   content: '';
   display: inline-block;
-  background-image: url('../../public/images/icon-info-24.svg');
+  background-image: url('../../public/images/icon-done-fill.svg');
   background-repeat: no-repeat;
   width: 24px;
   height: 24px;
@@ -5312,7 +5334,7 @@ input[type="tel"] {
   }
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 992px) {
   .desktop-menu {
     display: none !important;
   }
@@ -5320,7 +5342,9 @@ input[type="tel"] {
   .hamburger-menu-wrapper {
     display: block;
   }
+}
 
+@media screen and (max-width: 991px) {
   nav.main-navigation {
     padding: 10px 0;
   }
@@ -5448,12 +5472,16 @@ input[type="tel"] {
   }
 
   .vote-wrapper-style-hero {
-    display: block;
+    display: flex;
   }
 
   .vote-wrapper-style-hero > button {
     margin: 36px 0 0 0;
     width: 100%;
+  }
+
+  .vote-button-wrapper.vote-wrapper-style-background {
+    align-items: flex-start;
   }
 }
 

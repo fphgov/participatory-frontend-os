@@ -28,7 +28,7 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
       const response = await apiVote(projectId)
 
       if (response.message) {
-        window.location.href = '/szavazas-sikeres'
+        // window.location.href = '/szavazas-sikeres'
       }
     } catch (e: any) {
       if (typeof e?.message === "string") {
@@ -42,7 +42,7 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
       {showVoteButton ? <>
         {error ? <Error message={error} /> : null}
 
-        <div className={`vote-button-wrapper vote-wrapper-style-${style}`}>
+        <div className={`vote-button-wrapper vote-wrapper-style-${style} ${disableVoteButton ? 'vote-wrapper-disable' : ''}`}>
           <button className={`btn btn-primary btn-headline btn-next btn-vote ${disableVoteButton ? 'btn-disable' : ''}`} onClick={() => { if (!disableVoteButton) sendVoteHandler(token) }}>Szavazok</button>
 
           {errorVoteable ? <div className="vote-button-info-label">{errorVoteable}</div> : ''}
