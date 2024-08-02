@@ -254,6 +254,65 @@ export async function apiProfileChangePassword(credentials: { password: string, 
   return handleResponse<MessageResponse>(response).then(data => data)
 }
 
+export async function apiProfileChangeNewsletter(data: { newsletter: boolean }): Promise<MessageResponse> {
+  const token = (await getToken())?.value
+
+  const headers: Record<string, string> = {
+    "Content": "application/json",
+    'Content-Type': "application/x-www-form-urlencoded",
+  }
+
+  if (token) {
+    headers[ "Authorization" ] = `Bearer ${token}`
+  }
+
+  const urlencoded = new URLSearchParams()
+
+  urlencoded.append("newsletter", data.newsletter ? '1' : '0')
+
+  const url = backendUrl(endpoints.API_REQ_PROFILE_SIMPLE_NEWSLETTER)
+
+  const response = await fetch(url, {
+    cache: "no-store",
+    method: "POST",
+    credentials: "include",
+    headers,
+    body: urlencoded,
+  })
+
+  return handleResponse<MessageResponse>(response).then(data => data)
+}
+
+export async function apiProfileChangePrize(data: { prize: boolean }): Promise<MessageResponse> {
+  const token = (await getToken())?.value
+
+  const headers: Record<string, string> = {
+    "Content": "application/json",
+    'Content-Type': "application/x-www-form-urlencoded",
+  }
+
+  if (token) {
+    headers[ "Authorization" ] = `Bearer ${token}`
+  }
+
+  const urlencoded = new URLSearchParams()
+
+  urlencoded.append("prize", data.prize ? '1' : '0')
+
+  const url = backendUrl(endpoints.API_REQ_PROFILE_SIMPLE_PRIZE)
+
+  const response = await fetch(url, {
+    cache: "no-store",
+    method: "POST",
+    credentials: "include",
+    headers,
+    body: urlencoded,
+  })
+
+  return handleResponse<MessageResponse>(response).then(data => data)
+}
+
+
 export async function apiProfilePersonalData(credentials: { birthyear: string, postalCode: string }): Promise<MessageResponse> {
   const token = (await getToken())?.value
 

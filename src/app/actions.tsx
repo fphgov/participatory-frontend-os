@@ -1,6 +1,6 @@
 'use server'
 
-import { apiLoginUser, apiLostPassword, apiResetPasswordChange, apiRegistration, apiProfileChangePassword, apiProfileActivate, apiProfileSaving, apiIdeaSubmission, apiProfilePersonalData, apiProfileHearAbout } from "@/lib/api-requests"
+import { apiLoginUser, apiLostPassword, apiResetPasswordChange, apiRegistration, apiProfileChangePassword, apiProfileActivate, apiProfileSaving, apiIdeaSubmission, apiProfilePersonalData, apiProfileHearAbout, apiProfileChangeNewsletter, apiProfileChangePrize } from "@/lib/api-requests"
 import ServerFormData from 'form-data'
 
 export async function loginFom(formData: FormData) {
@@ -130,6 +130,60 @@ export async function passwordResetForm(data: any) {
   try {
     try {
       const response = await apiResetPasswordChange(data)
+
+      if (response.message) {
+        success = true
+        successMessage = response.message
+      }
+    } catch (e: any) {
+      try {
+        jsonError = JSON.parse(e.message)
+      } catch (jError: any) {
+        if (typeof e?.message === "string") {
+          error = e.message
+        }
+      }
+    }
+
+    return { jsonError, error, success, successMessage }
+  } catch (e) {
+    return { message: 'Váratlan hiba történt, kérünk próbáld később' }
+  }
+}
+
+export async function profileChangeNewsletterForm(data: any) {
+  let jsonError, error, success = false, successMessage = ''
+
+  try {
+    try {
+      const response = await apiProfileChangeNewsletter(data)
+
+      if (response.message) {
+        success = true
+        successMessage = response.message
+      }
+    } catch (e: any) {
+      try {
+        jsonError = JSON.parse(e.message)
+      } catch (jError: any) {
+        if (typeof e?.message === "string") {
+          error = e.message
+        }
+      }
+    }
+
+    return { jsonError, error, success, successMessage }
+  } catch (e) {
+    return { message: 'Váratlan hiba történt, kérünk próbáld később' }
+  }
+}
+
+export async function profileChangePrizeForm(data: any) {
+  let jsonError, error, success = false, successMessage = ''
+
+  try {
+    try {
+      const response = await apiProfileChangePrize(data)
 
       if (response.message) {
         success = true

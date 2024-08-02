@@ -12,6 +12,9 @@ import SectionBoxDetails from "@/components/profile/SectionBoxDetails"
 import PersonalDataForm from "./personal-data-form"
 import { IUserPreference } from "@/models/userPreference.model"
 import HearAboutForm from "./hear-about-form"
+import Checkbox from "@/components/common/form-element/Checkbox"
+import NewsletterChangeForm from "./newsletter-change-form"
+import PrizeChangeForm from "./prize-change-form"
 
 type ProfilePageData = {
   profile: IUser|null
@@ -43,6 +46,8 @@ async function getData(): Promise<ProfilePageData> {
 export default async function ProfilePage() {
   const { profile, profilePreference } = await getData()
 
+  console.log(profilePreference)
+
   if (! (profile && profilePreference)) {
     return notFound()
   }
@@ -57,11 +62,11 @@ export default async function ProfilePage() {
           <div className="row">
             <div className="offset-xl-2 col-lg-12 col-xl-8">
 
-              <SectionBox footer={<div className="section-newsletter"><input id="newsletter" type="checkbox" /> <label htmlFor="newsletter"> Szeretnék feliratkozni a hírlevélre</label></div>}>
+              <SectionBox footer={<div className="section-newsletter"><NewsletterChangeForm profilePreference={profilePreference} /></div>}>
                 <ProfileBox profile={profile} />
               </SectionBox>
 
-              <SectionBox footer={<div className="section-newsletter"><input id="prize" type="checkbox" /> <label htmlFor="prize"> Szeretnék részt venni a nyeremény-játékban</label></div>}>
+              <SectionBox footer={<div className="section-prize"><PrizeChangeForm profilePreference={profilePreference} /></div>}>
                 <div className="box-profile">
                   <div className="profile-item">
                     <div className="profile-item-name">Nyerenyjáték</div>

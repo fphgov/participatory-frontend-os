@@ -18,6 +18,8 @@ const endpoints = {
   API_REQ_PROFILE_STATISTICS: '/api/statistics',
   API_REQ_PROFILE_IDEA: '/api/user/idea',
   API_REQ_PROFILE_DELETE: '/api/user/delete',
+  API_REQ_PROFILE_SIMPLE_NEWSLETTER: '/api/user/simple/newsletter',
+  API_REQ_PROFILE_SIMPLE_PRIZE: '/api/user/simple/prize',
   API_REQ_PASSWORD: '/api/user/password',
   API_REQ_PERSONAL: '/api/user/personal',
   API_REQ_IDEA: '/api/ideas/:id',
