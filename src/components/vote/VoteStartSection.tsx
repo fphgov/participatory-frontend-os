@@ -22,6 +22,14 @@ export default function VoteStartSection({ title, subtitle = undefined, rand = u
 
   const randParam = rand ? rand : generateRandomValue().toString()
 
+  const getVotes = (categoryCode: string) => {
+    let counts: Record<string, number> = {}
+
+    votedList.forEach((x) => { counts[x] = (counts[x] || 0) + 1 })
+
+    return counts?.[categoryCode] >= 3 ? true : false
+  }
+
   return (
     <>
       <div className={`vote-start-section${isContinue ? ' vote-continue-section' : ''}`}>
@@ -37,7 +45,7 @@ export default function VoteStartSection({ title, subtitle = undefined, rand = u
               <div className="row">
                 {categories.map(category => (
                   <div key={category.code} className="col-md-6">
-                    <CategoryCard themeName={category.name} href={`/szavazas?theme=${category.code}&rand=${randParam}`} info={category.info} description={category.description} voted={votedList.includes(category.code)} />
+                    <CategoryCard themeName={category.name} href={`/szavazas?theme=${category.code}&rand=${randParam}`} info={category.info} description={category.description} voted={getVotes(category.code)} />
                   </div>
                 ))}
               </div>

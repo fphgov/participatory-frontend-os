@@ -1,8 +1,9 @@
 "use client"
 
 import { apiVote } from "@/lib/api-requests"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Error from "@/components/common/Error"
+import { useModalHardContext } from "@/context/modalHard"
 
 type VoteButtonProps = {
   showVoteButton: boolean
@@ -15,7 +16,19 @@ type VoteButtonProps = {
 }
 
 export default function VoteButton({ showVoteButton, disableVoteButton, token, errorVoteable, projectId, style = 'default' }: VoteButtonProps): JSX.Element {
+  const { openModalHard, setOpenModalHard, setDataModalHard } = useModalHardContext()
+
+  const [voted, setVoted] = useState(false)
   const [error, setError] = useState('')
+
+  function handleOpenModal(title: string, count: number|string) {
+    setDataModalHard({
+      title,
+      content: `Ebben a kategóriában még ennyi szavazatod maradt: ${count}`,
+    })
+
+    setOpenModalHard(true)
+  }
 
   const sendVoteHandler = async (_token: string) => {
     if (! _token) {
@@ -28,7 +41,7 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
       const response = await apiVote(projectId)
 
       if (response.message) {
-        // window.location.href = '/szavazas-sikeres'
+        handleOpenModal(response.message, response?.data?.remainingVote?.[0]?.votes)
       }
     } catch (e: any) {
       if (typeof e?.message === "string") {
@@ -36,6 +49,18 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
       }
     }
   }
+
+  useEffect(() => {
+    if (! disableVoteButton && openModalHard) {
+      setVoted(true)
+    }
+  }, [openModalHard, disableVoteButton])
+
+  useEffect(() => {
+    if (voted && ! openModalHard) {
+      window.location.reload();
+    }
+  }, [voted, openModalHard])
 
   return (
     <>

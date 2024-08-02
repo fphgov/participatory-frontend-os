@@ -14,7 +14,9 @@ import { config } from "@fortawesome/fontawesome-svg-core"
 import { cookies } from 'next/headers'
 import CookieConsentPopup from '@/components/common/CookieConsentPopup'
 import Modal from '@/components/common/Modal'
+import ModalHard from '@/components/common/ModalHard'
 import { ModalContextProvider } from '@/context/modal'
+import { ModalHardContextProvider } from '@/context/modalHard'
 
 config.autoAddCss = false
 
@@ -87,19 +89,22 @@ export default function RootLayout({
         </> : null}
       </head>
 
-      <ModalContextProvider>
-        <body className={`app ${font.className}`}>
-          <Modal />
+      <ModalHardContextProvider>
+        <ModalContextProvider>
+          <body className={`app ${font.className}`}>
+            <Modal />
+            <ModalHard />
 
-          <Header loggedIn={typeof cookieStore.get('token')?.value === 'string'} />
+            <Header loggedIn={typeof cookieStore.get('token')?.value === 'string'} />
 
-          {children}
+            {children}
 
-          <Footer />
+            <Footer />
 
-          <ScrollContent />
-        </body>
-      </ModalContextProvider>
+            <ScrollContent />
+          </body>
+        </ModalContextProvider>
+      </ModalHardContextProvider>
     </html>
   )
 }

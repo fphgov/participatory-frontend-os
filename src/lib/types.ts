@@ -16,6 +16,15 @@ export interface MessageResponse {
   message: string
 }
 
+export interface VoteResponse {
+  message: string
+  data: {
+    remainingVote: [
+      { id: number, votes: number }
+    ]
+  }
+}
+
 export interface UserResponse {
   data: IUser
 }

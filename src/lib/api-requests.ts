@@ -21,7 +21,8 @@ import {
   OkResponse,
   VoteStatusResponse,
   VotedProjectListResponse,
-  UserPreferenceResponse
+  UserPreferenceResponse,
+  VoteResponse
 } from "@/lib/types"
 import { IUser } from "@/models/user.model"
 import { IIdea } from '@/models/idea.model'
@@ -477,7 +478,7 @@ export async function apiCheckPhase(): Promise<IPhaseStatus> {
   return handleResponse<PhaseStatusResponse>(response).then(data => data.data)
 }
 
-export async function apiVote(projectId: number|string): Promise<IssueResponse|MessageResponse> {
+export async function apiVote(projectId: number|string): Promise<VoteResponse> {
   const token = (await getToken())?.value
 
   const headers: Record<string, string> = {
@@ -503,7 +504,7 @@ export async function apiVote(projectId: number|string): Promise<IssueResponse|M
     headers,
   })
 
-  return handleResponse<IssueResponse|MessageResponse>(response).then(data => data)
+  return handleResponse<VoteResponse>(response).then(data => data)
 }
 
 export async function apiCheckVote(id: number|string|undefined): Promise<IssueResponse|OkResponse> {
