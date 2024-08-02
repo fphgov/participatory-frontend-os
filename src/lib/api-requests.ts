@@ -633,15 +633,23 @@ export async function apiIdeasFilter(data: Record<string, string>): Promise<Filt
 }
 
 export async function apiVoteablePlansData(data: Record<string, string>): Promise<PlanListResponse> {
+  const token = (await getToken())?.value
+
   const url = backendUrl(endpoints.API_REQ_VOTE_LIST + '?' + new URLSearchParams(data as Record<string, string>).toString())
+
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  }
+
+  if (token) {
+    headers[ "Authorization" ] = `Bearer ${token}`
+  }
 
   const response = await fetch(url, {
     cache: "no-store",
     method: "GET",
     credentials: "include",
-    headers: {
-      'Content': "application/json",
-    },
+    headers,
   })
 
   return handleResponse<PlanListResponse>(response).then(data => data)

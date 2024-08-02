@@ -120,7 +120,7 @@ export default async function VotePage({ searchParams }: IProps) {
             <div className="container">
               <div className="row">
                 {projectList?._embedded?.projects.map((project, i) => <IdeasWrapper
-                  className="col-sm-12 col-sm-12 col-md-6 col-lg-4 col-xl-3"
+                  className={`col-sm-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 ${project.voted ? 'voted' : ''}`}
                   ideaPreLink="/projektek"
                   key={i}
                   idea={project}
@@ -128,7 +128,10 @@ export default async function VotePage({ searchParams }: IProps) {
                   showVoted={false}
                   showDescription={false}
                   extraButton={
-                    <VoteButtonCard showVoteButton={true} disableVoteButton={false} errorVoteable={""} token={token} projectId={project.id} />
+                    <VoteButtonCard showVoteButton={!project.voted} disableVoteButton={false} errorVoteable={""} token={token} projectId={project.id} />
+                  }
+                  footerExtend={
+                    project.voted ? <div className="prop-build">Már szavaztál erre az ötletre</div> : null
                   }
                   />)}
 

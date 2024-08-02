@@ -11,6 +11,7 @@ type IdeasWrapperProps = {
   tags?: ITag[],
   handleClick?: () => void|undefined
   extraButton?: React.ReactNode
+  footerExtend?: React.ReactNode
   showStatus?: boolean
   showCampaign?: boolean
   showVoted?: boolean
@@ -26,6 +27,7 @@ export default function IdeasWrapper({
   handleClick,
   className = null,
   extraButton = null,
+  footerExtend = null,
   showStatus = true,
   showCampaign = false,
   showDescription = true,
@@ -40,6 +42,7 @@ export default function IdeasWrapper({
         tags={tags}
         handleClick={handleClick}
         extraButton={extraButton}
+        footerExtend={footerExtend}
         showStatus={showStatus}
         showVoted={showVoted}
         showCampaign={showCampaign}

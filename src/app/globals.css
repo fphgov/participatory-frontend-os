@@ -553,6 +553,22 @@ input.btn[disabled]:hover {
   margin-right: 8px;
 }
 
+.btn.btn-trash {
+  display: flex;
+  color: #E5332A;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.btn.btn-trash::before {
+  content: '';
+  background: url('../../public/images/icon-trash.svg');
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
 .btn.btn-danger-solid {
   color: #E5332A;
   font-weight: bold;
@@ -1282,6 +1298,14 @@ p.info span {
   border-radius: 8px;
 }
 
+.voted .prop-wrapper {
+  border: 1px solid #29CE95;
+}
+
+.voted .prop-wrapper .prop-build {
+  margin-bottom: 24px;
+}
+
 .prop-wrapper-auto {
   height: auto;
 }
@@ -1291,7 +1315,7 @@ p.info span {
 }
 
 .prop-wrapper.prop-wrapper-voted {
-  background: transparent;
+  background: #FFF;
   border: 1px solid rgba(14, 166, 206, 0.3);
 }
 
@@ -1470,6 +1494,18 @@ p.info span {
   align-items: center;
   font-weight: 600;
   text-transform: uppercase;
+}
+
+.vote-start-section .prop-theme {
+  text-transform: none;
+}
+
+.vote-start-section .prop-wrapper.prop-wrapper-voted {
+  border: 1px solid #29CE95;
+}
+
+.vote-start-section .prop-wrapper.prop-wrapper-voted .post-more-wrapper {
+  flex-direction: column;
 }
 
 .prop-info {
@@ -4619,7 +4655,7 @@ p.subinfo {
   font-style: normal;
   font-weight: 700;
   line-height: 24px;
-  margin: 0;
+  margin: 0 0 12px 0;
 }
 
 .vote-start-section .prop-theme {
@@ -4648,21 +4684,22 @@ p.subinfo {
 }
 
 .card-voted-text {
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
-  font-weight: 600;
-  line-height: 26px;
+  font-weight: 700;
+  line-height: 22px;
   letter-spacing: 0.18px;
   display: flex;
   align-items: center;
+  margin: 18px 0 6px 0;
 }
 
 .card-voted-text::before {
   content: '';
   background-image: url('../../public/images/icon-circle-accept-green_36.svg');
   background-repeat: no-repeat;
-  width: 36px;
-  height: 36px;
+  width: 18px;
+  height: 18px;
   display: block;
   margin-right: 8px;
   background-size: contain;
@@ -5633,6 +5670,10 @@ input[type="tel"] {
 
   .hero-page h1 {
     text-align: left;
+  }
+
+  .page-vote .hero-page h1 {
+    text-align: center;
   }
 
   .vote-wrapper-style-hero {

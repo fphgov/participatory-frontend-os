@@ -36,6 +36,6 @@ export default function ProfileDeleteButton(): JSX.Element {
   }
 
   return (
-    <button className="btn btn-danger" onClick={deleteAccount}>Kérem a fiókom törlését</button>
+    <button className="btn btn-primary-solid btn-solid-underline btn-trash" onClick={deleteAccount}>Fiók törlése</button>
   )
 }

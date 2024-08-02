@@ -61,6 +61,15 @@ export default async function ProfilePage() {
                 <ProfileBox profile={profile} />
               </SectionBox>
 
+              <SectionBox footer={<div className="section-newsletter"><input id="prize" type="checkbox" /> <label htmlFor="prize"> Szeretnék részt venni a nyeremény-játékban</label></div>}>
+                <div className="box-profile">
+                  <div className="profile-item">
+                    <div className="profile-item-name">Nyerenyjáték</div>
+                    <div className="profile-item-value">Nyerj értékes ajándékokat! <Link href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatkezelesi_tajekoztato.pdf`} prefetch={false} download={true} target="_blank">Részletek itt</Link>.</div>
+                  </div>
+                </div>
+              </SectionBox>
+
               <SectionBoxDetails summary="Ötlet beadásához szükséges adatok">
                 <div className="box-profile">
                   <div className="profile-item">

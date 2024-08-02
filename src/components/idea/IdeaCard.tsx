@@ -12,6 +12,7 @@ type IdeaCardProps = {
   tags?: ITag[],
   handleClick?: () => void|undefined
   extraButton?: React.ReactNode
+  footerExtend?: React.ReactNode
   autoHeight?: boolean
   showStatus?: boolean
   showVoted?: boolean
@@ -27,6 +28,7 @@ export default function IdeaCard({
   tags,
   handleClick,
   extraButton = false,
+  footerExtend = false,
   autoHeight = false,
   showStatus = true,
   showVoted = false,
@@ -73,6 +75,8 @@ export default function IdeaCard({
             <>
               {/* <hr /> */}
 
+              {footerExtend ? footerExtend : null}
+
               <footer className="post-card-meta">
                 {showVoted && idea?.voted !== null || showCampaign || showStatus ? <>
                   <div>
@@ -87,6 +91,7 @@ export default function IdeaCard({
                   <Link href={`${ideaPreLink}/${idea.id}`} className="btn post-more post-more-outline" onClick={handleClick}>Megnézem</Link>
                 </div>
               </footer>
+
             </> : null}
         </div>
       </div>
