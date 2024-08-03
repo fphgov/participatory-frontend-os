@@ -1,6 +1,6 @@
 export type IUserPreference = {
   birthyear: string;
   postalCode: string;
-  prize: string;
+  prize: boolean;
   hearAbout: string;
 }

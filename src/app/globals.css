@@ -5463,6 +5463,32 @@ input[type="tel"] {
   margin-top: 6px;
 }
 
+.vote-info-wrapper {
+  margin: 36px 0 12px 0;
+}
+
+.section.section-block.section-block-full-width {
+  margin: 0;
+}
+
+.section-block-full-width details.section-more-2 {
+  border-bottom: 1px solid #DDDDDD;
+}
+
+.section-block-full-width summary {
+  padding: 24px 0 !important;
+}
+
+.section-block-full-width details.section-more-2 summary::after {
+  right: 0;
+  top: 24px;
+}
+
+.section-block-full-width details.section-more-2[open] .section-content {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
 @media screen and (min-width: 1440px) {
   .container,
   .container-sm,

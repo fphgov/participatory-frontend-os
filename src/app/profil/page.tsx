@@ -12,7 +12,6 @@ import SectionBoxDetails from "@/components/profile/SectionBoxDetails"
 import PersonalDataForm from "./personal-data-form"
 import { IUserPreference } from "@/models/userPreference.model"
 import HearAboutForm from "./hear-about-form"
-import Checkbox from "@/components/common/form-element/Checkbox"
 import NewsletterChangeForm from "./newsletter-change-form"
 import PrizeChangeForm from "./prize-change-form"
 
@@ -45,8 +44,6 @@ async function getData(): Promise<ProfilePageData> {
 
 export default async function ProfilePage() {
   const { profile, profilePreference } = await getData()
-
-  console.log(profilePreference)
 
   if (! (profile && profilePreference)) {
     return notFound()

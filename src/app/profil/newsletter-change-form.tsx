@@ -6,8 +6,13 @@ import Error from "@/components/common/Error"
 import ErrorMini from '@/components/common/ErrorMini'
 import { profileChangeNewsletterForm } from '@/app/actions'
 import Checkbox from '@/components/common/form-element/Checkbox'
+import { IUserPreference } from '@/models/userPreference.model'
 
-export default function NewsletterChangeForm(): JSX.Element {
+type NewsletterChangeFormProps = {
+  profilePreference: IUserPreference
+}
+
+export default function NewsletterChangeForm({ profilePreference }: NewsletterChangeFormProps): JSX.Element {
   const defaultFormData = {
     newsletter: false,
   }

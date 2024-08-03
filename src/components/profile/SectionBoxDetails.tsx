@@ -4,11 +4,12 @@ type SectionBoxDetailsProps = {
   children: React.ReactNode
   footer?: React.ReactNode
   summary?: React.ReactNode | string
+  fullWidth?: boolean
 }
 
-export default function SectionBoxDetails({ children, footer, summary }: SectionBoxDetailsProps): JSX.Element {
+export default function SectionBoxDetails({ children, footer, summary, fullWidth = false }: SectionBoxDetailsProps): JSX.Element {
   return (
-    <div className="section section-block section-block-details">
+    <div className={`section section-block section-block-details ${fullWidth ? 'section-block-full-width' : ''}`}>
       <details className="section-more-2">
         <summary>
           {summary}

@@ -49,8 +49,6 @@ export default function PrizeChangeForm({ profilePreference }: PrizeChangeFormmP
 
     const res = await profileChangePrizeForm(formData)
 
-    console.log(res)
-
     if (res?.success && res?.successMessage) {
       notify(res.successMessage)
     } else {
