@@ -53,7 +53,7 @@ export default function ModalHard(): JSX.Element {
           <div className="modal-title">{dataModalHard.title}</div>
           <div className="modal-content">{dataModalHard.content}</div>
 
-          <button type="button" className="btn btn-secondary" onClick={() => { closeModal() }}>Rendben</button>
+          {dataModalHard.showCancelButton ? <button type="button" className="btn btn-secondary" onClick={() => { closeModal() }}>Rendben</button> : null}
         </div>
       </div>
     </>

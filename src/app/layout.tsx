@@ -17,6 +17,7 @@ import Modal from '@/components/common/Modal'
 import ModalHard from '@/components/common/ModalHard'
 import { ModalContextProvider } from '@/context/modal'
 import { ModalHardContextProvider } from '@/context/modalHard'
+import AuthModal from '@/components/common/AuthModal'
 
 config.autoAddCss = false
 
@@ -94,6 +95,7 @@ export default function RootLayout({
           <body className={`app ${font.className}`}>
             <Modal />
             <ModalHard />
+            <AuthModal />
 
             <Header loggedIn={typeof cookieStore.get('token')?.value === 'string'} />
 

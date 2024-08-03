@@ -537,6 +537,10 @@ input.btn[disabled]:hover {
   text-decoration: underline;
 }
 
+.btn.btn-solid-padding {
+  padding: 6px 18px;
+}
+
 .btn.btn-pdf {
   display: flex;
   color: #12326E;
@@ -5189,6 +5193,12 @@ span.cc_highlight:hover {
   max-width: 327px;
 }
 
+.modal-hard-wrapper .modal-inner a,
+.modal-hard-wrapper .modal-inner button,
+.modal-hard-wrapper .modal-inner .btn {
+  color: #FFF;
+}
+
 .modal-title {
   font-size: 24px;
   font-style: normal;
@@ -5238,6 +5248,16 @@ span.cc_highlight:hover {
   line-height: 24px;
 }
 
+.modal-content p {
+  margin: 24px 0;
+  text-align: left;
+}
+
+.modal-content hr {
+  margin: 0;
+  border-top: 1px solid #FFF;
+}
+
 .modal-button-close {
   background-image: url('../../public/images/icon-modal-close.svg');
   background-repeat: no-repeat;
@@ -5249,6 +5269,36 @@ span.cc_highlight:hover {
   top: -13px;
   right: -13px;
   cursor: pointer;
+}
+
+.modal-content label {
+  color: #fff !important;
+  text-align: left;
+  font-weight: 600;
+}
+
+.modal-content .modal-links {
+  text-align: left;
+}
+
+.modal-content .modal-links a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.modal-content .modal-links a:hover {
+  text-decoration: none;
+}
+
+.modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 24px 0 0 0;
+}
+
+.modal-hard-wrapper .modal-actions button {
+  margin: 0;
 }
 
 .page-vote-success-share {

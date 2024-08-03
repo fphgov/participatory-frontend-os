@@ -12,7 +12,7 @@ export default function Header({ loggedIn }: IHeader): JSX.Element {
   // const rand = generateRandomValue().toString()
 
   const menu = [
-    { title: "Tudnivalók a szavazáshoz", href: "/oldal/bovebben-a-kozossegi-koltsegvetesrol", outside: false },
+    { title: "Tudnivalók a szavazáshoz", href: "/tudnivalok-a-szavazasrol", outside: false },
     { title: "Hírek, rendezvények", href: "/hirek", outside: false },
     // { title: "Ötletek", href: "#", outside: false, submenuItems: [
     //   { title: "Beküldött", href: `/otletek?campaign=4&rand=${rand}`, outside: true },
@@ -20,10 +20,10 @@ export default function Header({ loggedIn }: IHeader): JSX.Element {
     //   { title: "Megvalósuló", href: `/projektek?rand=${rand}`, outside: false },
     // ] },
     // { title: "Ötletbeküldés", href: "/bekuldesi-informacio", outside: false, highlight: true },
-    { title: "Belépés", href: "/bejelentkezes", highlight: false, onHideLoggedIn: true, onHideLoggedOut: false, onHideMobile: true, icon: 'account' },
+    { title: "Belépés", href: "?auth=login", highlight: false, onHideLoggedIn: true, onHideLoggedOut: false, onHideMobile: true, icon: 'account' },
     { title: "Fiókom", href: "/profil", highlight: false, onHideLoggedIn: false, onHideLoggedOut: true, outside: false, profile: false, icon: 'account' },
     { title: "Szavazás", href: "/szavazas-inditasa", outside: false, highlight: true },
-    { title: "Belépés", href: "/bejelentkezes", outside: false, highlight: false, onHideLoggedIn: true, secondHighlight: true, onHideDesktop: true },
+    { title: "Belépés", href: "?auth=login", outside: false, highlight: false, onHideLoggedIn: true, secondHighlight: true, onHideDesktop: true },
     { title: "Regisztráció", href: "/regisztracio", outside: false, highlight: false, onHideLoggedIn: true, secondHighlight: true, onHideDesktop: true },
     { title: "Kijelentkezés", href: "/kijelentkezes", outside: false, highlight: false, onHideLoggedOut: true, secondHighlight: true, onHideDesktop: true },
   ]

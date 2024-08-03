@@ -22,6 +22,7 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
     setDataModalHard({
       title,
       content: `Ebben a kategóriában még ennyi szavazatod maradt: ${count}`,
+      showCancelButton: true
     })
 
     setOpenModalHard(true)
@@ -31,6 +32,7 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
     setDataModalHard({
       title,
       content,
+      showCancelButton: true
     })
 
     setOpenModalHard(true)

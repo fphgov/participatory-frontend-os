@@ -25,6 +25,7 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
     setDataModalHard({
       title,
       content: `Ebben a kategóriában még ennyi szavazatod maradt: ${count}`,
+      showCancelButton: true
     })
 
     setOpenModalHard(true)

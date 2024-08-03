@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState } from "react"
+import React, { createContext, useContext, useState } from "react"
 
 type ModalHardContextProviderProps = {
   children: React.ReactNode
@@ -8,7 +8,8 @@ type ModalHardContextProviderProps = {
 
 type IDataModalHard = {
   title: string
-  content: string
+  content: string | React.ReactNode
+  showCancelButton: boolean
 }
 
 export type ModalHardContextContent = {
@@ -24,7 +25,8 @@ export const ModalHardContextProvider = ({ children }: ModalHardContextProviderP
   const [openModalHard, setOpenModalHard] = useState<boolean>(false)
   const [dataModalHard, setDataModalHard] = useState<IDataModalHard>({
     title: '',
-    content: ''
+    content: '',
+    showCancelButton: true
   })
 
   return (
