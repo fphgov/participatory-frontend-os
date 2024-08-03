@@ -1,6 +1,7 @@
 'use client'
 
 import { SetStateAction, useEffect, useState } from "react"
+// @ts-ignore
 import { ReCaptcha, loadReCaptcha } from "@icetee/react-recaptcha-v3"
 import Link from "next/link"
 import Error from "@/components/common/Error"

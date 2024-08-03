@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react"
+// @ts-ignore
 import { ReCaptcha, loadReCaptcha } from "@icetee/react-recaptcha-v3"
 import Error from "@/components/common/Error"
 import ErrorMini from '@/components/common/ErrorMini'

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
+// @ts-ignore
 import { ReCaptcha, loadReCaptcha } from "@icetee/react-recaptcha-v3"
 import Error from "@/components/common/Error"
 import ErrorMini from '@/components/common/ErrorMini'
