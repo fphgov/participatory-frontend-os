@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
+// @ts-ignore
 import randomId from 'random-id'
 import { usePathname } from 'next/navigation'
 import NavigationIcon from '@/components/common/NavigationIcon'

@@ -4,7 +4,6 @@ import Error from "@/components/common/Error"
 import ErrorMini from "@/components/common/ErrorMini"
 // @ts-ignore
 import { ReCaptcha, loadReCaptcha } from "@icetee/react-recaptcha-v3"
-import { apiLostPassword } from "@/lib/api-requests"
 import { rmAllCharForEmail } from "@/utilities/removeSpecialCharacters"
 import { useEffect, useState } from "react"
 import ScrollTo from "@/components/common/ScrollTo"

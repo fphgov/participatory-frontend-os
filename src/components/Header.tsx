@@ -1,3 +1,4 @@
+// @ts-ignore
 import randomId from 'random-id'
 import Image from 'next/image'
 import { MobileNavigation, Navigation } from '@/ui/Navigation'
