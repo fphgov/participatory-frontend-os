@@ -125,7 +125,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
 
               <div className="modal-links">
                 {isLoginTab ? <Link href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatkezelesi_tajekoztato.pdf`} target="_blank" rel="noopener noreferrer">Adatkezelési tájékoztató</Link> : null}
-                {!isLoginTab ? <Link href='/elfelejtett-jelszo'>Elfelejtett jelszó</Link> : null}
+                {!isLoginTab ? <Link href="/elfelejtett-jelszo">Elfelejtett jelszó</Link> : null}
               </div>
 
               <div className="modal-actions">
