@@ -11,7 +11,7 @@ export default function AuthModal(): JSX.Element {
 
   return (
     <>
-      {auth === "login" ? <LoginModalForm searchParams={searchParams} /> : null}
+      {auth === "login" || auth === "password" ? <LoginModalForm searchParams={searchParams} /> : null}
     </>
   )
 }

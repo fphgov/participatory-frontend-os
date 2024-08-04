@@ -5301,6 +5301,32 @@ span.cc_highlight:hover {
   margin: 0;
 }
 
+.modal-tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.modal-tabs a {
+  width: 100%;
+  text-decoration: none;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 22px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid transparent;
+}
+
+.modal-tabs a.active,
+.modal-tabs a:hover {
+  border-bottom: 2px solid #0EA6CE;
+}
+
+.modal-content .error-message {
+  margin: 0 0 24px 0;
+}
+
 .page-vote-success-share {
   margin: 52px 0 0 0;
   display: flex;

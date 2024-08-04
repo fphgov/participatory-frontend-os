@@ -1,6 +1,6 @@
 'use client'
 
-import { SetStateAction, useEffect, useState } from "react"
+import { SetStateAction, useCallback, useEffect, useState } from "react"
 // @ts-ignore
 import { ReCaptcha, loadReCaptcha } from "@icetee/react-recaptcha-v3"
 import Link from "next/link"
@@ -25,6 +25,16 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
   const [errorObject, setErrorObject] = useState<Record<string, string>|undefined>(undefined)
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState('')
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+      params.set(name, value)
+
+      return params.toString()
+    },
+    [searchParams]
+  )
 
   async function onLogin(formData: FormData) {
     setError('')
@@ -60,16 +70,28 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
     router.replace(`${pathname}?${nextSearchParams}`)
   }
 
-  const getModalContent = () => {
+  const getModalContent = (tab: string) => {
+    const isLoginTab = tab === 'login'
+
     return (
       <>
         <form className="" action={onLogin}>
           <fieldset>
+            <input type="hidden" name="type" value={searchParams.get('auth')?.toString() || 'login'} />
+
             {error ? <Error message={error} /> : null}
 
-            <hr />
+            <div className="modal-tabs">
+              <Link href={pathname + '?' + createQueryString('auth', 'login')} className={`${isLoginTab ? 'active' : ''}`}>
+                Hitelesítő e-maillel
+              </Link>
+              <Link href={pathname + '?' + createQueryString('auth', 'password')} className={`${!isLoginTab ? 'active' : ''}`}>
+                Jelszóval
+              </Link>
+            </div>
 
-            <p>Ha már korábban regisztráltál itt, add meg email címed és jelszavad a belépéshez!</p>
+            {!isLoginTab ? <p>Ha már korábban regisztráltál itt, add meg email címed és jelszavad a belépéshez!</p> : null}
+            {isLoginTab ? <p>Ha már korábban regisztráltál itt, add meg email címed és elküldjük a belépéshez szükséges linket!</p> : null}
 
             <div className="form-wrapper">
               <div className="input-wrapper">
@@ -81,14 +103,16 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
                 }) : null}
               </div>
 
-              <div className="input-wrapper">
-                <label htmlFor="password">Jelszó</label>
-                <input type="password" placeholder="Jelszó" name="password" id="password" />
+              {!isLoginTab ? <>
+                <div className="input-wrapper">
+                  <label htmlFor="password">Jelszó</label>
+                  <input type="password" placeholder="Jelszó" name="password" id="password" />
 
-                {errorObject && errorObject.password ? Object.values(errorObject.password).map((err, i) => {
-                  return <ErrorMini key={i} error={err} increment={`password-${i}`} />
-                }) : null}
-              </div>
+                  {errorObject && errorObject.password ? Object.values(errorObject.password).map((err, i) => {
+                    return <ErrorMini key={i} error={err} increment={`password-${i}`} />
+                  }) : null}
+                </div>
+              </> : null}
 
               <ReCaptcha
                 ref={(ref: any) => setRecaptcha(ref)}
@@ -100,7 +124,8 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
               />
 
               <div className="modal-links">
-                <Link href='/elfelejtett-jelszo' title="Elfelejtett jelszó">Elfelejtett jelszó</Link>
+                {isLoginTab ? <Link href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatkezelesi_tajekoztato.pdf`} target="_blank" rel="noopener noreferrer">Adatkezelési tájékoztató</Link> : null}
+                {!isLoginTab ? <Link href='/elfelejtett-jelszo'>Elfelejtett jelszó</Link> : null}
               </div>
 
               <div className="modal-actions">
@@ -119,19 +144,24 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
     )
   }
 
+  const renderContent = () => {
+    setDataModalHard({
+      title: 'Belépés',
+      content: getModalContent(searchParams.get('auth')?.toString() || 'login'),
+      showCancelButton: false
+    })
+
+    setOpenModalHard(true)
+  }
+
   useEffect(() => {
     // @ts-ignore
     loadReCaptcha(process.env.NEXT_PUBLIC_SITE_KEY, (recaptchaToken: string) => {
       setRecaptchaToken(recaptchaToken)
     })
 
-    setDataModalHard({
-      title: 'Belépés',
-      content: getModalContent(),
-      showCancelButton: false
-    })
+    renderContent()
 
-    setOpenModalHard(true)
     setLoaded(true)
   }, [])
 
@@ -139,7 +169,20 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
     if (! openModalHard && loaded) {
       removeSearchParams()
     }
-  }, [openModalHard])
+  }, [openModalHard, loaded])
+
+  useEffect(() => {
+    if (loaded) {
+      setError('')
+      renderContent()
+    }
+  }, [loaded, searchParams])
+
+  useEffect(() => {
+    if (loaded) {
+      renderContent()
+    }
+  }, [loaded, error])
 
   return <></>
 }
