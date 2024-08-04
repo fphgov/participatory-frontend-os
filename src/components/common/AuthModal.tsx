@@ -1,20 +1,25 @@
 "use client"
 
+import { useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import LoginModalForm from "@/components/common/LoginModalForm"
 import { useModalHardContext } from '@/context/modalHard'
 
-export default function AuthModal(): JSX.Element {
+type AuthModalProps = {
+  loggedIn: boolean
+}
+
+export default function AuthModal({ loggedIn }: AuthModalProps): JSX.Element {
   const searchParams = useSearchParams()
   const { setOpenModalHard } = useModalHardContext()
 
   const auth = searchParams.get('auth')
 
-  if (! (auth === "login" || auth === "password")) {
-    setOpenModalHard(false)
-
-    return <></>
-  }
+  useEffect(() => {
+    if (! (auth === "login" || auth === "password") || loggedIn) {
+      setOpenModalHard(false)
+    }
+  }, [auth, loggedIn])
 
   return (
     <>

@@ -95,7 +95,7 @@ export default function RootLayout({
           <body className={`app ${font.className}`}>
             <Modal />
             <ModalHard />
-            <AuthModal />
+            <AuthModal loggedIn={typeof cookieStore.get('token')?.value === 'string'} />
 
             <Header loggedIn={typeof cookieStore.get('token')?.value === 'string'} />
 
