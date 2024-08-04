@@ -114,6 +114,30 @@ export async function apiLoginUser(credentials: ApiLoginUserProps): Promise<{ to
   }
 }
 
+export async function apiLoginUserWithHash(hash: string): Promise<{ token: string | null, message: string }> {
+  const url = backendUrl((endpoints.API_REQ_PROFILE_LOGIN_WITH_MAGIC_LINK || '').toString().replace(':hash', hash))
+
+  const response = await fetch(url, {
+    cache: "no-store",
+    method: "GET",
+    credentials: "include",
+    headers: {
+      'Content': "application/json",
+    },
+  })
+
+  const { token, message } = await handleResponse<UserLoginResponse>(response)
+
+  if (token) {
+    await saveToken(token)
+  }
+
+  return {
+    token,
+    message
+  }
+}
+
 export async function apiProfileData(): Promise<IUser> {
   const token = (await getToken())?.value
 
