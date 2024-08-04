@@ -59,6 +59,7 @@ export interface PlanResponse extends IPlan {
 
 export interface UserLoginResponse {
   token: string
+  message: string
 }
 
 export interface ListLinks {

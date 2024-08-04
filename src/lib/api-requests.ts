@@ -39,6 +39,7 @@ import { IUserPreference } from '@/models/userPreference.model'
 type ApiLoginUserProps = {
   email: string
   password: string
+  type: string
   recaptchaToken: string
 }
 
@@ -80,11 +81,12 @@ async function handleResponse<T>(response: Response): Promise<T> {
   return data as T
 }
 
-export async function apiLoginUser(credentials: ApiLoginUserProps): Promise<string> {
+export async function apiLoginUser(credentials: ApiLoginUserProps): Promise<{ token: string | null, message: string}> {
   const urlencoded = new URLSearchParams()
 
   urlencoded.append("email", credentials.email)
   urlencoded.append("password", credentials.password)
+  urlencoded.append("type", credentials.type)
   urlencoded.append("g-recaptcha-response", credentials.recaptchaToken)
 
   const url = backendUrl(endpoints.API_REQ_LOGIN)
@@ -100,13 +102,16 @@ export async function apiLoginUser(credentials: ApiLoginUserProps): Promise<stri
     body: urlencoded,
   })
 
-  const { token } = await handleResponse<UserLoginResponse>(response)
+  const { token, message } = await handleResponse<UserLoginResponse>(response)
 
   if (token) {
     await saveToken(token)
   }
 
-  return token
+  return {
+    token,
+    message
+  }
 }
 
 export async function apiProfileData(): Promise<IUser> {

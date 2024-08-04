@@ -42,7 +42,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
 
     const res = await loginFom(formData)
 
-    if (res?.success) {
+    if (res?.success && res?.token) {
       if (searchParams.get('project')) {
         window.location.href = '/projektek/' + searchParams.get('project')
       } else if (searchParams.get('from')) {
@@ -50,6 +50,12 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
       } else {
         window.location.href = window.location.origin + window.location.pathname
       }
+    } else if (res?.success && res?.message) {
+      setDataModalHard({
+        title: 'Belépés',
+        content: res.message,
+        showCancelButton: true
+      })
     } else {
       if (res?.message) {
         setError(res.message)

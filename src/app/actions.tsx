@@ -5,16 +5,18 @@ import ServerFormData from 'form-data'
 
 export async function loginFom(formData: FormData) {
   let jsonError, error, success = false
+  let response = null
 
   try {
     const data = {
       email: formData.get('email')?.toString() || '',
       password: formData.get('password')?.toString() || '',
+      type: formData.get('type')?.toString() || 'password',
       recaptchaToken: formData.get('recaptchaToken')?.toString() || '',
     }
 
     try {
-      await apiLoginUser(data)
+      response = await apiLoginUser(data)
 
       success = true
     } catch (e: any) {
@@ -27,7 +29,7 @@ export async function loginFom(formData: FormData) {
       }
     }
 
-    return { jsonError, error, success }
+    return { jsonError, error, success, token: response?.token, message: response?.message }
   } catch (e) {
     return { message: 'Váratlan hiba történt, kérünk próbáld később' }
   }
