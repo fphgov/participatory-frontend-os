@@ -14,14 +14,20 @@ export default function Home() {
             <div className="hero-content">
               <div className="container">
                 <div className="row">
-                  <div className="offset-lg-2 col-lg-8">
-                    <h3>Köszönjük a közel 700 ötletet!</h3>
+                  <div className="col-12">
+                    <h3>Augusztus 21-én indul a szavazás!</h3>
                   </div>
 
-                  <div className="offset-lg-3 col-lg-6">
-                    <p>A 2023/24-es fővárosi közösségi költségvetés ötletbeadási időszaka 2024. január 5-én lezárult. Jelenleg az ötletek szakmai értékelése zajlik, aminek eredményéről minden ötletgazdát emailben értesítünk. A jóváhagyott ötletekre várhatóan 2024 szeptemberében lehet majd szavazni. </p>
+                  <div className="col-12">
+                    <p>
+                      Idén 175 ötlet szerepel a szavazólistán, amelyekre augusztus 21. és október 7. között tudtok szavazni.
+                    </p>
 
-                    <Link className="btn btn-primary btn-headline btn-next" href="/hirek/koszonjuk-hogy-otletet-kuldtetek-be-iden-mi-tortenik-most" target="_blank">Mi történik most?</Link>
+                    <Link
+                      className="btn btn-primary btn-headline btn-next"
+                      href="https://otlet.budapest.hu/hirek/indul-a-kozossegi-koltsegvetes-szavazasi-idoszaka">
+                      Részletek
+                    </Link>
                   </div>
                 </div>
               </div>
