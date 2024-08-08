@@ -219,14 +219,6 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
               </div>
             </div>
           </div>
-
-          <div className="offset-lg-1 col-lg-10">
-            {backHref ? <>
-              <hr className="project-hr" />
-
-              <Link className="btn btn-back" href={backHref}>Vissza a többi ötlethez</Link>
-            </>: null}
-          </div>
         </div>
       </div>
     </div>

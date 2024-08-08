@@ -1,5 +1,6 @@
 import VoteInfoSectionSec from '@/components/home/VoteInfoSectionSec'
 import BannerArea from '@/components/home/BannerArea'
+import Link from 'next/link'
 
 export default function Home() {
   return (

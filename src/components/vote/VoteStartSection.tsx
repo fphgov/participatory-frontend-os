@@ -13,8 +13,8 @@ type VoteStartSectionProps = {
 
 export default function VoteStartSection({ title, subtitle = undefined, rand = undefined, votedList = [], isContinue = false }: VoteStartSectionProps): JSX.Element {
   const categories = [
-    { code: 'LOCAL-SMALL', name: 'Helyi kis ötlet', info: 'Keretösszeg: 400 millió Ft', description: 'Olyan ötletek, amelyeket jellemzően egy, esetenként több konkrét helyszínre javasolt beadójuk, és megvalósításuk költsége nem haladja meg az 50 millió forintot.' },
-    { code: 'LOCAL-BIG', name: 'Helyi nagy ötlet', info: 'Keretösszeg: 240 millió Ft', description: 'Olyan ötletek, amelyeket jellemzően egy, esetenként több konkrét helyszínre javasolt beadójuk, és megvalósításuk költsége 51 és 120 millió forint közé esik.' },
+    { code: 'LOCAL-SMALL', name: 'Helyi kis ötletek', info: 'Keretösszeg: 400 millió Ft', description: 'Olyan ötletek, amelyeket jellemzően egy, esetenként több konkrét helyszínre javasolt beadójuk, és megvalósításuk költsége nem haladja meg az 50 millió forintot.' },
+    { code: 'LOCAL-BIG', name: 'Helyi nagy ötletek', info: 'Keretösszeg: 240 millió Ft', description: 'Olyan ötletek, amelyeket jellemzően egy, esetenként több konkrét helyszínre javasolt beadójuk, és megvalósításuk költsége 51 és 120 millió forint közé esik.' },
     { code: 'CARE', name: 'Esélyteremtő Budapest', info: 'Keretösszeg: 120 millió Ft', description: 'A cél a társadalmi különbségek csökkentése, hátrányos helyzetű közösségek életét támogató ötletekkel.' },
     { code: 'OPEN', name: 'Nyitott Budapest', info: 'Keretösszeg: 120 millió Ft', description: 'Egy nyitott város a szívügyed? Együttműködések, kísérleti megoldások, digitális fejlesztések, közösségépítő ötletek.' },
     { code: 'GREEN', name: 'Zöld Budapest', info: 'Keretösszeg: 120 millió Ft', description: 'Zöldebb utcák, üdébb parkok, mindenki számára elérhető, környezettudatos megoldások. Budapest reagál a klímaváltozásra.' },

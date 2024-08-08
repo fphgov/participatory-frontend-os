@@ -7,12 +7,11 @@ import VoteCategoryFilterSecondary from '@/components/vote/VoteCategoryFilterSec
 import VoteCategoryFilterItem from '@/components/vote/VoteCategoryFilterItem'
 import { apiVoteStatus, apiVoteablePlansData } from '@/lib/api-requests'
 import Error from '@/components/common/Error'
-import IdeasWrapper from '@/components/idea/IdeasWrapper'
 import { generateRandomValue } from '@/utilities/generateRandomValue'
 import { getToken } from '@/lib/actions'
 import { getNewUrlSearchParams } from '@/utilities/getNewUrlSearchParams'
 import BannerArea from '@/components/home/BannerArea'
-import VoteButtonCard from '@/components/vote/VoteButtonCard'
+import ShowProjects from "@/components/vote/ShowProjects";
 
 interface IProps {
   searchParams: Record<string, string>
@@ -30,7 +29,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default async function VotePage({ searchParams }: IProps) {
+export default async function VotePage({searchParams}: IProps) {
   const baseUrl = "/szavazas"
   const theme = searchParams?.theme?.toString().toUpperCase() || 'LOCAL-SMALL'
   const rand = searchParams?.rand?.toString() || generateRandomValue().toString()
@@ -51,7 +50,7 @@ export default async function VotePage({ searchParams }: IProps) {
     return baseUrl + '?' + getNewUrlSearchParams(urlSearchParams)
   }
 
-  if (! searchParams?.rand) {
+  if (!searchParams?.rand) {
     redirect(getUrl(theme))
   }
 
@@ -84,14 +83,14 @@ export default async function VotePage({ searchParams }: IProps) {
     error = e.message
   }
 
-  if (! projectList) {
+  if (!projectList) {
     return (
       <main className="page page-vote">
         <div className="page-vote-single-section">
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                {(typeof error === 'string' && error !== '') ? <Error message={error} /> : null}
+                {(typeof error === 'string' && error !== '') ? <Error message={error}/> : null}
               </div>
             </div>
           </div>
@@ -108,39 +107,23 @@ export default async function VotePage({ searchParams }: IProps) {
         <div className="page-vote-single-section">
           <HeroPage title="Szavazás" content="Minden kategóriában 3 szavazatot adhatsz le." />
 
-          {(typeof error === 'string' && error !== '') ? <Error message={error} /> : null}
+          {(typeof error === 'string' && error !== '') ? <Error message={error}/> : null}
 
           <VoteCategoryFilterSecondary>
             {["LOCAL-SMALL", "LOCAL-BIG", "CARE", "OPEN", "GREEN"].map((themeName) => (
-              <VoteCategoryFilterItem key={themeName} theme={themeName} ready={votedThemes?.includes(themeName)} currentTheme={theme} href={getUrl(themeName)} />
+              <VoteCategoryFilterItem
+                key={themeName}
+                theme={themeName}
+                ready={votedThemes?.includes(themeName)}
+                currentTheme={theme} href={getUrl(themeName)} />
             ))}
           </VoteCategoryFilterSecondary>
 
-          <div className="list-wrapper">
-            <div className="container">
-              <div className="row">
-                {projectList?._embedded?.projects.map((project, i) => <IdeasWrapper
-                  className={`col-sm-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 ${project.voted ? 'voted' : ''}`}
-                  ideaPreLink="/projektek"
-                  key={i}
-                  idea={project}
-                  showStatus={false}
-                  showVoted={false}
-                  showDescription={false}
-                  extraButton={
-                    <VoteButtonCard showVoteButton={!project.voted} disableVoteButton={false} errorVoteable={""} token={token} projectId={project.id} />
-                  }
-                  footerExtend={
-                    project.voted ? <div className="prop-build">Már szavaztál erre az ötletre</div> : null
-                  }
-                  />)}
-
-                <div className="col-md-12">
-                  {projectList?._embedded?.projects && projectList?._embedded?.projects.length === 0 ? <p>Nincs találat a megadott feltételek alapján, próbálj meg más kategóriában vagy kevesebb/más feltétel szerint szűrni.</p> : ''}
-                </div>
-              </div>
-            </div>
-          </div>
+          <ShowProjects
+            projectList={projectList}
+            enableMapList={(theme === 'LOCAL-SMALL' || theme === 'LOCAL-BIG')}
+            token={token}
+          />
         </div>
       </main>
 

@@ -4945,6 +4945,29 @@ p.subinfo {
   justify-content: flex-end;
 }
 
+.change_list_view {
+  color: #12326E;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0;
+  text-align: center;
+  margin: 32px 0;
+}
+
+.change_list_view > span {
+  margin-right: 6px;
+}
+
+.change_list_view > span:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.map-wrapper {}
+
 .list-wrapper {
   margin-bottom: 36px;
 }
