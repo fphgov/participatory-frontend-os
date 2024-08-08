@@ -1,25 +1,26 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import Error from "@/components/common/Error"
 import { loginWithMagicLinkForm } from '@/app/actions'
 
+
 export default function MagicLinkForm(): JSX.Element {
   const params = useParams()
-  const router = useRouter()
-
   const [error, setError] = useState('')
-
   const formRef = useRef<HTMLFormElement>(null)
+  const router = useRouter()
 
   async function onLoginWithMagicLink() {
     setError('')
 
     const res = await loginWithMagicLinkForm((params?.hash as string || ''))
+    const urlParams = new URLSearchParams(window.location.search);
+    const pathname = urlParams.get('pathname') ?? '/';
 
     if (res.success) {
-      router.push('/')
+      router.push(pathname)
     } else {
       setError(res.error)
     }

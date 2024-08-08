@@ -12,6 +12,7 @@ export async function loginFom(formData: FormData) {
       email: formData.get('email')?.toString() || '',
       password: formData.get('password')?.toString() || '',
       type: formData.get('type')?.toString() || 'password',
+      pathname: formData.get('pathname')?.toString() || '',
       recaptchaToken: formData.get('recaptchaToken')?.toString() || '',
     }
 

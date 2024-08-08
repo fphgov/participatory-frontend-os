@@ -3,6 +3,7 @@
 import { apiVote } from "@/lib/api-requests"
 import { useEffect, useState } from "react"
 import { useModalHardContext } from "@/context/modalHard"
+import { useRouter } from "next/navigation";
 
 type VoteButtonCardProps = {
   showVoteButton: boolean
@@ -15,7 +16,7 @@ type VoteButtonCardProps = {
 
 export default function VoteButtonCard({ showVoteButton, disableVoteButton, token, errorVoteable, projectId }: VoteButtonCardProps): JSX.Element {
   const { openModalHard, setOpenModalHard, setDataModalHard } = useModalHardContext()
-
+  const router = useRouter()
   const [voted, setVoted] = useState(false)
 
   function handleOpenModal(title: string, count: number|string) {
@@ -40,9 +41,10 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
 
   const sendVoteHandler = async (_token: string) => {
     if (! _token) {
-      window.location.href = '/bejelentkezes?project=' + projectId
+      const urlParams = new URLSearchParams(window.location.search);
+      urlParams.append('auth', 'login');
+      window.location.href = window.location.pathname + '?' + urlParams.toString()
     }
-
 
     try {
       const response = await apiVote(projectId)
@@ -64,12 +66,6 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
       setVoted(true)
     }
   }, [openModalHard, disableVoteButton])
-
-  useEffect(() => {
-    if (voted && ! openModalHard) {
-      window.location.reload();
-    }
-  }, [voted, openModalHard])
 
   return (
     <>
