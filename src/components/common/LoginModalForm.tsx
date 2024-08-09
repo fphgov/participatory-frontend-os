@@ -78,6 +78,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
 
   const getModalContent = (tab: string) => {
     const isLoginTab = tab === 'login'
+    const isAuthentication = searchParams.get('auth') === "authentication"
 
     return (
       <>
@@ -88,21 +89,29 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
 
             {error ? <Error message={error} /> : null}
 
-            <div className="modal-tabs">
-              <Link href={pathname + '?' + createQueryString('auth', 'login')} className={`${isLoginTab ? 'active' : ''}`}>
-                Hitelesítő e-maillel
-              </Link>
-              <Link href={pathname + '?' + createQueryString('auth', 'password')} className={`${!isLoginTab ? 'active' : ''}`}>
-                Jelszóval
-              </Link>
-            </div>
+            {!isAuthentication &&
+              <div className="modal-tabs">
+                <Link href={pathname + '?' + createQueryString('auth', 'login')}
+                      className={`${isLoginTab ? 'active' : ''}`}>
+                  Hitelesítő e-maillel
+                </Link>
+                <Link href={pathname + '?' + createQueryString('auth', 'password')}
+                      className={`${!isLoginTab ? 'active' : ''}`}>
+                  Jelszóval
+                </Link>
+              </div>
+            }
 
-            {!isLoginTab ? <p>Ha már korábban regisztráltál itt, add meg email címed és jelszavad a belépéshez!</p> : null}
-            {isLoginTab ? <p>Ha már korábban regisztráltál itt, add meg email címed és elküldjük a belépéshez szükséges linket!</p> : null}
+            {!isLoginTab && !isAuthentication ?
+              <p>Ha már korábban regisztráltál itt, add meg email címed és jelszavad a belépéshez!</p> : null}
+            {isLoginTab && !isAuthentication ? <p>Ha már korábban regisztráltál itt, add meg email címed és elküldjük a belépéshez szükséges
+              linket!</p> : null}
+            {isAuthentication ?
+              <p>Add meg e-mail címed és elküldjük a belépéshez szükséges linket.</p> : null}
 
             <div className="form-wrapper">
               <div className="input-wrapper">
-                <label htmlFor="email">E-mail cím</label>
+                <label htmlFor="email">E-mail cím: *</label>
                 <input type="text" autoCorrect="off" autoCapitalize="none" placeholder="E-mail cím" name="email" id="email" />
 
                 {errorObject && errorObject.password ? Object.values(errorObject.password).map((err, i) => {
@@ -110,7 +119,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
                 }) : null}
               </div>
 
-              {!isLoginTab ? <>
+              {!isLoginTab && !isAuthentication ? <>
                 <div className="input-wrapper">
                   <label htmlFor="password">Jelszó</label>
                   <input type="password" placeholder="Jelszó" name="password" id="password" />
@@ -118,6 +127,59 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
                   {errorObject && errorObject.password ? Object.values(errorObject.password).map((err, i) => {
                     return <ErrorMini key={i} error={err} increment={`password-${i}`} />
                   }) : null}
+                </div>
+              </> : null}
+
+              {isAuthentication ? <>
+                <div className="checkboxes-wrapper">
+
+                  <div className="form-group">
+                    <label htmlFor="privacy" className="form-group-label">
+                      <input className="form-control" type="checkbox" id="privacy" name="privacy"/>
+                      Elolvastam és elfogadom az <a
+                      href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatkezelesi_tajekoztato.pdf`} target="_blank"
+                      rel="noopener noreferrer">adatvédelmi nyilatkozatot</a> *
+                    </label>
+
+                    {errorObject?.privacy ? Object.values(errorObject.privacy).map((err, i) => {
+                      return <ErrorMini key={i} error={err} increment={`privacy-${i}`}/>
+                    }) : null}
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="live_in_city" className="form-group-label">
+                      <input className="form-control" type="checkbox" id="live_in_city" name="live_in_city"/>
+                      Kijelentem, hogy elmúltam 14 éves és budapesti lakos vagyok, vagy Budapesten dolgozom,
+                      vagy Budapesten tanulok. *
+                    </label>
+
+                    {errorObject?.live_in_city ? Object.values(errorObject.live_in_city).map((err, i) => {
+                      return <ErrorMini key={i} error={err} increment={`live_in_city-${i}`}/>
+                    }) : null}
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="newsletter" className="form-group-label">
+                      <input className="form-control" type="checkbox" id="newsletter" name="newsletter"/>
+                      Szeretnék feliratkozni a hírlevélre
+                    </label>
+
+                    {errorObject?.newsletter ? Object.values(errorObject.newsletter).map((err, i) => {
+                      return <ErrorMini key={i} error={err} increment={`newsletter-${i}`}/>
+                    }) : null}
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="prize" className="form-group-label">
+                      <input className="form-control" type="checkbox" id="prize" name="prize"/>
+                      Szeretnék részt venni a nyereményjátékban.
+                    </label>
+
+                    {errorObject?.prize ? Object.values(errorObject.prize).map((err, i) => {
+                      return <ErrorMini key={i} error={err} increment={`prize-${i}`}/>
+                    }) : null}
+                  </div>
+
                 </div>
               </> : null}
 
@@ -131,16 +193,21 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
               />
 
               <div className="modal-links">
-                {isLoginTab ? <Link href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatkezelesi_tajekoztato.pdf`} target="_blank" rel="noopener noreferrer">Adatkezelési tájékoztató</Link> : null}
-                {!isLoginTab ? <Link href="/elfelejtett-jelszo">Elfelejtett jelszó</Link> : null}
+                {isLoginTab ?
+                  <Link href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatkezelesi_tajekoztato.pdf`} target="_blank"
+                        rel="noopener noreferrer">Adatkezelési tájékoztató</Link> : null}
+                {!isLoginTab && !isAuthentication ? <Link href="/elfelejtett-jelszo">Elfelejtett jelszó</Link> : null}
               </div>
 
               <div className="modal-actions">
                 <button type="submit" className="btn btn-primary btn-headline btn-next">
-                  Mehet
+                  {isAuthentication ? 'E-mail küldése' : 'Belépés'}
                 </button>
 
-                <button type="button" className="btn btn-primary-solid btn-solid-underline btn-solid-padding" onClick={() => { setOpenModalHard(false) }}>
+                <button type="button" className="btn btn-primary-solid btn-solid-underline btn-solid-padding"
+                        onClick={() => {
+                          setOpenModalHard(false)
+                        }}>
                   Mégse
                 </button>
               </div>
@@ -153,7 +220,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
 
   const renderContent = () => {
     setDataModalHard({
-      title: 'Belépés',
+      title: searchParams.get('auth') === 'authentication' ? 'Hitelesítés' : 'Belépés',
       content: getModalContent(searchParams.get('auth')?.toString() || 'login'),
       showCancelButton: false
     })
@@ -173,7 +240,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
   }, [])
 
   useEffect(() => {
-    if (! openModalHard && loaded) {
+    if (!openModalHard && loaded) {
       removeSearchParams()
     }
   }, [openModalHard, loaded])

@@ -41,6 +41,10 @@ type ApiLoginUserProps = {
   password: string
   type: string
   pathname: string
+  privacy: string
+  liveInCity: string
+  newsletter: string
+  prize: string
   recaptchaToken: string
 }
 
@@ -89,6 +93,10 @@ export async function apiLoginUser(credentials: ApiLoginUserProps): Promise<{ to
   urlencoded.append("password", credentials.password)
   urlencoded.append("type", credentials.type)
   urlencoded.append("pathname", credentials.pathname)
+  urlencoded.append("privacy", credentials.privacy)
+  urlencoded.append("liveInCity", credentials.liveInCity)
+  urlencoded.append("newsletter", credentials.newsletter)
+  urlencoded.append("prize", credentials.prize)
   urlencoded.append("g-recaptcha-response", credentials.recaptchaToken)
 
   const url = backendUrl(endpoints.API_REQ_LOGIN)

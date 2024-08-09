@@ -42,7 +42,7 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
   const sendVoteHandler = async (_token: string) => {
     if (! _token) {
       const urlParams = new URLSearchParams(window.location.search);
-      urlParams.append('auth', 'login');
+      urlParams.append('auth', 'authentication');
       window.location.href = window.location.pathname + '?' + urlParams.toString()
     }
 

@@ -13,6 +13,10 @@ export async function loginFom(formData: FormData) {
       password: formData.get('password')?.toString() || '',
       type: formData.get('type')?.toString() || 'password',
       pathname: formData.get('pathname')?.toString() || '',
+      privacy: formData.get('privacy')?.toString() || 'off',
+      liveInCity: formData.get('live_in_city')?.toString() || 'off',
+      newsletter: formData.get('newsletter')?.toString() || 'off',
+      prize: formData.get('prize')?.toString() || 'off',
       recaptchaToken: formData.get('recaptchaToken')?.toString() || '',
     }
 
