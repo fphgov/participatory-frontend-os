@@ -72,15 +72,6 @@ export default async function ProfilePage() {
                 </div>
               </SectionBox>
 
-              <SectionBoxDetails summary="Ötlet beadásához szükséges adatok">
-                <div className="box-profile">
-                  <div className="profile-item">
-                    <div className="profile-item-name">Név</div>
-                    <div className="profile-item-value">{profile.lastname + ' ' + profile.firstname}</div>
-                  </div>
-                </div>
-              </SectionBoxDetails>
-
               <SectionBoxDetails summary="Jelszó beállítás">
                 <p>Állíts be jelszót a profilodhoz, így a későbbiekben azzal is be tudsz lépni. Nem kötelező.</p>
 
