@@ -16,14 +16,14 @@ export default function AuthModal({ loggedIn }: AuthModalProps): JSX.Element {
   const auth = searchParams.get('auth')
 
   useEffect(() => {
-    if (! (auth === "login" || auth === "password" || auth === "authentication") || loggedIn) {
+    if (! (auth === "login" || auth === "password" || auth === "authentication" || auth === "registration") || loggedIn) {
       setOpenModalHard(false)
     }
   }, [auth, loggedIn])
 
   return (
     <>
-      {auth === "login" || auth === "password" || auth === "authentication" ? <LoginModalForm searchParams={searchParams} /> : null}
+      {auth === "login" || auth === "password" || auth === "authentication" || auth === "registration" ? <LoginModalForm searchParams={searchParams} /> : null}
     </>
   )
 }

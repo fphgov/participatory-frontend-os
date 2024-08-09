@@ -10,7 +10,7 @@
 
     .name {
       display: inline-block;
-      color: var(--Accent-blue, #12326E);
+      color: #12326E;
       font-family: "Source Sans Pro", sans-serif;
       font-size: 14px;
       font-style: normal;
@@ -22,7 +22,7 @@
   }
 
   .title {
-    color: var(--Greys-black, #222);
+    color: #222222;
     font-family: "Source Sans 3", sans-serif;
     font-size: 18px;
     font-style: normal;
@@ -42,7 +42,7 @@
       border-radius: 999px;
       background: #F5CF68;
       text-decoration: none;
-      color: var(--Accent-blue, #12326E);
+      color: #12326E;
       font-family: "Source Sans 3", sans-serif;
       font-size: 16px;
       font-style: normal;
@@ -58,9 +58,9 @@
       align-items: center;
       gap: 8px;
       border-radius: 999px;
-      border: 1px solid var(--Accent-blue, #12326E);
+      border: 1px solid #12326E;
       text-decoration: none;
-      color: var(--Accent-blue, #12326E);
+      color: #12326E;
       font-family: "Source Sans 3", sans-serif;
       font-size: 16px;
       font-style: normal;
@@ -74,7 +74,7 @@
   .voted {
 
     .voted_label {
-      color: var(--Greys-black, #222);
+      color: #222222;
       font-family: "Source Sans 3", sans-serif;
       font-size: 16px;
       font-style: normal;

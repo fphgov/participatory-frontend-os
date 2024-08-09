@@ -936,6 +936,47 @@ footer .fa-inverse {
   margin-bottom: 0;
 }
 
+.sub-text-wrapper > p {
+  margin: 0 0 18px 0 !important;
+}
+
+.checkboxes-wrapper {
+  color: #FFFFFF;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.checkboxes-wrapper > .form-group {
+    margin: 0 0 18px 0;
+}
+
+.checkboxes-wrapper label {
+    margin: 0;
+}
+
+.checkboxes-wrapper p {
+    display: inline-grid;
+    margin: 0 !important;
+    width: 261px;
+}
+
+.checkboxes-wrapper input[type="checkbox"] {
+    height: 24px;
+    line-height: 24px;
+    background: #fff;
+    color: #000;
+    padding: 0 6px;
+    box-sizing: border-box;
+    display: inline-grid;
+    width: 24px;
+    top: 5px;
+    position: relative;
+}
+
 .form-wrapper {
   display: inline-block;
   min-width: 280px;
@@ -5211,7 +5252,7 @@ span.cc_highlight:hover {
 .modal-hard-wrapper .modal-inner {
   background-color: #12326E;
   color: #FFF;
-  padding: 24px;
+  padding: 18px;
   width: auto;
   max-width: 327px;
 }

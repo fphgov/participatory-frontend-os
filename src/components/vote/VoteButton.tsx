@@ -33,7 +33,9 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
 
   const sendVoteHandler = async (_token: string) => {
     if (! _token) {
-      window.location.href = '/bejelentkezes?project=' + projectId
+      const urlParams = new URLSearchParams(window.location.search);
+      urlParams.append('auth', 'authentication');
+      window.location.href = window.location.pathname + '?' + urlParams.toString()
     }
 
     setError('')
