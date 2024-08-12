@@ -2,10 +2,9 @@
 
 import { FC, useEffect, useState } from "react"
 import { Suspense } from 'react'
-import IdeasWrapper from "@/components/idea/IdeasWrapper";
-import dynamic from "next/dynamic";
-import VoteButtonCard from "@/components/vote/VoteButtonCard";
-import Loading from "@/app/loading";
+import IdeasWrapper from "@/components/idea/IdeasWrapper"
+import dynamic from "next/dynamic"
+import VoteButtonCard from "@/components/vote/VoteButtonCard"
 
 type ShowProjectsProps = {
   projectList: any
@@ -15,33 +14,46 @@ type ShowProjectsProps = {
 
 const ShowProjects: FC<ShowProjectsProps> = ({ projectList, enableMapList, token }) => {
   const [availableMap, setAvailableMap] = useState(false)
-  const [showMap, setShowMap] = useState(true)
+  const [listMode, setListMode] = useState('map')
   const Map = dynamic(() => import('../../components/map/Map'), {
     loading: () => <p>A térkép töltődik...</p>,
     ssr: false,
-  });
+  })
 
+  const switchListMode = () => {
+    if (availableMap) {
+      const mode = listMode === 'map' ? 'list' : 'map'
+
+      localStorage.setItem('list_mode', mode)
+
+      setListMode(mode)
+    }
+  }
 
   useEffect(() => {
     if (window && window.Modernizr?.webgl) {
       setAvailableMap(true)
     }
+
+    if (localStorage.getItem('list_mode')) {
+      setListMode(localStorage.getItem('list_mode') || 'map')
+    }
   }, [])
 
   return (
     <>
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={null}>
         {
           availableMap && enableMapList ?
             <div className="change_list_view">
-              <span onClick={() => {setShowMap(!showMap)}}>{showMap ? 'Lista nézet' : 'Térkép nézet'}</span>
+              <span onClick={() => { switchListMode() }}>{listMode === 'map' ? 'Lista nézet' : 'Térkép nézet'}</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
                 <path d="M5 16V3H0V0H13V3H8V16H5ZM14 16V8H11V5H20V8H17V16H14Z" fill="#12326E"/>
               </svg>
             </div> : null
         }
         {
-          availableMap && enableMapList && showMap ?
+          availableMap && enableMapList && listMode === 'map' ?
             <div className="map-wrapper">
               <div className="container">
                 <div className="row">
