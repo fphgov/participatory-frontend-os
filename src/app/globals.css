@@ -451,7 +451,6 @@ input.btn[disabled]:hover {
   background-color: #21A7CC;
 }
 
-.hero .btn.btn-headline:hover,
 .information-section-left .btn.btn-headline:hover {
   color: #fff !important;
   background-color: #12326E;
@@ -4792,7 +4791,7 @@ p.subinfo {
   box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.20);
   position: sticky;
   top: 0;
-  z-index: 99;
+  z-index: 1001;
 }
 
 .page-vote-type-2 .vote-filter {
@@ -5354,6 +5353,10 @@ span.cc_highlight:hover {
   text-decoration: none;
 }
 
+.modal-content .form-wrapper {
+  width: 100%;
+}
+
 .modal-actions {
   display: flex;
   align-items: center;
@@ -5385,6 +5388,10 @@ span.cc_highlight:hover {
 .modal-tabs a.active,
 .modal-tabs a:hover {
   border-bottom: 2px solid #0EA6CE;
+}
+
+.modal-tabs + .sub-text-wrapper {
+  margin-top: 24px;
 }
 
 .modal-content .error-message {
