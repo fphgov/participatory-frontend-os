@@ -53,8 +53,13 @@ const ShowProjects: FC<ShowProjectsProps> = ({ projectList, enableMapList, token
                   showVoted={false}
                   showDescription={false}
                   extraButton={
-                    <VoteButtonCard showVoteButton={!project.voted} disableVoteButton={false} errorVoteable={""}
-                                    token={token} projectId={project.id}/>
+                    <VoteButtonCard
+                      showVoteButton={!project.voted}
+                      disableVoteButton={false}
+                      errorVoteable={""}
+                      token={token}
+                      projectId={project.id}
+                    />
                   }
                   footerExtend={
                     project.voted ? <div className="prop-build">Már szavaztál erre az ötletre</div> : null
