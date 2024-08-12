@@ -68,6 +68,8 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
 
       if (response.successMessage) {
         handleOpenModal(response.successMessage, response?.data?.remainingVote?.[0]?.votes)
+
+        router.refresh()
       } else if (response.error) {
         handleOpenErrorModal(response.error)
       } else if (response.message) {
