@@ -52,11 +52,11 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
       const response = await sendVoteProject(projectId)
 
       if (response.successMessage) {
-        handleOpenModal(response.successMessage, 0)
-      }
-
-      if (response.error) {
+        handleOpenModal(response.successMessage, response?.data?.remainingVote?.[0]?.votes)
+      } else if (response.error) {
         handleOpenErrorModal(response.error)
+      } else if (response.message) {
+        handleOpenErrorModal(response.message)
       }
     } catch (e: any) {
       if (typeof e?.response?.error === "string") {

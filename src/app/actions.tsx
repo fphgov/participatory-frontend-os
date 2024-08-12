@@ -67,8 +67,8 @@ export async function loginWithMagicLinkForm(hash: string) {
   }
 }
 
-export async function sendVoteProject(projectId: string|number) {
-  let jsonError, error, success = false, successMessage = ''
+export async function sendVoteProject(projectId: string|number): Promise<any> {
+  let jsonError, error, success = false, successMessage = '', data = null
 
   try {
     try {
@@ -77,6 +77,7 @@ export async function sendVoteProject(projectId: string|number) {
       if (response.message) {
         success = true
         successMessage = response.message
+        data = response.data
       }
     } catch (e: any) {
       try {
@@ -88,7 +89,7 @@ export async function sendVoteProject(projectId: string|number) {
       }
     }
 
-    return { jsonError, error, success, successMessage }
+    return { jsonError, error, success, successMessage, data }
   } catch (e) {
     return { message: 'Váratlan hiba történt, kérünk próbáld később' }
   }
