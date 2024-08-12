@@ -1,6 +1,7 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useModalHardContext } from "@/context/modalHard"
 import { sendVoteProject } from '@/app/actions'
 
@@ -14,8 +15,26 @@ type VoteButtonCardProps = {
 }
 
 export default function VoteButtonCard({ showVoteButton, disableVoteButton, token, errorVoteable, projectId }: VoteButtonCardProps): JSX.Element {
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const pathname = usePathname()
+
   const { openModalHard, setOpenModalHard, setDataModalHard } = useModalHardContext()
   const [voted, setVoted] = useState(false)
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+      params.set(name, value)
+
+      return params.toString()
+    },
+    [searchParams]
+  )
+
+  const appendAuthParam = () => {
+    router.replace(`${pathname}?${createQueryString('auth', 'authentication')}`)
+  }
 
   function handleOpenModal(title: string, count: number|string) {
     setDataModalHard({
@@ -39,11 +58,9 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
 
   const sendVoteHandler = async () => {
     if (! token) {
-      const urlParams = new URLSearchParams(window.location.search)
+      appendAuthParam()
 
-      urlParams.append('auth', 'authentication')
-
-      window.location.href = window.location.pathname + '?' + urlParams.toString()
+      return
     }
 
     try {

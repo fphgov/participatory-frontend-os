@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 // @ts-ignore
 import randomId from 'random-id'
@@ -65,15 +66,35 @@ export function MobileNavigation({ menuItems, loggedIn }: MenuProps): JSX.Elemen
 }
 
 export function Navigation({ menuItems, onClick = () => {}, rand, loggedIn, isMobile = false }: MenuProps): JSX.Element {
+  const searchParams = useSearchParams()
   const [isOpen, setIsOpen] = useState(false)
-  const [isOpenMenu, setIsOpenMenu] = useState(false)
   const submenuRef = useRef(null)
   const pathname = usePathname()
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+      params.set(name, value)
+
+      return params.toString()
+    },
+    [searchParams]
+  )
 
   useOutside(submenuRef, () => { setIsOpen(false) })
 
   const removeOpenMenuClass = () => {
     document.body.classList.remove('open-menu')
+  }
+
+  const calcSearchParams = (href: string) => {
+    const param = href.match(/^\?(.*)=(.*)/)
+
+    if (param && param.length === 3) {
+      return pathname + '?' + createQueryString(param[1], param[2])
+    }
+
+    return href
   }
 
   return (<>
@@ -112,7 +133,7 @@ export function Navigation({ menuItems, onClick = () => {}, rand, loggedIn, isMo
 
       return (
           <li key={`${rand}-${i}`} className={menuItem?.highlight ? 'highlight' : '' || menuItem?.secondHighlight ? 'highlight-second' : ''}>
-            <Link prefetch={false} href={menuItem.href} className={menuItem.href.split("?")[0] === pathname ? 'active' : ''} onClick={() => { removeOpenMenuClass(); onClick() }}>
+            <Link prefetch={false} href={calcSearchParams(menuItem.href)} className={menuItem.href.split("?")[0] === pathname ? 'active' : ''} onClick={() => { removeOpenMenuClass(); onClick() }}>
               {menuItem?.icon ? <div>
                 <NavigationIcon icon={menuItem?.icon} />
                 {menuItem.title}

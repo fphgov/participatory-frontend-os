@@ -1,9 +1,10 @@
 "use client"
 
 import { apiVote } from "@/lib/api-requests"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import Error from "@/components/common/Error"
 import { useModalHardContext } from "@/context/modalHard"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 type VoteButtonProps = {
   showVoteButton: boolean
@@ -16,10 +17,28 @@ type VoteButtonProps = {
 }
 
 export default function VoteButton({ showVoteButton, disableVoteButton, token, errorVoteable, projectId, style = 'default' }: VoteButtonProps): JSX.Element {
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const pathname = usePathname()
+
   const { openModalHard, setOpenModalHard, setDataModalHard } = useModalHardContext()
 
   const [voted, setVoted] = useState(false)
   const [error, setError] = useState('')
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+      params.set(name, value)
+
+      return params.toString()
+    },
+    [searchParams]
+  )
+
+  const appendAuthParam = () => {
+    router.replace(`${pathname}?${createQueryString('auth', 'authentication')}`)
+  }
 
   function handleOpenModal(title: string, count: number|string) {
     setDataModalHard({
@@ -33,9 +52,9 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
 
   const sendVoteHandler = async (_token: string) => {
     if (! _token) {
-      const urlParams = new URLSearchParams(window.location.search);
-      urlParams.append('auth', 'authentication');
-      window.location.href = window.location.pathname + '?' + urlParams.toString()
+      appendAuthParam()
+
+      return
     }
 
     setError('')

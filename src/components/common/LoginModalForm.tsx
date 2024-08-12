@@ -29,6 +29,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString())
+
       params.set(name, value)
 
       return params.toString()
@@ -73,7 +74,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
 
     nextSearchParams.delete('auth')
 
-    router.replace(`${pathname}?${nextSearchParams}`)
+    router.replace(`${pathname}?${nextSearchParams.toString()}`)
   }
 
   const getModalContent = (tab: string) => {
@@ -92,12 +93,17 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
 
             {!isAuthentication && !isRegistration &&
               <div className="modal-tabs">
-                <Link href={pathname + '?' + createQueryString('auth', 'login')}
-                      className={`${isLoginTab ? 'active' : ''}`}>
+                <Link
+                  href={pathname + '?' + createQueryString('auth', 'login')}
+                  className={`${isLoginTab ? 'active' : ''}`}
+                >
                   Hitelesítő e-maillel
                 </Link>
-                <Link href={pathname + '?' + createQueryString('auth', 'password')}
-                      className={`${!isLoginTab ? 'active' : ''}`}>
+
+                <Link
+                  href={pathname + '?' + createQueryString('auth', 'password')}
+                  className={`${!isLoginTab ? 'active' : ''}`}
+                >
                   Jelszóval
                 </Link>
               </div>
@@ -201,8 +207,12 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
 
               <div className="modal-links">
                 {isLoginTab ?
-                  <Link href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatkezelesi_tajekoztato.pdf`} target="_blank"
-                        rel="noopener noreferrer">Adatkezelési tájékoztató</Link> : null}
+                  <Link
+                    href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatkezelesi_tajekoztato.pdf`}
+                    target="_blank"
+                    rel="noopener noreferrer">
+                      Adatkezelési tájékoztató
+                  </Link> : null}
                 {!isLoginTab && !isAuthentication && !isRegistration ? <Link href="/elfelejtett-jelszo">Elfelejtett jelszó</Link> : null}
               </div>
 
@@ -211,10 +221,13 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
                   {isAuthentication || isRegistration ? 'E-mail küldése' : 'Belépés'}
                 </button>
 
-                <button type="button" className="btn btn-primary-solid btn-solid-underline btn-solid-padding"
-                        onClick={() => {
-                          setOpenModalHard(false)
-                        }}>
+                <button
+                  type="button"
+                  className="btn btn-primary-solid btn-solid-underline btn-solid-padding"
+                  onClick={() => {
+                    setOpenModalHard(false)
+                  }}
+                >
                   Mégse
                 </button>
               </div>
@@ -227,9 +240,10 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
 
   const renderContent = () => {
     let title = 'Belépés'
+
     if (searchParams.get('auth') === 'authentication') {
       title = 'Hitelesítés'
-    } else if(searchParams.get('auth') === 'registration') {
+    } else if (searchParams.get('auth') === 'registration') {
       title = 'Regisztráció'
     }
 
