@@ -10,7 +10,6 @@ import Error from '@/components/common/Error'
 import { generateRandomValue } from '@/utilities/generateRandomValue'
 import { getToken } from '@/lib/actions'
 import { getNewUrlSearchParams } from '@/utilities/getNewUrlSearchParams'
-import BannerArea from '@/components/home/BannerArea'
 import ShowProjects from "@/components/vote/ShowProjects";
 import {categoryResolver} from "@/utilities/categoryResolver";
 import VoteSearch from "@/components/vote/VoteSearch";
@@ -102,6 +101,7 @@ export default async function VotePage({searchParams}: IProps) {
   }
 
   const votedThemes = voteStatus?.data?.projects?.map(project => project.campaignTheme?.code)
+  const noVotesLeft = voteStatus?.data?.voteables_count_by_campaign_themes?.[theme] === 0
 
   return (
     <>
@@ -121,11 +121,12 @@ export default async function VotePage({searchParams}: IProps) {
             ))}
           </VoteCategoryFilterSecondary>
 
-          <VoteSearch title={categoryResolver(theme)} searchParams={searchParams} baseUrl={baseUrl} ready={votedThemes?.includes(theme)} />
+          <VoteSearch title={categoryResolver(theme)} searchParams={searchParams} baseUrl={baseUrl} ready={noVotesLeft} />
 
           <ShowProjects
             projectList={projectList}
             enableMapList={(theme === 'LOCAL-SMALL' || theme === 'LOCAL-BIG')}
+            noVotesLeft={noVotesLeft}
             token={token}
           />
         </div>

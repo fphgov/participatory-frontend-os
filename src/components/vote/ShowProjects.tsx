@@ -10,9 +10,10 @@ type ShowProjectsProps = {
   projectList: any
   enableMapList: boolean
   token: any
+  noVotesLeft: boolean
 }
 
-const ShowProjects: FC<ShowProjectsProps> = ({ projectList, enableMapList, token }) => {
+const ShowProjects: FC<ShowProjectsProps> = ({ projectList, enableMapList, token, noVotesLeft }) => {
   const [availableMap, setAvailableMap] = useState(false)
   const [listMode, setListMode] = useState('map')
   const Map = dynamic(() => import('../../components/map/Map'), {
@@ -77,7 +78,7 @@ const ShowProjects: FC<ShowProjectsProps> = ({ projectList, enableMapList, token
                     showDescription={false}
                     extraButton={
                       <VoteButtonCard
-                        showVoteButton={!project.voted}
+                        showVoteButton={!project.voted && !noVotesLeft}
                         disableVoteButton={false}
                         errorVoteable={""}
                         token={token}

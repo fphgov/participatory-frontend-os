@@ -44,6 +44,7 @@ export interface PhaseStatusResponse {
 export interface VoteStatusResponse {
   data: {
     voteables_count: number,
+    voteables_count_by_campaign_themes: Record<string, number>,
     projects: IProject[],
   }
 }
