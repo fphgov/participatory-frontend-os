@@ -77,7 +77,7 @@ async function handleResponse<T>(response: Response): Promise<T> {
     }
 
     if (response.statusText === "Unauthorized") {
-      redirect('/bejelentkezes')
+      redirect('/?auth=login')
     }
 
     throw new ApiError(response.status, data.message || response.statusText)

@@ -34,7 +34,7 @@ export default function PasswordResetForm({ params }: PasswordResetFormProps): J
     const res = await passwordResetForm(data)
 
     if (res.success) {
-      window.location.href = '/bejelentkezes'
+      window.location.href = '/?auth=login'
     } else {
       setErrorObject(res.jsonError)
       setError(res.error)
