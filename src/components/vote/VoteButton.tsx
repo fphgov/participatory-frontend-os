@@ -48,6 +48,7 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
     })
 
     setOpenModalHard(true)
+    setVoted(true)
   }
 
   const sendVoteHandler = async (_token: string) => {
@@ -73,14 +74,8 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
   }
 
   useEffect(() => {
-    if (! disableVoteButton && openModalHard) {
-      setVoted(true)
-    }
-  }, [openModalHard, disableVoteButton])
-
-  useEffect(() => {
     if (voted && ! openModalHard) {
-      window.location.reload();
+      router.refresh()
     }
   }, [voted, openModalHard])
 
