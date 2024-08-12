@@ -5357,6 +5357,10 @@ span.cc_highlight:hover {
   width: 100%;
 }
 
+.modal-content fieldset .form-group a:hover {
+  color: #fff;
+}
+
 .modal-actions {
   display: flex;
   align-items: center;
