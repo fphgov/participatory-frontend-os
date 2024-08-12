@@ -112,7 +112,7 @@ export function Navigation({ menuItems, onClick = () => {}, rand, loggedIn, isMo
 
       return (
           <li key={`${rand}-${i}`} className={menuItem?.highlight ? 'highlight' : '' || menuItem?.secondHighlight ? 'highlight-second' : ''}>
-            <Link href={menuItem.href} className={menuItem.href.split("?")[0] === pathname ? 'active' : ''} onClick={() => { removeOpenMenuClass(); onClick() }}>
+            <Link prefetch={false} href={menuItem.href} className={menuItem.href.split("?")[0] === pathname ? 'active' : ''} onClick={() => { removeOpenMenuClass(); onClick() }}>
               {menuItem?.icon ? <div>
                 <NavigationIcon icon={menuItem?.icon} />
                 {menuItem.title}

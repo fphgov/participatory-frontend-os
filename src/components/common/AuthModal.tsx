@@ -9,10 +9,11 @@ type AuthModalProps = {
   loggedIn: boolean
 }
 
+export const fetchCache = 'force-no-store';
+
 export default function AuthModal({ loggedIn }: AuthModalProps): JSX.Element {
   const searchParams = useSearchParams()
   const { setOpenModalHard } = useModalHardContext()
-
   const auth = searchParams.get('auth')
 
   useEffect(() => {
