@@ -3,7 +3,6 @@ import "normalize.css"
 import "bootstrap-4-grid/css/grid.min.css"
 import 'react-toastify/dist/ReactToastify.css'
 import '@fortawesome/fontawesome-svg-core/styles.css'
-// import 'modernizr'
 import 'url-polyfill'
 import type { Metadata } from 'next'
 import { Source_Sans_3 } from 'next/font/google'
@@ -63,7 +62,7 @@ export default function RootLayout({
   const cookieStore = cookies()
 
   return (
-    <html lang="hu">
+    <html lang="hu" suppressHydrationWarning={true}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -71,6 +70,8 @@ export default function RootLayout({
         <meta httpEquiv="Pragma" content="no-cache" />
 
         <CookieConsentPopup />
+
+        <script type="text/javascript" src="/modernizr.js" />
 
         {process.env.NEXT_PUBLIC_FACEBOOK_PIXEL ? <>
           <script type="text/plain" data-cookiecategory="marketing" defer dangerouslySetInnerHTML={{ __html: `!function(f,b,e,v,n,t,s)

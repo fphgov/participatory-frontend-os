@@ -30,12 +30,13 @@ ENV NEXT_PUBLIC_FACEBOOK_PIXEL=$ARG_NEXT_PUBLIC_FACEBOOK_PIXEL
 
 WORKDIR "/app"
 
-RUN npm install -g npm@10
+RUN npm install -g npm@10 modernizr
 
 RUN printenv > .env
 RUN chown node:node .env
 
 COPY --chown=node:node . .
+RUN modernizr -c modernizr-config.json -d /app/public/modernizr.js
 RUN npm ci --force
 RUN npm run build
 

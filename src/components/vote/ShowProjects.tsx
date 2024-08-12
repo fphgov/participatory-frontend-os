@@ -18,6 +18,10 @@ const ShowProjects: FC<ShowProjectsProps> = ({ projectList, enableMapList, token
     ssr: false,
   });
 
+  if (window && window.Modernizr?.webgl) {
+    console.log('Supported WebGL')
+  }
+
   return (
     <>
       {

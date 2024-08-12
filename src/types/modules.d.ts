@@ -45,6 +45,12 @@ declare module "@icetee/react-recaptcha-v3" {
   export function loadReCaptcha(siteKey: string): void;
 }
 
+declare global {
+  interface Window {
+    Modernizr: any
+  }
+}
+
 // declare module "react-intl-tel-input-v2" {
 //   import React from 'react';
 
