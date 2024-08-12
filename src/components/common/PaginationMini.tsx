@@ -48,7 +48,7 @@ export default function PaginationMini({ baseUrl, links, pageSize, totalItems, s
           <ul>
             <li>
               {prevPageNum && (prevPageNum) ? (
-                <Link href={getUrl(prevPageNum)} aria-label={`Előző oldal ${prevPageNum}`} title={`Előző oldal ${prevPageNum}`}>
+                <Link href={getUrl(prevPageNum)} aria-label={`Előző oldal ${prevPageNum}`} title={`Előző oldal ${prevPageNum}`} prefetch={false}>
                   <div className="icon-arrow icon-arrow-left active" aria-hidden="true"></div>
                 </Link>
               ) : <button><div className="icon-arrow icon-arrow-left" aria-hidden="true"></div></button>}
@@ -56,7 +56,7 @@ export default function PaginationMini({ baseUrl, links, pageSize, totalItems, s
 
             <li>
               {nextPageNum && (nextPageNum) ? (
-                <Link href={getUrl(nextPageNum)} aria-label={`Következő oldal ${nextPageNum}`} title={`Következő oldal ${nextPageNum}`}>
+                <Link href={getUrl(nextPageNum)} aria-label={`Következő oldal ${nextPageNum}`} title={`Következő oldal ${nextPageNum}`} prefetch={false}>
                   <div className="icon-arrow icon-arrow-right active" aria-hidden="true"></div>
                 </Link>
               ) : <button><div className="icon-arrow icon-arrow-right" aria-hidden="true"></div></button>}

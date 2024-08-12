@@ -96,13 +96,15 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
                 <Link
                   href={pathname + '?' + createQueryString('auth', 'login')}
                   className={`${isLoginTab ? 'active' : ''}`}
-                >
+                  prefetch={false}
+                  >
                   Hitelesítő e-maillel
                 </Link>
 
                 <Link
                   href={pathname + '?' + createQueryString('auth', 'password')}
                   className={`${!isLoginTab ? 'active' : ''}`}
+                  prefetch={false}
                 >
                   Jelszóval
                 </Link>
@@ -210,7 +212,9 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
                   <Link
                     href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatkezelesi_tajekoztato.pdf`}
                     target="_blank"
-                    rel="noopener noreferrer">
+                    rel="noopener noreferrer"
+                    prefetch={false}
+                  >
                       Adatkezelési tájékoztató
                   </Link> : null}
                 {!isLoginTab && !isAuthentication && !isRegistration ? <Link href="/elfelejtett-jelszo">Elfelejtett jelszó</Link> : null}
