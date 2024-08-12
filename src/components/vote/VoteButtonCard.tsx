@@ -1,9 +1,9 @@
 "use client"
 
-import { apiVote } from "@/lib/api-requests"
 import { useEffect, useState } from "react"
 import { useModalHardContext } from "@/context/modalHard"
 import { useRouter } from "next/navigation";
+import { sendVoteProject } from '@/app/actions'
 
 type VoteButtonCardProps = {
   showVoteButton: boolean
@@ -39,24 +39,28 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
     setOpenModalHard(true)
   }
 
-  const sendVoteHandler = async (_token: string) => {
-    if (! _token) {
-      const urlParams = new URLSearchParams(window.location.search);
-      urlParams.append('auth', 'authentication');
+  const sendVoteHandler = async () => {
+    if (! token) {
+      const urlParams = new URLSearchParams(window.location.search)
+
+      urlParams.append('auth', 'authentication')
+
       window.location.href = window.location.pathname + '?' + urlParams.toString()
     }
 
     try {
-      const response = await apiVote(projectId)
+      const response = await sendVoteProject(projectId)
 
-      if (response.message) {
-        handleOpenModal(response.message, response?.data?.remainingVote?.[0]?.votes)
+      if (response.successMessage) {
+        handleOpenModal(response.successMessage, 0)
+      }
+
+      if (response.error) {
+        handleOpenErrorModal(response.error)
       }
     } catch (e: any) {
-      console.log(e)
-
-      if (typeof e?.message === "string") {
-        handleOpenErrorModal(e.message)
+      if (typeof e?.response?.error === "string") {
+        handleOpenErrorModal(e.response.error)
       }
     }
   }
@@ -70,7 +74,7 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
   return (
     <>
       {showVoteButton ? <>
-        <button className={`btn btn-secondary ${disableVoteButton ? 'btn-disable' : ''}`} onClick={() => { if (!disableVoteButton) sendVoteHandler(token) }}>Szavazok</button>
+        <button className={`btn btn-secondary ${disableVoteButton ? 'btn-disable' : ''}`} onClick={() => { if (!disableVoteButton) sendVoteHandler() }}>Szavazok</button>
 
         {errorVoteable ? <div className="vote-button-info-label">{errorVoteable}</div> : ''}
       </> : null}
