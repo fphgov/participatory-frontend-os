@@ -130,10 +130,6 @@ export default async function VotePage({searchParams}: IProps) {
           />
         </div>
       </main>
-
-      <div className="container">
-        <BannerArea />
-      </div>
     </>
   )
 }
