@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import { useModalHardContext } from "@/context/modalHard"
-import { useRouter } from "next/navigation";
 import { sendVoteProject } from '@/app/actions'
 
 type VoteButtonCardProps = {
@@ -16,7 +15,6 @@ type VoteButtonCardProps = {
 
 export default function VoteButtonCard({ showVoteButton, disableVoteButton, token, errorVoteable, projectId }: VoteButtonCardProps): JSX.Element {
   const { openModalHard, setOpenModalHard, setDataModalHard } = useModalHardContext()
-  const router = useRouter()
   const [voted, setVoted] = useState(false)
 
   function handleOpenModal(title: string, count: number|string) {
