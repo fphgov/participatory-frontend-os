@@ -49,7 +49,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
       } else if (searchParams.get('from')) {
         window.location.href = '/' + searchParams.get('from')
       } else {
-        window.location.href = window.location.origin + window.location.pathname
+        removeSearchParams()
       }
     } else if (res?.success && res?.message) {
       setDataModalHard({
