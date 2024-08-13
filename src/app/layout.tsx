@@ -6,6 +6,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 import 'url-polyfill'
 import type { Metadata } from 'next'
 import { Source_Sans_3 } from 'next/font/google'
+import Script from 'next/script'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import ScrollContent from '@/components/common/ScrollContent'
@@ -71,7 +72,7 @@ export default function RootLayout({
 
         <CookieConsentPopup />
 
-        <script type="text/javascript" src="/modernizr.js" />
+        <Script src="/modernizr.js" />
 
         {process.env.NEXT_PUBLIC_FACEBOOK_PIXEL ? <>
           <script type="text/plain" data-cookiecategory="marketing" defer dangerouslySetInnerHTML={{ __html: `!function(f,b,e,v,n,t,s)
