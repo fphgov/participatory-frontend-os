@@ -25,7 +25,7 @@ const Map: FC<MapProps> = ({ projectList, token }) => {
         center={{lat: 47.484, lng: window.innerWidth < 640 ? 19.130 : 19.123} as LatLngExpression}
         maxZoom={50}
         minZoom={9}
-        zoom={window.innerWidth < 640 ? 7 : 9}
+        zoom={window.innerWidth < 640 ? 10 : 11}
         style={{height: '50vh', width: '100%', margin: '0 0 24px 0'}}
         className={styles.map}
       >
