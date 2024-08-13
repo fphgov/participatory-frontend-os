@@ -5040,6 +5040,7 @@ p.subinfo {
   border: 1px solid rgba(41, 206, 149, 0.50);
   background: #FFFFFF;
   padding: 12px;
+  margin-bottom: 8px;
 }
 
 .vote-title {
@@ -5072,7 +5073,7 @@ p.subinfo {
 }
 
 .vote-search-wrapper {
-  margin: 36px 0 24px 0;
+  margin: 24px 0;
 }
 
 .vote-search-input {
@@ -5088,7 +5089,7 @@ p.subinfo {
   font-weight: 700;
   line-height: 20px;
   text-align: right;
-  margin-top: 45px;
+  margin-top: 10px;
 }
 
 .change_list_view > span {
@@ -5128,12 +5129,11 @@ p.subinfo {
 }
 
 .vote-search-tags {
-  margin-top: 36px;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
   line-height: 20px;
-  letter-spacing: 0.14px;
+  letter-spacing: 0;
 }
 
 .custom-select-wrapper label,

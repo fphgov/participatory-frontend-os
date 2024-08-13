@@ -27,19 +27,19 @@ export default function VoteSearch({ title, baseUrl, searchParams, ready = false
 
   const voteStatus = (
     <>
-      <div className="vote-status"></div>
-      <div className="vote-title">Ebben a kategóriában nincs már több szavazatod</div>
+      <div className="vote-search-title">
+        <div className="vote-status"></div>
+        <div className="vote-title">Ebben a kategóriában nincs már több szavazatod</div>
+      </div>
     </>
   );
 
   return (
     <div className="vote-search-wrapper">
       <div className="container">
-        <div className="row">
+      <div className="row">
           <div className="col-lg-12 col-xl-12">
-            <div className="vote-search-title">
-              {ready ? voteStatus : null}
-            </div>
+            {ready ? voteStatus : null}
           </div>
         </div>
 
