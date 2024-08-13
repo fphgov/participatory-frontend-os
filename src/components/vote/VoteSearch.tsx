@@ -8,9 +8,13 @@ type VoteSearchProps = {
   baseUrl: string
   ready?: boolean
   searchParams: Record<string, string>
+  availableMap: boolean
+  enableMapList: boolean
+  switchListMode: () => void
+  listMode: string
 }
 
-export default function VoteSearch({ title, baseUrl, searchParams, ready = false }: VoteSearchProps): JSX.Element {
+export default function VoteSearch({ title, baseUrl, searchParams, ready = false, availableMap, enableMapList, switchListMode, listMode }: VoteSearchProps): JSX.Element {
   const theme = searchParams?.theme
 
   const tags = [
@@ -27,21 +31,29 @@ export default function VoteSearch({ title, baseUrl, searchParams, ready = false
         <div className="row">
           <div className="col-lg-12 col-xl-12">
             <div className="vote-search-title">
-              <h4>{title}</h4>
-              {ready ? <div className="vote-status" title="Ebben a kategóriában már szavaztál!" /> : null}
+              {ready ? <div className="vote-status" title="Ebben a kategóriában nincs már több szavazatod" /> : null}
             </div>
           </div>
         </div>
 
         <div className="row">
-          <div className="col-lg-12">
+          <div className="col-6">
             <div className="vote-search-tags">
               <HeroTags tags={tags} baseUrl={baseUrl} searchParams={searchParams} />
             </div>
           </div>
+          <div className="col-6">
+            {
+              availableMap && enableMapList ?
+              <div className="change_list_view">
+                <span onClick={() => { switchListMode() }}>{listMode === 'map' ? 'Lista nézet' : 'Térkép nézet'}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
+                  <path d="M5 16V3H0V0H13V3H8V16H5ZM14 16V8H11V5H20V8H17V16H14Z" fill="#12326E"/>
+                </svg>
+              </div> : null
+            }
+          </div>
         </div>
-
-        <hr />
 
       </div>
     </div>

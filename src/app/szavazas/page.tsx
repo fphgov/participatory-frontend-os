@@ -12,7 +12,6 @@ import { getToken } from '@/lib/actions'
 import { getNewUrlSearchParams } from '@/utilities/getNewUrlSearchParams'
 import ShowProjects from "@/components/vote/ShowProjects";
 import {categoryResolver} from "@/utilities/categoryResolver";
-import VoteSearch from "@/components/vote/VoteSearch";
 
 interface IProps {
   searchParams: Record<string, string>
@@ -121,13 +120,14 @@ export default async function VotePage({searchParams}: IProps) {
             ))}
           </VoteCategoryFilterSecondary>
 
-          <VoteSearch title={categoryResolver(theme)} searchParams={searchParams} baseUrl={baseUrl} ready={noVotesLeft} />
-
           <ShowProjects
             projectList={projectList}
             enableMapList={(theme === 'LOCAL-SMALL' || theme === 'LOCAL-BIG')}
             noVotesLeft={noVotesLeft}
             token={token}
+            title={categoryResolver(theme)}
+            searchParams={searchParams}
+            baseUrl={baseUrl}
           />
         </div>
       </main>

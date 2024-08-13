@@ -5,15 +5,28 @@ import { Suspense } from 'react'
 import IdeasWrapper from "@/components/idea/IdeasWrapper"
 import dynamic from "next/dynamic"
 import VoteButtonCard from "@/components/vote/VoteButtonCard"
+import {categoryResolver} from "@/utilities/categoryResolver";
+import VoteSearch from "@/components/vote/VoteSearch";
 
 type ShowProjectsProps = {
   projectList: any
   enableMapList: boolean
   token: any
   noVotesLeft: boolean
+  title: string
+  baseUrl: string
+  searchParams: Record<string, string>
 }
 
-const ShowProjects: FC<ShowProjectsProps> = ({ projectList, enableMapList, token, noVotesLeft }) => {
+const ShowProjects: FC<ShowProjectsProps> = ({
+  projectList,
+  enableMapList,
+  token,
+  noVotesLeft,
+  title,
+  baseUrl,
+  searchParams,
+}) => {
   const [availableMap, setAvailableMap] = useState(false)
   const [listMode, setListMode] = useState('map')
   const Map = dynamic(() => import('../../components/map/Map'), {
@@ -44,15 +57,16 @@ const ShowProjects: FC<ShowProjectsProps> = ({ projectList, enableMapList, token
   return (
     <>
       <Suspense fallback={null}>
-        {
-          availableMap && enableMapList ?
-            <div className="change_list_view">
-              <span onClick={() => { switchListMode() }}>{listMode === 'map' ? 'Lista nézet' : 'Térkép nézet'}</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
-                <path d="M5 16V3H0V0H13V3H8V16H5ZM14 16V8H11V5H20V8H17V16H14Z" fill="#12326E"/>
-              </svg>
-            </div> : null
-        }
+        <VoteSearch
+          title={title}
+          searchParams={searchParams}
+          baseUrl={baseUrl}
+          ready={noVotesLeft}
+          availableMap={availableMap}
+          enableMapList={enableMapList}
+          switchListMode={switchListMode}
+          listMode={listMode}
+        />
         {
           availableMap && enableMapList && listMode === 'map' ?
             <div className="map-wrapper">

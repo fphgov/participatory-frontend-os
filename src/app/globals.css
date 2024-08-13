@@ -1705,7 +1705,7 @@ p.info span {
   font-size: 18px;
   font-weight: bold;
   color: #19506E;
-  margin: 2px;
+  margin: 0 12px 18px 0;
 }
 
 .idea a,
@@ -1737,11 +1737,93 @@ p.info span {
   margin-right: 12px;
 }
 
+.hero-tags {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.hero-tags span svg {
+    margin-left: 6px;
+    position: relative;
+    top: 5px;
+}
+
+.hero-tags span b {
+    margin-left: 6px;
+}
+
+.hero-tags > span > span {
+  color: #12326E;
+  text-align: right;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.hero-tags > span {
+  color: #222222;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0;
+  margin: 0 !important;
+}
+
+.hero-tags > span > b {
+  color: #FFF;
+  text-align: center;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0;
+  background: linear-gradient(90deg, #12326E 0%, #03194D 100%);
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  border-radius: 999px;
+}
+
 .hero-tags > div {
   display: inline-block;
 }
 
-.tag.tag-active a,
+.hero-tags-filter .hero-tags {
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.hero-tags-filter .hero-tags a {
+  color: #E7F5FE;
+  background-color: #12326e;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+  border-radius: 999px;
+  border: 1px solid #E7F5FE;
+}
+
+.tag.tag-active a {
+  border-radius: 999px;
+  border: 1px solid #E7F5FE;
+  background: #E7F5FE;
+  display: flex;
+  color: #12326E !important;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+}
+
 .tag.tag-active button {
   background-color: #E7F5FE;
   color: #0EA6CE;
@@ -1749,7 +1831,6 @@ p.info span {
   align-items: center;
 }
 
-.tag.tag-active a::after,
 .tag.tag-active button::after {
   content: '';
   background-image: url('../../public/images/icon-close.svg');
@@ -4991,10 +5072,9 @@ p.subinfo {
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px;
-  letter-spacing: 0;
-  text-align: center;
-  margin: 32px 0;
+  line-height: 20px;
+  text-align: right;
+  margin-top: 45px;
 }
 
 .change_list_view > span {
