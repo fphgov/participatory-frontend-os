@@ -1,6 +1,5 @@
 import VoteInfoSectionSec from '@/components/home/VoteInfoSectionSec'
 import BannerArea from '@/components/home/BannerArea'
-import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -12,19 +11,13 @@ export default function Home() {
               <div className="container">
                 <div className="row">
                   <div className="col-12">
-                    <h3>Augusztus 21-én indul a szavazás!</h3>
+                    <h3>Tele vagyunk ötletekkel. Szavazz október 7-ig!</h3>
                   </div>
 
                   <div className="col-12">
                     <p>
-                      Idén 175 ötlet szerepel a szavazólistán, amelyekre augusztus 21. és október 7. között tudtok szavazni.
+                      A legtöbb szavazatot szerző ötleteket 1 milliárd forint összértékben valósítja meg a Fővárosi Önkormányzat.
                     </p>
-
-                    <Link
-                      className="btn btn-primary btn-headline btn-next"
-                      href="https://otlet.budapest.hu/hirek/indul-a-kozossegi-koltsegvetes-szavazasi-idoszaka">
-                      Részletek
-                    </Link>
                   </div>
                 </div>
               </div>
