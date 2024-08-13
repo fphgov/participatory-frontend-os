@@ -1740,12 +1740,7 @@ p.info span {
 .hero-tags {
   display: inline-block;
   cursor: pointer;
-}
-
-.hero-tags span svg {
-    margin-left: 6px;
-    position: relative;
-    top: 5px;
+  color: #12326E;
 }
 
 .hero-tags span b {
@@ -1755,34 +1750,27 @@ p.info span {
 .hero-tags > span > span {
   color: #12326E;
   text-align: right;
-  font-family: "Source Sans 3", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 24px;
-  letter-spacing: 0;
 }
 
 .hero-tags > span {
-  color: #222222;
-  font-family: "Source Sans 3", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 24px;
-  letter-spacing: 0;
   margin: 0 !important;
 }
 
 .hero-tags > span > b {
   color: #FFF;
   text-align: center;
-  font-family: "Source Sans 3", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
-  letter-spacing: 0;
   background: linear-gradient(90deg, #12326E 0%, #03194D 100%);
   width: 24px;
   height: 24px;
@@ -1802,7 +1790,6 @@ p.info span {
 .hero-tags-filter .hero-tags a {
   color: #E7F5FE;
   background-color: #12326e;
-  font-family: "Source Sans Pro", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
@@ -1817,7 +1804,6 @@ p.info span {
   background: #E7F5FE;
   display: flex;
   color: #12326E !important;
-  font-family: "Source Sans Pro", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
@@ -5081,30 +5067,6 @@ p.subinfo {
   justify-content: flex-end;
 }
 
-.change_list_view {
-  color: #12326E;
-  font-family: "Source Sans 3", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 20px;
-  text-align: right;
-  margin-top: 10px;
-}
-
-.change_list_view svg {
-  margin-left: 6px;
-}
-
-.change_list_view > span {
-  margin-right: 6px;
-}
-
-.change_list_view > span:hover {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
 .map-wrapper {}
 
 .list-wrapper {
@@ -5132,12 +5094,56 @@ p.subinfo {
   margin: 48px 0;
 }
 
-.vote-search-tags {
-  font-size: 14px;
+.vote-filter-2 {
+  color: #12326E;
+  font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 20px;
-  letter-spacing: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vote-filter-2 > div {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.vote-filter-2 .change-list-view {
+  margin-left: 24px;
+}
+
+.btn-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-filter::after {
+  content: '';
+  display: block;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  margin-left: 6px;
+}
+
+.btn-filter.btn-filter-list::after {
+  background-image: url(../../public/images/btn-filter-list.svg);
+}
+
+.btn-filter.btn-filter-map::after {
+  background-image: url(../../public/images/btn-filter-map.svg);
+}
+
+.btn-filter.btn-filter-control::after {
+  background-image: url(../../public/images/btn-filter-control.svg);
+}
+
+.vote-search-tags {
+
 }
 
 .custom-select-wrapper label,
@@ -5819,12 +5825,6 @@ input[type="tel"] {
   .mobile-menu {
     display: none !important;
   }
-  .vote-search-tags {
-    text-align: right;
-  }
-  .change_list_view {
-    text-align: left;
-  }
 }
 
 @media screen and (max-width: 992px) {
@@ -5834,6 +5834,10 @@ input[type="tel"] {
 
   .hamburger-menu-wrapper {
     display: block;
+  }
+
+  .vote-filter-2 {
+    justify-content: space-between;
   }
 }
 
