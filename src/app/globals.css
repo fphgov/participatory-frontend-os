@@ -941,7 +941,6 @@ footer .fa-inverse {
 
 .checkboxes-wrapper {
   color: #FFFFFF;
-  font-family: "Source Sans Pro", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -5022,16 +5021,12 @@ p.subinfo {
 .vote-search-title {
   display: flex;
   align-items: center;
-  border-radius: 8px;
-  border: 1px solid rgba(41, 206, 149, 0.50);
   background: #FFFFFF;
-  padding: 12px;
   margin-bottom: 8px;
 }
 
 .vote-title {
   color: #222222;
-  font-family: "Source Sans Pro", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -5046,7 +5041,6 @@ p.subinfo {
   width: 24px;
   height: 24px;
   display: inline-block;
-  margin-left: 6px;
 }
 
 .vote-search-wrapper h4 {
