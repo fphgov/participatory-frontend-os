@@ -5092,6 +5092,10 @@ p.subinfo {
   margin-top: 10px;
 }
 
+.change_list_view svg {
+  margin-left: 6px;
+}
+
 .change_list_view > span {
   margin-right: 6px;
 }
@@ -5814,6 +5818,12 @@ input[type="tel"] {
 @media screen and (min-width: 992px) {
   .mobile-menu {
     display: none !important;
+  }
+  .vote-search-tags {
+    text-align: right;
+  }
+  .change_list_view {
+    text-align: left;
   }
 }
 

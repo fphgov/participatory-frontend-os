@@ -3,6 +3,7 @@
 import {ITag} from "@/models/tag.model"
 import {useModalHardContext} from "@/context/modalHard";
 import {useEffect, useState} from "react";
+import {useRouter} from "next/navigation";
 
 type HeroTagsProps = {
   tags: ITag[],
@@ -14,6 +15,7 @@ export default function HeroTags({ tags, baseUrl, searchParams }: HeroTagsProps)
   const { setOpenModalHard, setDataModalHard } = useModalHardContext()
   const [ activeTags, setActiveTags ] = useState(searchParams?.tag?.split(',') ?? [])
   const [loaded, setLoaded] = useState(false)
+  const router = useRouter()
 
   const filter = (active: boolean, tag: ITag): void => {
     if (active) {
@@ -54,7 +56,7 @@ export default function HeroTags({ tags, baseUrl, searchParams }: HeroTagsProps)
     setLoaded(false)
     setOpenModalHard(false)
 
-    window.location.href = baseUrl + '?' + urlSearchParams.toString()
+    router.replace(`${baseUrl}?${urlSearchParams.toString()}`)
   }
 
   const getModalContent = () => {
