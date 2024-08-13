@@ -6365,3 +6365,10 @@ input[type="tel"] {
     padding: 24px;
   }
 }
+
+@media screen and (max-height: 900px) {
+  .modal-inner {
+    height: 96vh;
+    overflow-y: scroll;
+  }
+}
