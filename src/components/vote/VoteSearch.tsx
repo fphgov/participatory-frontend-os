@@ -25,13 +25,20 @@ export default function VoteSearch({ title, baseUrl, searchParams, ready = false
     { id: 178, name: '#zöldítés / parkok / utcabútorok' }
   ]
 
+  const voteStatus = (
+    <>
+      <div className="vote-status"></div>
+      <div className="vote-title">Ebben a kategóriában nincs már több szavazatod</div>
+    </>
+  );
+
   return (
     <div className="vote-search-wrapper">
       <div className="container">
         <div className="row">
           <div className="col-lg-12 col-xl-12">
             <div className="vote-search-title">
-              {ready ? <div className="vote-status" title="Ebben a kategóriában nincs már több szavazatod" /> : null}
+              {ready ? voteStatus : null}
             </div>
           </div>
         </div>

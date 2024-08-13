@@ -5036,6 +5036,20 @@ p.subinfo {
 .vote-search-title {
   display: flex;
   align-items: center;
+  border-radius: 8px;
+  border: 1px solid rgba(41, 206, 149, 0.50);
+  background: #FFFFFF;
+  padding: 12px;
+}
+
+.vote-title {
+  color: #222222;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px;
+  margin-left: 12px;
 }
 
 .vote-status {

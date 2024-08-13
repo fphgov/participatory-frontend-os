@@ -1,7 +1,6 @@
 "use client"
 
 import {ITag} from "@/models/tag.model"
-import {addUniqParam} from "@/utilities/urlParams"
 import {useModalHardContext} from "@/context/modalHard";
 import {useEffect, useState} from "react";
 
@@ -22,8 +21,6 @@ export default function HeroTags({ tags, baseUrl, searchParams }: HeroTagsProps)
     } else {
       setActiveTags([...activeTags, tag.id.toString()])
     }
-
-    console.log(activeTags.join(','))
   }
 
   const cancel = (): void => {
