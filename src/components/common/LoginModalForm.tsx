@@ -87,7 +87,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
         <form className="" action={onLogin}>
           <fieldset>
             <input type="hidden" name="type" value={searchParams.get('auth')?.toString() || 'login'} />
-            <input type="hidden" name="pathname" value={pathname} />
+            <input type="hidden" name="pathname" value={pathname + '?' + searchParams.toString()} />
 
             {error ? <Error message={error} /> : null}
 
