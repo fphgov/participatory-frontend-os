@@ -1685,6 +1685,12 @@ p.info span {
 
 .prop-single-sidebar-info {
   padding: 24px;
+  border: 1px solid #C5E9F5;
+  border-radius: 8px;
+}
+
+.prop-single-sidebar-info .prop-single-elem {
+  margin-top: 12px;
 }
 
 .prop-info-vote {
