@@ -67,7 +67,7 @@ export default async function ProfilePage() {
                 <div className="box-profile">
                   <div className="profile-item">
                     <div className="profile-item-name">Nyerenyjáték</div>
-                    <div className="profile-item-value">Nyerj értékes ajándékokat! <Link href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatkezelesi_tajekoztato.pdf`} prefetch={false} download={true} target="_blank">Részletek itt</Link>.</div>
+                    <div className="profile-item-value">Nyerj értékes ajándékokat! <Link href="/hirek/indul-a-kozossegi-koltsegvetes-szavazasi-idoszaka" target="_blank">Részletek itt</Link>.</div>
                   </div>
                 </div>
               </SectionBox>

@@ -202,7 +202,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
                   <div className="form-group">
                     <label htmlFor="prize" className="form-group-label">
                       <input className="form-control" type="checkbox" id="prize" name="prize"/>
-                      <p>Szeretnék részt venni a nyereményjátékban.</p>
+                      <p>Szeretnék részt venni a <Link href="/hirek/indul-a-kozossegi-koltsegvetes-szavazasi-idoszaka" target="_blank">nyereményjátékban</Link>.</p>
                     </label>
 
                     {errorObject?.prize ? Object.values(errorObject.prize).map((err, i) => {

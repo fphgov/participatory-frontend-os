@@ -74,7 +74,7 @@ export default function PrizeChangeForm({ profilePreference }: PrizeChangeFormmP
               <Checkbox
                 id="prize"
                 name="prize"
-                label="Szeretnék részt venni a nyeremény-játékban"
+                label="Szeretnék részt venni a nyereményjátékban"
                 handleChange={handleChangeInput}
                 value={formData.prize}
               />
