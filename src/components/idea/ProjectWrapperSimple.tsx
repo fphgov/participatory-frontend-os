@@ -124,7 +124,9 @@ export default function ProjectWrapperSimple({ project, voteable, token, errorVo
                     <div className="prop-info-title">Kategória</div>
                     <div className="prop-info-content">
                       <div className="prop-category">
-                        <div className="prop-theme"><CategoryIcon name={theme.name} color="blue" />{theme.name}</div>
+                        <div className="prop-theme">
+                          <Link href={`${backHref ? backHref : `/projektek/?theme=${theme.code}`}`}><CategoryIcon name={theme.name} color="blue" />{theme.name}</Link>
+                        </div>
                       </div>
                     </div>
                   </div>

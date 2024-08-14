@@ -1529,7 +1529,8 @@ p.info span {
   flex: 1;
 }
 
-.prop-theme {
+.prop-theme,
+.prop-theme a {
   color: #12326E;
   border-radius: 25px;
   padding: 0;
@@ -1538,6 +1539,7 @@ p.info span {
   align-items: center;
   font-weight: 600;
   text-transform: uppercase;
+  text-decoration: none;
 }
 
 .vote-start-section .prop-theme {
@@ -1564,7 +1566,7 @@ p.info span {
   line-height: 0;
 }
 
-.prop-theme > img {
+.prop-theme img {
   margin-right: 6px;
 }
 
