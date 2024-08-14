@@ -5022,7 +5022,8 @@ p.subinfo {
   display: flex;
   align-items: center;
   background: #FFFFFF;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  justify-content: center;
 }
 
 .vote-title {
