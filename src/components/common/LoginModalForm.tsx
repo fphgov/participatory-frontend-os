@@ -38,9 +38,6 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
   )
 
   async function onLogin(formData: FormData) {
-    setError('')
-    setErrorObject(undefined)
-
     const res = await loginFom(formData)
 
     if (res?.success && res?.token) {
@@ -303,7 +300,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
   }, [loaded, searchParams])
 
   useEffect(() => {
-    if (loaded) {
+    if (loaded && error) {
       renderContent()
     }
   }, [loaded, error])
