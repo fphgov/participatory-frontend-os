@@ -155,11 +155,12 @@ body {
 
 .page-idea-info a {
   text-decoration: none;
-  color: #0EA6CE;
+  color: #12326E;
+  text-decoration: underline;
 }
 
 .page-idea-info a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .page-idea-info .apply-plan {
