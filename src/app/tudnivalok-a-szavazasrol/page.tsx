@@ -48,7 +48,7 @@ export default async function IdeaInfoPage() {
                     <Mastermind />
                   </SectionBoxDetails>
 
-                  <SectionBoxDetails summary="A helyi közösségnek, érintetteknek van-e beleszólása a projekt megvalósításába?" fullWidth={true}>
+                  <SectionBoxDetails summary="A helyi közösségnek, érintetteknek van beleszólása a projekt megvalósításába?" fullWidth={true}>
                     <Community />
                   </SectionBoxDetails>
 
