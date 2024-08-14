@@ -1,10 +1,9 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { useParams, useRouter, useSearchParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import Error from "@/components/common/Error"
 import { loginWithMagicLinkForm } from '@/app/actions'
-
 
 export default function MagicLinkForm(): JSX.Element {
   const params = useParams()
@@ -23,6 +22,8 @@ export default function MagicLinkForm(): JSX.Element {
       router.push(pathname)
     } else {
       setError(res.error)
+
+      router.replace('/')
     }
   }
 
