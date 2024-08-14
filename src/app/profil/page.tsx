@@ -82,7 +82,7 @@ export default async function ProfilePage() {
                 <PersonalDataForm profilePreference={profilePreference} />
               </SectionBoxDetails>
 
-              <SectionBoxDetails summary="Honnét hallottál rólunk?">
+              <SectionBoxDetails summary="Honnan hallottál rólunk?">
                 <HearAboutForm profilePreference={profilePreference}/>
               </SectionBoxDetails>
 
