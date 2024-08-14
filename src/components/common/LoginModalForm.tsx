@@ -9,6 +9,7 @@ import ErrorMini from "@/components/common/ErrorMini"
 import { loginFom } from "@/app/actions"
 import { useModalHardContext } from "@/context/modalHard"
 import { ReadonlyURLSearchParams, usePathname, useRouter } from "next/navigation"
+import CheckboxUncontrolled from "./form-element/CheckboxUncontrolled"
 
 type LoginModalFormProps = {
   searchParams: ReadonlyURLSearchParams
@@ -160,14 +161,17 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
                 <div className="checkboxes-wrapper">
 
                   <div className="form-group">
-                    <label htmlFor="privacy" className="form-group-label">
-                      <input className="form-control" type="checkbox" id="privacy" name="privacy"/>
-                      <p>
-                        Elolvastam és elfogadom az <a
-                        href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatkezelesi_tajekoztato.pdf`} target="_blank"
-                        rel="noopener noreferrer">adatvédelmi nyilatkozatot</a> *
-                      </p>
-                    </label>
+                    <CheckboxUncontrolled
+                      id="privacy"
+                      name="privacy"
+                      label={
+                        <p>
+                          Elolvastam és elfogadom az <a
+                          href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatkezelesi_tajekoztato.pdf`} target="_blank"
+                          rel="noopener noreferrer">adatvédelmi nyilatkozatot</a> *
+                        </p>
+                      }
+                    />
 
                     {errorObject?.privacy ? Object.values(errorObject.privacy).map((err, i) => {
                       return <ErrorMini key={i} error={err} increment={`privacy-${i}`}/>
@@ -175,13 +179,14 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="live_in_city" className="form-group-label">
-                      <input className="form-control" type="checkbox" id="live_in_city" name="live_in_city"/>
-                      <p>
-                        Kijelentem, hogy elmúltam 14 éves és budapesti lakos vagyok, vagy Budapesten dolgozom,
-                        vagy Budapesten tanulok. *
-                      </p>
-                    </label>
+                    <CheckboxUncontrolled
+                      id="live_in_city"
+                      name="live_in_city"
+                      label={
+                        <p>Kijelentem, hogy elmúltam 14 éves és budapesti lakos vagyok, vagy Budapesten dolgozom,
+                        vagy Budapesten tanulok. *</p>
+                      }
+                    />
 
                     {errorObject?.live_in_city ? Object.values(errorObject.live_in_city).map((err, i) => {
                       return <ErrorMini key={i} error={err} increment={`live_in_city-${i}`}/>
@@ -189,10 +194,13 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="newsletter" className="form-group-label">
-                      <input className="form-control" type="checkbox" id="newsletter" name="newsletter"/>
-                      <p>Szeretnék feliratkozni a hírlevélre</p>
-                    </label>
+                    <CheckboxUncontrolled
+                      id="newsletter"
+                      name="newsletter"
+                      label={
+                        <p>Szeretnék feliratkozni a hírlevélre</p>
+                      }
+                    />
 
                     {errorObject?.newsletter ? Object.values(errorObject.newsletter).map((err, i) => {
                       return <ErrorMini key={i} error={err} increment={`newsletter-${i}`}/>
@@ -200,10 +208,13 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="prize" className="form-group-label">
-                      <input className="form-control" type="checkbox" id="prize" name="prize"/>
-                      <p>Szeretnék részt venni a <Link href="/hirek/indul-a-kozossegi-koltsegvetes-szavazasi-idoszaka" target="_blank">nyereményjátékban</Link>.</p>
-                    </label>
+                    <CheckboxUncontrolled
+                      id="prize"
+                      name="prize"
+                      label={
+                        <p>Szeretnék részt venni a <Link href="/hirek/indul-a-kozossegi-koltsegvetes-szavazasi-idoszaka" target="_blank">nyereményjátékban</Link>.</p>
+                      }
+                    />
 
                     {errorObject?.prize ? Object.values(errorObject.prize).map((err, i) => {
                       return <ErrorMini key={i} error={err} increment={`prize-${i}`}/>

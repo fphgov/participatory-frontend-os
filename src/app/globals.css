@@ -940,40 +940,12 @@ footer .fa-inverse {
   margin: 0 0 18px 0 !important;
 }
 
-.checkboxes-wrapper {
-  color: #FFFFFF;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 24px;
-  letter-spacing: 0;
-}
-
 .checkboxes-wrapper > .form-group {
-    margin: 0 0 18px 0;
-}
-
-.checkboxes-wrapper label {
-    margin: 0;
+  margin: 0;
 }
 
 .checkboxes-wrapper p {
-    display: inline-grid;
-    margin: 0 !important;
-    width: 261px;
-}
-
-.checkboxes-wrapper input[type="checkbox"] {
-    height: 24px;
-    line-height: 24px;
-    background: #fff;
-    color: #000;
-    padding: 0 6px;
-    box-sizing: border-box;
-    display: inline-grid;
-    width: 24px;
-    top: 5px;
-    position: relative;
+  margin: 0 !important;
 }
 
 .form-wrapper {
@@ -1089,7 +1061,7 @@ input[type="submit"] {
 }
 
 .formatted-checkbox {
-  margin-bottom: 24px;
+  margin-bottom: 18px;
   margin-left: 36px;
 }
 
@@ -1125,6 +1097,11 @@ fieldset .formatted-checkbox label {
   top: 50%;
   transform: translateY(-50%);
   border-radius: 4px;
+}
+
+.formatted-checkbox.formatted-checkbox-grid span,
+.formatted-checkbox.formatted-checkbox-grid input[type="checkbox"] {
+  top: 11px;
 }
 
 .formatted-checkbox input:checked ~ span {
@@ -5422,6 +5399,7 @@ span.cc_highlight:hover {
 .modal-content p {
   margin: 24px 0;
   text-align: left;
+  color: #FFF;
 }
 
 .modal-content hr {
