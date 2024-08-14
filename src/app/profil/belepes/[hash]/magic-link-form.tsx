@@ -22,8 +22,7 @@ export default function MagicLinkForm(): JSX.Element {
       router.push(pathname)
     } else {
       setError(res.error)
-
-      router.replace('/')
+      setTimeout(() => {router.push('/')}, 2000);
     }
   }
 
