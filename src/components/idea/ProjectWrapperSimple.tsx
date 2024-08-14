@@ -14,12 +14,13 @@ type IdeasWrapperProps = {
   project: IProject
   voteable: boolean
   disableVoteButton: boolean
+  disableRelatedIdeas?: boolean
   errorVoteable: string
   token: string
   backHref?: string
 }
 
-export default function ProjectWrapperSimple({ project, voteable, token, errorVoteable, disableVoteButton, backHref }: IdeasWrapperProps): JSX.Element {
+export default function ProjectWrapperSimple({ project, voteable, token, errorVoteable, disableVoteButton, backHref, disableRelatedIdeas = true }: IdeasWrapperProps): JSX.Element {
   const theme = project?.campaignTheme
 
   const isProject = [140, 200].indexOf(project?.workflowState?.id) !== -1
@@ -142,7 +143,7 @@ export default function ProjectWrapperSimple({ project, voteable, token, errorVo
                   </div>
                 ) : null}
 
-                <div className="prop-single-side-section prop-single-ideas">
+                {! disableRelatedIdeas ? <div className="prop-single-side-section prop-single-ideas">
                   <div className="prop-info-title">Kapcsolódó ötletek <IdeaRelationTipp /></div>
                   <div className="prop-info-content">
                     {project.ideas.length === 0 ? <>Nincs kapcsolódó ötlet</> : null}
@@ -152,7 +153,7 @@ export default function ProjectWrapperSimple({ project, voteable, token, errorVo
                       </div>)
                     })}
                   </div>
-                </div>
+                </div> : null}
               </div>
             </div>
 
