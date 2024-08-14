@@ -77,6 +77,24 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
     router.replace(`${pathname}?${nextSearchParams.toString()}`)
   }
 
+  const filteredSearchParams = () => {
+    const filteredSearchParams = new URLSearchParams()
+
+    if (searchParams.get('theme') !== null) {
+      filteredSearchParams.append('theme', searchParams.get('theme')?.toString() || '');
+    }
+
+    if (searchParams.get('rand') !== null) {
+      filteredSearchParams.append('rand', searchParams.get('rand')?.toString() || '');
+    }
+
+    if (searchParams.get('location') !== null) {
+      filteredSearchParams.append('location', searchParams.get('location')?.toString() || '');
+    }
+
+    return filteredSearchParams.toString()
+  }
+
   const getModalContent = (tab: string) => {
     const isLoginTab = tab === 'login'
     const isAuthentication = searchParams.get('auth') === "authentication"
@@ -87,7 +105,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
         <form className="" action={onLogin}>
           <fieldset>
             <input type="hidden" name="type" value={searchParams.get('auth')?.toString() || 'login'} />
-            <input type="hidden" name="pathname" value={pathname + '?' + searchParams.toString()} />
+            <input type="hidden" name="pathname" value={pathname + '?' + filteredSearchParams()} />
 
             {error ? <Error message={error} /> : null}
 
