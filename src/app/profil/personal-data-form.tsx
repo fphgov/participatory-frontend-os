@@ -74,8 +74,8 @@ export default function PersonalDataForm({ profilePreference }: PersonalDataForm
               <label htmlFor="postalCode">Irányítószám:</label>
               <input type="text" name="postalCode" id="postalCode" placeholder="Pl.: 1234" value={formData.postalCode} onChange={handleChangeInput} />
 
-              {errorObject && errorObject.postalCode ? Object.values(errorObject.postalCode).map((err, i) => {
-                return <ErrorMini key={i} error={err} increment={`postalCode-${i}`} />
+              {errorObject && errorObject.postal_code ? Object.values(errorObject.postal_code).map((err, i) => {
+                return <ErrorMini key={i} error={err} increment={`postal_code-${i}`} />
               }) : null}
             </div>
           </div>
