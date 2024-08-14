@@ -1,6 +1,6 @@
 export const WhoAndHow = () => <>
   <p>Szavazni minden Budapesten élő vagy dolgozó/tanuló, 14. életévét betöltött magánszemély tud, aki regisztrált az <a href="https://otlet.budapest.hu">otlet.budapest.hu</a> oldalon vagy felkeresi valamelyik személyes szavazópontot.</p>
-  <p>Személyesen a Fővárosi Szabó Ervin könyvtárakban, a Főpolgármesteri Hivatal Központi Ügyfélszolgálati Irodájában, az Idősek Információs Pontján, és utcai kitelepüléseink alkalmával lehet szavazni.</p>
+  <p>Személyesen a Fővárosi Szabó Ervin könyvtárakban, a Főpolgármesteri Hivatal Központi Ügyfélszolgálati Irodájában és utcai kitelepüléseink alkalmával lehet szavazni.</p>
   <p>Szavazatot öt kategóriában lehet leadni, kategóriánként egyet. Nem kötelező minden kategóriában szavazatot leadni.</p>
 </>
 
