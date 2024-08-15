@@ -68,6 +68,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
     const nextSearchParams = new URLSearchParams(searchParams.toString())
 
     nextSearchParams.delete('auth')
+    nextSearchParams.delete('vote')
 
     router.replace(`${pathname}?${nextSearchParams.toString()}`)
   }
@@ -85,6 +86,10 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
 
     if (searchParams.get('location') !== null) {
       filteredSearchParams.append('location', searchParams.get('location')?.toString() || '');
+    }
+
+    if (searchParams.get('vote') !== null) {
+      filteredSearchParams.append('vote', searchParams.get('vote')?.toString() || '');
     }
 
     return filteredSearchParams.toString()

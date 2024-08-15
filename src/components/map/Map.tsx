@@ -10,9 +10,10 @@ import styles from '../../styles/components/map/Map.module.scss';
 export interface MapProps {
   projectList: any
   token: any
+  ready: boolean
 }
 
-const Map: FC<MapProps> = ({ projectList, token }) => {
+const Map: FC<MapProps> = ({ projectList, token, ready }) => {
   return (
     <>
       <MapContainer
@@ -52,8 +53,8 @@ const Map: FC<MapProps> = ({ projectList, token }) => {
                 <Popup>
                   <VotePopUp
                     project={project}
-                    canVote={true}
                     token={token}
+                    ready={ready}
                   />
                 </Popup>
               </Marker>

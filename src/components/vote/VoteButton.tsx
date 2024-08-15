@@ -34,8 +34,8 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
     return params.toString()
   }, [searchParams])
 
-  const appendAuthParam = () => {
-    router.replace(`${pathname}?${createQueryString('auth', 'authentication')}`)
+  const appendAuthParam = (projectId: number|string) => {
+    router.replace(`${pathname}?${createQueryString('vote', String(projectId))}&${createQueryString('auth', 'authentication')}`)
   }
 
   function handleOpenModal(title: string, count: number|string) {
@@ -51,7 +51,7 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
 
   const sendVoteHandler = async (_token: string) => {
     if (! _token) {
-      appendAuthParam()
+      appendAuthParam(projectId)
 
       return
     }

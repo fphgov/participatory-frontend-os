@@ -16,7 +16,7 @@ export default function MagicLinkForm(): JSX.Element {
 
     const res = await loginWithMagicLinkForm((params?.hash as string || ''))
     const urlParams = new URLSearchParams(window.location.search);
-    const pathname = urlParams.get('pathname') ?? '/';
+    const pathname = decodeURIComponent(urlParams.get('pathname') ?? '/');
 
     if (res.success) {
       router.push(pathname)

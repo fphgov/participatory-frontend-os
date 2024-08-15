@@ -12,6 +12,7 @@ import { getToken } from '@/lib/actions'
 import { getNewUrlSearchParams } from '@/utilities/getNewUrlSearchParams'
 import ShowProjects from "@/components/vote/ShowProjects";
 import {categoryResolver} from "@/utilities/categoryResolver";
+import VoteCallback from "@/components/common/VoteCallback";
 
 interface IProps {
   searchParams: Record<string, string>
@@ -105,6 +106,7 @@ export default async function VotePage({searchParams}: IProps) {
   return (
     <>
       <main className="page page-vote page-vote-type-2">
+        <VoteCallback loggedIn={typeof token === 'string'} />
         <div className="page-vote-single-section">
           <HeroPage title="Szavazás" content="Minden kategóriában 3 szavazatot adhatsz le." />
 

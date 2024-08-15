@@ -5,11 +5,11 @@ import VoteButtonCard from "@/components/vote/VoteButtonCard";
 
 export interface VotePopUpProps {
   project: any
-  canVote: any
   token: any
+  ready: boolean
 }
 
-const VotePopUp: FC<VotePopUpProps> = ({ project, canVote, token }) => {
+const VotePopUp: FC<VotePopUpProps> = ({ project, token, ready }) => {
   return (
     <div className={styles.vote_pop_up}>
       <div className={styles.campaign_theme}>
@@ -41,13 +41,20 @@ const VotePopUp: FC<VotePopUpProps> = ({ project, canVote, token }) => {
         {project.title}
       </div>
       <div className={styles.buttons}>
-        <VoteButtonCard showVoteButton={!project.voted} disableVoteButton={!canVote} errorVoteable={""}
-                                    token={token} projectId={project.id}/>
+        <VoteButtonCard
+          showVoteButton={!project.voted && !ready}
+          disableVoteButton={false}
+          errorVoteable={""}
+          token={token}
+          projectId={project.id}
+        />
         <Link href={`/projektek/${project.id}`} className="btn post-more post-more-outline">Megnézem</Link>
       </div>
-      {canVote ? null :
+      {!project.voted ? null :
         <div className={styles.voted}>
-          <p className={styles.voted_label}>Már szavaztál erre az ötletre</p>
+          <p className={styles.voted_label}>
+            <div className="prop-build">Már szavaztál erre az ötletre</div>
+          </p>
         </div>
       }
     </div>

@@ -22,16 +22,19 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
   const { openModalHard, setOpenModalHard, setDataModalHard } = useModalHardContext()
   const [voted, setVoted] = useState(false)
 
-  const createQueryString = useCallback((name: string, value: string) => {
-    const params = new URLSearchParams(searchParams.toString())
+  const createQueryString = useCallback(
+    (projectId: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+      params.set('vote', projectId)
+      params.set('auth', 'authentication')
 
-    params.set(name, value)
+      return params.toString()
+    },
+    [searchParams]
+  )
 
-    return params.toString()
-  }, [searchParams])
-
-  const appendAuthParam = () => {
-    router.replace(`${pathname}?${createQueryString('auth', 'authentication')}`)
+  const appendAuthParam = (projectId: string|number) => {
+    router.replace(`${pathname}?${createQueryString(String(projectId))}`)
   }
 
   function handleOpenModal(title: string, count: number|string) {
@@ -56,7 +59,7 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
 
   const sendVoteHandler = async () => {
     if (! token) {
-      appendAuthParam()
+      appendAuthParam(projectId)
 
       return
     }

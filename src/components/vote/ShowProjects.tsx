@@ -73,7 +73,7 @@ const ShowProjects: FC<ShowProjectsProps> = ({
               <div className="container">
                 <div className="row">
                   <div className="col-md-12">
-                    <Map projectList={projectList} token={token} />
+                    <Map projectList={projectList} token={token} ready={noVotesLeft} />
                   </div>
                 </div>
               </div>
