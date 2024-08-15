@@ -26,15 +26,13 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
   const [voted, setVoted] = useState(false)
   const [error, setError] = useState('')
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(name, value)
+  const createQueryString = useCallback((name: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString())
 
-      return params.toString()
-    },
-    [searchParams]
-  )
+    params.set(name, value)
+
+    return params.toString()
+  }, [searchParams])
 
   const appendAuthParam = () => {
     router.replace(`${pathname}?${createQueryString('auth', 'authentication')}`)

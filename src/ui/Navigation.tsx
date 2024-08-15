@@ -71,15 +71,13 @@ export function Navigation({ menuItems, onClick = () => {}, rand, loggedIn, isMo
   const submenuRef = useRef(null)
   const pathname = usePathname()
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(name, value)
+  const createQueryString = useCallback((name: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString())
 
-      return params.toString()
-    },
-    [searchParams]
-  )
+    params.set(name, value)
+
+    return params.toString()
+  }, [searchParams])
 
   useOutside(submenuRef, () => { setIsOpen(false) })
 

@@ -22,15 +22,13 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
   const { openModalHard, setOpenModalHard, setDataModalHard } = useModalHardContext()
   const [voted, setVoted] = useState(false)
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(name, value)
+  const createQueryString = useCallback((name: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString())
 
-      return params.toString()
-    },
-    [searchParams]
-  )
+    params.set(name, value)
+
+    return params.toString()
+  }, [searchParams])
 
   const appendAuthParam = () => {
     router.replace(`${pathname}?${createQueryString('auth', 'authentication')}`)

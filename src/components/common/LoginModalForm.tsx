@@ -27,16 +27,13 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState('')
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
+  const createQueryString = useCallback((name: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString())
 
-      params.set(name, value)
+    params.set(name, value)
 
-      return params.toString()
-    },
-    [searchParams]
-  )
+    return params.toString()
+  }, [searchParams])
 
   async function onLogin(formData: FormData) {
     const res = await loginFom(formData)
