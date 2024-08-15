@@ -131,8 +131,8 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
 
             <div className="sub-text-wrapper">
                 {!isLoginTab && !isAuthentication && !isRegistration ?
-                  <p>Ha már korábban regisztráltál itt, add meg email címed és jelszavad a belépéshez!</p> : null}
-                {isLoginTab && !isAuthentication && !isRegistration ? <p>Ha már korábban regisztráltál itt, add meg email címed és elküldjük a belépéshez szükséges
+                  <p>Ha már korábban regisztráltál itt, add meg e-mail címed és jelszavad a belépéshez!</p> : null}
+                {isLoginTab && !isAuthentication && !isRegistration ? <p>Ha már korábban regisztráltál itt, add meg e-mail címed és elküldjük a belépéshez szükséges
                   linket!</p> : null}
                 {isAuthentication || isRegistration ?
                   <p>Add meg e-mail címed és elküldjük a belépéshez szükséges linket.</p> : null}
@@ -170,7 +170,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
                         <p>
                           Elolvastam és elfogadom az <a
                           href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatkezelesi_tajekoztato.pdf`} target="_blank"
-                          rel="noopener noreferrer">adatvédelmi nyilatkozatot</a> *
+                          rel="noopener noreferrer">adatvédelmi tájékoztatót</a> *
                         </p>
                       }
                     />
