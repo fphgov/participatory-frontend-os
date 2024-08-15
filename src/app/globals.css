@@ -6354,7 +6354,7 @@ input[type="tel"] {
 
 @media screen and (max-height: 900px) {
   .modal-inner {
-    height: 96vh;
-    overflow-y: scroll;
+    max-height: 100%;
+    overflow-y: auto;
   }
 }
