@@ -38,9 +38,11 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
   }
 
   function handleOpenModal(title: string, count: number|string) {
+    const content = count === 0 ? 'Ebben a kategóriában az összes szavazatodat leadtad' : `Ebben a kategóriában még ennyi szavazatod maradt: ${count}`
+
     setDataModalHard({
       title,
-      content: `Ebben a kategóriában még ennyi szavazatod maradt: ${count}`,
+      content,
       showCancelButton: true
     })
 
