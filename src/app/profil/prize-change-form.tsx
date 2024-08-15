@@ -1,12 +1,12 @@
 'use client'
 
-import { ToastContainer, toast } from 'react-toastify'
 import { useRef, useState } from "react"
 import Error from "@/components/common/Error"
 import ErrorMini from '@/components/common/ErrorMini'
 import { profileChangePrizeForm } from '@/app/actions'
 import Checkbox from '@/components/common/form-element/Checkbox'
 import { IUserPreference } from '@/models/userPreference.model'
+import {useModalHardContext} from "@/context/modalHard";
 
 type PrizeChangeFormmProps = {
   profilePreference: IUserPreference
@@ -22,16 +22,7 @@ export default function PrizeChangeForm({ profilePreference }: PrizeChangeFormmP
   const [error, setError] = useState('')
   const [errorObject, setErrorObject] = useState<Record<string, string>|undefined>(undefined)
   const [formData, setFormData] = useState(defaultFormData)
-
-  const notify = (message: string) => toast.dark(message, {
-    position: "bottom-right",
-    autoClose: 5000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  })
+  const { openModalHard, setOpenModalHard, setDataModalHard } = useModalHardContext()
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
@@ -50,7 +41,11 @@ export default function PrizeChangeForm({ profilePreference }: PrizeChangeFormmP
     const res = await profileChangePrizeForm(formData)
 
     if (res?.success && res?.successMessage) {
-      notify(res.successMessage)
+      setDataModalHard({
+        title: '',
+        content: res.successMessage,
+        showCancelButton: true
+      })
     } else {
       if (res?.message) {
         setError(res.message)
@@ -59,8 +54,14 @@ export default function PrizeChangeForm({ profilePreference }: PrizeChangeFormmP
         setError(res.error)
       }
 
-      notify('⛔️ Sikertelen nyereményjáték részvétel módosítás')
+      setDataModalHard({
+        title: '',
+        content: '⛔️ Sikertelen nyereményjáték részvétel módosítás',
+        showCancelButton: true
+      })
     }
+
+    setOpenModalHard(true)
   }
 
   return <>
@@ -87,7 +88,5 @@ export default function PrizeChangeForm({ profilePreference }: PrizeChangeFormmP
         </div>
       </fieldset>
     </form>
-
-    <ToastContainer />
   </>
 }

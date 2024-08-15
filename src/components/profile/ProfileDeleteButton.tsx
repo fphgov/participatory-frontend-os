@@ -1,21 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import { toast } from "react-toastify";
 import { apiProfileDelete } from "@/lib/api-requests";
+import {useModalHardContext} from "@/context/modalHard";
 
 export default function ProfileDeleteButton(): JSX.Element {
   const [ error, setError ] = useState()
-
-  const notify = (message: string) => toast.dark(message, {
-    position: "bottom-right",
-    autoClose: 5000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  })
+  const { openModalHard, setOpenModalHard, setDataModalHard } = useModalHardContext()
 
   const deleteAccount = async () => {
     if (! confirm("Biztos törölni szeretnéd a fiókod?")) {
@@ -25,14 +16,24 @@ export default function ProfileDeleteButton(): JSX.Element {
     try {
       const response = await apiProfileDelete()
 
-      notify(response?.message)
+      setDataModalHard({
+        title: '',
+        content: response?.message,
+        showCancelButton: true
+      })
     } catch (e: any) {
       if (e.response && e.response.data && e.response.data.errors) {
         setError(e.response.data.errors)
       }
 
-      notify('⛔️ Sikertelen fiók törlés')
+      setDataModalHard({
+        title: '',
+        content: '⛔️ Sikertelen fiók törlés',
+        showCancelButton: true
+      })
     }
+
+    setOpenModalHard(true)
   }
 
   return (

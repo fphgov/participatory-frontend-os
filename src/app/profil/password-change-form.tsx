@@ -1,10 +1,10 @@
 'use client'
 
-import { ToastContainer, toast } from 'react-toastify'
 import { useState } from "react"
 import Error from "@/components/common/Error"
 import ErrorMini from '@/components/common/ErrorMini'
 import { profileChangePasswordForm } from '@/app/actions'
+import {useModalHardContext} from "@/context/modalHard";
 
 export default function PasswordChangeForm(): JSX.Element {
   const defaultCredential = {
@@ -15,16 +15,7 @@ export default function PasswordChangeForm(): JSX.Element {
   const [error, setError] = useState('')
   const [errorObject, setErrorObject] = useState<Record<string, string>|undefined>(undefined)
   const [credential, setCredential] = useState(defaultCredential)
-
-  const notify = (message: string) => toast.dark(message, {
-    position: "bottom-right",
-    autoClose: 5000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  })
+  const { openModalHard, setOpenModalHard, setDataModalHard } = useModalHardContext()
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
@@ -42,7 +33,11 @@ export default function PasswordChangeForm(): JSX.Element {
       setCredential(defaultCredential)
 
       if (res?.successMessage) {
-        notify(res.successMessage)
+        setDataModalHard({
+          title: '',
+          content: res.successMessage,
+          showCancelButton: true
+        })
       }
     } else {
       if (res?.message) {
@@ -52,8 +47,14 @@ export default function PasswordChangeForm(): JSX.Element {
         setError(res.error)
       }
 
-      notify('⛔️ Sikertelen jelszó módosítás')
+      setDataModalHard({
+        title: '',
+        content: '⛔️ Sikertelen jelszó módosítás',
+        showCancelButton: true
+      })
     }
+
+    setOpenModalHard(true)
   }
 
   return <>
@@ -89,7 +90,5 @@ export default function PasswordChangeForm(): JSX.Element {
 
       </fieldset>
     </form>
-
-    <ToastContainer />
   </>
 }

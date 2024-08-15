@@ -1,7 +1,6 @@
 import './globals.css'
 import "normalize.css"
 import "bootstrap-4-grid/css/grid.min.css"
-import 'react-toastify/dist/ReactToastify.css'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import 'url-polyfill'
 import type { Metadata } from 'next'

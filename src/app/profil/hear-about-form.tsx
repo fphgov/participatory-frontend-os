@@ -1,11 +1,11 @@
 'use client'
 
-import { ToastContainer, toast } from 'react-toastify'
 import { useState } from "react"
 import Error from "@/components/common/Error"
 import ErrorMini from '@/components/common/ErrorMini'
 import { profileHearAboutForm } from '@/app/actions'
 import { IUserPreference } from '@/models/userPreference.model'
+import {useModalHardContext} from "@/context/modalHard";
 
 type HearAboutFormProps = {
   profilePreference: IUserPreference
@@ -15,16 +15,7 @@ export default function HearAboutForm({ profilePreference }: HearAboutFormProps)
   const [error, setError] = useState('')
   const [errorObject, setErrorObject] = useState<Record<string, string>|undefined>(undefined)
   const [formData, setFormData] = useState(profilePreference)
-
-  const notify = (message: string) => toast.dark(message, {
-    position: "bottom-right",
-    autoClose: 5000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  })
+  const { openModalHard, setOpenModalHard, setDataModalHard } = useModalHardContext()
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
@@ -40,7 +31,11 @@ export default function HearAboutForm({ profilePreference }: HearAboutFormProps)
 
     if (res?.success) {
       if (res?.successMessage) {
-        notify(res.successMessage)
+        setDataModalHard({
+          title: '',
+          content: res.successMessage,
+          showCancelButton: true
+        })
       }
     } else {
       if (res?.message) {
@@ -50,8 +45,14 @@ export default function HearAboutForm({ profilePreference }: HearAboutFormProps)
         setError(res.error)
       }
 
-      notify('⛔️ Sikertelen módosítás')
+      setDataModalHard({
+        title: '',
+        content: '⛔️ Sikertelen módosítás',
+        showCancelButton: true
+      })
     }
+
+    setOpenModalHard(true)
   }
 
   return <>
@@ -96,7 +97,5 @@ export default function HearAboutForm({ profilePreference }: HearAboutFormProps)
 
       </fieldset>
     </form>
-
-    <ToastContainer />
   </>
 }
