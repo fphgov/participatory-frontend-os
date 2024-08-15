@@ -40,7 +40,7 @@ export default async function VoteStartPage({ searchParams }: IProps) {
     <main className="page page-vote-start">
       <div className="page-vote-start-section">
         <HeroPage title="Szavazás">
-          <p>Válassz egy kategóriát és szavazz a kedvenc ötleteidre! Kategóriánként több ötlet is megvalósulhat.</p>
+          <p>Válassz egy kategóriát és szavazz a kedvenc ötleteidre! Kategóriánként 3 ötletre szavazhatsz.</p>
         </HeroPage>
 
         <VoteStartSection title="Minden kategóriában 3 szavazatot adhatsz le." subtitle="" rand={searchParams?.rand || generateRandomValue().toString()} votedList={themes} />
