@@ -11,7 +11,7 @@ export default function BannerArea(): JSX.Element|null {
                 <h2>Szavazz és nyerj értékes ajándékokat!</h2>
 
                 <div>
-                  <a className="btn btn-primary btn-next" href="/hirek/indul-a-kozossegi-koltsegvetes-szavazasi-idoszaka" target="_blank" rel="noopener noreferrer">Hogyan nyerhetek?</a>
+                  <a className="btn btn-primary btn-next" href="/hirek/szavazz-es-nyerj-belepot-furdobe-allatkertbe-szinhazba-es-mas-klassz-helyekre" target="_blank" rel="noopener noreferrer">Hogyan nyerhetek?</a>
                 </div>
               </Banner>
             </div>
