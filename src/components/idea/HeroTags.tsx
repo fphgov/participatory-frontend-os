@@ -107,13 +107,18 @@ export default function HeroTags({ tags, baseUrl, searchParams }: HeroTagsProps)
   }
 
   useEffect(() => {
+    setActiveTags(searchParams?.tag?.split(',') ?? [])
+  }, [loaded])
+
+  useEffect(() => {
     if (loaded) {
       handleOpenModal()
     }
   }, [activeTags, loaded])
 
-
-  const title = activeTags.length ? <><span>Kiválasztott címkék</span><b>{activeTags.length}</b></> : <div className="btn-filter btn-filter-control">Találatok szűrése</div>
+  const tagsCount = (searchParams?.tag?.split(',') ?? []).length
+  // @ts-ignore
+  const title = tagsCount ? <><span>Kiválasztott címkék</span><b>{tagsCount}</b></> : <div className="btn-filter btn-filter-control">Találatok szűrése</div>
 
   return (
     <div className="hero-tags" onClick={handleOpenModal}>
