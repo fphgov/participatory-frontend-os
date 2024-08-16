@@ -17,6 +17,7 @@ type ShowProjectsProps = {
   baseUrl: string
   searchParams: Record<string, string>
   voteStatus: any
+  saveStateInLocalStorage?: boolean
 }
 
 const ShowProjects: FC<ShowProjectsProps> = ({
@@ -28,6 +29,7 @@ const ShowProjects: FC<ShowProjectsProps> = ({
   baseUrl,
   searchParams,
   voteStatus,
+  saveStateInLocalStorage = false
 }) => {
   const [availableMap, setAvailableMap] = useState(false)
   const [listMode, setListMode] = useState('map')
@@ -40,7 +42,9 @@ const ShowProjects: FC<ShowProjectsProps> = ({
     if (availableMap) {
       const mode = listMode === 'map' ? 'list' : 'map'
 
-      localStorage.setItem('list_mode', mode)
+      if (saveStateInLocalStorage) {
+        localStorage.setItem('list_mode', mode)
+      }
 
       setListMode(mode)
     }
@@ -51,7 +55,7 @@ const ShowProjects: FC<ShowProjectsProps> = ({
       setAvailableMap(true)
     }
 
-    if (localStorage.getItem('list_mode')) {
+    if (saveStateInLocalStorage && localStorage.getItem('list_mode')) {
       setListMode(localStorage.getItem('list_mode') || 'map')
     }
   }, [])
