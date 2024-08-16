@@ -44,12 +44,6 @@ export default function PersonalDataForm({ profilePreference }: PersonalDataForm
         setErrorObject(res.jsonError)
         setError(res.error)
       }
-
-      setDataModalHard({
-        title: '',
-        content: '⛔️ Sikertelen módosítás',
-        showCancelButton: true
-      })
     }
 
     setOpenModalHard(true)
