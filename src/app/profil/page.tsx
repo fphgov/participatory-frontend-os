@@ -59,7 +59,10 @@ export default async function ProfilePage() {
           <div className="row">
             <div className="offset-xl-2 col-lg-12 col-xl-8">
 
-              <SectionBox footer={<div className="section-newsletter"><NewsletterChangeForm profilePreference={profilePreference} /></div>}>
+              <SectionBox footer={
+                null
+                /*<div className="section-newsletter"><NewsletterChangeForm profilePreference={profilePreference} /></div>*/
+              }>
                 <ProfileBox profile={profile} />
               </SectionBox>
 
