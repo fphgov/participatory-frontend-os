@@ -16,6 +16,7 @@ type ShowProjectsProps = {
   title: string
   baseUrl: string
   searchParams: Record<string, string>
+  voteStatus: any
 }
 
 const ShowProjects: FC<ShowProjectsProps> = ({
@@ -26,6 +27,7 @@ const ShowProjects: FC<ShowProjectsProps> = ({
   title,
   baseUrl,
   searchParams,
+  voteStatus,
 }) => {
   const [availableMap, setAvailableMap] = useState(false)
   const [listMode, setListMode] = useState('map')
@@ -73,7 +75,7 @@ const ShowProjects: FC<ShowProjectsProps> = ({
               <div className="container">
                 <div className="row">
                   <div className="col-md-12">
-                    <Map projectList={projectList} token={token} ready={noVotesLeft} />
+                    <Map projectList={projectList} token={token} ready={noVotesLeft} voteStatus={voteStatus} />
                   </div>
                 </div>
               </div>
@@ -97,6 +99,7 @@ const ShowProjects: FC<ShowProjectsProps> = ({
                         errorVoteable={""}
                         token={token}
                         projectId={project.id}
+                        voteStatus={voteStatus}
                       />
                     }
                     footerExtend={

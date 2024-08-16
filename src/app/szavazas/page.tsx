@@ -130,6 +130,7 @@ export default async function VotePage({searchParams}: IProps) {
             title={categoryResolver(theme)}
             searchParams={searchParams}
             baseUrl={baseUrl}
+            voteStatus={voteStatus}
           />
         </div>
       </main>

@@ -7,9 +7,10 @@ export interface VotePopUpProps {
   project: any
   token: any
   ready: boolean
+  voteStatus: any
 }
 
-const VotePopUp: FC<VotePopUpProps> = ({ project, token, ready }) => {
+const VotePopUp: FC<VotePopUpProps> = ({ project, token, ready, voteStatus }) => {
   return (
     <div className={styles.vote_pop_up}>
       <div className={styles.campaign_theme}>
@@ -47,6 +48,7 @@ const VotePopUp: FC<VotePopUpProps> = ({ project, token, ready }) => {
           errorVoteable={""}
           token={token}
           projectId={project.id}
+          voteStatus={voteStatus}
         />
         <Link href={`/projektek/${project.id}`} className="btn post-more post-more-outline">Megnézem</Link>
       </div>

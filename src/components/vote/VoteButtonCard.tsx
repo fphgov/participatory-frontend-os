@@ -12,9 +12,10 @@ type VoteButtonCardProps = {
   token: string
   projectId: number|string
   onClickVote?: () => void
+  voteStatus: any
 }
 
-export default function VoteButtonCard({ showVoteButton, disableVoteButton, token, errorVoteable, projectId }: VoteButtonCardProps): JSX.Element {
+export default function VoteButtonCard({ showVoteButton, disableVoteButton, token, errorVoteable, projectId, voteStatus }: VoteButtonCardProps): JSX.Element {
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
@@ -38,12 +39,28 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
   }
 
   function handleOpenModal(title: string, count: number|string) {
-    const content = count === 0 ? 'Ebben a kategóriában az összes szavazatodat leadtad' : `Ebben a kategóriában még ennyi szavazatod maradt: ${count}`
+    const content = count === 0 ?
+      (
+        <>
+          <p>Ebben a kategóriában az összes szavazatodat leadtad</p>
+          <button type="button" className="btn btn-secondary" onClick={() => {
+            setOpenModalHard(false)
+            router.replace(`/szavazas-inditasa`)
+          }}>
+            Kategóriát választok
+          </button>
+        </>
+      ) :
+      (
+        <>
+          <p>Ebben a kategóriában még ennyi szavazatod maradt: {count}</p>
+        </>
+      )
 
     setDataModalHard({
       title,
       content,
-      showCancelButton: true
+      showCancelButton: (count !== 0)
     })
 
     setOpenModalHard(true)
@@ -70,7 +87,28 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
       const response = await sendVoteProject(projectId)
 
       if (response.successMessage) {
-        handleOpenModal(response.successMessage, response?.data?.remainingVote?.[0]?.votes)
+        const voteablesCount: number = (voteStatus?.data?.voteables_count ?? 2) -1
+        if (voteablesCount === 0) {
+          setDataModalHard({
+            title: 'Köszönjük',
+            content: (
+              <>
+                <p>Az utolsó szavazatodat is leadtad. Köszönjük.</p>
+                <button type="button" className="btn btn-secondary" onClick={() => {
+                  setOpenModalHard(false)
+                  router.replace(`/`)
+                }}>
+                  Vissza a főoldalra
+                </button>
+              </>
+          ),
+            showCancelButton: false
+          })
+
+          setOpenModalHard(true)
+        } else {
+          handleOpenModal(response.successMessage, response?.data?.remainingVote?.[0]?.votes)
+        }
 
         router.refresh()
       } else if (response.error) {

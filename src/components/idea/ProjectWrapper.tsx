@@ -12,6 +12,7 @@ import VoteButton from "@/components/vote/VoteButton"
 import Gallery from "@/components/common/Gallery"
 import IdeaVoteTipp from "@/components/idea/IdeaVoteTipp"
 import IdeaRelationTipp from "@/components/idea/IdeaRelationTipp"
+import VoteCallback from "@/components/common/VoteCallback";
 
 type IdeasWrapperProps = {
   project: IProject
@@ -32,6 +33,7 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
 
   return (
     <div className="prop-inner-wrapper">
+      <VoteCallback loggedIn={typeof token === 'string'} />
       <div className={`prop-inner-content${voteable ? ' voteable' : ''}`}>
         <div className="row">
           <div className="offset-xl-1 offset-lg-1 col-xl-7 col-lg-7">
