@@ -17,12 +17,34 @@ export default function VoteCallback({loggedIn}: VoteCallbackProps) {
   const vote = searchParams.get('vote')
 
   function handleOpenModal(title: string, count: number | string) {
-    const content = count === 0 ? 'Ebben a kategóriában az összes szavazatodat leadtad' : `Ebben a kategóriában még ennyi szavazatod maradt: ${count}`
+    const content = count === 0 ?
+      (
+        <>
+          <p>Ebben a kategóriában az összes szavazatodat leadtad</p>
+          <button type="button" className="btn btn-secondary" onClick={() => {
+            setOpenModalHard(false)
+            router.replace(`/szavazas-inditasa`)
+          }}>
+            Kategóriát választok
+          </button>
+        </>
+      ) :
+      (
+        <>
+          <p>Ebben a kategóriában még ennyi szavazatod maradt: {count}</p>
+          <button type="button" className="btn btn-secondary" onClick={() => {
+            setOpenModalHard(false)
+            router.refresh()
+          }}>
+            Rendben
+          </button>
+        </>
+      )
 
     setDataModalHard({
       title,
       content,
-      showCancelButton: true
+      showCancelButton: false
     })
 
     setOpenModalHard(true)
