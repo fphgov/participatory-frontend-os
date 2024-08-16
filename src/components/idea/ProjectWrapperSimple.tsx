@@ -9,6 +9,7 @@ import Implementation from "@/components/idea/Implementation"
 import VoteButton from "@/components/vote/VoteButton"
 import Gallery from "@/components/common/Gallery"
 import IdeaRelationTipp from "@/components/idea/IdeaRelationTipp"
+import nFormatter from "@/utilities/nFormatter"
 
 type IdeasWrapperProps = {
   project: IProject
@@ -144,6 +145,13 @@ export default function ProjectWrapperSimple({ project, voteable, token, errorVo
                     </div>
                   </div>
                 ) : null}
+
+                <div className="prop-single-side-section prop-single-cost">
+                  <div className="prop-info-title">Tervezett költség</div>
+                  <div className="prop-info-content">
+                    {!project.cost ? <>Nincs tervezett költség</> : <>{nFormatter(project.cost)}</>}
+                  </div>
+                </div>
 
                 {! disableRelatedIdeas ? <div className="prop-single-side-section prop-single-ideas">
                   <div className="prop-info-title">Kapcsolódó ötletek <IdeaRelationTipp /></div>
