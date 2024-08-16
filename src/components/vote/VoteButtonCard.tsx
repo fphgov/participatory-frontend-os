@@ -93,7 +93,7 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
             title: 'Köszönjük',
             content: (
               <>
-                <p>Az utolsó szavazatodat is leadtad. Köszönjük.</p>
+                <p>Köszönjük, hogy részt vettél a közösségi költségvetés szavazásában!</p>
                 <button type="button" className="btn btn-secondary" onClick={() => {
                   setOpenModalHard(false)
                   router.replace(`/`)
