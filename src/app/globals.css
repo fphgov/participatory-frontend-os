@@ -948,6 +948,13 @@ footer .fa-inverse {
   margin: 0 !important;
 }
 
+.checkboxes-wrapper h3 {
+  font-size: 18px;
+  text-align: left;
+  margin-top: 24px;
+  margin-bottom: 18px;
+}
+
 .form-wrapper {
   display: inline-block;
   min-width: 280px;

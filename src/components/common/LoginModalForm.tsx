@@ -195,6 +195,8 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
                     }) : null}
                   </div>
 
+                  {isAuthentication ? <h3>Ha új felhasználó vagy:</h3> : null}
+
                   <div className="form-group">
                     <CheckboxUncontrolled
                       id="newsletter"
