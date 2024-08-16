@@ -3,7 +3,7 @@
 import {sendVoteProject} from "@/app/actions";
 import {usePathname, useRouter, useSearchParams} from "next/navigation"
 import {useModalHardContext} from "@/context/modalHard";
-import {useCallback} from "react";
+import {useCallback, useEffect} from "react";
 
 type VoteCallbackProps = {
   loggedIn: boolean
@@ -73,6 +73,7 @@ export default function VoteCallback({loggedIn}: VoteCallbackProps) {
   async function sendVoteHandler(projectId: string) {
     try {
       const response = await sendVoteProject(projectId)
+      console.log(response)
 
       if (response.successMessage) {
         handleOpenModal(response.successMessage, response?.data?.remainingVote?.[0]?.votes)
@@ -88,15 +89,17 @@ export default function VoteCallback({loggedIn}: VoteCallbackProps) {
     }
   }
 
-  if (loggedIn && !vote && localStorage.getItem('vote')) {
-    sendVoteHandler(localStorage.getItem('vote') || '')
-    localStorage.removeItem('vote')
-  }
+  useEffect(() => {
+    if (loggedIn && !vote && localStorage.getItem('vote')) {
+      sendVoteHandler(localStorage.getItem('vote') || '')
+      localStorage.removeItem('vote')
+    }
 
-  if (vote && !searchParams.get('auth')) {
-    localStorage.setItem('vote', searchParams.get('vote') || '')
-    router.push(`${pathname}?${removeVoteParam()}`)
-  }
+    if (vote && !searchParams.get('auth')) {
+      localStorage.setItem('vote', searchParams.get('vote') || '')
+      router.push(`${pathname}?${removeVoteParam()}`)
+    }
+  });
 
   return (<></>)
 }
