@@ -93,7 +93,7 @@ export default function VoteCallback({loggedIn}: VoteCallbackProps) {
     localStorage.removeItem('vote')
   }
 
-  if (vote) {
+  if (vote && !searchParams.get('auth')) {
     localStorage.setItem('vote', searchParams.get('vote') || '')
     router.push(`${pathname}?${removeVoteParam()}`)
   }
