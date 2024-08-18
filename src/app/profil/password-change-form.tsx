@@ -38,6 +38,8 @@ export default function PasswordChangeForm(): JSX.Element {
           content: res.successMessage,
           showCancelButton: true
         })
+
+        setOpenModalHard(true)
       }
     } else {
       if (res?.message) {
@@ -46,15 +48,7 @@ export default function PasswordChangeForm(): JSX.Element {
         setErrorObject(res.jsonError)
         setError(res.error)
       }
-
-      setDataModalHard({
-        title: '',
-        content: '⛔️ Sikertelen jelszó módosítás',
-        showCancelButton: true
-      })
     }
-
-    setOpenModalHard(true)
   }
 
   return <>
