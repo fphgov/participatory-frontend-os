@@ -1,6 +1,6 @@
 'use client'
 
-import { SetStateAction, useCallback, useEffect, useState } from "react"
+import { SetStateAction, useCallback, useEffect, useRef, useState } from "react"
 // @ts-ignore
 import { ReCaptcha, loadReCaptcha } from "@icetee/react-recaptcha-v3"
 import Link from "next/link"
@@ -19,8 +19,9 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
   const router = useRouter()
   const pathname = usePathname()
 
-  const { openModalHard, setOpenModalHard, setDataModalHard } = useModalHardContext()
+  const { openModalHard, setOpenModalHard, setDataModalHard, setScrollModalHard } = useModalHardContext()
 
+  const containerRef = useRef(null);
   const [recaptcha, setRecaptcha] = useState<ReCaptcha>()
   const [recaptchaToken, setRecaptchaToken] = useState('')
   const [errorObject, setErrorObject] = useState<Record<string, string>|undefined>(undefined)
@@ -36,6 +37,8 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
   }, [searchParams])
 
   async function onLogin(formData: FormData) {
+    setScrollModalHard(false)
+
     const res = await loginFom(formData)
 
     if (res?.success && res?.token) {
@@ -59,6 +62,10 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
         setErrorObject(res.jsonError)
         setError(res.error)
       }
+
+      setTimeout(() => {
+        setScrollModalHard(true)
+      }, 10)
     }
 
     recaptcha?.execute()
@@ -101,7 +108,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
 
     return (
       <>
-        <form className="" action={onLogin}>
+        <form className="" action={onLogin} ref={containerRef}>
           <fieldset>
             <input type="hidden" name="type" value={searchParams.get('auth')?.toString() || 'login'} />
             <input type="hidden" name="pathname" value={pathname + '?' + filteredSearchParams()} />

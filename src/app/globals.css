@@ -5406,6 +5406,7 @@ span.cc_highlight:hover {
   margin: 0 auto;
   max-width: 494px;
   position: relative;
+  scroll-behavior: smooth;
 }
 
 .modal-content {

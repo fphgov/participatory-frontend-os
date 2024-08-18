@@ -3,34 +3,14 @@
 import { useModalHardContext } from '@/context/modalHard'
 import { useEffect, useRef } from 'react'
 
-const useOutsideClick = (callback: () => void) => {
-  const ref = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const handleClick = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        callback()
-      }
-    }
-
-    document.addEventListener('click', handleClick, true)
-
-    return () => {
-      document.removeEventListener('click', handleClick, true)
-    }
-  }, [ref])
-
-  return ref
-}
-
 export default function ModalHard(): JSX.Element {
-  const { openModalHard, setOpenModalHard, dataModalHard } = useModalHardContext()
+  const { openModalHard, setOpenModalHard, dataModalHard, scrollModalHard } = useModalHardContext()
+
+  const ref = useRef<HTMLDivElement>(null)
 
   const closeModal = () => {
     setOpenModalHard(false)
   }
-
-  const ref = useOutsideClick(closeModal)
 
   useEffect(() => {
     if (openModalHard) {
@@ -39,6 +19,16 @@ export default function ModalHard(): JSX.Element {
       document.body.classList.remove('modal-open')
     }
   }, [openModalHard])
+
+  useEffect(() => {
+    if (scrollModalHard) {
+      const element = ref.current
+
+      if (element) {
+        element.scrollTop = 0
+      }
+    }
+  }, [scrollModalHard])
 
   if (! openModalHard) {
     return <></>
