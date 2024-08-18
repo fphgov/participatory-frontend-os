@@ -10,6 +10,7 @@ import VoteButton from "@/components/vote/VoteButton"
 import Gallery from "@/components/common/Gallery"
 import IdeaRelationTipp from "@/components/idea/IdeaRelationTipp"
 import nFormatter from "@/utilities/nFormatter"
+import { IVoteStatus } from "@/models/voteableProject.model"
 
 type IdeasWrapperProps = {
   project: IProject
@@ -19,9 +20,19 @@ type IdeasWrapperProps = {
   errorVoteable: string
   token: string
   backHref?: string
+  voteStatus: IVoteStatus
 }
 
-export default function ProjectWrapperSimple({ project, voteable, token, errorVoteable, disableVoteButton, backHref, disableRelatedIdeas = true }: IdeasWrapperProps): JSX.Element {
+export default function ProjectWrapperSimple({
+  project,
+  voteable,
+  token,
+  errorVoteable,
+  disableVoteButton,
+  backHref,
+  disableRelatedIdeas = true,
+  voteStatus
+}: IdeasWrapperProps): JSX.Element {
   const theme = project?.campaignTheme
 
   const isProject = [140, 200].indexOf(project?.workflowState?.id) !== -1
@@ -171,6 +182,7 @@ export default function ProjectWrapperSimple({ project, voteable, token, errorVo
 
             <VoteButton
               style="background"
+              voteStatus={voteStatus}
               showVoteButton={voteable}
               disableVoteButton={disableVoteButton}
               projectId={project.id}

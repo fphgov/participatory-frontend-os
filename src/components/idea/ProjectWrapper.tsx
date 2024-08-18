@@ -12,18 +12,28 @@ import VoteButton from "@/components/vote/VoteButton"
 import Gallery from "@/components/common/Gallery"
 import IdeaVoteTipp from "@/components/idea/IdeaVoteTipp"
 import IdeaRelationTipp from "@/components/idea/IdeaRelationTipp"
-import VoteCallback from "@/components/common/VoteCallback";
+import VoteCallback from "@/components/common/VoteCallback"
+import { IVoteStatus } from "@/models/voteableProject.model"
 
-type IdeasWrapperProps = {
+type ProjectWrapperProps = {
   project: IProject
   voteable: boolean
   disableVoteButton: boolean
   errorVoteable: string
   token: string
   backHref?: string
+  voteStatus: IVoteStatus
 }
 
-export default function ProjectWrapper({ project, voteable, token, errorVoteable, disableVoteButton, backHref }: IdeasWrapperProps): JSX.Element {
+export default function ProjectWrapper({
+  project,
+  voteable,
+  token,
+  errorVoteable,
+  disableVoteButton,
+  backHref,
+  voteStatus
+}: ProjectWrapperProps): JSX.Element {
   const theme = project?.campaignTheme
 
   const isProject = [140, 200].indexOf(project?.workflowState?.id) !== -1
@@ -33,13 +43,14 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
 
   return (
     <div className="prop-inner-wrapper">
-      <VoteCallback loggedIn={typeof token === 'string'} />
+      <VoteCallback loggedIn={typeof token === 'string'} voteStatus={voteStatus} />
+
       <div className={`prop-inner-content${voteable ? ' voteable' : ''}`}>
         <div className="row">
           <div className="offset-xl-1 offset-lg-1 col-xl-7 col-lg-7">
             <div className="prop-single-wrapper prop-single-body">
               <div className="prop-single-inner">
-                <VoteButton showVoteButton={voteable} disableVoteButton={disableVoteButton} projectId={project.id} token={token} errorVoteable={errorVoteable} />
+                <VoteButton showVoteButton={voteable} disableVoteButton={disableVoteButton} projectId={project.id} token={token} errorVoteable={errorVoteable} voteStatus={voteStatus} />
 
                 <div className="prop-single-content">
                   {project.description ? <>
@@ -105,7 +116,7 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
                   </>) : null}
                 </div>
 
-                <VoteButton showVoteButton={voteable} disableVoteButton={disableVoteButton} projectId={project.id} token={token} errorVoteable={errorVoteable} />
+                <VoteButton showVoteButton={voteable} disableVoteButton={disableVoteButton} projectId={project.id} token={token} errorVoteable={errorVoteable} voteStatus={voteStatus} />
               </div>
 
               {project.implementations && project.implementations.length > 0 ? <>

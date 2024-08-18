@@ -1,26 +1,76 @@
 "use client"
 
-import {sendVoteProject} from "@/app/actions";
-import {usePathname, useRouter, useSearchParams} from "next/navigation"
-import {useModalHardContext} from "@/context/modalHard";
-import {useCallback, useEffect} from "react";
+import { sendVoteProject } from "@/app/actions"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { useModalHardContext } from "@/context/modalHard"
+import { useCallback, useEffect } from "react"
+import { IVoteStatus } from "@/models/voteableProject.model"
 
 type VoteCallbackProps = {
   loggedIn: boolean
+  voteStatus: IVoteStatus
 }
 
-export default function VoteCallback({loggedIn}: VoteCallbackProps) {
+export default function VoteCallback({ loggedIn, voteStatus }: VoteCallbackProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const pathname = usePathname()
-  const {setOpenModalHard, setDataModalHard} = useModalHardContext()
+  const { setOpenModalHard, setDataModalHard } = useModalHardContext()
   const vote = searchParams.get('vote')
+
+  const removeVoteParam = useCallback(() => {
+    const params = new URLSearchParams(searchParams.toString())
+
+    params.delete('vote')
+
+    return params.toString()
+  }, [searchParams])
+
+  const handleVote = () => {
+    setOpenModalHard(false)
+
+    if (vote) {
+      setTimeout(() => {
+        closeModal()
+        sendVoteHandler(vote)
+      }, 10)
+    }
+  }
+
+  const closeModal = () => {
+    setOpenModalHard(false)
+
+    router.replace(`${pathname}?${removeVoteParam()}`)
+  }
+
+  function handleOpenConfirmationModal() {
+    localStorage.removeItem('vote')
+
+    setDataModalHard({
+      title: 'Biztosan szavazol erre az ötletre?',
+      content: <>
+        <button type="button" className="btn btn-secondary" onClick={() => {
+          handleVote()
+        }}>
+          Igen
+        </button>
+        <button type="button" className="btn btn-secondary btn-secondary-outline" onClick={() => {
+          closeModal()
+        }}>
+          Nem
+        </button>
+      </>,
+      showCancelButton: false
+    })
+
+    setOpenModalHard(true)
+  }
 
   function handleOpenModal(title: string, count: number | string) {
     const content = count === 0 ?
       (
         <>
-          <p>Ebben a kategóriában az összes szavazatodat leadtad</p>
+          <div>Ebben a kategóriában az összes szavazatodat leadtad</div>
           <button type="button" className="btn btn-secondary" onClick={() => {
             setOpenModalHard(false)
             router.replace(`/szavazas-inditasa`)
@@ -31,7 +81,7 @@ export default function VoteCallback({loggedIn}: VoteCallbackProps) {
       ) :
       (
         <>
-          <p>Ebben a kategóriában még ennyi szavazatod maradt: {count}</p>
+          <div>Ebben a kategóriában még ennyi szavazatod maradt: {count}</div>
           <button type="button" className="btn btn-secondary" onClick={() => {
             setOpenModalHard(false)
             router.refresh()
@@ -60,23 +110,36 @@ export default function VoteCallback({loggedIn}: VoteCallbackProps) {
     setOpenModalHard(true)
   }
 
-  const removeVoteParam = useCallback(
-    () => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.delete('vote')
-
-      return params.toString()
-    },
-    [searchParams]
-  )
-
   async function sendVoteHandler(projectId: string) {
     try {
       const response = await sendVoteProject(projectId)
-      console.log(response)
 
       if (response.successMessage) {
-        handleOpenModal(response.successMessage, response?.data?.remainingVote?.[0]?.votes)
+        const voteablesCount: number = typeof voteStatus === 'object' ? (voteStatus?.data?.voteables_count ?? 2) - 1 : 1
+
+        if (voteablesCount === 0) {
+          setDataModalHard({
+            title: 'Köszönjük',
+            content: (
+              <>
+                <div>Köszönjük, hogy részt vettél a közösségi költségvetés szavazásában!</div>
+                <button type="button" className="btn btn-secondary" onClick={() => {
+                  setOpenModalHard(false)
+                  router.replace(`/`)
+                }}>
+                  Vissza a főoldalra
+                </button>
+              </>
+            ),
+            showCancelButton: false
+          })
+
+          setOpenModalHard(true)
+        } else {
+          handleOpenModal(response.successMessage, response?.data?.remainingVote?.[0]?.votes)
+        }
+
+        router.refresh()
       } else if (response.error) {
         handleOpenErrorModal(response.error)
       } else if (response.message) {
@@ -90,16 +153,13 @@ export default function VoteCallback({loggedIn}: VoteCallbackProps) {
   }
 
   useEffect(() => {
-    if (loggedIn && !vote && localStorage.getItem('vote')) {
-      sendVoteHandler(localStorage.getItem('vote') || '')
-      localStorage.removeItem('vote')
-    }
+    const voteNum = vote !== null && !isNaN(Number(vote)) ? Number(vote) : null
 
-    if (vote && !searchParams.get('auth')) {
-      localStorage.setItem('vote', searchParams.get('vote') || '')
-      router.push(`${pathname}?${removeVoteParam()}`)
+    if (voteNum !== null && Number.isInteger(voteNum) && loggedIn) {
+      handleOpenConfirmationModal()
+      console.log(voteNum)
     }
-  });
+  }, [vote, loggedIn])
 
   return (<></>)
 }

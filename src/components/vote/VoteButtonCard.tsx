@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useModalHardContext } from "@/context/modalHard"
 import { sendVoteProject } from '@/app/actions'
+import { IVoteStatus } from "@/models/voteableProject.model"
 
 type VoteButtonCardProps = {
   showVoteButton: boolean
@@ -12,10 +13,16 @@ type VoteButtonCardProps = {
   token: string
   projectId: number|string
   onClickVote?: () => void
-  voteStatus: any
+  voteStatus: IVoteStatus
 }
 
-export default function VoteButtonCard({ showVoteButton, disableVoteButton, token, errorVoteable, projectId, voteStatus }: VoteButtonCardProps): JSX.Element {
+export default function VoteButtonCard({
+  showVoteButton,
+  disableVoteButton,
+  token, errorVoteable,
+  projectId,
+  voteStatus
+}: VoteButtonCardProps): JSX.Element {
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
@@ -23,26 +30,23 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
   const { openModalHard, setOpenModalHard, setDataModalHard } = useModalHardContext()
   const [voted, setVoted] = useState(false)
 
-  const createQueryString = useCallback(
-    (projectId: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set('vote', projectId)
-      params.set('auth', 'authentication')
+  const createQueryString = useCallback((name: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString())
 
-      return params.toString()
-    },
-    [searchParams]
-  )
+    params.set(name, value)
 
-  const appendAuthParam = (projectId: string|number) => {
-    router.replace(`${pathname}?${createQueryString(String(projectId))}`)
+    return params.toString()
+  }, [searchParams])
+
+  const appendAuthParam = () => {
+    router.replace(`${pathname}?${createQueryString('auth', 'authentication')}`)
   }
 
   function handleOpenModal(title: string, count: number|string) {
     const content = count === 0 ?
       (
         <>
-          <p>Ebben a kategóriában az összes szavazatodat leadtad</p>
+          <div>Ebben a kategóriában az összes szavazatodat leadtad</div>
           <button type="button" className="btn btn-secondary" onClick={() => {
             setOpenModalHard(false)
             router.replace(`/szavazas-inditasa`)
@@ -52,9 +56,7 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
         </>
       ) :
       (
-        <>
-          <p>Ebben a kategóriában még ennyi szavazatod maradt: {count}</p>
-        </>
+        <>Ebben a kategóriában még ennyi szavazatod maradt: {count}</>
       )
 
     setDataModalHard({
@@ -78,7 +80,9 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
 
   const sendVoteHandler = async () => {
     if (! token) {
-      appendAuthParam(projectId)
+      localStorage.setItem('vote', projectId.toString())
+
+      appendAuthParam()
 
       return
     }
@@ -87,13 +91,14 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
       const response = await sendVoteProject(projectId)
 
       if (response.successMessage) {
-        const voteablesCount: number = (voteStatus?.data?.voteables_count ?? 2) -1
+        const voteablesCount: number = typeof voteStatus === 'object' ? (voteStatus?.data?.voteables_count ?? 2) - 1 : 1
+
         if (voteablesCount === 0) {
           setDataModalHard({
             title: 'Köszönjük',
             content: (
               <>
-                <p>Köszönjük, hogy részt vettél a közösségi költségvetés szavazásában!</p>
+                <div>Köszönjük, hogy részt vettél a közösségi költségvetés szavazásában!</div>
                 <button type="button" className="btn btn-secondary" onClick={() => {
                   setOpenModalHard(false)
                   router.replace(`/`)
@@ -101,7 +106,7 @@ export default function VoteButtonCard({ showVoteButton, disableVoteButton, toke
                   Vissza a főoldalra
                 </button>
               </>
-          ),
+            ),
             showCancelButton: false
           })
 

@@ -4,13 +4,14 @@ import type { Metadata } from 'next'
 import { getToken } from "@/lib/actions"
 import { notFound } from 'next/navigation'
 import Error from '@/components/common/Error'
-import { apiProjectData, apiCheckPhase, apiCheckVote } from '@/lib/api-requests'
+import { apiProjectData, apiCheckPhase, apiCheckVote, apiVoteStatus } from '@/lib/api-requests'
 import HeroPage from '@/components/common/HeroPage'
 import ProjectWrapperSimple from '@/components/idea/ProjectWrapperSimple'
 import { OkResponse } from '@/lib/types'
 import { generateRandomValue } from '@/utilities/generateRandomValue'
 import BannerArea from '@/components/home/BannerArea'
 import VoteButton from '@/components/vote/VoteButton'
+import VoteCallback from '@/components/common/VoteCallback'
 
 type Props = {
   params: { id: string }
@@ -41,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ProjectPage({ params }: Props) {
   const rand = generateRandomValue().toString()
 
-  let pageData, phaseStatus, voteable, error, errorVoteable
+  let pageData, phaseStatus, voteable, voteStatus, error, errorVoteable
 
   try {
     pageData = await apiProjectData(params.id)
@@ -60,6 +61,10 @@ export default async function ProjectPage({ params }: Props) {
     }
   }
 
+  if (token) {
+    voteStatus = await apiVoteStatus()
+  }
+
   const enabledVoteButton = (
     token === undefined ||
     (token !== undefined && (voteable as OkResponse)?.data?.code === "OK")
@@ -74,11 +79,14 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <>
+      <VoteCallback loggedIn={typeof token === 'string'} voteStatus={voteStatus} />
+
       <main className="page page-idea page-project">
         <div className="prop">
           <HeroPage title={pageData.title} link={null}>
             <VoteButton
               style="hero"
+              voteStatus={voteStatus}
               showVoteButton={projectVoteable}
               disableVoteButton={! enabledVoteButton}
               projectId={pageData.id}
@@ -93,6 +101,7 @@ export default async function ProjectPage({ params }: Props) {
             <ProjectWrapperSimple
               project={pageData}
               token={token}
+              voteStatus={voteStatus}
               disableVoteButton={! enabledVoteButton}
               voteable={projectVoteable}
               errorVoteable={errorVoteable}

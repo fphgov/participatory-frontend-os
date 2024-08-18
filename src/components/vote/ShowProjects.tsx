@@ -5,8 +5,8 @@ import { Suspense } from 'react'
 import IdeasWrapper from "@/components/idea/IdeasWrapper"
 import dynamic from "next/dynamic"
 import VoteButtonCard from "@/components/vote/VoteButtonCard"
-import {categoryResolver} from "@/utilities/categoryResolver";
 import VoteSearch from "@/components/vote/VoteSearch";
+import { IVoteStatus } from "@/models/voteableProject.model"
 
 type ShowProjectsProps = {
   projectList: any
@@ -16,7 +16,7 @@ type ShowProjectsProps = {
   title: string
   baseUrl: string
   searchParams: Record<string, string>
-  voteStatus: any
+  voteStatus: IVoteStatus
   saveStateInLocalStorage?: boolean
 }
 

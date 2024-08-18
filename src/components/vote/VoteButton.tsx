@@ -1,10 +1,11 @@
 "use client"
 
-import { apiVote } from "@/lib/api-requests"
 import { useCallback, useEffect, useState } from "react"
 import Error from "@/components/common/Error"
 import { useModalHardContext } from "@/context/modalHard"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { sendVoteProject } from "@/app/actions"
+import { IVoteStatus } from "@/models/voteableProject.model"
 
 type VoteButtonProps = {
   showVoteButton: boolean
@@ -14,9 +15,18 @@ type VoteButtonProps = {
   projectId: number|string
   style?: 'default' | 'background' | 'hero'
   onClickVote?: () => void
+  voteStatus: IVoteStatus
 }
 
-export default function VoteButton({ showVoteButton, disableVoteButton, token, errorVoteable, projectId, style = 'default' }: VoteButtonProps): JSX.Element {
+export default function VoteButton({
+  showVoteButton,
+  disableVoteButton,
+  token,
+  errorVoteable,
+  projectId,
+  voteStatus,
+  style = 'default'
+}: VoteButtonProps): JSX.Element {
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
@@ -34,13 +44,38 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
     return params.toString()
   }, [searchParams])
 
-  const appendAuthParam = (projectId: number|string) => {
-    router.replace(`${pathname}?${createQueryString('vote', String(projectId))}&${createQueryString('auth', 'authentication')}`)
+  const appendAuthParam = () => {
+    router.replace(`${pathname}?${createQueryString('auth', 'authentication')}`)
   }
 
   function handleOpenModal(title: string, count: number|string) {
-    const content = count === 0 ? 'Ebben a kategóriában az összes szavazatodat leadtad' : `Ebben a kategóriában még ennyi szavazatod maradt: ${count}`
+    const content = count === 0 ?
+      (
+        <>
+          <div>Ebben a kategóriában az összes szavazatodat leadtad</div>
+          <button type="button" className="btn btn-secondary" onClick={() => {
+            setOpenModalHard(false)
+            router.replace(`/szavazas-inditasa`)
+          }}>
+            Kategóriát választok
+          </button>
+        </>
+      ) :
+      (
+        <>Ebben a kategóriában még ennyi szavazatod maradt: {count}</>
+      )
 
+    setDataModalHard({
+      title,
+      content,
+      showCancelButton: (count !== 0)
+    })
+
+    setOpenModalHard(true)
+    setVoted(true)
+  }
+
+  function handleOpenErrorModal(title: string, content: string = '') {
     setDataModalHard({
       title,
       content,
@@ -48,12 +83,13 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
     })
 
     setOpenModalHard(true)
-    setVoted(true)
   }
 
   const sendVoteHandler = async (_token: string) => {
     if (! _token) {
-      appendAuthParam(projectId)
+      localStorage.setItem('vote', projectId.toString())
+
+      appendAuthParam()
 
       return
     }
@@ -61,14 +97,40 @@ export default function VoteButton({ showVoteButton, disableVoteButton, token, e
     setError('')
 
     try {
-      const response = await apiVote(projectId)
+      const response = await sendVoteProject(projectId)
 
-      if (response.message) {
-        handleOpenModal(response.message, response?.data?.remainingVote?.[0]?.votes)
+      if (response.successMessage) {
+        const voteablesCount: number = typeof voteStatus === 'object' ? (voteStatus?.data?.voteables_count ?? 2) - 1 : 1
+
+        if (voteablesCount === 0) {
+          setDataModalHard({
+            title: 'Köszönjük',
+            content: (
+              <>
+                <div>Köszönjük, hogy részt vettél a közösségi költségvetés szavazásában!</div>
+                <button type="button" className="btn btn-secondary" onClick={() => {
+                  setOpenModalHard(false)
+                  router.replace(`/`)
+                }}>
+                  Vissza a főoldalra
+                </button>
+              </>
+            ),
+            showCancelButton: false
+          })
+
+          setOpenModalHard(true)
+        } else {
+          handleOpenModal(response.successMessage, response?.data?.remainingVote?.[0]?.votes)
+        }
+      } else if (response.error) {
+        handleOpenErrorModal(response.error)
+      } else if (response.message) {
+        handleOpenErrorModal(response.message)
       }
     } catch (e: any) {
-      if (typeof e?.message === "string") {
-        setError(e.message)
+      if (typeof e?.response?.error === "string") {
+        handleOpenErrorModal(e.response.error)
       }
     }
   }

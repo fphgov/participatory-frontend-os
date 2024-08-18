@@ -1,17 +1,18 @@
-'use client';
+'use client'
 
-import {LayerGroup, MapContainer, Marker, Popup, TileLayer} from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import {DivIcon, LatLngBoundsExpression, LatLngExpression} from 'leaflet';
-import {FC} from "react";
-import VotePopUp from "@/components/map/VotePopUp";
-import styles from '../../styles/components/map/Map.module.scss';
+import { LayerGroup, MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css'
+import { DivIcon, LatLngBoundsExpression, LatLngExpression } from 'leaflet'
+import { FC} from "react"
+import VotePopUp from "@/components/map/VotePopUp"
+import styles from '../../styles/components/map/Map.module.scss'
+import { IVoteStatus } from '@/models/voteableProject.model'
 
 export interface MapProps {
   projectList: any
   token: any
   ready: boolean
-  voteStatus: any
+  voteStatus: IVoteStatus
 }
 
 const Map: FC<MapProps> = ({ projectList, token, ready, voteStatus }) => {

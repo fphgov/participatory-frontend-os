@@ -2,12 +2,13 @@ import {FC} from "react";
 import Link from "next/link";
 import styles from '../../styles/components/map/VotePopUp.module.scss';
 import VoteButtonCard from "@/components/vote/VoteButtonCard";
+import { IVoteStatus } from "@/models/voteableProject.model";
 
 export interface VotePopUpProps {
   project: any
   token: any
   ready: boolean
-  voteStatus: any
+  voteStatus: IVoteStatus
 }
 
 const VotePopUp: FC<VotePopUpProps> = ({ project, token, ready, voteStatus }) => {

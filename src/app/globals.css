@@ -452,6 +452,18 @@ input.btn[disabled]:hover {
   background-color: #21A7CC;
 }
 
+.btn.btn-secondary.btn-secondary-outline {
+  color: #F5CF68 !important;
+  background-color: #12326E;
+  border: 1px solid #F5CF68;
+}
+
+.btn.btn-secondary.btn-secondary-outline:hover {
+  color: #fff !important;
+  background-color: #21A7CC;
+  border: 1px solid #21A7CC;
+}
+
 .information-section-left .btn.btn-headline:hover {
   color: #fff !important;
   background-color: #12326E;
