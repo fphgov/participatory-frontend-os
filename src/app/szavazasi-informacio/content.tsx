@@ -1,6 +1,6 @@
 export const WhoAndHow = () => <>
   <p>Szavazni minden 14. életévét betöltött, Budapesten élő, dolgozó vagy tanuló magánszemély tud az <a href="https://otlet.budapest.hu" target="_blank">otlet.budapest.hu</a> oldalon vagy a személyes szavazópontokon.</p>
-  <p>Személyesen a <a href="/hirek/indul-a-kozossegi-koltsegvetes-szavazasi-idoszaka" target="_blank">kijelölt Fővárosi Szabó Ervin könyvtárakban</a>, a Főpolgármesteri Hivatal Központi Ügyfélszolgálati Irodájában és utcai kitelepüléseink alkalmával lehet szavazni.</p>
+  <p>Személyesen a <a href={`${process.env.NEXT_PUBLIC_FILES_PATH}/szemelyes_szavazasi_helyszinek_2024.pdf`} target="_blank">kijelölt Fővárosi Szabó Ervin könyvtárakban</a>, a Főpolgármesteri Hivatal Központi Ügyfélszolgálati Irodájában és utcai kitelepüléseink alkalmával lehet szavazni.</p>
   <p>Az alábbi utcai kitelepülési helyszíneken lesz lehetőség a szavazatok leadására:</p>
   <ul>
     <li>Mobilitási hét, IX. Fővám tér, 2024. szeptember 21-22.</li>
