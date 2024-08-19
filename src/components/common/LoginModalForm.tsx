@@ -222,7 +222,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
                       id="prize"
                       name="prize"
                       label={
-                        <p>Szeretnék részt venni a <Link href="/hirek/indul-a-kozossegi-koltsegvetes-szavazasi-idoszaka" target="_blank">nyereményjátékban</Link>.</p>
+                        <p>Szeretnék részt venni a <Link href="/hirek/szavazz-es-nyerj-belepot-furdobe-allatkertbe-szinhazba-es-mas-klassz-helyekre" target="_blank">nyereményjátékban</Link>.</p>
                       }
                     />
 

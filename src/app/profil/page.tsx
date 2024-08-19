@@ -70,7 +70,7 @@ export default async function ProfilePage() {
                 <div className="box-profile">
                   <div className="profile-item">
                     <div className="profile-item-name">Nyerenyjáték</div>
-                    <div className="profile-item-value">Nyerj értékes ajándékokat! <Link href="/hirek/indul-a-kozossegi-koltsegvetes-szavazasi-idoszaka" target="_blank">Részletek itt</Link>.</div>
+                    <div className="profile-item-value">Nyerj értékes ajándékokat! <Link href="/hirek/szavazz-es-nyerj-belepot-furdobe-allatkertbe-szinhazba-es-mas-klassz-helyekre" target="_blank">Részletek itt</Link>.</div>
                   </div>
                 </div>
               </SectionBox>

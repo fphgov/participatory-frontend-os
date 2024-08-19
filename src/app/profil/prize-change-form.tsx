@@ -46,6 +46,8 @@ export default function PrizeChangeForm({ profilePreference }: PrizeChangeFormmP
         content: res.successMessage,
         showCancelButton: true
       })
+
+      setOpenModalHard(true)
     } else {
       if (res?.message) {
         setError(res.message)
@@ -53,15 +55,7 @@ export default function PrizeChangeForm({ profilePreference }: PrizeChangeFormmP
         setErrorObject(res.jsonError)
         setError(res.error)
       }
-
-      setDataModalHard({
-        title: '',
-        content: '⛔️ Sikertelen nyereményjáték részvétel módosítás',
-        showCancelButton: true
-      })
     }
-
-    setOpenModalHard(true)
   }
 
   return <>
