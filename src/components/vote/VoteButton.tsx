@@ -11,7 +11,7 @@ type VoteButtonProps = {
   showVoteButton: boolean
   disableVoteButton: boolean
   errorVoteable: string
-  token: string
+  token: string | null
   projectId: number|string
   style?: 'default' | 'background' | 'hero'
   onClickVote?: () => void
@@ -85,7 +85,7 @@ export default function VoteButton({
     setOpenModalHard(true)
   }
 
-  const sendVoteHandler = async (_token: string) => {
+  const sendVoteHandler = async (_token: string|null) => {
     if (! _token) {
       localStorage.setItem('vote', projectId.toString())
 

@@ -20,7 +20,7 @@ type ProjectWrapperProps = {
   voteable: boolean
   disableVoteButton: boolean
   errorVoteable: string
-  token: string
+  token: string|null
   backHref?: string
   voteStatus: IVoteStatus
 }

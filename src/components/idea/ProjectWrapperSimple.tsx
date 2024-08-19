@@ -18,7 +18,7 @@ type IdeasWrapperProps = {
   disableVoteButton: boolean
   disableRelatedIdeas?: boolean
   errorVoteable: string
-  token: string
+  token: string|null
   backHref?: string
   voteStatus: IVoteStatus
 }

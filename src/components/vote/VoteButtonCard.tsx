@@ -10,7 +10,7 @@ type VoteButtonCardProps = {
   showVoteButton: boolean
   disableVoteButton: boolean
   errorVoteable: string
-  token: string
+  token: string|null
   projectId: number|string
   onClickVote?: () => void
   voteStatus: IVoteStatus
@@ -19,7 +19,8 @@ type VoteButtonCardProps = {
 export default function VoteButtonCard({
   showVoteButton,
   disableVoteButton,
-  token, errorVoteable,
+  token,
+  errorVoteable,
   projectId,
   voteStatus
 }: VoteButtonCardProps): JSX.Element {
