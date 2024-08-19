@@ -1,7 +1,7 @@
 "use server"
 
 import type { Metadata } from 'next'
-import { getToken } from "@/lib/actions"
+import { getValidToken } from "@/lib/actions"
 import { notFound } from 'next/navigation'
 import Error from '@/components/common/Error'
 import { apiProjectData, apiCheckPhase, apiCheckVote, apiVoteStatus } from '@/lib/api-requests'
@@ -51,7 +51,7 @@ export default async function ProjectPage({ params }: Props) {
     error = e.message
   }
 
-  const token = (await getToken())?.value
+  const token = await getValidToken()
 
   if (token && phaseStatus?.code === "VOTE") {
     try {

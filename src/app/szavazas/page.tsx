@@ -8,7 +8,7 @@ import VoteCategoryFilterItem from '@/components/vote/VoteCategoryFilterItem'
 import { apiVoteStatus, apiVoteablePlansData } from '@/lib/api-requests'
 import Error from '@/components/common/Error'
 import { generateRandomValue } from '@/utilities/generateRandomValue'
-import { getToken } from '@/lib/actions'
+import { getValidToken } from '@/lib/actions'
 import { getNewUrlSearchParams } from '@/utilities/getNewUrlSearchParams'
 import ShowProjects from "@/components/vote/ShowProjects"
 import { categoryResolver } from "@/utilities/categoryResolver"
@@ -72,7 +72,7 @@ export default async function VotePage({searchParams}: IProps) {
 
   let projectList, voteStatus, error
 
-  const token = (await getToken())?.value
+  const token = await getValidToken()
 
   try {
     projectList = await getPageData()

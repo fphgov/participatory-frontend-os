@@ -10,13 +10,13 @@ import Footer from '../components/Footer'
 import Header from '../components/Header'
 import ScrollContent from '@/components/common/ScrollContent'
 import { config } from "@fortawesome/fontawesome-svg-core"
-import { cookies } from 'next/headers'
 import CookieConsentPopup from '@/components/common/CookieConsentPopup'
 import Modal from '@/components/common/Modal'
 import ModalHard from '@/components/common/ModalHard'
 import { ModalContextProvider } from '@/context/modal'
 import { ModalHardContextProvider } from '@/context/modalHard'
 import AuthModal from '@/components/common/AuthModal'
+import { getValidToken } from '@/lib/actions'
 
 config.autoAddCss = false
 
@@ -54,12 +54,13 @@ export const metadata: Metadata = {
   }
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const cookieStore = cookies()
+  const token = await getValidToken()
+  const loggedIn = token !== null
 
   return (
     <html lang="hu" suppressHydrationWarning={true}>
@@ -96,9 +97,9 @@ export default function RootLayout({
           <body className={`app ${font.className}`}>
             <Modal />
             <ModalHard />
-            <AuthModal loggedIn={typeof cookieStore.get('token')?.value === 'string'} />
+            <AuthModal loggedIn={loggedIn} />
 
-            <Header loggedIn={typeof cookieStore.get('token')?.value === 'string'} />
+            <Header loggedIn={loggedIn} />
 
             {children}
 

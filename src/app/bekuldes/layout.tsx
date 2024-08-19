@@ -1,11 +1,11 @@
 import HeroPage from "@/components/common/HeroPage"
-import { getToken } from "@/lib/actions"
+import { getValidToken } from "@/lib/actions"
 import { RedirectType } from "next/dist/client/components/redirect"
 import { redirect } from "next/navigation"
 import { IdeaContextProvider } from "./idea-store"
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
-  const token = (await getToken())?.value
+  const token = await getValidToken()
 
   if (!token) {
     redirect('/?from=bekuldes&auth=login', RedirectType.replace)

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import HeroPage from '@/components/common/HeroPage'
 import VoteStartSection from '@/components/vote/VoteStartSection'
 import { apiVoteStatus } from '@/lib/api-requests'
-import { getToken } from '@/lib/actions'
+import { getValidToken } from '@/lib/actions'
 import { generateRandomValue } from '@/utilities/generateRandomValue'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -22,7 +22,7 @@ interface IProps {
 }
 
 export default async function VoteStartPage({ searchParams }: IProps) {
-  const token = (await getToken())?.value
+  const token = await getValidToken()
 
   let pageData, error
 

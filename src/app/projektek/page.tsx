@@ -8,7 +8,7 @@ import { getNewUrlSearchParams } from '@/utilities/getNewUrlSearchParams'
 import { NextPage } from "next"
 import { redirect } from 'next/navigation'
 import BannerArea from '@/components/home/BannerArea'
-import { getToken } from '@/lib/actions'
+import { getValidToken } from '@/lib/actions'
 import VoteCallback from '@/components/common/VoteCallback'
 
 interface IProps {
@@ -31,7 +31,7 @@ const Ideas: NextPage<IProps> = async ({ searchParams }) => {
   const baseUrl = "/projektek"
   const rand = searchParams?.rand?.toString() || generateRandomValue().toString()
 
-  const token = (await getToken())?.value
+  const token = await getValidToken()
 
   if (! searchParams?.rand) {
     redirect(baseUrl + '?' + getNewUrlSearchParams({ ...searchParams, rand }))
