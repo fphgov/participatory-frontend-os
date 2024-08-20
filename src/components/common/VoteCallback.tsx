@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useModalHardContext } from "@/context/modalHard"
 import { useCallback, useEffect } from "react"
 import { IVoteStatus } from "@/models/voteableProject.model"
+import { apiProjectData } from "@/lib/api-requests"
 
 type VoteCallbackProps = {
   loggedIn: boolean
@@ -43,12 +44,23 @@ export default function VoteCallback({ loggedIn, voteStatus }: VoteCallbackProps
     router.replace(`${pathname}?${removeVoteParam()}`)
   }
 
-  function handleOpenConfirmationModal() {
+  async function handleOpenConfirmationModal(voteNum: number) {
     localStorage.removeItem('vote')
+
+    let pageData = {
+      title: 'N/A'
+    }
+
+    try {
+      pageData = await apiProjectData(voteNum)
+    } catch (e) {
+
+    }
 
     setDataModalHard({
       title: 'Biztosan szavazol erre az ötletre?',
       content: <>
+        <div>{pageData.title}</div>
         <button type="button" className="btn btn-secondary" onClick={() => {
           handleVote()
         }}>
@@ -156,8 +168,7 @@ export default function VoteCallback({ loggedIn, voteStatus }: VoteCallbackProps
     const voteNum = vote !== null && !isNaN(Number(vote)) ? Number(vote) : null
 
     if (voteNum !== null && Number.isInteger(voteNum) && loggedIn) {
-      handleOpenConfirmationModal()
-      console.log(voteNum)
+      handleOpenConfirmationModal(voteNum)
     }
   }, [vote, loggedIn])
 
