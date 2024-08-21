@@ -92,6 +92,8 @@ export default async function ProjectPage({ params }: Props) {
               projectId={pageData.id}
               token={token}
               errorVoteable={errorVoteable}
+              theme={pageData?.campaignTheme?.code ?? ''}
+              rand={rand}
             />
           </HeroPage>
 

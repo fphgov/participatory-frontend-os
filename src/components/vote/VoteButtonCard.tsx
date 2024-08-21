@@ -14,6 +14,8 @@ type VoteButtonCardProps = {
   projectId: number|string
   onClickVote?: () => void
   voteStatus: IVoteStatus
+  theme: string
+  rand: string
 }
 
 export default function VoteButtonCard({
@@ -22,15 +24,15 @@ export default function VoteButtonCard({
   token,
   errorVoteable,
   projectId,
-  voteStatus
+  voteStatus,
+  theme,
+  rand,
 }: VoteButtonCardProps): JSX.Element {
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
-
   const { openModalHard, setOpenModalHard, setDataModalHard } = useModalHardContext()
   const [voted, setVoted] = useState(false)
-
   const createQueryString = useCallback((name: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString())
 
@@ -38,7 +40,6 @@ export default function VoteButtonCard({
 
     return params.toString()
   }, [searchParams])
-
   const appendAuthParam = () => {
     router.replace(`${pathname}?${createQueryString('auth', 'authentication')}`)
   }
@@ -57,13 +58,21 @@ export default function VoteButtonCard({
         </>
       ) :
       (
-        <>Ebben a kategóriában még ennyi szavazatod maradt: {count}</>
+        <>
+          <div>Ebben a kategóriában még ennyi szavazatod maradt: {count}</div>
+          <button type="button" className="btn btn-secondary" onClick={() => {
+            setOpenModalHard(false)
+            router.replace(`/szavazas?theme=${theme}&rand=${rand}`)
+          }}>
+            Tovább szavazok
+          </button>
+        </>
       )
 
     setDataModalHard({
       title,
       content,
-      showCancelButton: (count !== 0)
+      showCancelButton: false
     })
 
     setOpenModalHard(true)

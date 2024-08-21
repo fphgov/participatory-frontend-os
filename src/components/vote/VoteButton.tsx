@@ -16,6 +16,8 @@ type VoteButtonProps = {
   style?: 'default' | 'background' | 'hero'
   onClickVote?: () => void
   voteStatus: IVoteStatus
+  theme: string
+  rand: string
 }
 
 export default function VoteButton({
@@ -25,7 +27,9 @@ export default function VoteButton({
   errorVoteable,
   projectId,
   voteStatus,
-  style = 'default'
+  style = 'default',
+  theme,
+  rand
 }: VoteButtonProps): JSX.Element {
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -62,13 +66,21 @@ export default function VoteButton({
         </>
       ) :
       (
-        <>Ebben a kategóriában még ennyi szavazatod maradt: {count}</>
+        <>
+          <div>Ebben a kategóriában még ennyi szavazatod maradt: {count}</div>
+          <button type="button" className="btn btn-secondary" onClick={() => {
+            setOpenModalHard(false)
+            router.replace(`/szavazas?theme=${theme}&rand=${rand}`)
+          }}>
+            Tovább szavazok
+          </button>
+        </>
       )
 
     setDataModalHard({
       title,
       content,
-      showCancelButton: (count !== 0)
+      showCancelButton: false
     })
 
     setOpenModalHard(true)

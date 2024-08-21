@@ -14,6 +14,7 @@ import IdeaVoteTipp from "@/components/idea/IdeaVoteTipp"
 import IdeaRelationTipp from "@/components/idea/IdeaRelationTipp"
 import VoteCallback from "@/components/common/VoteCallback"
 import { IVoteStatus } from "@/models/voteableProject.model"
+import {generateRandomValue} from "@/utilities/generateRandomValue";
 
 type ProjectWrapperProps = {
   project: IProject
@@ -34,6 +35,7 @@ export default function ProjectWrapper({
   backHref,
   voteStatus
 }: ProjectWrapperProps): JSX.Element {
+  const rand = generateRandomValue().toString()
   const theme = project?.campaignTheme
 
   const isProject = [140, 200].indexOf(project?.workflowState?.id) !== -1
@@ -50,7 +52,16 @@ export default function ProjectWrapper({
           <div className="offset-xl-1 offset-lg-1 col-xl-7 col-lg-7">
             <div className="prop-single-wrapper prop-single-body">
               <div className="prop-single-inner">
-                <VoteButton showVoteButton={voteable} disableVoteButton={disableVoteButton} projectId={project.id} token={token} errorVoteable={errorVoteable} voteStatus={voteStatus} />
+                <VoteButton
+                  showVoteButton={voteable}
+                  disableVoteButton={disableVoteButton}
+                  projectId={project.id}
+                  token={token}
+                  errorVoteable={errorVoteable}
+                  voteStatus={voteStatus}
+                  theme={project?.campaignTheme?.code ?? ''}
+                  rand={rand}
+                />
 
                 <div className="prop-single-content">
                   {project.description ? <>
@@ -116,7 +127,16 @@ export default function ProjectWrapper({
                   </>) : null}
                 </div>
 
-                <VoteButton showVoteButton={voteable} disableVoteButton={disableVoteButton} projectId={project.id} token={token} errorVoteable={errorVoteable} voteStatus={voteStatus} />
+                <VoteButton
+                  showVoteButton={voteable}
+                  disableVoteButton={disableVoteButton}
+                  projectId={project.id}
+                  token={token}
+                  errorVoteable={errorVoteable}
+                  voteStatus={voteStatus}
+                  theme={project?.campaignTheme?.code ?? ''}
+                  rand={rand}
+                />
               </div>
 
               {project.implementations && project.implementations.length > 0 ? <>

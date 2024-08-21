@@ -11,6 +11,7 @@ import Gallery from "@/components/common/Gallery"
 import IdeaRelationTipp from "@/components/idea/IdeaRelationTipp"
 import nFormatter from "@/utilities/nFormatter"
 import { IVoteStatus } from "@/models/voteableProject.model"
+import {generateRandomValue} from "@/utilities/generateRandomValue";
 
 type IdeasWrapperProps = {
   project: IProject
@@ -33,6 +34,7 @@ export default function ProjectWrapperSimple({
   disableRelatedIdeas = true,
   voteStatus
 }: IdeasWrapperProps): JSX.Element {
+  const rand = generateRandomValue().toString()
   const theme = project?.campaignTheme
 
   const isProject = [140, 200].indexOf(project?.workflowState?.id) !== -1
@@ -188,6 +190,8 @@ export default function ProjectWrapperSimple({
               projectId={project.id}
               token={token}
               errorVoteable={errorVoteable}
+              theme={project?.campaignTheme?.code ?? ''}
+              rand={rand}
             />
           </div>
         </div>

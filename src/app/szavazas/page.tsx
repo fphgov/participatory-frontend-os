@@ -132,6 +132,8 @@ export default async function VotePage({searchParams}: IProps) {
             searchParams={searchParams}
             baseUrl={baseUrl}
             voteStatus={voteStatus}
+            theme={theme}
+            rand={rand}
           />
         </div>
       </main>

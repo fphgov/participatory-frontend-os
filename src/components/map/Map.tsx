@@ -13,9 +13,11 @@ export interface MapProps {
   token: any
   ready: boolean
   voteStatus: IVoteStatus
+  theme: string
+  rand: string
 }
 
-const Map: FC<MapProps> = ({ projectList, token, ready, voteStatus }) => {
+const Map: FC<MapProps> = ({ projectList, token, ready, voteStatus, theme, rand }) => {
   return (
     <>
       <MapContainer
@@ -58,6 +60,8 @@ const Map: FC<MapProps> = ({ projectList, token, ready, voteStatus }) => {
                     token={token}
                     ready={ready}
                     voteStatus={voteStatus}
+                    theme={theme}
+                    rand={rand}
                   />
                 </Popup>
               </Marker>

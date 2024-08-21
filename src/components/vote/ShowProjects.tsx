@@ -18,6 +18,8 @@ type ShowProjectsProps = {
   searchParams: Record<string, string>
   voteStatus: IVoteStatus
   saveStateInLocalStorage?: boolean
+  theme: string
+  rand: string
 }
 
 const ShowProjects: FC<ShowProjectsProps> = ({
@@ -29,7 +31,9 @@ const ShowProjects: FC<ShowProjectsProps> = ({
   baseUrl,
   searchParams,
   voteStatus,
-  saveStateInLocalStorage = false
+  saveStateInLocalStorage = false,
+  theme,
+  rand,
 }) => {
   const [availableMap, setAvailableMap] = useState(false)
   const [listMode, setListMode] = useState('map')
@@ -79,7 +83,14 @@ const ShowProjects: FC<ShowProjectsProps> = ({
               <div className="container">
                 <div className="row">
                   <div className="col-md-12">
-                    <Map projectList={projectList} token={token} ready={noVotesLeft} voteStatus={voteStatus} />
+                    <Map
+                      projectList={projectList}
+                      token={token}
+                      ready={noVotesLeft}
+                      voteStatus={voteStatus}
+                      theme={theme}
+                      rand={rand}
+                    />
                   </div>
                 </div>
               </div>
@@ -104,6 +115,8 @@ const ShowProjects: FC<ShowProjectsProps> = ({
                         token={token}
                         projectId={project.id}
                         voteStatus={voteStatus}
+                        theme={theme}
+                        rand={rand}
                       />
                     }
                     footerExtend={
