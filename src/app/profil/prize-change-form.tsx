@@ -30,7 +30,11 @@ export default function PrizeChangeForm({ profilePreference }: PrizeChangeFormmP
     setFormData({ ...formData, [e.target.name]: value })
 
     if (formRef.current) {
-      formRef.current.requestSubmit()
+      if (formRef.current.requestSubmit) {
+        formRef.current.requestSubmit()
+      } else {
+        formRef.current.submit()
+      }
     }
   }
 
