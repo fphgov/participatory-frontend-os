@@ -36,17 +36,16 @@ export default function PersonalDataForm({ profilePreference }: PersonalDataForm
           content: res.successMessage,
           showCancelButton: true
         })
+        setOpenModalHard(true)
       }
     } else {
       if (res?.message) {
         setError(res.message)
+        setOpenModalHard(true)
       } else {
         setErrorObject(res.jsonError)
-        setError(res.error)
       }
     }
-
-    setOpenModalHard(true)
   }
 
   return <>
