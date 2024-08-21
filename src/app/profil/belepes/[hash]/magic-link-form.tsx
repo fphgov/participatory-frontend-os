@@ -28,7 +28,11 @@ export default function MagicLinkForm(): JSX.Element {
 
   useEffect(() => {
     if (formRef.current) {
-      formRef.current.requestSubmit()
+      if (formRef.current.requestSubmit) {
+        formRef.current.requestSubmit()
+      } else {
+        formRef.current.submit()
+      }
     }
   }, [])
 
