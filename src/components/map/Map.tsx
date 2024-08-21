@@ -36,7 +36,7 @@ const Map: FC<MapProps> = ({ projectList, token, ready, voteStatus, theme, rand 
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url={'https://osm.budapest.dev/tile/{z}/{x}/{y}.png'}
+          url={`${process.env.NEXT_PUBLIC_OSM_URL}/tile/{z}/{x}/{y}.png`}
         />
         <LayerGroup>
           {projectList?._embedded?.projects.map((project: any, i: any) => {

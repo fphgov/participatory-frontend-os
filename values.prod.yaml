@@ -37,7 +37,6 @@ ingress:
       hosts:
         - otlet.budapest.hu
 
-
 resources:
   limits:
     memory: 2Gi
