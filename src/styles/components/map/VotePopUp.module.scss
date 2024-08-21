@@ -1,0 +1,88 @@
+.vote_pop_up {
+
+  .campaign_theme {
+    padding: 12px 0 0 0;
+
+    .icon {
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    .name {
+      display: inline-block;
+      color: #12326E;
+      font-family: "Source Sans Pro", sans-serif;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 18px;
+      text-transform: uppercase;
+    }
+
+  }
+
+  .title {
+    color: #222222;
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0.18px;
+    padding: 12px 0;
+  }
+
+  .buttons {
+
+    .vote {
+      display: inline-block;
+      padding: 6px 18px;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      background: #F5CF68;
+      text-decoration: none;
+      color: #12326E;
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 24px;
+      letter-spacing: 0.16px;
+      margin-right: 12px;
+    }
+
+    .open {
+      display: inline-block;
+      padding: 6px 18px;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      border: 1px solid #12326E;
+      text-decoration: none;
+      color: #12326E;
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 24px;
+      letter-spacing: 0.16px;
+    }
+
+  }
+
+  .voted {
+
+    .voted_label {
+      color: #222222;
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 24px;
+      letter-spacing: 0.16px;
+    }
+
+  }
+
+}

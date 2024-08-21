@@ -28,14 +28,14 @@ ingress:
     nginx.org/proxy-connect-timeout: "120s"
     nginx.org/proxy-read-timeout: "120s"
   hosts:
-    - host: reszveteli.budapest.hu
+    - host: otlet.budapest.dev
       paths:
         - path: /
           pathType: Prefix
   tls:
-    - secretName: wildcard-budapest-hu-tls
+    - secretName: wildcard-budapest-dev-tls
       hosts:
-        - reszveteli.budapest.hu
+        - otlet.budapest.dev
 
 resources:
   limits:

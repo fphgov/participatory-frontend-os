@@ -8,10 +8,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date(),
       },
       {
-        url: baseUrl + '/bejelentkezes',
-        lastModified: new Date(),
-      },
-      {
         url: baseUrl + '/kijelentkezes',
         lastModified: new Date(),
       }

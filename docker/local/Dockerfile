@@ -1,9 +1,10 @@
 FROM node:20-alpine
 
-RUN apk update && apk add git autoconf make automake pkgconfig libtool g++ libjpeg-turbo-dev libpng-dev nasm build-base
+RUN apk update && apk add git autoconf make automake pkgconfig libtool g++ libjpeg-turbo-dev libpng-dev nasm build-base python3
 
 RUN npm install -g \
     npm-check-updates \
+    modernizr \
     npm@10
 
 WORKDIR /app

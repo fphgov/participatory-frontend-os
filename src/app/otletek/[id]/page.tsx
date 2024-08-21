@@ -4,8 +4,7 @@ import Error from '@/components/common/Error'
 import { apiIdeaData } from '@/lib/api-requests'
 import HeroPage from '@/components/common/HeroPage'
 import IdeaWrapper from '@/components/idea/IdeaWrapper'
-import Link from 'next/link'
-import NewsletterArea from '@/components/home/NesletterArea'
+import BannerArea from '@/components/home/BannerArea'
 
 type Props = {
   params: { id: string }
@@ -50,7 +49,7 @@ export default async function SimplePage({ params }: Props) {
     <>
       <main className="page page-idea">
         <div className="prop">
-          <HeroPage title={pageData.title} link={<Link className="link-back" href="/otletek">Vissza</Link>} />
+          <HeroPage title={pageData.title} link={null} />
 
           <div className="container">
             {error ? <Error message={error} /> : null}
@@ -60,7 +59,9 @@ export default async function SimplePage({ params }: Props) {
 
       </main>
 
-      <NewsletterArea />
+      <div className="container">
+        <BannerArea />
+      </div>
     </>
   )
 }

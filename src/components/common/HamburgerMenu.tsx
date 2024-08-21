@@ -5,16 +5,26 @@ import { useState, useEffect } from "react"
 export default function HamburgerMenu(): JSX.Element {
   const [openMenu, setOpenMenu] = useState(false)
 
-  const toggleMenu = () => {
-    setOpenMenu(!openMenu)
-  }
-
-  useEffect(() => {
+  const refreshClass = (openMenu: boolean) => {
     if (openMenu) {
       document.body.classList.add('open-menu')
     } else {
       document.body.classList.remove('open-menu')
     }
+  }
+
+  const toggleMenu = () => {
+    if (document.body.classList.contains('open-menu') && !openMenu) {
+      setOpenMenu(true)
+    } else if (!document.body.classList.contains('open-menu') && openMenu) {
+      refreshClass(true)
+    } else {
+      setOpenMenu(!openMenu)
+    }
+  }
+
+  useEffect(() => {
+    refreshClass(openMenu)
   }, [openMenu])
 
   return (

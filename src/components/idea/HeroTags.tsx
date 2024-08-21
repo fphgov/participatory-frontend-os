@@ -1,8 +1,9 @@
 "use client"
 
-import { ITag } from "@/models/tag.model"
-import Tag from "@/components/idea/Tag"
-import { addUniqParam } from "@/utilities/urlParams"
+import {ITag} from "@/models/tag.model"
+import {useModalHardContext} from "@/context/modalHard"
+import {useEffect, useState} from "react"
+import {useRouter} from "next/navigation"
 
 type HeroTagsProps = {
   tags: ITag[],
@@ -11,32 +12,119 @@ type HeroTagsProps = {
 }
 
 export default function HeroTags({ tags, baseUrl, searchParams }: HeroTagsProps): JSX.Element|null {
-  const changeTagFilter = (tag: string): void => {
-    const newSearchParams = { ...searchParams }
+  const { setOpenModalHard, setDataModalHard } = useModalHardContext()
+  const [ activeTags, setActiveTags ] = useState(searchParams?.tag?.split(',') ?? [])
+  const [loaded, setLoaded] = useState(false)
+  const router = useRouter()
 
-    delete newSearchParams['page']
-
-    const urlSearchParams = new URLSearchParams({
-      ...newSearchParams,
-      tag: addUniqParam(searchParams, 'tag', tag)
-    })
-
-    window.location.href = baseUrl + '?' + urlSearchParams.toString()
+  const filter = (active: boolean, tag: ITag): void => {
+    if (active) {
+      setActiveTags(activeTags.filter(value => value !== tag.id.toString()))
+    } else {
+      setActiveTags([...activeTags, tag.id.toString()])
+    }
   }
 
+  const cancel = (): void => {
+    setLoaded(false)
+    setOpenModalHard(false)
+  }
+
+  function handleOpenModal() {
+    setDataModalHard({
+      title: 'Találatok szűrése címke alapján:',
+      content: getModalContent(),
+      showCancelButton: false
+    })
+
+    setLoaded(true)
+    setOpenModalHard(true)
+  }
+
+  const changeTagFilter = (): void => {
+    const tags = activeTags.join(',')
+
+    const urlSearchParams = new URLSearchParams({
+      ...searchParams,
+      tag: tags
+    })
+
+    if (!tags) {
+      urlSearchParams.delete('tag')
+    }
+
+    setLoaded(false)
+    setOpenModalHard(false)
+
+    router.replace(`${baseUrl}?${urlSearchParams.toString()}`)
+  }
+
+  const getModalContent = () => {
+    return (
+      <div className="hero-tags-filter">
+        <div className="hero-tags">
+          {tags?.map(tag => {
+            let active: boolean = false
+            if (activeTags.length) {
+              {activeTags?.map(activeTag => {
+                if (activeTag === tag.id.toString()) {
+                  active = true
+                }
+              })}
+            }
+
+            return (
+              <div
+                key={tag.id}
+                onClick={() => filter(active, tag)}
+              >
+                <div className={`tag${active ? ' tag-active' : ''}`}>
+                  <a>{tag.name}</a>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+        <div className="modal-actions">
+          <button
+            type="button"
+            className="btn btn-primary btn-headline"
+            onClick={() => changeTagFilter()}
+          >
+            Szűrés
+          </button>
+
+          <button
+            type="button"
+            className="btn btn-primary-solid btn-solid-underline btn-solid-padding"
+            onClick={() => cancel()}
+          >
+            Mégse
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  useEffect(() => {
+    setActiveTags(searchParams?.tag?.split(',') ?? [])
+  }, [loaded])
+
+  useEffect(() => {
+    if (loaded) {
+      handleOpenModal()
+    }
+  }, [activeTags, loaded])
+
+  const tagsCount = (searchParams?.tag?.split(',') ?? []).length
+  // @ts-ignore
+  const title = tagsCount ? <><span>Kiválasztott címkék</span><b>{tagsCount}</b></> : <div className="btn-filter btn-filter-control">Találatok szűrése</div>
+
   return (
-    <div className="hero-tags">
-      <span>Címkék:</span>
-
-      {tags?.map(tag => {
-        const active = searchParams?.tag?.split(',')?.includes(tag.id.toString())
-
-        return (
-          <div key={tag.id} onClick={() => { changeTagFilter(tag.id.toString()) }}>
-            <Tag tag={tag} active={active} />
-          </div>
-        )
-      })}
+    <div className="hero-tags" onClick={handleOpenModal}>
+      <span onClick={handleOpenModal}>
+        {title}
+      </span>
     </div>
   )
 }

@@ -1,3 +1,5 @@
+import { VoteStatusResponse } from "@/lib/types"
+
 export type IVoteableProject = {
   id: number
   cost: number
@@ -10,3 +12,5 @@ export type IVoteableProject = {
   latitude?: string
   longitude?: string
 }
+
+export type IVoteStatus = VoteStatusResponse | undefined

@@ -1,20 +1,22 @@
 import './globals.css'
 import "normalize.css"
 import "bootstrap-4-grid/css/grid.min.css"
-import 'react-toastify/dist/ReactToastify.css'
 import '@fortawesome/fontawesome-svg-core/styles.css'
-// import 'modernizr'
 import 'url-polyfill'
 import type { Metadata } from 'next'
 import { Source_Sans_3 } from 'next/font/google'
+import Script from 'next/script'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import ScrollContent from '@/components/common/ScrollContent'
 import { config } from "@fortawesome/fontawesome-svg-core"
-import { cookies } from 'next/headers'
 import CookieConsentPopup from '@/components/common/CookieConsentPopup'
 import Modal from '@/components/common/Modal'
+import ModalHard from '@/components/common/ModalHard'
 import { ModalContextProvider } from '@/context/modal'
+import { ModalHardContextProvider } from '@/context/modalHard'
+import AuthModal from '@/components/common/AuthModal'
+import { getValidToken } from '@/lib/actions'
 
 config.autoAddCss = false
 
@@ -52,15 +54,16 @@ export const metadata: Metadata = {
   }
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const cookieStore = cookies()
+  const token = await getValidToken()
+  const loggedIn = token !== null
 
   return (
-    <html lang="hu">
+    <html lang="hu" suppressHydrationWarning={true}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -68,6 +71,8 @@ export default function RootLayout({
         <meta httpEquiv="Pragma" content="no-cache" />
 
         <CookieConsentPopup />
+
+        <Script src="/modernizr.js" />
 
         {process.env.NEXT_PUBLIC_FACEBOOK_PIXEL ? <>
           <script type="text/plain" data-cookiecategory="marketing" defer dangerouslySetInnerHTML={{ __html: `!function(f,b,e,v,n,t,s)
@@ -87,19 +92,23 @@ export default function RootLayout({
         </> : null}
       </head>
 
-      <ModalContextProvider>
-        <body className={`app ${font.className}`}>
-          <Modal />
+      <ModalHardContextProvider>
+        <ModalContextProvider>
+          <body className={`app ${font.className}`}>
+            <Modal />
+            <ModalHard />
+            <AuthModal loggedIn={loggedIn} />
 
-          <Header loggedIn={typeof cookieStore.get('token')?.value === 'string'} />
+            <Header loggedIn={loggedIn} />
 
-          {children}
+            {children}
 
-          <Footer />
+            <Footer />
 
-          <ScrollContent />
-        </body>
-      </ModalContextProvider>
+            <ScrollContent />
+          </body>
+        </ModalContextProvider>
+      </ModalHardContextProvider>
     </html>
   )
 }

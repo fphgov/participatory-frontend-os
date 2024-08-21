@@ -3,13 +3,13 @@ import Details from '@/components/common/Details'
 import CategoryIcon from '@/components/idea/CategoryIcon'
 import VoteInfoSection from "@/components/home/VoteInfoSection"
 import Link from "next/link"
-import NewsletterArea from "@/components/home/NesletterArea"
+import BannerArea from "@/components/home/BannerArea"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <main className="page page-idea-info">
-        <div className="page-profile-single-section">
+        <div className="page-info-single-section">
 
           <HeroPage title="Hogyan tudsz szavazatot leadni?">
             <VoteInfoSection />
@@ -56,7 +56,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
       </main>
 
-      <NewsletterArea />
+      <div className="container">
+        <BannerArea />
+      </div>
     </>
   )
 }

@@ -1,13 +1,15 @@
 import type { Metadata } from 'next'
 import PaginationMini from '@/components/common/PaginationMini'
 import SearchArea from '@/components/common/SearchArea'
-import NewsletterArea from '@/components/home/NesletterArea'
 import IdeasWrapper from '@/components/idea/IdeasWrapper'
-import { apiProjectsData, apiProjectsFilter } from '@/lib/api-requests'
+import { apiProjectsData, apiProjectsFilter, apiVoteStatus } from '@/lib/api-requests'
 import { generateRandomValue } from '@/utilities/generateRandomValue'
 import { getNewUrlSearchParams } from '@/utilities/getNewUrlSearchParams'
 import { NextPage } from "next"
 import { redirect } from 'next/navigation'
+import BannerArea from '@/components/home/BannerArea'
+import { getToken } from '@/lib/actions'
+import VoteCallback from '@/components/common/VoteCallback'
 
 interface IProps {
   searchParams: Record<string, string>
@@ -29,15 +31,21 @@ const Ideas: NextPage<IProps> = async ({ searchParams }) => {
   const baseUrl = "/projektek"
   const rand = searchParams?.rand?.toString() || generateRandomValue().toString()
 
+  const token = (await getToken())?.value
+
   if (! searchParams?.rand) {
     redirect(baseUrl + '?' + getNewUrlSearchParams({ ...searchParams, rand }))
   }
 
-  let projectsList, projectsFilter, error
+  let projectsList, projectsFilter, voteStatus, error
 
   try {
     projectsList = await apiProjectsData(searchParams)
     projectsFilter = await apiProjectsFilter(searchParams)
+
+    if (token) {
+      voteStatus = await apiVoteStatus()
+    }
   } catch (e: any) {
     error = e.message
   }
@@ -48,6 +56,8 @@ const Ideas: NextPage<IProps> = async ({ searchParams }) => {
 
   return (
     <>
+      <VoteCallback loggedIn={typeof token === 'string'} voteStatus={voteStatus} />
+
       <main className="page page-projects">
         <div className="projects">
           <SearchArea
@@ -98,7 +108,9 @@ const Ideas: NextPage<IProps> = async ({ searchParams }) => {
 
       </main>
 
-      <NewsletterArea />
+      <div className="container">
+        <BannerArea />
+      </div>
     </>
   )
 }

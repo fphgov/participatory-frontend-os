@@ -6,6 +6,7 @@ import { getHungarianDateFormat } from '@/utilities/dateFormats'
 import SidebarCard from '@/components/article/SidebarCard'
 import ShareBox from '@/components/common/ShareBox'
 import Image from 'next/image'
+import BannerArea from '@/components/home/BannerArea'
 
 type Props = {
   params: { slug: string }
@@ -66,15 +67,9 @@ export default async function SimplePage({ params }: Props) {
             </div>
 
             <div className="col-md-12 col-lg-4">
-              <SidebarCard>
-                <div className="light section-newsletter">
-                  <h2>Iratkozz fel hírlevelünkre!</h2>
-
-                  <p>Ne maradj le a közösségi költségvetéssel kapcsolatos legfontosabb hírekről és eseményekről! Iratkozz fel hírlevelünkre!</p>
-
-                  <a className="btn btn-primary" href="https://hirlevel.budapest.hu/subscribe.php?cid=aSQV5beZ_" target="_blank" rel="noopener noreferrer">Feliratkozás</a>
-                </div>
-              </SidebarCard>
+              <div className="side-bar">
+                <BannerArea />
+              </div>
             </div>
           </div>
         </div>

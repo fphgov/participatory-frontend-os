@@ -10,7 +10,7 @@ export default function Layout() {
 
   return (
     <main className="page page-idea-info">
-      <div className="page-profile-single-section">
+      <div className="page-info-single-section">
 
         <HeroPage title="Mire figyelj az ötleted beadásakor?">
           <p>Azt szeretnénk, hogy úgy ötletelj, hogy energiád és munkád később hasznosulni tudjon! Ezért kérünk, figyelmesen olvasd át, hogy milyen ötleteket tudunk elfogadni.</p>

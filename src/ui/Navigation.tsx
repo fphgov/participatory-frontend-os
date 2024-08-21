@@ -1,7 +1,9 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
+// @ts-ignore
 import randomId from 'random-id'
 import { usePathname } from 'next/navigation'
 import NavigationIcon from '@/components/common/NavigationIcon'
@@ -11,6 +13,7 @@ export type MenuProps = {
   onClick?: () => void
   rand?: string
   loggedIn: boolean
+  isMobile?: boolean
 }
 
 export type MenuItem = {
@@ -19,9 +22,12 @@ export type MenuItem = {
   roles?: []
   submenuItems?: MenuItem[]
   highlight?: boolean
+  secondHighlight?: boolean
   outside?: boolean
   onHideLoggedIn?: boolean
   onHideLoggedOut?: boolean
+  onHideMobile?: boolean
+  onHideDesktop?: boolean
   icon?: string
 }
 
@@ -50,7 +56,7 @@ export function MobileNavigation({ menuItems, loggedIn }: MenuProps): JSX.Elemen
         <div className="row">
           <div className="col-md-12">
             <ul>
-              <Navigation menuItems={menuItems} rand={randomId(30, 'aA0')} loggedIn={loggedIn} />
+              <Navigation menuItems={menuItems} rand={randomId(30, 'aA0')} loggedIn={loggedIn} isMobile={true} />
             </ul>
           </div>
         </div>
@@ -59,18 +65,43 @@ export function MobileNavigation({ menuItems, loggedIn }: MenuProps): JSX.Elemen
   )
 }
 
-export function Navigation({ menuItems, onClick = () => {}, rand, loggedIn }: MenuProps): JSX.Element {
+export function Navigation({ menuItems, onClick = () => {}, rand, loggedIn, isMobile = false }: MenuProps): JSX.Element {
+  const searchParams = useSearchParams()
   const [isOpen, setIsOpen] = useState(false)
   const submenuRef = useRef(null)
   const pathname = usePathname()
 
+  const createQueryString = useCallback((name: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString())
+
+    params.set(name, value)
+
+    return params.toString()
+  }, [searchParams])
+
   useOutside(submenuRef, () => { setIsOpen(false) })
+
+  const removeOpenMenuClass = () => {
+    document.body.classList.remove('open-menu')
+  }
+
+  const calcSearchParams = (href: string) => {
+    const param = href.match(/^\?(.*)=(.*)/)
+
+    if (param && param.length === 3) {
+      return pathname + '?' + createQueryString(param[1], param[2])
+    }
+
+    return href
+  }
 
   return (<>
     {menuItems?.map((menuItem: MenuItem, i: number) => {
       if (
         menuItem?.onHideLoggedIn === true && loggedIn === true ||
-        menuItem?.onHideLoggedOut === true && loggedIn === false
+        menuItem?.onHideLoggedOut === true && loggedIn === false ||
+        menuItem?.onHideMobile === true && isMobile === true ||
+        menuItem?.onHideDesktop === true && isMobile === false
       ) return
 
       if (menuItem?.outside) {
@@ -81,33 +112,33 @@ export function Navigation({ menuItems, onClick = () => {}, rand, loggedIn }: Me
         )
       }
 
-    if (menuItem?.submenuItems) {
+      if (menuItem?.submenuItems) {
+        return (
+          <li key={`${rand}-${i}`} className={isOpen ? 'open' : ''} ref={submenuRef}>
+            <button type="button" aria-expanded={isOpen} onClick={() => { setIsOpen(! isOpen) }}>{menuItem.title}<span className="caret"></span></button>
+
+            <ul className="submenu">
+              <Navigation
+                menuItems={menuItem.submenuItems}
+                onClick={() => { setIsOpen(! isOpen); onClick() }}
+                rand={randomId(30, 'aA0')}
+                loggedIn={loggedIn}
+              />
+            </ul>
+          </li>
+        )
+      }
+
       return (
-        <li key={`${rand}-${i}`} className={isOpen ? 'open' : ''} ref={submenuRef}>
-          <button type="button" aria-expanded={isOpen} onClick={() => { setIsOpen(! isOpen) }}>{menuItem.title}<span className="caret"></span></button>
-
-          <ul className="submenu">
-            <Navigation
-              menuItems={menuItem.submenuItems}
-              onClick={() => { setIsOpen(! isOpen); onClick() }}
-              rand={randomId(30, 'aA0')}
-              loggedIn={loggedIn}
-            />
-          </ul>
-        </li>
-      )
-    }
-
-    return (
-        <li key={`${rand}-${i}`} className={menuItem?.highlight ? 'highlight' : ''}>
-          <Link href={menuItem.href} className={menuItem.href.split("?")[0] === pathname ? 'active' : ''} onClick={onClick}>
-            {menuItem?.icon ? <div>
-              <NavigationIcon icon={menuItem?.icon} />
-              {menuItem.title}
-            </div> : menuItem.title}
-          </Link>
-        </li>
-      )
-    })}
+          <li key={`${rand}-${i}`} className={menuItem?.highlight ? 'highlight' : '' || menuItem?.secondHighlight ? 'highlight-second' : ''}>
+            <Link prefetch={false} href={calcSearchParams(menuItem.href)} className={menuItem.href.split("?")[0] === pathname ? 'active' : ''} onClick={() => { removeOpenMenuClass(); onClick() }}>
+              {menuItem?.icon ? <div>
+                <NavigationIcon icon={menuItem?.icon} />
+                {menuItem.title}
+              </div> : menuItem.title}
+            </Link>
+          </li>
+        )
+      })}
   </>)
 }

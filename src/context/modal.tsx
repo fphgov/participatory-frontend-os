@@ -15,6 +15,8 @@ export type ModalContextContent = {
   setOpenModal: (openModal: boolean) => void
   dataModal: IDataModal
   setDataModal: (dataModal: IDataModal) => void
+  scrollModalHard: boolean
+  setScrollModalHard: (scrollModalHard: boolean) => void
 }
 
 const ModalContext = createContext<ModalContextContent>({} as ModalContextContent)
@@ -24,9 +26,10 @@ export const ModalContextProvider = ({ children }: ModalContextProviderProps) =>
   const [dataModal, setDataModal] = useState<IDataModal>({
     content: ''
   })
+  const [scrollModalHard, setScrollModalHard] = useState<boolean>(false)
 
   return (
-    <ModalContext.Provider value={{ openModal, setOpenModal, dataModal, setDataModal }}>
+    <ModalContext.Provider value={{ openModal, setOpenModal, dataModal, setDataModal, scrollModalHard, setScrollModalHard }}>
       {children}
     </ModalContext.Provider>
   )

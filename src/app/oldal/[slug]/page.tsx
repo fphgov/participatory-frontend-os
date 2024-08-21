@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import Error from '@/components/common/Error'
 import HeroPage from "@/components/common/HeroPage"
 import { apiPageData } from '@/lib/api-requests'
-import NewsletterArea from '@/components/home/NesletterArea'
+import BannerArea from '@/components/home/BannerArea'
 
 type Props = {
   params: { slug: string }
@@ -46,7 +46,7 @@ export default async function SimplePage({ params }: Props) {
   return (
     <>
       <main className="page page-page">
-        <div className="page-profile-single-section">
+        <div className="page-single-section">
 
           <HeroPage title={pageData.title} />
 
@@ -64,7 +64,9 @@ export default async function SimplePage({ params }: Props) {
         </div>
       </main>
 
-      <NewsletterArea />
+      <div className="container">
+        <BannerArea />
+      </div>
     </>
   )
 }

@@ -6,23 +6,36 @@ import { IProject } from "@/models/project.model"
 import { getDocuments, getImages } from "@/utilities/helperFunctions"
 import CategoryIcon from "@/components/idea/CategoryIcon"
 import nFormatter from "@/utilities/nFormatter"
-import Share from "@/components/common/Share"
+import ShareInfo from "@/components/common/ShareInfo"
 import Implementation from "@/components/idea/Implementation"
 import VoteButton from "@/components/vote/VoteButton"
 import Gallery from "@/components/common/Gallery"
 import IdeaVoteTipp from "@/components/idea/IdeaVoteTipp"
 import IdeaRelationTipp from "@/components/idea/IdeaRelationTipp"
+import VoteCallback from "@/components/common/VoteCallback"
+import { IVoteStatus } from "@/models/voteableProject.model"
+import {generateRandomValue} from "@/utilities/generateRandomValue";
 
-type IdeasWrapperProps = {
+type ProjectWrapperProps = {
   project: IProject
   voteable: boolean
   disableVoteButton: boolean
   errorVoteable: string
-  token: string
+  token: string|null
   backHref?: string
+  voteStatus: IVoteStatus
 }
 
-export default function ProjectWrapper({ project, voteable, token, errorVoteable, disableVoteButton, backHref }: IdeasWrapperProps): JSX.Element {
+export default function ProjectWrapper({
+  project,
+  voteable,
+  token,
+  errorVoteable,
+  disableVoteButton,
+  backHref,
+  voteStatus
+}: ProjectWrapperProps): JSX.Element {
+  const rand = generateRandomValue().toString()
   const theme = project?.campaignTheme
 
   const isProject = [140, 200].indexOf(project?.workflowState?.id) !== -1
@@ -32,12 +45,23 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
 
   return (
     <div className="prop-inner-wrapper">
+      <VoteCallback loggedIn={typeof token === 'string'} voteStatus={voteStatus} />
+
       <div className={`prop-inner-content${voteable ? ' voteable' : ''}`}>
         <div className="row">
-          <div className="offset-lg-1 col-lg-7">
+          <div className="offset-xl-1 offset-lg-1 col-xl-7 col-lg-7">
             <div className="prop-single-wrapper prop-single-body">
               <div className="prop-single-inner">
-                <VoteButton showVoteButton={voteable} disableVoteButton={disableVoteButton} projectId={project.id} token={token} errorVoteable={errorVoteable} />
+                <VoteButton
+                  showVoteButton={voteable}
+                  disableVoteButton={disableVoteButton}
+                  projectId={project.id}
+                  token={token}
+                  errorVoteable={errorVoteable}
+                  voteStatus={voteStatus}
+                  theme={project?.campaignTheme?.code ?? ''}
+                  rand={rand}
+                />
 
                 <div className="prop-single-content">
                   {project.description ? <>
@@ -103,7 +127,16 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
                   </>) : null}
                 </div>
 
-                <VoteButton showVoteButton={voteable} disableVoteButton={disableVoteButton} projectId={project.id} token={token} errorVoteable={errorVoteable} />
+                <VoteButton
+                  showVoteButton={voteable}
+                  disableVoteButton={disableVoteButton}
+                  projectId={project.id}
+                  token={token}
+                  errorVoteable={errorVoteable}
+                  voteStatus={voteStatus}
+                  theme={project?.campaignTheme?.code ?? ''}
+                  rand={rand}
+                />
               </div>
 
               {project.implementations && project.implementations.length > 0 ? <>
@@ -122,7 +155,7 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
             </div>
           </div>
 
-          <div className="col-lg-3">
+          <div className="col-xl-3 col-lg-4">
             {typeof project.voted !== "undefined" && voteable ? (
               <div className="prop-single-wrapper prop-single-sidebar prop-single-sidebar-info">
                 <div className="prop-single-content">
@@ -154,15 +187,7 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
               </div>
             ) : null}
 
-            <div className="prop-single-wrapper prop-single-sidebar prop-single-sidebar-info">
-              <div className="prop-single-content">
-                <h6>Oszd meg másokkal is!</h6>
-
-                <div className="prop-info-content prop-info-share">
-                  <Share />
-                </div>
-              </div>
-            </div>
+            <ShareInfo type="sidebar" />
 
             <div className="prop-single-wrapper prop-single-sidebar">
               <div className="prop-single-content">
@@ -226,14 +251,6 @@ export default function ProjectWrapper({ project, voteable, token, errorVoteable
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="offset-lg-1 col-lg-10">
-            {backHref ? <>
-              <hr className="project-hr" />
-
-              <Link className="btn btn-back" href={backHref}>Vissza a többi ötlethez</Link>
-            </>: null}
           </div>
         </div>
       </div>

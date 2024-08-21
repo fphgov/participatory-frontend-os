@@ -1,22 +1,23 @@
 import { Metadata } from "next"
-import { apiProfileData, apiProfileIdeaData, apiProfileVotesData } from "@/lib/api-requests"
+import { apiProfileData, apiProfilePreferenceData } from "@/lib/api-requests"
 import HeroPage from '@/components/common/HeroPage'
 import ProfileBox from '@/components/profile/ProfileBox'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faIdCardAlt, faLightbulb, faUserCheck } from "@fortawesome/free-solid-svg-icons"
 import Link from 'next/link'
 import { IUser } from '@/models/user.model'
-import { IIdea } from '@/models/idea.model'
-import { IProject } from "@/models/project.model"
-import ProfileIdeaList from '@/components/profile/ProfileIdeaList'
 import ProfileDeleteButton from '@/components/profile/ProfileDeleteButton'
 import { notFound } from 'next/navigation'
 import PasswordChangeForm from './password-change-form'
+import SectionBox from "@/components/profile/SectionBox"
+import SectionBoxDetails from "@/components/profile/SectionBoxDetails"
+import PersonalDataForm from "./personal-data-form"
+import { IUserPreference } from "@/models/userPreference.model"
+import HearAboutForm from "./hear-about-form"
+import NewsletterChangeForm from "./newsletter-change-form"
+import PrizeChangeForm from "./prize-change-form"
 
 type ProfilePageData = {
   profile: IUser|null
-  ideas: IIdea[]
-  votedProjects: IProject[]
+  profilePreference: IUserPreference|null
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -33,22 +34,18 @@ export async function generateMetadata(): Promise<Metadata> {
 
 async function getData(): Promise<ProfilePageData> {
   const profile = await apiProfileData()
-  const ideas = await apiProfileIdeaData({
-    'username': profile.username
-  })
-  const votedProjects = await apiProfileVotesData()
+  const profilePreference = await apiProfilePreferenceData()
 
   return {
     profile,
-    ideas,
-    votedProjects
+    profilePreference,
   }
 }
 
 export default async function ProfilePage() {
-  const { profile, ideas, votedProjects } = await getData()
+  const { profile, profilePreference } = await getData()
 
-  if (! (profile && ideas && votedProjects)) {
+  if (! (profile && profilePreference)) {
     return notFound()
   }
 
@@ -62,26 +59,48 @@ export default async function ProfilePage() {
           <div className="row">
             <div className="offset-xl-2 col-lg-12 col-xl-8">
 
-              <div className="section section-block">
-                <h2><FontAwesomeIcon icon={faIdCardAlt} /> Fiók információk</h2>
+              <SectionBox footer={
+                null
+                /*<div className="section-newsletter"><NewsletterChangeForm profilePreference={profilePreference} /></div>*/
+              }>
+                <ProfileBox profile={profile} />
+              </SectionBox>
 
-                {profile ? <ProfileBox profile={profile} /> : null}
+              <SectionBox footer={<div className="section-prize"><PrizeChangeForm profilePreference={profilePreference} /></div>}>
+                <div className="box-profile">
+                  <div className="profile-item">
+                    <div className="profile-item-name">Nyerenyjáték</div>
+                    <div className="profile-item-value">Nyerj értékes ajándékokat! <Link href="/hirek/szavazz-es-nyerj-belepot-furdobe-allatkertbe-szinhazba-es-mas-klassz-helyekre" target="_blank">Részletek itt</Link>.</div>
+                  </div>
+                </div>
+              </SectionBox>
 
-                <hr />
+              <SectionBoxDetails summary="Jelszó beállítás">
+                <p>Állíts be jelszót a profilodhoz, így a későbbiekben azzal is be tudsz lépni. Nem kötelező.</p>
 
                 <PasswordChangeForm />
+              </SectionBoxDetails>
 
-                <div className="btn-wrapper btn-wrapper-flex">
-                  <ProfileDeleteButton profile={profile} />
+              <SectionBoxDetails summary="Személyes adatok">
+                <PersonalDataForm profilePreference={profilePreference} />
+              </SectionBoxDetails>
 
-                  <Link className="btn btn-primary-solid" href="/kijelentkezes" prefetch={false}>Kijelentkezés</Link>
-                </div>
-              </div>
+              <SectionBoxDetails summary="Honnan hallottál rólunk?">
+                <HearAboutForm profilePreference={profilePreference}/>
+              </SectionBoxDetails>
 
-              <div className="section">
-                <h2><FontAwesomeIcon icon={faLightbulb} /> Beküldött ötletek ({ideas.length})</h2>
+              <SectionBoxDetails summary="Adatvédelem">
+                <Link className="btn btn-primary-solid btn-solid-underline btn-pdf" href={`${process.env.NEXT_PUBLIC_FILES_PATH}/adatkezelesi_tajekoztato.pdf`} prefetch={false} download={true} target="_blank">Adatkezelési tájékoztató letöltése</Link>
+              </SectionBoxDetails>
 
-                <ProfileIdeaList ideas={ideas} />
+              <SectionBoxDetails summary="Fiók törlés">
+                <p>Kérheted a fiókod törlését, 5 napos türelmi idő után automatikusan töröljük. A türelmi idő alatt meggondolhatod magad. A beadott ötleteid változatlan formában megmaradnak.</p>
+
+                <ProfileDeleteButton />
+              </SectionBoxDetails>
+
+              <div style={{ margin: '24px 0' }}>
+                <Link className="btn btn-primary-solid btn-solid-underline" href="/kijelentkezes" prefetch={false}>Kijelentkezés</Link>
               </div>
             </div>
           </div>

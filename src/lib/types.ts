@@ -6,6 +6,7 @@ import { IPlan } from "@/models/plan.model"
 import { IUser } from "@/models/user.model"
 import { IVoteableProject } from "@/models/voteableProject.model"
 import { IPhaseStatus } from "@/models/phaseStatus.model"
+import { IUserPreference } from "@/models/userPreference.model"
 
 export interface PageResponse {
   data: IPage
@@ -15,8 +16,21 @@ export interface MessageResponse {
   message: string
 }
 
+export interface VoteResponse {
+  message: string
+  data: {
+    remainingVote: [
+      { id: number, votes: number }
+    ]
+  }
+}
+
 export interface UserResponse {
   data: IUser
+}
+
+export interface UserPreferenceResponse {
+  data: IUserPreference
 }
 
 export interface ArticleResponse {
@@ -30,6 +44,7 @@ export interface PhaseStatusResponse {
 export interface VoteStatusResponse {
   data: {
     voteables_count: number,
+    voteables_count_by_campaign_themes: Record<string, number>,
     projects: IProject[],
   }
 }
@@ -45,6 +60,7 @@ export interface PlanResponse extends IPlan {
 
 export interface UserLoginResponse {
   token: string
+  message: string
 }
 
 export interface ListLinks {

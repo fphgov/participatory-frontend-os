@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
+// @ts-ignore
+import { ReCaptcha, loadReCaptcha } from "@icetee/react-recaptcha-v3"
 import Error from "@/components/common/Error"
 import ErrorMini from '@/components/common/ErrorMini'
-import { apiProfileSaving } from "@/lib/api-requests"
 import { profileSavingForm } from '@/app/actions'
 import ScrollTo from '@/components/common/ScrollTo'
 

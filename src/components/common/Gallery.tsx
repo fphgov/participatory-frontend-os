@@ -1,8 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import Lightbox from "react-image-lightbox"
-import "react-image-lightbox/style.css"
+import Lightbox from "@icetee/react-image-lightbox"
+import "@icetee/react-image-lightbox/style.css"
 import Image from 'next/image'
 
 export type GalleryProps = {

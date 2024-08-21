@@ -9,7 +9,7 @@ export default function ForgotPasswordSuccess({ message }: { message: string }):
 
       <div className="row">
         <div className="col-md-12">
-          <Link className="btn btn-primary btn-headline btn-next" href="/bejelentkezes" style={{ marginTop: 24 }}>Tovább a bejelentkezésre</Link>
+          <Link className="btn btn-primary btn-headline btn-next" href="?auth=login" style={{ marginTop: 24 }}>Tovább a bejelentkezésre</Link>
         </div>
       </div>
     </>

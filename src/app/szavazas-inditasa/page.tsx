@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import HeroPage from '@/components/common/HeroPage'
 import VoteStartSection from '@/components/vote/VoteStartSection'
 import { apiVoteStatus } from '@/lib/api-requests'
-import { getToken } from '@/lib/actions'
+import { getValidToken } from '@/lib/actions'
 import { generateRandomValue } from '@/utilities/generateRandomValue'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -22,7 +22,7 @@ interface IProps {
 }
 
 export default async function VoteStartPage({ searchParams }: IProps) {
-  const token = (await getToken())?.value
+  const token = await getValidToken()
 
   let pageData, error
 
@@ -40,11 +40,10 @@ export default async function VoteStartPage({ searchParams }: IProps) {
     <main className="page page-vote-start">
       <div className="page-vote-start-section">
         <HeroPage title="Szavazás">
-          <p>Itt találod azokat az ötleteket, amikre szavazhatsz. Öt kategória van, minden kategóriában egy szavazatot adhatsz le.</p>
-          <p>Ügyelj arra, hogy egyszer szavazhatsz, és szavazatod végleges, azt nem változtathatod meg!</p>
+          <p>Válassz egy kategóriát és szavazz a kedvenc ötleteidre! Kategóriánként 3 ötletre szavazhatsz.</p>
         </HeroPage>
 
-        <VoteStartSection title="Válassz egy kategóriát és szavazz a kedvenc ötletedre!" subtitle="Több ötlet is megvalósulhat!" rand={searchParams?.rand || generateRandomValue().toString()} votedList={themes} />
+        <VoteStartSection title="Minden kategóriában 3 szavazatot adhatsz le." subtitle="" rand={searchParams?.rand || generateRandomValue().toString()} votedList={themes} />
       </div>
     </main>
   )

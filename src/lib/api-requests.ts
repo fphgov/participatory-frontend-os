@@ -20,7 +20,9 @@ import {
   IssueResponse,
   OkResponse,
   VoteStatusResponse,
-  VotedProjectListResponse
+  VotedProjectListResponse,
+  UserPreferenceResponse,
+  VoteResponse
 } from "@/lib/types"
 import { IUser } from "@/models/user.model"
 import { IIdea } from '@/models/idea.model'
@@ -32,10 +34,17 @@ import endpoints from '@/lib/endpoints'
 import { IPhaseStatus } from '@/models/phaseStatus.model'
 import { ApiError } from 'next/dist/server/api-utils';
 import { Agent, setGlobalDispatcher } from 'undici'
+import { IUserPreference } from '@/models/userPreference.model'
 
 type ApiLoginUserProps = {
   email: string
   password: string
+  type: string
+  pathname: string
+  privacy: string
+  liveInCity: string
+  newsletter: string
+  prize: string
   recaptchaToken: string
 }
 
@@ -68,7 +77,7 @@ async function handleResponse<T>(response: Response): Promise<T> {
     }
 
     if (response.statusText === "Unauthorized") {
-      redirect('/bejelentkezes')
+      redirect('/?auth=login')
     }
 
     throw new ApiError(response.status, data.message || response.statusText)
@@ -77,11 +86,17 @@ async function handleResponse<T>(response: Response): Promise<T> {
   return data as T
 }
 
-export async function apiLoginUser(credentials: ApiLoginUserProps): Promise<string> {
+export async function apiLoginUser(credentials: ApiLoginUserProps): Promise<{ token: string | null, message: string}> {
   const urlencoded = new URLSearchParams()
 
   urlencoded.append("email", credentials.email)
   urlencoded.append("password", credentials.password)
+  urlencoded.append("type", credentials.type)
+  urlencoded.append("pathname", credentials.pathname)
+  urlencoded.append("privacy", credentials.privacy)
+  urlencoded.append("liveInCity", credentials.liveInCity)
+  urlencoded.append("newsletter", credentials.newsletter)
+  urlencoded.append("prize", credentials.prize)
   urlencoded.append("g-recaptcha-response", credentials.recaptchaToken)
 
   const url = backendUrl(endpoints.API_REQ_LOGIN)
@@ -97,13 +112,40 @@ export async function apiLoginUser(credentials: ApiLoginUserProps): Promise<stri
     body: urlencoded,
   })
 
-  const { token } = await handleResponse<UserLoginResponse>(response)
+  const { token, message } = await handleResponse<UserLoginResponse>(response)
 
   if (token) {
     await saveToken(token)
   }
 
-  return token
+  return {
+    token,
+    message
+  }
+}
+
+export async function apiLoginUserWithHash(hash: string): Promise<{ token: string | null, message: string }> {
+  const url = backendUrl((endpoints.API_REQ_PROFILE_LOGIN_WITH_MAGIC_LINK || '').toString().replace(':hash', hash))
+
+  const response = await fetch(url, {
+    cache: "no-store",
+    method: "GET",
+    credentials: "include",
+    headers: {
+      'Content': "application/json",
+    },
+  })
+
+  const { token, message } = await handleResponse<UserLoginResponse>(response)
+
+  if (token) {
+    await saveToken(token)
+  }
+
+  return {
+    token,
+    message
+  }
 }
 
 export async function apiProfileData(): Promise<IUser> {
@@ -127,6 +169,29 @@ export async function apiProfileData(): Promise<IUser> {
   })
 
   return handleResponse<UserResponse>(response).then(data => data.data)
+}
+
+export async function apiProfilePreferenceData(): Promise<IUserPreference> {
+  const token = (await getToken())?.value
+
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  }
+
+  if (token) {
+    headers[ "Authorization" ] = `Bearer ${token}`
+  }
+
+  const url = backendUrl(endpoints.API_REQ_PROFILE_PREFERENCE)
+
+  const response = await fetch(url, {
+    cache: "no-store",
+    method: "GET",
+    credentials: "include",
+    headers,
+  })
+
+  return handleResponse<UserPreferenceResponse>(response).then(data => data.data)
 }
 
 export async function apiProfileIdeaData(data: Record<string, string>): Promise<IIdea[]> {
@@ -216,6 +281,124 @@ export async function apiProfileChangePassword(credentials: { password: string, 
   urlencoded.append("password_again", credentials.password_again)
 
   const url = backendUrl(endpoints.API_REQ_PASSWORD)
+
+  const response = await fetch(url, {
+    cache: "no-store",
+    method: "POST",
+    credentials: "include",
+    headers,
+    body: urlencoded,
+  })
+
+  return handleResponse<MessageResponse>(response).then(data => data)
+}
+
+export async function apiProfileChangeNewsletter(data: { newsletter: boolean }): Promise<MessageResponse> {
+  const token = (await getToken())?.value
+
+  const headers: Record<string, string> = {
+    "Content": "application/json",
+    'Content-Type': "application/x-www-form-urlencoded",
+  }
+
+  if (token) {
+    headers[ "Authorization" ] = `Bearer ${token}`
+  }
+
+  const urlencoded = new URLSearchParams()
+
+  urlencoded.append("newsletter", data.newsletter ? '1' : '0')
+
+  const url = backendUrl(endpoints.API_REQ_PROFILE_SIMPLE_NEWSLETTER)
+
+  const response = await fetch(url, {
+    cache: "no-store",
+    method: "POST",
+    credentials: "include",
+    headers,
+    body: urlencoded,
+  })
+
+  return handleResponse<MessageResponse>(response).then(data => data)
+}
+
+export async function apiProfileChangePrize(data: { prize: boolean }): Promise<MessageResponse> {
+  const token = (await getToken())?.value
+
+  const headers: Record<string, string> = {
+    "Content": "application/json",
+    'Content-Type': "application/x-www-form-urlencoded",
+  }
+
+  if (token) {
+    headers[ "Authorization" ] = `Bearer ${token}`
+  }
+
+  const urlencoded = new URLSearchParams()
+
+  urlencoded.append("prize", data.prize ? '1' : '0')
+
+  const url = backendUrl(endpoints.API_REQ_PROFILE_SIMPLE_PRIZE)
+
+  const response = await fetch(url, {
+    cache: "no-store",
+    method: "POST",
+    credentials: "include",
+    headers,
+    body: urlencoded,
+  })
+
+  return handleResponse<MessageResponse>(response).then(data => data)
+}
+
+
+export async function apiProfilePersonalData(credentials: { birthyear: string, postalCode: string }): Promise<MessageResponse> {
+  const token = (await getToken())?.value
+
+  const headers: Record<string, string> = {
+    "Content": "application/json",
+    'Content-Type': "application/x-www-form-urlencoded",
+  }
+
+  if (token) {
+    headers[ "Authorization" ] = `Bearer ${token}`
+  }
+
+  const urlencoded = new URLSearchParams()
+
+  urlencoded.append("birthyear", credentials.birthyear)
+  urlencoded.append("postal_code", credentials.postalCode)
+
+  const url = backendUrl(endpoints.API_REQ_PERSONAL)
+
+  const response = await fetch(url, {
+    cache: "no-store",
+    method: "POST",
+    credentials: "include",
+    headers,
+    body: urlencoded,
+  })
+
+  return handleResponse<MessageResponse>(response).then(data => data)
+}
+
+export async function apiProfileHearAbout(credentials: { hearAbout: string }): Promise<MessageResponse> {
+  const token = (await getToken())?.value
+
+  const headers: Record<string, string> = {
+    "Content": "application/json",
+    'Content-Type': "application/x-www-form-urlencoded",
+  }
+
+  if (token) {
+    headers[ "Authorization" ] = `Bearer ${token}`
+  }
+
+  const urlencoded = new URLSearchParams()
+
+  urlencoded.append("hear_about", credentials.hearAbout)
+
+  const url = backendUrl(endpoints.API_REQ_PROFILE_HEAR_ABOUT)
 
   const response = await fetch(url, {
     cache: "no-store",
@@ -393,7 +576,7 @@ export async function apiCheckPhase(): Promise<IPhaseStatus> {
   return handleResponse<PhaseStatusResponse>(response).then(data => data.data)
 }
 
-export async function apiVote(projectId: number|string): Promise<IssueResponse|MessageResponse> {
+export async function apiVote(projectId: number|string): Promise<VoteResponse> {
   const token = (await getToken())?.value
 
   const headers: Record<string, string> = {
@@ -419,7 +602,7 @@ export async function apiVote(projectId: number|string): Promise<IssueResponse|M
     headers,
   })
 
-  return handleResponse<IssueResponse|MessageResponse>(response).then(data => data)
+  return handleResponse<VoteResponse>(response).then(data => data)
 }
 
 export async function apiCheckVote(id: number|string|undefined): Promise<IssueResponse|OkResponse> {
@@ -548,15 +731,23 @@ export async function apiIdeasFilter(data: Record<string, string>): Promise<Filt
 }
 
 export async function apiVoteablePlansData(data: Record<string, string>): Promise<PlanListResponse> {
+  const token = (await getToken())?.value
+
   const url = backendUrl(endpoints.API_REQ_VOTE_LIST + '?' + new URLSearchParams(data as Record<string, string>).toString())
+
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  }
+
+  if (token) {
+    headers[ "Authorization" ] = `Bearer ${token}`
+  }
 
   const response = await fetch(url, {
     cache: "no-store",
     method: "GET",
     credentials: "include",
-    headers: {
-      'Content': "application/json",
-    },
+    headers,
   })
 
   return handleResponse<PlanListResponse>(response).then(data => data)

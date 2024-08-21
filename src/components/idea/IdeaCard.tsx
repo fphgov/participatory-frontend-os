@@ -11,11 +11,14 @@ type IdeaCardProps = {
   ideaPreLink: string
   tags?: ITag[],
   handleClick?: () => void|undefined
+  extraButton?: React.ReactNode
+  footerExtend?: React.ReactNode
   autoHeight?: boolean
   showStatus?: boolean
   showVoted?: boolean
   showCampaign?: boolean
   showMore?: boolean
+  showDescription?: boolean
   tagClick?: (tag: ITag) => {}|undefined
 }
 
@@ -24,11 +27,14 @@ export default function IdeaCard({
   ideaPreLink,
   tags,
   handleClick,
+  extraButton = false,
+  footerExtend = false,
   autoHeight = false,
   showStatus = true,
   showVoted = false,
   showCampaign = false,
   showMore = true,
+  showDescription = true,
   tagClick = undefined,
 }: IdeaCardProps): JSX.Element|null {
   if (idea == null) {
@@ -62,23 +68,30 @@ export default function IdeaCard({
               <Link href={`${ideaPreLink}/${idea.id}`}>{idea.title}</Link>
             </h2>
 
-            <div className="prop-description">{shortDescription}</div>
+            {showDescription ? <div className="prop-description">{shortDescription}</div> : null}
           </div>
 
           {showMore ?
             <>
-              <hr />
+              {/* <hr /> */}
+
+              {footerExtend ? footerExtend : null}
 
               <footer className="post-card-meta">
-                <div>
-                  {showVoted && idea?.voted !== null ? <VoteCounter count={idea?.voted || 0} /> : null}
-                  {showCampaign ? <span className="campaign-name">{idea?.campaign?.shortTitle}</span> : null}
-                  {showStatus ? <div className="prop-build">{idea.status?.title}</div> : null}
-                </div>
+                {showVoted && idea?.voted !== null || showCampaign || showStatus ? <>
+                  <div>
+                    {showVoted && idea?.voted !== null ? <VoteCounter count={idea?.voted || 0} /> : null}
+                    {showCampaign ? <span className="campaign-name">{idea?.campaign?.shortTitle}</span> : null}
+                    {showStatus ? <div className="prop-build">{idea.status?.title}</div> : null}
+                  </div>
+                </> : null}
+
                 <div className="post-more-wrapper">
-                  <Link href={`${ideaPreLink}/${idea.id}`} className="btn post-more" onClick={handleClick}>Bővebben</Link>
+                  {extraButton ? extraButton : null}
+                  <Link href={`${ideaPreLink}/${idea.id}`} className="btn post-more post-more-outline" onClick={handleClick}>Megnézem</Link>
                 </div>
               </footer>
+
             </> : null}
         </div>
       </div>

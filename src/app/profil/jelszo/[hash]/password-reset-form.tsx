@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
+import { useEffect, useState } from "react"
+// @ts-ignore
+import { ReCaptcha, loadReCaptcha } from "@icetee/react-recaptcha-v3"
 import Error from "@/components/common/Error"
 import ErrorMini from '@/components/common/ErrorMini'
 import { passwordResetForm } from '@/app/actions'
@@ -33,7 +34,7 @@ export default function PasswordResetForm({ params }: PasswordResetFormProps): J
     const res = await passwordResetForm(data)
 
     if (res.success) {
-      window.location.href = '/bejelentkezes'
+      window.location.href = '/?auth=login'
     } else {
       setErrorObject(res.jsonError)
       setError(res.error)

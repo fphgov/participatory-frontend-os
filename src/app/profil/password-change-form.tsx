@@ -1,10 +1,10 @@
 'use client'
 
-import { ToastContainer, toast } from 'react-toastify'
 import { useState } from "react"
 import Error from "@/components/common/Error"
 import ErrorMini from '@/components/common/ErrorMini'
 import { profileChangePasswordForm } from '@/app/actions'
+import {useModalHardContext} from "@/context/modalHard";
 
 export default function PasswordChangeForm(): JSX.Element {
   const defaultCredential = {
@@ -15,16 +15,7 @@ export default function PasswordChangeForm(): JSX.Element {
   const [error, setError] = useState('')
   const [errorObject, setErrorObject] = useState<Record<string, string>|undefined>(undefined)
   const [credential, setCredential] = useState(defaultCredential)
-
-  const notify = (message: string) => toast.dark(message, {
-    position: "bottom-right",
-    autoClose: 5000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  })
+  const { openModalHard, setOpenModalHard, setDataModalHard } = useModalHardContext()
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
@@ -42,7 +33,13 @@ export default function PasswordChangeForm(): JSX.Element {
       setCredential(defaultCredential)
 
       if (res?.successMessage) {
-        notify(res.successMessage)
+        setDataModalHard({
+          title: '',
+          content: res.successMessage,
+          showCancelButton: true
+        })
+
+        setOpenModalHard(true)
       }
     } else {
       if (res?.message) {
@@ -51,8 +48,6 @@ export default function PasswordChangeForm(): JSX.Element {
         setErrorObject(res.jsonError)
         setError(res.error)
       }
-
-      notify('⛔️ Sikertelen jelszó módosítás')
     }
   }
 
@@ -64,7 +59,7 @@ export default function PasswordChangeForm(): JSX.Element {
         <div className="form-wrapper">
           <div className="input-inline-wrapper">
             <div className="input-wrapper">
-              <label htmlFor="password">Új jelszó</label>
+              <label htmlFor="password">Új jelszó:</label>
               <input type="password" name="password" id="password" value={credential.password} onChange={handleChangeInput} />
 
               {errorObject && errorObject.password ? Object.values(errorObject.password).map((err, i) => {
@@ -73,7 +68,7 @@ export default function PasswordChangeForm(): JSX.Element {
             </div>
 
             <div className="input-wrapper">
-              <label htmlFor="password_again">Új jelszó ismét</label>
+              <label htmlFor="password_again">Új jelszó ismét:</label>
               <input type="password" name="password_again" id="password_again" value={credential.password_again} onChange={handleChangeInput} />
 
               {errorObject && errorObject.password_again ? Object.values(errorObject.password_again).map((err, i) => {
@@ -83,13 +78,11 @@ export default function PasswordChangeForm(): JSX.Element {
           </div>
 
           <div className="btn-wrapper" style={{ marginTop: 24 }}>
-            <button type="submit" className="btn btn-gray">Módosítás</button>
+            <button type="submit" className="btn btn-primary">Módosítás</button>
           </div>
         </div>
 
       </fieldset>
     </form>
-
-    <ToastContainer />
   </>
 }

@@ -1,3 +1,4 @@
+// @ts-ignore
 import TimeAgo from '@icetee/time-ago'
 
 const ta = new TimeAgo({
