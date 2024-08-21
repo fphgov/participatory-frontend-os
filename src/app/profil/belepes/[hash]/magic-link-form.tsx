@@ -9,6 +9,7 @@ export default function MagicLinkForm(): JSX.Element {
   const params = useParams()
   const [error, setError] = useState('')
   const formRef = useRef<HTMLFormElement>(null)
+  const submitButtonRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
 
   async function onLoginWithMagicLink() {
@@ -27,12 +28,8 @@ export default function MagicLinkForm(): JSX.Element {
   }
 
   useEffect(() => {
-    if (formRef.current) {
-      if (formRef.current.requestSubmit) {
-        formRef.current.requestSubmit()
-      } else {
-        formRef.current.submit()
-      }
+    if (submitButtonRef.current) {
+      submitButtonRef.current.click()
     }
   }, [])
 
@@ -41,7 +38,7 @@ export default function MagicLinkForm(): JSX.Element {
       <fieldset>
         <div style={{ display: 'inline-block' }}>{error ? <Error message={error} /> : null}</div>
 
-        <input type="submit" value="Belépés" style={{ display: 'none' }} />
+        <input ref={submitButtonRef} type="submit" value="Belépés" style={{ display: 'none' }} />
       </fieldset>
     </form>
   </>
