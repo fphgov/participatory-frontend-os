@@ -546,7 +546,7 @@ input.btn[disabled]:hover {
 }
 
 .btn.btn-primary-solid:hover {
-  text-decoration: underline;
+  text-decoration: underline !important;
 }
 
 .btn.btn-solid-padding {
