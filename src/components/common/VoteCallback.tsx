@@ -6,6 +6,7 @@ import { useModalHardContext } from "@/context/modalHard"
 import { useCallback, useEffect } from "react"
 import { IVoteStatus } from "@/models/voteableProject.model"
 import { apiProjectData } from "@/lib/api-requests"
+import Link from "next/link"
 
 type VoteCallbackProps = {
   loggedIn: boolean
@@ -131,16 +132,18 @@ export default function VoteCallback({ loggedIn, voteStatus }: VoteCallbackProps
 
         if (voteablesCount === 0) {
           setDataModalHard({
-            title: 'Köszönjük',
+            title: 'Sikeresen leadtad az összes szavazatodat! Köszönjük, hogy részt vettél a szavazáson!',
             content: (
               <>
-                <div>Köszönjük, hogy részt vettél a közösségi költségvetés szavazásában!</div>
                 <button type="button" className="btn btn-secondary" onClick={() => {
                   setOpenModalHard(false)
-                  router.replace(`/`)
+
+                  window.location.href = 'https://forms.office.com/e/SwHUvaC42f?origin=lprLink'
                 }}>
-                  Vissza a főoldalra
+                  Mondd el véleményed
                 </button>
+
+                <Link href="/" className="btn btn-primary-solid btn-solid-padding">Most nem</Link>
               </>
             ),
             showCancelButton: false
