@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from "react"
+import {useEffect, useRef, useState} from "react"
 import Error from "@/components/common/Error"
 import ErrorMini from '@/components/common/ErrorMini'
 import { profileChangeNewsletterForm } from '@/app/actions'
@@ -14,7 +14,7 @@ type NewsletterChangeFormProps = {
 
 export default function NewsletterChangeForm({ profilePreference }: NewsletterChangeFormProps): JSX.Element {
   const defaultFormData = {
-    newsletter: false,
+    newsletter: profilePreference.newsletter,
   }
 
   const formRef = useRef<HTMLFormElement>(null)
@@ -41,6 +41,8 @@ export default function NewsletterChangeForm({ profilePreference }: NewsletterCh
   async function onChangeNewsletter() {
     setError('')
     setErrorObject(undefined)
+
+    formData.newsletter = !formData.newsletter;
 
     const res = await profileChangeNewsletterForm(formData)
 

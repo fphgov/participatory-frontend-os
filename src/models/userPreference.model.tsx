@@ -3,4 +3,5 @@ export type IUserPreference = {
   postalCode: string;
   prize: boolean;
   hearAbout: string;
+  newsletter: boolean;
 }
