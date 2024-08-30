@@ -11,7 +11,7 @@ export const WhoAndHow = () => <>
 </>
 
 export const HowIsItDescided = () => <>
-  <p>Az online és offline beérkezett szavazatok összesítését követően kategóriánként a legtöbb szavazatot kapott ötletek valósulhatnak meg a rendelkezésre álló keretösszeg erejéig. A Zöld Budapest, Esélyteremtő Budapest és Nyitott Budapest kategóriákban ez 1-2 nyertes ötletet, a Helyi nagy ötletek kategóriában 2-4 nyertes ötletet, a Helyi kis ötletek kategóriában pedig 8-12 nyertes ötletet jelent az ötletek költségétől függően.</p>
+  <p>Az online és offline beérkezett szavazatok összesítését követően kategóriánként a legtöbb szavazatot kapott ötletek valósulhatnak meg a rendelkezésre álló keretösszeg erejéig. A Zöld Budapest, Esélyteremtő Budapest és Nyitott Budapest kategóriákban kategóriánként 120 millió forint áll rendelkezésre, ami kategóriánként 1-2 ötlet megvalósítására elég. A Helyi nagy ötleteknél 240 millió forint a keret, ami 2-4 nyertes ötletet fedez, a Helyi kis ötletek kategóriában pedig 400 millió forint a keretösszeg, ez 8-12 nyertes ötletet jelent.</p>
 </>
 
 export const Who = () => <>
