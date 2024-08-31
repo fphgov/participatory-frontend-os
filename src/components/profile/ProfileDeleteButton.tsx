@@ -40,15 +40,17 @@ export default function ProfileDeleteButton(): JSX.Element {
     try {
       const response = await apiProfileDelete()
 
-      setDataModalHard({
-        title: response?.message,
-        content: 'Hamarosan átirányítunk',
-        showCancelButton: true
-      })
+      if (response.message) {
+        setDataModalHard({
+          title: response.message,
+          content: 'Hamarosan átirányítunk',
+          showCancelButton: false
+        })
 
-      setTimeout(() => {
-        router.replace('/kijelentkezes')
-      }, 3 * 1000)
+        setTimeout(() => {
+          router.replace('/kijelentkezes')
+        }, 3 * 1000)
+      }
     } catch (e: any) {
       if (e.response && e.response.data && e.response.data.errors) {
         setError(e.response.data.errors)
