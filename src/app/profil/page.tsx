@@ -93,7 +93,7 @@ export default async function ProfilePage() {
               </SectionBoxDetails>
 
               <SectionBoxDetails summary="Fiók törlés">
-                <p>Kérheted a fiókod törlését, 5 napos türelmi idő után automatikusan töröljük. A türelmi idő alatt meggondolhatod magad. A beadott ötleteid változatlan formában megmaradnak.</p>
+                <p>Minden személyes adatod azonnal törlésre kerül, a törlés nem visszavonható.</p>
 
                 <ProfileDeleteButton />
               </SectionBoxDetails>
