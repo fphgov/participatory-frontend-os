@@ -1,12 +1,12 @@
 'use client'
 
-import {useEffect, useRef, useState} from "react"
+import { useRef, useState } from "react"
 import Error from "@/components/common/Error"
 import ErrorMini from '@/components/common/ErrorMini'
 import { profileChangeNewsletterForm } from '@/app/actions'
 import Checkbox from '@/components/common/form-element/Checkbox'
 import { IUserPreference } from '@/models/userPreference.model'
-import {useModalHardContext} from "@/context/modalHard";
+import { useModalHardContext } from "@/context/modalHard"
 
 type NewsletterChangeFormProps = {
   profilePreference: IUserPreference
