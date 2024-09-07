@@ -6,7 +6,7 @@ import ErrorMini from '@/components/common/ErrorMini'
 import { profileChangeNewsletterForm } from '@/app/actions'
 import Checkbox from '@/components/common/form-element/Checkbox'
 import { IUserPreference } from '@/models/userPreference.model'
-import {useModalHardContext} from "@/context/modalHard";
+import { useModalHardContext } from "@/context/modalHard"
 
 type NewsletterChangeFormProps = {
   profilePreference: IUserPreference
@@ -14,7 +14,7 @@ type NewsletterChangeFormProps = {
 
 export default function NewsletterChangeForm({ profilePreference }: NewsletterChangeFormProps): JSX.Element {
   const defaultFormData = {
-    newsletter: false,
+    newsletter: profilePreference.newsletter,
   }
 
   const formRef = useRef<HTMLFormElement>(null)
@@ -41,6 +41,8 @@ export default function NewsletterChangeForm({ profilePreference }: NewsletterCh
   async function onChangeNewsletter() {
     setError('')
     setErrorObject(undefined)
+
+    formData.newsletter = !formData.newsletter;
 
     const res = await profileChangeNewsletterForm(formData)
 

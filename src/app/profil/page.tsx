@@ -60,8 +60,7 @@ export default async function ProfilePage() {
             <div className="offset-xl-2 col-lg-12 col-xl-8">
 
               <SectionBox footer={
-                null
-                /*<div className="section-newsletter"><NewsletterChangeForm profilePreference={profilePreference} /></div>*/
+                <div className="section-newsletter"><NewsletterChangeForm profilePreference={profilePreference} /></div>
               }>
                 <ProfileBox profile={profile} />
               </SectionBox>
@@ -94,7 +93,7 @@ export default async function ProfilePage() {
               </SectionBoxDetails>
 
               <SectionBoxDetails summary="Fiók törlés">
-                <p>Kérheted a fiókod törlését, 5 napos türelmi idő után automatikusan töröljük. A türelmi idő alatt meggondolhatod magad. A beadott ötleteid változatlan formában megmaradnak.</p>
+                <p>Minden személyes adatod azonnal törlésre kerül, a törlés nem visszavonható.</p>
 
                 <ProfileDeleteButton />
               </SectionBoxDetails>
