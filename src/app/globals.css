@@ -3297,7 +3297,8 @@ time.post-full-meta-date::before {
   text-align: center;
   align-items: center;
   justify-content: center;
-  padding: 72px 0 calc(124px + 44px) 0;
+  /* padding: 72px 0 calc(124px + 44px) 0; */
+  padding: 72px 0;
   position: relative;
 }
 
