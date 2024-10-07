@@ -1,10 +1,10 @@
 import Banner from './Banner'
 
-export default function BannerArea({ withWin = false }): JSX.Element|null {
+export default function BannerArea({ withWin = false, forceFullWidth = false }): JSX.Element|null {
   return (
     <div className="banner-area">
       <div className="row">
-        <div className={withWin ? "col-12" : "offset-lg-3 col-lg-6"}>
+        <div className={withWin && forceFullWidth ? "col-12" : "offset-lg-3 col-lg-6"}>
           <div className="banner-wrapper">
             {withWin ?
               <div className="banner-item">
