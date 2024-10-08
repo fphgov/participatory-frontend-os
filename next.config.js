@@ -19,6 +19,15 @@ module.exports = async (phase, { defaultConfig }) => {
         },
       ];
     },
+    redirects: async () => {
+      return [
+        {
+          source: '/szavazas',
+          destination: '/',
+          permanent: false,
+        }
+      ]
+    },
     reactStrictMode: false,
     poweredByHeader: false,
     images: {
