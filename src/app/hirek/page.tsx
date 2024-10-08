@@ -62,7 +62,7 @@ const Articles: NextPage<IProps> = async ({ searchParams }) => {
       </main>
 
       <div className="container">
-        <BannerArea />
+        <BannerArea forceFullWidth={true} />
       </div>
     </>
   )
