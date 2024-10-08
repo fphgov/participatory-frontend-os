@@ -13,7 +13,7 @@ export default function Header({ loggedIn }: IHeader): JSX.Element {
   const rand = generateRandomValue().toString()
 
   const menu = [
-    { title: "Tudnivalók a szavazáshoz", href: "/tudnivalok-a-szavazasrol", outside: false },
+    // { title: "Tudnivalók a szavazáshoz", href: "/tudnivalok-a-szavazasrol", outside: false },
     { title: "Hírek, rendezvények", href: "/hirek", outside: false },
     { title: "Ötletek", href: "#", outside: false, submenuItems: [
       { title: "Beküldött", href: `/otletek?campaign=4&rand=${rand}`, outside: true },
