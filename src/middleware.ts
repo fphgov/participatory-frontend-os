@@ -68,22 +68,6 @@ export async function middleware(req: NextRequest) {
     }
   }
 
-  // if (redirectToLogin) {
-  //   const response = NextResponse.redirect(new URL(`/bejelentkezes`, req.url))
-
-  //   response.cookies.set("token", "", { expires: new Date(Date.now()) })
-
-  //   return response
-  // }
-
-  // const authUser = (req as AuthenticatedRequest).user
-
-  // if (!authUser) {
-  //   return NextResponse.redirect(
-  //     new URL('/bejelentkezes', req.url)
-  //   )
-  // }
-
   if (req.url.includes("/bejelentkezes")) {
     return NextResponse.redirect(new URL("/profil", req.url))
   }

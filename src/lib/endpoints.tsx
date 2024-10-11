@@ -1,6 +1,7 @@
 const endpoints = {
   API_REQ_PING: '/api/ping',
   API_REQ_LOGIN: '/api/login',
+  API_REQ_LOGOUT: '/api/logout',
   API_REQ_CONFIG: '/api/options',
   API_REQ_REGISTRATION: '/api/user/registration',
   API_REQ_PAGE: '/api/page/:slug',

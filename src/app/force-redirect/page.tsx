@@ -1,14 +1,11 @@
-"use client"
+"use server"
 
-import { useEffect } from "react"
+import {apiLogoutUser} from "@/lib/api-requests";
+import {redirect} from "next/navigation";
 
-export default function ForceRedirectPage() {
-  useEffect(() => {
-    window.location.href = '/'
-  }, [])
+export default async function ForceRedirectPage() {
 
-  return (
-    <main className="page">
-    </main>
-  );
+  const response = await apiLogoutUser();
+
+  redirect('/');
 }
