@@ -12,6 +12,8 @@ export async function saveToken(token: string) {
     value: token,
     httpOnly: true,
     path: '/',
+    secure: process.env.NODE_ENV !== "development" ? true : false,
+    sameSite: 'lax',
     expires: Date.now() + hours
   })
 }
