@@ -217,6 +217,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
                     }) : null}
                   </div>
 
+                  {0 ?
                   <div className="form-group">
                     <CheckboxUncontrolled
                       id="prize"
@@ -229,7 +230,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
                     {errorObject?.prize ? Object.values(errorObject.prize).map((err, i) => {
                       return <ErrorMini key={i} error={err} increment={`prize-${i}`}/>
                     }) : null}
-                  </div>
+                  </div> : null}
 
                 </div>
               </> : null}
