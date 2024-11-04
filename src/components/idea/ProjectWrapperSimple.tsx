@@ -31,7 +31,7 @@ export default function ProjectWrapperSimple({
   errorVoteable,
   disableVoteButton,
   backHref,
-  disableRelatedIdeas = true,
+  disableRelatedIdeas = false,
   voteStatus
 }: IdeasWrapperProps): JSX.Element {
   const rand = generateRandomValue().toString()

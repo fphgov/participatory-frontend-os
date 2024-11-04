@@ -15,15 +15,15 @@ export default function Home() {
               <div className="container">
                 <div className="row">
                   <div className="offset-lg-2 col-lg-8">
-                    <h3>Köszönjük, hogy közel 29 ezren szavaztatok!</h3>
+                    <h3>Köszönjük, hogy több mint 29 ezren szavaztatok!</h3>
                   </div>
 
                   <div className="offset-lg-3 col-lg-6">
                     <p>
-                      Gyere el az eredményhirdetésre október 11-én a Városháza Pop-up parkba!
+                      Október 11-én kihirdettük az eredményeket, 13 új projekt valósul meg.
                     </p>
 
-                    <Link className="btn btn-primary btn-headline btn-next" href="/hirek/gyere-el-az-eredmenyhirdetesre-oktober-11-en">Érdekel az esemény</Link>
+                    <Link className="btn btn-primary btn-headline btn-next" href="/hirek/kontenerhazak-esokertek-es-margitszigeti-csomagmegorzo-is-epul-a-kozossegi-koltsegvetesbol">Megnézem az eredményeket</Link>
                   </div>
                 </div>
               </div>
