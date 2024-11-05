@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { verifyJWT } from "./lib/token"
 import { getErrorResponse } from "./lib/helpers"
+import endpoints from "@/lib/endpoints";
 
 export type User = {
   username: string
@@ -73,6 +74,23 @@ export async function middleware(req: NextRequest) {
   }
 
   if (req.url.includes("/kijelentkezes")) {
+    const urlencoded = new URLSearchParams()
+
+    urlencoded.append("token", token ?? '')
+    urlencoded.append("type", 'logout')
+
+    const res = await fetch(`${process.env.BACKEND_URL}/app${endpoints.API_REQ_LOGOUT}`, {
+      cache: "no-store",
+      method: "POST",
+      credentials: "include",
+      headers: {
+        'Content': "application/json",
+        'Content-Type': "application/x-www-form-urlencoded",
+      },
+      body: urlencoded,
+    })
+    console.log(res)
+
     const response = NextResponse.redirect(new URL("/force-redirect", req.url))
 
     response.cookies.set("token", "", { expires: new Date(Date.now()) })

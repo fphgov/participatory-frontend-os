@@ -124,23 +124,6 @@ export async function apiLoginUser(credentials: ApiLoginUserProps): Promise<{ to
   }
 }
 
-export async function apiLogoutUser() {
-  const token = await getToken();
-  if (!token?.value) return;
-
-  const url = backendUrl(endpoints.API_REQ_LOGOUT);
-  const urlencoded = new URLSearchParams({ token: token.value, type: 'logout' });
-
-  return fetch(url, {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      'Content-Type': "application/x-www-form-urlencoded",
-    },
-    body: urlencoded,
-  });
-}
-
 export async function apiLoginUserWithHash(hash: string): Promise<{ token: string | null, message: string }> {
   const url = backendUrl((endpoints.API_REQ_PROFILE_LOGIN_WITH_MAGIC_LINK || '').toString().replace(':hash', hash))
 
