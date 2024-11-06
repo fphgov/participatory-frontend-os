@@ -32,7 +32,6 @@ const endpoints = {
   API_REQ_PLANS: '/api/plans',
   API_REQ_MEDIA: '/api/media/:id',
   API_REQ_MEDIA_DOWNLOAD: '/api/media/download/:id',
-  API_REQ_GEOCODING: '/api/geocoding',
   API_REQ_FILTER_IDEAS: '/api/idea/filter',
   API_REQ_FILTER_PROJECTS: '/api/projects/filter',
   API_REQ_FILTER_PLANS: '/api/plans/filter',
