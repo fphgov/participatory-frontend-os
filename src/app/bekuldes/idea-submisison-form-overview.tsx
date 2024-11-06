@@ -22,9 +22,11 @@ import { districtDataList } from "@/models/district.model"
 import MediaList from "@/components/common/form-element/MediaList"
 import Link from "next/link"
 import { generateRandomValue } from "@/utilities/generateRandomValue"
+import { useModalHardContext } from "@/context/modalHard"
 
 export default function IdeaSubmissionFormOverview(): JSX.Element {
   const { ideaFormContextData, setIdeaFormContextData } = useIdeaContext()
+  const { openModalHard, setOpenModalHard, setDataModalHard } = useModalHardContext()
 
   const [ canBeSubmit, setCanBeSubmit ] = useState(false)
   const [ error, setError ] = useState('')
@@ -94,7 +96,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
     const res = await ideaSubmissionForm(ideaFormData)
 
     if (res.success) {
-      window.location.href = '/bekuldes-sikeres'
+      handleOpenModal()
     } else {
       setErrorObject(res?.jsonError)
       setError(res.error)
@@ -126,6 +128,32 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
     } else {
       setInputComponentEdit('')
     }
+  }
+
+  function handleOpenModal() {
+  const content = <div className="modal-content-center">
+      <p>Megkaptuk az ötletedet, rövid ellenőrzést követően mindenki számára láthatóvá válik a honlapon a beküldött ötletek között.</p>
+      <p><b>Erről e-mailen kapsz majd visszajelzést. Ha van további ötleted, add be azt is most!</b></p>
+
+      <button type="button" className="btn btn-headline btn-next" onClick={() => {
+        setOpenModalHard(false)
+        window.location.href = '/bekuldes'
+      }}>
+        Új ötletet adok be 
+      </button>
+
+      <Link href="/" onClick={() => { setOpenModalHard(false)}}>
+        Vissza a főoldalra
+      </Link>
+    </div>
+
+    setDataModalHard({
+      title: 'Köszönjük, hogy megosztottad velünk az ötleted!',
+      content,
+      showCancelButton: false,
+    })
+
+    setOpenModalHard(true)
   }
 
   return (

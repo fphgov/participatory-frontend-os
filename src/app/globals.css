@@ -5394,6 +5394,10 @@ span.cc_highlight:hover {
   margin-top: 36px;
 }
 
+.modal-hard-wrapper .modal-content-center button {
+  margin-top: 0px;
+}
+
 .modal-background {
   background: rgba(34, 34, 34, 0.50);
   position: fixed;
@@ -5436,6 +5440,20 @@ span.cc_highlight:hover {
   margin: 24px 0;
   text-align: left;
   color: #FFF;
+}
+
+.modal-content .modal-content-center p {
+  text-align: center;
+}
+
+.modal-content .modal-content-center button {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.modal-content .modal-content-center button + a {
+  margin-top: 24px;
+  display: block;
 }
 
 .modal-content hr {
