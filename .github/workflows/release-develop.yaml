@@ -60,7 +60,7 @@ jobs:
           password: ${{ secrets.DEV_HARBOR_PASSWD }}
           tag_with_latest: true
           tag: ${{ needs.create-image-tag.outputs.imageTag }}
-          extra_args: '--skip-tls-verify --build-arg ARG_BACKEND_URL=http://backend-php-nginx:8080 --build-arg ARG_NEXT_PUBLIC_URL=https://otlet.budapest.dev --build-arg ARG_TZ="Europe/Budapest" --build-arg ARG_JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }} --build-arg ARG_NEXT_PUBLIC_BASENAME="/" --build-arg ARG_NEXT_PUBLIC_FILES_PATH=/files --build-arg ARG_NEXT_PUBLIC_MAPBOX_TOKEN=${{ secrets.NEXT_PUBLIC_MAPBOX_TOKEN }} --build-arg ARG_NEXT_PUBLIC_SITE_KEY=${{ secrets.NEXT_PUBLIC_SITE_KEY }} --build-arg ARG_NEXT_PUBLIC_MATOMO_URL=https://matomo.budapest.hu --build-arg ARG_NEXT_PUBLIC_MATOMO_SITE_ID=9 --build-arg ARG_NEXT_PUBLIC_FACEBOOK_PIXEL=1184088115623088 --build-arg ARG_NEXT_PUBLIC_OSM_URL=https://osm.budapest.dev'
+          extra_args: '--skip-tls-verify --build-arg ARG_BACKEND_URL=http://backend-php-nginx:8080 --build-arg ARG_NEXT_PUBLIC_URL=https://otlet.budapest.dev --build-arg ARG_TZ="Europe/Budapest" --build-arg ARG_JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }} --build-arg ARG_NEXT_PUBLIC_BASENAME="/" --build-arg ARG_NEXT_PUBLIC_FILES_PATH=/files --build-arg ARG_NEXT_PUBLIC_MAPBOX_TOKEN=${{ secrets.NEXT_PUBLIC_MAPBOX_TOKEN }} --build-arg ARG_NEXT_PUBLIC_SITE_KEY=${{ secrets.NEXT_PUBLIC_SITE_KEY }} --build-arg ARG_NEXT_PUBLIC_MATOMO_URL=https://matomo.budapest.hu --build-arg ARG_NEXT_PUBLIC_MATOMO_SITE_ID=9 --build-arg ARG_NEXT_PUBLIC_FACEBOOK_PIXEL=1184088115623088 --build-arg ARG_NEXT_PUBLIC_OSM_URL=https://osm.budapest.dev --build-arg ARG_NEXT_TOKEN_EXPIRATION_IN_HOUR=24'
 
   sonarqube-scan:
     name: Sonarqube Scan
