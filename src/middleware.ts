@@ -79,7 +79,7 @@ export async function middleware(req: NextRequest) {
     urlencoded.append("token", token ?? '')
     urlencoded.append("type", 'logout')
 
-    const res = await fetch(`${process.env.BACKEND_URL}/app${endpoints.API_REQ_LOGOUT}`, {
+    await fetch(`${process.env.BACKEND_URL}/app${endpoints.API_REQ_LOGOUT}`, {
       cache: "no-store",
       method: "POST",
       credentials: "include",
@@ -89,7 +89,6 @@ export async function middleware(req: NextRequest) {
       },
       body: urlencoded,
     })
-    console.log(res)
 
     const response = NextResponse.redirect(new URL("/force-redirect", req.url))
 
