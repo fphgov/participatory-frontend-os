@@ -15,15 +15,14 @@ export default function Home() {
               <div className="container">
                 <div className="row">
                   <div className="offset-lg-2 col-lg-8">
-                    <h3>Köszönjük, hogy több mint 29 ezren szavaztatok!</h3>
+                    <h3>Küldd be ötleted 2025. január 6-ig!</h3>
                   </div>
 
                   <div className="offset-lg-3 col-lg-6">
                     <p>
-                      Október 11-én kihirdettük az eredményeket, 13 új projekt valósul meg.
-                    </p>
+                    Adj te is egy jó ötletet, hogy mire fordítson Budapest 1 milliárd forintot! Mielőtt beadnád az ötleted, alaposan olvasd el a következő oldalt.</p>
 
-                    <Link className="btn btn-primary btn-headline btn-next" href="/hirek/kontenerhazak-esokertek-es-margitszigeti-csomagmegorzo-is-epul-a-kozossegi-koltsegvetesbol">Megnézem az eredményeket</Link>
+                    <Link className="btn btn-primary btn-headline btn-next" href="/bekuldesi-informacio">Mire figyelj?</Link>
                   </div>
                 </div>
               </div>
@@ -40,16 +39,16 @@ export default function Home() {
             <div className="container">
               <div className="row">
                 <div className="col-md-12">
-                  <h3>Közösségi költségvetés menete</h3>
+                  <h3>A közösségi költségvetés menete</h3>
                 </div>
 
                 <div className="col-md-12">
                   <div className="timeline-wrapper">
-                    <TimeLineItem icon='timeline-icon-1-done.svg' date="2023.11.15. - 2024.01.05." description="Ötletek beküldése" />
-                    <TimeLineItem icon='timeline-icon-2-done.svg' date="2024. első negyedév" description="Szakmai jóváhagyás" />
-                    <TimeLineItem icon='timeline-icon-3-done.svg' date="2024. tavasz" description="Ötletfejlesztés" />
-                    <TimeLineItem icon='timeline-icon-4-done.svg' date="2024. ősz" description="Szavazás" />
-                    <TimeLineItem icon='timeline-icon-5.svg' date="2024. ősztől" description="Megvalósítás" />
+                    <TimeLineItem icon='timeline-icon-1-done.svg' date="2024. 11. 13. - 2025. 01. 06." description="Ötletek beküldése" />
+                    <TimeLineItem icon='timeline-icon-2.svg' date="2025. 01. 20. - 2025. 02. 03." description="Lakossági támogatás" />
+                    <TimeLineItem icon='timeline-icon-3.svg' date="2025. tél / tavasz" description="Szakmai jóváhagyás" />
+                    <TimeLineItem icon='timeline-icon-4.svg' date="2025. ősz" description="Szavazás" />
+                    <TimeLineItem icon='timeline-icon-5.svg' date="2025. ősztől" description="Megvalósítás" />
                   </div>
                 </div>
               </div>
