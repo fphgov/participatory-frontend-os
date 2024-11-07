@@ -13,7 +13,7 @@ export default function Layout() {
       <div className="page-info-single-section">
 
         <HeroPage title="Mire figyelj az ötleted beadásakor?">
-          <p>Azt szeretnénk, hogy úgy ötletelj, hogy energiád és munkád később hasznosulni tudjon! Ezért kérünk, figyelmesen olvasd át, hogy milyen ötleteket tudunk elfogadni.</p>
+          <p><b>Figyelmesen olvasd át, hogy milyen ötleteket tudunk elfogadni!</b> Azt szeretnénk, hogy úgy ötletelj, hogy energiád és munkád később hasznosulni tudjon!</p>
         </HeroPage>
 
         <div id="megvalosithato-otlet" className="light-section">
@@ -21,14 +21,14 @@ export default function Layout() {
             <div className="row">
               <div className="col-md-12">
                 <h4>Az ötleted legyen megvalósítható 120 millió forintból!</h4>
-                <p>Biztosan nem lehet 120 millió forintból új aluljárót építeni vagy meghosszabbítani egy villamosvonalat, nem lehet új járműveket venni a közösségi közlekedés számára, nem lehet minden játszótérre kérni valamit. Viszonyítási alapként böngéssz a <Link href={`/tervek?rand=${rand}`}>korábban szakmailag jóváhagyott ötletek</Link> között.</p>
+                <p>Biztosan nem lehet 120 millió forintból új aluljárót építeni vagy meghosszabbítani egy villamosvonalat, nem lehet új járműveket venni a közösségi közlekedés számára, nem lehet minden játszótérre kérni valamit. Viszonyítási alapként böngéssz a <Link href={`/projektek?rand=${rand}`}>korábbi nyertes</Link> ötletek között.</p>
               </div>
             </div>
 
             <div className="row">
               <div className="col-md-6">
-                <Details className="section-more" summary={<div>Az ötletek megvalósítási költségét a hivatal fogja megbecsülni.</div>}>
-                  <p>Ettől függetlenül jó, ha tudod, hogy egy automata üzemű közvécé telepítése mintegy 60 millió forint, de akár egyetlen fa elültetése is több tízmillióba kerülhet, ha burkolatot kell hozzá feltörni, ki kell alakítani olyan talajszerkezetet, amelyben a fa hosszú ideig tud fejlődni, esetleg közműveket kell kiváltani.</p>
+                <Details className="section-more" summary={<div>Az ötletek megvalósítási költségét a hivatal fogja megbecsülni</div>}>
+                  <p>Ettől függetlenül jó, ha tudod,hogy egy automata üzemű közvécé telepítése mintegy 60 millió forint, de akár egyetlen fa elültetése is több tízmillióba kerülhet, ha burkolatot kell hozzá feltörni, ki kell alakítani olyan talajszerkezetet, amelyben a fa hosszú ideig tud fejlődni, esetleg közműveket kell kiváltani.</p>
                 </Details>
 
                 <Details className="section-more" summary={<div>Ne legyen túl bonyolult, összetett az ötleted!</div>}>
@@ -57,15 +57,15 @@ export default function Layout() {
 
             <div className="row">
               <div className="col-md-6">
-                <Details className="section-more" summary={<div>Felújításra, karbantartásra ne tégy javaslatot!</div>}>
-                  <p>A közösségi költségvetés keretösszege nem fordítható olyan karbantartási, fenntartási, köztisztasági feladatokra, amelyek egyébként is a Fővárosi Önkormányzat feladatai. Nem elromlott dolgok megjavítása a cél, hanem új funkciók, új dolgok létrehozása.</p>
+                <Details className="section-more" summary={<div>Felújításra, karbantartásra ne tegyél javaslatot!</div>}>
+                  <p>A közösségi költségvetés keretösszege nem fordítható karbantartási, fenntartási vagy köztisztasági feladatokra. Nem elromlott dolgok megjavítása a cél, hanem új funkciók, új dolgok létrehozása.</p>
                 </Details>
 
-                <Details className="section-more" summary={<div>Ne kizárólag szabályozásra vonatkozzon az ötlet!</div>}>
-                  <p>Kizárólag valamely tevékenység szabályozására nem lehet ötletet beadni, ezért például forgalomszabályozási feladatot javaslatot tartalmazó ötletek közül is csak azok lehetnek megvalósíthatók, amelyek révén új funkció (például sétálóutca, iskolautca, zebra) jön létre.</p>
+                <Details className="section-more" summary={<div>Ne szabályozásra vonatkozzon az ötlet!</div>}>
+                  <p>Kizárólag valamely tevékenység szabályozására nem lehet ötletet beadni (például bírságolás, forgalomszabályozás, közösségi közlekedés hálózati kérdései). A forgalomszabályozási javaslatot tartalmazó ötletek közül csak azok lehetnek megvalósíthatók, amelyek révén új funkció jön létre (például sétálóutca, iskolautca, zebra).</p>
                 </Details>
 
-                <Details className="section-more" summary={<div>Ha fel akarod hívni a figyelmet valamire, azt is valamilyen fejlesztésen keresztül tedd!</div>}>
+                <Details className="section-more" summary={<div>Ha fel akarod hívni a figyelmet valamire, azt is valamilyen fejlesztésen keresztül tedd</div>}>
                   <p>Szemléletformáló kampány helyett javasolj olyan kisebb fejlesztést, amivel gazdagodik a város, ami létrehoz valami újat, és ezen keresztül világít rá egy problémára, hiányra.</p>
                 </Details>
               </div>
@@ -87,15 +87,15 @@ export default function Layout() {
 
             <div className="row">
               <div className="col-md-6">
-                <Details className="section-more" summary={<div>Ne tervezz a HÉV, vasút, iskolák, vagy kórházak területére, mert ezek az állam tulajdonában, kezelésében vannak!</div>}>
+                <Details className="section-more" summary={<div>Ne tervezz a HÉV, vasút, iskolák vagy kórházak területére, mert ezek az állam tulajdonában, kezelésében vannak!</div>}>
                   <p>Mivel a HÉV, a vasút, az iskolák és a kórházak területe nem fővárosi vagy kerületi tulajdonban van, nem tudjuk garantálni, hogy a tulajdonos hozzájárul az ötlet megvalósításához.</p>
                 </Details>
 
-                <Details className="section-more" summary={<div>Nem fejleszthetünk magántulajdont a főváros forrásából.</div>}>
+                <Details className="section-more" summary={<div>Nem fejleszthetünk magántulajdont a főváros forrásából</div>}>
                   <p>Társasházak, magáncégek tulajdonában lévő területekre vagy építményekre, épületekre nem vonatkozhatnak a javaslatok.</p>
                 </Details>
 
-                <Details className="section-more" summary={<div>Valószínűleg nem lesz jó a helyszín, ha ott már zajlik egy fejlesztés.</div>}>
+                <Details className="section-more" summary={<div>Valószínűleg nem lesz jó a helyszín, ha ott már zajlik egy fejlesztés</div>}>
                   <p>Vannak olyan fővárosi helyszínek, amelyek fejlesztésére hamarosan sor kerül, esetleg már rendelkezésre állnak tervek és a megvalósítás forrásai. Ilyen esetben valószínűleg nem tudjuk befogadni az ötletet, vagy csak akkor, ha összhangban van a tervekkel.</p>
                 </Details>
               </div>
@@ -117,11 +117,11 @@ export default function Layout() {
 
             <div className="row">
               <div className="col-md-6">
-                <Details className="section-more" summary={<div>Az iskolai oktatás, oktatásügy állami feladat.</div>}>
+                <Details className="section-more" summary={<div>Az iskolai oktatás, oktatásügy állami feladat</div>}>
                   <p>A korhatár leszállításával is bátorítjuk, hogy középiskolások is részt vegyenek a közösségi költségvetésben, ugyanakkor az oktatásügy állami feladat, így a budapesti iskolákban nem tudunk fejlesztéseket megvalósítani.</p>
                 </Details>
 
-                <Details className="section-more" summary={<div>Az egészségügy sem fővárosi feladat.</div>}>
+                <Details className="section-more" summary={<div>Az egészségügy sem fővárosi feladat</div>}>
                   <p>Az államhoz és a kerületekhez van rendelve az egészségügy, a főváros azzal közvetlenül nem foglalkozik.</p>
                 </Details>
 
@@ -151,7 +151,7 @@ export default function Layout() {
                   <p>Nagyon sok embernek van ötlete újabb köztéri szobrokra, vagy arra, hogy mely személyeknek vagy eseményeknek kellene még emléket állítani. A főváros azonban fontosnak tartja, hogy tervszerűen, a “<a href="https://budapest.hu/Documents/kultura/budapest%20fovaros%20kozteri%20muveszeti%20koncepcioja.pdf">szoborstratégia</a>” alapján végezzen ilyen fejlesztéseket. A közösségi költségvetésben ezért állandó jellegű konkrét művészeti alkotások, szobrok állítására tett javaslatokat nem tudunk támogatni.</p>
                 </Details>
 
-                <Details className="section-more" summary={<div>Saját műalkotásodat, művészeti tevékenységedet nem tudjuk a közösségi költségvetésből finanszírozni!</div>}>
+                <Details className="section-more" summary={<div>Ne akard saját műalkotásodat, művészeti tevékenységedet finanszírozni!</div>}>
                   <p>A közösségi költségvetés nyertes ötleteit a főváros valósítja meg. Ha a beszerzés szabályait betartva be is von külső megvalósítót, az ötletgazda ugyanolyan esélyekkel indul, mint bárki más.</p>
                 </Details>
               </div>
@@ -173,7 +173,7 @@ export default function Layout() {
 
             <div className="row">
               <div className="col-md-6">
-                <Details className="section-more" summary={<div>A helyszín sokat számít.</div>}>
+                <Details className="section-more" summary={<div>A helyszín sokat számít</div>}>
                   <p>A helyszín alapvetően meghatározza, hogy hány embert érint a javaslat. Minél több ember érintett, annál nagyobb eséllyel nyerhet az ötleted.</p>
                 </Details>
 
@@ -192,7 +192,7 @@ export default function Layout() {
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <p>Ha úgy érzed, hogy annyi a szabály, hogy szinte lehetetlen megfelelni mindegyiknek, <Link href={`/tervek?rand=${rand}`}>itt tudsz böngészni</Link> a korábbi években elfogadott, és szavazásra bocsátott ötletek között.</p>
+                <p>Ha példákra van szükséged, <Link href={`/tervek?rand=${rand}`}>itt tudsz böngészni</Link> a korábbi években elfogadott és szavazásra bocsátott ötletek között.</p>
               </div>
             </div>
           </div>
