@@ -1,7 +1,6 @@
 'use client'
 
 import { rmAllCharForName, rmAllCharForTitle } from "@/utilities/removeSpecialCharacters"
-import { useEffect } from "react"
 import SimpleRadio from "@/components/common/form-element/SimpleRadio"
 import Select from "@/components/common/form-element/Select"
 import InputLengthValidator from "@/components/common/form-element/InputLengthValidator"
@@ -16,28 +15,28 @@ import { districtDataList } from "@/models/district.model"
 import { generateRandomValue } from "@/utilities/generateRandomValue"
 
 export default function IdeaSubmissionForm(): JSX.Element {
-  const { ideaFormContextData, setIdeaFormContextData } = useIdeaContext()
+  const { ideaFormContextData, updateIdeaFormContextData } = useIdeaContext()
 
   const rand = generateRandomValue().toString()
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : rmAllCharForName(e.target.value)
 
-    setIdeaFormContextData({ ...ideaFormContextData, [e.target.name]: value })
+    updateIdeaFormContextData({ [e.target.name]: value })
   }
 
   const handleChangeInputTitle = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : rmAllCharForTitle(e.target.value)
 
-    setIdeaFormContextData({ ...ideaFormContextData, [e.target.name]: value })
+    updateIdeaFormContextData({ [e.target.name]: value })
   }
 
   const handlePhonenumberInput = (phoneObject: PhonenumberValue) => {
-    setIdeaFormContextData({ ...ideaFormContextData, phone: phoneObject })
+    updateIdeaFormContextData({ phone: phoneObject })
   }
 
   const handleChangeFileRaw = (name: string, value: any) => {
-    setIdeaFormContextData({ ...ideaFormContextData, [name]: value })
+    updateIdeaFormContextData({ [name]: value })
   }
 
   return (

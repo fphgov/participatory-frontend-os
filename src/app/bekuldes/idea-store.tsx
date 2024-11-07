@@ -8,7 +8,7 @@ type IdeaContextProviderProps = {
 
 export type IdeaContextContent = {
   ideaFormContextData: Record<string, any>
-  setIdeaFormContextData: (ideaFormContextData: Record<string, any>) => void
+  updateIdeaFormContextData: (newData: Record<string, any>) => void
 }
 
 const IdeaContext = createContext<IdeaContextContent>({} as IdeaContextContent)
@@ -29,8 +29,12 @@ export const IdeaContextProvider = ({ children }: IdeaContextProviderProps) => {
     'medias': [],
   })
 
+  const updateIdeaFormContextData = (newData: Record<string, any>): void => {
+    setIdeaFormContextData(prevData => ({ ...prevData, ...newData }))
+  }
+
   return (
-    <IdeaContext.Provider value={{ ideaFormContextData, setIdeaFormContextData }}>
+    <IdeaContext.Provider value={{ ideaFormContextData, updateIdeaFormContextData }}>
       {children}
     </IdeaContext.Provider>
   )
