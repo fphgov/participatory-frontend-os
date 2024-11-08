@@ -132,8 +132,8 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
 
   function handleOpenModal() {
   const content = <div className="modal-content-center">
-      <p>Megkaptuk az ötletedet, rövid ellenőrzést követően mindenki számára láthatóvá válik a honlapon a beküldött ötletek között.</p>
-      <p><b>Erről e-mailen kapsz majd visszajelzést. Ha van további ötleted, add be azt is most!</b></p>
+      <p>Megkaptuk az ötleted, rövid ellenőrzést követően közzétesszük a honlapon, erről értesíteni fogunk. A lakossági támogatásra január 20. és február 3. között kerül sor, erről e-mailben küldünk még tájékoztatást.</p>
+      <p><b>Ha van további ötleted, add be azt is most!</b></p>
 
       <button type="button" className="btn btn-headline btn-next" onClick={() => {
         setOpenModalHard(false)
@@ -148,7 +148,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
     </div>
 
     setDataModalHard({
-      title: 'Köszönjük, hogy megosztottad velünk az ötleted!',
+      title: 'Köszönjük, hogy megosztottad velünk ötleted! Január 20-tól gyűjts hozzá támogatókat!',
       content,
       showCancelButton: false,
     })
