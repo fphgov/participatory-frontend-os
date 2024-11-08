@@ -3677,6 +3677,11 @@ form fieldset .input-inline-wrapper select {
   margin-bottom: 36px;
 }
 
+.fix-section .centered-paragraph {
+  text-align: center;
+  margin: 0 120px 36px;
+}
+
 .documents > a {
   display: inline-block;
   margin: 4px;
@@ -5831,6 +5836,10 @@ input[type="tel"] {
     height: auto;
     margin-bottom: 18px;
   }
+
+  .fix-section .centered-paragraph {
+    margin: 0 60px 36px;
+  }
 }
 
 @media screen and (max-width: 1199px) {
@@ -6029,6 +6038,9 @@ input[type="tel"] {
     justify-content: left;
     white-space: nowrap;
     text-overflow: ellipsis;
+  }
+  .fix-section .centered-paragraph {
+    margin: 0 30px 36px;
   }
 }
 
