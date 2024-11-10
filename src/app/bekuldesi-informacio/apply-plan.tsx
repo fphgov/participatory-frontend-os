@@ -18,7 +18,7 @@ export default function AppyPlan() {
             <Checkbox
               id="guide"
               name="guide"
-              label="Elolvastam és megértettem, hogy milyen ötletekkel lehet pályázni."
+              label="Elolvastam és megértettem az ötletbeadás szabályait."
               handleChange={handleChangeInput}
               value={checked}
             />
