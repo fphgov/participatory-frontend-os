@@ -19,10 +19,10 @@ export default function BannerArea({ withWin = false, forceFullWidth = false }):
 
             <div className="banner-item">
               <Banner id="hirlevel" image="newsletter" imageWidth={108} imageHeight={60} col={4} imageFit={true}>
-                <h2>Ne maradj le a közösségi költségvetés legfrissebb híreiről és eseményeiről, iratkozz fel hírlevelünkre!</h2>
+                <h2>Ne maradj le a közösségi költségvetés legfrissebb híreiről!</h2>
 
                 <div>
-                  <a className="btn btn-white btn-dark btn-next" href="https://hirlevel.budapest.hu/subscribe.php?cid=aSQV5beZ_" target="_blank" rel="noopener noreferrer">Feliratkozom</a>
+                  <a className="btn btn-white btn-dark btn-next" href="https://hirlevel.budapest.hu/subscribe.php?cid=aSQV5beZ_" target="_blank" rel="noopener noreferrer">Feliratkozás</a>
                 </div>
               </Banner>
             </div>
