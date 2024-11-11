@@ -11,9 +11,12 @@ import Link from "next/link"
 import { useIdeaContext } from "./idea-store"
 import { districtDataList } from "@/models/district.model"
 import { locationDataList } from "@/models/location.model"
+import { generateRandomValue } from "@/utilities/generateRandomValue"
 
 export default function IdeaSubmissionForm(): JSX.Element {
   const { ideaFormContextData, setIdeaFormContextData } = useIdeaContext()
+
+  const rand = generateRandomValue().toString()
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : rmAllCharForName(e.target.value)
@@ -136,10 +139,8 @@ export default function IdeaSubmissionForm(): JSX.Element {
 
             <h2>Ötlet címe</h2>
             <p>
-              Adj ötletednek olyan címet, ami tömör, lényegretörő, kiderül, mit javasolsz. Az előző évben,
-              már megvalósítás alatt álló ötletek listáját
-              <span> <Link href={'/'} target={'_blank'}>itt</Link> </span>
-              éred el, segítséget nyújthat a könnyebb kitöltésben.
+              Adj ötletednek olyan címet, ami tömör, lényegretörő, kiderül, mit javasolsz. Az előző évben, már megvalósítás alatt álló ötletek listáját
+              <Link href={`/projektek?rand=${rand}`} target={'_blank'}>itt</Link> éred el, segítséget nyújthat a könnyebb kitöltésben.
             </p>
 
             <div className="input-wrapper">
