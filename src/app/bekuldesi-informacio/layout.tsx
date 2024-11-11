@@ -58,6 +58,9 @@ export default function Layout() {
               </div>
 
               <div className="row">
+                <div className="col-md-6 justify-self-end align-self-center p-5">
+                  <Image src={`/images/pic_valami-uj.svg`} width={570} height={345} alt="Az ötleted alapján jöjjön létre valami új!" aria-hidden={true} />
+                </div>
                 <div className="col-md-6">
                   <Details className="section-more" summary={<div>Felújításra, karbantartásra ne tegyél javaslatot!</div>}>
                     <p>A közösségi költségvetés keretösszege nem fordítható karbantartási, fenntartási vagy köztisztasági feladatokra. Nem elromlott dolgok megjavítása a cél, hanem új funkciók, új dolgok létrehozása.</p>
@@ -70,9 +73,6 @@ export default function Layout() {
                   <Details className="section-more" summary={<div>Ha fel akarod hívni a figyelmet valamire, azt is valamilyen fejlesztésen keresztül tedd</div>}>
                     <p>Szemléletformáló kampány helyett javasolj olyan kisebb fejlesztést, amivel gazdagodik a város, ami létrehoz valami újat, és ezen keresztül világít rá egy problémára, hiányra.</p>
                   </Details>
-                </div>
-                <div className="col-md-6 justify-self-end align-self-center p-5">
-                  <Image src={`/images/pic_valami-uj.svg`} width={570} height={345} alt="Az ötleted alapján jöjjön létre valami új!" aria-hidden={true} />
                 </div>
               </div>
             </div>
@@ -118,6 +118,9 @@ export default function Layout() {
               </div>
 
               <div className="row">
+                <div className="col-md-6 justify-self-end align-self-center p-5">
+                  <Image src={`/images/pic_fovarosi-feladat.svg`} width={570} height={345} alt="Legyen fővárosi feladat" aria-hidden={true} />
+                </div>
                 <div className="col-md-6">
                   <Details className="section-more" summary={<div>Az iskolai oktatás, oktatásügy állami feladat</div>}>
                     <p>A korhatár leszállításával is bátorítjuk, hogy középiskolások is részt vegyenek a közösségi költségvetésben, ugyanakkor az oktatásügy állami feladat, így a budapesti iskolákban nem tudunk fejlesztéseket megvalósítani.</p>
@@ -130,9 +133,6 @@ export default function Layout() {
                   <Details className="section-more" summary={<div>A hulladékkezelés állami feladat, de a hulladékképződést megelőzhetjük.</div>}>
                     <p>A hulladék kezelése már nem fővárosi feladat, az ötlet azonban vonatkozhat tárgyak újrahasználására vagy javítására, ezzel megakadályozva, hogy hulladékká váljanak.</p>
                   </Details>
-                </div>
-                <div className="col-md-6 justify-self-end align-self-center p-5">
-                  <Image src={`/images/pic_fovarosi-feladat.svg`} width={570} height={345} alt="Legyen fővárosi feladat" aria-hidden={true} />
                 </div>
               </div>
             </div>
@@ -174,6 +174,9 @@ export default function Layout() {
               </div>
 
               <div className="row">
+                <div className="col-md-6 justify-self-end align-self-center p-5">
+                  <Image src={`/images/pic_eselyek.svg`} width={570} height={345} alt="Milyen ötleteknek van esélye a szavazáson?" aria-hidden={true} />
+                </div>
                 <div className="col-md-6">
                   <Details className="section-more" summary={<div>A helyszín sokat számít</div>}>
                     <p>A helyszín alapvetően meghatározza, hogy hány embert érint a javaslat. Minél több ember érintett, annál nagyobb eséllyel nyerhet az ötleted.</p>
@@ -183,19 +186,6 @@ export default function Layout() {
                     <p>Lehet egy ötletnek annyira népszerű a témája, felvetése, hogy az minden támogatás, kampányolás nélkül is nagyon sok embert szavazásra késztet, de ha fejlesztési ötletedet annak helyszíne vagy témája miatt felkarolhat egy nagy eléréssel - például bejáratott közösségi média platformmal - rendelkező szervezet vagy közösség, az jelentősen megnöveli az esélyeit. </p>
                   </Details>
                 </div>
-                <div className="col-md-6 justify-self-end align-self-center p-5">
-                  <Image src={`/images/pic_eselyek.svg`} width={570} height={345} alt="Milyen ötleteknek van esélye a szavazáson?" aria-hidden={true} />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="light-section help">
-            <div className="container">
-              <div className="row">
-                <div className="col-md-12">
-                  <p>Ha példákra van szükséged, <Link href={`/tervek?rand=${rand}`}>itt tudsz böngészni</Link> a korábbi években elfogadott és szavazásra bocsátott ötletek között.</p>
-                </div>
               </div>
             </div>
           </div>
@@ -203,6 +193,7 @@ export default function Layout() {
           <AppyPlan />
         </div>
       </main>
+
       <div className="container">
         <BannerArea />
       </div>
