@@ -9,7 +9,7 @@ import 'intl-tel-input/build/css/intlTelInput.css';
 import PhonenumberInput, { PhonenumberValue } from "@/components/common/form-element/PhonenumberInput"
 import Link from "next/link"
 import { useIdeaContext } from "./idea-store"
-import {districtDataList, districtOptions} from "@/models/district.model"
+import {districtDataList} from "@/models/district.model"
 import {locationDataList} from "@/models/location.model";
 
 export default function IdeaSubmissionForm(): JSX.Element {
