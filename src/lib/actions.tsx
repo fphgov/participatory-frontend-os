@@ -6,7 +6,7 @@ import { User } from '@/middleware'
 
 export async function saveToken(token: string): Promise<void> {
   const hours: number = parseInt(process.env.NEXT_TOKEN_EXPIRATION_IN_HOUR ?? "24");
-  const expirationDate = new Date(Date.now() + hours /* * 60 * 60*/ * 1000);
+  const expirationDate = new Date(Date.now() + hours * 60 * 60 * 1000);
 
   cookies().set({
     name: 'token',
