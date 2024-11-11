@@ -25,7 +25,7 @@ export default function InputLengthValidator({ title, tipp, name, value = '', on
     <div className="input-wrapper">
       {showLabel ? <label htmlFor={name}>{title}</label> : null}
 
-      <div className="tipp">{tipp}</div>
+      {tipp ? <div className="tipp">{tipp}</div> : null}
 
       <input type="text" className={(value.length === 0 || titleIsInvalid) ? "" : "valid"} aria-invalid={titleIsInvalid} autoCorrect="off" autoCapitalize="none" name={name} id={name} value={value} onChange={onChange} />
 

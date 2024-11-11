@@ -1152,6 +1152,14 @@ p.info span {
   flex: 1;
 }
 
+.input-wrapper .info {
+  margin: 6px 0 12px;
+}
+
+.input-wrapper .info + .input-wrapper {
+  margin-bottom: 24px;
+}
+
 .cookie-notice {
   background-color: #f6d05f;
   color: #21A7CC;

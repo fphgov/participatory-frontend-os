@@ -154,7 +154,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
         setOpenModalHard(false)
         window.location.href = '/bekuldes'
       }}>
-        Új ötletet adok be 
+        Új ötletet adok be
       </button>
 
       <Link href="/" onClick={() => { setOpenModalHard(false)}}>
@@ -205,7 +205,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
 
                 {inputComponentEdit === "fullName" ? <>
                   <div className="input-wrapper-content">
-                    <input type="text" name="fullName" id="fullName" placeholder="Vezetéknév Keresztnév"
+                    <input type="text" name="fullName" id="fullName" placeholder="Családnév Utónév"
                            value={ideaFormContextData.fullName}
                            onChange={handleChangeInput}/>
                   </div>

@@ -9,8 +9,8 @@ import 'intl-tel-input/build/css/intlTelInput.css';
 import PhonenumberInput, { PhonenumberValue } from "@/components/common/form-element/PhonenumberInput"
 import Link from "next/link"
 import { useIdeaContext } from "./idea-store"
-import {districtDataList} from "@/models/district.model"
-import {locationDataList} from "@/models/location.model";
+import { districtDataList } from "@/models/district.model"
+import { locationDataList } from "@/models/location.model"
 
 export default function IdeaSubmissionForm(): JSX.Element {
   const { ideaFormContextData, setIdeaFormContextData } = useIdeaContext()
@@ -58,7 +58,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
             <div className="input-wrapper">
               <h6><label htmlFor="fullName">Teljes név *</label></h6>
               <p className="info">Ez a név fog megjelenni a beadott ötleted mellett a honlapon.</p>
-              <input type="text" name="fullName" id="fullName" placeholder="Vezetéknév Keresztnév"
+              <input type="text" name="fullName" id="fullName" placeholder="Családnév Utónév"
                      value={ideaFormContextData.fullName}
                      onChange={handleChangeInput}/>
             </div>
@@ -67,7 +67,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
 
             <div className="input-wrapper">
               <h6><label htmlFor="birthYear">Születési év *</label></h6>
-              <input type="text" name="birthYear" id="birthYear" placeholder="ÉÉÉÉ." maxLength={4} minLength={4}
+              <input type="text" name="birthYear" id="birthYear" placeholder="ÉÉÉÉ" maxLength={4} minLength={4}
                      value={ideaFormContextData.birthYear}
                      onChange={handleChangeInput}/>
             </div>
