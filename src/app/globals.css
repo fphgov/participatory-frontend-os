@@ -167,8 +167,27 @@ body {
   text-align: center;
 }
 
+.page-idea-info .apply-plan p,
+.page-idea-info .apply-plan p a {
+  font-size: 24px;
+  color: #fff;
+  font-weight: bold;
+}
+
 .page-idea-info .apply-plan .guide-check {
   margin-bottom: 40px;
+}
+
+.page-idea-info .dark-section.apply-plan.info-zig-zag-bg-blue {
+  background: var(--Gradient-liner-blue, linear-gradient(90deg, #12326E 0%, #03194D 100%));
+}
+
+.page-idea-info .apply-plan p + .checkbox-inline {
+  margin-top: 36px;
+}
+
+.page-idea-info .apply-plan .formatted-checkbox {
+  margin-bottom: 26px;
 }
 
 nav.main-navigation {
@@ -494,10 +513,11 @@ input.btn[disabled]:hover {
   padding: 12px 0;
 }
 
-.btn.btn-tertiary.btn-big:disabled,
-.btn.btn-tertiary.btn-big.disabled {
+.btn:disabled,
+.btn.disabled {
   pointer-events: none;
   background-color: #EEEEEE !important;
+  color: #CCC !important;
 }
 
 .btn.btn-warning {
@@ -623,6 +643,10 @@ input.btn[disabled]:hover {
 
 .btn-next.btn-headline::after {
   background-image: url('../../public/images/btn-next.svg');
+}
+
+.btn-next.btn-headline.disabled::after {
+  background-image: url('../../public/images/btn-next-gray.svg');
 }
 
 .btn-next.btn-headline:hover::after {
@@ -1150,6 +1174,14 @@ fieldset .formatted-checkbox label {
 
 p.info span {
   flex: 1;
+}
+
+.input-wrapper .info {
+  margin: 6px 0 12px;
+}
+
+.input-wrapper .info + .input-wrapper {
+  margin-bottom: 24px;
 }
 
 .cookie-notice {
@@ -3677,6 +3709,11 @@ form fieldset .input-inline-wrapper select {
   margin-bottom: 36px;
 }
 
+.fix-section .centered-paragraph {
+  text-align: center;
+  margin: 0 120px 36px;
+}
+
 .documents > a {
   display: inline-block;
   margin: 4px;
@@ -4638,6 +4675,12 @@ form fieldset .link-elem input {
   height: 200px;
   margin: 0;
   z-index: 0;
+  background-size: cover;
+}
+
+.dark-section.info-zig-zag-bg-yellow::after,
+.dark-section.info-zig-zag-bg-blue::after {
+  background-image: url('../../public/images/bg_pattern_opacity.svg');
 }
 
 .medium-section.news-feed {
@@ -5831,6 +5874,10 @@ input[type="tel"] {
     height: auto;
     margin-bottom: 18px;
   }
+
+  .fix-section .centered-paragraph {
+    margin: 0 60px 36px;
+  }
 }
 
 @media screen and (max-width: 1199px) {
@@ -6029,6 +6076,9 @@ input[type="tel"] {
     justify-content: left;
     white-space: nowrap;
     text-overflow: ellipsis;
+  }
+  .fix-section .centered-paragraph {
+    margin: 0 30px 36px;
   }
 }
 

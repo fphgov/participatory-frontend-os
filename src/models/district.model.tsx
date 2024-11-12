@@ -1,4 +1,4 @@
-export type IDisctrictValue = '0' | 'AREA1' | 'AREA2' | 'AREA3' | 'AREA4' | 'AREA5' | 'AREA6' | 'AREA7' | 'AREA8' | 'AREA9' | 'AREA10' | 'AREA11' | 'AREA12' | 'AREA13' | 'AREA14' | 'AREA15' | 'AREA16' | 'AREA17' | 'AREA18' | 'AREA19' | 'AREA20' | 'AREA21' | 'AREA22' | 'AREA23' | 'AREA24'
+export type IDisctrictValue = 'AREA1' | 'AREA2' | 'AREA3' | 'AREA4' | 'AREA5' | 'AREA6' | 'AREA7' | 'AREA8' | 'AREA9' | 'AREA10' | 'AREA11' | 'AREA12' | 'AREA13' | 'AREA14' | 'AREA15' | 'AREA16' | 'AREA17' | 'AREA18' | 'AREA19' | 'AREA20' | 'AREA21' | 'AREA22' | 'AREA23' | 'AREA24'
 export type IDisctrictName = 'Válassz egy kerületet' | 'I. kerület' | 'II. kerület' | 'III. kerület' | 'IV. kerület' | 'V. kerület' | 'VI. kerület' | 'VII. kerület' | 'VIII. kerület' | 'IX. kerület' | 'X. kerület' | 'XI. kerület' | 'XII. kerület' | 'XIII. kerület' | 'XIV. kerület' | 'XV. kerület' |
 'XVI. kerület' | 'XVII. kerület' | 'XVIII. kerület' | 'XIX. kerület' | 'XX. kerület' | 'XXI. kerület' | 'XXII. kerület' | 'XXIII. kerület' | 'Margit sziget'
 
@@ -8,7 +8,6 @@ export type IDisctrict = {
 }
 
 export const districtDataList: IDisctrict[] = [
-  { name: 'Válassz egy kerületet', value: '0'},
   { name: 'I. kerület', value: 'AREA1'},
   { name: 'II. kerület', value: 'AREA2'},
   { name: 'III. kerület', value: 'AREA3'},

@@ -15,9 +15,12 @@ const IdeaContext = createContext<IdeaContextContent>({} as IdeaContextContent)
 
 export const IdeaContextProvider = ({ children }: IdeaContextProviderProps) => {
   const [ideaFormContextData, setIdeaFormContextData] = useState<Record<string, any>>({
+    'fullName': '',
+    'birthYear': '',
+    'postalCode': '',
     'location': '',
     'locationDescription': '',
-    'locationDistrict': '',
+    'locationDistricts': [],
     'cost': false,
     'title': '',
     'description': '',
@@ -26,6 +29,7 @@ export const IdeaContextProvider = ({ children }: IdeaContextProviderProps) => {
     'rule_1': false,
     'rule_2': false,
     'rule_3': false,
+    'rule_4': false,
     'medias': [],
   })
 

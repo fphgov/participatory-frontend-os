@@ -8,12 +8,10 @@ import { rmAllCharForName, rmAllCharForTitle } from "@/utilities/removeSpecialCh
 import React, { FormEvent, useEffect, useState } from "react"
 import ScrollTo from "@/components/common/ScrollTo"
 import { ideaSubmissionForm } from "@/app/actions"
-import SimpleRadio from "@/components/common/form-element/SimpleRadio"
 import Select from "@/components/common/form-element/Select"
 import InputLengthValidator from "@/components/common/form-element/InputLengthValidator"
 import TextareaLengthValidator from "@/components/common/form-element/TextareaLengthValidator"
 import FileArea from "@/components/common/form-element/FileArea"
-import Toggle from "@/components/common/form-element/Toogle"
 import Checkbox from "@/components/common/form-element/Checkbox"
 import 'intl-tel-input/build/css/intlTelInput.css';
 import PhonenumberInput, { PhonenumberValue } from "@/components/common/form-element/PhonenumberInput"
@@ -23,6 +21,7 @@ import MediaList from "@/components/common/form-element/MediaList"
 import Link from "next/link"
 import { generateRandomValue } from "@/utilities/generateRandomValue"
 import { useModalHardContext } from "@/context/modalHard"
+import {locationDataList} from "@/models/location.model";
 
 export default function IdeaSubmissionFormOverview(): JSX.Element {
   const { ideaFormContextData, updateIdeaFormContextData } = useIdeaContext()
@@ -50,6 +49,18 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
     updateIdeaFormContextData({ [e.target.name]: value })
   }
 
+  const handleLocationDistrictsInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
+    const locationDistricts = ideaFormContextData.locationDistricts;
+
+    if (locationDistricts.includes(e.target.value)) {
+      locationDistricts.splice(locationDistricts.indexOf(e.target.value), 1);
+    } else {
+      locationDistricts.push(e.target.value);
+    }
+
+    updateIdeaFormContextData({ ...ideaFormContextData, locationDistricts: locationDistricts })
+  }
+
   const handlePhonenumberInput = (phoneObject: PhonenumberValue) => {
     updateIdeaFormContextData({ phone: phoneObject })
   }
@@ -67,16 +78,20 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
 
     const ideaFormData = new FormData()
 
+    ideaFormData.append('fullName', ideaFormContextData.fullName)
+    ideaFormData.append('birthYear', ideaFormContextData.birthYear)
+    ideaFormData.append('postalCode', ideaFormContextData.postalCode)
     ideaFormData.append('cost', ideaFormContextData.cost.toString())
     ideaFormData.append('title', ideaFormContextData.title)
     ideaFormData.append('solution', ideaFormContextData.solution)
     ideaFormData.append('description', ideaFormContextData.description)
     ideaFormData.append('location_description', ideaFormContextData.locationDescription)
-    ideaFormData.append('location_district', ideaFormContextData.locationDistrict)
+    ideaFormData.append('location_districts', ideaFormContextData.locationDistricts)
     ideaFormData.append('phone', ideaFormContextData.phone.dialCode + ideaFormContextData.phone.phone)
     ideaFormData.append('rule_1', ideaFormContextData.rule_1.toString())
     ideaFormData.append('rule_2', ideaFormContextData.rule_2.toString())
     ideaFormData.append('rule_3', ideaFormContextData.rule_3.toString())
+    ideaFormData.append('rule_4', ideaFormContextData.rule_4.toString())
     ideaFormData.append('g-recaptcha-response', recaptchaToken)
 
     if (typeof ideaFormContextData['location'] === 'object') {
@@ -117,7 +132,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
   useEffect(() => {
     setCanBeSubmit(false)
 
-    if (ideaFormContextData.rule_1 && ideaFormContextData.rule_2 && ideaFormContextData.rule_3) {
+    if (ideaFormContextData.rule_1 && ideaFormContextData.rule_2 && ideaFormContextData.rule_3 && ideaFormContextData.rule_4) {
       setCanBeSubmit(true)
     }
   }, [ideaFormContextData])
@@ -132,14 +147,14 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
 
   function handleOpenModal() {
   const content = <div className="modal-content-center">
-      <p>Megkaptuk az ötletedet, rövid ellenőrzést követően mindenki számára láthatóvá válik a honlapon a beküldött ötletek között.</p>
-      <p><b>Erről e-mailen kapsz majd visszajelzést. Ha van további ötleted, add be azt is most!</b></p>
+      <p>Megkaptuk az ötleted, rövid ellenőrzést követően közzétesszük a honlapon, erről értesíteni fogunk. A lakossági támogatásra január 20. és február 3. között kerül sor, erről e-mailben küldünk még tájékoztatást.</p>
+      <p><b>Ha van további ötleted, add be azt is most!</b></p>
 
       <button type="button" className="btn btn-headline btn-next" onClick={() => {
         setOpenModalHard(false)
         window.location.href = '/bekuldes'
       }}>
-        Új ötletet adok be 
+        Új ötletet adok be
       </button>
 
       <Link href="/" onClick={() => { setOpenModalHard(false)}}>
@@ -148,7 +163,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
     </div>
 
     setDataModalHard({
-      title: 'Köszönjük, hogy megosztottad velünk az ötleted!',
+      title: 'Köszönjük, hogy megosztottad velünk ötleted! Január 20-tól gyűjts hozzá támogatókat!',
       content,
       showCancelButton: false,
     })
@@ -160,9 +175,13 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
     <div className="idea-submission-form">
       {scroll && document.querySelector('.error-message-inline') ? <ScrollTo element={(document?.querySelector('.error-message-inline') as HTMLElement)?.offsetTop || 0} /> : null}
 
-      <h2>Áttekintés</h2>
+      <h2>Áttekintés és beküldés</h2>
 
-      <p>Így néz ki az ötleted. Az oldal alján a “Beküldöm az ötletem” gombra kattintva véglegesítheted, vagy bármelyik ceruza ikonra kattintva módosíthatsz még rajta!</p>
+      <p>
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
+        A lap alján a "Beküldöm az ötletem" gombra kattitnva véglegesítheted,
+        vagy a ceruza ikonra kattintva módosíthatsz még rajta.
+      </p>
 
       <form className="form-horizontal" onSubmit={onIdeaSubmission}>
         <fieldset>
@@ -174,163 +193,207 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
 
           <div className="form-wrapper">
             <div className="input-wrapper">
+
               <div className="input-wrapper-overview">
                 <div className="input-wrapper-overview-title">
-                  <h6><label htmlFor="location">Add meg, hol képzeled el az ötleted!</label></h6>
+                  <h6><label htmlFor="fullName">Név</label></h6>
 
-                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => { setInputComponent('location') }} />
+                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => {
+                    setInputComponent('fullName')
+                  }}/>
+                </div>
+
+                {inputComponentEdit === "fullName" ? <>
+                  <div className="input-wrapper-content">
+                    <input type="text" name="fullName" id="fullName" placeholder="Családnév Utónév"
+                           value={ideaFormContextData.fullName}
+                           onChange={handleChangeInput}/>
+                  </div>
+                </> : <>
+                  {ideaFormContextData.fullName === "" || ideaFormContextData.fullName === undefined ?
+                    <p>Nem adtad meg a neved!</p> : <p>{ideaFormContextData.fullName}</p>}
+                </>}
+
+                {errorObject?.fullName ? Object.values(errorObject.fullName).map((err, i) => {
+                  return <ErrorMini key={i} error={err} increment={`fullName-${i}`}/>
+                }) : null}
+              </div>
+
+              <hr/>
+
+              <div className="input-wrapper-overview">
+                <div className="input-wrapper-overview-title">
+                  <h6><label htmlFor="birthYear">Születési év</label></h6>
+
+                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => {
+                    setInputComponent('birthYear')
+                  }}/>
+                </div>
+
+                {inputComponentEdit === "birthYear" ? <>
+                  <div className="input-wrapper-content">
+                    <input type="text" name="birthYear" id="birthYear" placeholder="ÉÉÉÉ." maxLength={4} minLength={4}
+                           value={ideaFormContextData.birthYear}
+                           onChange={handleChangeInput}/>
+                  </div>
+                </> : <>
+                  {ideaFormContextData.birthYear === "" || ideaFormContextData.birthYear === undefined ?
+                    <p>Nem adtad meg a születési éved!</p> : <p>{ideaFormContextData.birthYear}</p>}
+                </>}
+
+                {errorObject?.birthYear ? Object.values(errorObject.birthYear).map((err, i) => {
+                  return <ErrorMini key={i} error={err} increment={`birthYear-${i}`}/>
+                }) : null}
+              </div>
+
+              <hr/>
+
+              <div className="input-wrapper-overview">
+                <div className="input-wrapper-overview-title">
+                  <h6><label htmlFor="postalCode">Irányítószám</label></h6>
+
+                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => {
+                    setInputComponent('postalCode')
+                  }}/>
+                </div>
+
+                {inputComponentEdit === "postalCode" ? <>
+                  <div className="input-wrapper-content">
+                    <input type="text" name="postalCode" id="postalCode" placeholder="Pl.: 1234" maxLength={4}
+                           minLength={4}
+                           value={ideaFormContextData.postalCode}
+                           onChange={handleChangeInput}/>
+                  </div>
+                </> : <>
+                  {ideaFormContextData.postalCode === "" || ideaFormContextData.postalCode === undefined ?
+                    <p>Nem adtad meg az irányítószámod!</p> : <p>{ideaFormContextData.postalCode}</p>}
+                </>}
+
+                {errorObject?.postalCode ? Object.values(errorObject.postalCode).map((err, i) => {
+                  return <ErrorMini key={i} error={err} increment={`postalCode-${i}`}/>
+                }) : null}
+              </div>
+
+              <hr/>
+
+              <div className="input-wrapper-overview">
+                <div className="input-wrapper-overview-title">
+                  <h6><label htmlFor="location">Ötlet helyszíne</label></h6>
+
+                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => {
+                    setInputComponent('location')
+                  }}/>
                 </div>
 
                 {inputComponentEdit === "location" ? <>
                   <div className="input-wrapper-content">
-                    <p className="info">
-                      <span>Kérjük, válassz, hogy az ötleted konkrét helyszínre vonatkozik vagy nem!</span>
-                    </p>
+                    <div className="input-wrapper">
+                      <div className="row">
+                        <div className="col-12 col-xl-12">
+                          <Select
+                            title="Ötlet helyszíne *"
+                            name="location"
+                            value={ideaFormContextData.location}
+                            dataList={locationDataList}
+                            handleChange={handleChangeInputTitle}
+                          />
+                        </div>
+                      </div>
 
-                    <div className="row">
-                      <div className="col-12 col-xl-12">
-
-                        <div className="form-group">
-                          <div className="input-wrapper card-radio-wrapper">
-                            <div className="row">
-                              <div className="col-md-6">
-                                <SimpleRadio
-                                  id="specific"
-                                  name="location"
-                                  value="1"
-                                  radioValue={ideaFormContextData.location}
-                                  title="Konkrét helyszínhez kötődik"
-                                  tipp="Pl. konkrét utca, tér"
-                                  handleChange={handleChangeInput}
-                                />
+                      {ideaFormContextData.location === "1" ?
+                        <div style={{marginTop: 18}}>
+                          <div className="row">
+                            <div className="col-6 col-xl-6">
+                              <div className="input-wrapper">
+                                <h6><label htmlFor="birthyear">Közterület megnevezése *</label></h6>
+                                <input type="text" name="locationDescription" id="locationDescription"
+                                       placeholder="Pl. utca, tér"
+                                       value={ideaFormContextData.locationDescription}
+                                       onChange={handleChangeInputTitle}/>
                               </div>
-                              <div className="col-md-6">
-                                <SimpleRadio
-                                  id="unspecific"
-                                  name="location"
-                                  value="0"
-                                  radioValue={ideaFormContextData.location}
-                                  title="Nem kötődik konkrét helyszínhez"
-                                  handleChange={handleChangeInput}
-                                />
-                              </div>
+                            </div>
+                            <div className="col-6 col-xl-6">
+                              <Select
+                                title="Kerület *"
+                                name="locationDistricts"
+                                value={ideaFormContextData.locationDistricts}
+                                dataList={districtDataList}
+                                handleChange={handleLocationDistrictsInput}
+                                multiple={true}
+                              />
                             </div>
                           </div>
                         </div>
-
-                        {ideaFormContextData.location === "1" ? <>
-                          <InputLengthValidator
-                            title="Helyszín megnevezése"
-                            name="locationDescription"
-                            value={ideaFormContextData.locationDescription}
-                            options={{ min: 0, max: 200 }}
-                            onChange={handleChangeInputTitle}
-                          />
-
-                          <div style={{ marginTop: 18 }}>
-                            <Select
-                              title="Kerület"
-                              name="locationDistrict"
-                              value={ideaFormContextData.locationDistrict}
-                              dataList={districtDataList}
-                              handleChange={handleChangeInputTitle}
-                            />
-                          </div>
-                        </> : null}
-                      </div>
+                        : null}
                     </div>
                   </div>
                 </> : <>
-                  {ideaFormContextData.location === "" || ideaFormContextData.location === undefined ? <p>Nem választottál a helyszínt!</p> : <>
-                    {ideaFormContextData.location === "0" ? <p>Nem kötődik konkrét helyszínhez</p> : <p>
-                      {ideaFormContextData.locationDistrict === "" && ideaFormContextData.locationDescription === "" ? <>Konkrét helyszínhez kötödik, de nem választottál helyszínt!</> : <>
-                        {ideaFormContextData.locationDistrict ? <>{`${districtDataList.filter(district => district.value === ideaFormContextData.locationDistrict)[0]?.name}, `}</> : null}
-                        {ideaFormContextData.locationDescription ? <>{ideaFormContextData.locationDescription}</> : null}
-                      </>}
-                    </p>
-                    }
-                  </>}
+                  {ideaFormContextData.location === undefined || ideaFormContextData.location === "" || ideaFormContextData.location === "0" ?
+                    <p>Nem választottál a helyszínt!</p> :
+                    <>
+                      {ideaFormContextData.location === "1" ? <p>Nem kötődik konkrét helyszínhez</p> : null }
+                      {ideaFormContextData.location === "2" ? <p>Konkrét helyszínhez kötödik</p> : null }
+                      <p>{ideaFormContextData.locationDescription}</p>
+                      <p>{districtDataList.map((district: any) => {
+                        if (ideaFormContextData.locationDistricts.includes(district.value)) {
+                          return district.name + ' '
+                        }
+                      })}</p>
+                    </>
+                  }
                 </>}
-
-                {errorObject?.location ? Object.values(errorObject.location).map((err, i) => {
-                  return <ErrorMini key={i} error={err} increment={`location-${i}`} />
-                }) : null}
               </div>
             </div>
 
-            <hr />
+            <hr/>
 
             <div className="input-wrapper">
               <div className="input-wrapper-overview">
                 <div className="input-wrapper-overview-title">
-                  <h6><label htmlFor="cost">Becsüld meg az ötleted megvalósításához szükséges összeget!</label></h6>
+                  <h6><label htmlFor="title">Ötlet címe</label></h6>
 
-                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => { setInputComponent('cost') }} />
-                </div>
-
-                {inputComponentEdit === "cost" ? <>
-                  <div className="input-wrapper-content">
-                    <Toggle
-                      id="cost"
-                      name="cost"
-                      value={ideaFormContextData.cost}
-                      handleChange={handleChangeInput}
-                      tipp={"Megértettem, hogy ötletem csak úgy kerülhet szavazólistára, ha tervezett megvalósítási költsége nem több 120 millió forintnál."}
-                    />
-                  </div>
-                </> : <>
-                  {ideaFormContextData.cost === true ? <p>Elfogadtad a feltételeket az ötletbeküldés összegére vonatkozóan.</p> : <p>Nem fogadtad el a feltételeket az ötletbeküldés összegére vonatkozóan. Ha azért nem fogadtad el, mert azt érzed, hogy az ötleted nem fér bele a 120 millió Ft-os keretbe, érdemes átgondolni az ötleted.</p>}
-                </>}
-
-                {errorObject?.cost ? Object.values(errorObject.cost).map((err, i) => {
-                  return <ErrorMini key={i} error={err} increment={`cost-${i}`} />
-                }) : null}
-              </div>
-            </div>
-
-            <hr />
-
-            <div className="input-wrapper">
-              <div className="input-wrapper-overview">
-                <div className="input-wrapper-overview-title">
-                  <h6><label htmlFor="title">Nevezd el az ötleted!</label></h6>
-
-                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => { setInputComponent('title') }} />
+                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => {
+                    setInputComponent('title')
+                  }}/>
                 </div>
 
                 {inputComponentEdit === "title" ? <>
                   <div className="input-wrapper-content">
                     <p className="info">
-                      <span>Adj az ötletednek olyan címet, ami tömör, lényegretörő, kiderül, mit javasolsz. Így többen szavaznak rá! Az előző években nyertes, már megvalósítás alatt álló ötletek listáját <Link href={`/projektek?rand=${rand}`} target="_blank">itt éred el</Link>, ez segítséget nyújthat a kitöltésben.</span>
+                      <span>Adj az ötletednek olyan címet, ami tömör, lényegretörő, kiderül, mit javasolsz. Így többen szavaznak rá! Az előző években nyertes, már megvalósítás alatt álló ötletek listáját <Link
+                        href={`/projektek?rand=${rand}`} target="_blank">itt éred el</Link>, ez segítséget nyújthat a kitöltésben.</span>
                     </p>
 
                     <InputLengthValidator
-                        title="Ötleted címe"
-                        name="title"
-                        value={ideaFormContextData.title}
-                        showLabel={false}
-                        options={{ min: 4, max: 100 }}
-                        onChange={handleChangeInputTitle}
+                      title="Ötleted címe"
+                      name="title"
+                      value={ideaFormContextData.title}
+                      showLabel={false}
+                      options={{min: 4, max: 100}}
+                      onChange={handleChangeInputTitle}
                     />
                   </div>
                 </> : <>
-                  {ideaFormContextData.title === "" || ideaFormContextData.title === undefined ? <p>Nem nevezted el az ötleted!</p> : <p>{ideaFormContextData.title}</p>}
+                  {ideaFormContextData.title === "" || ideaFormContextData.title === undefined ?
+                    <p>Nem nevezted el az ötleted!</p> : <p>{ideaFormContextData.title}</p>}
                 </>}
 
                 {errorObject?.title ? Object.values(errorObject.title).map((err, i) => {
-                  return <ErrorMini key={i} error={err} increment={`title-${i}`} />
+                  return <ErrorMini key={i} error={err} increment={`title-${i}`}/>
                 }) : null}
               </div>
             </div>
 
-            <hr />
+            <hr/>
 
             <div className="input-wrapper">
               <div className="input-wrapper-overview">
                 <div className="input-wrapper-overview-title">
-                  <h6><label htmlFor="description">Mit valósítson meg a főváros?</label></h6>
+                  <h6><label htmlFor="description">Ötlet leírása</label></h6>
 
-                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => { setInputComponent('description') }} />
+                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => {
+                    setInputComponent('description')
+                  }}/>
                 </div>
 
                 {inputComponentEdit === "description" ? <>
@@ -344,28 +407,32 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                       name="description"
                       value={ideaFormContextData.description}
                       showLabel={false}
-                      options={{ min: 100, max: 1000 }}
+                      options={{min: 100, max: 1000}}
                       onChange={handleChangeInputTitle}
                     />
                   </div>
                 </> : <>
-                  {ideaFormContextData.description === "" || ideaFormContextData.description === undefined ? <p>Nem adtál meg fejlesztési leírást az ötletednek!</p> : <p>{ideaFormContextData.description}</p>}
+                  {ideaFormContextData.description === "" || ideaFormContextData.description === undefined ?
+                    <p>Nem adtál meg fejlesztési leírást az ötletednek!</p> :
+                    <p style={{wordBreak: 'break-all'}}>{ideaFormContextData.description}</p>}
                 </>}
 
                 {errorObject?.description ? Object.values(errorObject.description).map((err, i) => {
-                  return <ErrorMini key={i} error={err} increment={`description-${i}`} />
+                  return <ErrorMini key={i} error={err} increment={`description-${i}`}/>
                 }) : null}
               </div>
             </div>
 
-            <hr />
+            <hr/>
 
             <div className="input-wrapper">
               <div className="input-wrapper-overview">
                 <div className="input-wrapper-overview-title">
                   <h6><label htmlFor="solution">Miért jó, ha megvalósul ötleted?</label></h6>
 
-                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => { setInputComponent('solution') }} />
+                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => {
+                    setInputComponent('solution')
+                  }}/>
                 </div>
 
                 {inputComponentEdit === "solution" ? <>
@@ -379,30 +446,32 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                       name="solution"
                       value={ideaFormContextData.solution}
                       showLabel={false}
-                      options={{ min: 20, max: 1000 }}
+                      options={{min: 20, max: 1000}}
                       onChange={handleChangeInputTitle}
                     />
                   </div>
                 </> : <>
-                  {ideaFormContextData.solution === "" || ideaFormContextData.solution === undefined ? <p>Nem adtad meg, hogy milyen problémát old meg az ötleted!</p> : <p>{ideaFormContextData.solution}</p>}
+                  {ideaFormContextData.solution === "" || ideaFormContextData.solution === undefined ?
+                    <p>Nem adtad meg, hogy milyen problémát old meg az ötleted!</p> :
+                    <p style={{wordBreak: 'break-all'}}>{ideaFormContextData.solution}</p>}
                 </>}
 
                 {errorObject?.solution ? Object.values(errorObject.solution).map((err, i) => {
-                  return <ErrorMini key={i} error={err} increment={`solution-${i}`} />
+                  return <ErrorMini key={i} error={err} increment={`solution-${i}`}/>
                 }) : null}
               </div>
             </div>
 
-            <hr />
-
-            <h5>Kiegészítő információk</h5>
+            <hr/>
 
             <div className="input-wrapper">
               <div className="input-wrapper-overview">
                 <div className="input-wrapper-overview-title">
-                  <h6><label htmlFor="phone">Telefonszám:</label></h6>
+                  <h6><label htmlFor="phone">Telefonszám</label></h6>
 
-                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => { setInputComponent('phone') }} />
+                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => {
+                    setInputComponent('phone')
+                  }}/>
                 </div>
 
                 {inputComponentEdit === "phone" ? <>
@@ -411,59 +480,67 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                       <span>Telefonos elérhetőség megadása nem kötelező. Ha megadod, gördülékenyebben tudunk kommunikálni veled az ötleted kapcsán.</span>
                     </p>
 
-                    <PhonenumberInput id="phone" name="phone" value={ideaFormContextData.phone} handleChange={handlePhonenumberInput} />
+                    <PhonenumberInput id="phone" name="phone" value={ideaFormContextData.phone}
+                                      handleChange={handlePhonenumberInput}/>
                   </div>
                 </> : <>
-                  {ideaFormContextData.phone?.phone === "" || ideaFormContextData.phone === undefined ? <p>Nem adtál meg telefonszámot. (Nem kötelező)</p> : <p>+{ideaFormContextData.phone?.dialCode + ideaFormContextData.phone?.phone}</p>}
+                  {ideaFormContextData.phone?.phone === "" || ideaFormContextData.phone === undefined ?
+                    <p>Nem adtál meg telefonszámot. (Nem kötelező)</p> :
+                    <p>+{ideaFormContextData.phone?.dialCode + ideaFormContextData.phone?.phone}</p>}
                 </>}
 
                 {errorObject?.phone ? Object.values(errorObject.phone).map((err, i) => {
-                  return <ErrorMini key={i} error={err} increment={`phone-${i}`} />
+                  return <ErrorMini key={i} error={err} increment={`phone-${i}`}/>
                 }) : null}
               </div>
             </div>
 
-            <hr />
+            <hr/>
 
             <div className="input-wrapper">
               <div className="input-wrapper-overview">
                 <div className="input-wrapper-overview-title">
                   <label htmlFor="medias">Képek, dokumentumok feltöltése</label>
 
-                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => { setInputComponent('medias') }} />
+                  <button type="button" className="btn btn-overview-edit" aria-label="Szerkesztés" onClick={() => {
+                    setInputComponent('medias')
+                  }}/>
                 </div>
 
                 {inputComponentEdit === "medias" ? <>
                   <div className="input-wrapper-content">
-                    <div className="tipp">Itt tudsz képeket vagy egyéb dokumentumokat feltölteni, amikről úgy gondolod, segítik az ötleted megértését, kapcsolódnak hozzá. Max. 5 darab fájl tölthető fel!</div>
+                    <div className="tipp">Itt tudsz képeket vagy egyéb dokumentumokat feltölteni, amikről úgy gondolod,
+                      segítik az ötleted megértését, kapcsolódnak hozzá. Max. 5 darab fájl tölthető fel!
+                    </div>
 
-                    <FileArea changeRaw={handleChangeFileRaw} originalMedias={ideaFormContextData.medias} />
+                    <FileArea changeRaw={handleChangeFileRaw} originalMedias={ideaFormContextData.medias}/>
                   </div>
                 </> : <>
-                  {ideaFormContextData.medias?.length === 0 || ideaFormContextData.medias === undefined ? <p>Nem töltöttél fel csatolmányt. (Nem kötelező)</p> : <>
-                    <MediaList originalMedias={ideaFormContextData.medias} />
-                  </>}
+                  {ideaFormContextData.medias?.length === 0 || ideaFormContextData.medias === undefined ?
+                    <p>Nem töltöttél fel csatolmányt. (Nem kötelező)</p> : <>
+                      <MediaList originalMedias={ideaFormContextData.medias}/>
+                    </>}
                 </>}
 
                 {errorObject?.medias ? Object.values(errorObject.medias).map((err, i) => {
-                  return <ErrorMini key={i} error={err} increment={`medias-${i}`} />
+                  return <ErrorMini key={i} error={err} increment={`medias-${i}`}/>
                 }) : null}
               </div>
             </div>
 
-            <hr />
+            <hr/>
 
             <div className="form-group">
               <Checkbox
                 id="rule_1"
                 name="rule_1"
-                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha az a főváros hatáskörében megvalósítható és nem szabályozási kérdés."
+                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha az a Főváros hatáskörében megvalósítható vagy karbantartási kérdés."
                 handleChange={handleChangeInput}
                 value={ideaFormContextData.rule_1}
               />
 
               {errorObject?.rule_1 ? Object.values(errorObject.rule_1).map((err, i) => {
-                return <ErrorMini key={i} error={err} increment={`rule_1-${i}`} />
+                return <ErrorMini key={i} error={err} increment={`rule_1-${i}`}/>
               }) : null}
             </div>
 
@@ -471,13 +548,13 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
               <Checkbox
                 id="rule_2"
                 name="rule_2"
-                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha az nem érint állami vagy magántulajdonú területet, pl. iskolák, kórházak, MÁV, HÉV területek."
+                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha az nem érint magán- vagy állami területet, pl. iskolák, kórházak, a MÁV vagy a HÉV területei."
                 handleChange={handleChangeInput}
                 value={ideaFormContextData.rule_2}
               />
 
               {errorObject?.rule_2 ? Object.values(errorObject.rule_2).map((err, i) => {
-                return <ErrorMini key={i} error={err} increment={`rule_2-${i}`} />
+                return <ErrorMini key={i} error={err} increment={`rule_2-${i}`}/>
               }) : null}
             </div>
 
@@ -485,13 +562,27 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
               <Checkbox
                 id="rule_3"
                 name="rule_3"
-                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha tervezett megvalósítási költsége nem több 120 millió forintnál."
+                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha a tervezett megvalósítási költsége nem több 120 millió forintnál."
                 handleChange={handleChangeInput}
                 value={ideaFormContextData.rule_3}
               />
 
               {errorObject?.rule_3 ? Object.values(errorObject.rule_3).map((err, i) => {
-                return <ErrorMini key={i} error={err} increment={`rule_3-${i}`} />
+                return <ErrorMini key={i} error={err} increment={`rule_3-${i}`}/>
+              }) : null}
+            </div>
+
+            <div className="form-group">
+              <Checkbox
+                id="rule_4"
+                name="rule_4"
+                label="Tudomásul veszem, hogy az ötlet hivatali szakmai értékelésének előfeltétele a lakossági támogatáson való továbbjutás."
+                handleChange={handleChangeInput}
+                value={ideaFormContextData.rule_4}
+              />
+
+              {errorObject?.rule_4 ? Object.values(errorObject.rule_4).map((err, i) => {
+                return <ErrorMini key={i} error={err} increment={`rule_4-${i}`}/>
               }) : null}
             </div>
 
@@ -504,7 +595,8 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
               }}
             />
 
-            <input type="submit" className="btn btn-primary btn-headline next-step" disabled={!canBeSubmit} value="Beküldöm az ötletem" />
+            <input type="submit" className="btn btn-primary btn-headline next-step" disabled={!canBeSubmit}
+                   value="Beküldöm az ötletem"/>
           </div>
         </fieldset>
       </form>
