@@ -22,6 +22,7 @@ import Link from "next/link"
 import { generateRandomValue } from "@/utilities/generateRandomValue"
 import { useModalHardContext } from "@/context/modalHard"
 import {locationDataList} from "@/models/location.model";
+import ReactSelect, {MultiValue} from "react-select";
 
 export default function IdeaSubmissionFormOverview(): JSX.Element {
   const { ideaFormContextData, setIdeaFormContextData } = useIdeaContext()
@@ -49,15 +50,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
     setIdeaFormContextData({ ...ideaFormContextData, [e.target.name]: value })
   }
 
-  const handleLocationDistrictsInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
-    const locationDistricts = ideaFormContextData.locationDistricts;
-
-    if (locationDistricts.includes(e.target.value)) {
-      locationDistricts.splice(locationDistricts.indexOf(e.target.value), 1);
-    } else {
-      locationDistricts.push(e.target.value);
-    }
-
+  const handleLocationDistrictsInput = (locationDistricts: MultiValue<any>) => {
     setIdeaFormContextData({ ...ideaFormContextData, locationDistricts: locationDistricts })
   }
 
@@ -86,7 +79,10 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
     ideaFormData.append('solution', ideaFormContextData.solution)
     ideaFormData.append('description', ideaFormContextData.description)
     ideaFormData.append('location_description', ideaFormContextData.locationDescription)
-    ideaFormData.append('location_districts', ideaFormContextData.locationDistricts)
+    ideaFormData.append(
+      'location_districts',
+      ideaFormContextData.locationDistricts.map((item: { value: string }) => item.value)
+    )
     ideaFormData.append('phone', ideaFormContextData.phone.dialCode + ideaFormContextData.phone.phone)
     ideaFormData.append('rule_1', ideaFormContextData.rule_1.toString())
     ideaFormData.append('rule_2', ideaFormContextData.rule_2.toString())
@@ -313,13 +309,12 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                               </div>
                             </div>
                             <div className="col-6 col-xl-6">
-                              <Select
-                                title="Kerület *"
-                                name="locationDistricts"
+                              <h6><label htmlFor="birthyear">Kerület *</label></h6>
+                              <ReactSelect
+                                isMulti
+                                options={districtDataList}
                                 value={ideaFormContextData.locationDistricts}
-                                dataList={districtDataList}
-                                handleChange={handleLocationDistrictsInput}
-                                multiple={true}
+                                onChange={handleLocationDistrictsInput}
                               />
                             </div>
                           </div>
@@ -331,14 +326,13 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                   {ideaFormContextData.location === undefined || ideaFormContextData.location === "" || ideaFormContextData.location === "0" ?
                     <p>Nem választottál a helyszínt!</p> :
                     <>
-                      {ideaFormContextData.location === "1" ? <p>Nem kötődik konkrét helyszínhez</p> : null }
-                      {ideaFormContextData.location === "2" ? <p>Konkrét helyszínhez kötödik</p> : null }
+                      {ideaFormContextData.location === "1" ? <p>Konkrét helyszínhez kötödik</p> : null}
+                      {ideaFormContextData.location === "2" ? <p>Nem kötődik konkrét helyszínhez</p> : null}
                       <p>{ideaFormContextData.locationDescription}</p>
-                      <p>{districtDataList.map((district: any) => {
-                        if (ideaFormContextData.locationDistricts.includes(district.value)) {
-                          return district.name + ' '
-                        }
-                      })}</p>
+                      {ideaFormContextData.location === "1" ?
+                        <p>{ideaFormContextData.locationDistricts.map((district: any) => {
+                          return district.label + ' '
+                        })}</p> : null}
                     </>
                   }
                 </>}

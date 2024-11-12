@@ -3,33 +3,33 @@ export type IDisctrictName = 'Válassz egy kerületet' | 'I. kerület' | 'II. ke
 'XVI. kerület' | 'XVII. kerület' | 'XVIII. kerület' | 'XIX. kerület' | 'XX. kerület' | 'XXI. kerület' | 'XXII. kerület' | 'XXIII. kerület' | 'Margit sziget'
 
 export type IDisctrict = {
-  name: IDisctrictName
+  label: IDisctrictName
   value: IDisctrictValue
 }
 
 export const districtDataList: IDisctrict[] = [
-  { name: 'I. kerület', value: 'AREA1'},
-  { name: 'II. kerület', value: 'AREA2'},
-  { name: 'III. kerület', value: 'AREA3'},
-  { name: 'IV. kerület', value: 'AREA4'},
-  { name: 'V. kerület', value: 'AREA5'},
-  { name: 'VI. kerület', value: 'AREA6'},
-  { name: 'VII. kerület', value: 'AREA7'},
-  { name: 'VIII. kerület', value: 'AREA8'},
-  { name: 'IX. kerület', value: 'AREA9'},
-  { name: 'X. kerület', value: 'AREA10'},
-  { name: 'XI. kerület', value: 'AREA11'},
-  { name: 'XII. kerület', value: 'AREA12'},
-  { name: 'XIII. kerület', value: 'AREA13'},
-  { name: 'XIV. kerület', value: 'AREA14'},
-  { name: 'XV. kerület', value: 'AREA15'},
-  { name: 'XVI. kerület', value: 'AREA16'},
-  { name: 'XVII. kerület', value: 'AREA17'},
-  { name: 'XVIII. kerület', value: 'AREA18'},
-  { name: 'XIX. kerület', value: 'AREA19'},
-  { name: 'XX. kerület', value: 'AREA20'},
-  { name: 'XXI. kerület', value: 'AREA21'},
-  { name: 'XXII. kerület', value: 'AREA22'},
-  { name: 'XXIII. kerület', value: 'AREA23'},
-  { name: 'Margit sziget', value: 'AREA24'},
+  { label: 'I. kerület', value: 'AREA1'},
+  { label: 'II. kerület', value: 'AREA2'},
+  { label: 'III. kerület', value: 'AREA3'},
+  { label: 'IV. kerület', value: 'AREA4'},
+  { label: 'V. kerület', value: 'AREA5'},
+  { label: 'VI. kerület', value: 'AREA6'},
+  { label: 'VII. kerület', value: 'AREA7'},
+  { label: 'VIII. kerület', value: 'AREA8'},
+  { label: 'IX. kerület', value: 'AREA9'},
+  { label: 'X. kerület', value: 'AREA10'},
+  { label: 'XI. kerület', value: 'AREA11'},
+  { label: 'XII. kerület', value: 'AREA12'},
+  { label: 'XIII. kerület', value: 'AREA13'},
+  { label: 'XIV. kerület', value: 'AREA14'},
+  { label: 'XV. kerület', value: 'AREA15'},
+  { label: 'XVI. kerület', value: 'AREA16'},
+  { label: 'XVII. kerület', value: 'AREA17'},
+  { label: 'XVIII. kerület', value: 'AREA18'},
+  { label: 'XIX. kerület', value: 'AREA19'},
+  { label: 'XX. kerület', value: 'AREA20'},
+  { label: 'XXI. kerület', value: 'AREA21'},
+  { label: 'XXII. kerület', value: 'AREA22'},
+  { label: 'XXIII. kerület', value: 'AREA23'},
+  { label: 'Margit sziget', value: 'AREA24'},
 ]
