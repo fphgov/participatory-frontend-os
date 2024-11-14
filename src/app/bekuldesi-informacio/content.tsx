@@ -9,7 +9,7 @@ export const Conditions = () => <>
 
   <p><b>HATÁSKÖR / JOGSZABÁLYOK:</b></p>
 
-  <p>A közösségi költségvetésen javasolt projekteknek a Fővárosi Önkormányzat hatáskörébe kell tartozniuk. Ezen belül az ötlet fejleszthet fővárosi vagy kerületi területet, utóbbi esetben a kerület hozzájárulása is szükséges. Az egyeztetéseket a Fővárosi Önkormányzat intézi. A projekteknek meg kell felelniük a mindenkori jogszabályoknak.</p>
+  <p>A közösségi költségvetésen javasolt projekteknek a Fővárosi Önkormányzat hatáskörébe kell tartozniuk. Ezen belül az ötlet fejleszthet Fővárosi vagy kerületi területet, utóbbi esetben a kerület hozzájárulása is szükséges. Az egyeztetéseket a Fővárosi Önkormányzat intézi. A projekteknek meg kell felelniük a mindenkori jogszabályoknak.</p>
 
   <p><b>HELYSZÍNEK:</b></p>
 
@@ -36,7 +36,7 @@ export const WhatNo = () => <>
     <li><i>Folyamatban lévő fejlesztés</i> - Már folyamatban, illetve előkészítés alatt lévő fejlesztést érintő ötlet nem adható be, csak ha kimondottan illeszkedik a meglévő tervekhez.</li>
     <li><i>Tervezés, tanulmányírás</i> - A közösségi költségvetésből fejlesztések finanszírozhatóak, tanulmány-, stratégiaírás önmagában nem.</li>
     <li><i>Saját termék</i> - A közösségi költségvetés nem alkalmas arra, hogy saját termékünket, műtárgyunkat vagy szolgáltatásunkat eladjuk a városnak. A benyújtott és nyertes ötleteket a hivatal fogja megvalósítani, a kivitelezésben az ötletgazda csak a társadalmi egyeztetés egyik szereplőjeként vesz részt. Ha mégis partnert von be az önkormányzat a megvalósításba, akkor azt pályázat útján választja ki.</li>
-    <li><i>Szobor</i> - A főváros szoborkoncepciója nem támogatja az egyéni kezdeményezések alapján való szoborállítást.</li>
+    <li><i>Szobor</i> - A Főváros szoborkoncepciója nem támogatja az egyéni kezdeményezések alapján való szoborállítást.</li>
     <li><i>Kirekesztő tartalom</i> - Ne adj be kirekesztő tartalmat megfogalmazó ötletet se!</li>
   </ul>
 </>

@@ -83,22 +83,22 @@ export default function Layout() {
               <div className="row">
                 <div className="col-md-12">
                   <h4>Az ötletedet önkormányzati tulajdonú helyszínen tudjuk megvalósítani</h4>
-                  <p>A helyszín lehet a főváros vagy valamelyik kerület tulajdona, tehát sok olyan terület, amelyre általában közterületként gondolunk. Állami és magántulajdonon (beleértve magáncégek tulajdonát) a szabályok szerint nem végezhető fejlesztés.</p>
+                  <p>A helyszín lehet a Főváros vagy valamelyik kerület tulajdona, tehát sok olyan terület, amelyre általában közterületként gondolunk. Állami és magántulajdonon (beleértve magáncégek tulajdonát) a szabályok szerint nem végezhető fejlesztés.</p>
                 </div>
               </div>
 
               <div className="row">
                 <div className="col-md-6">
                   <Details className="section-more" summary={<div>Ne tervezz a HÉV, vasút, iskolák vagy kórházak területére, mert ezek az állam tulajdonában, kezelésében vannak!</div>}>
-                    <p>Mivel a HÉV, a vasút, az iskolák és a kórházak területe nem fővárosi vagy kerületi tulajdonban van, nem tudjuk garantálni, hogy a tulajdonos hozzájárul az ötlet megvalósításához.</p>
+                    <p>Mivel a HÉV, a vasút, az iskolák és a kórházak területe nem Fővárosi vagy kerületi tulajdonban van, nem tudjuk garantálni, hogy a tulajdonos hozzájárul az ötlet megvalósításához.</p>
                   </Details>
 
-                  <Details className="section-more" summary={<div>Nem fejleszthetünk magántulajdont a főváros forrásából</div>}>
+                  <Details className="section-more" summary={<div>Nem fejleszthetünk magántulajdont a Főváros forrásából</div>}>
                     <p>Társasházak, magáncégek tulajdonában lévő területekre vagy építményekre, épületekre nem vonatkozhatnak a javaslatok.</p>
                   </Details>
 
                   <Details className="section-more" summary={<div>Valószínűleg nem lesz jó a helyszín, ha ott már zajlik egy fejlesztés</div>}>
-                    <p>Vannak olyan fővárosi helyszínek, amelyek fejlesztésére hamarosan sor kerül, esetleg már rendelkezésre állnak tervek és a megvalósítás forrásai. Ilyen esetben valószínűleg nem tudjuk befogadni az ötletet, vagy csak akkor, ha összhangban van a tervekkel.</p>
+                    <p>Vannak olyan Fővárosi helyszínek, amelyek fejlesztésére hamarosan sor kerül, esetleg már rendelkezésre állnak tervek és a megvalósítás forrásai. Ilyen esetben valószínűleg nem tudjuk befogadni az ötletet, vagy csak akkor, ha összhangban van a tervekkel.</p>
                   </Details>
                 </div>
                 <div className="col-md-6 justify-self-end align-self-center p-5">
@@ -112,26 +112,26 @@ export default function Layout() {
             <div className="container">
               <div className="row">
                 <div className="col-md-12">
-                  <h4>Legyen fővárosi feladat</h4>
-                  <p>A főváros alapvetően olyan tevékenységeket végezhet, amelyeket jogszabályok a feladatkörébe utalnak, de nem végezhet olyan feladatot, amely más – például az állam – hatáskörébe tartozik.</p>
+                  <h4>Legyen Fővárosi feladat</h4>
+                  <p>A Főváros alapvetően olyan tevékenységeket végezhet, amelyeket jogszabályok a feladatkörébe utalnak, de nem végezhet olyan feladatot, amely más – például az állam – hatáskörébe tartozik.</p>
                 </div>
               </div>
 
               <div className="row">
                 <div className="col-md-6 justify-self-end align-self-center p-5">
-                  <Image src={`/images/pic_fovarosi-feladat.svg`} width={570} height={345} alt="Legyen fővárosi feladat" aria-hidden={true} />
+                  <Image src={`/images/pic_fovarosi-feladat.svg`} width={570} height={345} alt="Legyen Fővárosi feladat" aria-hidden={true} />
                 </div>
                 <div className="col-md-6">
                   <Details className="section-more" summary={<div>Az iskolai oktatás, oktatásügy állami feladat</div>}>
                     <p>A korhatár leszállításával is bátorítjuk, hogy középiskolások is részt vegyenek a közösségi költségvetésben, ugyanakkor az oktatásügy állami feladat, így a budapesti iskolákban nem tudunk fejlesztéseket megvalósítani.</p>
                   </Details>
 
-                  <Details className="section-more" summary={<div>Az egészségügy sem fővárosi feladat</div>}>
-                    <p>Az államhoz és a kerületekhez van rendelve az egészségügy, a főváros azzal közvetlenül nem foglalkozik.</p>
+                  <Details className="section-more" summary={<div>Az egészségügy sem Fővárosi feladat</div>}>
+                    <p>Az államhoz és a kerületekhez van rendelve az egészségügy, a Főváros azzal közvetlenül nem foglalkozik.</p>
                   </Details>
 
                   <Details className="section-more" summary={<div>A hulladékkezelés állami feladat, de a hulladékképződést megelőzhetjük.</div>}>
-                    <p>A hulladék kezelése már nem fővárosi feladat, az ötlet azonban vonatkozhat tárgyak újrahasználására vagy javítására, ezzel megakadályozva, hogy hulladékká váljanak.</p>
+                    <p>A hulladék kezelése már nem Fővárosi feladat, az ötlet azonban vonatkozhat tárgyak újrahasználására vagy javítására, ezzel megakadályozva, hogy hulladékká váljanak.</p>
                   </Details>
                 </div>
               </div>
@@ -150,11 +150,11 @@ export default function Layout() {
               <div className="row">
                 <div className="col-md-6">
                   <Details className="section-more" summary={<div>Ne kérj konkrét szobrot vagy emlékművet!</div>}>
-                    <p>Nagyon sok embernek van ötlete újabb köztéri szobrokra, vagy arra, hogy mely személyeknek vagy eseményeknek kellene még emléket állítani. A főváros azonban fontosnak tartja, hogy tervszerűen, a “<a href="https://budapest.hu/Documents/kultura/budapest%20fovaros%20kozteri%20muveszeti%20koncepcioja.pdf">szoborstratégia</a>” alapján végezzen ilyen fejlesztéseket. A közösségi költségvetésben ezért állandó jellegű konkrét művészeti alkotások, szobrok állítására tett javaslatokat nem tudunk támogatni.</p>
+                    <p>Nagyon sok embernek van ötlete újabb köztéri szobrokra, vagy arra, hogy mely személyeknek vagy eseményeknek kellene még emléket állítani. A Főváros azonban fontosnak tartja, hogy tervszerűen, a “<a href="https://budapest.hu/Documents/kultura/budapest%20fovaros%20kozteri%20muveszeti%20koncepcioja.pdf">szoborstratégia</a>” alapján végezzen ilyen fejlesztéseket. A közösségi költségvetésben ezért állandó jellegű konkrét művészeti alkotások, szobrok állítására tett javaslatokat nem tudunk támogatni.</p>
                   </Details>
 
                   <Details className="section-more" summary={<div>Ne akard saját műalkotásodat, művészeti tevékenységedet finanszírozni!</div>}>
-                    <p>A közösségi költségvetés nyertes ötleteit a főváros valósítja meg. Ha a beszerzés szabályait betartva be is von külső megvalósítót, az ötletgazda ugyanolyan esélyekkel indul, mint bárki más.</p>
+                    <p>A közösségi költségvetés nyertes ötleteit a Főváros valósítja meg. Ha a beszerzés szabályait betartva be is von külső megvalósítót, az ötletgazda ugyanolyan esélyekkel indul, mint bárki más.</p>
                   </Details>
                 </div>
                 <div className="col-md-6 justify-self-end align-self-center p-5">
@@ -169,7 +169,7 @@ export default function Layout() {
               <div className="row">
                 <div className="col-md-12">
                   <h4>Milyen ötleteknek van esélye a szavazáson?</h4>
-                  <p>Az ötletekre a budapestiek fognak szavazni, a főváros pedig a legnépszerűbb ötleteket valósítja meg. Mit mérlegelhetsz, mire érdemes figyelned?</p>
+                  <p>Az ötletekre a budapestiek fognak szavazni, a Főváros pedig a legnépszerűbb ötleteket valósítja meg. Mit mérlegelhetsz, mire érdemes figyelned?</p>
                 </div>
               </div>
 

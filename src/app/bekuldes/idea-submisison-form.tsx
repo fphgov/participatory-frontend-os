@@ -166,7 +166,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
               <h6><label htmlFor="description">Ötlet leírása *</label></h6>
 
               <TextareaLengthValidator
-                title="Mit valósítson meg a főváros?"
+                title="Mit valósítson meg a Főváros?"
                 name="description"
                 value={ideaFormContextData.description}
                 showLabel={false}
