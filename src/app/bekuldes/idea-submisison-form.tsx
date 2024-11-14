@@ -132,8 +132,10 @@ export default function IdeaSubmissionForm(): JSX.Element {
 
             <h2>Ötlet címe</h2>
             <p>
-              Adj ötletednek olyan címet, ami tömör, lényegretörő, kiderül, mit javasolsz. Az előző évben, már megvalósítás alatt álló ötletek listáját
-              <Link href={`/projektek?rand=${rand}`} target={'_blank'}>itt</Link> éred el, segítséget nyújthat a könnyebb kitöltésben.
+              Adj ötletednek olyan címet, ami tömör, lényegretörő, kiderül, mit javasolsz.
+              Az előző évek nyertes, már megvalósítás alatt álló ötleteinek listáját&nbsp;
+              <Link href={`/projektek?rand=${rand}`} target={'_blank'}>itt</Link>
+              &nbsp;éred el, ez segítséget nyújthat a könnyebb kitöltésben.
             </p>
 
             <div className="input-wrapper">

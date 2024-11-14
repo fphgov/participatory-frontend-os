@@ -354,8 +354,12 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                 {inputComponentEdit === "title" ? <>
                   <div className="input-wrapper-content">
                     <p className="info">
-                      <span>Adj az ötletednek olyan címet, ami tömör, lényegretörő, kiderül, mit javasolsz. Így többen szavaznak rá! Az előző években nyertes, már megvalósítás alatt álló ötletek listáját <Link
-                        href={`/projektek?rand=${rand}`} target="_blank">itt éred el</Link>, ez segítséget nyújthat a kitöltésben.</span>
+                      <span>
+                        Adj ötletednek olyan címet, ami tömör, lényegretörő, kiderül, mit javasolsz.
+                        Az előző évek nyertes, már megvalósítás alatt álló ötleteinek listáját&nbsp;
+                        <Link href={`/projektek?rand=${rand}`} target={'_blank'}>itt</Link>
+                        &nbsp;éred el, ez segítséget nyújthat a könnyebb kitöltésben.
+                      </span>
                     </p>
 
                     <InputLengthValidator
