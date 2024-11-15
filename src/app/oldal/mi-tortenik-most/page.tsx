@@ -72,7 +72,7 @@ export default async function WhatPage() {
           <InfoZigZag id="utolso-koros-ellenorzes" image="/images/illustration-talk.svg" imageAlt="Illusztráció beszélgető embererekről" bgColor="blue" orient="right">
             <h3 className="single">Utolsó körös ellenőrzés</h3>
 
-            <p>Az ötleteket a szavazólapra kerülésük előtt a fővárosi Önkormányzat Jogi- és Közbeszerzési Főosztálya nézi át. A szavazólapra csak olyan ötlet kerülhet, ami jogi és közbeszerzési értelemben szabályosan megvalósítható.</p>
+            <p>Az ötleteket a szavazólapra kerülésük előtt a Fővárosi Önkormányzat Jogi- és Közbeszerzési Főosztálya nézi át. A szavazólapra csak olyan ötlet kerülhet, ami jogi és közbeszerzési értelemben szabályosan megvalósítható.</p>
 
             <p>Végül az Önkormányzat főpolgármesteri döntést hoz a feldolgozott ötletek szavazólapra kerüléséről. Ekkor a főpolgármesteri kabinet és a főpolgármester-helyettesi irodák megkapják a szavazólapra kerülő, és az elutasított ötleteket is.</p>
 
