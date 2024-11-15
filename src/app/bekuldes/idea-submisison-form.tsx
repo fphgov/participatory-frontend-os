@@ -16,20 +16,20 @@ import React from 'react'
 import ReactSelect, {MultiValue} from 'react-select'
 
 export default function IdeaSubmissionForm(): JSX.Element {
-  const { ideaFormContextData, setIdeaFormContextData } = useIdeaContext()
+  const { ideaFormContextData, updateIdeaFormContextData } = useIdeaContext()
 
   const rand = generateRandomValue().toString()
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : rmAllCharForName(e.target.value)
 
-    setIdeaFormContextData({ ...ideaFormContextData, [e.target.name]: value })
+    updateIdeaFormContextData({ [e.target.name]: value })
   }
 
   const handleChangeInputTitle = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : rmAllCharForTitle(e.target.value)
 
-    setIdeaFormContextData({ ...ideaFormContextData, [e.target.name]: value })
+    updateIdeaFormContextData({ [e.target.name]: value })
   }
 
   const handleLocationDistrictsInput = (locationDistricts: MultiValue<any>) => {
@@ -37,11 +37,11 @@ export default function IdeaSubmissionForm(): JSX.Element {
   }
 
   const handlePhonenumberInput = (phoneObject: PhonenumberValue) => {
-    setIdeaFormContextData({ ...ideaFormContextData, phone: phoneObject })
+    updateIdeaFormContextData({ phone: phoneObject })
   }
 
   const handleChangeFileRaw = (name: string, value: any) => {
-    setIdeaFormContextData({ ...ideaFormContextData, [name]: value })
+    updateIdeaFormContextData({ [name]: value })
   }
 
   return (

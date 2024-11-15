@@ -25,8 +25,8 @@ import {locationDataList} from "@/models/location.model";
 import ReactSelect, {MultiValue} from "react-select";
 
 export default function IdeaSubmissionFormOverview(): JSX.Element {
-  const { ideaFormContextData, setIdeaFormContextData } = useIdeaContext()
-  const { setOpenModalHard, setDataModalHard } = useModalHardContext()
+  const { ideaFormContextData, updateIdeaFormContextData } = useIdeaContext()
+  const { openModalHard, setOpenModalHard, setDataModalHard } = useModalHardContext()
 
   const [ canBeSubmit, setCanBeSubmit ] = useState(false)
   const [ error, setError ] = useState('')
@@ -41,13 +41,13 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : rmAllCharForName(e.target.value)
 
-    setIdeaFormContextData({ ...ideaFormContextData, [e.target.name]: value })
+    updateIdeaFormContextData({ [e.target.name]: value })
   }
 
   const handleChangeInputTitle = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : rmAllCharForTitle(e.target.value)
 
-    setIdeaFormContextData({ ...ideaFormContextData, [e.target.name]: value })
+    updateIdeaFormContextData({ [e.target.name]: value })
   }
 
   const handleLocationDistrictsInput = (locationDistricts: MultiValue<any>) => {
@@ -55,11 +55,11 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
   }
 
   const handlePhonenumberInput = (phoneObject: PhonenumberValue) => {
-    setIdeaFormContextData({ ...ideaFormContextData, phone: phoneObject })
+    updateIdeaFormContextData({ phone: phoneObject })
   }
 
   const handleChangeFileRaw = (name: string, value: any) => {
-    setIdeaFormContextData({ ...ideaFormContextData, [name]: value })
+    updateIdeaFormContextData({ [name]: value })
   }
 
   async function onIdeaSubmission(e: FormEvent<HTMLFormElement>) {
