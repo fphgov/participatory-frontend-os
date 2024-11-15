@@ -51,7 +51,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
   }
 
   const handleLocationDistrictsInput = (locationDistricts: MultiValue<any>) => {
-    setIdeaFormContextData({ ...ideaFormContextData, locationDistricts: locationDistricts })
+    updateIdeaFormContextData({ ...ideaFormContextData, locationDistricts: locationDistricts })
   }
 
   const handlePhonenumberInput = (phoneObject: PhonenumberValue) => {
