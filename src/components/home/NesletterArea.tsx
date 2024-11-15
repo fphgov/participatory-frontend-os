@@ -10,7 +10,7 @@ export default function NewsletterArea(): JSX.Element|null {
               src='/images/newsletter.svg'
               width={60}
               height={60}
-              alt={'Értesüljön egy helyen a Fővárosi ügyekről promóciós kép'}
+              alt={'Értesüljön egy helyen a fővárosi ügyekről promóciós kép'}
               aria-hidden={true}
             />
           </div>

@@ -1,6 +1,6 @@
 export const WhoAndHow = () => <>
   <p>Szavazni minden 14. életévét betöltött, Budapesten élő, dolgozó vagy tanuló magánszemély tud az <a href="https://otlet.budapest.hu" target="_blank">otlet.budapest.hu</a> oldalon vagy a személyes szavazópontokon.</p>
-  <p>Személyesen a <a href={`${process.env.NEXT_PUBLIC_FILES_PATH}/szemelyes_szavazasi_helyszinek_2024.pdf`} target="_blank">kijelölt Fővárosi Szabó Ervin könyvtárakban</a>, a Főpolgármesteri Hivatal Központi Ügyfélszolgálati Irodájában és utcai kitelepüléseink alkalmával lehet szavazni.</p>
+  <p>Személyesen a <a href={`${process.env.NEXT_PUBLIC_FILES_PATH}/szemelyes_szavazasi_helyszinek_2024.pdf`} target="_blank">kijelölt fővárosi Szabó Ervin könyvtárakban</a>, a Főpolgármesteri Hivatal Központi Ügyfélszolgálati Irodájában és utcai kitelepüléseink alkalmával lehet szavazni.</p>
   <p>Az alábbi utcai kitelepülési helyszíneken lesz lehetőség a szavazatok leadására:</p>
   <ul>
     <li>Mobilitási hét, IX. Fővám tér, 2024. szeptember 21-22.</li>
@@ -15,7 +15,7 @@ export const HowIsItDescided = () => <>
 </>
 
 export const Who = () => <>
-  <p>A nyertes projektötleteket a Fővárosi Önkormányzat valósítja meg saját cégein/intézményein keresztül, vagy szükség szerint beszerzési eljárás, pályázat keretében kiválasztott cégek, civil/szakmai partnerek segítségével. Az előző évek nyertes projektjeiről <a href="https://otlet.budapest.hu/projektek" target="_blank">itt olvashatsz</a>.</p>
+  <p>A nyertes projektötleteket a fővárosi Önkormányzat valósítja meg saját cégein/intézményein keresztül, vagy szükség szerint beszerzési eljárás, pályázat keretében kiválasztott cégek, civil/szakmai partnerek segítségével. Az előző évek nyertes projektjeiről <a href="https://otlet.budapest.hu/projektek" target="_blank">itt olvashatsz</a>.</p>
 </>
 
 export const Mastermind = () => <>
