@@ -12,6 +12,8 @@ import { useIdeaContext } from "./idea-store"
 import { districtDataList } from "@/models/district.model"
 import { locationDataList } from "@/models/location.model"
 import { generateRandomValue } from "@/utilities/generateRandomValue"
+import React from 'react'
+import ReactSelect, {MultiValue} from 'react-select'
 
 export default function IdeaSubmissionForm(): JSX.Element {
   const { ideaFormContextData, updateIdeaFormContextData } = useIdeaContext()
@@ -30,15 +32,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
     updateIdeaFormContextData({ [e.target.name]: value })
   }
 
-  const handleLocationDistrictsInput = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>|React.ChangeEvent<HTMLTextAreaElement>) => {
-    const locationDistricts = ideaFormContextData.locationDistricts;
-
-    if (locationDistricts.includes(e.target.value)) {
-      locationDistricts.splice(locationDistricts.indexOf(e.target.value), 1);
-    } else {
-      locationDistricts.push(e.target.value);
-    }
-
+  const handleLocationDistrictsInput = (locationDistricts: MultiValue<any>) => {
     setIdeaFormContextData({ ...ideaFormContextData, locationDistricts: locationDistricts })
   }
 
@@ -121,26 +115,27 @@ export default function IdeaSubmissionForm(): JSX.Element {
                       </div>
                     </div>
                     <div className="col-6 col-xl-6">
-                      <Select
-                        title="Kerület *"
-                        name="locationDistricts"
+                      <h6><label htmlFor="birthyear">Kerület *</label></h6>
+                      <ReactSelect
+                        isMulti
+                        options={districtDataList}
                         value={ideaFormContextData.locationDistricts}
-                        dataList={districtDataList}
-                        handleChange={handleLocationDistrictsInput}
-                        multiple={true}
+                        onChange={handleLocationDistrictsInput}
                       />
+                    </div>
                   </div>
                 </div>
-                </div>
-              : null}
+                : null}
             </div>
 
             <hr/>
 
             <h2>Ötlet címe</h2>
             <p>
-              Adj ötletednek olyan címet, ami tömör, lényegretörő, kiderül, mit javasolsz. Az előző évben, már megvalósítás alatt álló ötletek listáját
-              <Link href={`/projektek?rand=${rand}`} target={'_blank'}>itt</Link> éred el, segítséget nyújthat a könnyebb kitöltésben.
+              Adj ötletednek olyan címet, ami tömör, lényegretörő, kiderül, mit javasolsz.
+              Az előző évek nyertes, már megvalósítás alatt álló ötleteinek listáját&nbsp;
+              <Link href={`/projektek?rand=${rand}`} target={'_blank'}>itt</Link>
+              &nbsp;éred el, ez segítséget nyújthat a könnyebb kitöltésben.
             </p>
 
             <div className="input-wrapper">

@@ -41,7 +41,7 @@ export default function Layout() {
                     <p>A maximum 120 millió forintnak elégnek kell lennie 5 évi fenntartásra (ha rövidebb életű projekt, akkor a projekt egészére).</p>
                   </Details>
                 </div>
-                <div className="col-md-6 justify-self-end align-self-center p-5">
+                <div className="col-md-6 justify-self-end p-5">
                   <Image src={`/images/pic_megvalosithato-otlet.svg`} width={570} height={345} alt="Az ötleted legyen megvalósítható 120 millió forintból!" aria-hidden={true} />
                 </div>
               </div>
@@ -58,7 +58,7 @@ export default function Layout() {
               </div>
 
               <div className="row">
-                <div className="col-md-6 justify-self-end align-self-center p-5">
+                <div className="col-md-6 justify-self-end p-5">
                   <Image src={`/images/pic_valami-uj.svg`} width={570} height={345} alt="Az ötleted alapján jöjjön létre valami új!" aria-hidden={true} />
                 </div>
                 <div className="col-md-6">
@@ -101,7 +101,7 @@ export default function Layout() {
                     <p>Vannak olyan fővárosi helyszínek, amelyek fejlesztésére hamarosan sor kerül, esetleg már rendelkezésre állnak tervek és a megvalósítás forrásai. Ilyen esetben valószínűleg nem tudjuk befogadni az ötletet, vagy csak akkor, ha összhangban van a tervekkel.</p>
                   </Details>
                 </div>
-                <div className="col-md-6 justify-self-end align-self-center p-5">
+                <div className="col-md-6 justify-self-end p-5">
                   <Image src={`/images/pic_megvalositas-helyszine.svg`} width={570} height={345} alt="Az ötletedet önkormányzati tulajdonú helyszínen tudjuk megvalósítani" aria-hidden={true} />
                 </div>
               </div>
@@ -118,7 +118,7 @@ export default function Layout() {
               </div>
 
               <div className="row">
-                <div className="col-md-6 justify-self-end align-self-center p-5">
+                <div className="col-md-6 justify-self-end p-5">
                   <Image src={`/images/pic_fovarosi-feladat.svg`} width={570} height={345} alt="Legyen fővárosi feladat" aria-hidden={true} />
                 </div>
                 <div className="col-md-6">
@@ -157,7 +157,7 @@ export default function Layout() {
                     <p>A közösségi költségvetés nyertes ötleteit a főváros valósítja meg. Ha a beszerzés szabályait betartva be is von külső megvalósítót, az ötletgazda ugyanolyan esélyekkel indul, mint bárki más.</p>
                   </Details>
                 </div>
-                <div className="col-md-6 justify-self-end align-self-center p-5">
+                <div className="col-md-6 justify-self-end p-5">
                   <Image src={`/images/pic_muveszet.svg`} width={570} height={345} alt="Művészet az utcán" aria-hidden={true} />
                 </div>
               </div>
@@ -174,7 +174,7 @@ export default function Layout() {
               </div>
 
               <div className="row">
-                <div className="col-md-6 justify-self-end align-self-center p-5">
+                <div className="col-md-6 justify-self-end p-5">
                   <Image src={`/images/pic_eselyek.svg`} width={570} height={345} alt="Milyen ötleteknek van esélye a szavazáson?" aria-hidden={true} />
                 </div>
                 <div className="col-md-6">
