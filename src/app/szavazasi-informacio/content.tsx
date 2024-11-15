@@ -15,7 +15,7 @@ export const HowIsItDescided = () => <>
 </>
 
 export const Who = () => <>
-  <p>A nyertes projektötleteket a fővárosi Önkormányzat valósítja meg saját cégein/intézményein keresztül, vagy szükség szerint beszerzési eljárás, pályázat keretében kiválasztott cégek, civil/szakmai partnerek segítségével. Az előző évek nyertes projektjeiről <a href="https://otlet.budapest.hu/projektek" target="_blank">itt olvashatsz</a>.</p>
+  <p>A nyertes projektötleteket a Fővárosi Önkormányzat valósítja meg saját cégein/intézményein keresztül, vagy szükség szerint beszerzési eljárás, pályázat keretében kiválasztott cégek, civil/szakmai partnerek segítségével. Az előző évek nyertes projektjeiről <a href="https://otlet.budapest.hu/projektek" target="_blank">itt olvashatsz</a>.</p>
 </>
 
 export const Mastermind = () => <>
