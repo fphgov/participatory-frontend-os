@@ -77,7 +77,7 @@ export default function HearAboutForm({ profilePreference }: HearAboutFormProps)
                   <option value="facebook">Facebook csoportból</option>
                   <option value="facebook_firend">Ismerős / barát / szervezet Facebook posztjából</option>
                   <option value="civil">Civil szervezet hírleveléből, civil szervezettől</option>
-                  <option value="library">fővárosi Szabó Ervin Könyvtárban</option>
+                  <option value="library">Fővárosi Szabó Ervin Könyvtárban</option>
                   <option value="other">Egyéb</option>
                 </select>
               </div>
