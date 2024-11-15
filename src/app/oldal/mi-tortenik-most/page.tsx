@@ -28,7 +28,7 @@ export default async function WhatPage() {
           <InfoZigZag id="szakmai-ellenorzes" image="/images/illustration-todo.svg" imageAlt="Illusztráció egy listáról" bgColor="">
             <h3 className="single">Szakmai ellenőrzés</h3>
 
-            <p>A fővárosi Önkormányzat szakmai főosztályai megvizsgálják a hozzájuk tartozó ötleteket. Ha a döntéshez kerületi önkormányzat engedélye kell, ők is megvizsgálják. Egy ötlet véleményezésében részt vehet akár több önkormányzati osztály vagy cég is (pl. Főkert, BKK).</p>
+            <p>A Fővárosi Önkormányzat szakmai főosztályai megvizsgálják a hozzájuk tartozó ötleteket. Ha a döntéshez kerületi önkormányzat engedélye kell, ők is megvizsgálják. Egy ötlet véleményezésében részt vehet akár több önkormányzati osztály vagy cég is (pl. Főkert, BKK).</p>
 
             <p><b>Ekkor kiderül, hogy:</b></p>
             <ul>
