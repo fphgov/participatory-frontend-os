@@ -14,7 +14,7 @@ import TextareaLengthValidator from "@/components/common/form-element/TextareaLe
 import FileArea from "@/components/common/form-element/FileArea"
 import Checkbox from "@/components/common/form-element/Checkbox"
 import 'intl-tel-input/build/css/intlTelInput.css';
-import PhonenumberInput, { PhonenumberValue } from "@/components/common/form-element/PhonenumberInput"
+import PhonenumberInput from "@/components/common/form-element/PhonenumberInput"
 import { useIdeaContext } from "./idea-store"
 import { districtDataList } from "@/models/district.model"
 import MediaList from "@/components/common/form-element/MediaList"
@@ -23,6 +23,7 @@ import { generateRandomValue } from "@/utilities/generateRandomValue"
 import { useModalHardContext } from "@/context/modalHard"
 import {locationDataList} from "@/models/location.model";
 import ReactSelect, {MultiValue} from "react-select";
+import {E164Number} from "libphonenumber-js";
 
 export default function IdeaSubmissionFormOverview(): JSX.Element {
   const { ideaFormContextData, updateIdeaFormContextData } = useIdeaContext()
@@ -54,7 +55,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
     updateIdeaFormContextData({ ...ideaFormContextData, locationDistricts: locationDistricts })
   }
 
-  const handlePhonenumberInput = (phoneObject: PhonenumberValue) => {
+  const handlePhonenumberInput = (phoneObject?: E164Number | undefined) => {
     updateIdeaFormContextData({ phone: phoneObject })
   }
 
@@ -83,7 +84,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
       'location_districts',
       ideaFormContextData.locationDistricts.map((item: { value: string }) => item.value)
     )
-    ideaFormData.append('phone', ideaFormContextData.phone.dialCode + ideaFormContextData.phone.phone)
+    ideaFormData.append('phone', ideaFormContextData.phone)
     ideaFormData.append('rule_1', ideaFormContextData.rule_1.toString())
     ideaFormData.append('rule_2', ideaFormContextData.rule_2.toString())
     ideaFormData.append('rule_3', ideaFormContextData.rule_3.toString())
@@ -482,9 +483,9 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                                       handleChange={handlePhonenumberInput}/>
                   </div>
                 </> : <>
-                  {ideaFormContextData.phone?.phone === "" || ideaFormContextData.phone === undefined ?
+                  {ideaFormContextData.phone === "" || ideaFormContextData.phone === undefined ?
                     <p>Nem adtál meg telefonszámot. (Nem kötelező)</p> :
-                    <p>+{ideaFormContextData.phone?.dialCode + ideaFormContextData.phone?.phone}</p>}
+                    <p>{ideaFormContextData.phone}</p>}
                 </>}
 
                 {errorObject?.phone ? Object.values(errorObject.phone).map((err, i) => {

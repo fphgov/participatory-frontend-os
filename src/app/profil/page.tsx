@@ -62,7 +62,7 @@ export default async function ProfilePage() {
               <SectionBox footer={
                 <div className="section-newsletter"><NewsletterChangeForm profilePreference={profilePreference} /></div>
               }>
-                <ProfileBox profile={profile} />
+                <ProfileBox profile={profile} profilePreference={profilePreference} />
               </SectionBox>
 
               {0 ?

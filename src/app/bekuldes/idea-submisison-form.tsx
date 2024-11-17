@@ -6,7 +6,7 @@ import InputLengthValidator from "@/components/common/form-element/InputLengthVa
 import TextareaLengthValidator from "@/components/common/form-element/TextareaLengthValidator"
 import FileArea from "@/components/common/form-element/FileArea"
 import 'intl-tel-input/build/css/intlTelInput.css';
-import PhonenumberInput, { PhonenumberValue } from "@/components/common/form-element/PhonenumberInput"
+import PhonenumberInput from "@/components/common/form-element/PhonenumberInput"
 import Link from "next/link"
 import { useIdeaContext } from "./idea-store"
 import { districtDataList } from "@/models/district.model"
@@ -14,6 +14,7 @@ import { locationDataList } from "@/models/location.model"
 import { generateRandomValue } from "@/utilities/generateRandomValue"
 import React from 'react'
 import ReactSelect, {MultiValue} from 'react-select'
+import {E164Number} from "libphonenumber-js";
 
 export default function IdeaSubmissionForm(): JSX.Element {
   const { ideaFormContextData, updateIdeaFormContextData } = useIdeaContext()
@@ -36,7 +37,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
     updateIdeaFormContextData({ ...ideaFormContextData, locationDistricts: locationDistricts })
   }
 
-  const handlePhonenumberInput = (phoneObject: PhonenumberValue) => {
+  const handlePhonenumberInput = (phoneObject?: E164Number | undefined) => {
     updateIdeaFormContextData({ phone: phoneObject })
   }
 
