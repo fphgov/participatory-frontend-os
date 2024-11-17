@@ -48,6 +48,7 @@
     "react-dom": "18.3.1",
     "react-intl-tel-input-v2": "^1.0.8",
     "react-leaflet": "^4.2.1",
+    "react-phone-number-input": "^3.4.9",
     "react-select": "^5.8.3",
     "sass": "^1.77.8",
     "store": "^2.0.12",

@@ -25,7 +25,7 @@ export const IdeaContextProvider = ({ children }: IdeaContextProviderProps) => {
     'title': '',
     'description': '',
     'solution': '',
-    'phone':  { iso2: 'hu', dialCode: '36', phone: '' },
+    'phone': '',
     'rule_1': false,
     'rule_2': false,
     'rule_3': false,
