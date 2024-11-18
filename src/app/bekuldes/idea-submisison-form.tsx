@@ -12,12 +12,27 @@ import { useIdeaContext } from "./idea-store"
 import { districtDataList } from "@/models/district.model"
 import { locationDataList } from "@/models/location.model"
 import { generateRandomValue } from "@/utilities/generateRandomValue"
-import React from 'react'
+import React, {useEffect} from 'react'
 import ReactSelect, {MultiValue} from 'react-select'
 import {E164Number} from "libphonenumber-js";
+import {IUser} from "@/models/user.model";
+import {IUserPreference} from "@/models/userPreference.model";
 
-export default function IdeaSubmissionForm(): JSX.Element {
+export type IdeaSubmissionFormProps = {
+  profile: IUser|null
+  profilePreference: IUserPreference|null
+}
+
+export default function IdeaSubmissionForm({ profile, profilePreference }: IdeaSubmissionFormProps): JSX.Element {
   const { ideaFormContextData, updateIdeaFormContextData } = useIdeaContext()
+
+  useEffect(() => {
+    updateIdeaFormContextData({
+      fullName:  profile?.firstname + ' ' + profile?.lastname,
+      birthYear: profilePreference?.birthyear,
+      postalCode: profilePreference?.postalCode
+    })
+  }, [])
 
   const rand = generateRandomValue().toString()
 

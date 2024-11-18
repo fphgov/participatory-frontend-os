@@ -36,6 +36,11 @@ import {ApiError} from 'next/dist/server/api-utils';
 import {Agent, setGlobalDispatcher} from 'undici'
 import {IUserPreference} from '@/models/userPreference.model'
 
+export type ProfileData = {
+  profile: IUser|null
+  profilePreference: IUserPreference|null
+}
+
 type ApiLoginUserProps = {
   email: string
   password: string
@@ -145,6 +150,16 @@ export async function apiLoginUserWithHash(hash: string): Promise<{ token: strin
   return {
     token,
     message
+  }
+}
+
+export async function getProfileData(): Promise<ProfileData> {
+  const profile = await apiProfileData()
+  const profilePreference = await apiProfilePreferenceData()
+
+  return {
+    profile,
+    profilePreference,
   }
 }
 
