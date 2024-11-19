@@ -30,7 +30,7 @@ export default function Layout() {
               <div className="row">
                 <div className="col-md-6">
                   <Details className="section-more" summary={<div>Az ötletek megvalósítási költségét a hivatal fogja megbecsülni</div>}>
-                    <p>Ettől függetlenül jó, ha tudod,hogy egy automata üzemű közvécé telepítése mintegy 60 millió forint, de akár egyetlen fa elültetése is több tízmillióba kerülhet, ha burkolatot kell hozzá feltörni, ki kell alakítani olyan talajszerkezetet, amelyben a fa hosszú ideig tud fejlődni, esetleg közműveket kell kiváltani.</p>
+                    <p>Ettől függetlenül jó, ha tudod, hogy egy automata üzemű közvécé telepítése mintegy 60 millió forint, de akár egyetlen fa elültetése is több tízmillióba kerülhet, ha burkolatot kell hozzá feltörni, ki kell alakítani olyan talajszerkezetet, amelyben a fa hosszú ideig tud fejlődni, esetleg közműveket kell kiváltani.</p>
                   </Details>
 
                   <Details className="section-more" summary={<div>Ne legyen túl bonyolult, összetett az ötleted!</div>}>
