@@ -173,7 +173,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
                 name="description"
                 value={ideaFormContextData.description}
                 showLabel={false}
-                options={{min: 100, max: 1000}}
+                options={{min: 80, max: 1000}}
                 onChange={handleChangeInputTitle}
               />
             </div>
@@ -191,7 +191,7 @@ export default function IdeaSubmissionForm(): JSX.Element {
                 name="solution"
                 value={ideaFormContextData.solution}
                 showLabel={false}
-                options={{min: 20, max: 1000}}
+                options={{min: 50, max: 1000}}
                 onChange={handleChangeInputTitle}
               />
             </div>
