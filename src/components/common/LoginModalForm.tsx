@@ -107,7 +107,11 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
 
     return (
       <>
-        <form className="" action={onLogin} ref={containerRef}>
+        <form className="" action={onLogin} ref={containerRef} onLoad={
+          loadReCaptcha(process.env.NEXT_PUBLIC_SITE_KEY, (recaptchaToken: string) => {
+            setRecaptchaToken(recaptchaToken)
+          })
+        }>
           <fieldset>
             <input type="hidden" name="type" value={searchParams.get('auth')?.toString() || 'login'} />
             <input type="hidden" name="pathname" value={(from ?? pathname) + '?' + filteredSearchParams()} />
