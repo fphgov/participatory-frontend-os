@@ -34,6 +34,17 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
   const from = searchParams.get('from') || null
   const pathname = usePathname()
 
+  useEffect(() => {
+    // @ts-ignore
+    loadReCaptcha(process.env.NEXT_PUBLIC_SITE_KEY, (recaptchaToken: string) => {
+      setRecaptchaToken(recaptchaToken)
+    })
+
+    renderContent()
+
+    setLoaded(true)
+  }, [])
+
   async function onLogin(formData: FormData) {
     setScrollModalHard(false)
 
@@ -295,17 +306,6 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
 
     setOpenModalHard(true)
   }
-
-  useEffect(() => {
-    // @ts-ignore
-    loadReCaptcha(process.env.NEXT_PUBLIC_SITE_KEY, (recaptchaToken: string) => {
-      setRecaptchaToken(recaptchaToken)
-    })
-
-    renderContent()
-
-    setLoaded(true)
-  }, [])
 
   useEffect(() => {
     if (!openModalHard && loaded) {
