@@ -144,7 +144,14 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
 
   function handleOpenModal() {
   const content = <div className="modal-content-center">
-      <p>Megkaptuk az ötleted, rövid ellenőrzést követően közzétesszük a honlapon, erről értesíteni fogunk. A lakossági támogatásra január 20. és február 3. között kerül sor, erről e-mailben küldünk még tájékoztatást.</p>
+      <p>
+        Megkaptuk az ötleted, rövid ellenőrzést követően közzétesszük a honlapon, erről értesíteni fogunk.
+        A&nbsp;
+        <Link href={'/hirek/lakossagi-egyeztetessel-indul-negy-zoldinfrastruktura-fejlesztesi-projekt-tervezese'} onClick={() => {setOpenModalHard(false)}}>
+          lakossági támogatásra
+        </Link>
+        &nbsp;január 20. és február 3. között kerül sor, erről e-mailben küldünk még tájékoztatást.
+      </p>
       <p><b>Ha van további ötleted, add be azt is most!</b></p>
 
       <button type="button" className="btn btn-headline btn-next" onClick={() => {
