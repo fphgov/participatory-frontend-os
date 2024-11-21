@@ -1,8 +1,6 @@
 'use client'
 
-import { SetStateAction, useCallback, useEffect, useRef, useState } from "react"
-// @ts-ignore
-import { ReCaptcha, loadReCaptcha } from "@icetee/react-recaptcha-v3"
+import { useCallback, useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import Error from "@/components/common/Error"
 import ErrorMini from "@/components/common/ErrorMini"
@@ -10,17 +8,17 @@ import { loginFom } from "@/app/actions"
 import { useModalHardContext } from "@/context/modalHard"
 import { ReadonlyURLSearchParams, usePathname, useRouter } from "next/navigation"
 import CheckboxUncontrolled from "./form-element/CheckboxUncontrolled"
+import {ReCaptcha} from "react-recaptcha-v3";
 
 type LoginModalFormProps = {
   searchParams: ReadonlyURLSearchParams
+  recaptcha: ReCaptcha | undefined
 }
 
-export default function LoginModalForm({ searchParams } : LoginModalFormProps): JSX.Element {
+export default function LoginModalForm({ searchParams, recaptcha } : LoginModalFormProps): JSX.Element {
   const router = useRouter()
   const { openModalHard, setOpenModalHard, setDataModalHard, setScrollModalHard } = useModalHardContext()
   const containerRef = useRef(null);
-  const [recaptcha, setRecaptcha] = useState<ReCaptcha>()
-  const [recaptchaToken, setRecaptchaToken] = useState('')
   const [errorObject, setErrorObject] = useState<Record<string, string>|undefined>(undefined)
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState('')
@@ -234,15 +232,6 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
                 </div>
               </> : null}
 
-              <ReCaptcha
-                ref={(ref: any) => setRecaptcha(ref)}
-                sitekey={process.env.NEXT_PUBLIC_SITE_KEY || ''}
-                action='submit'
-                verifyCallback={(recaptchaToken: SetStateAction<string>) => {
-                  setRecaptchaToken(recaptchaToken)
-                }}
-              />
-
               <div className="modal-links">
                 {isLoginTab ?
                   <Link
@@ -297,11 +286,6 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
   }
 
   useEffect(() => {
-    // @ts-ignore
-    loadReCaptcha(process.env.NEXT_PUBLIC_SITE_KEY, (recaptchaToken: string) => {
-      setRecaptchaToken(recaptchaToken)
-    })
-
     renderContent()
 
     setLoaded(true)
