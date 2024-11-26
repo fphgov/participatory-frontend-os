@@ -298,8 +298,10 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
 
   useEffect(() => {
     // @ts-ignore
-    loadReCaptcha(process.env.NEXT_PUBLIC_SITE_KEY, (recaptchaToken: string) => {
-      setRecaptchaToken(recaptchaToken)
+    window?.grecaptcha?.ready(() => {
+      loadReCaptcha(process.env.NEXT_PUBLIC_SITE_KEY, (recaptchaToken: string) => {
+        setRecaptchaToken(recaptchaToken)
+      })
     })
 
     renderContent()
