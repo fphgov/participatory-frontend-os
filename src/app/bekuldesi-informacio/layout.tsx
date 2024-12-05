@@ -168,8 +168,16 @@ export default function Layout() {
             <div className="container">
               <div className="row">
                 <div className="col-md-12">
-                  <h4>Milyen ötleteknek van esélye a szavazáson?</h4>
-                  <p>Az ötletekre a budapestiek fognak szavazni, a Főváros pedig a legnépszerűbb ötleteket valósítja meg. Mit mérlegelhetsz, mire érdemes figyelned?</p>
+                  <h4>Új lépéssel bővült a közösségi költségvetés folyamata!</h4>
+                  <p>
+                    Az ötletbeadást követően január 20-tól február 3-ig egy előszűréssel egészül ki a közösségi költségvetés folyamata.
+                    A közösségi költségvetés szabályainak megfelelt ötleteket lakossági támogatásra bocsátjuk.
+                    A 300 legtöbb támogatást szerzett ötlet kerül majd a szakmai értékelők elé.
+                    Erre azért van szükség, hogy a szavazólapra kevesebb,
+                    könnyebben befogadható mennyiségű ötlet kerüljön, valamint
+                    hogy a Hivatal lépést tudjon tartani az egyre népszerűbbé váló programmal,
+                    tekintettel a véges kapacitásokra.
+                  </p>
                 </div>
               </div>
 
@@ -178,12 +186,17 @@ export default function Layout() {
                   <Image src={`/images/pic_eselyek.svg`} width={570} height={345} alt="Milyen ötleteknek van esélye a szavazáson?" aria-hidden={true} />
                 </div>
                 <div className="col-md-6">
-                  <Details className="section-more" summary={<div>A helyszín sokat számít</div>}>
-                    <p>A helyszín alapvetően meghatározza, hogy hány embert érint a javaslat. Minél több ember érintett, annál nagyobb eséllyel nyerhet az ötleted.</p>
+                  <Details className="section-more" summary={<div>A helyszín sokat számít.</div>}>
+                    <p>
+                      A helyszín alapvetően meghatározza, hogy hány embert érint a javaslat.
+                      Minél több ember érintett, annál nagyobb eséllyel nyerhet az ötleted.
+                    </p>
                   </Details>
 
-                  <Details className="section-more" summary={<div>Ki fog kampányolni az ötleted mellett?</div>}>
-                    <p>Lehet egy ötletnek annyira népszerű a témája, felvetése, hogy az minden támogatás, kampányolás nélkül is nagyon sok embert szavazásra késztet, de ha fejlesztési ötletedet annak helyszíne vagy témája miatt felkarolhat egy nagy eléréssel - például bejáratott közösségi média platformmal - rendelkező szervezet vagy közösség, az jelentősen megnöveli az esélyeit. </p>
+                  <Details className="section-more" summary={<div>Gondold végig, hány ember számára lehet érdekes az ötleted!</div>}>
+                    <p>
+                      Ötleted könnyebben kaphat támogatást, ha annak témája sokakat megmozgat.
+                    </p>
                   </Details>
                 </div>
               </div>
