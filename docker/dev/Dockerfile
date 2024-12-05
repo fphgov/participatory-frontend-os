@@ -1,4 +1,4 @@
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 
 ARG ARG_DISABLE_ESLINT_PLUGIN='true'
 ARG ARG_TS_IGNORE_BUILD_ERRORS='true'
@@ -46,7 +46,7 @@ RUN modernizr -c modernizr-config.json -d /app/public/modernizr.js
 RUN npm ci --force
 RUN npm run build
 
-FROM node:20-alpine AS production
+FROM node:22-alpine AS production
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
