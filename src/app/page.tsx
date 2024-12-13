@@ -15,7 +15,7 @@ export default function Home() {
               <div className="container">
                 <div className="row">
                   <div className="offset-lg-2 col-lg-8">
-                    <h3>Küldd be ötleted január 6-ig, <br/> majd gyűjts támogatókat február 3-ig!</h3>
+                    <h3>Küldd be ötleted január 31-ig, <br/> majd gyűjts támogatókat február 21-ig!</h3>
                   </div>
 
                   <div className="offset-lg-3 col-lg-6">
