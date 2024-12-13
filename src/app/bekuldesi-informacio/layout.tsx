@@ -170,7 +170,7 @@ export default function Layout() {
                 <div className="col-md-12">
                   <h4>Új lépéssel bővült a közösségi költségvetés folyamata!</h4>
                   <p>
-                    Az ötletbeadást követően január 20-tól február 3-ig egy előszűréssel egészül ki a közösségi költségvetés folyamata.
+                    Az ötletbeadást követően február 6-21. között egy előszűréssel egészül ki a közösségi költségvetés folyamata.
                     A közösségi költségvetés szabályainak megfelelt ötleteket lakossági támogatásra bocsátjuk.
                     A 300 legtöbb támogatást szerzett ötlet kerül majd a szakmai értékelők elé.
                     Erre azért van szükség, hogy a szavazólapra kevesebb,
