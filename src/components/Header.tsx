@@ -17,7 +17,7 @@ export default function Header({ loggedIn }: IHeader): JSX.Element {
     // { title: "Tudnivalók a szavazáshoz", href: "/tudnivalok-a-szavazasrol", outside: false },
     { title: "Hírek, rendezvények", href: "/hirek", outside: false },
     { title: "Ötletek", href: "#", outside: false, submenuItems: [
-      { title: "Beküldött", href: `/otletek?campaign=4&rand=${rand}`, outside: true },
+      { title: "Beküldött", href: `/otletek?campaign=5&rand=${rand}`, outside: true },
       { title: "Feldolgozott", href: `/tervek?rand=${rand}`, outside: false },
       { title: "Megvalósuló", href: `/projektek?rand=${rand}`, outside: false },
     ] },
