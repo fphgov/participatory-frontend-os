@@ -542,7 +542,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
               <Checkbox
                 id="rule_1"
                 name="rule_1"
-                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha az a Főváros hatáskörében megvalósítható vagy karbantartási kérdés."
+                label="Megértettem, hogy az ötletem csak akkor kerülhet szavazólistára, ha az a Főváros hatáskörében megvalósítható és nem szabályozási vagy karbantartási kérdés."
                 handleChange={handleChangeInput}
                 value={ideaFormContextData.rule_1}
               />
