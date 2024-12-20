@@ -584,7 +584,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
               <Checkbox
                 id="rule_4"
                 name="rule_4"
-                label="Tudomásul veszem, hogy az ötlet hivatali szakmai értékelésének előfeltétele a lakossági támogatáson való továbbjutás."
+                label={<>Tudomásul veszem, hogy az ötlet <a href="/hirek/lakossagi-tamogatas-uj-fazis-a-kozossegi-koltsegvetesben" target="_blank">hivatali szakmai értékelésének</a> előfeltétele a lakossági támogatáson való továbbjutás.</>}
                 handleChange={handleChangeInput}
                 value={ideaFormContextData.rule_4}
               />
