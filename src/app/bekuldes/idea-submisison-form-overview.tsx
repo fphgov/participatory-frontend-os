@@ -152,7 +152,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
         <Link href={'/hirek/lakossagi-egyeztetessel-indul-negy-zoldinfrastruktura-fejlesztesi-projekt-tervezese'} onClick={() => {setOpenModalHard(false)}}>
           lakossági támogatásra
         </Link>
-        &nbsp;január 20. és február 3. között kerül sor, erről e-mailben küldünk még tájékoztatást.
+        &nbsp;február 6. és február 21. között kerül sor, erről e-mailben küldünk még tájékoztatást.
       </p>
       <p><b>Ha van további ötleted, add be azt is most!</b></p>
 
@@ -169,7 +169,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
     </div>
 
     setDataModalHard({
-      title: 'Köszönjük, hogy megosztottad velünk ötleted! Január 20-tól gyűjts hozzá támogatókat!',
+      title: 'Köszönjük, hogy megosztottad velünk ötleted! Február 6-tól gyűjts hozzá támogatókat!',
       content,
       showCancelButton: false,
     })
