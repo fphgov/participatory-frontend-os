@@ -149,7 +149,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
       <p>
         Megkaptuk az ötleted, rövid ellenőrzést követően közzétesszük a honlapon, erről értesíteni fogunk.
         A&nbsp;
-        <Link href={'/hirek/lakossagi-egyeztetessel-indul-negy-zoldinfrastruktura-fejlesztesi-projekt-tervezese'} onClick={() => {setOpenModalHard(false)}}>
+        <Link href={'/hirek/lakossagi-tamogatas-uj-fazis-a-kozossegi-koltsegvetesben'} onClick={() => {setOpenModalHard(false)}}>
           lakossági támogatásra
         </Link>
         &nbsp;február 6. és február 21. között kerül sor, erről e-mailben küldünk még tájékoztatást.
