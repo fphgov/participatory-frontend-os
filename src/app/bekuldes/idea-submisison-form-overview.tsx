@@ -319,12 +319,13 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                               </div>
                             </div>
                             <div className="col-6 col-xl-6">
-                              <h6><label htmlFor="birthyear">Kerület *</label></h6>
+                              <h6><label>Kerület *</label></h6>
                               <ReactSelect
                                 isMulti
                                 options={districtDataList}
                                 value={ideaFormContextData.locationDistricts}
                                 onChange={handleLocationDistrictsInput}
+                                placeholder={'Válassz'}
                               />
                             </div>
                           </div>
