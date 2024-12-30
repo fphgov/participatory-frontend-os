@@ -8,29 +8,37 @@ type IdeaContextProviderProps = {
 
 export type IdeaContextContent = {
   ideaFormContextData: Record<string, any>
-  setIdeaFormContextData: (ideaFormContextData: Record<string, any>) => void
+  updateIdeaFormContextData: (newData: Record<string, any>) => void
 }
 
 const IdeaContext = createContext<IdeaContextContent>({} as IdeaContextContent)
 
 export const IdeaContextProvider = ({ children }: IdeaContextProviderProps) => {
   const [ideaFormContextData, setIdeaFormContextData] = useState<Record<string, any>>({
+    'fullName': '',
+    'birthYear': '',
+    'postalCode': '',
     'location': '',
     'locationDescription': '',
-    'locationDistrict': '',
+    'locationDistricts': [],
     'cost': false,
     'title': '',
     'description': '',
     'solution': '',
-    'phone':  { iso2: 'hu', dialCode: '36', phone: '' },
+    'phone': '',
     'rule_1': false,
     'rule_2': false,
     'rule_3': false,
+    'rule_4': false,
     'medias': [],
   })
 
+  const updateIdeaFormContextData = (newData: Record<string, any>): void => {
+    setIdeaFormContextData(prevData => ({ ...prevData, ...newData }))
+  }
+
   return (
-    <IdeaContext.Provider value={{ ideaFormContextData, setIdeaFormContextData }}>
+    <IdeaContext.Provider value={{ ideaFormContextData, updateIdeaFormContextData }}>
       {children}
     </IdeaContext.Provider>
   )

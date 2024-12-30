@@ -1,24 +1,17 @@
 import { Metadata } from "next"
-import { apiProfileData, apiProfilePreferenceData } from "@/lib/api-requests"
+import {getProfileData} from "@/lib/api-requests"
 import HeroPage from '@/components/common/HeroPage'
 import ProfileBox from '@/components/profile/ProfileBox'
 import Link from 'next/link'
-import { IUser } from '@/models/user.model'
 import ProfileDeleteButton from '@/components/profile/ProfileDeleteButton'
 import { notFound } from 'next/navigation'
 import PasswordChangeForm from './password-change-form'
 import SectionBox from "@/components/profile/SectionBox"
 import SectionBoxDetails from "@/components/profile/SectionBoxDetails"
 import PersonalDataForm from "./personal-data-form"
-import { IUserPreference } from "@/models/userPreference.model"
 import HearAboutForm from "./hear-about-form"
 import NewsletterChangeForm from "./newsletter-change-form"
 import PrizeChangeForm from "./prize-change-form"
-
-type ProfilePageData = {
-  profile: IUser|null
-  profilePreference: IUserPreference|null
-}
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -32,18 +25,8 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-async function getData(): Promise<ProfilePageData> {
-  const profile = await apiProfileData()
-  const profilePreference = await apiProfilePreferenceData()
-
-  return {
-    profile,
-    profilePreference,
-  }
-}
-
 export default async function ProfilePage() {
-  const { profile, profilePreference } = await getData()
+  const { profile, profilePreference } = await getProfileData()
 
   if (! (profile && profilePreference)) {
     return notFound()
@@ -62,7 +45,7 @@ export default async function ProfilePage() {
               <SectionBox footer={
                 <div className="section-newsletter"><NewsletterChangeForm profilePreference={profilePreference} /></div>
               }>
-                <ProfileBox profile={profile} />
+                <ProfileBox profile={profile} profilePreference={profilePreference} />
               </SectionBox>
 
               {0 ?

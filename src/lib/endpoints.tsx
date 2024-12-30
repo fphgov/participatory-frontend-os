@@ -1,6 +1,7 @@
 const endpoints = {
   API_REQ_PING: '/api/ping',
   API_REQ_LOGIN: '/api/login',
+  API_REQ_LOGOUT: '/api/logout',
   API_REQ_CONFIG: '/api/options',
   API_REQ_REGISTRATION: '/api/user/registration',
   API_REQ_PAGE: '/api/page/:slug',
@@ -31,7 +32,6 @@ const endpoints = {
   API_REQ_PLANS: '/api/plans',
   API_REQ_MEDIA: '/api/media/:id',
   API_REQ_MEDIA_DOWNLOAD: '/api/media/download/:id',
-  API_REQ_GEOCODING: '/api/geocoding',
   API_REQ_FILTER_IDEAS: '/api/idea/filter',
   API_REQ_FILTER_PROJECTS: '/api/projects/filter',
   API_REQ_FILTER_PLANS: '/api/plans/filter',

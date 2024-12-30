@@ -2,7 +2,6 @@
 
 import React, { createRef, useState } from 'react'
 import DragAndDrop from './DragAndDrop'
-import clonedeep from 'lodash.clonedeep'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash, faFileUpload, faFile } from "@fortawesome/free-solid-svg-icons"
 import fileSize from '@/utilities/fileSize'
@@ -13,24 +12,25 @@ type FileAreaProps = {
 }
 
 export default function FileArea({ changeRaw, originalMedias = [] }: FileAreaProps) {
+  const medias = structuredClone(originalMedias);
   const inputRef = createRef<HTMLInputElement>()
   const [ dragged, setDragged ] = useState(false)
 
   const maxFiles = 5
 
-  const removeItemOnce = (array: any[], value: any) => {
-    const index = array.indexOf(value)
+  const removeItemOnce = (files: any[], fileToBeDeleted: File) => {
+    const index = files.findIndex(file =>
+      file.name === fileToBeDeleted.name && file.size === fileToBeDeleted.size
+    );
 
     if (index > -1) {
-      array.splice(index, 1)
+      files.splice(index, 1)
     }
 
-    return array
+    return files
   }
 
   const addTempMedia = (newMediaList: string | any[]) => {
-    const medias = clonedeep(originalMedias)
-
     if ((originalMedias.length + newMediaList.length) <= maxFiles) {
       for (let i = 0; i < newMediaList.length; i++) {
         medias.push(newMediaList[i])
@@ -41,7 +41,6 @@ export default function FileArea({ changeRaw, originalMedias = [] }: FileAreaPro
   }
 
   const removeTempMedia = (file: any) => {
-    const medias = clonedeep(originalMedias)
     const removedMedias = removeItemOnce(medias, file)
 
     changeRaw('medias', [ ...removedMedias ])

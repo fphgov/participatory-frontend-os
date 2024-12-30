@@ -4,19 +4,21 @@ import { cookies } from 'next/headers'
 import { verifyJWT } from './token'
 import { User } from '@/middleware'
 
-export async function saveToken(token: string) {
-  const hours = 1 * 60 * 60 * 1000
+export async function saveToken(token: string): Promise<void> {
+  const hours: number = parseInt(process.env.NEXT_TOKEN_EXPIRATION_IN_HOUR ?? "24");
+  const expirationDate = new Date(Date.now() + hours * 60 * 60 * 1000);
 
   cookies().set({
     name: 'token',
     value: token,
     httpOnly: true,
     path: '/',
-    secure: process.env.NODE_ENV !== "development" ? true : false,
+    secure: process.env.NODE_ENV === "production",
     sameSite: 'lax',
-    expires: Date.now() + hours
-  })
+    expires: expirationDate
+  });
 }
+
 
 export async function getToken(): Promise<any> {
   return cookies().get('token')

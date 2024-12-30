@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { verifyJWT } from "./lib/token"
 import { getErrorResponse } from "./lib/helpers"
+import endpoints from "@/lib/endpoints";
 
 export type User = {
   username: string
@@ -68,27 +69,27 @@ export async function middleware(req: NextRequest) {
     }
   }
 
-  // if (redirectToLogin) {
-  //   const response = NextResponse.redirect(new URL(`/bejelentkezes`, req.url))
-
-  //   response.cookies.set("token", "", { expires: new Date(Date.now()) })
-
-  //   return response
-  // }
-
-  // const authUser = (req as AuthenticatedRequest).user
-
-  // if (!authUser) {
-  //   return NextResponse.redirect(
-  //     new URL('/bejelentkezes', req.url)
-  //   )
-  // }
-
   if (req.url.includes("/bejelentkezes")) {
     return NextResponse.redirect(new URL("/profil", req.url))
   }
 
   if (req.url.includes("/kijelentkezes")) {
+    const urlencoded = new URLSearchParams()
+
+    urlencoded.append("token", token ?? '')
+    urlencoded.append("type", 'logout')
+
+    await fetch(`${process.env.BACKEND_URL}/app${endpoints.API_REQ_LOGOUT}`, {
+      cache: "no-store",
+      method: "POST",
+      credentials: "include",
+      headers: {
+        'Content': "application/json",
+        'Content-Type': "application/x-www-form-urlencoded",
+      },
+      body: urlencoded,
+    })
+
     const response = NextResponse.redirect(new URL("/force-redirect", req.url))
 
     response.cookies.set("token", "", { expires: new Date(Date.now()) })

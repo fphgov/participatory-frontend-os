@@ -17,17 +17,13 @@ type LoginModalFormProps = {
 
 export default function LoginModalForm({ searchParams } : LoginModalFormProps): JSX.Element {
   const router = useRouter()
-  const pathname = usePathname()
-
   const { openModalHard, setOpenModalHard, setDataModalHard, setScrollModalHard } = useModalHardContext()
-
   const containerRef = useRef(null);
   const [recaptcha, setRecaptcha] = useState<ReCaptcha>()
   const [recaptchaToken, setRecaptchaToken] = useState('')
   const [errorObject, setErrorObject] = useState<Record<string, string>|undefined>(undefined)
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState('')
-
   const createQueryString = useCallback((name: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString())
 
@@ -35,6 +31,8 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
 
     return params.toString()
   }, [searchParams])
+  const from = searchParams.get('from') || null
+  const pathname = usePathname()
 
   async function onLogin(formData: FormData) {
     setScrollModalHard(false)
@@ -74,6 +72,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
   const removeSearchParams = () => {
     const nextSearchParams = new URLSearchParams(searchParams.toString())
 
+    nextSearchParams.delete('from')
     nextSearchParams.delete('auth')
 
     router.replace(`${pathname}?${nextSearchParams.toString()}`)
@@ -111,7 +110,7 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
         <form className="" action={onLogin} ref={containerRef}>
           <fieldset>
             <input type="hidden" name="type" value={searchParams.get('auth')?.toString() || 'login'} />
-            <input type="hidden" name="pathname" value={pathname + '?' + filteredSearchParams()} />
+            <input type="hidden" name="pathname" value={(from ?? pathname) + '?' + filteredSearchParams()} />
 
             {error ? <Error message={error} /> : null}
 
@@ -299,8 +298,10 @@ export default function LoginModalForm({ searchParams } : LoginModalFormProps): 
 
   useEffect(() => {
     // @ts-ignore
-    loadReCaptcha(process.env.NEXT_PUBLIC_SITE_KEY, (recaptchaToken: string) => {
-      setRecaptchaToken(recaptchaToken)
+    window?.grecaptcha?.ready(() => {
+      loadReCaptcha(process.env.NEXT_PUBLIC_SITE_KEY, (recaptchaToken: string) => {
+        setRecaptchaToken(recaptchaToken)
+      })
     })
 
     renderContent()
