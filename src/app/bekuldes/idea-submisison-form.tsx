@@ -232,7 +232,8 @@ export default function IdeaSubmissionForm({ profile, profilePreference }: IdeaS
             <div className="input-wrapper">
               <label htmlFor="medias">Képek, dokumentumok feltöltése</label>
               <div className="tipp">Itt tudsz képeket vagy egyéb dokumentumokat feltölteni, amikről úgy gondolod,
-                segítik az ötleted megértését, kapcsolódnak hozzá. Max. 5 darab fájl tölthető fel!
+                segítik az ötleted megértését. Max. 5 darab fájl tölthető fel! Csak olyan fájlt küldj el, amit
+                közzétehetünk. Kérjük, ne adj meg személyes adatot (pl. arcképet, rendszámot, nevet, emailcímet)!
               </div>
 
               <FileArea changeRaw={handleChangeFileRaw} originalMedias={ideaFormContextData.medias}/>

@@ -145,7 +145,7 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
   }
 
   function handleOpenModal() {
-  const content = <div className="modal-content-center">
+    const content = <div className="modal-content-center">
       <p>
         Megkaptuk az ötleted, rövid ellenőrzést követően közzétesszük a honlapon, erről értesíteni fogunk.
         A&nbsp;
@@ -518,7 +518,8 @@ export default function IdeaSubmissionFormOverview(): JSX.Element {
                 {inputComponentEdit === "medias" ? <>
                   <div className="input-wrapper-content">
                     <div className="tipp">Itt tudsz képeket vagy egyéb dokumentumokat feltölteni, amikről úgy gondolod,
-                      segítik az ötleted megértését, kapcsolódnak hozzá. Max. 5 darab fájl tölthető fel!
+                      segítik az ötleted megértését. Max. 5 darab fájl tölthető fel! Csak olyan fájlt küldj el, amit
+                      közzétehetünk. Kérjük, ne adj meg személyes adatot (pl. arcképet, rendszámot, nevet, emailcímet)!
                     </div>
 
                     <FileArea changeRaw={handleChangeFileRaw} originalMedias={ideaFormContextData.medias}/>
