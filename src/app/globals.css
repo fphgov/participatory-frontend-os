@@ -1047,6 +1047,7 @@ footer .fa-inverse {
 }
 
 .input-wrapper select {
+  -webkit-appearance: none;
   display: block;
   width: 100%;
   min-height: 24px;
