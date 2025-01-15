@@ -9,6 +9,7 @@ import { ICampaign } from "@/models/campaign.model"
 import { IWorkflowStateExtra } from "@/models/workflowStateExtra.model"
 import { IMedia } from "@/models/media.model"
 import { IComment } from "@/models/comment.model"
+import {IIdeaCampaignLocation} from "@/models/ideaCampaignLocation.model";
 
 export type IIdeaStatus = {
   id: string|number
@@ -23,6 +24,7 @@ export type IIdea = {
   campaign_theme?: ICampaignTheme
   campaignTheme?: ICampaignTheme
   campaignLocation?: ICampaignLocation
+  ideaCampaignLocations?: IIdeaCampaignLocation[]
   _links?: ListLinks
   project?: IProject
   featuredImage?: IFeaturedImage
