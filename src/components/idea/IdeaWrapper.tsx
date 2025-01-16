@@ -9,7 +9,7 @@ import Comment from "@/components/idea/Comment"
 import nFormatter from "@/utilities/nFormatter"
 import ShareInfo from "@/components/common/ShareInfo"
 import Gallery from "../common/Gallery"
-import {IIdeaCampaignLocation} from "@/models/ideaCampaignLocation.model";
+import { IIdeaCampaignLocation } from "@/models/ideaCampaignLocation.model";
 
 type IdeasWrapperProps = {
   idea: IIdea
