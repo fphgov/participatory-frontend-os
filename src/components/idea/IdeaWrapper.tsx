@@ -164,11 +164,12 @@ export default function IdeaWrapper({ idea }: IdeasWrapperProps): JSX.Element {
                   <div className="prop-single-side-section">
                     <div className="prop-info-title">Helyszín</div>
                     <div className="prop-info-content">
-                      <ul className="m-0">
-                      {idea?.ideaCampaignLocations?.map((ideaCampaignLocation: IIdeaCampaignLocation) => (
-                        <li key={ideaCampaignLocation.id}>{ideaCampaignLocation?.campaignLocation?.name}</li>
+                      {idea?.ideaCampaignLocations?.map((ideaCampaignLocation: IIdeaCampaignLocation, index: number) => (
+                        <span key={ideaCampaignLocation.campaignLocation?.id || index}>
+                          {ideaCampaignLocation?.campaignLocation?.name}
+                          {index < (idea?.ideaCampaignLocations?.length ? idea.ideaCampaignLocations.length : 0) - 1 ? ', ' : ''}
+                        </span>
                       ))}
-                      </ul>
                     </div>
                   </div>
                 ) : null}
