@@ -909,6 +909,11 @@ body.open-menu .mobile-menu {
   display: block;
 }
 
+.mobile-menu ul>li>button {
+  width: 100%;
+  text-align: left;
+}
+
 .mobile-menu ul>li>button,
 .mobile-menu ul>li>a {
   display: block;
@@ -1042,6 +1047,7 @@ footer .fa-inverse {
 }
 
 .input-wrapper select {
+  -webkit-appearance: none;
   display: block;
   width: 100%;
   min-height: 24px;
