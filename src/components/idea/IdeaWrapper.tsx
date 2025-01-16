@@ -9,6 +9,7 @@ import Comment from "@/components/idea/Comment"
 import nFormatter from "@/utilities/nFormatter"
 import ShareInfo from "@/components/common/ShareInfo"
 import Gallery from "../common/Gallery"
+import { IIdeaCampaignLocation } from "@/models/ideaCampaignLocation.model";
 
 type IdeasWrapperProps = {
   idea: IIdea
@@ -159,11 +160,15 @@ export default function IdeaWrapper({ idea }: IdeasWrapperProps): JSX.Element {
                   </div>
                 ) : null}
 
-                {idea.campaignLocation && idea.campaignLocation.name ? (
+                {idea.ideaCampaignLocations ? (
                   <div className="prop-single-side-section">
                     <div className="prop-info-title">Helyszín</div>
                     <div className="prop-info-content">
-                      {idea.campaignLocation.name}
+                      <ul className="m-0">
+                      {idea?.ideaCampaignLocations?.map((ideaCampaignLocation: IIdeaCampaignLocation) => (
+                        <li key={ideaCampaignLocation.id}>{ideaCampaignLocation?.campaignLocation?.name}</li>
+                      ))}
+                      </ul>
                     </div>
                   </div>
                 ) : null}
