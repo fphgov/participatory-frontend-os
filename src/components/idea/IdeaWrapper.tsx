@@ -160,7 +160,7 @@ export default function IdeaWrapper({ idea }: IdeasWrapperProps): JSX.Element {
                   </div>
                 ) : null}
 
-                {idea.ideaCampaignLocations ? (
+                {idea.ideaCampaignLocations && idea.ideaCampaignLocations?.length > 0 ? (
                   <div className="prop-single-side-section">
                     <div className="prop-info-title">Helyszín</div>
                     <div className="prop-info-content">
