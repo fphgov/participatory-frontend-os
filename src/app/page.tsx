@@ -15,15 +15,15 @@ export default function Home() {
               <div className="container">
                 <div className="row">
                   <div className="offset-lg-2 col-lg-8">
-                    <h3>Köszönjük a több, mint 700 ötletet!<br/>Február 6-án indul a lakossági támogatás!</h3>
+                    <h3>Köszönjük a több mint 700 ötletet!<br/>Február 6-án indul a lakossági támogatás!</h3>
                   </div>
 
                   <div className="offset-lg-3 col-lg-6">
                     <p>
                       Köszönjük, hogy minden eddiginél több ötletet kaptunk tőletek!<br/>
-                      Támogassátok február 6-21. között a kedvenc ötleteiteket! A Hivatal a lakossági támogatáson továbbjutó 300 ötletet fogja megvizsgálni.
+                      Támogassátok február 6–21. között a kedvenc ötleteiteket! A Hivatal a lakossági támogatáson továbbjutó 300 ötletet fogja megvizsgálni.
                     </p>
-                    <Link className="btn btn-primary btn-headline btn-next" href="/hirek/lakossagi-tamogatas-uj-fazis-a-kozossegi-koltsegvetesben">Információk</Link>
+                    <Link className="btn btn-primary btn-headline btn-next" href="/hirek/lakossagi-tamogatas-uj-fazis-a-kozossegi-koltsegvetesben">További információk</Link>
                   </div>
                 </div>
               </div>
