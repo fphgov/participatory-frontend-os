@@ -23,7 +23,7 @@ export default function Home() {
                       Köszönjük, hogy minden eddiginél több ötletet kaptunk tőletek!<br/>
                       Támogassátok február 6–21. között a kedvenc ötleteiteket! A Hivatal a lakossági támogatáson továbbjutó 300 ötletet fogja megvizsgálni.
                     </p>
-                    <Link className="btn btn-primary btn-headline btn-next" href="/hirek/lakossagi-tamogatas-uj-fazis-a-kozossegi-koltsegvetesben">További információk</Link>
+                    <Link className="btn btn-primary btn-headline btn-next" href="/hirek/lakossagi-tamogatas-uj-fazis-a-kozossegi-koltsegvetesben">Bővebben</Link>
                   </div>
                 </div>
               </div>
