@@ -15,15 +15,12 @@ export default function Home() {
               <div className="container">
                 <div className="row">
                   <div className="offset-lg-2 col-lg-8">
-                    <h3>Köszönjük a több mint 700 ötletet!<br/>Február 6-án indul a lakossági támogatás!</h3>
+                    <h3>Február 21-ig tudod támogatni a kedvenc ötleteidet! A lakossági támogatás során a 300 legnépszerűbb ötletet keressük.</h3>
                   </div>
 
                   <div className="offset-lg-3 col-lg-6">
-                    <p>
-                      Köszönjük, hogy minden eddiginél több ötletet kaptunk tőletek!<br/>
-                      Támogassátok február 6–21. között a kedvenc ötleteiteket! A Hivatal a lakossági támogatáson továbbjutó 300 ötletet fogja megvizsgálni.
-                    </p>
-                    <Link className="btn btn-primary btn-headline btn-next" href="/hirek/lakossagi-tamogatas-uj-fazis-a-kozossegi-koltsegvetesben">Bővebben</Link>
+                    <p>A fővárosi közösségi költségvetésbe beérkezett ötletek közül bármennyit támogathatsz, egyszer, a megadott határidőig. A 300 legtöbb támogatást gyűjtő ötlet jut tovább szakmai értékelésre. Az alábbi űrlapra kattintva tudod támogatni a kedvenceidet.</p>
+                    <a className="btn btn-primary btn-headline btn-next" href="https://budapest.hu/urlapok/kk-lakossagi-eloszures" target="_blank">Bővebben</a>
                   </div>
                 </div>
               </div>
