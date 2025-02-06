@@ -52,7 +52,7 @@
     "sass": "^1.77.8",
     "store": "^2.0.12",
     "typescript": "5.5.3",
-    "undici": "^6.19.2",
+    "undici": "^6.21.1",
     "url-polyfill": "^1.1.12",
     "vanilla-cookieconsent": "^2.0.0",
     "zod": "^3.23.8",
