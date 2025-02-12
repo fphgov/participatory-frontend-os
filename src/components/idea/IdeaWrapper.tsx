@@ -131,6 +131,18 @@ export default function IdeaWrapper({ idea }: IdeasWrapperProps): JSX.Element {
           </div>
 
           <div className="col-xl-3 col-lg-4">
+            {idea?.workflowState?.id === 112 ? (
+              <div className="prop-single-wrapper prop-single-sidebar prop-single-sidebar-info">
+                <div className="prop-single-content">
+                  <div className="prop-info-title">Ötlet támogatása</div>
+                  <p>Lehetőséged van támogatni ezt az ötletet sok más mellett február 21-ig.</p>
+                  <div className="prop-info-content prop-info-vote">
+                    <a className="btn btn-primary btn-headline btn-next" href="https://budapest.hu/urlapok/kk-lakossagi-eloszures" target="_blank">Tovább a támogatásra</a>
+                  </div>
+                </div>
+              </div>
+            ) : null}
+
             {idea.project ? (
               <div className="prop-single-wrapper prop-single-sidebar prop-single-sidebar-info">
                 <div className="prop-single-content">
