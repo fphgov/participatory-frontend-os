@@ -20,7 +20,7 @@ export default function Home() {
 
                   <div className="offset-lg-3 col-lg-6">
                     <p>A fővárosi közösségi költségvetésbe beérkezett ötletek közül bármennyit támogathatsz, egyszer, a megadott határidőig. A 300 legtöbb támogatást gyűjtő ötlet jut tovább szakmai értékelésre. Az alábbi űrlapra kattintva tudod támogatni a kedvenceidet.</p>
-                    <a className="btn btn-primary btn-headline btn-next" href="https://budapest.hu/urlapok/kk-lakossagi-eloszures" target="_blank">Bővebben</a>
+                    <a className="btn btn-primary btn-headline btn-next" href="https://budapest.hu/urlapok/kk-lakossagi-eloszures" target="_blank">Tovább a támogatásra</a>
                   </div>
                 </div>
               </div>
