@@ -134,10 +134,10 @@ export default function IdeaWrapper({ idea }: IdeasWrapperProps): JSX.Element {
             {idea?.workflowState?.id === 112 ? (
               <div className="prop-single-wrapper prop-single-sidebar prop-single-sidebar-info">
                 <div className="prop-single-content">
-                  <div className="prop-info-title">Ötlet támogatása</div>
-                  <p>Lehetőséged van támogatni ezt az ötletet sok más mellett február 21-ig.</p>
+                  <div className="prop-info-title">Támogatom az ötletet</div>
+                  <p>Február 21-ig tudsz korlátlan számban ötleteket támogatni, egy alkalommal.</p>
                   <div className="prop-info-content prop-info-vote">
-                    <a className="btn btn-primary btn-headline btn-next" href="https://budapest.hu/urlapok/kk-lakossagi-eloszures" target="_blank">Tovább a támogatásra</a>
+                    <a className="btn btn-primary btn-headline btn-next" href="https://budapest.hu/urlapok/kk-lakossagi-eloszures" target="_blank">Tovább az űrlapra</a>
                   </div>
                 </div>
               </div>
