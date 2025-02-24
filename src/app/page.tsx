@@ -37,7 +37,7 @@ export default function Home() {
                 <div className="col-md-12">
                   <div className="timeline-wrapper">
                     <TimeLineItem icon='timeline-icon-1-done.svg' date="2024. 12. 30. - 2025. 01. 31." description="Ötletek beküldése" />
-                    <TimeLineItem icon='timeline-icon-like.svg' date="2025. 02. 06. - 2025. 02. 21." description="Lakossági támogatás" />
+                    <TimeLineItem icon='timeline-icon-like-done.svg' date="2025. 02. 06. - 2025. 02. 21." description="Lakossági támogatás" />
                     <TimeLineItem icon='timeline-icon-2.svg' date="2025. tél / tavasz" description="Szakmai jóváhagyás" />
                     <TimeLineItem icon='timeline-icon-4.svg' date="2025. ősz" description="Szavazás" />
                     <TimeLineItem icon='timeline-icon-5.svg' date="2025. ősztől" description="Megvalósítás" />
