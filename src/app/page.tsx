@@ -15,12 +15,12 @@ export default function Home() {
               <div className="container">
                 <div className="row">
                   <div className="offset-lg-2 col-lg-8">
-                    <h3>Köszönjük az ötletekre beérkezett támogatásokat!</h3>
+                    <h3>Megvan az első lakossági támogatás 300 legnépszerűbb ötlete!</h3>
                   </div>
 
                   <div className="offset-lg-3 col-lg-6">
-                    <p>A beérkezett ötletek lakossági támogatása február 6. és 21. között zajlott. A legnépszerűbb 300 ötletről hamarosan hírt adunk. Addig se maradj le semmiről, iratkozz fel hírlevelünkre!</p>
-                    <a className="btn btn-primary btn-headline btn-next" href="https://hirlevel.budapest.hu/subscribe.php?cid=aSQV5beZ_" target="_blank">Feliratkozom a hírlevélre</a>
+                    <p>Közel 5 ezren vettek részt a 2025. február 21-ig tartó első lakossági támogatási folyamatban az idei közösségi költségvetésben. Köszönjük! Összesítettük a beérkezett támogatásokat, a szakmai értékelésre továbbjutó ötletek listáját a cikkben találod.</p>
+                    <a className="btn btn-primary btn-headline btn-next" href="https://otlet.budapest.hu/hirek/300-legnepszerubb-otlet-lakossagi-tamogatas">Továbbjutó ötletek</a>
                   </div>
                 </div>
               </div>
