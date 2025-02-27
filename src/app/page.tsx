@@ -33,7 +33,7 @@ export default function Home() {
                 <div className="col-md-12">
                   <h3>Új lépéssel bővült a közösségi költségvetés folyamata!</h3>
                 </div>
-                <p className="centered-paragraph">Idén először a beadott ötleteknek támogatókat kell szerezniük ahhoz, hogy szakmai szűrésre kerüljenek. Támogatók gyűjtésére 2025. február 6-21. között volt lehetőség. A 300 legtöbb támogatást szerzett ötlet kerül a szakmai értékelők elé. <Link href={`/hirek/lakossagi-tamogatas-uj-fazis-a-kozossegi-koltsegvetesben`}>Itt olvashatsz bővebben</Link> arról, hogy miért van erre szükség és mik a pontos szabályok. <Link href={`/hirek/300-legnepszerubb-otlet-lakossagi-tamogatasn`}>Itt pedig meg tudod nézni</Link> a továbbjutó ötleteket.</p>
+                <p className="centered-paragraph">Idén először a beadott ötleteknek támogatókat kell szerezniük ahhoz, hogy szakmai szűrésre kerüljenek. Támogatók gyűjtésére 2025. február 6-21. között volt lehetőség. A 300 legtöbb támogatást szerzett ötlet kerül a szakmai értékelők elé. <Link href={`/hirek/lakossagi-tamogatas-uj-fazis-a-kozossegi-koltsegvetesben`}>Itt olvashatsz bővebben</Link> arról, hogy miért van erre szükség és mik a pontos szabályok. <Link href={`/hirek/300-legnepszerubb-otlet-lakossagi-tamogatas`}>Itt pedig meg tudod nézni</Link> a továbbjutó ötleteket.</p>
                 <div className="col-md-12">
                   <div className="timeline-wrapper">
                     <TimeLineItem icon='timeline-icon-1-done.svg' date="2024. 12. 30. - 2025. 01. 31." description="Ötletek beküldése" />
